@@ -13,6 +13,7 @@ import {
   Timer,
   TrendingUp
 } from "lucide-react";
+import { APP_RELEASE_CHANNEL, APP_VERSION } from "../config/appMetadata";
 import { useConcurseiroStore } from "../store";
 import { StudySession } from "../core/sde/planner/plannerTypes";
 import { StrategicAction } from "../core/sde/prioritization/types";
@@ -140,6 +141,9 @@ export default function DashboardView() {
                   {activeConcurso?.status ?? "SEM CONCURSO"}
                 </span>
                 <span>Decisão baseada nos dados registrados</span>
+                <span className="rounded-full border border-zinc-700 bg-zinc-900 px-2 py-1 text-zinc-400">
+                  v{APP_VERSION} · {APP_RELEASE_CHANNEL}
+                </span>
               </div>
               <h1 className="text-xl font-bold text-zinc-100">
                 {activeConcurso?.nome ?? "Nenhum concurso selecionado"}

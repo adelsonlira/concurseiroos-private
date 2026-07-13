@@ -6,7 +6,10 @@ import {
   CloudOff,
   DownloadCloud,
   ExternalLink,
+  Eye,
+  EyeOff,
   FileLock2,
+  KeyRound,
   LoaderCircle,
   LogIn,
   LogOut,
@@ -46,12 +49,19 @@ export default function OnlineAccountView() {
   const { configuracao, updateConfiguracao } = useConcurseiroStore();
   const [email, setEmail] = useState(configuracao.estudanteEmail ?? "");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [capsLockOn, setCapsLockOn] = useState(false);
+  const [recoveryPassword, setRecoveryPassword] = useState("");
+  const [recoveryConfirmation, setRecoveryConfirmation] = useState("");
+  const [showRecoveryPassword, setShowRecoveryPassword] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [uploadSummary, setUploadSummary] = useState<string | null>(null);
 
   const busy = ["INITIALIZING", "AUTHENTICATING", "SYNCING", "UPLOADING"].includes(
     cloud.phase
   );
+  const recoveryPasswordsMatch =
+    recoveryPassword.length >= 8 && recoveryPassword === recoveryConfirmation;
   const storageTotal = useMemo(
     () => cloud.privateDocuments.reduce((sum, item) => sum + (item.sizeBytes ?? 0), 0),
     [cloud.privateDocuments]
@@ -158,7 +168,74 @@ export default function OnlineAccountView() {
           </div>
         )}
 
-        {cloud.authStatus !== "SIGNED_IN" ? (
+        {cloud.passwordRecoveryActive ? (
+          <section className="mx-auto max-w-2xl rounded-xl border border-blue-500/30 bg-blue-500/5 p-6">
+            <h3 className="flex items-center gap-2 text-lg font-semibold text-zinc-100">
+              <KeyRound className="h-5 w-5 text-blue-400" /> Definir nova senha
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-zinc-400">
+              O link de recuperação foi validado. Defina uma nova senha com pelo menos oito caracteres.
+            </p>
+            <div className="mt-5 space-y-4">
+              <label className="block">
+                <span className="mb-1.5 block text-xs font-medium text-zinc-400">Nova senha</span>
+                <div className="relative">
+                  <input
+                    type={showRecoveryPassword ? "text" : "password"}
+                    value={recoveryPassword}
+                    onChange={(event) => setRecoveryPassword(event.target.value)}
+                    className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2.5 pr-11 text-sm text-zinc-100 outline-none focus:border-blue-500"
+                    autoComplete="new-password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowRecoveryPassword((value) => !value)}
+                    className="absolute inset-y-0 right-0 flex w-11 items-center justify-center text-zinc-500 hover:text-zinc-200"
+                    aria-label={showRecoveryPassword ? "Ocultar nova senha" : "Mostrar nova senha"}
+                  >
+                    {showRecoveryPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+              </label>
+              <label className="block">
+                <span className="mb-1.5 block text-xs font-medium text-zinc-400">Confirmar nova senha</span>
+                <input
+                  type={showRecoveryPassword ? "text" : "password"}
+                  value={recoveryConfirmation}
+                  onChange={(event) => setRecoveryConfirmation(event.target.value)}
+                  className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-sm text-zinc-100 outline-none focus:border-blue-500"
+                  autoComplete="new-password"
+                />
+              </label>
+              {recoveryConfirmation && recoveryPassword !== recoveryConfirmation && (
+                <p className="text-xs text-amber-300">As senhas ainda não conferem.</p>
+              )}
+              <div className="flex flex-wrap gap-3">
+                <button
+                  disabled={busy || !recoveryPasswordsMatch}
+                  onClick={async () => {
+                    const ok = await cloud.completePasswordRecovery(recoveryPassword);
+                    if (ok) {
+                      setRecoveryPassword("");
+                      setRecoveryConfirmation("");
+                    }
+                  }}
+                  className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  {busy ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <KeyRound className="h-4 w-4" />}
+                  Atualizar senha
+                </button>
+                <button
+                  onClick={cloud.signOut}
+                  disabled={busy}
+                  className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 px-4 py-2.5 text-sm text-zinc-300"
+                >
+                  Cancelar e sair
+                </button>
+              </div>
+            </div>
+          </section>
+        ) : cloud.authStatus !== "SIGNED_IN" ? (
           <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
               <h3 className="flex items-center gap-2 text-lg font-semibold text-zinc-100">
@@ -177,20 +254,36 @@ export default function OnlineAccountView() {
                 </label>
                 <label className="block">
                   <span className="mb-1.5 block text-xs font-medium text-zinc-400">Senha</span>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-sm text-zinc-100 outline-none focus:border-blue-500"
-                    autoComplete="current-password"
-                  />
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      onKeyDown={(event) => setCapsLockOn(event.getModifierState("CapsLock"))}
+                      onKeyUp={(event) => setCapsLockOn(event.getModifierState("CapsLock"))}
+                      className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2.5 pr-11 text-sm text-zinc-100 outline-none focus:border-blue-500"
+                      autoComplete="current-password"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((value) => !value)}
+                      className="absolute inset-y-0 right-0 flex w-11 items-center justify-center text-zinc-500 hover:text-zinc-200"
+                      aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                    >
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                  {capsLockOn && <span className="mt-1.5 block text-xs text-amber-300">Caps Lock está ativado.</span>}
                 </label>
                 <div className="flex flex-wrap gap-3">
                   <button
                     disabled={busy || !email.trim() || password.length < 8}
                     onClick={async () => {
                       const ok = await cloud.signIn(email, password);
-                      if (ok) updateConfiguracao({ estudanteEmail: email.trim() });
+                      if (ok) {
+                        updateConfiguracao({ estudanteEmail: email.trim().toLowerCase() });
+                        setPassword("");
+                      }
                     }}
                     className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-40"
                   >
@@ -205,7 +298,17 @@ export default function OnlineAccountView() {
                     <UserPlus className="h-4 w-4" /> Criar conta
                   </button>
                 </div>
-                <p className="text-xs leading-5 text-zinc-500">A senha deve possuir ao menos oito caracteres. O aplicativo não armazena a senha no estado local.</p>
+                <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+                  <p className="leading-5 text-zinc-500">A senha deve possuir ao menos oito caracteres. O aplicativo não armazena a senha no estado local.</p>
+                  <button
+                    type="button"
+                    disabled={busy || !email.trim()}
+                    onClick={() => cloud.requestPasswordReset(email)}
+                    className="font-medium text-blue-300 hover:text-blue-200 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    Esqueci minha senha
+                  </button>
+                </div>
               </div>
             </div>
 

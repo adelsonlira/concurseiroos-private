@@ -1,4 +1,4 @@
-import type { Session, User } from "@supabase/supabase-js";
+import type { AuthChangeEvent, Session, User } from "@supabase/supabase-js";
 import type { BackupExportSchema } from "../../types";
 import { getCloudEnvironment } from "./environment";
 import { getSupabaseClient } from "./supabaseClient";
@@ -17,10 +17,12 @@ export async function getCurrentSession(): Promise<Session | null> {
   return data.session;
 }
 
-export function onAuthStateChange(callback: (session: Session | null) => void) {
+export function onAuthStateChange(
+  callback: (event: AuthChangeEvent, session: Session | null) => void
+) {
   const client = getSupabaseClient();
   if (!client) return () => undefined;
-  const { data } = client.auth.onAuthStateChange((_event, session) => callback(session));
+  const { data } = client.auth.onAuthStateChange((event, session) => callback(event, session));
   return () => data.subscription.unsubscribe();
 }
 
@@ -34,6 +36,21 @@ export async function signUpWithPassword(email: string, password: string): Promi
 export async function signInWithPassword(email: string, password: string): Promise<User> {
   const client = requireClient();
   const { data, error } = await client.auth.signInWithPassword({ email, password });
+  if (error) throw error;
+  if (!data.user) throw new Error("AUTH_USER_NOT_RETURNED");
+  return data.user;
+}
+
+
+export async function requestPasswordReset(email: string, redirectTo: string): Promise<void> {
+  const client = requireClient();
+  const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo });
+  if (error) throw error;
+}
+
+export async function updateAccountPassword(password: string): Promise<User> {
+  const client = requireClient();
+  const { data, error } = await client.auth.updateUser({ password });
   if (error) throw error;
   if (!data.user) throw new Error("AUTH_USER_NOT_RETURNED");
   return data.user;

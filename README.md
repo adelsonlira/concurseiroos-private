@@ -9,8 +9,8 @@ O aplicativo separa regras oficiais, evidências do candidato, hipóteses estrat
 Pré-requisito: Node.js.
 
 ```bash
-npm install
-cp .env.example .env.local
+npm ci
+cp .env.example .env
 npm run dev
 ```
 
@@ -29,6 +29,8 @@ A fundação on-line utiliza Supabase para:
 Execute `supabase/001_online_foundation.sql` no projeto Supabase e configure as variáveis descritas em `.env.example`.
 
 Guia completo: `docs/ONLINE_DEPLOYMENT_FREE.md`.
+
+Índice da documentação: `docs/README.md`.
 
 ## Materiais privados
 

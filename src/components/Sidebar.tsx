@@ -21,6 +21,7 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react";
+import { APP_RELEASE_CHANNEL, APP_VERSION } from "../config/appMetadata";
 import { useCloudAccountStore } from "../integrations/cloud/cloudStore";
 import {
   filterNavigationItems,
@@ -150,7 +151,7 @@ export default function Sidebar({
               </div>
               <div className={`min-w-0 ${desktopCollapsed ? "lg:hidden" : ""}`}>
                 <h1 className="truncate text-sm font-semibold tracking-wide text-zinc-100">ConcurseiroOS</h1>
-                <p className="truncate font-mono text-[10px] text-zinc-500">v3.0.1 · PRIVATE BETA</p>
+                <p className="truncate font-mono text-[10px] text-zinc-500">v{APP_VERSION} · {APP_RELEASE_CHANNEL}</p>
               </div>
             </div>
 

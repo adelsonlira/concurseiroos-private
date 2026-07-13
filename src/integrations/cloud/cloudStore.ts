@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { describeAuthError, normalizeAuthEmail } from "./authPolicy";
 import type { Session } from "@supabase/supabase-js";
 import { useConcurseiroStore } from "../../store";
 import type { ItemBiblioteca } from "../../types";
@@ -20,6 +21,8 @@ import {
   signInWithPassword,
   signOut,
   signUpWithPassword,
+  requestPasswordReset,
+  updateAccountPassword,
   uploadPrivateDocument
 } from "./cloudRepository";
 import {
@@ -56,11 +59,14 @@ interface CloudAccountState {
   error: string | null;
   notice: string | null;
   initialized: boolean;
+  passwordRecoveryActive: boolean;
 
   initialize: () => Promise<void>;
   signUp: (email: string, password: string) => Promise<boolean>;
   signIn: (email: string, password: string) => Promise<boolean>;
   signOut: () => Promise<void>;
+  requestPasswordReset: (email: string) => Promise<boolean>;
+  completePasswordRecovery: (password: string) => Promise<boolean>;
   syncNow: (force?: boolean) => Promise<boolean>;
   restoreFromCloud: () => Promise<boolean>;
   resolveConflictWithLocal: () => Promise<boolean>;
@@ -135,6 +141,7 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
     error: null,
     notice: null,
     initialized: false,
+    passwordRecoveryActive: false,
 
     initialize: async () => {
       if (get().initialized) return;
@@ -154,13 +161,24 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
         });
 
         unsubscribeAuth?.();
-        unsubscribeAuth = onAuthStateChange((nextSession) => {
+        unsubscribeAuth = onAuthStateChange((event, nextSession) => {
+          const recoveryActive =
+            event === "PASSWORD_RECOVERY"
+              ? true
+              : event === "SIGNED_OUT"
+                ? false
+                : get().passwordRecoveryActive;
           set({
             authStatus: nextSession ? "SIGNED_IN" : "SIGNED_OUT",
             user: toUserSummary(nextSession),
             conflict: null,
             error: null,
-            phase: "IDLE"
+            phase: "IDLE",
+            passwordRecoveryActive: recoveryActive,
+            notice:
+              event === "PASSWORD_RECOVERY"
+                ? "Link de recuperação validado. Defina uma nova senha para concluir."
+                : get().notice
           });
           if (nextSession) {
             void get().refreshPrivateDocuments();
@@ -194,7 +212,7 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
     signUp: async (email, password) => {
       set({ phase: "AUTHENTICATING", error: null, notice: null });
       try {
-        const user = await signUpWithPassword(email.trim(), password);
+        const user = await signUpWithPassword(normalizeAuthEmail(email), password);
         set({
           phase: "IDLE",
           notice: user
@@ -203,7 +221,7 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
         });
         return true;
       } catch (error) {
-        set({ phase: "ERROR", error: errorMessage(error) });
+        set({ phase: "ERROR", error: describeAuthError(error) });
         return false;
       }
     },
@@ -211,7 +229,7 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
     signIn: async (email, password) => {
       set({ phase: "AUTHENTICATING", error: null, notice: null });
       try {
-        const user = await signInWithPassword(email.trim(), password);
+        const user = await signInWithPassword(normalizeAuthEmail(email), password);
         set({
           authStatus: "SIGNED_IN",
           user: { id: user.id, email: user.email ?? null },
@@ -229,7 +247,41 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
         }
         return get().syncNow(false);
       } catch (error) {
-        set({ phase: "ERROR", error: errorMessage(error), authStatus: "SIGNED_OUT" });
+        set({ phase: "ERROR", error: describeAuthError(error), authStatus: "SIGNED_OUT" });
+        return false;
+      }
+    },
+
+    requestPasswordReset: async (email) => {
+      set({ phase: "AUTHENTICATING", error: null, notice: null });
+      try {
+        const redirectTo = typeof window === "undefined" ? "" : `${window.location.origin}/`;
+        await requestPasswordReset(normalizeAuthEmail(email), redirectTo);
+        set({
+          phase: "IDLE",
+          notice: "E-mail de recuperação solicitado. Abra a mensagem no mesmo dispositivo e defina uma nova senha."
+        });
+        return true;
+      } catch (error) {
+        set({ phase: "ERROR", error: describeAuthError(error) });
+        return false;
+      }
+    },
+
+    completePasswordRecovery: async (password) => {
+      set({ phase: "AUTHENTICATING", error: null, notice: null });
+      try {
+        const user = await updateAccountPassword(password);
+        set({
+          phase: "IDLE",
+          authStatus: "SIGNED_IN",
+          user: { id: user.id, email: user.email ?? null },
+          passwordRecoveryActive: false,
+          notice: "Senha atualizada. Esta conta permanece conectada neste dispositivo."
+        });
+        return true;
+      } catch (error) {
+        set({ phase: "ERROR", error: describeAuthError(error) });
         return false;
       }
     },
@@ -244,7 +296,8 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
           authStatus: "SIGNED_OUT",
           user: null,
           conflict: null,
-          privateDocuments: []
+          privateDocuments: [],
+          passwordRecoveryActive: false
         });
       }
     },
