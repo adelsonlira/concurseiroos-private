@@ -596,17 +596,17 @@ app.post("/api/organize-material", async (req: any, res: any) => {
   }
 });
 
-// 3. Mount Vite or Static middleware based on environment
-async function startServer() {
-  const isVercel = process.env.VERCEL === "1";
-
-  if (!isVercel && process.env.NODE_ENV !== "production") {
+// 3. Mount Vite or static middleware only outside Vercel.
+// On Vercel, files in public/** are served by the CDN and this Express app
+// is deployed as a Vercel Function through the default export below.
+async function startLocalServer() {
+  if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
-  } else if (!isVercel) {
+  } else {
     const publicPath = path.join(process.cwd(), "public");
     app.use(express.static(publicPath));
     app.get("*", (req, res) => {
@@ -619,4 +619,8 @@ async function startServer() {
   });
 }
 
-startServer();
+if (process.env.VERCEL !== "1") {
+  void startLocalServer();
+}
+
+export default app;
