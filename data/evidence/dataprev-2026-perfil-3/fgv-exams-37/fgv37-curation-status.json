@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-13",
+  "examCount": 37,
+  "rawQuestionRecordCount": 2522,
+  "uniqueQuestionCountAcrossWaves": 2363,
+  "withinWaveDuplicateRecordCount": 30,
+  "crossWaveDuplicateRecordCount": 129,
+  "audits": {
+    "wave1": {
+      "reviewed": 98,
+      "pass": 94,
+      "corrected": 4,
+      "excluded": 0
+    },
+    "wave2": {
+      "reviewed": 73,
+      "pass": 71,
+      "corrected": 1,
+      "excluded": 1
+    },
+    "wave3": {
+      "reviewed": 15,
+      "pass": 15,
+      "corrected": 0,
+      "excluded": 0
+    }
+  },
+  "independentHoldout": {
+    "wave": "wave1",
+    "reviewedQuestionCount": 22,
+    "correctCount": 22,
+    "observedAccuracy": 1.0,
+    "wilson95LowerBound": 0.851
+  },
+  "activationStatus": "NOT_ELIGIBLE_FOR_SDE_HISTORICAL_INCIDENCE",
+  "remainingBlockingCounts": {
+    "wave1ReviewRequiredRaw": 184,
+    "wave2ReviewRequiredRaw": 127,
+    "wave3ReviewRequiredRaw": 78,
+    "totalReviewRequiredRaw": 389,
+    "wave1ReviewRequiredUnique": 184,
+    "wave2ReviewRequiredUnique": 127,
+    "wave3ReviewRequiredUnique": 72,
+    "totalReviewRequiredUnique": 383
+  },
+  "activationReasons": [
+    "Somente as faixas automáticas de alta confiança foram censitadas integralmente.",
+    "Há 383 questões únicas em REVIEW_REQUIRED sem decisão temática individual nas três ondas.",
+    "As ondas B/C/D não possuem holdout independente próprio.",
+    "Não há gabaritos para análise de distratores, anulações e uso em simulados.",
+    "A matriz experimental da Onda A1/A2 não representa probabilidade de cobrança na DATAPREV."
+  ]
+}

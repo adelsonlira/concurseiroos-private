@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-13",
+  "totalReviewRequiredUniqueQuestions": 383,
+  "countsByWave": {
+    "wave1": 184,
+    "wave2": 127,
+    "wave3": 72
+  },
+  "countsByPriorityBand": {
+    "P1_PRIMARY": 184,
+    "P2_HIGH": 127,
+    "P3_COMPLEMENTARY": 72
+  },
+  "candidateCountsByTopic": {
+    "dp26-p3-esp-desenvolvimento-sistemas": 244,
+    "dp26-p3-esp-gestao-governanca": 11,
+    "dp26-p3-esp-banco-dados": 86,
+    "dp26-p3-esp-bi": 18,
+    "dp26-p3-esp-seguranca": 23,
+    "dp26-p3-ia-fundamentos": 1
+  },
+  "purpose": "Operational manual-curation queue; it is not a study-priority ranking and cannot influence the SDE."
+}

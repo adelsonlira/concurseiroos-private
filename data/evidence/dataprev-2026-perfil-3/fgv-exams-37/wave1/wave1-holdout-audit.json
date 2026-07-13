@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "auditType": "INDEPENDENT_STRATIFIED_HOLDOUT",
+  "generatedAt": "2026-07-13",
+  "sampleSize": 22,
+  "correctCount": 22,
+  "exactPrecision": 1.0,
+  "wilson95": {
+    "lower": 0.851345,
+    "upper": 1
+  },
+  "statusBreakdown": {
+    "AUTO_CLASSIFIED_HIGH_CONFIDENCE": 16,
+    "AUTO_CLASSIFIED_REVIEW_REQUIRED": 6
+  },
+  "topicBreakdown": {
+    "dp26-p3-esp-desenvolvimento-sistemas": 6,
+    "dp26-p3-esp-gestao-governanca": 4,
+    "dp26-p3-esp-seguranca": 4,
+    "dp26-p3-leg-lgpd": 4,
+    "dp26-p3-esp-banco-dados": 2,
+    "dp26-p3-esp-bi": 2
+  },
+  "sampling": {
+    "excludedDevelopmentSample": true,
+    "selection": "Deterministic salted hash, stratified by classification status and broad official topic.",
+    "highConfidenceLimitPerTopic": 4,
+    "reviewRequiredLimitPerTopic": 2
+  },
+  "result": "NO_ERROR_OBSERVED_IN_HOLDOUT",
+  "limitations": [
+    "A amostra não valida os 1.090 itens nem autoriza ativar incidência no SDE.",
+    "A revisão confirma a classificação temática, não o gabarito nem a validade da questão.",
+    "O limite inferior de Wilson mostra que 100% observado não significa precisão populacional de 100%.",
+    "Itens REVIEW_REQUIRED continuam fora do denominador experimental até revisão individual."
+  ]
+}

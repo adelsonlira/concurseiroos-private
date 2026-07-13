@@ -1,0 +1,123 @@
+{
+  "status": "AUTO_CLASSIFIED_UNREVIEWED",
+  "eligibleForSDEHistoricalIncidence": false,
+  "methodologyVersion": "1.0.0",
+  "rawQuestionBlocks": 3352,
+  "uniqueQuestionIds": 3348,
+  "duplicateQuestionIdsAcrossCorpus": [
+    "4001012262",
+    "4001012263",
+    "4001012264",
+    "4001012266"
+  ],
+  "sources": [
+    {
+      "year": 2021,
+      "file": "fgv 2021 questões.pdf",
+      "sha256": "4f999a169c30597dcf923b553712a38692e842a2de3cc6b3c1ee634177558f13",
+      "questionBlocks": 271,
+      "uniqueQuestionIdsInsideFile": 271
+    },
+    {
+      "year": 2022,
+      "file": "fgv 2022 questões.pdf",
+      "sha256": "69ca5d058d7fc2db804cd50b3ef4d0ada86ee0644fc2130f687cab0364dfb7ab",
+      "questionBlocks": 444,
+      "uniqueQuestionIdsInsideFile": 444
+    },
+    {
+      "year": 2023,
+      "file": "fgv 2023 questões.pdf",
+      "sha256": "ac1cf4acf0ee059c5e9a54828a5c68e145c6cc8e2b36ef004955a59e9d0311aa",
+      "questionBlocks": 598,
+      "uniqueQuestionIdsInsideFile": 598
+    },
+    {
+      "year": 2024,
+      "file": "fgv 2024 questões.pdf",
+      "sha256": "4337711ee93430ddd58a0ac0a4c158c5942018b5e2e8837f7a52ed1ed4e44b45",
+      "questionBlocks": 988,
+      "uniqueQuestionIdsInsideFile": 988
+    },
+    {
+      "year": 2025,
+      "file": "fgv 2025 questões.pdf",
+      "sha256": "18757fc1009766b0d11c23bec9c5ffa85075eb4e8e0ad724be53b0297421c9ae",
+      "questionBlocks": 600,
+      "uniqueQuestionIdsInsideFile": 600
+    },
+    {
+      "year": 2026,
+      "file": "fgv 2026 questões.pdf",
+      "sha256": "ae3dadcdd5ce1910f02a4dff9359a885dc9797659fc558cd332ee0e5f34931a7",
+      "questionBlocks": 451,
+      "uniqueQuestionIdsInsideFile": 451
+    }
+  ],
+  "recordsWithAtLeastOneCandidateTopic": 1503,
+  "recordsWithExclusionFlags": 438,
+  "recordsWithoutCandidateTopic": 1849,
+  "candidateTopicMatchCounts": {
+    "dp26-p3-esp-ia-dados-bigdata": 251,
+    "dp26-p3-esp-bd-sgbd": 167,
+    "dp26-p3-esp-bd-sql": 119,
+    "dp26-p3-esp-linguagens-frameworks": 89,
+    "dp26-p3-esp-arquitetura-software": 82,
+    "dp26-p3-esp-bi-dw-etl-olap": 82,
+    "dp26-p3-esp-metodologias-ageis": 77,
+    "dp26-p3-esp-si-acesso": 72,
+    "dp26-p3-esp-design-arquitetura": 67,
+    "dp26-p3-esp-devops-git": 62,
+    "dp26-p3-esp-si-iso": 61,
+    "dp26-p3-esp-bd-nosql": 61,
+    "dp26-p3-esp-padroes-dados-web": 60,
+    "dp26-p3-esp-https-tls": 57,
+    "dp26-p3-esp-ux-cms": 48,
+    "dp26-p3-esp-orientacao-objetos-web": 44,
+    "dp26-p3-esp-bd-normalizacao": 41,
+    "dp26-p3-esp-gov-cobit": 38,
+    "dp26-p3-esp-testes": 37,
+    "dp26-p3-esp-requisitos": 36,
+    "dp26-p3-esp-bd-relacional-multidimensional": 35,
+    "dp26-p3-esp-frontend": 32,
+    "dp26-p3-esp-padroes-reuso": 32,
+    "dp26-p3-esp-gov-itil": 32,
+    "dp26-p3-esp-bi-dw-mining": 32,
+    "dp26-p3-esp-bd-integracao-ingestao": 31,
+    "dp26-p3-esp-gov-projetos": 29,
+    "dp26-p3-esp-si-sdl-owasp": 29,
+    "dp26-p3-esp-bd-datalake-bigdata": 28,
+    "dp26-p3-esp-bd-estruturados": 27,
+    "dp26-p3-esp-bi-visualizacao": 26,
+    "dp26-p3-esp-metricas": 25,
+    "dp26-p3-esp-gov-bpmn": 24,
+    "dp26-p3-esp-mobile-lowcode": 24,
+    "dp26-p3-esp-bd-integridade": 23,
+    "dp26-p3-esp-ambientes-web": 15,
+    "dp26-p3-esp-si-riscos": 15,
+    "dp26-p3-esp-bd-dimensional": 11,
+    "dp26-p3-esp-blockchain": 11,
+    "dp26-p3-esp-si-cid": 7,
+    "dp26-p3-esp-bd-propriedades": 7,
+    "dp26-p3-esp-bd-memoria": 7,
+    "dp26-p3-esp-bd-modelagem": 5,
+    "dp26-p3-esp-clean-code-sonarqube": 4,
+    "dp26-p3-esp-si-sast-dast": 3,
+    "dp26-p3-esp-rpa": 1
+  },
+  "exclusionFlagCounts": {
+    "NETWORK_LOW_LEVEL": 174,
+    "HARDWARE": 94,
+    "OFFICE_BASIC": 72,
+    "FORENSICS": 48,
+    "OUT_OF_SCOPE_LANGUAGE": 30,
+    "SERVER_ADMIN": 28
+  },
+  "limitations": [
+    "Classificação automática por regras lexicais; exige revisão humana por questão.",
+    "Uma questão pode possuir mais de um tópico candidato.",
+    "As contagens de candidatos não representam incidência validada.",
+    "O corpus reúne cargos e especialidades heterogêneos.",
+    "O texto das questões e alternativas não é armazenado no arquivo derivado."
+  ]
+}

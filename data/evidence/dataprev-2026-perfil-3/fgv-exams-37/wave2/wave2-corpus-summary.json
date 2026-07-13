@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-13",
+  "wave": "B_HIGH_RELEVANCE",
+  "examCount": 13,
+  "rawQuestionCount": 860,
+  "withinWaveDuplicateRecordCount": 0,
+  "crossWaveDuplicateRecordCount": 0,
+  "nonDuplicateQuestionCount": 860,
+  "highConfidenceCandidateCount": 71,
+  "classificationStatusCounts": {
+    "UNCLASSIFIED": 651,
+    "AUTO_CLASSIFIED_REVIEW_REQUIRED": 127,
+    "AUTO_CLASSIFIED_HIGH_CONFIDENCE": 71,
+    "AUTO_EXCLUDED_OUT_OF_SCOPE": 9,
+    "MANUALLY_EXCLUDED": 1,
+    "MANUALLY_REVIEWED": 1
+  },
+  "candidateTopicCounts": {
+    "dp26-p3-esp-bi": 8,
+    "dp26-p3-esp-desenvolvimento-sistemas": 99,
+    "dp26-p3-leg-lai": 5,
+    "dp26-p3-esp-seguranca": 21,
+    "dp26-p3-esp-gestao-governanca": 17,
+    "dp26-p3-leg-lgpd": 9,
+    "dp26-p3-esp-banco-dados": 38,
+    "dp26-p3-ia-fundamentos": 1,
+    "dp26-p3-leg-marco-civil": 1
+  },
+  "extraction": [
+    {
+      "filename": "TCE - PE - analista_de_controle_externo_tecnologia_da_informacao.pdf",
+      "rank": 16,
+      "tier": "B - alta",
+      "declaredQuestionCount": 80,
+      "extractedQuestionCount": 80,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "tecnico_de_gestao_administrativa_analista_de_sistemas.pdf",
+      "rank": 17,
+      "tier": "B - alta",
+      "declaredQuestionCount": 60,
+      "extractedQuestionCount": 60,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "2025 AMAZUL - analista_de_desenvolvimento_de_sistemas.pdf",
+      "rank": 18,
+      "tier": "B - alta",
+      "declaredQuestionCount": 60,
+      "extractedQuestionCount": 60,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_legislativo_informatica_legislativa_analise_de_sistemas.pdf",
+      "rank": 19,
+      "tier": "B - alta",
+      "declaredQuestionCount": 70,
+      "extractedQuestionCount": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_cvm_perfil_8_ti_sistemas_e_desenvolvimento_manha.pdf",
+      "rank": 20,
+      "tier": "B - alta",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 40,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_judiciario_tecnologia_da_informacao.pdf",
+      "rank": 21,
+      "tier": "B - alta",
+      "declaredQuestionCount": 70,
+      "extractedQuestionCount": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_judiciario_analise_de_sistemas.pdf",
+      "rank": 22,
+      "tier": "B - alta",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "tecnico_de_nivel_superior_analista_de_sistemas_computacionais_analista_de_sistemas.pdf",
+      "rank": 23,
+      "tier": "B - alta",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 60,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_especializado_analista_de_sistemas.pdf",
+      "rank": 24,
+      "tier": "B - alta",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 60,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "EBSERH analista_de_tecnologia_da_informacao.pdf",
+      "rank": 25,
+      "tier": "B - alta",
+      "declaredQuestionCount": 60,
+      "extractedQuestionCount": 60,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_de_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf",
+      "rank": 26,
+      "tier": "B - alta",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "2023 DNIT analista_administrativo_tecnologia_da_informacao.pdf",
+      "rank": 27,
+      "tier": "B - alta",
+      "declaredQuestionCount": 80,
+      "extractedQuestionCount": 80,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_em_tecnologia_da_informacao.pdf",
+      "rank": 28,
+      "tier": "B - alta",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 80,
+      "completeContiguousSequence": true
+    }
+  ],
+  "activationStatus": "NOT_ELIGIBLE_FOR_SDE_HISTORICAL_INCIDENCE",
+  "activationReasons": [
+    "A onda B não possui revisão manual individual.",
+    "Classificações automáticas são apenas candidatas temáticas.",
+    "Duplicações com a onda A devem permanecer excluídas de qualquer denominador.",
+    "Gabaritos não estão disponíveis."
+  ]
+}

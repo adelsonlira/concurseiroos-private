@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "EXPERIMENTAL_NOT_ACTIVE",
+  "denominatorDefinition": "Questões únicas A1/A2 revisadas manualmente ou classificadas automaticamente com alta confiança; itens REVIEW_REQUIRED são excluídos.",
+  "evidence": [
+    {
+      "id": "fgv37-wave1-dp26-p3-esp-banco-dados",
+      "topicId": "dp26-p3-esp-banco-dados",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 21,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.112903,
+      "manuallyReviewedQuestionCount": 15,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-esp-bi",
+      "topicId": "dp26-p3-esp-bi",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 10,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.053763,
+      "manuallyReviewedQuestionCount": 6,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-esp-desenvolvimento-sistemas",
+      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 97,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.521505,
+      "manuallyReviewedQuestionCount": 52,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-esp-gestao-governanca",
+      "topicId": "dp26-p3-esp-gestao-governanca",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 16,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.086022,
+      "manuallyReviewedQuestionCount": 1,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-esp-seguranca",
+      "topicId": "dp26-p3-esp-seguranca",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 28,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.150538,
+      "manuallyReviewedQuestionCount": 14,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-leg-lai",
+      "topicId": "dp26-p3-leg-lai",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 2,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.010753,
+      "manuallyReviewedQuestionCount": 1,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-leg-lgpd",
+      "topicId": "dp26-p3-leg-lgpd",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 11,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.05914,
+      "manuallyReviewedQuestionCount": 0,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-leg-marco-civil",
+      "topicId": "dp26-p3-leg-marco-civil",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 1,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.005376,
+      "manuallyReviewedQuestionCount": 0,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    }
+  ]
+}

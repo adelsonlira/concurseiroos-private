@@ -1,0 +1,44 @@
+[
+  {
+    "file": "fgv 2021 questões.pdf",
+    "questionBlocks": 271,
+    "sha256": "4f999a169c30597dcf923b553712a38692e842a2de3cc6b3c1ee634177558f13",
+    "uniqueQuestionIdsInsideFile": 271,
+    "year": 2021
+  },
+  {
+    "file": "fgv 2022 questões.pdf",
+    "questionBlocks": 444,
+    "sha256": "69ca5d058d7fc2db804cd50b3ef4d0ada86ee0644fc2130f687cab0364dfb7ab",
+    "uniqueQuestionIdsInsideFile": 444,
+    "year": 2022
+  },
+  {
+    "file": "fgv 2023 questões.pdf",
+    "questionBlocks": 598,
+    "sha256": "ac1cf4acf0ee059c5e9a54828a5c68e145c6cc8e2b36ef004955a59e9d0311aa",
+    "uniqueQuestionIdsInsideFile": 598,
+    "year": 2023
+  },
+  {
+    "file": "fgv 2024 questões.pdf",
+    "questionBlocks": 988,
+    "sha256": "4337711ee93430ddd58a0ac0a4c158c5942018b5e2e8837f7a52ed1ed4e44b45",
+    "uniqueQuestionIdsInsideFile": 988,
+    "year": 2024
+  },
+  {
+    "file": "fgv 2025 questões.pdf",
+    "questionBlocks": 600,
+    "sha256": "18757fc1009766b0d11c23bec9c5ffa85075eb4e8e0ad724be53b0297421c9ae",
+    "uniqueQuestionIdsInsideFile": 600,
+    "year": 2025
+  },
+  {
+    "file": "fgv 2026 questões.pdf",
+    "questionBlocks": 451,
+    "sha256": "ae3dadcdd5ce1910f02a4dff9359a885dc9797659fc558cd332ee0e5f34931a7",
+    "uniqueQuestionIdsInsideFile": 451,
+    "year": 2026
+  }
+]

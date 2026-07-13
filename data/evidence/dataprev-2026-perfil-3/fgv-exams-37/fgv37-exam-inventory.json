@@ -1,0 +1,1738 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-13",
+  "sourceArchive": "Provas FGV.zip",
+  "examCount": 37,
+  "methodology": {
+    "status": "AUTO_TRIAGE_NOT_INCIDENCE",
+    "notes": [
+      "Ranking preliminar baseado em proximidade do cargo, órgão, recência detectável e cobertura lexical do edital DATAPREV Perfil 3.",
+      "Não representa incidência histórica e não pode alterar o SDE antes de revisão manual por questão.",
+      "Anos ausentes na capa permanecem não detectados; não foram inferidos externamente."
+    ]
+  },
+  "exams": [
+    {
+      "filename": "analista_de_tecnologia_da_informacao_desenvolvimento_de_software.pdf",
+      "sha256": "962a9c53f78ef3ce4760dbe1e3bf69077755ef966ef2199c3a5b79630738a78d",
+      "size_bytes": 498850,
+      "pages": 16,
+      "detected_year": null,
+      "cover_title": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA - DATAPREV ATI - DESENVOLVIMENTO DE SOFTWARE",
+      "declared_total_questions": 70,
+      "relevance_score": 126.5,
+      "relevance_tier": "A1 - referência primária",
+      "recommended_use": "Base primária para estilo e aderência; incidência somente após classificação manual.",
+      "score_reasons": [
+        "título contém \"dataprev\" (+35)",
+        "título contém \"desenvolvimento de software\" (+26)",
+        "conteúdo fora do escopo (-0.9)",
+        "mesmo órgão e especialidade (+20)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 18,
+        "engenharia_testes_requisitos": 8,
+        "banco_dados_bi": 7,
+        "seguranca_aplicacoes": 4,
+        "governanca_gestao": 1,
+        "ia_dados_emergentes": 3
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 96,
+        "engenharia_testes_requisitos": 33,
+        "banco_dados_bi": 28,
+        "seguranca_aplicacoes": 75,
+        "governanca_gestao": 2,
+        "ia_dados_emergentes": 4
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 6,
+        "hardware_suporte": 7,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 1
+    },
+    {
+      "filename": "auditor_de_controle_externo_informatica_analista_de_sistemas.pdf",
+      "sha256": "376c476cc56214d2004da9eb39503ee80707c6a9f3e10f7c4660cd8c2a9f2652",
+      "size_bytes": 850256,
+      "pages": 24,
+      "detected_year": 2024,
+      "cover_title": "TRIBUNAL DE CONTAS DO ESTADO DO PARÁ – AUDITOR DE CONTROLE EXTERNO – ÁREA DE INFORMÁTICA ANALISTA DE SISTEMAS",
+      "declared_total_questions": 100,
+      "relevance_score": 71.6,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"analista de sistemas\" (+15)",
+        "recência 2024 (+5)",
+        "conteúdo fora do escopo (-0.9)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 12,
+        "engenharia_testes_requisitos": 6,
+        "banco_dados_bi": 9,
+        "seguranca_aplicacoes": 7,
+        "governanca_gestao": 5,
+        "ia_dados_emergentes": 3
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 73,
+        "engenharia_testes_requisitos": 35,
+        "banco_dados_bi": 45,
+        "seguranca_aplicacoes": 108,
+        "governanca_gestao": 8,
+        "ia_dados_emergentes": 5
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 11,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 2
+    },
+    {
+      "filename": "analista_legislativo_desenvolvedor_de_sistemas.pdf",
+      "sha256": "b5627644592c0aaa05392c5887b5b7fa1207419af31e05340814d6c5f96365a3",
+      "size_bytes": 1820797,
+      "pages": 28,
+      "detected_year": 2024,
+      "cover_title": "ASSEMBLEIA LEGISLATIVA DO ESTADO DO PARANÁ – OBJETIVA – ( ) ANALISTA LEGISLATIVO DESENVOLVEDOR DE SISTEMAS –",
+      "declared_total_questions": 70,
+      "relevance_score": 66.85,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"desenvolvedor de sistemas\" (+24)",
+        "recência 2024 (+5)",
+        "conteúdo fora do escopo (-1.4)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 13,
+        "engenharia_testes_requisitos": 7,
+        "banco_dados_bi": 6,
+        "seguranca_aplicacoes": 2,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 1
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 87,
+        "engenharia_testes_requisitos": 39,
+        "banco_dados_bi": 20,
+        "seguranca_aplicacoes": 70,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 1
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 21,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 3
+    },
+    {
+      "filename": "analista_judiciario_area_apoio_especializado_especialidade_analise_de_sistemas_de_informacao.pdf",
+      "sha256": "61ad9926e9c5bc99433f6b818cce7b49c4dd2fe3a7e68a49968d6a96d1420f69",
+      "size_bytes": 510601,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL REGIONAL FEDERAL DA 1ª REGIÃO ANALISTA JUDICIÁRIO - ÁREA APOIO ESPECIALIZADO – ESPECIALIDADE: ANÁLISE DE SISTEMAS DE INFORMAÇÃO OBJETIVA E DISCURSIVA –",
+      "declared_total_questions": null,
+      "relevance_score": 65.8,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"analise de sistemas de informacao\" (+18)",
+        "título contém \"analise de sistemas\" (+17)",
+        "conteúdo fora do escopo (-0.9)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 17,
+        "engenharia_testes_requisitos": 4,
+        "banco_dados_bi": 3,
+        "seguranca_aplicacoes": 2,
+        "governanca_gestao": 2,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 121,
+        "engenharia_testes_requisitos": 33,
+        "banco_dados_bi": 4,
+        "seguranca_aplicacoes": 69,
+        "governanca_gestao": 2,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 7,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 4
+    },
+    {
+      "filename": "analista_judiciario_apoio_especializado_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf",
+      "sha256": "4db9c0dfdbd6b76f2f1c766e01ef2e471b784abfb008d26c66830066e84b7750",
+      "size_bytes": 1241423,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL DE JUSTIÇA DO ESTADO DO AMAPÁ ANALISTA JUDICIÁRIO - APOIO ESPECIALIZADO - TECNOLOGIA DA INFORMAÇÃO - DESENVOLVIMENTO DE SISTEMAS ESCRITA OBJETIVA –",
+      "declared_total_questions": null,
+      "relevance_score": 60.2,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"desenvolvimento de sistemas\" (+22)",
+        "título contém \"tecnologia da informacao\" (+6)",
+        "conteúdo fora do escopo (-1.8)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 17,
+        "engenharia_testes_requisitos": 3,
+        "banco_dados_bi": 3,
+        "seguranca_aplicacoes": 5,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 3
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 82,
+        "engenharia_testes_requisitos": 34,
+        "banco_dados_bi": 10,
+        "seguranca_aplicacoes": 53,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 3
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 2,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 18,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 5
+    },
+    {
+      "filename": "analista_do_mpu_desenvolvimento_de_sistemas.pdf",
+      "sha256": "886210336abfe27dee68911792b16bec11a373b21dbe93678e8143c7fab5772d",
+      "size_bytes": 747655,
+      "pages": 24,
+      "detected_year": null,
+      "cover_title": "MINISTÉRIO PÚBLICO DA UNIÃO A06 - ANALISTA DO MPU - DESENVOLVIMENTO DE SISTEMAS OBJETIVA E DISCURSIVA –",
+      "declared_total_questions": null,
+      "relevance_score": 59.75,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"desenvolvimento de sistemas\" (+22)",
+        "conteúdo fora do escopo (-1.4)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 14,
+        "engenharia_testes_requisitos": 4,
+        "banco_dados_bi": 7,
+        "seguranca_aplicacoes": 4,
+        "governanca_gestao": 2,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 97,
+        "engenharia_testes_requisitos": 27,
+        "banco_dados_bi": 51,
+        "seguranca_aplicacoes": 193,
+        "governanca_gestao": 5,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 2,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 3,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 6
+    },
+    {
+      "filename": "analista_em_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf",
+      "sha256": "5d3c3eab1a1dbd3bc40aa8f9be21b60fc0e2d44714ee3f3e683643e7f1f16347",
+      "size_bytes": 735256,
+      "pages": 16,
+      "detected_year": null,
+      "cover_title": "BANESTES ANALISTA EM TECNOLOGIA DA INFORMAÇÃO - DESENVOLVIMENTO DE SISTEMAS",
+      "declared_total_questions": null,
+      "relevance_score": 59.75,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"desenvolvimento de sistemas\" (+22)",
+        "título contém \"tecnologia da informacao\" (+6)",
+        "conteúdo fora do escopo (-0.5)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 10,
+        "engenharia_testes_requisitos": 5,
+        "banco_dados_bi": 2,
+        "seguranca_aplicacoes": 3,
+        "governanca_gestao": 1,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 44,
+        "engenharia_testes_requisitos": 20,
+        "banco_dados_bi": 6,
+        "seguranca_aplicacoes": 41,
+        "governanca_gestao": 1,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 0,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 7,
+        "hardware_suporte": 0,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 7
+    },
+    {
+      "filename": "analista_previdenciario_especialidade_analista_de_sistemas.pdf",
+      "sha256": "9dc857d84aaefd1f2cdcd90bebf90d4b69394c8ca3f64dd2e5c68e2da705717e",
+      "size_bytes": 1232185,
+      "pages": 16,
+      "detected_year": 2024,
+      "cover_title": "PREFEITURA MUNICIPAL DE MACAÉ PARA PROVIMENTO DE VAGAS EM CARGOS EFETIVOS DO QUADRO DE PESSOAL DO INSTITUTO DE PREVIDÊNCIA SOCIAL DO MUNICÍPIO DE MACAÉ – MACAEPREV OBJETIVA – ANALISTA PREVIDENCIÁRIO ESPECIALIDADE ANALISTA DE SISTEMAS",
+      "declared_total_questions": 70,
+      "relevance_score": 59.35,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"analista de sistemas\" (+15)",
+        "recência 2024 (+5)",
+        "conteúdo fora do escopo (-1.4)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 11,
+        "engenharia_testes_requisitos": 6,
+        "banco_dados_bi": 7,
+        "seguranca_aplicacoes": 1,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 5
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 45,
+        "engenharia_testes_requisitos": 21,
+        "banco_dados_bi": 24,
+        "seguranca_aplicacoes": 29,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 12
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 1,
+        "hardware_suporte": 5,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 8
+    },
+    {
+      "filename": "analista_judiciario_desenvolvimento_de_sistemas.pdf",
+      "sha256": "7ab12537ede267518572678376cb7d3d4c27c44b4baca1accc767aa7a2e4df4e",
+      "size_bytes": 491613,
+      "pages": 16,
+      "detected_year": 2024,
+      "cover_title": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA – EDITAL 01/2024 ANALISTA JUDICIÁRIO DESENVOLVIMENTO DE SISTEMAS – TIPO 1 BRANCA",
+      "declared_total_questions": 70,
+      "relevance_score": 57.15,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"desenvolvimento de sistemas\" (+22)",
+        "recência 2024 (+5)",
+        "conteúdo fora do escopo (-2.2)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 13,
+        "engenharia_testes_requisitos": 3,
+        "banco_dados_bi": 3,
+        "seguranca_aplicacoes": 4,
+        "governanca_gestao": 2,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 74,
+        "engenharia_testes_requisitos": 22,
+        "banco_dados_bi": 8,
+        "seguranca_aplicacoes": 94,
+        "governanca_gestao": 2,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 3,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 3,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 9
+    },
+    {
+      "filename": "analista_cvm_perfil_8_ti_sistemas_e_desenvolvimento_tarde.pdf",
+      "sha256": "98409060fc88d5734d869e6b83b8f8cf3a6cd9f7b2d0baf91a218f74f7ca7464",
+      "size_bytes": 1173345,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "COMISSÃO DE VALORES MOBILIÁRIOS ANALISTA CVM - PERFIL 8 - TI - SISTEMAS E DESENVOLVIMENTO OBJETIVA DE CONHECIMENTOS ESPECÍFICOS –",
+      "declared_total_questions": null,
+      "relevance_score": 55.2,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"sistemas e desenvolvimento\" (+23)",
+        "conteúdo fora do escopo (-2.7)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 12,
+        "engenharia_testes_requisitos": 7,
+        "banco_dados_bi": 2,
+        "seguranca_aplicacoes": 2,
+        "governanca_gestao": 2,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 68,
+        "engenharia_testes_requisitos": 20,
+        "banco_dados_bi": 6,
+        "seguranca_aplicacoes": 104,
+        "governanca_gestao": 4,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 3,
+        "hardware_suporte": 3,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 19,
+        "hardware_suporte": 4,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 10
+    },
+    {
+      "filename": "DPERS - analista_area_de_apoio_especializado_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf",
+      "sha256": "924ad5543b5536face4a40292b38eafca6e17afa7e845e00d803476f50dc6029",
+      "size_bytes": 1277055,
+      "pages": 18,
+      "detected_year": null,
+      "cover_title": "DEFENSORIA PÚBLICA DO ESTADO DO RIO GRANDE DO SUL ANALISTA - ÁREA DE APOIO ESPECIALIZADO - TECNOLOGIA DA INFORMAÇÃO - DESENVOLVIMENTO DE SISTEMAS OBJETIVA E DE REDAÇÃO –",
+      "declared_total_questions": null,
+      "relevance_score": 54.8,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"desenvolvimento de sistemas\" (+22)",
+        "título contém \"tecnologia da informacao\" (+6)",
+        "conteúdo fora do escopo (-0.9)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 10,
+        "engenharia_testes_requisitos": 2,
+        "banco_dados_bi": 2,
+        "seguranca_aplicacoes": 3,
+        "governanca_gestao": 1,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 53,
+        "engenharia_testes_requisitos": 27,
+        "banco_dados_bi": 5,
+        "seguranca_aplicacoes": 58,
+        "governanca_gestao": 1,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 6,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 11
+    },
+    {
+      "filename": "analista_judiciario_tecnologia_de_informacao_analise_de_sistemas.pdf",
+      "sha256": "268a6bfd9c86f4a3e0273b23bc82ee5c2c80cd0670a21e69b21c53dace2fbab2",
+      "size_bytes": 1357859,
+      "pages": 18,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL DE JUSTIÇA DO RIO GRANDE DO NORTE ANALISTA JUDICIÁRIO - APOIO ESPECIALIZADO - ESPECIALIDADE - TECNOLOGIA DE INFORMAÇÃO - ANÁLISE DE SISTEMAS ESCRITA OBJETIVA E DISCURSIVA –",
+      "declared_total_questions": null,
+      "relevance_score": 53.8,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"analise de sistemas\" (+17)",
+        "conteúdo fora do escopo (-1.8)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 14,
+        "engenharia_testes_requisitos": 2,
+        "banco_dados_bi": 9,
+        "seguranca_aplicacoes": 4,
+        "governanca_gestao": 1,
+        "ia_dados_emergentes": 1
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 90,
+        "engenharia_testes_requisitos": 25,
+        "banco_dados_bi": 19,
+        "seguranca_aplicacoes": 86,
+        "governanca_gestao": 1,
+        "ia_dados_emergentes": 2
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 2,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 12,
+        "hardware_suporte": 5,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 12
+    },
+    {
+      "filename": "2025 DPE RO - analista_de_sistemas_classe_b.pdf",
+      "sha256": "e068ad61908ddbc0326f529722a909ac1aa3bc6a8a94864138f373fe98991f6f",
+      "size_bytes": 455759,
+      "pages": 20,
+      "detected_year": 2025,
+      "cover_title": "DEFENSORIA PÚBLICA DO ESTADO DE RONDÔNIA – EDITAL 01/2025 ANALISTA DE SISTEMAS - CLASSE B",
+      "declared_total_questions": 70,
+      "relevance_score": 51.95,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"analista de sistemas\" (+15)",
+        "recência 2025 (+6)",
+        "conteúdo fora do escopo (-1.4)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 15,
+        "engenharia_testes_requisitos": 5,
+        "banco_dados_bi": 0,
+        "seguranca_aplicacoes": 4,
+        "governanca_gestao": 3,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 57,
+        "engenharia_testes_requisitos": 44,
+        "banco_dados_bi": 0,
+        "seguranca_aplicacoes": 75,
+        "governanca_gestao": 5,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 12,
+        "hardware_suporte": 7,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 13
+    },
+    {
+      "filename": "analista_judiciario_tecnologia_da_informacao_analista_de_sistemas.pdf",
+      "sha256": "524931dc4676b3711a911763d73370572be40d314ccbe8469ae9c848ceeecef0",
+      "size_bytes": 609152,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL DE JUSTIÇA DO ESTADO DO RIO DE JANEIRO ANALISTA JUDICIÁRIO - TECNOLOGIA DA INFORMAÇÃO - ANALISTA DE SISTEMAS OBJETIVA E DISCURSIVA –",
+      "declared_total_questions": null,
+      "relevance_score": 51.35,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"analista de sistemas\" (+15)",
+        "título contém \"tecnologia da informacao\" (+6)",
+        "conteúdo fora do escopo (-1.4)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 13,
+        "engenharia_testes_requisitos": 4,
+        "banco_dados_bi": 3,
+        "seguranca_aplicacoes": 2,
+        "governanca_gestao": 2,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 94,
+        "engenharia_testes_requisitos": 41,
+        "banco_dados_bi": 12,
+        "seguranca_aplicacoes": 139,
+        "governanca_gestao": 3,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 3,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 14
+    },
+    {
+      "filename": "analista_judiciario_analise_de_sistemas (1).pdf",
+      "sha256": "b1841013402e4c0874e204a7771e7d28389be8c54389892d501128609151fa66",
+      "size_bytes": 778392,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL DE JUSTIÇA DO DISTRITO FEDERAL E DOS TERRITÓRIOS ANALISTA JUDICIÁRIO - ANÁLISE DE SISTEMAS ESCRITA OBJETIVA E DISCURSIVA – ANALISTA JUDICIÁRIO –",
+      "declared_total_questions": null,
+      "relevance_score": 50.45,
+      "relevance_tier": "A2 - muito alta",
+      "recommended_use": "Base principal para classificação temática e estilo FGV de desenvolvimento.",
+      "score_reasons": [
+        "título contém \"analise de sistemas\" (+17)",
+        "conteúdo fora do escopo (-1.4)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 13,
+        "engenharia_testes_requisitos": 2,
+        "banco_dados_bi": 6,
+        "seguranca_aplicacoes": 4,
+        "governanca_gestao": 2,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 80,
+        "engenharia_testes_requisitos": 16,
+        "banco_dados_bi": 16,
+        "seguranca_aplicacoes": 70,
+        "governanca_gestao": 4,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 4,
+        "hardware_suporte": 3,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 15
+    },
+    {
+      "filename": "TCE - PE - analista_de_controle_externo_tecnologia_da_informacao.pdf",
+      "sha256": "2284d6344248ee5cdb0eaca76839c2bfea8b8db32de8d6fcb154158effa5a949",
+      "size_bytes": 558062,
+      "pages": 24,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL DE CONTAS DO ESTADO DE PERNAMBUCO OBJETIVA E DISCURSIVA – ANALISTA DE CONTROLE EXTERNO – TECNOLOGIA DA INFORMAÇÃO",
+      "declared_total_questions": 80,
+      "relevance_score": 48.6,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "conteúdo fora do escopo (-1.8)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 14,
+        "engenharia_testes_requisitos": 5,
+        "banco_dados_bi": 6,
+        "seguranca_aplicacoes": 4,
+        "governanca_gestao": 4,
+        "ia_dados_emergentes": 5
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 104,
+        "engenharia_testes_requisitos": 28,
+        "banco_dados_bi": 21,
+        "seguranca_aplicacoes": 103,
+        "governanca_gestao": 8,
+        "ia_dados_emergentes": 14
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 1
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 13,
+        "hardware_suporte": 6,
+        "informatica_basica": 0,
+        "forense": 1
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 16
+    },
+    {
+      "filename": "tecnico_de_gestao_administrativa_analista_de_sistemas.pdf",
+      "sha256": "561c979b7640603758672f636d319fb731d15844ef8872f01567d7e61ecbf112",
+      "size_bytes": 1229714,
+      "pages": 12,
+      "detected_year": null,
+      "cover_title": "ASSEMBLEIA LEGISLATIVO DO ESTADO DO MARANHÃO TÉCNICO DE GESTÃO ADMINISTRATIVA ANALISTA DE SISTEMAS",
+      "declared_total_questions": 60,
+      "relevance_score": 48.25,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"analista de sistemas\" (+15)",
+        "conteúdo fora do escopo (-1.4)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 12,
+        "engenharia_testes_requisitos": 4,
+        "banco_dados_bi": 4,
+        "seguranca_aplicacoes": 2,
+        "governanca_gestao": 4,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 71,
+        "engenharia_testes_requisitos": 19,
+        "banco_dados_bi": 8,
+        "seguranca_aplicacoes": 48,
+        "governanca_gestao": 5,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 4,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 17
+    },
+    {
+      "filename": "2025 AMAZUL - analista_de_desenvolvimento_de_sistemas.pdf",
+      "sha256": "146dec8dc04b75ed1630f578403573ef4810b52cce06355f762701df8a2d0950",
+      "size_bytes": 663368,
+      "pages": 16,
+      "detected_year": 2025,
+      "cover_title": "PARA A AMAZÔNIA AZUL TECNOLOGIAS DE DEFESA S.A. – AMAZUL ( ) ANALISTA DE DESENVOLVIMENTO DE SISTEMAS",
+      "declared_total_questions": 60,
+      "relevance_score": 48.15,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"desenvolvimento de sistemas\" (+22)",
+        "recência 2025 (+6)",
+        "conteúdo fora do escopo (-2.2)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 7,
+        "engenharia_testes_requisitos": 2,
+        "banco_dados_bi": 3,
+        "seguranca_aplicacoes": 2,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 1
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 80,
+        "engenharia_testes_requisitos": 9,
+        "banco_dados_bi": 15,
+        "seguranca_aplicacoes": 51,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 1
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 2,
+        "informatica_basica": 2,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 11,
+        "hardware_suporte": 5,
+        "informatica_basica": 3,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 18
+    },
+    {
+      "filename": "analista_legislativo_informatica_legislativa_analise_de_sistemas.pdf",
+      "sha256": "3f064de09a5aefe00147c0a733718eddcf38f29e85bd8a0ed30056972826fc6f",
+      "size_bytes": 1565556,
+      "pages": 21,
+      "detected_year": null,
+      "cover_title": "SENADO FEDERAL – EDITAL 1 OBJETIVA E DISCURSIVA ANALISTA LEGISLATIVO - INFORMÁTICA LEGISLATIVA ANÁLISE DE SISTEMAS –",
+      "declared_total_questions": 70,
+      "relevance_score": 48.15,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"analise de sistemas\" (+17)",
+        "conteúdo fora do escopo (-2.2)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 13,
+        "engenharia_testes_requisitos": 4,
+        "banco_dados_bi": 4,
+        "seguranca_aplicacoes": 1,
+        "governanca_gestao": 3,
+        "ia_dados_emergentes": 1
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 67,
+        "engenharia_testes_requisitos": 22,
+        "banco_dados_bi": 26,
+        "seguranca_aplicacoes": 89,
+        "governanca_gestao": 12,
+        "ia_dados_emergentes": 1
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 2,
+        "hardware_suporte": 3,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 4,
+        "hardware_suporte": 4,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 19
+    },
+    {
+      "filename": "analista_cvm_perfil_8_ti_sistemas_e_desenvolvimento_manha.pdf",
+      "sha256": "06dc4d76004fe598fb1b474df2dc270c5f01ecb897bdb0b9f333859b546b5726",
+      "size_bytes": 1237712,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "COMISSÃO DE VALORES MOBILIÁRIOS ANALISTA CVM - PERFIL 8 - TI - SISTEMAS E DESENVOLVIMENTO OBJETIVA DE CONHECIMENTOS BÁSICOS E DISCURSIVA –",
+      "declared_total_questions": null,
+      "relevance_score": 45.0,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"sistemas e desenvolvimento\" (+23)",
+        "conteúdo fora do escopo (-0.9)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 9,
+        "engenharia_testes_requisitos": 2,
+        "banco_dados_bi": 0,
+        "seguranca_aplicacoes": 2,
+        "governanca_gestao": 1,
+        "ia_dados_emergentes": 1
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 46,
+        "engenharia_testes_requisitos": 11,
+        "banco_dados_bi": 0,
+        "seguranca_aplicacoes": 54,
+        "governanca_gestao": 1,
+        "ia_dados_emergentes": 3
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 4,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 20
+    },
+    {
+      "filename": "analista_judiciario_tecnologia_da_informacao.pdf",
+      "sha256": "eca93bf99c2fd5aa3f9431b74f89cae5186dbaef0de8cbe43845643056b91c23",
+      "size_bytes": 514950,
+      "pages": 16,
+      "detected_year": 2024,
+      "cover_title": "TRIBUNAL DE JUSTIÇA DE MATO GROSSO – EDITAL 74/2024 ANALISTA JUDICIÁRIO TECNOLOGIA DA INFORMAÇÃO –",
+      "declared_total_questions": 70,
+      "relevance_score": 44.6,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "recência 2024 (+5)",
+        "conteúdo fora do escopo (-1.8)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 9,
+        "engenharia_testes_requisitos": 3,
+        "banco_dados_bi": 3,
+        "seguranca_aplicacoes": 3,
+        "governanca_gestao": 5,
+        "ia_dados_emergentes": 5
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 59,
+        "engenharia_testes_requisitos": 12,
+        "banco_dados_bi": 11,
+        "seguranca_aplicacoes": 104,
+        "governanca_gestao": 7,
+        "ia_dados_emergentes": 15
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 3,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 10,
+        "hardware_suporte": 3,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 21
+    },
+    {
+      "filename": "analista_judiciario_analise_de_sistemas.pdf",
+      "sha256": "2ab540853158bdbd6270736b64c5ce8df18df2050ec14ea404269291bc30bec3",
+      "size_bytes": 1053152,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL DE JUSTIÇA DO ESTADO DE SERGIPE ANALISTA JUDICIÁRIO - ESPECIALIDADE - ANÁLISE DE SISTEMAS ESCRITA OBJETIVA –",
+      "declared_total_questions": null,
+      "relevance_score": 44.35,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"analise de sistemas\" (+17)",
+        "conteúdo fora do escopo (-1.4)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 15,
+        "engenharia_testes_requisitos": 2,
+        "banco_dados_bi": 3,
+        "seguranca_aplicacoes": 2,
+        "governanca_gestao": 2,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 48,
+        "engenharia_testes_requisitos": 29,
+        "banco_dados_bi": 4,
+        "seguranca_aplicacoes": 52,
+        "governanca_gestao": 3,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 2,
+        "hardware_suporte": 5,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 22
+    },
+    {
+      "filename": "tecnico_de_nivel_superior_analista_de_sistemas_computacionais_analista_de_sistemas.pdf",
+      "sha256": "6cfe1a84f62cab9c6a064909c3cee1dcf9f0bf9a7e2c881d0b272cd3420dfd5f",
+      "size_bytes": 1142647,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL DE JUSTIÇA DO ESTADO DE MATO GROSSO DO SUL TÉCNICO DE - ANALISTA DE SISTEMAS COMPUTACIONAIS - ANALISTA DE SISTEMAS OBJETIVA –",
+      "declared_total_questions": null,
+      "relevance_score": 44.25,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"analista de sistemas\" (+15)",
+        "conteúdo fora do escopo (-0.5)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 11,
+        "engenharia_testes_requisitos": 3,
+        "banco_dados_bi": 2,
+        "seguranca_aplicacoes": 2,
+        "governanca_gestao": 3,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 40,
+        "engenharia_testes_requisitos": 16,
+        "banco_dados_bi": 8,
+        "seguranca_aplicacoes": 93,
+        "governanca_gestao": 5,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 0,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 2,
+        "hardware_suporte": 0,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 23
+    },
+    {
+      "filename": "analista_especializado_analista_de_sistemas.pdf",
+      "sha256": "92d998f8c3ef2dcd2190261cef9e4ddc7a24f04261f2c3d637ed76e61b7deea6",
+      "size_bytes": 423387,
+      "pages": 16,
+      "detected_year": 2021,
+      "cover_title": "Indústria de Material Bélico do Brasil – 2021 ANALISTA ESPECIALIZADO - ANALISTA DE SISTEMAS",
+      "declared_total_questions": null,
+      "relevance_score": 42.55,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"analista de sistemas\" (+15)",
+        "recência 2021 (+2)",
+        "conteúdo fora do escopo (-1.4)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 10,
+        "engenharia_testes_requisitos": 2,
+        "banco_dados_bi": 2,
+        "seguranca_aplicacoes": 3,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 31,
+        "engenharia_testes_requisitos": 7,
+        "banco_dados_bi": 7,
+        "seguranca_aplicacoes": 16,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 1,
+        "informatica_basica": 1,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 3,
+        "hardware_suporte": 1,
+        "informatica_basica": 1,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 24
+    },
+    {
+      "filename": "EBSERH analista_de_tecnologia_da_informacao.pdf",
+      "sha256": "12cb3b7151fbc3c0ec4089c9a6c5d782f998238fe9dd325facbe517980fe4096",
+      "size_bytes": 567279,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES – EBSERH GRUPO ANALISTA DE TECNOLOGIA DA INFORMAÇÃO CÓDIGO CONTROLE - 37",
+      "declared_total_questions": 60,
+      "relevance_score": 40.05,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "conteúdo fora do escopo (-0.5)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 10,
+        "engenharia_testes_requisitos": 2,
+        "banco_dados_bi": 4,
+        "seguranca_aplicacoes": 4,
+        "governanca_gestao": 4,
+        "ia_dados_emergentes": 1
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 82,
+        "engenharia_testes_requisitos": 13,
+        "banco_dados_bi": 4,
+        "seguranca_aplicacoes": 94,
+        "governanca_gestao": 6,
+        "ia_dados_emergentes": 10
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 0,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 2,
+        "hardware_suporte": 0,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 25
+    },
+    {
+      "filename": "analista_de_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf",
+      "sha256": "02a70265763c9dfa3c1339e91817a182809d735f6d4c74a8c82128f022ca8b3b",
+      "size_bytes": 628996,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL DE JUSTIÇA E TRIBUNAL DE CONTAS DO ESTADO DE RONDÔNIA M ANALISTA JUDICIÁRIO - ANALISTA DE A SISTEMAS E ANALISTA DE TECNOLOGIA DA N INFORMAÇÃO - DESENVOLVIMENTO DE H SISTEMAS Ã Escrita Objetiva e Discursiva -",
+      "declared_total_questions": null,
+      "relevance_score": 36.5,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "conteúdo fora do escopo (-1.8)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 13,
+        "engenharia_testes_requisitos": 4,
+        "banco_dados_bi": 4,
+        "seguranca_aplicacoes": 5,
+        "governanca_gestao": 1,
+        "ia_dados_emergentes": 4
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 55,
+        "engenharia_testes_requisitos": 29,
+        "banco_dados_bi": 10,
+        "seguranca_aplicacoes": 77,
+        "governanca_gestao": 1,
+        "ia_dados_emergentes": 5
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 3,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 7,
+        "hardware_suporte": 5,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 26
+    },
+    {
+      "filename": "2023 DNIT analista_administrativo_tecnologia_da_informacao.pdf",
+      "sha256": "6e25f83dd473d068f2a4fc02b0bd7a49a9f4e7607adbee32fbcebbf5b5111f3f",
+      "size_bytes": 1378220,
+      "pages": 16,
+      "detected_year": 2023,
+      "cover_title": "2023 ANALISTA ADMINISTRATIVO TECNOLOGIA DA INFORMAÇÃO",
+      "declared_total_questions": 80,
+      "relevance_score": 35.9,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "recência 2023 (+4)",
+        "conteúdo fora do escopo (-4.5)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 10,
+        "engenharia_testes_requisitos": 1,
+        "banco_dados_bi": 5,
+        "seguranca_aplicacoes": 4,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 68,
+        "engenharia_testes_requisitos": 14,
+        "banco_dados_bi": 15,
+        "seguranca_aplicacoes": 60,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 5,
+        "hardware_suporte": 5,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 11,
+        "hardware_suporte": 10,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 27
+    },
+    {
+      "filename": "analista_em_tecnologia_da_informacao.pdf",
+      "sha256": "887cada95c19d9063ded0cad3c45b118c878336d4e171a381aebc58e90ca9e5a",
+      "size_bytes": 1277045,
+      "pages": 18,
+      "detected_year": null,
+      "cover_title": "MINISTÉRIO PÚBLICO DO ESTADO DE SANTA CATARINA ANALISTA EM TECNOLOGIA DA INFORMAÇÃO ESCRITA OBJETIVA –",
+      "declared_total_questions": null,
+      "relevance_score": 34.7,
+      "relevance_tier": "B - alta",
+      "recommended_use": "Base secundária para ampliar amostra de temas aderentes.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "conteúdo fora do escopo (-1.8)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 9,
+        "engenharia_testes_requisitos": 4,
+        "banco_dados_bi": 3,
+        "seguranca_aplicacoes": 4,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 38,
+        "engenharia_testes_requisitos": 32,
+        "banco_dados_bi": 12,
+        "seguranca_aplicacoes": 57,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 2,
+        "informatica_basica": 1,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 10,
+        "hardware_suporte": 3,
+        "informatica_basica": 1,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 28
+    },
+    {
+      "filename": "analista_judiciario_area_administrativa_tecnologia_da_informacao.pdf",
+      "sha256": "0cca0d7deee07f5e49c49a09f12df629a9785a801e5f2971f1f363921f037eac",
+      "size_bytes": 1673826,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "JUSTIÇA DO TRABALHO TRIBUNAL REGIONAL DO TRABALHO 16ª REGIÃO (MA) ANALISTA JUDICIÁRIO - ÁREA ADMINISTRATIVA TECNOLOGIA DA INFORMAÇÃO –",
+      "declared_total_questions": 80,
+      "relevance_score": 33.35,
+      "relevance_tier": "C - complementar",
+      "recommended_use": "Usar seletivamente por questão; não usar denominador integral.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "conteúdo fora do escopo (-1.4)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 16,
+        "engenharia_testes_requisitos": 1,
+        "banco_dados_bi": 4,
+        "seguranca_aplicacoes": 3,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 1
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 110,
+        "engenharia_testes_requisitos": 15,
+        "banco_dados_bi": 19,
+        "seguranca_aplicacoes": 44,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 3
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 2,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 26,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 29
+    },
+    {
+      "filename": "analista_tecnico_tecnologia_da_informacao.pdf",
+      "sha256": "2e465b4caa9df71c6cf014029cb8ce738fec70a508c6b31741c26bfd97b6ee0f",
+      "size_bytes": 1235244,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL DE CONTAS DO ESTADO DO TOCANTINS ANALISTA TÉCNICO - TECNOLOGIA DA INFORMAÇÃO ESCRITA OBJETIVA E DISCURSIVA –",
+      "declared_total_questions": null,
+      "relevance_score": 33.2,
+      "relevance_tier": "C - complementar",
+      "recommended_use": "Usar seletivamente por questão; não usar denominador integral.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "conteúdo fora do escopo (-2.7)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 10,
+        "engenharia_testes_requisitos": 4,
+        "banco_dados_bi": 2,
+        "seguranca_aplicacoes": 3,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 51,
+        "engenharia_testes_requisitos": 40,
+        "banco_dados_bi": 10,
+        "seguranca_aplicacoes": 62,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 3,
+        "hardware_suporte": 3,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 17,
+        "hardware_suporte": 4,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 30
+    },
+    {
+      "filename": "analista_tecnolo_inform_desenv_tipo_1.pdf",
+      "sha256": "443b77063e59046b995303ee246c314811a4ec434bc3543391984290a64f244d",
+      "size_bytes": 777700,
+      "pages": 16,
+      "detected_year": 2015,
+      "cover_title": "Tribunal de Contas do Estado de Sergipe 60 2015 Escrita Objetiva – ANALISTA DE TECNOLOGIA DA INFORMAÇÃO - DESENVOLVIMENTO",
+      "declared_total_questions": null,
+      "relevance_score": 31.85,
+      "relevance_tier": "C - complementar",
+      "recommended_use": "Usar seletivamente por questão; não usar denominador integral.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "recência 2015 (+0)",
+        "conteúdo fora do escopo (-1.4)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 9,
+        "engenharia_testes_requisitos": 4,
+        "banco_dados_bi": 3,
+        "seguranca_aplicacoes": 1,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 51,
+        "engenharia_testes_requisitos": 14,
+        "banco_dados_bi": 11,
+        "seguranca_aplicacoes": 65,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 2,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 6,
+        "hardware_suporte": 1,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 31
+    },
+    {
+      "filename": "analista_judiciario_tecnologia_da_informacao_tipo_1.pdf",
+      "sha256": "7dfa6e70987b4c3e6539c321b93e21e4aac72a163abdee341edbd67239f10fcf",
+      "size_bytes": 656132,
+      "pages": 16,
+      "detected_year": 2014,
+      "cover_title": "Tribunal de Justiça do Estado da Bahia 2014 objetiva e discursiva – Analista Judiciário - Área de Apoio Especializado - Especialidade - Tecnologia da Informação",
+      "declared_total_questions": null,
+      "relevance_score": 31.4,
+      "relevance_tier": "C - complementar",
+      "recommended_use": "Usar seletivamente por questão; não usar denominador integral.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "recência 2014 (+0)",
+        "conteúdo fora do escopo (-1.8)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 11,
+        "engenharia_testes_requisitos": 2,
+        "banco_dados_bi": 1,
+        "seguranca_aplicacoes": 3,
+        "governanca_gestao": 2,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 37,
+        "engenharia_testes_requisitos": 12,
+        "banco_dados_bi": 2,
+        "seguranca_aplicacoes": 57,
+        "governanca_gestao": 3,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 4,
+        "hardware_suporte": 0,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 5,
+        "hardware_suporte": 0,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 32
+    },
+    {
+      "filename": "analista_judiciario_area_apoio_especializado_tecnologia_da_informacao.pdf",
+      "sha256": "6218ef8ac21df0c40a59b890ac0deb4abad350f2f8085c2e22d9d4eed5006d4f",
+      "size_bytes": 1230393,
+      "pages": 16,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL REGIONAL DO TRABALHO DA 24ª REGIÃO (TRT-24) REAPLICAÇÃO OBJETIVA – ANALISTA JUDICIÁRIO ÁREA APOIO ESPECIALIZADO - TECNOLOGIA DA INFORMAÇÃO Atenção: a frase a seguir deverá ser transcrita no espaço reservado da sua folha de respostas, com sua caligrafia usual, considerando as letras maiúsculas e minúsculas. Trabalho decente não é um privilégio, mas um direito humano inalienável.",
+      "declared_total_questions": 60,
+      "relevance_score": 30.05,
+      "relevance_tier": "C - complementar",
+      "recommended_use": "Usar seletivamente por questão; não usar denominador integral.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "conteúdo fora do escopo (-3.1)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 13,
+        "engenharia_testes_requisitos": 1,
+        "banco_dados_bi": 2,
+        "seguranca_aplicacoes": 4,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 1
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 82,
+        "engenharia_testes_requisitos": 11,
+        "banco_dados_bi": 15,
+        "seguranca_aplicacoes": 56,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 1
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 5,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 14,
+        "hardware_suporte": 4,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 33
+    },
+    {
+      "filename": "analista_judiciario_area_apoio_especializado_especialidade_tecnologia_da_informacao.pdf",
+      "sha256": "38e7c9f9571b62731c0a46ed96274c15cbe7a8b65b7f0f3eb9b28f33446042f5",
+      "size_bytes": 492272,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL REGIONAL FEDERAL DA 1ª REGIÃO ANALISTA JUDICIÁRIO - ÁREA APOIO ESPECIALIZADO – ESPECIALIDADE: TECNOLOGIA DA INFORMAÇÃO OBJETIVA E DISCURSIVA –",
+      "declared_total_questions": null,
+      "relevance_score": 21.6,
+      "relevance_tier": "C - complementar",
+      "recommended_use": "Usar seletivamente por questão; não usar denominador integral.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "conteúdo fora do escopo (-3.6)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 8,
+        "engenharia_testes_requisitos": 1,
+        "banco_dados_bi": 0,
+        "seguranca_aplicacoes": 3,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 70,
+        "engenharia_testes_requisitos": 23,
+        "banco_dados_bi": 0,
+        "seguranca_aplicacoes": 68,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 4,
+        "hardware_suporte": 2,
+        "informatica_basica": 2,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 12,
+        "hardware_suporte": 3,
+        "informatica_basica": 2,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 34
+    },
+    {
+      "filename": "2021 FUNSAUDE CE - analista_da_tecnologia_da_informacao.pdf",
+      "sha256": "946187d6a060599a3a8100b8cf3413dcc7f9e9c328db0b2049130b42ce451b4b",
+      "size_bytes": 572949,
+      "pages": 16,
+      "detected_year": 2021,
+      "cover_title": "Fundação Regional de Saúde FUNSAÚDE-CE 2021 T ANALISTA DE TECNOLOGIA DA INFORMAÇÃO – TI E INFRAESTRUTURA DE INFORMÁTICA",
+      "declared_total_questions": null,
+      "relevance_score": 13.3,
+      "relevance_tier": "D - baixa/controle negativo",
+      "recommended_use": "Controle negativo/filtro; questões aderentes somente após revisão individual.",
+      "score_reasons": [
+        "título contém \"tecnologia da informacao\" (+6)",
+        "título contém \"infraestrutura\" (-18)",
+        "recência 2021 (+2)",
+        "conteúdo fora do escopo (-6.6)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 11,
+        "engenharia_testes_requisitos": 4,
+        "banco_dados_bi": 2,
+        "seguranca_aplicacoes": 3,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 42,
+        "engenharia_testes_requisitos": 20,
+        "banco_dados_bi": 6,
+        "seguranca_aplicacoes": 36,
+        "governanca_gestao": 0,
+        "ia_dados_emergentes": 0
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 1,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 3,
+        "hardware_suporte": 3,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 35
+    },
+    {
+      "filename": "tecnico_de_nivel_superior_analista_de_sistemas_computacionais_analista_de_suporte_de_ti.pdf",
+      "sha256": "5a222067918c60fdc81f7c8d775bb6b1bd6dbeda7b3f080ce9210d1f10742cab",
+      "size_bytes": 1135218,
+      "pages": 20,
+      "detected_year": null,
+      "cover_title": "TRIBUNAL DE JUSTIÇA DO ESTADO DE MATO GROSSO DO SUL TÉCNICO DE - ANALISTA DE SISTEMAS COMPUTACIONAIS - ANALISTA DE SUPORTE DE TI OBJETIVA –",
+      "declared_total_questions": null,
+      "relevance_score": -2.3,
+      "relevance_tier": "D - baixa/controle negativo",
+      "recommended_use": "Controle negativo/filtro; questões aderentes somente após revisão individual.",
+      "score_reasons": [
+        "título contém \"analista de sistemas\" (+15)",
+        "título contém \"suporte de ti\" (-20)",
+        "conteúdo fora do escopo (-18.0)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 7,
+        "engenharia_testes_requisitos": 1,
+        "banco_dados_bi": 1,
+        "seguranca_aplicacoes": 2,
+        "governanca_gestao": 3,
+        "ia_dados_emergentes": 1
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 54,
+        "engenharia_testes_requisitos": 11,
+        "banco_dados_bi": 6,
+        "seguranca_aplicacoes": 109,
+        "governanca_gestao": 4,
+        "ia_dados_emergentes": 1
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 4,
+        "hardware_suporte": 5,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 10,
+        "hardware_suporte": 36,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 36
+    },
+    {
+      "filename": "analista_legislativo_informatica_legislativa_analise_de_suporte_de_sistemas.pdf",
+      "sha256": "c6a1b254e763c4c4b6eeec4058fae3f544a95aebd59226eceface061b7216566",
+      "size_bytes": 1628234,
+      "pages": 24,
+      "detected_year": null,
+      "cover_title": "SENADO FEDERAL – EDITAL 1 OBJETIVA E DISCURSIVA ANALISTA LEGISLATIVO - INFORMÁTICA LEGISLATIVA ANÁLISE DE SUPORTE DE SISTEMAS –",
+      "declared_total_questions": 70,
+      "relevance_score": -12.4,
+      "relevance_tier": "D - baixa/controle negativo",
+      "recommended_use": "Controle negativo/filtro; questões aderentes somente após revisão individual.",
+      "score_reasons": [
+        "título contém \"analise de suporte\" (-22)",
+        "conteúdo fora do escopo (-18.0)"
+      ],
+      "topic_keyword_coverage": {
+        "desenvolvimento_arquitetura": 10,
+        "engenharia_testes_requisitos": 1,
+        "banco_dados_bi": 3,
+        "seguranca_aplicacoes": 1,
+        "governanca_gestao": 3,
+        "ia_dados_emergentes": 1
+      },
+      "topic_keyword_hits": {
+        "desenvolvimento_arquitetura": 58,
+        "engenharia_testes_requisitos": 19,
+        "banco_dados_bi": 13,
+        "seguranca_aplicacoes": 82,
+        "governanca_gestao": 7,
+        "ia_dados_emergentes": 1
+      },
+      "out_of_scope_keyword_coverage": {
+        "redes_infra": 7,
+        "hardware_suporte": 2,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "out_of_scope_keyword_hits": {
+        "redes_infra": 38,
+        "hardware_suporte": 3,
+        "informatica_basica": 0,
+        "forense": 0
+      },
+      "review_status": "AUTO_TRIAGED_UNREVIEWED",
+      "rank": 37
+    }
+  ]
+}

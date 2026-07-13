@@ -1,0 +1,13 @@
+﻿sourceExamFilename,gabaritoSourceFileName,documentStatus,cadernoType,expectedQuestionCount,parsedAnswerCount,annulledQuestions,sourcePage,matchStatus
+analista_de_tecnologia_da_informacao_desenvolvimento_de_software.pdf,gabarito dataprev.pdf,DEFINITIVE,1,70,70,13,5,EXACT_TITLE_AND_CADERNO_MATCH
+auditor_de_controle_externo_informatica_analista_de_sistemas.pdf,gabarito TCE-PA 2024.pdf,DEFINITIVE,1,100,100,"10,50,52,58,87,97",16,EXACT_TITLE_AND_CADERNO_MATCH
+analista_legislativo_desenvolvedor_de_sistemas.pdf,gabarito - ALEP.pdf,DEFINITIVE,1,70,70,10,7,EXACT_TITLE_AND_CADERNO_MATCH
+analista_judiciario_area_apoio_especializado_especialidade_analise_de_sistemas_de_informacao.pdf,gabarito_preliminar - TRF 1.pdf,DEFINITIVE,1,80,80,9,4,EXACT_TITLE_AND_CADERNO_MATCH
+analista_judiciario_apoio_especializado_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf,gabarito_definitivo TJAP.pdf,DEFINITIVE,1,80,80,,10,EXACT_TITLE_AND_CADERNO_MATCH
+analista_do_mpu_desenvolvimento_de_sistemas.pdf,gabarito MPU.pdf,DEFINITIVE,1,80,80,21,6,EXACT_TITLE_AND_CADERNO_MATCH
+analista_em_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf,gabarito_definitivo - Baneste.pdf,DEFINITIVE,1,60,60,"21,22",1,EXACT_TITLE_AND_CADERNO_MATCH
+analista_previdenciario_especialidade_analista_de_sistemas.pdf,gabarito_preliminar MACAEPREV.pdf,PRELIMINARY,1,70,70,,6,EXACT_TITLE_AND_CADERNO_MATCH
+analista_judiciario_desenvolvimento_de_sistemas.pdf,gabarito TJRR.pdf,PRELIMINARY,1,70,70,,3,EXACT_TITLE_AND_CADERNO_MATCH
+analista_cvm_perfil_8_ti_sistemas_e_desenvolvimento_tarde.pdf,gabaritos_preliminares CVM.pdf,PRELIMINARY,1,70,70,,11,EXACT_TITLE_AND_CADERNO_MATCH
+DPERS - analista_area_de_apoio_especializado_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf,gabarito_oficial DPE RS.pdf,DEFINITIVE,1,70,70,,12,EXACT_TITLE_AND_CADERNO_MATCH
+analista_judiciario_tecnologia_de_informacao_analise_de_sistemas.pdf,gabarito TJRN.pdf,PUBLISHED_UNQUALIFIED,1,70,70,,12,EXACT_TITLE_AND_CADERNO_MATCH

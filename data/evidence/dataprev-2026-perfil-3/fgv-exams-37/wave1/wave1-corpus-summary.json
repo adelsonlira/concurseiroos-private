@@ -1,0 +1,522 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-13",
+  "sourceArchive": "Provas FGV.zip",
+  "wave": "A1_A2",
+  "examCount": 15,
+  "rawQuestionCount": 1090,
+  "uniqueQuestionCount": 1090,
+  "duplicateQuestionCount": 0,
+  "manuallyReviewedOrExcludedQuestionCount": 91,
+  "candidateClassifiedInScopeUniqueQuestionCount": 370,
+  "experimentalIncidenceBasisQuestionCount": 186,
+  "classifiedInScopeUniqueQuestionCount": 186,
+  "classificationStatusCounts": {
+    "AUTO_CLASSIFIED_HIGH_CONFIDENCE": 97,
+    "AUTO_CLASSIFIED_REVIEW_REQUIRED": 184,
+    "AUTO_EXCLUDED_OUT_OF_SCOPE": 17,
+    "MANUALLY_EXCLUDED": 2,
+    "MANUALLY_REVIEWED": 89,
+    "UNCLASSIFIED": 701
+  },
+  "candidateTopicCounts": {
+    "dp26-p3-esp-desenvolvimento-sistemas": 224,
+    "dp26-p3-esp-banco-dados": 64,
+    "dp26-p3-esp-seguranca": 29,
+    "dp26-p3-esp-bi": 21,
+    "dp26-p3-esp-gestao-governanca": 18,
+    "dp26-p3-leg-lgpd": 11,
+    "dp26-p3-leg-lai": 2,
+    "dp26-p3-leg-marco-civil": 1
+  },
+  "candidateSubtopicCounts": {
+    "dp26-p3-esp-linguagens-frameworks": 26,
+    "dp26-p3-esp-frontend": 23,
+    "dp26-p3-esp-design-arquitetura": 22,
+    "dp26-p3-esp-bd-sql": 20,
+    "dp26-p3-esp-arquitetura-software": 17,
+    "dp26-p3-esp-ia-dados-bigdata": 17,
+    "dp26-p3-esp-devops-git": 16,
+    "dp26-p3-esp-testes": 14,
+    "dp26-p3-esp-metodologias-ageis": 13,
+    "dp26-p3-esp-si-acesso": 12,
+    "dp26-p3-esp-padroes-dados-web": 11,
+    "dp26-p3-esp-requisitos": 11,
+    "dp26-p3-leg-lgpd-capitulos": 11,
+    "dp26-p3-esp-metricas": 10,
+    "dp26-p3-esp-bd-nosql": 9,
+    "dp26-p3-esp-bi-dw-etl-olap": 9,
+    "dp26-p3-esp-codificacao": 8,
+    "dp26-p3-esp-gov-bpmn": 7,
+    "dp26-p3-esp-orientacao-objetos-web": 7,
+    "dp26-p3-esp-padroes-reuso": 7,
+    "dp26-p3-esp-si-sdl-owasp": 7,
+    "dp26-p3-esp-bd-integridade": 6,
+    "dp26-p3-esp-bd-relacional-multidimensional": 6,
+    "dp26-p3-esp-mobile-lowcode": 6,
+    "dp26-p3-esp-bi-dw-mining": 5,
+    "dp26-p3-esp-ux-cms": 5,
+    "dp26-p3-esp-bd-ddl": 4,
+    "dp26-p3-esp-bd-dml": 4,
+    "dp26-p3-esp-bi-visualizacao": 4,
+    "dp26-p3-esp-clean-code-sonarqube": 4,
+    "dp26-p3-esp-gov-cobit": 4,
+    "dp26-p3-esp-gov-itil": 4,
+    "dp26-p3-esp-https-tls": 4,
+    "dp26-p3-esp-si-politicas": 4,
+    "dp26-p3-esp-bd-integracao-ingestao": 3,
+    "dp26-p3-esp-bd-modelagem": 3,
+    "dp26-p3-esp-bd-propriedades": 3,
+    "dp26-p3-esp-bd-sgbd": 3,
+    "dp26-p3-esp-gov-projetos": 3,
+    "dp26-p3-esp-si-iso": 3,
+    "dp26-p3-esp-ambientes-web": 2,
+    "dp26-p3-esp-bd-normalizacao": 2,
+    "dp26-p3-esp-si-riscos": 2,
+    "dp26-p3-leg-lai-capitulos": 2,
+    "dp26-p3-esp-bd-metadados": 1,
+    "dp26-p3-esp-bi-conceitos": 1,
+    "dp26-p3-esp-bi-fontes": 1,
+    "dp26-p3-esp-bi-suporte-decisao": 1,
+    "dp26-p3-esp-blockchain": 1,
+    "dp26-p3-esp-si-cid": 1,
+    "dp26-p3-leg-marco-civil-capitulos": 1
+  },
+  "topicCounts": {
+    "dp26-p3-esp-desenvolvimento-sistemas": 97,
+    "dp26-p3-esp-seguranca": 28,
+    "dp26-p3-esp-banco-dados": 21,
+    "dp26-p3-esp-gestao-governanca": 16,
+    "dp26-p3-leg-lgpd": 11,
+    "dp26-p3-esp-bi": 10,
+    "dp26-p3-leg-lai": 2,
+    "dp26-p3-leg-marco-civil": 1
+  },
+  "subtopicCounts": {
+    "dp26-p3-esp-ia-dados-bigdata": 14,
+    "dp26-p3-esp-si-acesso": 12,
+    "dp26-p3-leg-lgpd-capitulos": 11,
+    "dp26-p3-esp-metricas": 10,
+    "dp26-p3-esp-testes": 9,
+    "dp26-p3-esp-bd-nosql": 8,
+    "dp26-p3-esp-metodologias-ageis": 8,
+    "dp26-p3-esp-gov-bpmn": 7,
+    "dp26-p3-esp-si-sdl-owasp": 7,
+    "dp26-p3-esp-design-arquitetura": 6,
+    "dp26-p3-esp-linguagens-frameworks": 6,
+    "dp26-p3-esp-orientacao-objetos-web": 6,
+    "dp26-p3-esp-padroes-dados-web": 6,
+    "dp26-p3-esp-bi-dw-mining": 5,
+    "dp26-p3-esp-devops-git": 5,
+    "dp26-p3-esp-codificacao": 4,
+    "dp26-p3-esp-frontend": 4,
+    "dp26-p3-esp-gov-cobit": 4,
+    "dp26-p3-esp-gov-itil": 4,
+    "dp26-p3-esp-requisitos": 4,
+    "dp26-p3-esp-mobile-lowcode": 3,
+    "dp26-p3-esp-padroes-reuso": 3,
+    "dp26-p3-esp-si-iso": 3,
+    "dp26-p3-esp-si-politicas": 3,
+    "dp26-p3-esp-arquitetura-software": 2,
+    "dp26-p3-esp-bd-integridade": 2,
+    "dp26-p3-esp-bd-normalizacao": 2,
+    "dp26-p3-esp-bd-propriedades": 2,
+    "dp26-p3-esp-bd-sgbd": 2,
+    "dp26-p3-esp-clean-code-sonarqube": 2,
+    "dp26-p3-esp-https-tls": 2,
+    "dp26-p3-esp-si-riscos": 2,
+    "dp26-p3-leg-lai-capitulos": 2,
+    "dp26-p3-esp-ambientes-web": 1,
+    "dp26-p3-esp-bd-dml": 1,
+    "dp26-p3-esp-bd-integracao-ingestao": 1,
+    "dp26-p3-esp-bd-modelagem": 1,
+    "dp26-p3-esp-bd-relacional-multidimensional": 1,
+    "dp26-p3-esp-bd-sql": 1,
+    "dp26-p3-esp-bi-conceitos": 1,
+    "dp26-p3-esp-bi-dw-etl-olap": 1,
+    "dp26-p3-esp-bi-fontes": 1,
+    "dp26-p3-esp-bi-suporte-decisao": 1,
+    "dp26-p3-esp-bi-visualizacao": 1,
+    "dp26-p3-esp-blockchain": 1,
+    "dp26-p3-esp-gov-projetos": 1,
+    "dp26-p3-esp-si-cid": 1,
+    "dp26-p3-esp-ux-cms": 1,
+    "dp26-p3-leg-marco-civil-capitulos": 1
+  },
+  "styleCounts": {
+    "DIRECT_KNOWLEDGE": 776,
+    "SCENARIO": 109,
+    "CONCEPT_COMPARISON": 99,
+    "ASSERTION_SET": 64,
+    "CODE_TRACE": 33,
+    "ASSOCIATION": 9
+  },
+  "extraction": [
+    {
+      "filename": "analista_de_tecnologia_da_informacao_desenvolvimento_de_software.pdf",
+      "rank": 1,
+      "tier": "A1 - referência primária",
+      "expectedQuestionCount": 70,
+      "extractedQuestionCount": 70,
+      "firstQuestion": 1,
+      "lastQuestion": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "auditor_de_controle_externo_informatica_analista_de_sistemas.pdf",
+      "rank": 2,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": 100,
+      "extractedQuestionCount": 100,
+      "firstQuestion": 1,
+      "lastQuestion": 100,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_legislativo_desenvolvedor_de_sistemas.pdf",
+      "rank": 3,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": 70,
+      "extractedQuestionCount": 70,
+      "firstQuestion": 1,
+      "lastQuestion": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_judiciario_area_apoio_especializado_especialidade_analise_de_sistemas_de_informacao.pdf",
+      "rank": 4,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": null,
+      "extractedQuestionCount": 80,
+      "firstQuestion": 1,
+      "lastQuestion": 80,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_judiciario_apoio_especializado_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf",
+      "rank": 5,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": null,
+      "extractedQuestionCount": 80,
+      "firstQuestion": 1,
+      "lastQuestion": 80,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_do_mpu_desenvolvimento_de_sistemas.pdf",
+      "rank": 6,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": null,
+      "extractedQuestionCount": 80,
+      "firstQuestion": 1,
+      "lastQuestion": 80,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_em_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf",
+      "rank": 7,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": null,
+      "extractedQuestionCount": 60,
+      "firstQuestion": 1,
+      "lastQuestion": 60,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_previdenciario_especialidade_analista_de_sistemas.pdf",
+      "rank": 8,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": 70,
+      "extractedQuestionCount": 70,
+      "firstQuestion": 1,
+      "lastQuestion": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_judiciario_desenvolvimento_de_sistemas.pdf",
+      "rank": 9,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": 70,
+      "extractedQuestionCount": 70,
+      "firstQuestion": 1,
+      "lastQuestion": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_cvm_perfil_8_ti_sistemas_e_desenvolvimento_tarde.pdf",
+      "rank": 10,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": null,
+      "extractedQuestionCount": 70,
+      "firstQuestion": 1,
+      "lastQuestion": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "DPERS - analista_area_de_apoio_especializado_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf",
+      "rank": 11,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": null,
+      "extractedQuestionCount": 70,
+      "firstQuestion": 1,
+      "lastQuestion": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_judiciario_tecnologia_de_informacao_analise_de_sistemas.pdf",
+      "rank": 12,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": null,
+      "extractedQuestionCount": 70,
+      "firstQuestion": 1,
+      "lastQuestion": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "2025 DPE RO - analista_de_sistemas_classe_b.pdf",
+      "rank": 13,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": 70,
+      "extractedQuestionCount": 70,
+      "firstQuestion": 1,
+      "lastQuestion": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_judiciario_tecnologia_da_informacao_analista_de_sistemas.pdf",
+      "rank": 14,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": null,
+      "extractedQuestionCount": 70,
+      "firstQuestion": 1,
+      "lastQuestion": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_judiciario_analise_de_sistemas (1).pdf",
+      "rank": 15,
+      "tier": "A2 - muito alta",
+      "expectedQuestionCount": null,
+      "extractedQuestionCount": 60,
+      "firstQuestion": 1,
+      "lastQuestion": 60,
+      "completeContiguousSequence": true
+    }
+  ],
+  "incidenceEvidence": [
+    {
+      "id": "fgv37-wave1-dp26-p3-esp-banco-dados",
+      "topicId": "dp26-p3-esp-banco-dados",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 21,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.112903,
+      "manuallyReviewedQuestionCount": 15,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-esp-bi",
+      "topicId": "dp26-p3-esp-bi",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 10,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.053763,
+      "manuallyReviewedQuestionCount": 6,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-esp-desenvolvimento-sistemas",
+      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 97,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.521505,
+      "manuallyReviewedQuestionCount": 52,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-esp-gestao-governanca",
+      "topicId": "dp26-p3-esp-gestao-governanca",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 16,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.086022,
+      "manuallyReviewedQuestionCount": 1,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-esp-seguranca",
+      "topicId": "dp26-p3-esp-seguranca",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 28,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.150538,
+      "manuallyReviewedQuestionCount": 14,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-leg-lai",
+      "topicId": "dp26-p3-leg-lai",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 2,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.010753,
+      "manuallyReviewedQuestionCount": 1,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-leg-lgpd",
+      "topicId": "dp26-p3-leg-lgpd",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 11,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.05914,
+      "manuallyReviewedQuestionCount": 0,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    },
+    {
+      "id": "fgv37-wave1-dp26-p3-leg-marco-civil",
+      "topicId": "dp26-p3-leg-marco-civil",
+      "sourceIds": [
+        "fgv-exam-corpus-37-wave1-auto-classified"
+      ],
+      "status": "AUTO_CLASSIFIED_UNREVIEWED",
+      "matchedQuestionCount": 1,
+      "eligibleCorpusQuestionCount": 186,
+      "incidenceRate": 0.005376,
+      "manuallyReviewedQuestionCount": 0,
+      "deduplicated": true,
+      "inclusionCriteria": [
+        "Prova classificada na faixa A1 ou A2 do inventário de proximidade.",
+        "Questão revisada manualmente ou classificada automaticamente com alta confiança após regras conservadoras."
+      ],
+      "exclusionCriteria": [
+        "Questão geral ou técnica sem aderência segura ao conteúdo programático.",
+        "Questão duplicada conta uma única vez no denominador experimental.",
+        "Questão de linguagem ou tecnologia explicitamente fora do edital é excluída."
+      ],
+      "notes": [
+        "Taxa experimental entre questões classificadas como aderentes, não probabilidade de cobrança na prova DATAPREV.",
+        "Evidência permanece inativa até revisão manual por tópico e validação do corpus."
+      ]
+    }
+  ],
+  "activationStatus": "NOT_ELIGIBLE_FOR_SDE_HISTORICAL_INCIDENCE",
+  "activationReasons": [
+    "Classificações automáticas ainda não foram revisadas manualmente por tópico.",
+    "A taxa mede participação no corpus aderente, não chance absoluta de cobrança.",
+    "Gabaritos não estão disponíveis para identificar anulações e analisar distratores."
+  ]
+}

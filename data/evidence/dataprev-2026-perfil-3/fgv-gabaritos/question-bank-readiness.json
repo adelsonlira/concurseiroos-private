@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "totalCorpusRecords": 2522,
+  "exactAnswerKeyRecords": 890,
+  "manuallyReviewedAnalyticEligibleRecords": 88,
+  "uniqueAnalyticEligibleRecords": 88,
+  "inAppPracticeEligibleRecords": 0,
+  "reasonInAppPracticeIsZero": "The curated corpus stores excerpts and provenance, not complete stems and all alternatives.",
+  "analyticEligibleByAnswerKeyStatus": {
+    "DEFINITIVE": 88
+  },
+  "analyticEligibleByExam": {
+    "analista_de_tecnologia_da_informacao_desenvolvimento_de_software.pdf": 30,
+    "auditor_de_controle_externo_informatica_analista_de_sistemas.pdf": 58
+  },
+  "policy": {
+    "manualSyllabusReviewRequired": true,
+    "exactTitleAndCadernoKeyRequired": true,
+    "canonicalRecordRequired": true,
+    "completeQuestionAndOptionsRequiredForPractice": true,
+    "preliminaryKeysMustRemainMarkedProvisional": true,
+    "mayDriveStrategicIncidence": false
+  }
+}

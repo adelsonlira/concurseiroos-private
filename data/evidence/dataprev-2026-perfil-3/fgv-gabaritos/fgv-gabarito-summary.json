@@ -1,0 +1,35 @@
+{
+  "records": 12,
+  "exactMatches": 12,
+  "definitive": 8,
+  "preliminary": 3,
+  "publishedUnqualified": 1,
+  "officialUserSupplied": 6,
+  "headerStatusMismatches": 1,
+  "annulledQuestions": 12,
+  "duplicateContentGroups": [
+    [
+      "gabaritos_preliminares CVM .pdf",
+      "gabaritos_preliminares CVM.pdf"
+    ]
+  ],
+  "corpusCoverage": {
+    "corpusFilesProcessed": 3,
+    "totalCorpusRecords": 2522,
+    "recordsWithAnswerKey": 890,
+    "files": [
+      {
+        "file": "/mnt/data/p29_work/data/evidence/dataprev-2026-perfil-3/fgv-exams-37/wave1/wave1-question-corpus.ndjson",
+        "recordsUpdated": 890
+      },
+      {
+        "file": "/mnt/data/p29_work/data/evidence/dataprev-2026-perfil-3/fgv-exams-37/wave2/wave2-question-corpus.ndjson",
+        "recordsUpdated": 0
+      },
+      {
+        "file": "/mnt/data/p29_work/data/evidence/dataprev-2026-perfil-3/fgv-exams-37/wave3/wave3-question-corpus.ndjson",
+        "recordsUpdated": 0
+      }
+    ]
+  }
+}

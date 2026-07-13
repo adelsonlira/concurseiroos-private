@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-13",
+  "wave": "C_COMPLEMENTARY_AND_D_NEGATIVE_CONTROL",
+  "examCount": 9,
+  "rawQuestionCount": 572,
+  "withinWaveDuplicateRecordCount": 30,
+  "crossWaveDuplicateRecordCount": 129,
+  "nonDuplicateQuestionCount": 413,
+  "highConfidenceCandidateCount": 15,
+  "classificationStatusCounts": {
+    "UNCLASSIFIED": 470,
+    "AUTO_CLASSIFIED_REVIEW_REQUIRED": 78,
+    "AUTO_CLASSIFIED_HIGH_CONFIDENCE": 20,
+    "AUTO_EXCLUDED_OUT_OF_SCOPE": 4
+  },
+  "candidateTopicCounts": {
+    "dp26-p3-esp-desenvolvimento-sistemas": 51,
+    "dp26-p3-leg-lgpd": 5,
+    "dp26-p3-esp-banco-dados": 19,
+    "dp26-p3-esp-bi": 2,
+    "dp26-p3-esp-seguranca": 14,
+    "dp26-p3-ia-fundamentos": 1,
+    "dp26-p3-esp-gestao-governanca": 4,
+    "dp26-p3-leg-lai": 1,
+    "dp26-p3-leg-marco-civil": 1
+  },
+  "questionCountsByTier": {
+    "C - complementar": 390,
+    "D - baixa/controle negativo": 182
+  },
+  "extraction": [
+    {
+      "filename": "analista_judiciario_area_administrativa_tecnologia_da_informacao.pdf",
+      "rank": 29,
+      "tier": "C - complementar",
+      "declaredQuestionCount": 80,
+      "extractedQuestionCount": 80,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_tecnico_tecnologia_da_informacao.pdf",
+      "rank": 30,
+      "tier": "C - complementar",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_tecnolo_inform_desenv_tipo_1.pdf",
+      "rank": 31,
+      "tier": "C - complementar",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 70,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_judiciario_tecnologia_da_informacao_tipo_1.pdf",
+      "rank": 32,
+      "tier": "C - complementar",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 30,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_judiciario_area_apoio_especializado_tecnologia_da_informacao.pdf",
+      "rank": 33,
+      "tier": "C - complementar",
+      "declaredQuestionCount": 60,
+      "extractedQuestionCount": 60,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_judiciario_area_apoio_especializado_especialidade_tecnologia_da_informacao.pdf",
+      "rank": 34,
+      "tier": "C - complementar",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 80,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "2021 FUNSAUDE CE - analista_da_tecnologia_da_informacao.pdf",
+      "rank": 35,
+      "tier": "D - baixa/controle negativo",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 52,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "tecnico_de_nivel_superior_analista_de_sistemas_computacionais_analista_de_suporte_de_ti.pdf",
+      "rank": 36,
+      "tier": "D - baixa/controle negativo",
+      "declaredQuestionCount": null,
+      "extractedQuestionCount": 60,
+      "completeContiguousSequence": true
+    },
+    {
+      "filename": "analista_legislativo_informatica_legislativa_analise_de_suporte_de_sistemas.pdf",
+      "rank": 37,
+      "tier": "D - baixa/controle negativo",
+      "declaredQuestionCount": 70,
+      "extractedQuestionCount": 70,
+      "completeContiguousSequence": true
+    }
+  ],
+  "activationStatus": "NOT_ELIGIBLE_FOR_SDE_HISTORICAL_INCIDENCE",
+  "activationReasons": [
+    "A onda C é complementar e a onda D funciona como controle negativo de proximidade.",
+    "Nenhuma questão foi revisada manualmente nesta onda.",
+    "Classificações automáticas servem somente para descoberta temática e análise de ruído.",
+    "Questões duplicadas com ondas anteriores permanecem excluídas de qualquer denominador.",
+    "Gabaritos não estão disponíveis."
+  ]
+}
