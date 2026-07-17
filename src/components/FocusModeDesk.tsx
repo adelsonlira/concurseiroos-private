@@ -597,6 +597,11 @@ export default function FocusModeDesk({ onOpenQuestions, onAskCoach }: { onOpenQ
                     <p className="mt-2 text-base font-bold text-indigo-200">
                       Páginas {selectedMaterial.startPage}–{selectedMaterial.endPage}
                     </p>
+                    {selectedMaterial.fallbackNotice && (
+                      <p className="mt-2 rounded-lg border border-cyan-500/20 bg-cyan-500/[0.04] p-2 text-[11px] leading-relaxed text-cyan-100/70">
+                        {selectedMaterial.fallbackNotice}
+                      </p>
+                    )}
                     {selectedMaterial.questionBank && (
                       <p className="mt-1 text-[11px] text-zinc-500">
                         Banco identificado: {selectedMaterial.questionBank}

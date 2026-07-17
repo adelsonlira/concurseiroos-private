@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import OperationalScreenGuide from "./OperationalScreenGuide";
 import taxonomyArtifact from "../../data/knowledge/dataprev-2026-taxonomy.json";
+import routingArtifact from "../../data/quality/pedagogical-routing-report.json";
 
 export default function VerticalizedSyllabusView() {
   const { 
@@ -20,6 +21,7 @@ export default function VerticalizedSyllabusView() {
     .sort((a, b) => a.ordem - b.ordem);
 
   const coverageBySubtopic = new Map(taxonomyArtifact.coverage.records.map((item) => [item.subtopicId, item]));
+  const routingBySubtopic = new Map(routingArtifact.records.map((item) => [item.subtopicId, item]));
 
   const [expandedDisciplines, setExpandedDisciplines] = useState<{ [id: string]: boolean }>({});
   const [expandedAssuntos, setExpandedAssuntos] = useState<{ [id: string]: boolean }>({});
@@ -47,10 +49,10 @@ export default function VerticalizedSyllabusView() {
       />
 
       <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <CoverageMetric label="Subassuntos oficiais" value={taxonomyArtifact.coverage.totalSubtopics} detail="Escopo canônico do edital" />
-        <CoverageMetric label="Com material localizado" value={taxonomyArtifact.coverage.materialOnly + taxonomyArtifact.coverage.ready} detail="Estratégia/TI Total apenas para execução" />
-        <CoverageMetric label="Com questão revisada" value={taxonomyArtifact.coverage.ready} detail="Ainda não ativa incidência" />
-        <CoverageMetric label="Lacunas de material" value={taxonomyArtifact.coverage.gaps + taxonomyArtifact.coverage.questionOnly} detail="O Coach aplica fallback explícito" />
+        <CoverageMetric label="Subassuntos oficiais" value={routingArtifact.counts.subtopics} detail="Escopo canônico do edital" />
+        <CoverageMetric label="Teoria exata" value={routingArtifact.counts.exactTheory} detail="Localizador validado no subassunto" />
+        <CoverageMetric label="Fallback amplo" value={routingArtifact.counts.topicTheoryFallback} detail="Seção do assunto, explicitamente sinalizada" />
+        <CoverageMetric label="Localizador manual" value={routingArtifact.counts.manualTheoryLocatorRequired} detail="Nunca recebe páginas de subassunto irmão" />
       </section>
 
       <div className="border border-zinc-900 rounded-lg overflow-x-auto">
@@ -144,15 +146,24 @@ export default function VerticalizedSyllabusView() {
                                 <td className="px-4 py-2">
                                   {(() => {
                                     const coverage = coverageBySubtopic.get(sub.id);
-                                    if (!coverage) return <span className="text-zinc-600">Sem catálogo</span>;
-                                    const label = coverage.status === "READY"
-                                      ? "Material + questão revisada"
-                                      : coverage.status === "MATERIAL_ONLY"
-                                        ? `${coverage.materialLocatorCount} localizador(es) de material`
-                                        : coverage.status === "QUESTION_ONLY"
-                                          ? "Questão sem material"
-                                          : "Fallback necessário";
-                                    return <span className={coverage.status === "GAP" ? "text-amber-400" : "text-cyan-300"}>{label}</span>;
+                                    const routing = routingBySubtopic.get(sub.id);
+                                    if (!coverage || !routing) return <span className="text-zinc-600">Sem catálogo</span>;
+                                    const theoryLabel = routing.theoryStatus === "EXACT_LOCAL"
+                                      ? "Teoria exata"
+                                      : routing.theoryStatus === "TOPIC_FALLBACK"
+                                        ? "Teoria ampla · confirmar trecho"
+                                        : "Teoria: localizar manualmente";
+                                    const questionLabel = routing.diagnosticStatus === "EXACT_LOCAL_QUESTION_SET"
+                                      ? "questões locais"
+                                      : routing.diagnosticStatus === "TOPIC_LOCAL_QUESTION_SET"
+                                        ? "questões amplas"
+                                        : "questões via plataforma";
+                                    const className = routing.theoryStatus === "MANUAL_LOCATOR_REQUIRED"
+                                      ? "text-amber-400"
+                                      : routing.theoryStatus === "TOPIC_FALLBACK"
+                                        ? "text-cyan-200"
+                                        : "text-emerald-300";
+                                    return <span className={className}>{theoryLabel} · {questionLabel}</span>;
                                   })()}
                                 </td>
                              </tr>

@@ -38,7 +38,7 @@ npm run build
 npm audit --omit=dev
 ```
 
-`npm run build` e `npm run vercel-build` bloqueiam a publicação quando TypeScript ou qualquer teste falha.
+`npm run build` executa toda a validação local. O workflow versionado em `.github/workflows/ci.yml` bloqueia a integração quando TypeScript, testes, auditorias ou builds falham; `npm run vercel-build` executa apenas o build web para evitar repetição do pipeline dentro da Vercel.
 
 ## Prescrição de questões
 
@@ -54,15 +54,17 @@ Após uma sessão de questões, a tela de registro:
 
 Quando o catálogo privado não oferece uma bateria FGV suficiente, a prescrição pode indicar **Qconcursos** ou **Estratégia Questões**. O sistema mantém a decisão central — assunto, quantidade e tempo — e fornece os filtros de banca, disciplina, assunto, subassunto e exclusão de anuladas. Não há automação de login, cópia de questões ou coleta de respostas dessas plataformas.
 
-## Super Coach 3.26.0
+## Super Coach 3.30.0
 
-A sessão diária possui uma única ação operacional e um fechamento pedagógico baseado em recuperação. Conteúdo inédito começa com bateria diagnóstica obtida de lista local sem solução ou de banco externo identificado; a teoria integral só pode ser adiada com pelo menos 10 questões, 85% de acerto, nenhuma consulta, nenhum branco e acertos seguros. Isso não declara domínio e mantém revisão/prática obrigatórias. Snapshots anteriores são migrados de forma aditiva e transacional, sem inventar evidência.
+Erros relevantes agora exigem causa confirmada, correção explícita e duas verificações independentes antes da estabilização provisória. Um novo erro reabre automaticamente o ciclo.
 
-O deploy privado usa login antes da interface, cadastro público desligado por padrão e encerramento seguro para computadores públicos. Consulte `docs/IMPLEMENTATION_REPORT_3.26.0.md`, `docs/PRIVATE_ACCESS_GUIDE.md` e `docs/GUIDED_LEARNING_PROTOCOL.md`.
+A sessão diária possui uma única ação operacional e um fechamento pedagógico baseado em recuperação. Conteúdo inédito começa com bateria diagnóstica obtida de lista local sem solução ou de banco externo identificado; a teoria integral só pode ser adiada com pelo menos 10 questões, 85% de acerto, nenhuma consulta, nenhum branco e acertos seguros. Isso não declara domínio e mantém revisão/prática obrigatórias. O roteamento de materiais exige vínculo exato com o subassunto ou fallback amplo explicitamente revisado; páginas de subassuntos irmãos nunca são prescritas como substitutas. Snapshots anteriores são migrados de forma aditiva e transacional, sem inventar evidência.
+
+O deploy privado usa login antes da interface, cadastro público desligado por padrão e encerramento seguro para computadores públicos. Consulte `docs/PRIVATE_ACCESS_GUIDE.md`, `docs/GUIDED_LEARNING_PROTOCOL.md`, `.ai/sprints/SPRINT-3.30.0.md`, `docs/ERROR_RECOVERY_PROTOCOL.md` e `docs/VALIDATION_RESULTS_3.30.0.md`.
 
 ## Corpus oficial FGV
 
-A versão 3.26.0 contém um corpus **metadado e minimizado** de 6.462 questões oficiais. O repositório não armazena enunciados ou alternativas integrais; conserva hashes, localizadores de página, trecho curto, estado de revisão e vínculo auditável com gabaritos. Todo o corpus permanece em shadow mode e não altera o SDE.
+A versão 3.30.0 contém um corpus **metadado e minimizado** de 6.462 questões oficiais. O repositório não armazena enunciados ou alternativas integrais; conserva hashes, localizadores de página, trecho curto, estado de revisão e vínculo auditável com gabaritos. Todo o corpus permanece em shadow mode e não altera o SDE.
 
 Para reproduzir a extração a partir do acervo oficial organizado:
 

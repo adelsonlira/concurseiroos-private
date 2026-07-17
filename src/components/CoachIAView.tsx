@@ -174,6 +174,7 @@ export default function CoachIAView({
     assuntos,
     subassuntos,
     cronogramasRevisao,
+    casosRecuperacaoErro,
     tentativasQuestoes,
     sessoesEstudo,
     historicoAtividades,
@@ -291,6 +292,7 @@ export default function CoachIAView({
         tentativasQuestoes,
         sessoesEstudo,
         cronogramasRevisao,
+        casosRecuperacaoErro,
         historicoAtividades,
         decision: currentDecision,
         privateMaterialCatalog:

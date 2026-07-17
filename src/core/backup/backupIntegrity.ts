@@ -71,7 +71,7 @@ function requireArray(value: unknown, label: string, errors: string[]): value is
  * feature did not exist when the snapshot was produced, therefore an empty
  * list is the only safe default.
  */
-const SAFE_ADDITIVE_COLLECTIONS = ["evidenciasAprendizagemGuiada"] as const;
+const SAFE_ADDITIVE_COLLECTIONS = ["evidenciasAprendizagemGuiada", "casosRecuperacaoErro"] as const;
 
 function verifyOriginalChecksum(
   backup: BackupExportSchema,
@@ -136,7 +136,7 @@ export function prepareBackupForImport(value: unknown): BackupImportPreparation 
   if (migrated) {
     normalized.metadata = {
       ...normalized.metadata,
-      versaoBackup: "2.0.0",
+      versaoBackup: "2.1.0",
       integrityAlgorithm: "FNV1A64_CANONICAL_JSON"
     };
     normalized.metadata.checksum = calculateBackupChecksum(normalized);
@@ -163,7 +163,7 @@ export function validateBackup(backup: BackupExportSchema): BackupValidationResu
     "concursos", "editais", "disciplinas", "assuntos", "subassuntos", "questoes",
     "tentativasQuestoes", "flashcards", "documentos", "resumos", "anotacoes",
     "planosEstudo", "simulados", "agenda", "historicos", "cronogramasRevisao",
-    "conversasIA", "sessoesEstudo", "evidenciasAprendizagemGuiada", "itensBiblioteca"
+    "conversasIA", "sessoesEstudo", "evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "itensBiblioteca"
   ];
   for (const key of requiredCollections) requireArray(backup.dados[key], String(key), errors);
   if (errors.length > 0) return { valid: false, errors, warnings };
@@ -173,7 +173,8 @@ export function validateBackup(backup: BackupExportSchema): BackupValidationResu
     ["disciplinas", backup.dados.disciplinas], ["assuntos", backup.dados.assuntos],
     ["subassuntos", backup.dados.subassuntos], ["questoes", backup.dados.questoes],
     ["flashcards", backup.dados.flashcards], ["documentos", backup.dados.documentos],
-    ["simulados", backup.dados.simulados], ["sessoesEstudo", backup.dados.sessoesEstudo]
+    ["simulados", backup.dados.simulados], ["sessoesEstudo", backup.dados.sessoesEstudo],
+    ["casosRecuperacaoErro", backup.dados.casosRecuperacaoErro]
   ] as const;
   for (const [label, items] of identityCollections) {
     const duplicates = duplicateIds(items);
@@ -185,12 +186,27 @@ export function validateBackup(backup: BackupExportSchema): BackupValidationResu
   const assuntoIds = new Set(backup.dados.assuntos.map((item) => item.id));
   const subassuntoIds = new Set(backup.dados.subassuntos.map((item) => item.id));
   const questaoIds = new Set(backup.dados.questoes.map((item) => item.id));
+  const tentativaIds = new Set(backup.dados.tentativasQuestoes.map((item) => item.id));
 
   for (const item of backup.dados.disciplinas) if (!concursoIds.has(item.concursoId)) errors.push(`Disciplina ${item.id} referencia concurso inexistente.`);
   for (const item of backup.dados.assuntos) if (!disciplinaIds.has(item.disciplinaId)) errors.push(`Assunto ${item.id} referencia disciplina inexistente.`);
   for (const item of backup.dados.subassuntos) if (!assuntoIds.has(item.assuntoId)) errors.push(`Subassunto ${item.id} referencia assunto inexistente.`);
-  for (const item of backup.dados.tentativasQuestoes) if (!questaoIds.has(item.questaoId)) errors.push(`Tentativa ${item.id} referencia questão inexistente.`);
+  for (const item of backup.dados.tentativasQuestoes) {
+    if (!item.registradaManualmente && !questaoIds.has(item.questaoId)) {
+      errors.push(`Tentativa ${item.id} referencia questão inexistente.`);
+    }
+  }
   for (const item of backup.dados.cronogramasRevisao) if (!subassuntoIds.has(item.subassuntoId)) errors.push(`Revisão ${item.id} referencia subassunto inexistente.`);
+  for (const item of backup.dados.casosRecuperacaoErro) {
+    if (!subassuntoIds.has(item.subassuntoId)) errors.push(`Caso de recuperação ${item.id} referencia subassunto inexistente.`);
+    const duplicateEvents = duplicateIds(item.events ?? []);
+    if (duplicateEvents.length > 0) errors.push(`Caso de recuperação ${item.id} contém eventos duplicados: ${duplicateEvents.slice(0, 5).join(", ")}.`);
+    for (const event of item.events ?? []) {
+      for (const attemptId of event.attemptIds ?? []) {
+        if (!tentativaIds.has(attemptId)) errors.push(`Evento ${event.id} referencia tentativa inexistente ${attemptId}.`);
+      }
+    }
+  }
 
   const checksum = backup.metadata.checksum;
   if (checksum) {

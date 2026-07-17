@@ -34,6 +34,8 @@ const material: MaterialLocatorRecommendation = {
   contentKind: "COMMENTED_QUESTIONS",
   questionBank: "FGV",
   mappingStatus: "AUTO_HIGH_CONFIDENCE",
+  matchScope: "EXACT_SUBTOPIC",
+  fallbackNotice: null,
   confidence: 0.98,
   accessMode: "USER_PRIVATE_LOCAL_COPY",
   privacyNotice: "privado",

@@ -94,7 +94,7 @@ export async function loadRuntimeConfiguration(
       environment: fallback,
       services: {
         configurationSource: fallback.source,
-        authMode: "unknown",
+        authMode: typeof window !== "undefined" && !["localhost", "127.0.0.1"].includes(window.location.hostname) ? "required" : "optional",
         allowSelfSignup: false,
         geminiConfigured: null,
         geminiModel: null,

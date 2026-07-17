@@ -9,13 +9,34 @@ import { PrivateStudyMaterial } from "../../../core/materials/types";
 const STRATEGY_MATERIALS = strategyCatalogJson.materials as PrivateStudyMaterial[];
 const TI_TOTAL_MATERIALS = tiTotalCatalogJson.materials as PrivateStudyMaterial[];
 
+function applyAuditedMetadataCorrections(material: PrivateStudyMaterial): PrivateStudyMaterial {
+  if (/lei-de-acesso-a-informacao-lei-n-12-5272011/i.test(material.sourceFileName)) {
+    return {
+      ...material,
+      courseTitle: "Lei de Acesso à Informação",
+      displayTitle: "Lei de Acesso à Informação — Lei nº 12.527/2011",
+      topicId: "dp26-p3-leg-lai",
+      sections: material.sections.map((section) => ({
+        ...section,
+        title: "Lei nº 12.527/2011 — texto grifado",
+        topicId: "dp26-p3-leg-lai",
+        subtopicIds: ["dp26-p3-leg-lai-capitulos"],
+        mappingStatus: "AUTO_HIGH_CONFIDENCE",
+        confidence: 0.99,
+        matchedTerms: ["lei de acesso à informação", "lei 12.527/2011"]
+      }))
+    };
+  }
+  return material;
+}
+
 export const DATAPREV_2026_PRIVATE_STUDY_MATERIALS: PrivateStudyMaterial[] = [
   ...STRATEGY_MATERIALS,
   ...TI_TOTAL_MATERIALS
-];
+].map(applyAuditedMetadataCorrections);
 
 export const DATAPREV_2026_PRIVATE_STUDY_MATERIAL_SUMMARY = {
-  schemaVersion: "1.1.0",
+  schemaVersion: "1.2.0",
   concursoId: "dataprev-2026-perfil-3",
   materialCount: DATAPREV_2026_PRIVATE_STUDY_MATERIALS.length,
   totalPages:

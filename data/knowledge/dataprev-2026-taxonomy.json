@@ -1374,9 +1374,9 @@
   "coverage": {
     "totalSubtopics": 94,
     "ready": 0,
-    "materialOnly": 62,
+    "materialOnly": 63,
     "questionOnly": 0,
-    "gaps": 32,
+    "gaps": 31,
     "records": [
       {
         "subtopicId": "dp26-p3-por-interpretacao-generos",
@@ -1604,10 +1604,10 @@
       },
       {
         "subtopicId": "dp26-p3-leg-lai-capitulos",
-        "materialLocatorCount": 0,
+        "materialLocatorCount": 1,
         "questionEvidenceCount": 0,
         "humanReviewedQuestionCount": 0,
-        "status": "GAP"
+        "status": "MATERIAL_ONLY"
       },
       {
         "subtopicId": "dp26-p3-leg-delitos-art2",

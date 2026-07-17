@@ -7,6 +7,7 @@ import type { GuidedLearningEvidence } from "./core/learning/types";
 import type {
   AnswerConfidence,
   ErrorCause,
+  ErrorRecoveryCase,
   ReviewDurationSource,
   ReviewMethod,
   ReviewMethodSelectionReason,
@@ -800,6 +801,7 @@ export interface BackupExportSchema {
     conversasIA: HistoricoChatIA[];
     sessoesEstudo: SessaoEstudo[];
     evidenciasAprendizagemGuiada: GuidedLearningEvidence[];
+    casosRecuperacaoErro: ErrorRecoveryCase[];
     itensBiblioteca: ItemBiblioteca[];
   };
 }

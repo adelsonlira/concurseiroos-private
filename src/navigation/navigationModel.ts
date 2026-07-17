@@ -32,7 +32,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "dashboard",
     label: "Hoje — Seu Coach",
-    badge: "G D",
+    badge: "",
     group: "daily",
     keywords: ["inicio", "hoje", "resumo", "prioridade", "proxima acao"],
     subitems: ["Prescrição atual", "Saldo diário", "Próximas sessões"],
@@ -41,7 +41,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "focus",
     label: "Sessão guiada",
-    badge: "Alt P",
+    badge: "",
     group: "daily",
     keywords: ["sessao", "cronometro", "estudar", "executar", "pomodoro"],
     subitems: ["Sessão atual", "Cronômetro", "Material e páginas"],
@@ -50,7 +50,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "roadmap",
     label: "Plano e Progresso",
-    badge: "G E",
+    badge: "",
     group: "intelligence",
     keywords: ["rota", "plano", "progresso", "semana", "diagnostico", "cobertura"],
     subitems: ["Mapa de evidências", "Próximos sete dias", "Fila estratégica"],
@@ -59,7 +59,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "reviews",
     label: "Revisões e erros",
-    badge: "G R",
+    badge: "",
     group: "daily",
     keywords: ["revisao", "erro", "recuperacao", "memoria", "caderno"],
     subitems: ["Revisões vencidas", "Caderno de erros", "Recuperação adaptativa"],
@@ -68,7 +68,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "exercises",
     label: "Registrar questões",
-    badge: "G Q",
+    badge: "",
     group: "daily",
     keywords: ["questoes", "tentativa", "acerto", "erro", "fgv", "diagnostico"],
     subitems: ["Registrar resultados", "Tentativas", "Diagnóstico por questões"],
@@ -77,7 +77,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "flashcards",
     label: "Flashcards prescritos",
-    badge: "G F",
+    badge: "",
     group: "daily",
     keywords: ["cartoes", "memorizacao", "recuperacao", "baralho"],
     subitems: ["Cartões pendentes", "Recuperação ativa", "Agendamento adaptativo"],
@@ -86,7 +86,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "weekly",
     label: "Revisão da semana",
-    badge: "G W",
+    badge: "",
     group: "daily",
     keywords: ["semana", "calibracao", "execucao", "planejado", "tempo"],
     subitems: ["Planejado versus executado", "Eficiência observada", "Proteção de avanço"],
@@ -95,16 +95,16 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "coach",
     label: "Perguntar ao Coach",
-    badge: "G C",
+    badge: "",
     group: "daily",
     keywords: ["coach", "ia", "mentor", "explicacao", "ajuda", "duvida"],
     subitems: ["Mentoria", "Explicar recomendação", "Preparar sessão"],
-    primary: false,
+    primary: true,
   },
   {
     id: "syllabus",
     label: "Edital e cobertura",
-    badge: "G V",
+    badge: "",
     group: "intelligence",
     keywords: ["edital", "verticalizado", "topicos", "cobertura", "progresso"],
     subitems: ["Disciplinas", "Assuntos", "Subassuntos", "Cobertura confirmada"],
@@ -113,7 +113,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "library",
     label: "Materiais e páginas",
-    badge: "G L",
+    badge: "",
     group: "intelligence",
     keywords: ["biblioteca", "material", "pdf", "aula", "paginas", "estrategia"],
     subitems: ["Materiais privados", "Localizador de aulas", "Páginas recomendadas"],
@@ -122,7 +122,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "online",
     label: "Conta e sincronização",
-    badge: "G O",
+    badge: "",
     group: "system",
     keywords: ["conta", "login", "nuvem", "supabase", "sincronizacao", "pdf"],
     subitems: ["Autenticação", "Sincronização", "Cofre privado"],
@@ -131,7 +131,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "backup",
     label: "Configurações e backup",
-    badge: "G B",
+    badge: "",
     group: "system",
     keywords: ["ajustes", "backup", "perfil", "disponibilidade", "restaurar", "exportar"],
     subitems: ["Disponibilidade semanal", "Exportar backup", "Restaurar dados"],

@@ -1,35 +1,29 @@
-# Próximos Passos — após 3.26.0
+# Próximos Passos — após 3.30.0
 
-## Prioridade imediata
+## Trabalho autônomo imediato
 
-1. Substituir a 3.25.0 pela 3.26.0 sem apagar a cópia existente na nuvem.
-2. Entrar na mesma conta e escolher “Usar dados da nuvem neste dispositivo”.
-3. Confirmar a mensagem de migração segura e a presença do histórico anterior.
-4. Não usar “Substituir a nuvem pelos dados locais” enquanto a cópia remota não estiver confirmada.
-5. Conferir que `/api/runtime-config` e `/api/readiness` distinguem configuração presente de smoke test ainda pendente.
-6. Abrir a prescrição diagnóstica de Avaliação de modelos de dados e confirmar que a fonte principal é lista de questões sem comentários ou banco externo.
-7. Confirmar que teoria e páginas aparecem explicitamente no bloco “se a evidência for insuficiente”.
-8. Validar as pastas recolhíveis do cofre por disciplina.
-9. Executar uma bateria real de 10 questões sem consulta, registrando acertos seguros e incertezas honestamente.
-10. Observar se o Coach agenda prática/revisão ao ultrapassar o portão ou teoria ao ficar abaixo dele.
+1. Preparar simulados parciais e completos sem gerar questões:
+   - fontes oficiais, listas privadas ou plataformas externas;
+   - composição por disciplina e pontuação oficial;
+   - tempo, brancos e risco de zero.
+2. Revisar a fila de 37 localizadores teóricos pendentes por metadados auditáveis.
+3. Priorizar os 43 grupos P0 DATAPREV na curadoria histórica, ainda em shadow mode.
+4. Observar prospectivamente se duas verificações independentes evitam recorrência sem criar excesso de repetição.
 
-## Sequência de produto após o smoke real
+## Confirmações de ambiente já concluídas
 
-1. Teste autenticado notebook → celular → notebook.
-2. Teste de recuperação de senha e encerramento em dispositivo público.
-3. Smoke real do Gemini pela seção técnica.
-4. Cobertura dos 32 subassuntos sem localizador pedagógico direto.
-5. Simulação global do plano até a prova com disponibilidade real.
-6. Aprimoramento de simulados, correção de erros e reaprendizagem.
-7. Curadoria dos 43 grupos P0 para DATAPREV, mantendo shadow mode.
+- login obrigatório: confirmado;
+- sincronização notebook–celular: confirmada;
+- Gemini pela Vercel: confirmado.
 
-## Portões que permanecem fechados
+## Portões fechados
 
-- migração de snapshot não pode inventar evidência;
-- cadastro público permanece desligado por padrão;
-- diagnóstico não declara domínio nem elimina revisão;
-- questões objetivas não são inventadas pela IA;
-- corpus histórico não vira banco operacional sem curadoria e interface próprias;
-- incidência histórica não altera o SDE sem revisão humana e validação shadow;
-- material privado nunca altera incidência;
-- falha externa deve acionar fallback, nunca bloquear o Coach determinístico.
+- páginas de subassunto irmão nunca são fallback;
+- `TOPIC_ONLY` não autoriza prescrição sem revisão explícita;
+- ausência de localizador não é preenchida por IA;
+- incidência histórica não altera o SDE;
+- IA não cria questões usadas para diagnóstico ou dispensa de teoria;
+- material privado não altera prioridade estratégica;
+- projeção de capacidade não é promessa de aprovação.
+- recuperação de erro exige correção explícita; consulta e confiança baixa não contam como verificação.
+- duas verificações não representam domínio permanente.

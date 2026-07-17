@@ -21,6 +21,7 @@ function seedStore() {
     sessoesEstudo: [],
     flashcards: [],
     cronogramasRevisao: [],
+    casosRecuperacaoErro: [],
     ultimaDecisaoSDE: null,
     activeConcursoId: seed.concurso.id
   });
@@ -437,4 +438,67 @@ describe("Zustand → SDE integration", () => {
     expect(result.availability?.completedMinutes).toBe(60);
     expect(result.availability?.remainingMinutes).toBe(120);
   });
+  it("exige correção explícita e duas verificações independentes para estabilizar um erro", () => {
+    const seed = seedStore();
+    const subtopic = seed.subassuntos[0];
+    const subject = seed.assuntos.find((item) => item.id === subtopic.assuntoId)!;
+    const discipline = seed.disciplinas.find((item) => item.id === subject.disciplinaId)!;
+
+    useConcurseiroStore.getState().registrarTentativaExterna({
+      disciplinaId: discipline.id,
+      assuntoId: subject.id,
+      subassuntoId: subtopic.id,
+      acertou: false,
+      tempoRespostaSegundos: 70,
+      nivelConfianca: "MEDIA",
+      erroCausa: "INTERPRETACAO",
+      erroNota: "Ignorei uma exceção do enunciado."
+    });
+
+    let state = useConcurseiroStore.getState();
+    expect(state.casosRecuperacaoErro).toHaveLength(1);
+    const caseId = state.casosRecuperacaoErro[0].id;
+    const reviewId = state.cronogramasRevisao[0].id;
+    expect(state.concluirRevisaoProgramada(reviewId, "EASY")).toMatchObject({
+      success: false,
+      error: expect.stringContaining("registre a correção")
+    });
+    expect(state.registrarCorrecaoErro(caseId, {
+      cause: "INTERPRETACAO",
+      correctionSummary: "A questão pedia a alternativa incorreta e eu respondi como se pedisse a correta.",
+      preventionRule: "Antes das alternativas, reescrever o comando e destacar negações."
+    })).toEqual({ success: true });
+
+    for (const confidence of ["MEDIA", "ALTA"] as const) {
+      useConcurseiroStore.getState().registrarTentativaExterna({
+        disciplinaId: discipline.id,
+        assuntoId: subject.id,
+        subassuntoId: subtopic.id,
+        acertou: true,
+        tempoRespostaSegundos: 55,
+        nivelConfianca: confidence,
+        consultouMaterial: false
+      });
+    }
+
+    state = useConcurseiroStore.getState();
+    const verificationEvents = state.casosRecuperacaoErro[0].events.filter(
+      (event) => event.type === "VERIFICATION_PASSED"
+    );
+    expect(verificationEvents).toHaveLength(2);
+
+    useConcurseiroStore.getState().registrarTentativaExterna({
+      disciplinaId: discipline.id,
+      assuntoId: subject.id,
+      subassuntoId: subtopic.id,
+      acertou: false,
+      tempoRespostaSegundos: 50,
+      nivelConfianca: "ALTA",
+      erroCausa: "APLICACAO"
+    });
+    expect(
+      useConcurseiroStore.getState().casosRecuperacaoErro[0].events.at(-1)?.type
+    ).toBe("REOPENED");
+  });
+
 });

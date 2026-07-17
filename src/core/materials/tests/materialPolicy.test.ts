@@ -96,7 +96,7 @@ describe("private material policy", () => {
     expect(JSON.stringify(result)).not.toContain("conteudoMarkdown");
   });
 
-  it("prefers commented FGV questions for question practice", () => {
+  it("prefers an unanswered question list for question practice", () => {
     const result = routePrivateStudyMaterial([baseMaterial], {
       concursoId: "dataprev-2026-perfil-3",
       activity: "questoes",
@@ -105,9 +105,10 @@ describe("private material policy", () => {
       subtopicId: "dp26-p3-esp-linguagens-frameworks"
     });
 
-    expect(result?.contentKind).toBe("COMMENTED_QUESTIONS");
+    expect(result?.contentKind).toBe("QUESTION_LIST");
     expect(result?.questionBank).toBe("FGV");
-    expect(result?.startPage).toBe(72);
+    expect(result?.startPage).toBe(81);
+    expect(result?.matchScope).toBe("EXACT_SUBTOPIC");
   });
 
   it("prefers a question-only list over commented solutions for initial diagnosis", () => {
@@ -161,7 +162,7 @@ describe("private material policy", () => {
           subtopicIds: [],
           mappingStatus: "TOPIC_ONLY",
           confidence: 0.94,
-          matchedTerms: ["banco de dados"]
+          matchedTerms: ["banco de dados", "AUDITED_TOPIC_WIDE"]
         }
       ]
     };
@@ -178,8 +179,21 @@ describe("private material policy", () => {
       materialId: "material-topic-fallback",
       sourceProvider: "TI_TOTAL",
       sourceRole: "COMPLEMENTARY",
-      questionBank: "FGV"
+      questionBank: "FGV",
+      matchScope: "TOPIC_FALLBACK"
     });
+    expect(result?.fallbackNotice).toMatch(/forma ampla/i);
+  });
+
+  it("never uses a section mapped to a sibling subtopic as fallback", () => {
+    const result = routePrivateStudyMaterial([baseMaterial], {
+      concursoId: "dataprev-2026-perfil-3",
+      activity: "teoria",
+      disciplineId: "dp26-p3-conhecimentos-especificos",
+      topicId: "dp26-p3-esp-desenvolvimento-sistemas",
+      subtopicId: "dp26-p3-esp-outro-subassunto"
+    });
+    expect(result).toBeNull();
   });
 
   it("prefers the primary provider when pedagogical fit and banca are equivalent", () => {

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "verifiedAt": "2026-07-17T10:04:53Z",
+  "environment": "PRODUCTION",
+  "source": "USER_CONFIRMED_REAL_ENVIRONMENT_SMOKE",
+  "checks": {
+    "requiredLogin": {
+      "status": "PASS",
+      "detail": "Login obrigatório confirmado no domínio de produção pelo usuário."
+    },
+    "crossDeviceSync": {
+      "status": "PASS",
+      "detail": "Sincronização notebook–celular confirmada pelo usuário com a mesma conta."
+    },
+    "geminiLive": {
+      "status": "PASS",
+      "detail": "Integração Gemini com chave da Vercel confirmada pelo usuário em produção."
+    }
+  },
+  "limitations": [
+    "A confirmação é evidência operacional declarada pelo usuário, não monitoramento sintético contínuo.",
+    "Novos deployments ainda devem preservar os testes de regressão e o diagnóstico de runtime."
+  ]
+}

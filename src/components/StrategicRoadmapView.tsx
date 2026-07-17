@@ -143,6 +143,59 @@ export default function StrategicRoadmapView() {
           </div>
         </header>
 
+        <section className="rounded-2xl border border-cyan-500/20 bg-cyan-500/[0.035] p-5">
+          <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.18em] text-cyan-400">
+                <CalendarDays className="h-4 w-4" /> Capacidade até a prova
+              </div>
+              <h2 className="mt-2 text-sm font-semibold text-zinc-100">
+                {roadmap.horizon.daysUntilExam >= 0
+                  ? `${roadmap.horizon.daysUntilExam} dia(s) até 11/10/2026`
+                  : "Data da prova anterior à referência"}
+              </h2>
+              <p className="mt-1 max-w-3xl text-[11px] leading-relaxed text-zinc-500">
+                Enxergue a pressão do calendário sem transformar a projeção em cronograma rígido. A decisão diária continua sendo recalculada pelo SDE.
+              </p>
+            </div>
+            <span className="rounded-full border border-cyan-500/20 px-3 py-1 text-[9px] font-mono uppercase text-cyan-300">
+              {roadmap.horizon.phase.replaceAll("_", " ")}
+            </span>
+          </div>
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <Tiny label="Horas ainda disponíveis" value={roadmap.horizon.remainingHours} />
+            <Tiny label="Dias ativos" value={roadmap.horizon.activeStudyDays} />
+            <Tiny label="Subassuntos sem medição" value={roadmap.horizon.unassessedSubtopics} />
+            <Tiny
+              label="Minutos por item não medido"
+              value={roadmap.horizon.remainingMinutesPerUnassessedSubtopic ?? 0}
+            />
+          </div>
+
+          <div className="mt-4 grid gap-2 md:grid-cols-2 xl:grid-cols-3">
+            {roadmap.horizon.disciplines.map((discipline) => (
+              <div key={discipline.disciplinaId} className="rounded-xl border border-zinc-800 bg-zinc-950/45 p-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="text-[11px] font-medium text-zinc-300">{discipline.disciplinaNome}</div>
+                  <div className="text-[9px] font-mono text-cyan-400">{discipline.officialPointShare}% dos pontos</div>
+                </div>
+                <div className="mt-2 text-[9px] text-zinc-600">
+                  {discipline.unassessedSubtopics}/{discipline.totalSubtopics} sem evidência · {discipline.withQuestionEvidence} com questões
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {roadmap.horizon.warnings.length > 0 && (
+            <div className="mt-4 rounded-xl border border-amber-500/20 bg-amber-500/[0.04] p-3">
+              {roadmap.horizon.warnings.map((warning) => (
+                <p key={warning} className="text-[10px] leading-relaxed text-amber-100/70">• {warning}</p>
+              ))}
+            </div>
+          )}
+        </section>
+
         <div className="flex gap-2 rounded-xl border border-zinc-800 bg-zinc-900/30 p-1">
           <SectionButton
             active={activeSection === "evidence"}

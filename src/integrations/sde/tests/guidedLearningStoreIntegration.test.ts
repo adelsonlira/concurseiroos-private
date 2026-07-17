@@ -30,6 +30,7 @@ beforeEach(() => {
     }],
     cronogramasRevisao: [],
     evidenciasAprendizagemGuiada: [],
+      casosRecuperacaoErro: [],
   });
 });
 

@@ -55,67 +55,7 @@ export default function App() {
     setSearchFocusToken((token) => token + 1);
   }, []);
 
-  useEffect(() => {
-    let lastKey = "";
-    let lastKeyTime = 0;
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      const key = event.key.toLowerCase();
-
-      if ((event.ctrlKey || event.metaKey) && key === "k") {
-        event.preventDefault();
-        openNavigationSearch();
-        return;
-      }
-
-      const activeElement = document.activeElement;
-      const isTyping =
-        activeElement instanceof HTMLInputElement ||
-        activeElement instanceof HTMLTextAreaElement ||
-        (activeElement instanceof HTMLElement && activeElement.isContentEditable);
-
-      if (isTyping) return;
-
-      const now = Date.now();
-
-      if (event.altKey && key === "p") {
-        event.preventDefault();
-        navigateTo("focus");
-        return;
-      }
-
-      if (lastKey === "g" && now - lastKeyTime < 1500) {
-        const shortcuts: Readonly<Record<string, string>> = {
-          d: "dashboard",
-          l: "library",
-          v: "syllabus",
-          q: "exercises",
-          f: "flashcards",
-          r: "reviews",
-          w: "weekly",
-          e: "roadmap",
-          c: "coach",
-          b: "backup",
-          o: "online",
-        };
-
-        const destination = shortcuts[key];
-        if (destination) {
-          event.preventDefault();
-          navigateTo(destination);
-        }
-
-        lastKey = "";
-        return;
-      }
-
-      lastKey = key;
-      lastKeyTime = now;
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [navigateTo, openNavigationSearch]);
 
   const accessDecision = useMemo(
     () => decideAppAccess({

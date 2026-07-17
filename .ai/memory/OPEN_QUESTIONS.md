@@ -5,7 +5,7 @@
 - Qual cobertura humana mínima por subassunto produz estatística descritiva útil sem enviesar a matriz?
 - Quais provas possuem proximidade técnica suficiente para cada bloco do Perfil 3?
 - Como versionar mudanças de taxonomia entre editais sem criar equivalências falsas?
-- Quais dos 32 gaps pedagógicos exigem novo material e quais podem usar fallback externo?
+- Quais dos 37 localizadores teóricos pendentes podem ser ligados por metadados exatos e quais exigem novo material?
 
 ## Validação prospectiva
 
@@ -19,7 +19,7 @@
 - O fechamento guiado reduz repetição inútil e aumenta recuperação sem consulta?
 - O usuário inicia a sessão com menos navegação e menos decisões?
 - Quais fallbacks funcionam melhor no celular quando material, plataforma ou internet falham?
-- O snapshot e o cofre se comportam corretamente em múltiplos dispositivos no deploy autenticado?
-- A IA agrega explicação útil sem criar plano paralelo ao SDE?
+- Como monitorar regressões da sincronização entre dispositivos após novos deployments?
+- A IA agrega explicação útil sem criar plano paralelo ao SDE durante várias semanas de uso?
 
 Essas perguntas devem ser respondidas por dados observados ou revisão humana explícita, nunca por preferência da IA.

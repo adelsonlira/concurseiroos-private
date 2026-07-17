@@ -1085,77 +1085,33 @@ export default function LibraryView() {
                 </div>
               )}
 
-              {/* VIDEO WORKSPACE (TIMESTAMPS & NOTES) */}
+              {/* VIDEO EXTERNAL SOURCE */}
               {activeItem.tipoMaterial === "VIDEO" && (
-                <div className="flex flex-col gap-4">
-                  {/* Simulated video player UI */}
-                  <div className="bg-zinc-950 aspect-video rounded-xl border border-zinc-900 flex flex-col justify-between p-4 relative overflow-hidden group">
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                      <button 
-                        onClick={() => setIsVideoPlaying(!isVideoPlaying)}
-                        className="h-12 w-12 rounded-full bg-white text-zinc-950 flex items-center justify-center shadow-lg hover:scale-105 transition-all"
-                      >
-                        {isVideoPlaying ? <Pause className="h-6 w-6 fill-zinc-950" /> : <Play className="h-6 w-6 fill-zinc-950 ml-0.5" />}
-                      </button>
-                    </div>
-
-                    <div className="flex items-center justify-between text-[10px] text-zinc-400 font-mono z-10">
-                      <span>{formatTime(videoPlayTime)}</span>
-                      <span>{formatTime(videoDuration)}</span>
-                    </div>
-
-                    {/* Timeline bar */}
-                    <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden cursor-pointer z-10">
-                      <div 
-                        className="bg-emerald-500 h-full transition-all duration-300"
-                        style={{ width: `${(videoPlayTime / videoDuration) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Bookmark note editor */}
-                  <div className="bg-zinc-900/30 rounded-xl border border-zinc-900 p-4">
-                    <h4 className="text-xs font-semibold text-zinc-300 mb-3 flex items-center gap-1">
-                      <Bookmark className="h-3.5 w-3.5 text-emerald-500" />
-                      <span>Anotações com Bookmark Sincronizado</span>
-                    </h4>
-
-                    {/* Bookmarked lists */}
-                    <div className="space-y-2 max-h-48 overflow-y-auto mb-3 pr-1">
-                      {(activeItem.dadosVideo?.notasEstudo || []).map((note, index) => (
-                        <div 
-                          key={index}
-                          onClick={() => setVideoPlayTime(note.tempo)}
-                          className="flex items-start gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-colors cursor-pointer text-xs"
+                <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-5">
+                  <div className="flex items-start gap-3">
+                    <Video className="mt-0.5 h-5 w-5 text-emerald-400" />
+                    <div>
+                      <h4 className="text-sm font-semibold text-zinc-100">Videoaula externa</h4>
+                      <p className="mt-2 text-xs leading-5 text-zinc-400">
+                        O ConcurseiroOS não simula reprodução. Abra a fonte original para assistir ao conteúdo e volte para registrar somente evidências reais de estudo.
+                      </p>
+                      {activeItem.dadosVideo?.linkUrl || /^https?:\/\//i.test(activeItem.linkAcesso) ? (
+                        <a
+                          href={activeItem.dadosVideo?.linkUrl || activeItem.linkAcesso}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-4 inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-500"
                         >
-                          <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded shrink-0">
-                            {formatTime(note.tempo)}
-                          </span>
-                          <span className="text-zinc-300 line-clamp-2">{note.texto}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="flex gap-2">
-                      <input 
-                        type="text" 
-                        placeholder="Nota no tempo atual..."
-                        value={videoNoteText}
-                        onChange={(e) => setVideoNoteText(e.target.value)}
-                        className="flex-1 bg-zinc-900 border border-zinc-800 rounded px-2.5 py-1 text-xs text-zinc-300 focus:outline-none"
-                      />
-                      <button 
-                        onClick={handleAddVideoNote}
-                        className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 rounded text-xs text-white shrink-0"
-                      >
-                        Anotar ({formatTime(videoPlayTime)})
-                      </button>
+                          <ArrowUpRight className="h-4 w-4" /> Abrir videoaula na fonte original
+                        </a>
+                      ) : (
+                        <p className="mt-4 rounded-lg border border-amber-500/20 bg-amber-500/5 p-3 text-xs text-amber-200">Link indisponível. Este item não deve ser usado até receber uma fonte válida.</p>
+                      )}
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* INTERACTIVE MIND MAP BUILDER */}
               {activeItem.tipoMaterial === "MAPA_MENTAL" && (
                 <div className="flex flex-col gap-4">
                   <div className="bg-zinc-900/50 rounded-xl border border-zinc-800 p-2">

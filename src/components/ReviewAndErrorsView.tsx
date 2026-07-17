@@ -9,6 +9,7 @@ import {
   RotateCcw,
   ShieldCheck,
   TimerReset,
+  Save,
   XCircle
 } from "lucide-react";
 import { useConcurseiroStore } from "../store";
@@ -23,8 +24,10 @@ import {
   REVIEW_POLICY_VERSION,
   selectObservedPreferredReviewMethod
 } from "../core/review/reviewEngine";
+import { deriveErrorRecoveryCaseState, getErrorRecoveryProtocol } from "../core/review/errorRecovery";
 import type {
   ErrorCause,
+  ErrorRecoveryCase,
   RecoveryEvidenceState,
   ReviewMethod,
   ReviewPerformance,
@@ -155,6 +158,144 @@ function reviewProtocol(schedule: CronogramaRevisao): string[] {
   ];
 }
 
+const ERROR_RECOVERY_STATUS_LABELS = {
+  PENDING_CLASSIFICATION: {
+    label: "Confirmar causa",
+    detail: "O sistema não infere a causa. Compare seu raciocínio com a solução e escolha o primeiro desvio real.",
+    className: "border-red-500/30 bg-red-500/10 text-red-300"
+  },
+  PENDING_CORRECTION: {
+    label: "Correção pendente",
+    detail: "A causa foi registrada, mas ainda falta explicar a correção e como evitar a repetição.",
+    className: "border-amber-500/30 bg-amber-500/10 text-amber-300"
+  },
+  READY_FOR_VERIFICATION: {
+    label: "Nova tentativa necessária",
+    detail: "Resolva outra questão equivalente sem consulta e registre confiança média ou alta.",
+    className: "border-blue-500/30 bg-blue-500/10 text-blue-300"
+  },
+  RECOVERED_PROVISIONALLY: {
+    label: "Recuperação provisória",
+    detail: "Existe um acerto independente. Uma segunda verificação ainda é necessária para estabilizar o ciclo.",
+    className: "border-cyan-500/30 bg-cyan-500/10 text-cyan-300"
+  },
+  STABILIZED: {
+    label: "Recuperação repetida",
+    detail: "Duas verificações independentes foram observadas. Isso não representa domínio permanente.",
+    className: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
+  }
+} as const;
+
+function ErrorRecoveryPanel(props: {
+  caseItem: ErrorRecoveryCase;
+  onSave: (
+    caseId: string,
+    input: { cause: ErrorCause; correctionSummary: string; preventionRule: string }
+  ) => { success: boolean; error?: string };
+}) {
+  const derived = deriveErrorRecoveryCaseState(props.caseItem);
+  const [cause, setCause] = useState<ErrorCause>(derived.activeCause);
+  const [correctionSummary, setCorrectionSummary] = useState(derived.correctionSummary ?? "");
+  const [preventionRule, setPreventionRule] = useState(derived.preventionRule ?? "");
+  const [feedback, setFeedback] = useState<string | null>(null);
+  const protocol = getErrorRecoveryProtocol(cause);
+  const status = ERROR_RECOVERY_STATUS_LABELS[derived.status];
+  const needsCorrection =
+    derived.status === "PENDING_CLASSIFICATION" || derived.status === "PENDING_CORRECTION";
+
+  useEffect(() => {
+    setCause(derived.activeCause);
+    setCorrectionSummary(derived.correctionSummary ?? "");
+    setPreventionRule(derived.preventionRule ?? "");
+  }, [props.caseItem.updatedAt]);
+
+  const submit = () => {
+    const result = props.onSave(props.caseItem.id, { cause, correctionSummary, preventionRule });
+    setFeedback(result.success ? "Correção registrada. Faça uma nova questão equivalente sem consulta." : result.error ?? "Não foi possível registrar.");
+  };
+
+  return (
+    <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950/70 p-4">
+      <div className={`rounded-lg border px-3 py-2 text-[11px] ${status.className}`}>
+        <div className="font-semibold">{status.label}</div>
+        <p className="mt-1 opacity-80">{status.detail}</p>
+        <p className="mt-1 font-mono text-[10px] opacity-70">
+          {derived.verificationPasses}/{derived.confirmationsRequired} verificação(ões) independente(s)
+        </p>
+      </div>
+
+      <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_1.2fr]">
+        <div>
+          <label className="text-[10px] font-mono uppercase text-zinc-500">
+            Causa confirmada pelo estudante
+          </label>
+          <select
+            value={cause}
+            onChange={(event) => setCause(event.target.value as ErrorCause)}
+            disabled={!needsCorrection}
+            className="mt-1 w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs text-zinc-200 outline-none disabled:opacity-70"
+          >
+            {Object.entries(ERROR_CAUSE_LABELS).map(([value, label]) => (
+              <option key={value} value={value}>{label}</option>
+            ))}
+          </select>
+          <p className="mt-3 text-xs font-semibold text-zinc-300">{protocol.objective}</p>
+          <ol className="mt-2 space-y-2">
+            {protocol.steps.map((step, index) => (
+              <li key={step} className="flex gap-2 text-[11px] leading-relaxed text-zinc-500">
+                <span className="font-mono text-blue-400">{index + 1}.</span>{step}
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div className="space-y-3">
+          <label className="block text-[10px] font-mono uppercase text-zinc-500">
+            O que foi corrigido
+            <textarea
+              value={correctionSummary}
+              onChange={(event) => setCorrectionSummary(event.target.value)}
+              disabled={!needsCorrection}
+              maxLength={2000}
+              rows={3}
+              placeholder="Ex.: confundi dependência parcial com transitiva; a chave candidata precisa ser identificada antes de avaliar a forma normal."
+              className="mt-1 w-full resize-y rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs normal-case text-zinc-200 outline-none placeholder:text-zinc-700 disabled:opacity-70"
+            />
+          </label>
+          <label className="block text-[10px] font-mono uppercase text-zinc-500">
+            Regra para evitar repetição
+            <textarea
+              value={preventionRule}
+              onChange={(event) => setPreventionRule(event.target.value)}
+              disabled={!needsCorrection}
+              maxLength={1000}
+              rows={2}
+              placeholder="Ex.: antes de marcar, listar chave e dependências funcionais relevantes."
+              className="mt-1 w-full resize-y rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs normal-case text-zinc-200 outline-none placeholder:text-zinc-700 disabled:opacity-70"
+            />
+          </label>
+          {needsCorrection && (
+            <button
+              type="button"
+              onClick={submit}
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-500"
+            >
+              <Save className="h-4 w-4" /> Salvar correção e liberar nova tentativa
+            </button>
+          )}
+          {feedback && <p className="text-[11px] text-zinc-400">{feedback}</p>}
+          {!needsCorrection && derived.correctionSummary && (
+            <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-3 text-[11px] leading-relaxed text-zinc-400">
+              <p><strong className="text-zinc-300">Correção:</strong> {derived.correctionSummary}</p>
+              <p className="mt-2"><strong className="text-zinc-300">Prevenção:</strong> {derived.preventionRule}</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ReviewAndErrorsView() {
   const {
     disciplinas,
@@ -162,8 +303,10 @@ export default function ReviewAndErrorsView() {
     subassuntos,
     tentativasQuestoes,
     cronogramasRevisao,
+    casosRecuperacaoErro,
     configuracao,
     agendarRevisaoSubassunto,
+    registrarCorrecaoErro,
     concluirRevisaoProgramada,
     definirRevisaoDesabilitada
   } = useConcurseiroStore();
@@ -173,6 +316,7 @@ export default function ReviewAndErrorsView() {
     startedAtMs: number;
   } | null>(loadActiveReviewTimer);
   const [timerNowMs, setTimerNowMs] = useState(Date.now());
+  const [reviewFeedback, setReviewFeedback] = useState<string | null>(null);
 
   useEffect(() => {
     if (!activeReviewTimer) return;
@@ -193,6 +337,10 @@ export default function ReviewAndErrorsView() {
   const subtopicById = useMemo(
     () => new Map(subassuntos.map((item) => [item.id, item])),
     [subassuntos]
+  );
+  const errorCaseBySubtopicId = useMemo(
+    () => new Map(casosRecuperacaoErro.map((item) => [item.subassuntoId, item])),
+    [casosRecuperacaoErro]
   );
 
   const coreSchedules = useMemo<ReviewScheduleLike[]>(
@@ -342,7 +490,12 @@ export default function ReviewAndErrorsView() {
       tempoGastoSegundos: elapsedSeconds,
       duracaoFonte: "TIMER"
     });
-    if (result.success) cancelReviewTimer();
+    if (result.success) {
+      setReviewFeedback(null);
+      cancelReviewTimer();
+    } else {
+      setReviewFeedback(result.error ?? "Não foi possível concluir a revisão.");
+    }
   };
 
   const primaryDiscipline = primarySchedule
@@ -353,6 +506,9 @@ export default function ReviewAndErrorsView() {
   const primaryReasons = primarySchedule
     ? priorityReasonsByScheduleId.get(primarySchedule.id) ?? []
     : [];
+  const primaryErrorCase = primarySchedule
+    ? errorCaseBySubtopicId.get(primarySchedule.subassuntoId) ?? null
+    : null;
 
   return (
     <div className="flex-1 overflow-y-auto bg-zinc-950 p-4 text-zinc-100 sm:p-6">
@@ -452,6 +608,10 @@ export default function ReviewAndErrorsView() {
               </div>
             </div>
 
+            {primaryErrorCase && (
+              <ErrorRecoveryPanel caseItem={primaryErrorCase} onSave={registrarCorrecaoErro} />
+            )}
+
             {activeReviewTimer?.scheduleId === primarySchedule.id && (
               <div className="mt-5 rounded-xl border border-zinc-800 bg-zinc-950/65 p-4">
                 <div className="text-[10px] font-mono uppercase text-zinc-500">
@@ -475,6 +635,11 @@ export default function ReviewAndErrorsView() {
                     </button>
                   ))}
                 </div>
+                {reviewFeedback && (
+                  <p className="mt-3 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-[11px] text-amber-300">
+                    {reviewFeedback}
+                  </p>
+                )}
                 <button
                   type="button"
                   onClick={cancelReviewTimer}
@@ -632,6 +797,7 @@ export default function ReviewAndErrorsView() {
               const subject = subjectById.get(summary.assuntoId);
               const subtopic = subtopicById.get(summary.subassuntoId);
               const recovery = RECOVERY_LABELS[summary.estadoRecuperacao];
+              const errorCase = errorCaseBySubtopicId.get(summary.subassuntoId);
               const schedule = cronogramasRevisao.find(
                 (item) => item.subassuntoId === summary.subassuntoId && !item.isDeleted
               );
@@ -694,6 +860,9 @@ export default function ReviewAndErrorsView() {
                       </button>
                     </div>
                   </div>
+                  {errorCase && (
+                    <ErrorRecoveryPanel caseItem={errorCase} onSave={registrarCorrecaoErro} />
+                  )}
                 </article>
               );
             })}

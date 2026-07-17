@@ -359,7 +359,7 @@ function PerformanceButton({ label, shortcut, tone, onClick }: { label: string; 
   return (
     <button onClick={onClick} className={`flex flex-col items-center justify-center py-2.5 rounded-lg border text-xs transition-all cursor-pointer ${classes}`}>
       <span className="font-bold">{label}</span>
-      <span className="text-[9px] font-mono mt-0.5 text-zinc-500">[Tecla {shortcut}]</span>
+
     </button>
   );
 }

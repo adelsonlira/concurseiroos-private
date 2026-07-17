@@ -5,7 +5,7 @@ import {
   EyeOff,
   KeyRound,
   LoaderCircle,
-  LockKeyhole,
+
   LogIn,
   Mail,
   UserPlus
@@ -49,10 +49,8 @@ export default function AccessGate(props: { misconfigured?: boolean }) {
     <div className="flex min-h-dvh items-center justify-center bg-zinc-950 p-5 text-zinc-100">
       <div className="w-full max-w-md">
         <div className="mb-6 text-center">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-blue-500/30 bg-blue-500/10">
-            <LockKeyhole className="h-7 w-7 text-blue-300" />
-          </div>
-          <p className="mt-5 text-[10px] font-mono uppercase tracking-[0.22em] text-blue-400">ConcurseiroOS</p>
+          <img src="/brand/concurseiroos-logo-square.png" alt="ConcurseiroOS" className="mx-auto h-28 w-28 rounded-3xl object-cover shadow-2xl shadow-blue-950/40" />
+          <p className="mt-4 text-[10px] font-mono uppercase tracking-[0.22em] text-blue-400">ConcurseiroOS</p>
           <h1 className="mt-2 text-2xl font-semibold">Área privada de estudos</h1>
           <p className="mt-2 text-sm leading-6 text-zinc-500">
             Entre para abrir seu plano, histórico, materiais privados e recomendações do Coach.
@@ -155,6 +153,7 @@ export default function AccessGate(props: { misconfigured?: boolean }) {
             </p>
           )}
         </section>
+        <p className="mt-5 text-center text-[10px] text-zinc-700">© 2026 ConcurseiroOS. Todos os direitos reservados.</p>
       </div>
     </div>
   );

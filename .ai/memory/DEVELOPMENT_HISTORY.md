@@ -251,3 +251,24 @@ Acesso privado e diagnóstico de entrada: gate de autenticação antes da interf
 ## 3.26.0 — 2026-07-17
 
 Compatibilidade de nuvem e rotina diagnóstica clara: snapshots anteriores à evidência guiada passam por migração aditiva somente após verificação do conteúdo original, mantendo corrupção e inconsistência bloqueadas. O diagnóstico prioriza listas sem solução ou bancos externos, distingue fonte, correção e teoria, declara a consequência do resultado e elimina instruções abstratas. Cofre recolhível por disciplina e prontidão de runtime coerente com a configuração efetiva completam a entrega, sem alterar score, pesos ou incidência do SDE.
+
+
+## 3.27.0
+- UX e identidade visual consolidadas.
+- Cofre reconciliado com catálogo auditado e agrupado por matéria.
+- Pipeline Vercel enxuto, com validação completa no CI.
+- Videoaulas externas corrigidas e Coach incluído no menu.
+
+
+## 3.28.0 — 2026-07-17
+
+Capacidade viável até a prova: novo horizonte descritivo calcula dias ativos, horas restantes, pressão de cobertura e segurança por disciplina usando apenas calendário e evidências reais. A projeção não distribui prioridade por assunto, não estima aprovação e não modifica o SDE.
+
+## 3.29.0 — 2026-07-17
+
+Roteamento pedagógico seguro: páginas passaram a exigir vínculo exato com o subassunto ou fallback amplo explicitamente aprovado. `TOPIC_ONLY` isolado deixou de autorizar prescrição; teoria e questões comentadas foram excluídas da primeira tentativa diagnóstica. Foi criado relatório para os 94 subassuntos, com zero fallback entre irmãos e zero alvo sem fonte diagnóstica executável. O PDF da Lei nº 12.527/2011 foi corrigido para LAI por metadado de origem auditado. Login obrigatório, sincronização entre dispositivos e Gemini foram registrados como confirmados pelo usuário no ambiente real.
+
+
+## 3.30.0 — 2026-07-17
+
+Correção de erros com evidência: cada subassunto com erro passa a ter caso append-only, protocolo por causa confirmada, correção e regra preventiva. Acertos só confirmam recuperação sem consulta e com confiança média/alta; duas verificações estabilizam provisoriamente e novo erro reabre o caso. Backups antigos migram sem promover acertos históricos a domínio. O contrato não altera o SDE.

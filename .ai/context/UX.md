@@ -45,3 +45,15 @@ Cada estado possui uma única ação primária e não transfere ao estudante a d
 ## Cobertura do edital
 
 A interface mostra quantos subassuntos possuem localizador pedagógico, evidência humana de questões ou gap. Cobertura não significa domínio e proposta automática não significa revisão concluída.
+## Roteamento pedagógico seguro
+
+- Nunca apresentar páginas de um subassunto irmão como fallback do alvo atual.
+- `TOPIC_ONLY` é metadado insuficiente para prescrição; fallback amplo exige revisão explícita.
+- Quando não houver localizador exato, mostrar a lacuna, orientar busca pelo nome oficial e pedir o registro do trecho realmente utilizado.
+- Diagnóstico inicial usa lista sem solução, simulado ou banco externo; comentários e teoria ficam para a correção posterior.
+
+
+
+## Recuperação de erros
+
+A interface não deve aceitar “recuperei” como encerramento de um erro sem causa confirmada e correção explícita. O usuário vê uma ação por vez: classificar, corrigir, verificar e estabilizar. Textos privados não são enviados automaticamente ao Coach.

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-16",
-  "projectVersion": "3.7.0",
+  "generatedAt": "2026-07-17",
+  "projectVersion": "3.29.0",
   "activeCompetition": {
     "id": "dataprev-2026-perfil-3",
     "label": "DATAPREV 2026 — Perfil 3: Desenvolvimento de Software",
@@ -101,6 +101,11 @@
       "field": "documentos.json[*].size_bytes",
       "previousIssue": "All values were incorrectly recorded as 13.",
       "correction": "Recalculated from the actual canonical PDF files and hashes revalidated."
+    },
+    {
+      "field": "privateStudyMaterials[lei-de-acesso-a-informacao-lei-n-12-5272011-grifado-f933.pdf]",
+      "previousIssue": "O arquivo explicitamente identificado como Lei de Acesso à Informação estava associado ao tópico LGPD e sem subassunto.",
+      "correction": "Metadados corrigidos pelo nome de origem auditado: tópico Lei de Acesso à Informação e subassunto oficial da Lei nº 12.527/2011. Nenhum conteúdo do PDF foi copiado ou inferido."
     }
   ]
 }

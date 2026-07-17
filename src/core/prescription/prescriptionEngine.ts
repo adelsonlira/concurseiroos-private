@@ -199,6 +199,13 @@ function buildExecutionReadiness(params: {
   questionPractice: QuestionPracticePrescription | null;
 }): PrescriptionExecutionReadiness {
   if (params.activity === "questoes") {
+    if (params.material?.matchScope === "TOPIC_FALLBACK") {
+      return {
+        status: "READY_WITH_FALLBACK",
+        reason: "A bateria local cobre o assunto de forma ampla, não o subassunto de modo exato. Use somente itens claramente aderentes ao recorte prescrito ou aplique os filtros do banco externo.",
+        requiredResource: "QUESTION_SOURCE"
+      };
+    }
     if (params.questionPractice?.externalSourcePlan || params.material) {
       return { status: "READY", reason: "Fonte de questões identificada para execução.", requiredResource: "NONE" };
     }
@@ -211,7 +218,17 @@ function buildExecutionReadiness(params: {
   if ((params.activity === "teoria" || params.activity === "revisao") && !params.material) {
     return {
       status: "READY_WITH_FALLBACK",
-      reason: "A decisão pedagógica está válida, mas falta um localizador de material; use o material principal da disciplina e registre o trecho efetivamente estudado.",
+      reason: "A decisão pedagógica está válida, mas falta um localizador exato. Use a busca da biblioteca pelo nome oficial do subassunto e registre o material e as páginas realmente utilizados.",
+      requiredResource: "MATERIAL"
+    };
+  }
+  if (
+    (params.activity === "teoria" || params.activity === "revisao") &&
+    params.material?.matchScope === "TOPIC_FALLBACK"
+  ) {
+    return {
+      status: "READY_WITH_FALLBACK",
+      reason: params.material.fallbackNotice ?? "O material cobre o assunto de forma ampla; confirme o trecho relevante antes de registrar a conclusão.",
       requiredResource: "MATERIAL"
     };
   }
@@ -275,8 +292,10 @@ function buildPrescriptionForSession(
           onPass:
             "A teoria integral fica adiada provisoriamente. O Coach mantém prática e revisão para confirmar retenção; qualquer regressão pode reabrir a teoria.",
           onFail: diagnosticTheoryMaterial
-            ? `O Coach abre teoria ativa em “${diagnosticTheoryMaterial.sectionTitle}”, páginas ${diagnosticTheoryMaterial.startPage}–${diagnosticTheoryMaterial.endPage}, antes de uma nova bateria.`
-            : "O Coach abre uma sessão de teoria ativa no material principal do assunto antes de uma nova bateria.",
+            ? diagnosticTheoryMaterial.matchScope === "EXACT_SUBTOPIC"
+              ? `O Coach abre teoria ativa em “${diagnosticTheoryMaterial.sectionTitle}”, páginas ${diagnosticTheoryMaterial.startPage}–${diagnosticTheoryMaterial.endPage}, antes de uma nova bateria.`
+              : `O Coach abre a seção ampla “${diagnosticTheoryMaterial.sectionTitle}”, páginas ${diagnosticTheoryMaterial.startPage}–${diagnosticTheoryMaterial.endPage}. Confirme dentro dela o trecho que cobre “${session.subassuntoNome ?? session.assuntoNome}” antes de registrar a conclusão.`
+            : `O Coach abre uma sessão de teoria com busca manual pelo nome oficial “${session.subassuntoNome ?? session.assuntoNome}”; material e páginas usados devem ser registrados.`,
           theoryMaterial: diagnosticTheoryMaterial
         }
       : null,
@@ -376,11 +395,16 @@ export function buildDailyStudyPrescription(
   });
 
   const maxUpcoming = Math.max(0, input.maxUpcomingSessions ?? 2);
-  const warnings = prescriptionsWithNextAction.flatMap((prescription) =>
-    prescription.material
-      ? []
-      : [`Não há material mapeado com confiança suficiente para ${prescription.topicName}${prescription.subtopicName ? ` · ${prescription.subtopicName}` : ""}.`]
-  );
+  const warnings = prescriptionsWithNextAction.flatMap((prescription) => {
+    const target = `${prescription.topicName}${prescription.subtopicName ? ` · ${prescription.subtopicName}` : ""}`;
+    if (!prescription.material) {
+      return [`Não há localizador exato ou fallback amplo auditado para ${target}; use a busca da biblioteca e registre o trecho utilizado.`];
+    }
+    if (prescription.material.matchScope === "TOPIC_FALLBACK") {
+      return [`O material indicado para ${target} cobre o assunto de forma ampla e não comprova cobertura exata do subassunto.`];
+    }
+    return [];
+  });
 
   return {
     status: "READY",

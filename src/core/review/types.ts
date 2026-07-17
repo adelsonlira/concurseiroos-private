@@ -9,6 +9,97 @@ export type ErrorCause =
   | "PRESSAO_TEMPO"
   | "DESCONHECIDA";
 
+
+export type ErrorRecoveryCaseStatus =
+  | "PENDING_CLASSIFICATION"
+  | "PENDING_CORRECTION"
+  | "READY_FOR_VERIFICATION"
+  | "RECOVERED_PROVISIONALLY"
+  | "STABILIZED";
+
+export type ErrorRecoveryEventType =
+  | "OPENED"
+  | "ERROR_RECORDED"
+  | "CAUSE_CONFIRMED"
+  | "CORRECTION_RECORDED"
+  | "VERIFICATION_PASSED"
+  | "VERIFICATION_INSUFFICIENT"
+  | "REOPENED";
+
+export interface ErrorRecoveryEvent {
+  id: string;
+  type: ErrorRecoveryEventType;
+  recordedAt: string;
+  attemptIds?: string[];
+  cause?: ErrorCause;
+  correctionSummary?: string;
+  preventionRule?: string;
+  consultedMaterial?: boolean;
+  confidence?: AnswerConfidence;
+  note?: string;
+}
+
+export interface ErrorRecoveryCase {
+  id: string;
+  disciplinaId: string;
+  assuntoId: string;
+  subassuntoId: string;
+  policyVersion: string;
+  openedAt: string;
+  updatedAt: string;
+  events: ErrorRecoveryEvent[];
+}
+
+export interface ErrorRecoveryCaseState {
+  status: ErrorRecoveryCaseStatus;
+  activeCause: ErrorCause;
+  correctionSummary?: string;
+  preventionRule?: string;
+  verificationPasses: number;
+  confirmationsRequired: number;
+  lastErrorAt: string;
+  sourceAttemptIds: string[];
+  lastEventAt: string;
+}
+
+export interface LegacyErrorRecoveryAttempt {
+  id: string;
+  disciplinaId: string;
+  assuntoId: string;
+  subassuntoId?: string;
+  acertou: boolean;
+  respondidaEm: string;
+  erroCausa?: ErrorCause;
+  erroNota?: string;
+}
+
+export interface ErrorRecoveryEpisode {
+  disciplinaId: string;
+  assuntoId: string;
+  subassuntoId: string;
+  attemptIds: string[];
+  recordedAt: string;
+  correct: boolean;
+  declaredCause?: ErrorCause;
+  consultedMaterial?: boolean;
+  confidence?: AnswerConfidence;
+  note?: string;
+}
+
+export interface ErrorCorrectionInput {
+  cause: ErrorCause;
+  correctionSummary: string;
+  preventionRule: string;
+  recordedAt: string;
+}
+
+export interface ErrorRecoveryProtocol {
+  cause: ErrorCause;
+  label: string;
+  objective: string;
+  steps: string[];
+}
+
 export type ReviewTrigger =
   | "ERRO_QUESTAO"
   | "ACERTO_BAIXA_CONFIANCA"

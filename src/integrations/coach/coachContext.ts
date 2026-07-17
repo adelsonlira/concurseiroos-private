@@ -9,6 +9,7 @@ import {
   Subassunto,
   TentativaQuestaoUsuario
 } from "../../types";
+import type { ErrorRecoveryCase } from "../../core/review/types";
 import { CoachGroundingContext } from "./types";
 import { PrivateStudyMaterial } from "../../core/materials/types";
 import { routePrivateStudyMaterial } from "../../core/materials/materialPolicy";
@@ -18,6 +19,7 @@ import {
   REVIEW_POLICY_VERSION,
   selectObservedPreferredReviewMethod
 } from "../../core/review/reviewEngine";
+import { deriveErrorRecoveryCaseState } from "../../core/review/errorRecovery";
 import { buildWeeklyCalibrationReport } from "../../core/weekly/weeklyCalibration";
 import { buildCompetitionEvidenceCoverage } from "../sde/competitionRoadmapAdapter";
 
@@ -30,6 +32,7 @@ export function buildCoachGroundingContext(params: {
   tentativasQuestoes: TentativaQuestaoUsuario[];
   sessoesEstudo: SessaoEstudo[];
   cronogramasRevisao: CronogramaRevisao[];
+  casosRecuperacaoErro?: ErrorRecoveryCase[];
   historicoAtividades?: LogHistoricoAtividade[];
   decision: SDEApplicationResult;
   privateMaterialCatalog?: readonly PrivateStudyMaterial[];
@@ -43,6 +46,7 @@ export function buildCoachGroundingContext(params: {
     tentativasQuestoes,
     sessoesEstudo,
     cronogramasRevisao,
+    casosRecuperacaoErro = [],
     historicoAtividades = [],
     decision,
     privateMaterialCatalog = []
@@ -60,6 +64,9 @@ export function buildCoachGroundingContext(params: {
   const subjectById = new Map(assuntos.map((item) => [item.id, item]));
   const subtopicById = new Map(subassuntos.map((item) => [item.id, item]));
   const errorSummaries = buildErrorTopicSummaries(tentativasQuestoes);
+  const errorCaseBySubtopicId = new Map(
+    casosRecuperacaoErro.map((item) => [item.subassuntoId, deriveErrorRecoveryCaseState(item)])
+  );
   const reviewMethodEvidence = buildReviewMethodEvidence(
     cronogramasRevisao
       .filter((item) => !item.isDeleted)
@@ -191,7 +198,10 @@ export function buildCoachGroundingContext(params: {
             Object.entries(item.causasDeclaradas).filter(
               ([, count]) => (count ?? 0) > 0
             )
-          ) as Record<string, number>
+          ) as Record<string, number>,
+          casoCorrecaoStatus: errorCaseBySubtopicId.get(item.subassuntoId)?.status ?? null,
+          verificacoesIndependentes: errorCaseBySubtopicId.get(item.subassuntoId)?.verificationPasses ?? 0,
+          verificacoesNecessarias: errorCaseBySubtopicId.get(item.subassuntoId)?.confirmationsRequired ?? null
         })),
         revisoesAtivas: cronogramasRevisao.filter(
           (item) => !item.desabilitada && !item.isDeleted

@@ -1,14 +1,12 @@
 {
   "schemaVersion": "1.0.0",
-  "projectVersion": "3.26.0",
-  "generatedAt": "2026-07-17T03:01:39.376Z",
+  "projectVersion": "3.30.0",
+  "generatedAt": "2026-07-17T11:22:59.614Z",
   "status": "READY_WITH_LIMITATIONS",
   "confidence": "MEDIUM",
   "blockingChecks": [],
   "warnings": [
-    "Paridade Node.js 24: Executado em Node.js 22.16.0; alvo declarado 24.x.",
-    "Supabase autenticado: Credenciais públicas não disponíveis neste ambiente.",
-    "Gemini no backend: Sem chave no ambiente; o Coach determinístico continua operacional."
+    "Paridade Node.js 24: Executado em Node.js 22.16.0; alvo declarado 24.x."
   ],
   "checks": [
     {
@@ -33,6 +31,13 @@
       "detail": "Escopo oficial e cobertura pedagógica versionados."
     },
     {
+      "id": "pedagogical-routing-safety",
+      "label": "Roteamento pedagógico seguro",
+      "status": "PASS",
+      "requiredForDailyUse": true,
+      "detail": "57 localizadores teóricos exatos, 0 fallbacks amplos explícitos e nenhum fallback entre subassuntos irmãos."
+    },
+    {
       "id": "local-persistence",
       "label": "Persistência local e backup",
       "status": "PASS",
@@ -54,6 +59,13 @@
       "detail": "Amostra, consulta, branco e confiança governam a elegibilidade para adiar teoria."
     },
     {
+      "id": "error-recovery-evidence",
+      "label": "Correção de erros com evidência",
+      "status": "PASS",
+      "requiredForDailyUse": true,
+      "detail": "7 causas possuem protocolo; 2 verificações independentes são exigidas sem alterar o ranking."
+    },
+    {
       "id": "node-runtime",
       "label": "Paridade Node.js 24",
       "status": "WARN",
@@ -63,16 +75,23 @@
     {
       "id": "supabase-authenticated",
       "label": "Supabase autenticado",
-      "status": "NOT_TESTED",
+      "status": "PASS",
       "requiredForDailyUse": false,
-      "detail": "Credenciais públicas não disponíveis neste ambiente."
+      "detail": "Login obrigatório confirmado no domínio de produção pelo usuário."
+    },
+    {
+      "id": "cross-device-sync",
+      "label": "Sincronização entre dispositivos",
+      "status": "PASS",
+      "requiredForDailyUse": false,
+      "detail": "Sincronização notebook–celular confirmada pelo usuário com a mesma conta."
     },
     {
       "id": "gemini-live",
       "label": "Gemini no backend",
-      "status": "NOT_TESTED",
+      "status": "PASS",
       "requiredForDailyUse": false,
-      "detail": "Sem chave no ambiente; o Coach determinístico continua operacional."
+      "detail": "Integração Gemini com chave da Vercel confirmada pelo usuário em produção."
     }
   ],
   "guaranteePolicy": "The product may guide and reduce decision error, but it never guarantees approval."

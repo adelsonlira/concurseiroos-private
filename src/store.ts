@@ -17,7 +17,10 @@ import { runCompetitionDecisionForDate } from "./integrations/sde/competitionDec
 import { SDEApplicationResult } from "./integrations/sde/types";
 import { mergeLibrarySeedItems, sanitizeLibraryForBackup } from "./core/materials/libraryPrivacy";
 import { completeReviewSchedule, createOrRefreshReviewSchedule } from "./core/review/reviewEngine";
+import { applyErrorRecoveryEpisode, buildLegacyErrorRecoveryCases, deriveErrorRecoveryCaseState, recordErrorCorrection } from "./core/review/errorRecovery";
 import type {
+  ErrorCorrectionInput,
+  ErrorRecoveryCase,
   ReviewCompletionInput,
   ReviewPerformance,
   ReviewScheduleLike,
@@ -55,6 +58,7 @@ interface ConcurseiroState {
   conversasIA: HistoricoChatIA[];
   sessoesEstudo: SessaoEstudo[];
   evidenciasAprendizagemGuiada: GuidedLearningEvidence[];
+  casosRecuperacaoErro: ErrorRecoveryCase[];
   biblioteca: ItemBiblioteca[];
   /** Ephemeral SDE output. It is recalculated from source data and is not persisted. */
   ultimaDecisaoSDE: SDEApplicationResult | null;
@@ -139,6 +143,7 @@ interface ConcurseiroState {
   resolveQuestao: (questaoId: string, selectedOptionId: string, isCorrect: boolean, timeSpentSeconds: number, origin?: "TREINO_ISOLADO" | "SIMULADO", contextId?: string) => void;
   registrarTentativaExterna: (input: ExternalQuestionAttemptInput) => { success: boolean; error?: string };
   registrarBateriaExterna: (input: ExternalQuestionBatchInput) => { success: boolean; error?: string };
+  registrarCorrecaoErro: (caseId: string, input: Omit<ErrorCorrectionInput, "recordedAt">) => { success: boolean; error?: string };
 
   // Review cycle and error recovery
   agendarRevisaoSubassunto: (subassuntoId: string, trigger?: ReviewTrigger, triggerId?: string) => { success: boolean; error?: string };
@@ -362,6 +367,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
   conversasIA: [],
   sessoesEstudo: [],
   evidenciasAprendizagemGuiada: [],
+  casosRecuperacaoErro: [],
   biblioteca: [],
   ultimaDecisaoSDE: null,
 
@@ -407,6 +413,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             conversasIA: [],
             sessoesEstudo: [],
             evidenciasAprendizagemGuiada: [],
+            casosRecuperacaoErro: [],
             biblioteca: seed.biblioteca,
             ultimaDecisaoSDE: null,
             activeConcursoId: seed.concurso.id,
@@ -429,6 +436,10 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           ...parsed,
           tentativasQuestoes: parsed.tentativasQuestoes ?? [],
           evidenciasAprendizagemGuiada: parsed.evidenciasAprendizagemGuiada ?? [],
+          casosRecuperacaoErro:
+            Array.isArray(parsed.casosRecuperacaoErro) && parsed.casosRecuperacaoErro.length > 0
+              ? parsed.casosRecuperacaoErro
+              : buildLegacyErrorRecoveryCases(parsed.tentativasQuestoes ?? []),
           configuracao: normalizeConfig(parsed.configuracao),
           biblioteca: mergeLibrarySeedItems(parsed.biblioteca ?? [], seed.biblioteca),
           ultimaDecisaoSDE: null,
@@ -460,6 +471,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           conversasIA: [],
           sessoesEstudo: [],
           evidenciasAprendizagemGuiada: [],
+          casosRecuperacaoErro: [],
           biblioteca: seed.biblioteca,
           ultimaDecisaoSDE: null,
           activeConcursoId: seed.concurso.id,
@@ -508,6 +520,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       conversasIA: [],
       sessoesEstudo: [],
       evidenciasAprendizagemGuiada: [],
+      casosRecuperacaoErro: [],
       biblioteca: seed.biblioteca,
       ultimaDecisaoSDE: null,
       activeConcursoId: seed.concurso.id,
@@ -530,7 +543,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     } = get();
@@ -539,7 +552,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     };
@@ -580,6 +593,10 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         conversasIA: d.conversasIA || [],
         sessoesEstudo: d.sessoesEstudo || [],
         evidenciasAprendizagemGuiada: d.evidenciasAprendizagemGuiada || [],
+        casosRecuperacaoErro:
+          d.casosRecuperacaoErro?.length > 0
+            ? d.casosRecuperacaoErro
+            : buildLegacyErrorRecoveryCases(d.tentativasQuestoes || []),
         biblioteca: mergeLibrarySeedItems(
           sanitizeLibraryForBackup(d.itensBiblioteca || []),
           buildSeedForCompetition(d.configuracao?.concursoAlvoId).biblioteca
@@ -607,7 +624,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     const s = get();
     const backup: BackupExportSchema = {
       metadata: {
-        versaoBackup: "2.0.0",
+        versaoBackup: "2.1.0",
         exportadoEm: new Date().toISOString(),
         estudanteNome: s.configuracao.estudanteNome,
         totalTamanhoBytes: 0,
@@ -636,6 +653,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         conversasIA: s.conversasIA,
         sessoesEstudo: s.sessoesEstudo,
         evidenciasAprendizagemGuiada: s.evidenciasAprendizagemGuiada,
+        casosRecuperacaoErro: s.casosRecuperacaoErro,
         itensBiblioteca: sanitizeLibraryForBackup(s.biblioteca)
       }
     };
@@ -1319,6 +1337,20 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           examDate: get().concursos.find((item) => item.id === get().configuracao.concursoAlvoId)?.dataProva
         })
       : get().cronogramasRevisao;
+    const updatedErrorRecoveryCases = subId
+      ? applyErrorRecoveryEpisode(get().casosRecuperacaoErro, {
+          disciplinaId: discId,
+          assuntoId: assId,
+          subassuntoId: subId,
+          attemptIds: [attempt.id],
+          recordedAt: respondedAt,
+          correct: isCorrect,
+          declaredCause: isCorrect ? undefined : "DESCONHECIDA",
+          note: isCorrect
+            ? "Questão interna correta sem confiança registrada; não confirma recuperação independente."
+            : "Erro em questão interna; a causa precisa ser confirmada pelo estudante."
+        })
+      : get().casosRecuperacaoErro;
 
     set(state => ({
       questoes: updatedQuestoes,
@@ -1328,6 +1360,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       subassuntos: updatedSubassuntos,
       estatisticas: stats,
       cronogramasRevisao: updatedReviewSchedules,
+      casosRecuperacaoErro: updatedErrorRecoveryCases,
       historicoAtividades: [activity, ...state.historicoAtividades],
       ultimaDecisaoSDE: null
     }));
@@ -1486,6 +1519,18 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           examDate: state.concursos.find((item) => item.id === state.configuracao.concursoAlvoId)?.dataProva
         })
       : state.cronogramasRevisao;
+    const updatedErrorRecoveryCases = applyErrorRecoveryEpisode(state.casosRecuperacaoErro, {
+      disciplinaId: discipline.id,
+      assuntoId: subject.id,
+      subassuntoId: subtopic.id,
+      attemptIds: [attempt.id],
+      recordedAt: respondedAt,
+      correct: input.acertou,
+      declaredCause: attempt.erroCausa,
+      consultedMaterial: input.consultouMaterial,
+      confidence: input.nivelConfianca,
+      note: attempt.erroNota
+    });
 
     set({
       tentativasQuestoes: [...state.tentativasQuestoes, attempt],
@@ -1494,6 +1539,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       subassuntos: updatedSubassuntos,
       estatisticas: stats,
       cronogramasRevisao: updatedReviewSchedules,
+      casosRecuperacaoErro: updatedErrorRecoveryCases,
       historicoAtividades: [activity, ...state.historicoAtividades],
       ultimaDecisaoSDE: null
     });
@@ -1706,6 +1752,26 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           examDate: state.concursos.find((item) => item.id === state.configuracao.concursoAlvoId)?.dataProva
         })
       : state.cronogramasRevisao;
+    const allCorrect = correct === total && blank === 0;
+    const batchConfidence = input.diagnosticoInicial
+      ? confidentCorrect === correct && correct === total
+        ? "MEDIA"
+        : "BAIXA"
+      : input.nivelConfianca;
+    const updatedErrorRecoveryCases = applyErrorRecoveryEpisode(state.casosRecuperacaoErro, {
+      disciplinaId: discipline.id,
+      assuntoId: subject.id,
+      subassuntoId: subtopic.id,
+      attemptIds: attempts.filter((item) => (allCorrect ? item.acertou : !item.acertou)).map((item) => item.id),
+      recordedAt: respondedAt,
+      correct: allCorrect,
+      declaredCause: allCorrect ? undefined : "DESCONHECIDA",
+      consultedMaterial: input.consultouMaterial,
+      confidence: batchConfidence,
+      note: allCorrect
+        ? "Bateria integralmente correta registrada como um único episódio de verificação."
+        : "A bateria contém erro ou branco; confirme a causa predominante antes de corrigir."
+    });
 
     set({
       tentativasQuestoes: [...state.tentativasQuestoes, ...attempts],
@@ -1714,9 +1780,21 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       subassuntos: updatedSubassuntos,
       estatisticas: stats,
       cronogramasRevisao: updatedReviewSchedules,
+      casosRecuperacaoErro: updatedErrorRecoveryCases,
       historicoAtividades: [activity, ...state.historicoAtividades],
       ultimaDecisaoSDE: null
     });
+    get().saveToLocalStorage();
+    return { success: true };
+  },
+
+  registrarCorrecaoErro: (caseId, input) => {
+    const result = recordErrorCorrection(get().casosRecuperacaoErro, caseId, {
+      ...input,
+      recordedAt: new Date().toISOString()
+    });
+    if (result.error) return { success: false, error: result.error };
+    set({ casosRecuperacaoErro: result.cases, ultimaDecisaoSDE: null });
     get().saveToLocalStorage();
     return { success: true };
   },
@@ -1772,6 +1850,23 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     if (!schedule) return { success: false, error: "Revisão programada inexistente." };
     if (schedule.desabilitada) {
       return { success: false, error: "A revisão está desabilitada." };
+    }
+    if (schedule.gatilhoOrigem === "ERRO_QUESTAO" && performance !== "HARD") {
+      const errorCase = state.casosRecuperacaoErro.find(
+        (item) => item.subassuntoId === schedule.subassuntoId
+      );
+      if (errorCase) {
+        const recoveryState = deriveErrorRecoveryCaseState(errorCase);
+        if (
+          recoveryState.status === "PENDING_CLASSIFICATION" ||
+          recoveryState.status === "PENDING_CORRECTION"
+        ) {
+          return {
+            success: false,
+            error: "Confirme a causa e registre a correção antes de declarar recuperação."
+          };
+        }
+      }
     }
 
     const now = new Date().toISOString();

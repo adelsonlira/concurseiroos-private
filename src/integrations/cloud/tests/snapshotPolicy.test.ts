@@ -39,6 +39,7 @@ function backup(): BackupExportSchema {
       conversasIA: [],
       sessoesEstudo: [],
       evidenciasAprendizagemGuiada: [],
+      casosRecuperacaoErro: [],
       itensBiblioteca: []
     }
   };

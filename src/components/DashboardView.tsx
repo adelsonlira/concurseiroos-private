@@ -337,6 +337,11 @@ export default function DashboardView({ onStartSession, onAskCoach }: { onStartS
                     <p className="mt-2 text-sm font-bold text-indigo-200">
                       Páginas {prescription.material.startPage}–{prescription.material.endPage}
                     </p>
+                    {prescription.material.fallbackNotice && (
+                      <p className="mt-2 rounded-lg border border-cyan-500/20 bg-cyan-500/[0.04] p-2 text-[11px] leading-relaxed text-cyan-100/70">
+                        {prescription.material.fallbackNotice}
+                      </p>
+                    )}
                     {prescription.material.questionBank && (
                       <p className="mt-1 text-[11px] text-zinc-500">
                         Banco identificado: {prescription.material.questionBank}

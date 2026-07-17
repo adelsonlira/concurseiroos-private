@@ -78,6 +78,9 @@ export interface CoachErrorRecoveryEvidence {
     | "UM_ACERTO_POSTERIOR"
     | "DOIS_OU_MAIS_ACERTOS_POSTERIORES";
   causasDeclaradas: Record<string, number>;
+  casoCorrecaoStatus: string | null;
+  verificacoesIndependentes: number;
+  verificacoesNecessarias: number | null;
 }
 
 export interface CoachReviewMethodEvidence {

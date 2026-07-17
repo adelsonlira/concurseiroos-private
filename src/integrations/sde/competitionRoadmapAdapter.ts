@@ -2,6 +2,7 @@ import { getCompetitionRuntimeDefinition } from "../../config/concursos/registry
 import { buildEvidenceCoverageReport } from "../../core/diagnostic/diagnosticEngine";
 import type { EvidenceCoverageReport } from "../../core/diagnostic/types";
 import { buildWeeklyOutlook } from "../../core/roadmap/weeklyOutlook";
+import { buildExamHorizonReport, type ExamHorizonReport } from "../../core/roadmap/examHorizon";
 import type { WeeklyOutlook } from "../../core/roadmap/types";
 import type {
   ConfigUsuario,
@@ -31,6 +32,7 @@ export interface CompetitionRoadmapSnapshot
 export interface CompetitionStrategicRoadmap {
   evidence: EvidenceCoverageReport;
   weekly: WeeklyOutlook;
+  horizon: ExamHorizonReport;
 }
 
 export function buildCompetitionEvidenceCoverage(
@@ -101,13 +103,44 @@ export function buildCompetitionStrategicRoadmap(
   snapshot: CompetitionRoadmapSnapshot,
   referenceDate: string
 ): CompetitionStrategicRoadmap {
+  const runtime = getCompetitionRuntimeDefinition(snapshot.configuracao.concursoAlvoId);
   const evidence = buildCompetitionEvidenceCoverage(snapshot, referenceDate);
   const weekly = buildWeeklyOutlook({
     referenceDate,
     numberOfDays: 7,
     decisionForDate: (date) => runCompetitionDecisionForDate(snapshot, date)
   });
+  const completedStudy = snapshot.sessoesEstudo.map((session) => ({
+    id: session.id,
+    date: session.dataLocal ?? (() => {
+      const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: snapshot.configuracao.disponibilidadeEstudo.timeZone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).formatToParts(new Date(session.dataFim));
+      const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+      return `${values.year}-${values.month}-${values.day}`;
+    })(),
+    minutes: Math.ceil(session.tempoGastoSegundos / 60),
+    countsAgainstAvailability: session.contabilizaNaDisponibilidade ?? true
+  }));
+  const horizon = buildExamHorizonReport({
+    referenceDate,
+    examDate: runtime.package.officialRules.examDate,
+    availability: snapshot.configuracao.disponibilidadeEstudo,
+    completedStudy,
+    disciplines: evidence.disciplines.map((discipline) => ({
+      disciplinaId: discipline.disciplinaId,
+      disciplinaNome: discipline.disciplinaNome,
+      officialMaxPoints: discipline.officialMaxPoints,
+      totalSubtopics: discipline.totalSubtopics,
+      noLearningEvidence: discipline.noLearningEvidence,
+      withQuestionEvidence: discipline.withQuestionEvidence,
+      activeErrorOrRecovery: discipline.activeErrorOrRecovery
+    }))
+  });
 
-  return { evidence, weekly };
+  return { evidence, weekly, horizon };
 }
 

@@ -40,3 +40,8 @@ O SDE é um priorizador constitucional heurístico, conservador, puro, determin�
 - pré-requisitos completos;
 - risco eliminatório global;
 - revisão de cenários dourados por especialista.
+
+
+## Limite da recuperação de erros
+
+O contrato de correção de erros é pedagógico e operacional. Ele não adiciona peso, bônus, incidência ou probabilidade ao ranking do SDE. Duas verificações independentes indicam estabilização provisória, não domínio permanente.

@@ -71,6 +71,8 @@ export interface PrivateStudyMaterial {
   rights: PrivateMaterialRights;
 }
 
+export type MaterialMatchScope = "EXACT_SUBTOPIC" | "TOPIC_FALLBACK";
+
 export interface MaterialLocatorRecommendation {
   materialId: string;
   materialTitle: string;
@@ -83,6 +85,8 @@ export interface MaterialLocatorRecommendation {
   contentKind: MaterialContentKind;
   questionBank: string | null;
   mappingStatus: MaterialMappingStatus;
+  matchScope: MaterialMatchScope;
+  fallbackNotice: string | null;
   confidence: number;
   accessMode: "USER_PRIVATE_LOCAL_COPY";
   privacyNotice: string;

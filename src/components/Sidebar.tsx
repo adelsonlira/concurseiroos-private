@@ -153,9 +153,7 @@ export default function Sidebar({
         <div className={`shrink-0 border-b border-zinc-900 p-4 ${desktopCollapsed ? "lg:px-3" : ""}`}>
           <div className={`flex items-center ${desktopCollapsed ? "lg:justify-center" : "justify-between"}`}>
             <div className="flex min-w-0 items-center gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-blue-400 bg-blue-600 font-mono text-base font-bold text-white shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-                C
-              </div>
+              <img src="/brand/concurseiroos-mark.png" alt="ConcurseiroOS" className="h-10 w-10 shrink-0 rounded-xl object-cover shadow-[0_0_18px_rgba(59,130,246,0.28)]" />
               <div className={`min-w-0 ${desktopCollapsed ? "lg:hidden" : ""}`}>
                 <h1 className="truncate text-sm font-semibold tracking-wide text-zinc-100">ConcurseiroOS</h1>
                 <p className="truncate font-mono text-[10px] text-zinc-500">v{APP_VERSION} · {APP_RELEASE_CHANNEL}</p>
@@ -213,16 +211,13 @@ export default function Sidebar({
                 autoComplete="off"
                 className="w-full rounded-lg border border-zinc-800 bg-zinc-900 py-2 pl-9 pr-12 text-xs text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15"
               />
-              <kbd className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 font-mono text-[9px] text-zinc-500">
-                Ctrl K
-              </kbd>
             </div>
           </div>
 
           <button
             type="button"
             aria-label="Abrir busca de navegação"
-            title="Buscar telas e funções (Ctrl+K)"
+            title="Buscar telas e funções"
             onClick={openExpandedSearch}
             className={`mt-4 hidden h-10 w-full items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-400 transition hover:border-zinc-700 hover:text-zinc-100 ${
               desktopCollapsed ? "lg:flex" : ""
@@ -298,13 +293,6 @@ export default function Sidebar({
                                 ) : null}
                               </div>
                             </div>
-                            <kbd
-                              className={`shrink-0 rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 font-mono text-[9px] text-zinc-500 ${
-                                desktopCollapsed ? "lg:hidden" : ""
-                              }`}
-                            >
-                              {item.badge}
-                            </kbd>
                           </div>
                         </button>
                       );
@@ -345,6 +333,7 @@ export default function Sidebar({
               <CloudOff title={cloudStatusText} className="h-4 w-4 shrink-0 text-zinc-600" />
             )}
           </button>
+          <p className={`mt-3 text-center text-[9px] text-zinc-700 ${desktopCollapsed ? "lg:hidden" : ""}`}>© 2026 ConcurseiroOS. Todos os direitos reservados.</p>
         </div>
       </aside>
     </>

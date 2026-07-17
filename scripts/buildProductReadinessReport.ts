@@ -5,8 +5,20 @@ import packageMetadata from "../package.json";
 
 const knowledgeQuality = JSON.parse(readFileSync(resolve("data/knowledge/official-corpus-quality.json"), "utf8"));
 const sdeReportPath = resolve("data/quality/sde-reliability-report.json");
+const routingReportPath = resolve("data/quality/pedagogical-routing-report.json");
+const runtimeValidationPath = resolve("data/quality/runtime-validation.json");
+const errorRecoveryPath = resolve("data/quality/error-recovery-contract.json");
 const sdeReport = existsSync(sdeReportPath)
   ? JSON.parse(readFileSync(sdeReportPath, "utf8"))
+  : null;
+const routingReport = existsSync(routingReportPath)
+  ? JSON.parse(readFileSync(routingReportPath, "utf8"))
+  : null;
+const errorRecoveryReport = existsSync(errorRecoveryPath)
+  ? JSON.parse(readFileSync(errorRecoveryPath, "utf8"))
+  : null;
+const runtimeValidation = existsSync(runtimeValidationPath)
+  ? JSON.parse(readFileSync(runtimeValidationPath, "utf8"))
   : null;
 const nodeMajor = Number(process.versions.node.split(".")[0]);
 const hasSupabaseConfig = Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY);
@@ -35,6 +47,21 @@ const checks: ReadinessCheck[] = [
     detail: "Escopo oficial e cobertura pedagógica versionados.",
   },
   {
+    id: "pedagogical-routing-safety",
+    label: "Roteamento pedagógico seguro",
+    status:
+      routingReport?.status === "PASS" &&
+      routingReport?.counts?.unsafeSiblingRoutes === 0 &&
+      routingReport?.counts?.noExecutableDiagnosticSource === 0
+        ? "PASS"
+        : "FAIL",
+    requiredForDailyUse: true,
+    detail:
+      routingReport?.status === "PASS"
+        ? `${routingReport.counts.exactTheory} localizadores teóricos exatos, ${routingReport.counts.topicTheoryFallback} fallbacks amplos explícitos e nenhum fallback entre subassuntos irmãos.`
+        : "Relatório de roteamento ausente ou inválido.",
+  },
+  {
     id: "local-persistence",
     label: "Persistência local e backup",
     status: existsSync(resolve("src/store.ts")) && existsSync(resolve("src/components/BackupSettingsView.tsx")) ? "PASS" : "FAIL",
@@ -61,6 +88,20 @@ const checks: ReadinessCheck[] = [
     detail: "Amostra, consulta, branco e confiança governam a elegibilidade para adiar teoria.",
   },
   {
+    id: "error-recovery-evidence",
+    label: "Correção de erros com evidência",
+    status:
+      errorRecoveryReport?.status === "PASS" &&
+      errorRecoveryReport?.safeguards?.changesSdeRanking === false
+        ? "PASS"
+        : "FAIL",
+    requiredForDailyUse: true,
+    detail:
+      errorRecoveryReport?.status === "PASS"
+        ? `${errorRecoveryReport.causeCount} causas possuem protocolo; ${errorRecoveryReport.confirmationsRequired} verificações independentes são exigidas sem alterar o ranking.`
+        : "Contrato de recuperação de erros ausente ou inválido.",
+  },
+  {
     id: "node-runtime",
     label: "Paridade Node.js 24",
     status: nodeMajor === 24 ? "PASS" : "WARN",
@@ -70,16 +111,23 @@ const checks: ReadinessCheck[] = [
   {
     id: "supabase-authenticated",
     label: "Supabase autenticado",
-    status: hasSupabaseConfig ? "WARN" : "NOT_TESTED",
+    status: runtimeValidation?.checks?.requiredLogin?.status === "PASS" ? "PASS" : hasSupabaseConfig ? "WARN" : "NOT_TESTED",
     requiredForDailyUse: false,
-    detail: hasSupabaseConfig ? "Configuração presente; o smoke autenticado depende de credenciais de usuário." : "Credenciais públicas não disponíveis neste ambiente.",
+    detail: runtimeValidation?.checks?.requiredLogin?.detail ?? (hasSupabaseConfig ? "Configuração presente; o smoke autenticado ainda não foi confirmado." : "Credenciais públicas não disponíveis neste ambiente."),
+  },
+  {
+    id: "cross-device-sync",
+    label: "Sincronização entre dispositivos",
+    status: runtimeValidation?.checks?.crossDeviceSync?.status === "PASS" ? "PASS" : "NOT_TESTED",
+    requiredForDailyUse: false,
+    detail: runtimeValidation?.checks?.crossDeviceSync?.detail ?? "Fluxo notebook–celular ainda não confirmado.",
   },
   {
     id: "gemini-live",
     label: "Gemini no backend",
-    status: hasGeminiConfig ? "WARN" : "NOT_TESTED",
+    status: runtimeValidation?.checks?.geminiLive?.status === "PASS" ? "PASS" : hasGeminiConfig ? "WARN" : "NOT_TESTED",
     requiredForDailyUse: false,
-    detail: hasGeminiConfig ? "Chave presente; resposta real não é necessária para a decisão determinística." : "Sem chave no ambiente; o Coach determinístico continua operacional.",
+    detail: runtimeValidation?.checks?.geminiLive?.detail ?? (hasGeminiConfig ? "Chave presente; resposta real ainda não confirmada." : "Sem chave no ambiente; o Coach determinístico continua operacional."),
   },
 ];
 

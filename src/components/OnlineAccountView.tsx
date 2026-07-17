@@ -24,6 +24,7 @@ import { useCloudAccountStore } from "../integrations/cloud/cloudStore";
 import { useConcurseiroStore } from "../store";
 import { authenticatedFetch } from "../integrations/cloud/authenticatedFetch";
 import { clearAllPrivatePdfAssociations } from "../integrations/localFiles/privatePdfAccess";
+import { normalizeMaterialFileName } from "../integrations/cloud/privateDocumentPolicy";
 
 function formatBytes(value: number | null): string {
   if (value === null || !Number.isFinite(value)) return "Tamanho não informado";
@@ -79,15 +80,20 @@ export default function OnlineAccountView() {
     }>();
 
     for (const document of cloud.privateDocuments) {
-      const libraryItem = biblioteca.find(
-        (item) => item.privateMaterial?.storagePath === document.storagePath
+      const normalizedDocumentName = normalizeMaterialFileName(document.name);
+      const libraryItem = biblioteca.find((item) =>
+        item.privateMaterial?.storagePath === document.storagePath ||
+        normalizeMaterialFileName(item.privateMaterial?.sourceFileName ?? "") === normalizedDocumentName
       );
       const discipline = disciplinas.find((item) => item.id === libraryItem?.disciplinaId);
       const topic = assuntos.find((item) => item.id === libraryItem?.assuntoId);
-      const id = discipline?.id ?? "UNCLASSIFIED";
+      const detailedLabel = discipline?.nome === "Conhecimentos Específicos"
+        ? libraryItem?.privateMaterial?.courseTitle || topic?.nome || discipline.nome
+        : discipline?.nome;
+      const id = detailedLabel ? `GROUP:${detailedLabel}` : "UNCLASSIFIED";
       const current = groups.get(id) ?? {
         id,
-        label: discipline?.nome ?? "Materiais ainda não classificados",
+        label: detailedLabel ?? "Materiais ainda não classificados",
         documents: []
       };
       current.documents.push({ document, topicLabel: topic?.nome ?? null });

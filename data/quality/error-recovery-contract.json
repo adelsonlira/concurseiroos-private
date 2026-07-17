@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "policyVersion": "ERROR_RECOVERY_EVIDENCE_V1",
+  "generatedAt": "2026-07-17T11:22:58.178Z",
+  "status": "PASS",
+  "confirmationsRequired": 2,
+  "causeCount": 7,
+  "protocols": [
+    {
+      "cause": "LACUNA_CONTEUDO",
+      "label": "Lacuna de conteúdo",
+      "stepCount": 4
+    },
+    {
+      "cause": "INTERPRETACAO",
+      "label": "Interpretação do enunciado",
+      "stepCount": 4
+    },
+    {
+      "cause": "APLICACAO",
+      "label": "Aplicação do conhecimento",
+      "stepCount": 4
+    },
+    {
+      "cause": "MEMORIA",
+      "label": "Falha de recuperação da memória",
+      "stepCount": 4
+    },
+    {
+      "cause": "DISTRAÇÃO",
+      "label": "Distração",
+      "stepCount": 4
+    },
+    {
+      "cause": "PRESSAO_TEMPO",
+      "label": "Pressão de tempo",
+      "stepCount": 4
+    },
+    {
+      "cause": "DESCONHECIDA",
+      "label": "Causa ainda não confirmada",
+      "stepCount": 4
+    }
+  ],
+  "safeguards": {
+    "causeIsUserConfirmed": true,
+    "correctionRequiredBeforeVerification": true,
+    "consultationDoesNotConfirmRecovery": true,
+    "lowConfidenceDoesNotConfirmRecovery": true,
+    "repeatedErrorReopensCase": true,
+    "changesSdeRanking": false,
+    "meansPermanentMastery": false
+  },
+  "errors": []
+}
