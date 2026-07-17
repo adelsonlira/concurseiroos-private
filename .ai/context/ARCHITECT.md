@@ -26,3 +26,8 @@ UI → Zustand/adaptadores → Core determinístico → persistência/backend �
 - O build de produção deve bloquear erro TypeScript e teste quebrado.
 - A versão não pode ser fechada com memória de sprint desatualizada.
 - Plataformas externas executam baterias, mas não definem conteúdo, quantidade ou prioridade.
+
+## Diagnósticos serverless
+
+Endpoints públicos de configuração e probes operacionais devem falhar de forma controlada e permanecer independentes do boot completo da aplicação. SDKs externos e verificadores de autenticação são inicializados sob demanda. Configuração inválida não pode impedir o próprio endpoint de explicar o estado do runtime.
+

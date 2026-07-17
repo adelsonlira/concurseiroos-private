@@ -46,6 +46,61 @@ describe("runtime service configuration", () => {
 
 
 
+  it("normalizes quoted variables and keeps runtime-config reachable", async () => {
+    const base = await startApp({
+      AUTH_MODE: '"optional"',
+      SUPABASE_URL: '"https://project.supabase.co"',
+      SUPABASE_ANON_KEY: '"public-anon-key"',
+      GEMINI_API_KEY: '"secret-gemini-key"',
+      GEMINI_MODEL: '"gemini-3.5-flash"'
+    });
+    const response = await fetch(`${base}/api/runtime-config`);
+    const payload = await response.json();
+    expect(response.status).toBe(200);
+    expect(payload.supabase).toMatchObject({
+      configured: true,
+      url: "https://project.supabase.co",
+      anonKey: "public-anon-key",
+      source: "SERVER_RUNTIME"
+    });
+    expect(payload.ai).toEqual({ configured: true, model: "gemini-3.5-flash" });
+  });
+
+  it("falls back to the valid VITE pair instead of crashing on malformed server variables", async () => {
+    const base = await startApp({
+      AUTH_MODE: "optional",
+      SUPABASE_URL: "not-a-url",
+      SUPABASE_ANON_KEY: "bad-server-key",
+      VITE_SUPABASE_URL: "https://project.supabase.co",
+      VITE_SUPABASE_ANON_KEY: "public-anon-key"
+    });
+    const response = await fetch(`${base}/api/runtime-config`);
+    const payload = await response.json();
+    expect(response.status).toBe(200);
+    expect(payload.supabase).toMatchObject({
+      configured: true,
+      source: "VITE_COMPAT",
+      url: "https://project.supabase.co",
+      anonKey: "public-anon-key"
+    });
+    expect(payload.supabase.configurationIssue).toMatch(/SUPABASE_URL/);
+  });
+
+  it("returns a safe unconfigured payload for invalid Supabase values", async () => {
+    const base = await startApp({
+      AUTH_MODE: "optional",
+      SUPABASE_URL: "not-a-url",
+      SUPABASE_ANON_KEY: "public-anon-key",
+      GEMINI_API_KEY: "secret-gemini-key"
+    });
+    const response = await fetch(`${base}/api/runtime-config`);
+    const payload = await response.json();
+    expect(response.status).toBe(200);
+    expect(payload.supabase.configured).toBe(false);
+    expect(payload.supabase.url).toBeNull();
+    expect(payload.ai.configured).toBe(true);
+  });
+
   it("promove modo optional para required em produção", async () => {
     const base = await startApp({
       NODE_ENV: "production",

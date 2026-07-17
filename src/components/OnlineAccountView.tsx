@@ -165,8 +165,11 @@ export default function OnlineAccountView() {
     setAiProbe({ status: "RUNNING", message: null });
     try {
       const response = await authenticatedFetch("/api/ai-health", { method: "POST" });
-      const payload = await response.json().catch(() => ({})) as { error?: string; model?: string; latencyMs?: number };
-      if (!response.ok) throw new Error(payload.error || `HTTP ${response.status}`);
+      const payload = await response.json().catch(() => ({})) as { error?: string; details?: string; model?: string; latencyMs?: number };
+      if (!response.ok) {
+        const message = [payload.error, payload.details].filter(Boolean).join(" — ");
+        throw new Error(message || `HTTP ${response.status}`);
+      }
       setAiProbe({
         status: "OK",
         message: `${payload.model ?? cloud.runtimeStatus.geminiModel ?? "Gemini"} respondeu em ${payload.latencyMs ?? "?"} ms.`
@@ -281,7 +284,13 @@ export default function OnlineAccountView() {
           </div>
           <div className="rounded-xl border border-violet-500/25 bg-violet-500/5 p-4">
             <p className="text-[10px] font-mono uppercase text-violet-300">Gemini</p>
-            <p className="mt-2 text-sm font-semibold text-zinc-100">{cloud.runtimeStatus.geminiConfigured ? "Disponível para o Coach" : "Chave não confirmada"}</p>
+            <p className="mt-2 text-sm font-semibold text-zinc-100">
+              {cloud.runtimeStatus.geminiConfigured === true
+                ? "Chave detectada pelo servidor"
+                : cloud.runtimeStatus.geminiConfigured === false
+                  ? "Chave ausente no servidor"
+                  : "Servidor de configuração indisponível"}
+            </p>
             <p className="mt-1 text-xs text-zinc-500">O SDE continua independente da IA.</p>
           </div>
           <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">

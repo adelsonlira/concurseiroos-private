@@ -66,3 +66,13 @@ A interface não deve aceitar “recuperei” como encerramento de um erro sem c
 - Apresentar correção como sequência do episódio, nunca como cronograma paralelo ao SDE.
 - Explicar que resultado agregado só afeta a estratégia depois de o usuário identificar os subassuntos reais dos erros.
 
+## Cancelamento de simulados
+
+- Um simulado ainda não concluído deve oferecer ação explícita de cancelamento.
+- O cancelamento exige confirmação, remove o item da fila recente e preserva um registro `CANCELADO` no snapshot para evitar perda silenciosa.
+- Simulados concluídos não podem ser cancelados.
+
+## Identidade visual resiliente
+
+Elementos essenciais de marca usados no gate de acesso e navegação devem estar no bundle da aplicação ou possuir teste de existência; a interface não pode depender de assets estáticos ausentes no deploy.
+

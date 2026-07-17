@@ -74,6 +74,59 @@ describe("simulation store integration", () => {
     expect(useConcurseiroStore.getState().ultimaDecisaoSDE).toBeNull();
   });
 
+  it("cancela sem apagar o registro e retira o simulado da fila ativa", () => {
+    const created = useConcurseiroStore.getState().createSimulationPlan({
+      title: "Parcial adiado",
+      kind: "PARTIAL",
+      selectedDisciplineIds: [useConcurseiroStore.getState().disciplinas[0].id],
+      source: {
+        id: "qconcursos",
+        label: "Qconcursos",
+        kind: "EXTERNAL_BANK",
+        reference: "Qconcursos — filtros registrados",
+      },
+    });
+    expect(created.success).toBe(true);
+    expect(useConcurseiroStore.getState().activeSimuladoId).toBe(created.id);
+
+    expect(useConcurseiroStore.getState().cancelSimulado(created.id!)).toEqual({ success: true });
+    const cancelled = useConcurseiroStore.getState().simulados.find((item) => item.id === created.id);
+    expect(cancelled).toMatchObject({
+      status: "CANCELADO",
+      canceladoEm: "2026-07-17T12:00:00.000Z",
+    });
+    expect(useConcurseiroStore.getState().activeSimuladoId).toBeNull();
+    expect(useConcurseiroStore.getState().startSimulado(created.id!).success).toBe(false);
+    expect(useConcurseiroStore.getState().finishSimulado(created.id!).success).toBe(false);
+  });
+
+  it("protege simulados concluídos contra cancelamento", () => {
+    const created = useConcurseiroStore.getState().createSimulationPlan({
+      title: "Parcial concluído",
+      kind: "PARTIAL",
+      selectedDisciplineIds: [useConcurseiroStore.getState().disciplinas[0].id],
+      source: {
+        id: "estrategia-questoes",
+        label: "Estratégia Questões",
+        kind: "EXTERNAL_BANK",
+        reference: "Estratégia Questões — filtros registrados",
+      },
+    });
+    const simulado = useConcurseiroStore.getState().simulados[0];
+    const discipline = simulado.plano!.disciplines[0];
+    useConcurseiroStore.getState().recordSimulationDisciplineResult(simulado.id, {
+      disciplineId: discipline.disciplineId,
+      correct: discipline.questionCount,
+      wrong: 0,
+      blank: 0,
+      elapsedSeconds: 600,
+    });
+    expect(useConcurseiroStore.getState().finishSimulado(created.id!).success).toBe(true);
+    const result = useConcurseiroStore.getState().cancelSimulado(created.id!);
+    expect(result.success).toBe(false);
+    expect(result.error).toMatch(/concluído/);
+  });
+
   it("impede concluir enquanto falta disciplina", () => {
     const created = useConcurseiroStore.getState().createSimulationPlan({
       title: "Completo",

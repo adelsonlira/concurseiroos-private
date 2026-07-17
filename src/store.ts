@@ -175,6 +175,7 @@ interface ConcurseiroState {
   createSimulado: (titulo: string, concursoId: string, qCount: number, timeLimitSeconds: number, selectedSubjectIds?: string[]) => string;
   submitSimuladoAnswer: (simuladoId: string, questaoId: string, optionId: string, isCorrect: boolean, timeSpentSeconds: number) => void;
   finishSimulado: (simuladoId: string) => { success: boolean; error?: string };
+  cancelSimulado: (simuladoId: string) => { success: boolean; error?: string };
 
   // AI Chat Messages
   addChatMessage: (chatId: string, message: Omit<MensagemChat, "id" | "timestamp">) => void;
@@ -2172,6 +2173,9 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     if (simulado.status === "CONCLUIDO") {
       return { success: false, error: "Um simulado concluído não pode ser reiniciado." };
     }
+    if (simulado.status === "CANCELADO") {
+      return { success: false, error: "Um simulado cancelado não pode ser iniciado." };
+    }
     const now = new Date().toISOString();
     set((state) => ({
       simulados: state.simulados.map((item) =>
@@ -2192,6 +2196,9 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     }
     if (simulado.status === "CONCLUIDO") {
       return { success: false, error: "O simulado já foi concluído." };
+    }
+    if (simulado.status === "CANCELADO") {
+      return { success: false, error: "O simulado foi cancelado." };
     }
     const discipline = simulado.plano.disciplines.find(
       (item) => item.disciplineId === result.disciplineId,
@@ -2257,7 +2264,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
 
   submitSimuladoAnswer: (simuladoId, questaoId, optionId, isCorrect, timeSpentSeconds) => {
     const currentSimulado = get().simulados.find((sim) => sim.id === simuladoId);
-    if (!currentSimulado || !currentSimulado.questoesIds.includes(questaoId)) return;
+    if (!currentSimulado || currentSimulado.status === "CANCELADO" || !currentSimulado.questoesIds.includes(questaoId)) return;
     const previousAnswer = currentSimulado.respostas[questaoId];
 
     set((state) => ({
@@ -2293,10 +2300,34 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     }
   },
 
+  cancelSimulado: (simuladoId) => {
+    const simulado = get().simulados.find((item) => item.id === simuladoId);
+    if (!simulado) return { success: false, error: "Simulado inexistente." };
+    if (simulado.status === "CONCLUIDO") {
+      return { success: false, error: "Um simulado concluído não pode ser cancelado." };
+    }
+    if (simulado.status === "CANCELADO") return { success: true };
+
+    const now = new Date().toISOString();
+    set((state) => ({
+      simulados: state.simulados.map((item) =>
+        item.id === simuladoId
+          ? { ...item, status: "CANCELADO", canceladoEm: now, updatedAt: now }
+          : item,
+      ),
+      activeSimuladoId: state.activeSimuladoId === simuladoId ? null : state.activeSimuladoId,
+    }));
+    get().saveToLocalStorage();
+    return { success: true };
+  },
+
   finishSimulado: (simuladoId) => {
     const simulado = get().simulados.find((item) => item.id === simuladoId);
     if (!simulado) return { success: false, error: "Simulado inexistente." };
     if (simulado.status === "CONCLUIDO") return { success: true };
+    if (simulado.status === "CANCELADO") {
+      return { success: false, error: "Um simulado cancelado não pode ser concluído." };
+    }
 
     const now = new Date().toISOString();
     let completed: Simulado;

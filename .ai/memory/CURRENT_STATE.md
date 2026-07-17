@@ -1,7 +1,7 @@
 # Estado Atual
 
 Data: 2026-07-17
-Versão: 3.31.0
+Versão: 3.31.1
 
 ## Projeto
 
@@ -11,7 +11,7 @@ O produto é um sistema de apoio à decisão orientado à aprovação. Deve redu
 
 ## Fase atual
 
-Uso privado no ambiente real com login obrigatório, sincronização notebook–celular e Gemini confirmados pelo usuário. A prioridade técnica atual é validar o uso real dos simulados oficiais recém-implementados e fechar os 37 localizadores pedagógicos ainda pendentes, preservando o SDE e o Knowledge Engine em shadow mode.
+Patch 3.31.1 preparado após regressões observadas pelo usuário no deploy 3.31.0: logos ausentes, diagnósticos serverless com HTTP 500 e falta de cancelamento de simulados. Login e sincronização continuam confirmados; a integração Gemini precisa ser reconfirmada após o novo deploy. Em seguida, a prioridade retorna à validação real dos simulados e aos 37 localizadores pedagógicos pendentes.
 
 ## Implementado
 
@@ -36,10 +36,15 @@ Uso privado no ambiente real com login obrigatório, sincronização notebook–
 - Seleção local determinística limitada a questões com documento de origem e gabarito oficial; fontes externas não incorporam conteúdo.
 - Análise pós-simulado e plano de correção sem cronograma paralelo ou alteração direta do ranking.
 - Comparação descritiva somente entre simulados com mesma composição.
+- Marca do produto renderizada por SVG embutido, sem dependência de arquivos estáticos ausentes.
+- Diagnósticos `/api/runtime-config` e `/api/ai-health` isolados do boot Express e tolerantes a configuração Supabase inválida ou entre aspas.
+- Cliente Supabase do backend inicializado sob demanda, sem derrubar endpoints públicos durante a carga do módulo.
+- Simulados podem ser cancelados com confirmação; saem da fila recente e permanecem preservados como `CANCELADO` no backup.
 
 ## Validado
 
-- Login obrigatório, sincronização notebook–celular e Gemini confirmados pelo usuário no domínio de produção.
+- Login obrigatório e sincronização notebook–celular confirmados pelo usuário no domínio de produção.
+- Gemini havia sido confirmado antes da regressão 3.31.0; a 3.31.1 possui correção e testes locais, mas requer novo probe autenticado após redeploy.
 - Auditoria de roteamento: 57 teorias exatas, 0 fallbacks amplos ativos sem aprovação, 37 localizadores manuais pendentes, 52 baterias diagnósticas locais e 42 fallbacks por plataforma externa.
 - Zero subassuntos sem fonte diagnóstica executável.
 - Zero fallbacks entre subassuntos irmãos.
@@ -47,7 +52,7 @@ Uso privado no ambiente real com login obrigatório, sincronização notebook–
 - Pipeline de memória, corpus, taxonomia, curadoria, classificação, roteamento, SDE, prontidão, TypeScript e testes.
 - Auditoria do SDE com 117 ações e 50 parâmetros catalogados.
 - Contrato de recuperação com 7 causas, 2 verificações independentes e contribuição zero ao ranking.
-- Linha de base 3.30.0 confirmada com 398 testes em 67 arquivos antes da alteração. A 3.31.0 foi validada com 407 testes em 69 arquivos, TypeScript, builds web/Express/serverless, auditoria de simulados, segurança e smoke HTTP aprovados.
+- Linha de base 3.31.0 confirmada com 407 testes em 69 arquivos antes do patch. A 3.31.1 foi validada com 417 testes em 71 arquivos, TypeScript, builds web/Express/serverless, auditorias, segurança e smoke HTTP local.
 - Incidência histórica e materiais privados continuam neutros no ranking.
 
 ## Problemas conhecidos
@@ -60,8 +65,9 @@ Uso privado no ambiente real com login obrigatório, sincronização notebook–
 - Dados locais ainda não são namespaceados para múltiplos usuários no mesmo perfil de navegador.
 - O limiar diagnóstico de 85% é conservador e só poderá ser recalibrado com resultados reais suficientes.
 - O runtime-alvo é Node.js 24.x; este ambiente automatizado executa Node 22.x.
+- A correção dos endpoints e do Gemini ainda precisa ser validada no runtime real da Vercel após publicação da 3.31.1.
 - Nenhum software ou plano garante aprovação; o produto reduz erro decisório e organiza esforço com rastreabilidade.
 
 ## Próxima tarefa
 
-Fechar os 37 localizadores teóricos pendentes por metadados auditáveis e validar prospectivamente o fluxo de simulados em sessões reais. Depois, revisar os 43 grupos P0 DATAPREV e comparar a matriz histórica em shadow mode.
+Publicar a 3.31.1 e confirmar em produção as logos, `/api/runtime-config`, o probe autenticado do Gemini e o cancelamento de simulados. Depois, fechar os 37 localizadores teóricos pendentes e validar prospectivamente os simulados.

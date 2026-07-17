@@ -1,6 +1,14 @@
-# Próximos Passos — após 3.31.0
+# Próximos Passos — após 3.31.1
 
-## Trabalho autônomo imediato
+## Validação operacional imediata
+
+1. Publicar a versão 3.31.1 pelo fluxo normal da Vercel.
+2. Confirmar HTTP 200 e JSON em `/api/runtime-config`.
+3. Executar o teste autenticado do Gemini e registrar o código/detalhe apenas se ainda houver falha.
+4. Confirmar que a barra lateral e o gate de login não solicitam mais `/brand/*`.
+5. Criar e cancelar um simulado, verificando que ele sai do histórico recente sem ser apagado do backup.
+
+## Trabalho autônomo seguinte
 
 1. Fechar os 37 localizadores teóricos ainda pendentes:
    - priorizar metadados exatos, sumários e títulos auditáveis;
@@ -18,7 +26,7 @@
 
 - login obrigatório: confirmado;
 - sincronização notebook–celular: confirmada;
-- Gemini pela Vercel: confirmado.
+- Gemini pela Vercel: confirmado antes da regressão; reconfirmação pendente após deploy 3.31.1.
 
 ## Portões fechados
 

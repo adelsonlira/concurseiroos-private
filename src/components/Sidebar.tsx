@@ -22,6 +22,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { APP_RELEASE_CHANNEL, APP_VERSION } from "../config/appMetadata";
+import BrandMark from "./BrandMark";
 import { useCloudAccountStore } from "../integrations/cloud/cloudStore";
 import {
   filterNavigationItems,
@@ -155,7 +156,7 @@ export default function Sidebar({
         <div className={`shrink-0 border-b border-zinc-900 p-4 ${desktopCollapsed ? "lg:px-3" : ""}`}>
           <div className={`flex items-center ${desktopCollapsed ? "lg:justify-center" : "justify-between"}`}>
             <div className="flex min-w-0 items-center gap-3">
-              <img src="/brand/concurseiroos-mark.png" alt="ConcurseiroOS" className="h-10 w-10 shrink-0 rounded-xl object-cover shadow-[0_0_18px_rgba(59,130,246,0.28)]" />
+              <BrandMark className="h-10 w-10 shrink-0 drop-shadow-[0_0_12px_rgba(59,130,246,0.3)]" />
               <div className={`min-w-0 ${desktopCollapsed ? "lg:hidden" : ""}`}>
                 <h1 className="truncate text-sm font-semibold tracking-wide text-zinc-100">ConcurseiroOS</h1>
                 <p className="truncate font-mono text-[10px] text-zinc-500">v{APP_VERSION} · {APP_RELEASE_CHANNEL}</p>

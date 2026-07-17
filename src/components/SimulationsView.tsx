@@ -10,6 +10,7 @@ import {
   Save,
   ShieldAlert,
   TimerReset,
+  XCircle,
 } from "lucide-react";
 import { compareSimulationAnalyses } from "../core/simulations/simulationEngine";
 import type { SimulationKind, SimulationSource } from "../core/simulations/types";
@@ -38,9 +39,10 @@ function formatDuration(totalSeconds: number): string {
   return [hours, minutes, seconds].map((value) => String(value).padStart(2, "0")).join(":");
 }
 
-function statusLabel(status: "CRIADO" | "EM_ANDAMENTO" | "CONCLUIDO"): string {
+function statusLabel(status: "CRIADO" | "EM_ANDAMENTO" | "CONCLUIDO" | "CANCELADO"): string {
   if (status === "CRIADO") return "Pronto para iniciar";
   if (status === "EM_ANDAMENTO") return "Em andamento";
+  if (status === "CANCELADO") return "Cancelado";
   return "Concluído";
 }
 
@@ -54,11 +56,17 @@ export default function SimulationsView() {
     startSimulado,
     recordSimulationDisciplineResult,
     finishSimulado,
+    cancelSimulado,
   } = useConcurseiroStore();
   const competitionId = activeConcursoId ?? configuracao.concursoAlvoId;
   const availableDisciplines = useMemo(
     () => disciplinas.filter((discipline) => discipline.concursoId === competitionId),
     [competitionId, disciplinas],
+  );
+
+  const visibleSimulados = useMemo(
+    () => simulados.filter((item) => item.status !== "CANCELADO"),
+    [simulados],
   );
 
   const [kind, setKind] = useState<SimulationKind>("PARTIAL");
@@ -69,7 +77,7 @@ export default function SimulationsView() {
   const [title, setTitle] = useState("");
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [selectedSimuladoId, setSelectedSimuladoId] = useState<string | null>(
-    simulados[simulados.length - 1]?.id ?? null,
+    visibleSimulados[visibleSimulados.length - 1]?.id ?? null,
   );
   const [clockNow, setClockNow] = useState(Date.now());
   const [drafts, setDrafts] = useState<
@@ -88,9 +96,15 @@ export default function SimulationsView() {
   }, []);
 
   const selectedSimulado = useMemo(
-    () => simulados.find((item) => item.id === selectedSimuladoId) ?? simulados[simulados.length - 1] ?? null,
-    [selectedSimuladoId, simulados],
+    () => visibleSimulados.find((item) => item.id === selectedSimuladoId) ?? visibleSimulados[visibleSimulados.length - 1] ?? null,
+    [selectedSimuladoId, visibleSimulados],
   );
+
+  useEffect(() => {
+    if (selectedSimuladoId && !visibleSimulados.some((item) => item.id === selectedSimuladoId)) {
+      setSelectedSimuladoId(visibleSimulados[visibleSimulados.length - 1]?.id ?? null);
+    }
+  }, [selectedSimuladoId, visibleSimulados]);
 
   useEffect(() => {
     if (!selectedSimulado?.plano) return;
@@ -210,6 +224,25 @@ export default function SimulationsView() {
       text: result.success
         ? "Simulado concluído e analisado sem alterar automaticamente o ranking do SDE."
         : result.error ?? "Não foi possível concluir o simulado.",
+    });
+  };
+
+  const handleCancel = () => {
+    if (!selectedSimulado) return;
+    const confirmed = window.confirm(
+      `Cancelar “${selectedSimulado.titulo}”? Ele sairá da fila e do histórico recente, mas permanecerá preservado no backup como registro cancelado.`,
+    );
+    if (!confirmed) return;
+    const fallbackId = visibleSimulados
+      .filter((item) => item.id !== selectedSimulado.id)
+      .at(-1)?.id ?? null;
+    const result = cancelSimulado(selectedSimulado.id);
+    if (result.success) setSelectedSimuladoId(fallbackId);
+    setFeedback({
+      type: result.success ? "success" : "error",
+      text: result.success
+        ? "Simulado cancelado e removido da fila recente."
+        : result.error ?? "Não foi possível cancelar o simulado.",
     });
   };
 
@@ -344,11 +377,18 @@ export default function SimulationsView() {
               <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3"><p className="text-[10px] uppercase tracking-wide text-zinc-600">Fonte</p><p className="mt-1 text-sm font-semibold text-zinc-100">{selectedSimulado.plano.source.label}</p></div>
             </div>
 
-            {selectedSimulado.status === "CRIADO" && (
-              <button type="button" onClick={() => startSimulado(selectedSimulado.id)} className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-500">
-                <Play className="h-4 w-4" /> Iniciar cronômetro
-              </button>
-            )}
+            <div className="flex flex-wrap gap-2">
+              {selectedSimulado.status === "CRIADO" && (
+                <button type="button" onClick={() => startSimulado(selectedSimulado.id)} className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-500">
+                  <Play className="h-4 w-4" /> Iniciar cronômetro
+                </button>
+              )}
+              {(selectedSimulado.status === "CRIADO" || selectedSimulado.status === "EM_ANDAMENTO") && (
+                <button type="button" onClick={handleCancel} className="inline-flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/5 px-4 py-2 text-sm font-semibold text-red-300 transition hover:bg-red-500/10">
+                  <XCircle className="h-4 w-4" /> Cancelar simulado
+                </button>
+              )}
+            </div>
 
             <div className="space-y-3">
               {selectedSimulado.plano.disciplines.map((discipline) => {
@@ -436,11 +476,11 @@ export default function SimulationsView() {
           </section>
         )}
 
-        {simulados.length > 0 && (
+        {visibleSimulados.length > 0 && (
           <section>
             <h2 className="text-sm font-semibold text-zinc-100">Histórico recente</h2>
             <div className="mt-3 grid gap-2">
-              {[...simulados].reverse().slice(0, 8).map((simulado) => (
+              {[...visibleSimulados].reverse().slice(0, 8).map((simulado) => (
                 <button key={simulado.id} type="button" onClick={() => setSelectedSimuladoId(simulado.id)} className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/45 px-4 py-3 text-left transition hover:border-zinc-700">
                   <div><p className="text-sm font-medium text-zinc-200">{simulado.titulo}</p><p className="mt-1 text-[11px] text-zinc-500">{simulado.fonte?.label ?? "Registro legado"} · {statusLabel(simulado.status)}</p></div>
                   <ExternalLink className="h-4 w-4 text-zinc-600" />

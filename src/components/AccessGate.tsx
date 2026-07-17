@@ -11,6 +11,7 @@ import {
   UserPlus
 } from "lucide-react";
 import { useCloudAccountStore } from "../integrations/cloud/cloudStore";
+import BrandMark from "./BrandMark";
 
 export default function AccessGate(props: { misconfigured?: boolean }) {
   const cloud = useCloudAccountStore();
@@ -49,7 +50,7 @@ export default function AccessGate(props: { misconfigured?: boolean }) {
     <div className="flex min-h-dvh items-center justify-center bg-zinc-950 p-5 text-zinc-100">
       <div className="w-full max-w-md">
         <div className="mb-6 text-center">
-          <img src="/brand/concurseiroos-logo-square.png" alt="ConcurseiroOS" className="mx-auto h-28 w-28 rounded-3xl object-cover shadow-2xl shadow-blue-950/40" />
+          <BrandMark className="mx-auto h-28 w-28 drop-shadow-[0_18px_32px_rgba(30,64,175,0.28)]" />
           <p className="mt-4 text-[10px] font-mono uppercase tracking-[0.22em] text-blue-400">ConcurseiroOS</p>
           <h1 className="mt-2 text-2xl font-semibold">Área privada de estudos</h1>
           <p className="mt-2 text-sm leading-6 text-zinc-500">

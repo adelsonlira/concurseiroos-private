@@ -4,35 +4,22 @@ import dotenv from "dotenv";
 import readinessReport from "../../data/quality/product-readiness-report.json";
 import { assessProductReadiness } from "../core/readiness/productReadiness";
 import type { ReadinessCheck } from "../core/readiness/types";
+import { buildPublicRuntimeConfiguration, resolveRuntimeEnvironment } from "./runtimeEnvironment";
 
 dotenv.config({ quiet: true });
 
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
-const GEMINI_MODEL = process.env.GEMINI_MODEL?.trim() || "gemini-3.5-flash";
-const runtimeSupabaseUrl = process.env.SUPABASE_URL?.trim() || process.env.VITE_SUPABASE_URL?.trim() || null;
-const runtimeSupabaseAnonKey = process.env.SUPABASE_ANON_KEY?.trim() || process.env.VITE_SUPABASE_ANON_KEY?.trim() || null;
-const runtimeSupabaseConfigured = Boolean(runtimeSupabaseUrl && runtimeSupabaseAnonKey);
+const runtime = resolveRuntimeEnvironment();
+const GEMINI_MODEL = runtime.ai.model;
+const runtimeSupabaseUrl = runtime.supabase.url;
+const runtimeSupabaseAnonKey = runtime.supabase.anonKey;
+const runtimeSupabaseConfigured = runtime.supabase.configured;
 const runtimeNodeMajor = Number(process.versions.node.split(".")[0]);
-const runtimeGeminiConfigured = Boolean(
-  process.env.GEMINI_API_KEY?.trim() &&
-    process.env.GEMINI_API_KEY !== "MY_GEMINI_API_KEY" &&
-    process.env.GEMINI_API_KEY !== "SUA_CHAVE_DO_GEMINI"
-);
+const runtimeGeminiConfigured = runtime.ai.configured;
+const apiAuthMode = runtime.auth.mode;
 
 app.use(express.json({ limit: "50mb" }));
-
-const requestedAuthMode = process.env.AUTH_MODE?.trim().toLowerCase();
-const normalizedRequestedAuthMode =
-  requestedAuthMode === "disabled" || requestedAuthMode === "optional" || requestedAuthMode === "required"
-    ? requestedAuthMode
-    : null;
-const apiAuthMode =
-  process.env.NODE_ENV === "production"
-    ? normalizedRequestedAuthMode === "disabled"
-      ? "disabled"
-      : "required"
-    : normalizedRequestedAuthMode ?? "optional";
 
 // 1. Gemini is loaded lazily only when an AI endpoint is invoked.
 // This keeps health/auth routes independent from the SDK and from GEMINI_API_KEY.
@@ -45,10 +32,11 @@ const SchemaType = {
 } as const;
 
 async function createAiClient() {
-  const apiKey = process.env.GEMINI_API_KEY?.trim();
-  if (!apiKey || apiKey === "MY_GEMINI_API_KEY" || apiKey === "SUA_CHAVE_DO_GEMINI") {
+  const apiKey = runtime.ai.apiKey;
+  if (!apiKey) {
     const error = new Error("GEMINI_API_KEY não configurada no servidor.");
-    (error as Error & { statusCode?: number }).statusCode = 503;
+    (error as Error & { statusCode?: number; code?: string }).statusCode = 503;
+    (error as Error & { statusCode?: number; code?: string }).code = "GEMINI_NOT_CONFIGURED";
     throw error;
   }
 
@@ -61,6 +49,23 @@ async function createAiClient() {
       }
     }
   });
+}
+
+function sanitizeProviderError(error: unknown): string {
+  const message = error instanceof Error ? error.message : String(error);
+  const apiKey = runtime.ai.apiKey;
+  return apiKey ? message.split(apiKey).join("[REDACTED]") : message;
+}
+
+function isGeminiNotConfigured(error: unknown): boolean {
+  return (error as { code?: string } | null)?.code === "GEMINI_NOT_CONFIGURED";
+}
+
+function resolveAiFailureStatus(error: unknown): number {
+  if (isGeminiNotConfigured(error)) return 503;
+  const status = Number((error as { statusCode?: number; status?: number } | null)?.statusCode ?? (error as { status?: number } | null)?.status);
+  if (status === 429) return 429;
+  return 502;
 }
 
 // 2. Full-Stack API Endpoints
@@ -125,42 +130,37 @@ app.get("/api/readiness", (_req, res) => {
 
 app.get("/api/runtime-config", (_req, res) => {
   res.setHeader("Cache-Control", "no-store");
-  res.json({
-    supabase: {
-      configured: runtimeSupabaseConfigured,
-      url: runtimeSupabaseUrl,
-      anonKey: runtimeSupabaseAnonKey,
-      snapshotTable: process.env.VITE_SUPABASE_SNAPSHOT_TABLE?.trim() || "user_snapshots",
-      privateBucket: process.env.VITE_SUPABASE_PRIVATE_BUCKET?.trim() || "private-study-materials"
-    },
-    auth: {
-      mode: apiAuthMode,
-      allowSelfSignup: process.env.AUTH_ALLOW_SELF_SIGNUP?.trim().toLowerCase() === "true"
-    },
-    ai: {
-      configured: runtimeGeminiConfigured,
-      model: GEMINI_MODEL
-    }
-  });
+  res.json(buildPublicRuntimeConfiguration(runtime));
 });
 
-const supabaseAuthUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
-const supabaseAuthKey = process.env.SUPABASE_ANON_KEY ?? process.env.VITE_SUPABASE_ANON_KEY;
-const authVerifier =
-  supabaseAuthUrl && supabaseAuthKey
-    ? createClient(supabaseAuthUrl, supabaseAuthKey, {
-        auth: {
-          persistSession: false,
-          autoRefreshToken: false,
-          detectSessionInUrl: false
-        }
-      })
-    : null;
+let authVerifier: ReturnType<typeof createClient> | null | undefined;
+
+function getAuthVerifier(): ReturnType<typeof createClient> | null {
+  if (authVerifier !== undefined) return authVerifier;
+  if (!runtimeSupabaseUrl || !runtimeSupabaseAnonKey) {
+    authVerifier = null;
+    return authVerifier;
+  }
+  try {
+    authVerifier = createClient(runtimeSupabaseUrl, runtimeSupabaseAnonKey, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false
+      }
+    });
+  } catch (error) {
+    console.error("[API Auth Configuration Error]", error);
+    authVerifier = null;
+  }
+  return authVerifier;
+}
 
 app.use("/api", async (req: any, res: any, next: any) => {
   if (apiAuthMode === "disabled") return next();
 
-  if (!authVerifier) {
+  const verifier = getAuthVerifier();
+  if (!verifier) {
     if (apiAuthMode === "required") {
       return res.status(503).json({
         error: "Autenticação on-line não configurada no servidor."
@@ -179,7 +179,7 @@ app.use("/api", async (req: any, res: any, next: any) => {
   }
 
   try {
-    const { data, error } = await authVerifier.auth.getUser(match[1]);
+    const { data, error } = await verifier.auth.getUser(match[1]);
     if (error || !data.user) {
       return res.status(401).json({ error: "Sessão inválida ou expirada." });
     }
@@ -206,13 +206,15 @@ app.post("/api/ai-health", async (_req, res) => {
       latencyMs: Date.now() - startedAt,
       responseReceived: Boolean(response.text?.trim())
     });
-  } catch (error: any) {
-    const status = Number(error?.statusCode) || 502;
+  } catch (error: unknown) {
+    const status = resolveAiFailureStatus(error);
     if (status !== 503) console.error("[AI Health Error]", error);
+    const notConfigured = isGeminiNotConfigured(error);
     res.status(status).json({
-      error: status === 503 ? "Gemini não configurado no servidor." : "Falha ao validar a conexão com o Gemini.",
+      error: notConfigured ? "Gemini não configurado no servidor." : "Falha ao validar a conexão com o Gemini.",
+      code: notConfigured ? "GEMINI_NOT_CONFIGURED" : "GEMINI_PROBE_FAILED",
       model: GEMINI_MODEL,
-      details: error?.message || String(error)
+      details: sanitizeProviderError(error)
     });
   }
 });

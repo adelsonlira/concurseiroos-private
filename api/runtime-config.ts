@@ -1,6 +1,11 @@
-import type { Request, Response } from "express";
-import app from "../src/server/httpApp";
+import { buildPublicRuntimeConfiguration, resolveRuntimeEnvironment } from "../src/server/runtimeEnvironment";
 
-export default function handler(req: Request, res: Response) {
-  return app(req, res);
-}
+export default {
+  fetch() {
+    return Response.json(buildPublicRuntimeConfiguration(resolveRuntimeEnvironment()), {
+      headers: {
+        "Cache-Control": "no-store",
+      },
+    });
+  },
+};

@@ -13,9 +13,7 @@ describe("Vercel serverless entrypoints", () => {
     "explain-question",
     "coach-chat",
     "semantic-search",
-    "organize-material",
-    "runtime-config",
-    "ai-health"
+    "organize-material"
   ];
 
   it("keeps local Vite/static serving outside the serverless HTTP app", () => {
@@ -42,6 +40,24 @@ describe("Vercel serverless entrypoints", () => {
     expect(healthSource).toContain("Response.json");
     expect(healthSource).not.toContain("../server");
     expect(healthSource).not.toContain("httpApp");
+  });
+
+
+  it("keeps the Gemini probe independent from the shared Express boot path", () => {
+    const source = readFileSync(resolve(root, "api/ai-health.ts"), "utf8");
+    expect(source).toContain("async fetch(request: Request)");
+    expect(source).toContain('await import("@google/genai")');
+    expect(source).toContain('await import("@supabase/supabase-js")');
+    expect(source).not.toContain("httpApp");
+    expect(source).not.toContain('import { GoogleGenAI');
+  });
+
+  it("keeps runtime configuration independent from the Express and Supabase SDK boot path", () => {
+    const runtimeSource = readFileSync(resolve(root, "api/runtime-config.ts"), "utf8");
+    expect(runtimeSource).toContain("Response.json");
+    expect(runtimeSource).toContain("resolveRuntimeEnvironment");
+    expect(runtimeSource).not.toContain("httpApp");
+    expect(runtimeSource).not.toContain("@supabase/supabase-js");
   });
 
   it("routes AI functions through the serverless-safe shared app", () => {

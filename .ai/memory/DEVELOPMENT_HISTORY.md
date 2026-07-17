@@ -277,3 +277,7 @@ Correção de erros com evidência: cada subassunto com erro passa a ter caso ap
 
 Simulados parciais e completos com composição oficial e fonte identificada: o fluxo legado aleatório foi substituído por blueprint determinístico, cotas e pontos do edital, controle de tempo e brancos, alerta de zero, análise pós-simulado e comparação entre composições equivalentes. Questões locais exigem documento e gabarito identificados; fontes externas não copiam conteúdo. Resultados agregados não criam evidência temática nem alteram o SDE.
 
+## 3.31.1 — 2026-07-17
+
+Patch de recuperação operacional: logos deixam de depender de assets inexistentes; configuração de runtime e probe Gemini ganham funções serverless independentes, normalização de variáveis e falhas JSON controladas; o cliente Supabase deixa de ser construído no boot do módulo. Simulados podem ser cancelados sem exclusão destrutiva, saindo da fila recente e permanecendo nos backups. Nenhum parâmetro do SDE ou sinal histórico foi alterado.
+

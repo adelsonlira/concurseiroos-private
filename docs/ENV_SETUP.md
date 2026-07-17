@@ -1,8 +1,8 @@
-# Configuração de ambiente — ConcurseiroOS 3.25.0
+# Configuração de ambiente — ConcurseiroOS 3.31.1
 
 ## O ponto mais importante
 
-O `.env` local configura apenas a execução naquela máquina. Em Vercel ou outro host, cadastre as variáveis no painel e faça novo deploy.
+O `.env` local configura apenas a execução naquela máquina. Em Vercel ou outro host, cadastre as variáveis no painel e faça novo deploy. Cole somente o valor, sem envolver com aspas; a 3.31.1 normaliza aspas externas por compatibilidade, mas o painel deve manter o valor limpo.
 
 ## Desenvolvimento local
 
@@ -57,13 +57,13 @@ O retorno esperado é semelhante a:
 
 ```json
 {
-  "supabase": { "configured": true },
+  "supabase": { "configured": true, "source": "SERVER_RUNTIME", "configurationIssue": null },
   "auth": { "mode": "required", "allowSelfSignup": false },
   "ai": { "configured": true, "model": "gemini-3.5-flash" }
 }
 ```
 
-A chave Gemini nunca aparece. Depois, confirme que a raiz do aplicativo mostra somente a tela de login até existir sessão autenticada.
+A chave Gemini nunca aparece. Se o par principal do Supabase estiver inválido e o par VITE estiver válido, `source` será `VITE_COMPAT` e `configurationIssue` explicará o fallback sem derrubar o endpoint. Depois, confirme que a raiz do aplicativo mostra somente a tela de login até existir sessão autenticada e use o botão de teste do Gemini já autenticado.
 
 ## Contas
 

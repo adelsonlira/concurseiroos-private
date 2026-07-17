@@ -461,9 +461,10 @@ export interface Simulado {
   respostas: { [questaoId: string]: RespostaSimulado };
   percentualAcertos: number; // final grade (0-100)
   tempoEstudoGastoSegundos: number;
-  status: "CRIADO" | "EM_ANDAMENTO" | "CONCLUIDO";
+  status: "CRIADO" | "EM_ANDAMENTO" | "CONCLUIDO" | "CANCELADO";
   iniciadoEm: string;
   concluidoEm?: string;
+  canceladoEm?: string;
   createdAt: string;
   updatedAt: string;
   isDeleted?: boolean;
