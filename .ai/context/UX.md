@@ -57,3 +57,12 @@ A interface mostra quantos subassuntos possuem localizador pedagógico, evidênc
 ## Recuperação de erros
 
 A interface não deve aceitar “recuperei” como encerramento de um erro sem causa confirmada e correção explícita. O usuário vê uma ação por vez: classificar, corrigir, verificar e estabilizar. Textos privados não são enviados automaticamente ao Coach.
+
+## Simulados
+
+- Mostrar fonte, composição oficial, pontos, duração e regra de zero antes de iniciar.
+- Registrar acertos, erros, brancos e tempo por disciplina.
+- Não declarar corte global em simulado parcial.
+- Apresentar correção como sequência do episódio, nunca como cronograma paralelo ao SDE.
+- Explicar que resultado agregado só afeta a estratégia depois de o usuário identificar os subassuntos reais dos erros.
+

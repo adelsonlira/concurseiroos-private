@@ -54,17 +54,17 @@ Após uma sessão de questões, a tela de registro:
 
 Quando o catálogo privado não oferece uma bateria FGV suficiente, a prescrição pode indicar **Qconcursos** ou **Estratégia Questões**. O sistema mantém a decisão central — assunto, quantidade e tempo — e fornece os filtros de banca, disciplina, assunto, subassunto e exclusão de anuladas. Não há automação de login, cópia de questões ou coleta de respostas dessas plataformas.
 
-## Super Coach 3.30.0
+## Super Coach 3.31.0
 
-Erros relevantes agora exigem causa confirmada, correção explícita e duas verificações independentes antes da estabilização provisória. Um novo erro reabre automaticamente o ciclo.
+A versão 3.31.0 adiciona simulados parciais e completos derivados da composição oficial da DATAPREV 2026: 70 questões, 240 minutos e 115 pontos no completo; no parcial, cotas oficiais das disciplinas escolhidas e duração proporcional declarada. O fluxo exige fonte identificada, registra acertos, erros, brancos e tempo por disciplina, sinaliza risco de zero e organiza a correção sem gerar questões, alternativas ou gabaritos.
 
-A sessão diária possui uma única ação operacional e um fechamento pedagógico baseado em recuperação. Conteúdo inédito começa com bateria diagnóstica obtida de lista local sem solução ou de banco externo identificado; a teoria integral só pode ser adiada com pelo menos 10 questões, 85% de acerto, nenhuma consulta, nenhum branco e acertos seguros. Isso não declara domínio e mantém revisão/prática obrigatórias. O roteamento de materiais exige vínculo exato com o subassunto ou fallback amplo explicitamente revisado; páginas de subassuntos irmãos nunca são prescritas como substitutas. Snapshots anteriores são migrados de forma aditiva e transacional, sem inventar evidência.
+Questões locais só podem compor o simulado quando possuem documento de origem, gabarito oficial e quantidade suficiente para a cota. A seleção é determinística. Qconcursos e Estratégia Questões funcionam como fontes externas identificadas: o sistema fornece filtros e não copia conteúdo nem inventa IDs. O resultado agregado do simulado não cria domínio por subassunto, não ativa incidência histórica e não altera silenciosamente o ranking do SDE.
 
-O deploy privado usa login antes da interface, cadastro público desligado por padrão e encerramento seguro para computadores públicos. Consulte `docs/PRIVATE_ACCESS_GUIDE.md`, `docs/GUIDED_LEARNING_PROTOCOL.md`, `.ai/sprints/SPRINT-3.30.0.md`, `docs/ERROR_RECOVERY_PROTOCOL.md` e `docs/VALIDATION_RESULTS_3.30.0.md`.
+O ciclo de recuperação de erros da 3.30.0 permanece: causa confirmada, correção explícita, regra preventiva e duas verificações independentes antes da estabilização provisória. Login obrigatório, sincronização notebook–celular e Gemini foram confirmados pelo usuário em produção. Consulte `.ai/sprints/SPRINT-3.31.0.md`, `docs/IMPLEMENTATION_REPORT_3.31.0.md`, `docs/VALIDATION_RESULTS_3.31.0.md` e `.ai/decisions/ADR-028-evidence-gated-simulations.md`.
 
 ## Corpus oficial FGV
 
-A versão 3.30.0 contém um corpus **metadado e minimizado** de 6.462 questões oficiais. O repositório não armazena enunciados ou alternativas integrais; conserva hashes, localizadores de página, trecho curto, estado de revisão e vínculo auditável com gabaritos. Todo o corpus permanece em shadow mode e não altera o SDE.
+A versão 3.31.0 contém um corpus **metadado e minimizado** de 6.462 questões oficiais. O repositório não armazena enunciados ou alternativas integrais; conserva hashes, localizadores de página, trecho curto, estado de revisão e vínculo auditável com gabaritos. Todo o corpus permanece em shadow mode e não altera o SDE.
 
 Para reproduzir a extração a partir do acervo oficial organizado:
 

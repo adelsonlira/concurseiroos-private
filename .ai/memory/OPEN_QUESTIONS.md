@@ -9,6 +9,10 @@
 
 ## Validação prospectiva
 
+- O tempo proporcional dos simulados parciais representa bem a execução real ou precisa de ajuste após amostra suficiente?
+- Quais causas explicam brancos por disciplina sem inferência automática: falta de tempo, desconhecimento ou decisão estratégica?
+- A correção por disciplina reduz reincidência quando os erros são depois classificados por subassunto real?
+
 - Quais parâmetros heurísticos devem ser recalibrados após sessões reais suficientes?
 - Qual amostra mínima estabiliza ritmo, retenção e desempenho por tipo de atividade?
 - Como estimar ganho marginal sem confundir associação com causalidade?

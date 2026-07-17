@@ -5,6 +5,14 @@ import type {
 } from "./core/flashcards/types";
 import type { GuidedLearningEvidence } from "./core/learning/types";
 import type {
+  SimulationAnalysis,
+  SimulationDisciplinePlan,
+  SimulationDisciplineResult,
+  SimulationKind,
+  SimulationPlan,
+  SimulationSource,
+} from "./core/simulations/types";
+import type {
   AnswerConfidence,
   ErrorCause,
   ErrorRecoveryCase,
@@ -449,7 +457,7 @@ export interface Simulado {
   titulo: string; // e.g., "Simulado Geral #1 FGV"
   quantidadeQuestoes: number;
   tempoLimiteSegundos: number; // default exam timer
-  questoesIds: string[]; // List of Questao ids included
+  questoesIds: string[]; // Local question IDs only when each source and answer key is identified.
   respostas: { [questaoId: string]: RespostaSimulado };
   percentualAcertos: number; // final grade (0-100)
   tempoEstudoGastoSegundos: number;
@@ -459,6 +467,15 @@ export interface Simulado {
   createdAt: string;
   updatedAt: string;
   isDeleted?: boolean;
+  /** Fields below belong to the evidence-gated simulation contract. They are optional for old backups. */
+  tipo?: SimulationKind;
+  fonte?: SimulationSource;
+  plano?: SimulationPlan;
+  composicao?: SimulationDisciplinePlan[];
+  resultadosPorDisciplina?: Record<string, SimulationDisciplineResult>;
+  analise?: SimulationAnalysis;
+  policyVersion?: string;
+  blueprintVersion?: string;
 }
 
 // ------------------------------------------

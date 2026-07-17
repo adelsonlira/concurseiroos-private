@@ -1,14 +1,18 @@
-# Próximos Passos — após 3.30.0
+# Próximos Passos — após 3.31.0
 
 ## Trabalho autônomo imediato
 
-1. Preparar simulados parciais e completos sem gerar questões:
-   - fontes oficiais, listas privadas ou plataformas externas;
-   - composição por disciplina e pontuação oficial;
-   - tempo, brancos e risco de zero.
-2. Revisar a fila de 37 localizadores teóricos pendentes por metadados auditáveis.
-3. Priorizar os 43 grupos P0 DATAPREV na curadoria histórica, ainda em shadow mode.
-4. Observar prospectivamente se duas verificações independentes evitam recorrência sem criar excesso de repetição.
+1. Fechar os 37 localizadores teóricos ainda pendentes:
+   - priorizar metadados exatos, sumários e títulos auditáveis;
+   - manter `TOPIC_ONLY` sem poder prescritivo;
+   - solicitar aprovação somente para fallback amplo real.
+2. Validar prospectivamente simulados e sessões reais:
+   - observar duração, brancos, risco de zero e atrito de registro;
+   - registrar subassuntos reais dos erros antes de permitir recalibração temática;
+   - comparar apenas composições equivalentes.
+3. Revisar os 43 grupos P0 DATAPREV na curadoria histórica, mantendo ledger append-only e shadow mode.
+4. Comparar matriz histórica simulada contra decisões atuais, sem ativar incidência.
+5. Preparar estratégia de reta final, última semana e véspera depois de existir evidência operacional suficiente.
 
 ## Confirmações de ambiente já concluídas
 
@@ -18,12 +22,12 @@
 
 ## Portões fechados
 
+- simulados usam composição oficial e fonte identificada;
+- questão local exige documento e gabarito identificados e não pode ser customizada;
+- Gemini não cria questões, gabaritos ou cronograma de correção;
+- resultado agregado por disciplina não altera o SDE;
 - páginas de subassunto irmão nunca são fallback;
-- `TOPIC_ONLY` não autoriza prescrição sem revisão explícita;
 - ausência de localizador não é preenchida por IA;
 - incidência histórica não altera o SDE;
-- IA não cria questões usadas para diagnóstico ou dispensa de teoria;
 - material privado não altera prioridade estratégica;
-- projeção de capacidade não é promessa de aprovação.
-- recuperação de erro exige correção explícita; consulta e confiança baixa não contam como verificação.
-- duas verificações não representam domínio permanente.
+- recuperação de erro exige correção explícita e verificações independentes.

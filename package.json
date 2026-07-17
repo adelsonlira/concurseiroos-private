@@ -1,7 +1,7 @@
 {
   "name": "concurseiroos",
   "private": true,
-  "version": "3.30.0",
+  "version": "3.31.0",
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
@@ -9,7 +9,7 @@
     "lint": "npm run typecheck",
     "test": "vitest",
     "test:run": "vitest run",
-    "validate": "npm run validate:memory && npm run knowledge:validate-official && npm run knowledge:build && npm run knowledge:build-taxonomy && npm run knowledge:build-curation && npm run knowledge:build-classification && npm run knowledge:build-routing && npm run learning:audit-error-recovery && npm run sde:audit && npm run readiness:audit && npm run typecheck && npm run test:run",
+    "validate": "npm run validate:memory && npm run knowledge:validate-official && npm run knowledge:build && npm run knowledge:build-taxonomy && npm run knowledge:build-curation && npm run knowledge:build-classification && npm run knowledge:build-routing && npm run learning:audit-error-recovery && npm run simulation:audit && npm run sde:audit && npm run readiness:audit && npm run typecheck && npm run test:run",
     "build": "npm run validate && npm run build:web && npm run build:server && npm run build:serverless",
     "start": "node dist/server.cjs",
     "clean": "rm -rf dist",
@@ -27,7 +27,8 @@
     "readiness:audit": "tsx scripts/buildProductReadinessReport.ts",
     "knowledge:build-classification": "tsx scripts/buildQuestionClassificationProposals.ts",
     "knowledge:build-routing": "tsx scripts/buildPedagogicalRoutingReport.ts",
-    "learning:audit-error-recovery": "tsx scripts/auditErrorRecoveryContract.ts"
+    "learning:audit-error-recovery": "tsx scripts/auditErrorRecoveryContract.ts",
+    "simulation:audit": "tsx scripts/auditSimulationContract.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

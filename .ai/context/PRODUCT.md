@@ -44,6 +44,10 @@ A tela inicial apresenta um único comando operacional: iniciar, retomar, recupe
 
 Teoria e revisão começam com perguntas objetivas e terminam com recuperação sem consulta. O resultado alimenta diretamente o estado cognitivo: recuperação suficiente agenda revisão; recuperação fraca cria repetição ou reaprendizagem.
 
+## Simulados oficiais
+
+O produto permite executar provas completas e recortes parciais sem criar conteúdo artificial. A composição vem do edital ativo; cada execução preserva fonte, filtros, duração, acertos, erros, brancos e pontuação por disciplina. O pós-simulado orienta correção, mas não cria cronograma paralelo, não declara domínio temático e não altera o SDE sem evidência compatível com seus contratos.
+
 ## Antiobjetivos
 
 - dashboards de vaidade;

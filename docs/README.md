@@ -41,3 +41,10 @@ A memória institucional e o protocolo de retomada ficam em [`../.ai/README.md`]
 - `IMPLEMENTATION_REPORT_3.26.0.md`: migração de snapshots, fonte diagnóstica e organização visual.
 - `VALIDATION_RESULTS_3.26.0.md`: pipeline, builds, segurança e smoke HTTP.
 - `RELEASE_NOTES_3.26.0.md`: compatibilidade e comportamento após atualização.
+
+## Simulados com fontes identificadas 3.31.0
+
+- `IMPLEMENTATION_REPORT_3.31.0.md`: arquitetura, integração e guardrails.
+- `VALIDATION_RESULTS_3.31.0.md`: pipeline, builds, segurança e smoke HTTP.
+- `RELEASE_NOTES_3.31.0.md`: mudanças e compatibilidade.
+- `../.ai/decisions/ADR-028-evidence-gated-simulations.md`: decisão arquitetural.

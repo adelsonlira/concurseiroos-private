@@ -75,6 +75,15 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
     primary: true,
   },
   {
+    id: "simulations",
+    label: "Simulados",
+    badge: "",
+    group: "daily",
+    keywords: ["simulado", "prova", "tempo", "brancos", "pontuacao", "fgv"],
+    subitems: ["Simulado parcial", "Simulado completo", "Análise pós-simulado"],
+    primary: true,
+  },
+  {
     id: "flashcards",
     label: "Flashcards prescritos",
     badge: "",

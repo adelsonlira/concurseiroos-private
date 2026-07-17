@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "policyVersion": "OFFICIAL_BLUEPRINT_IDENTIFIED_SOURCES_V1",
+  "generatedAt": "2026-07-17T12:28:45.641Z",
+  "status": "PASS",
+  "blueprint": {
+    "competitionId": "dataprev-2026-perfil-3",
+    "officialDocument": "Edital DATAPREV 001/2026",
+    "disciplines": 6,
+    "totalQuestions": 70,
+    "maximumPoints": 115,
+    "durationMinutes": 240,
+    "minimumTotalPoints": 57.5,
+    "eliminatesOnZeroDiscipline": true
+  },
+  "safeguards": {
+    "identifiedSourceRequired": true,
+    "generatedQuestionsAllowed": false,
+    "generatedAnswerKeysAllowed": false,
+    "historicalIncidenceChanged": false,
+    "sdeRankingChangedByAggregateResult": false,
+    "blanksRecordedSeparately": true,
+    "partialGlobalEligibilityEvaluated": false
+  },
+  "sample": {
+    "zeroScoreDisciplineIds": [
+      "dp26-p3-portugues"
+    ],
+    "correctionPriority": "ZERO_SCORE_RISK"
+  },
+  "errors": []
+}

@@ -10,6 +10,15 @@ import { calculateDailyAvailability } from "./core/availability/availabilityEngi
 import { scheduleFlashcardReview } from "./core/flashcards/flashcardScheduler";
 import { assessGuidedLearningCycle } from "./core/learning/learningCycle";
 import { assessDiagnosticPlacement } from "./core/diagnostic/diagnosticPlacement";
+import {
+  analyzeSimulation,
+  buildSimulationBlueprint,
+  composeSimulationPlan,
+} from "./core/simulations/simulationEngine";
+import type {
+  CreateSimulationInput,
+  SimulationDisciplineResult,
+} from "./core/simulations/types";
 import type { GuidedLearningEvidence, GuidedLearningEvidenceInput, LearningCycleAssessment } from "./core/learning/types";
 import type { FlashcardRetrievalPerformance } from "./core/flashcards/types";
 import { AvailabilityOverride, DailyAvailabilityResult, WeeklyAvailabilityDay } from "./core/availability/types";
@@ -159,9 +168,13 @@ interface ConcurseiroState {
   deleteFlashcard: (id: string) => void;
 
   // Simulated Exam Actions
+  createSimulationPlan: (input: CreateSimulationInput) => { success: boolean; id?: string; error?: string };
+  startSimulado: (simuladoId: string) => { success: boolean; error?: string };
+  recordSimulationDisciplineResult: (simuladoId: string, result: SimulationDisciplineResult) => { success: boolean; error?: string };
+  /** Legacy local entry point kept for old callers; it now enforces identified sources and official composition. */
   createSimulado: (titulo: string, concursoId: string, qCount: number, timeLimitSeconds: number, selectedSubjectIds?: string[]) => string;
   submitSimuladoAnswer: (simuladoId: string, questaoId: string, optionId: string, isCorrect: boolean, timeSpentSeconds: number) => void;
-  finishSimulado: (simuladoId: string) => void;
+  finishSimulado: (simuladoId: string) => { success: boolean; error?: string };
 
   // AI Chat Messages
   addChatMessage: (chatId: string, message: Omit<MensagemChat, "id" | "timestamp">) => void;
@@ -2094,134 +2107,264 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
   // -------------------------------------------------------------
   // Simulated Exams / Simulado Logic
   // -------------------------------------------------------------
-  createSimulado: (titulo, concursoId, qCount, timeLimitSeconds, selectedSubjectIds) => {
-    const id = "sim-" + Date.now();
-    
-    // Pick questions matching concurso & optional subjects
-    let candidateQuestions = get().questoes.filter(q => {
-      const matchConcurso = true; // mapped via subject/discipline relations
-      if (selectedSubjectIds && selectedSubjectIds.length > 0) {
-        return selectedSubjectIds.includes(q.assuntoId);
-      }
-      return true;
-    });
+  createSimulationPlan: (input) => {
+    const state = get();
+    try {
+      const runtime = getCompetitionRuntimeDefinition(
+        state.activeConcursoId ?? state.configuracao.concursoAlvoId,
+      );
+      const blueprint = buildSimulationBlueprint(runtime.package);
+      const plan = composeSimulationPlan(blueprint, {
+        kind: input.kind,
+        selectedDisciplineIds: input.selectedDisciplineIds,
+        source: input.source,
+        availableQuestions: state.questoes.map((question) => ({
+          questionId: question.id,
+          disciplineId: question.disciplinaId,
+          sourceDocumentId: question.fonteDocumentoId,
+          hasOfficialAnswer: Boolean(question.gabaritoOficial?.trim()),
+          isCustomQuestion: Boolean(question.isCustomQuestion),
+        })),
+        deterministicSeed: `${runtime.id}:${state.simulados.length + 1}:${input.source.id}`,
+      });
+      const now = new Date().toISOString();
+      const id = `sim-${Date.now()}`;
+      const simulado: Simulado = {
+        id,
+        concursoId: runtime.id,
+        titulo: input.title.trim() || `${input.kind === "FULL" ? "Simulado completo" : "Simulado parcial"} #${state.simulados.length + 1}`,
+        quantidadeQuestoes: plan.totalQuestions,
+        tempoLimiteSegundos: plan.durationMinutes * 60,
+        questoesIds: plan.disciplines.flatMap((discipline) => discipline.questionIds),
+        respostas: {},
+        percentualAcertos: 0,
+        tempoEstudoGastoSegundos: 0,
+        status: "CRIADO",
+        iniciadoEm: now,
+        createdAt: now,
+        updatedAt: now,
+        tipo: plan.kind,
+        fonte: plan.source,
+        plano: plan,
+        composicao: plan.disciplines,
+        resultadosPorDisciplina: {},
+        policyVersion: plan.policyVersion,
+        blueprintVersion: plan.blueprintVersion,
+      };
 
-    // If zero questions match, fallback to any available questions in DB
-    if (candidateQuestions.length === 0) {
-      candidateQuestions = get().questoes;
+      set((current) => ({
+        simulados: [...current.simulados, simulado],
+        activeSimuladoId: id,
+      }));
+      get().saveToLocalStorage();
+      return { success: true, id };
+    } catch (error) {
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Não foi possível compor o simulado.",
+      };
     }
+  },
 
-    // Shuffle questions and select the count
-    const shuffled = [...candidateQuestions].sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, qCount);
-
-    const newSimulado: Simulado = {
-      id,
-      concursoId,
-      titulo,
-      quantidadeQuestoes: selected.length,
-      tempoLimiteSegundos: timeLimitSeconds,
-      questoesIds: selected.map(q => q.id),
-      respostas: {},
-      percentualAcertos: 0,
-      tempoEstudoGastoSegundos: 0,
-      status: "CRIADO",
-      iniciadoEm: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    };
-
-    set(state => ({
-      simulados: [...state.simulados, newSimulado],
-      activeSimuladoId: id
+  startSimulado: (simuladoId) => {
+    const simulado = get().simulados.find((item) => item.id === simuladoId);
+    if (!simulado) return { success: false, error: "Simulado inexistente." };
+    if (simulado.status === "CONCLUIDO") {
+      return { success: false, error: "Um simulado concluído não pode ser reiniciado." };
+    }
+    const now = new Date().toISOString();
+    set((state) => ({
+      simulados: state.simulados.map((item) =>
+        item.id === simuladoId
+          ? { ...item, status: "EM_ANDAMENTO", iniciadoEm: now, updatedAt: now }
+          : item,
+      ),
+      activeSimuladoId: simuladoId,
     }));
-
     get().saveToLocalStorage();
-    return id;
+    return { success: true };
+  },
+
+  recordSimulationDisciplineResult: (simuladoId, result) => {
+    const simulado = get().simulados.find((item) => item.id === simuladoId);
+    if (!simulado?.plano) {
+      return { success: false, error: "Este registro não possui composição oficial versionada." };
+    }
+    if (simulado.status === "CONCLUIDO") {
+      return { success: false, error: "O simulado já foi concluído." };
+    }
+    const discipline = simulado.plano.disciplines.find(
+      (item) => item.disciplineId === result.disciplineId,
+    );
+    if (!discipline) return { success: false, error: "Disciplina fora da composição do simulado." };
+    const values = [result.correct, result.wrong, result.blank, result.elapsedSeconds];
+    if (values.some((value) => !Number.isInteger(value) || value < 0)) {
+      return { success: false, error: "Acertos, erros, brancos e tempo devem ser inteiros não negativos." };
+    }
+    if (result.correct + result.wrong + result.blank !== discipline.questionCount) {
+      return {
+        success: false,
+        error: `${discipline.disciplineName}: os resultados devem totalizar ${discipline.questionCount} questões.`,
+      };
+    }
+    const now = new Date().toISOString();
+    set((state) => ({
+      simulados: state.simulados.map((item) => {
+        if (item.id !== simuladoId) return item;
+        const resultadosPorDisciplina = {
+          ...(item.resultadosPorDisciplina ?? {}),
+          [result.disciplineId]: result,
+        };
+        return {
+          ...item,
+          resultadosPorDisciplina,
+          tempoEstudoGastoSegundos: Object.values(resultadosPorDisciplina).reduce(
+            (sum, entry) => sum + entry.elapsedSeconds,
+            0,
+          ),
+          status: item.status === "CRIADO" ? "EM_ANDAMENTO" : item.status,
+          updatedAt: now,
+        };
+      }),
+      activeSimuladoId: simuladoId,
+    }));
+    get().saveToLocalStorage();
+    return { success: true };
+  },
+
+  createSimulado: (titulo, concursoId, _qCount, _timeLimitSeconds, selectedSubjectIds) => {
+    const state = get();
+    const selectedDisciplineIds = selectedSubjectIds?.length
+      ? [...new Set(
+          selectedSubjectIds
+            .map((subjectId) => state.assuntos.find((subject) => subject.id === subjectId)?.disciplinaId)
+            .filter((value): value is string => Boolean(value)),
+        )]
+      : undefined;
+    const result = get().createSimulationPlan({
+      title: titulo,
+      kind: selectedDisciplineIds?.length ? "PARTIAL" : "FULL",
+      selectedDisciplineIds,
+      source: {
+        id: "local-identified-questions",
+        label: "Questões locais identificadas",
+        kind: "LOCAL_IDENTIFIED_QUESTIONS",
+        reference: `Banco local do concurso ${concursoId}; somente itens com documento e gabarito identificados`,
+      },
+    });
+    return result.id ?? "";
   },
 
   submitSimuladoAnswer: (simuladoId, questaoId, optionId, isCorrect, timeSpentSeconds) => {
     const currentSimulado = get().simulados.find((sim) => sim.id === simuladoId);
-    const previousAnswer = currentSimulado?.respostas[questaoId];
+    if (!currentSimulado || !currentSimulado.questoesIds.includes(questaoId)) return;
+    const previousAnswer = currentSimulado.respostas[questaoId];
 
-    set(state => ({
-      simulados: state.simulados.map(sim => {
-        if (sim.id === simuladoId) {
-          const updatedRespostas = {
-            ...sim.respostas,
-            [questaoId]: {
-              questaoId,
-              opcaoSelecionadaId: optionId,
-              isCorreta: isCorrect,
-              tempoGastoSegundos: timeSpentSeconds
-            }
-          };
-          const previousTime = previousAnswer?.tempoGastoSegundos ?? 0;
-
-          return {
-            ...sim,
-            respostas: updatedRespostas,
-            tempoEstudoGastoSegundos: Math.max(
-              0,
-              sim.tempoEstudoGastoSegundos - previousTime + timeSpentSeconds
-            ),
-            updatedAt: new Date().toISOString()
-          };
-        }
-        return sim;
-      })
+    set((state) => ({
+      simulados: state.simulados.map((sim) => {
+        if (sim.id !== simuladoId) return sim;
+        const updatedRespostas = {
+          ...sim.respostas,
+          [questaoId]: {
+            questaoId,
+            opcaoSelecionadaId: optionId,
+            isCorreta: isCorrect,
+            tempoGastoSegundos: timeSpentSeconds,
+          },
+        };
+        const previousTime = previousAnswer?.tempoGastoSegundos ?? 0;
+        return {
+          ...sim,
+          respostas: updatedRespostas,
+          tempoEstudoGastoSegundos: Math.max(
+            0,
+            sim.tempoEstudoGastoSegundos - previousTime + timeSpentSeconds,
+          ),
+          status: sim.status === "CRIADO" ? "EM_ANDAMENTO" : sim.status,
+          updatedAt: new Date().toISOString(),
+        };
+      }),
     }));
 
-    // Only the first finalized response becomes a new canonical attempt.
     if (!previousAnswer) {
-      get().resolveQuestao(
-        questaoId,
-        optionId,
-        isCorrect,
-        timeSpentSeconds,
-        "SIMULADO",
-        simuladoId
-      );
+      get().resolveQuestao(questaoId, optionId, isCorrect, timeSpentSeconds, "SIMULADO", simuladoId);
     } else {
       get().saveToLocalStorage();
     }
   },
 
   finishSimulado: (simuladoId) => {
-    set(state => ({
-      simulados: state.simulados.map(sim => {
-        if (sim.id === simuladoId) {
-          const totalAnswers = Object.values(sim.respostas).length;
-          const correctAnswers = Object.values(sim.respostas).filter(r => r.isCorreta).length;
-          const pct = sim.quantidadeQuestoes > 0 ? Math.round((correctAnswers / sim.quantidadeQuestoes) * 100) : 0;
+    const simulado = get().simulados.find((item) => item.id === simuladoId);
+    if (!simulado) return { success: false, error: "Simulado inexistente." };
+    if (simulado.status === "CONCLUIDO") return { success: true };
 
-          return {
-            ...sim,
-            status: "CONCLUIDO",
-            percentualAcertos: pct,
-            concluidoEm: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          };
+    const now = new Date().toISOString();
+    let completed: Simulado;
+    try {
+      if (simulado.plano) {
+        const results = Object.values(simulado.resultadosPorDisciplina ?? {});
+        const analysis = analyzeSimulation(simulado.plano, results);
+        completed = {
+          ...simulado,
+          status: "CONCLUIDO",
+          percentualAcertos:
+            simulado.quantidadeQuestoes > 0
+              ? Math.round((analysis.totalCorrect / simulado.quantidadeQuestoes) * 100)
+              : 0,
+          tempoEstudoGastoSegundos: analysis.elapsedSeconds,
+          analise: analysis,
+          concluidoEm: now,
+          updatedAt: now,
+        };
+      } else {
+        const totalAnswers = Object.values(simulado.respostas).length;
+        if (totalAnswers < simulado.quantidadeQuestoes) {
+          return { success: false, error: "Ainda existem questões sem registro no simulado legado." };
         }
-        return sim;
-      }),
-      activeSimuladoId: null
-    }));
-
-    const sim = get().simulados.find(s => s.id === simuladoId);
-    if (sim) {
-      const activity: LogHistoricoAtividade = {
-        id: "act-" + Date.now(),
-        tipoAtividade: "SIMULADO",
-        dataHora: new Date().toISOString(),
-        descricao: `Finalizou o Simulado '${sim.titulo}' com taxa de acerto de ${sim.percentualAcertos}%.`
+        const correctAnswers = Object.values(simulado.respostas).filter((result) => result.isCorreta).length;
+        completed = {
+          ...simulado,
+          status: "CONCLUIDO",
+          percentualAcertos:
+            simulado.quantidadeQuestoes > 0
+              ? Math.round((correctAnswers / simulado.quantidadeQuestoes) * 100)
+              : 0,
+          concluidoEm: now,
+          updatedAt: now,
+        };
+      }
+    } catch (error) {
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Não foi possível concluir o simulado.",
       };
-      set(state => ({
-        historicoAtividades: [activity, ...state.historicoAtividades]
-      }));
     }
 
+    const activity: LogHistoricoAtividade = {
+      id: `act-${Date.now()}`,
+      tipoAtividade: "SIMULADO",
+      dataHora: now,
+      descricao: completed.analise
+        ? `Finalizou “${completed.titulo}”: ${completed.analise.points}/${completed.analise.maximumPoints} pontos, ${completed.analise.totalBlank} em branco.`
+        : `Finalizou “${completed.titulo}” com ${completed.percentualAcertos}% de acerto.`,
+      tempoGastoSegundos: completed.tempoEstudoGastoSegundos,
+      concursoId: completed.concursoId,
+      simuladoId: completed.id,
+      metadata: completed.analise
+        ? {
+            policyVersion: completed.policyVersion,
+            sourceId: completed.fonte?.id,
+            eligibilityStatus: completed.analise.eligibilityStatus,
+          }
+        : undefined,
+    };
+    set((state) => ({
+      simulados: state.simulados.map((item) => (item.id === simuladoId ? completed : item)),
+      activeSimuladoId: null,
+      historicoAtividades: [activity, ...state.historicoAtividades],
+    }));
     get().saveToLocalStorage();
+    return { success: true };
   },
 
   // -------------------------------------------------------------

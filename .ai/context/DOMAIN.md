@@ -42,6 +42,10 @@ Plataforma assinada pelo usuário usada para executar baterias prescritas. O sis
 
 Fila adaptativa de recuperação. Intervalos são decisões operacionais baseadas em histórico; não representam uma curva individual comprovada.
 
+### Simulation Plan
+
+Composição versionada derivada do edital, com disciplina, quantidade, pontuação, duração e fonte identificada. Pode ser parcial ou completa. Resultado agregado permanece no domínio de simulado e não se transforma em evidência temática sem subassunto real.
+
 ## Invariantes
 
 - edital oficial define o universo válido do concurso;

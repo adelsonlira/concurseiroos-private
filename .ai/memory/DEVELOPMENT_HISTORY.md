@@ -272,3 +272,8 @@ Roteamento pedagógico seguro: páginas passaram a exigir vínculo exato com o s
 ## 3.30.0 — 2026-07-17
 
 Correção de erros com evidência: cada subassunto com erro passa a ter caso append-only, protocolo por causa confirmada, correção e regra preventiva. Acertos só confirmam recuperação sem consulta e com confiança média/alta; duas verificações estabilizam provisoriamente e novo erro reabre o caso. Backups antigos migram sem promover acertos históricos a domínio. O contrato não altera o SDE.
+
+## 3.31.0 — 2026-07-17
+
+Simulados parciais e completos com composição oficial e fonte identificada: o fluxo legado aleatório foi substituído por blueprint determinístico, cotas e pontos do edital, controle de tempo e brancos, alerta de zero, análise pós-simulado e comparação entre composições equivalentes. Questões locais exigem documento e gabarito identificados; fontes externas não copiam conteúdo. Resultados agregados não criam evidência temática nem alteram o SDE.
+

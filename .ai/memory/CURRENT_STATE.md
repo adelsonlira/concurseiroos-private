@@ -1,7 +1,7 @@
 # Estado Atual
 
 Data: 2026-07-17
-Versão: 3.30.0
+Versão: 3.31.0
 
 ## Projeto
 
@@ -11,7 +11,7 @@ O produto é um sistema de apoio à decisão orientado à aprovação. Deve redu
 
 ## Fase atual
 
-Uso privado no ambiente real com login obrigatório, sincronização notebook–celular e Gemini confirmados pelo usuário. A prioridade técnica atual é fechar a aprendizagem observável: erros exigem causa confirmada, correção explícita e novas tentativas independentes antes de serem considerados estabilizados.
+Uso privado no ambiente real com login obrigatório, sincronização notebook–celular e Gemini confirmados pelo usuário. A prioridade técnica atual é validar o uso real dos simulados oficiais recém-implementados e fechar os 37 localizadores pedagógicos ainda pendentes, preservando o SDE e o Knowledge Engine em shadow mode.
 
 ## Implementado
 
@@ -32,6 +32,10 @@ Uso privado no ambiente real com login obrigatório, sincronização notebook–
 - Correção auditada do PDF da Lei nº 12.527/2011 para o tópico e subassunto oficiais de LAI.
 - Plano e Progresso distingue teoria exata, fallback amplo aprovado e necessidade de localização manual.
 - Confirmações de login, sincronização e Gemini registradas com proveniência operacional do usuário.
+- Simulados parciais e completos com composição oficial, fonte identificada, tempo, brancos, pontuação e risco de zero.
+- Seleção local determinística limitada a questões com documento de origem e gabarito oficial; fontes externas não incorporam conteúdo.
+- Análise pós-simulado e plano de correção sem cronograma paralelo ou alteração direta do ranking.
+- Comparação descritiva somente entre simulados com mesma composição.
 
 ## Validado
 
@@ -43,7 +47,7 @@ Uso privado no ambiente real com login obrigatório, sincronização notebook–
 - Pipeline de memória, corpus, taxonomia, curadoria, classificação, roteamento, SDE, prontidão, TypeScript e testes.
 - Auditoria do SDE com 117 ações e 50 parâmetros catalogados.
 - Contrato de recuperação com 7 causas, 2 verificações independentes e contribuição zero ao ranking.
-- 398 testes aprovados em 67 arquivos, TypeScript, builds web/Express/serverless e auditoria de dependências sem vulnerabilidades conhecidas.
+- Linha de base 3.30.0 confirmada com 398 testes em 67 arquivos antes da alteração. A 3.31.0 foi validada com 407 testes em 69 arquivos, TypeScript, builds web/Express/serverless, auditoria de simulados, segurança e smoke HTTP aprovados.
 - Incidência histórica e materiais privados continuam neutros no ranking.
 
 ## Problemas conhecidos
@@ -60,4 +64,4 @@ Uso privado no ambiente real com login obrigatório, sincronização notebook–
 
 ## Próxima tarefa
 
-Preparar simulados parciais e completos usando apenas fontes identificadas, com composição oficial por disciplina, controle de tempo, brancos e risco de zero. Em paralelo, revisar localizadores teóricos pendentes por metadados e avançar a curadoria P0 em shadow mode.
+Fechar os 37 localizadores teóricos pendentes por metadados auditáveis e validar prospectivamente o fluxo de simulados em sessões reais. Depois, revisar os 43 grupos P0 DATAPREV e comparar a matriz histórica em shadow mode.
