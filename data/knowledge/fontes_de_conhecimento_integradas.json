@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-16",
+  "projectVersion": "3.7.0",
+  "activeCompetition": {
+    "id": "dataprev-2026-perfil-3",
+    "label": "DATAPREV 2026 — Perfil 3: Desenvolvimento de Software",
+    "role": "TARGET_OFFICIAL_SOURCE"
+  },
+  "officialFgvCorpus": {
+    "receivedPdfCount": 201,
+    "uniqueDocumentCount": 181,
+    "duplicateLogicalCount": 20,
+    "contestPackageCount": 54,
+    "documentTypeCounts": {
+      "edital": 38,
+      "gabarito": 48,
+      "prova": 95
+    },
+    "packageStatusCounts": {
+      "prova_somente": 9,
+      "completo": 37,
+      "prova+gabarito": 7,
+      "edital_somente": 1
+    },
+    "totalBytes": 151838810,
+    "allowedUses": [
+      "STYLE_ANALYSIS",
+      "QUESTION_EXTRACTION",
+      "INCIDENCE_AFTER_VALIDATION"
+    ],
+    "strategicUsePolicy": "Official evidence only; incidence remains shadow mode until question-level validation."
+  },
+  "privatePedagogicalSources": {
+    "rawFilesIncluded": false,
+    "metadataOnly": true,
+    "strategy": {
+      "role": "PRIMARY_PEDAGOGICAL_SOURCE",
+      "materialCount": 109,
+      "totalPages": 10676,
+      "sectionCount": 621,
+      "groupsWithoutPdf": []
+    },
+    "tiTotal": {
+      "role": "COMPLEMENTARY_PEDAGOGICAL_SOURCE",
+      "materialCount": 17,
+      "totalPages": 438,
+      "sectionCount": 66,
+      "fgvQuestionSectionCount": 10,
+      "invalidFileCount": 4
+    },
+    "combined": {
+      "materialCount": 126,
+      "totalPages": 11114,
+      "sectionCount": 687
+    },
+    "strategicUsePolicy": "Pedagogical routing only; private materials never alter edital scope or historical incidence."
+  },
+  "externalQuestionPlatforms": [
+    {
+      "provider": "QCONCURSOS",
+      "availability": "USER_SUBSCRIPTION",
+      "role": "EXTERNAL_EXECUTION_SOURCE",
+      "contentIncluded": false
+    },
+    {
+      "provider": "ESTRATEGIA_QUESTOES",
+      "availability": "USER_SUBSCRIPTION",
+      "role": "EXTERNAL_EXECUTION_SOURCE",
+      "contentIncluded": false
+    }
+  ],
+  "knownPendingSources": [
+    {
+      "sourceFileName": "1_TI TOTAL - Aula 02 - T02Q03 - Questões FGV - Parte I.pdf",
+      "sizeBytes": 279,
+      "status": "INVALID_NOT_A_PDF",
+      "note": "Extensão PDF com conteúdo XML NoSuchKey; excluído do catálogo operacional."
+    },
+    {
+      "sourceFileName": "1_TI TOTAL - Aula 03 - T03Q03 - Questões FGV - Parte I.pdf",
+      "sizeBytes": 279,
+      "status": "INVALID_NOT_A_PDF",
+      "note": "Extensão PDF com conteúdo XML NoSuchKey; excluído do catálogo operacional."
+    },
+    {
+      "sourceFileName": "1_TI TOTAL - Aula 04 - TI04Q3 - Questões FGV.pdf",
+      "sizeBytes": 279,
+      "status": "INVALID_NOT_A_PDF",
+      "note": "Extensão PDF com conteúdo XML NoSuchKey; excluído do catálogo operacional."
+    },
+    {
+      "sourceFileName": "2_TI TOTAL - Aula 03 - T03Q03 - Questões FGV - Parte II.pdf",
+      "sizeBytes": 279,
+      "status": "INVALID_NOT_A_PDF",
+      "note": "Extensão PDF com conteúdo XML NoSuchKey; excluído do catálogo operacional."
+    }
+  ],
+  "catalogCorrections": [
+    {
+      "field": "documentos.json[*].size_bytes",
+      "previousIssue": "All values were incorrectly recorded as 13.",
+      "correction": "Recalculated from the actual canonical PDF files and hashes revalidated."
+    }
+  ]
+}

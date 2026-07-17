@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "invalidFiles": [
+    {
+      "sourceFileName": "1_TI TOTAL - Aula 02 - T02Q03 - Questões FGV - Parte I.pdf",
+      "sizeBytes": 279,
+      "status": "INVALID_NOT_A_PDF",
+      "note": "Extensão PDF com conteúdo XML NoSuchKey; excluído do catálogo operacional."
+    },
+    {
+      "sourceFileName": "1_TI TOTAL - Aula 03 - T03Q03 - Questões FGV - Parte I.pdf",
+      "sizeBytes": 279,
+      "status": "INVALID_NOT_A_PDF",
+      "note": "Extensão PDF com conteúdo XML NoSuchKey; excluído do catálogo operacional."
+    },
+    {
+      "sourceFileName": "1_TI TOTAL - Aula 04 - TI04Q3 - Questões FGV.pdf",
+      "sizeBytes": 279,
+      "status": "INVALID_NOT_A_PDF",
+      "note": "Extensão PDF com conteúdo XML NoSuchKey; excluído do catálogo operacional."
+    },
+    {
+      "sourceFileName": "2_TI TOTAL - Aula 03 - T03Q03 - Questões FGV - Parte II.pdf",
+      "sizeBytes": 279,
+      "status": "INVALID_NOT_A_PDF",
+      "note": "Extensão PDF com conteúdo XML NoSuchKey; excluído do catálogo operacional."
+    }
+  ]
+}

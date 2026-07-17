@@ -8,10 +8,9 @@ import {
 
 describe("navigationModel", () => {
   it("preserva a ordem operacional definida para uso diário", () => {
-    expect(NAVIGATION_ITEMS.slice(0, 5).map((item) => item.id)).toEqual([
+    expect(filterNavigationItems("").filter((result) => result.item.group === "daily").map((result) => result.item.id)).toEqual([
       "dashboard",
       "focus",
-      "roadmap",
       "reviews",
       "exercises",
     ]);
@@ -33,11 +32,17 @@ describe("navigationModel", () => {
   });
 
   it("retorna todos os itens quando a consulta está vazia", () => {
-    expect(filterNavigationItems("   ")).toHaveLength(NAVIGATION_ITEMS.length);
+    expect(filterNavigationItems("   ")).toHaveLength(9);
+    expect(filterNavigationItems("coach").map((result) => result.item.id)).toContain("coach");
+  });
+
+  it("mantém fora da rotina o cadastro de outro concurso", () => {
+    expect(NAVIGATION_ITEMS.some((item) => item.id === "parser")).toBe(false);
+    expect(filterNavigationItems("importar novo edital")).toEqual([]);
   });
 
   it("resolve o título do módulo ativo", () => {
-    expect(getNavigationItem("focus")?.label).toBe("Desk de Foco");
+    expect(getNavigationItem("focus")?.label).toBe("Sessão guiada");
     expect(getNavigationItem("inexistente")).toBeUndefined();
   });
 });

@@ -11,12 +11,16 @@ import {
   Trash2,
   Upload
 } from "lucide-react";
+import OperationalScreenGuide from "./OperationalScreenGuide";
 import { useConcurseiroStore } from "../store";
 import { ConfigUsuario } from "../types";
+import { useCloudAccountStore } from "../integrations/cloud/cloudStore";
+import { clearAllPrivatePdfAssociations } from "../integrations/localFiles/privatePdfAccess";
 
 const DAY_LABELS = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
 export default function BackupSettingsView() {
+  const cloud = useCloudAccountStore();
   const {
     configuracao,
     updateConfiguracao,
@@ -46,7 +50,9 @@ export default function BackupSettingsView() {
   const [importStatus, setImportStatus] = useState<{
     success?: boolean;
     error?: string;
+    message?: string;
   }>({});
+  const [resetting, setResetting] = useState(false);
 
   const handleSaveConfig = () => {
     setFormError(null);
@@ -121,7 +127,12 @@ export default function BackupSettingsView() {
         const parsed = JSON.parse(loadEvent.target?.result as string);
         const result = importBackup(parsed);
         if (result.success) {
-          setImportStatus({ success: true });
+          setImportStatus({
+            success: true,
+            message: result.migrated
+              ? "Backup antigo importado e migrado com segurança para o formato atual."
+              : "Backup importado."
+          });
           setTimeout(() => setImportStatus({}), 4000);
         } else {
           setImportStatus({
@@ -139,13 +150,21 @@ export default function BackupSettingsView() {
     reader.readAsText(file);
   };
 
-  const handleFullReset = () => {
+  const handleFullReset = async () => {
     const confirmed = window.confirm(
-      "ATENÇÃO: deseja apagar todos os registros de estudo, questões, revisões e anotações? O aplicativo voltará à configuração inicial da DATAPREV."
+      "ATENÇÃO: isto restaurará apenas este dispositivo para a configuração inicial da DATAPREV. Um backup será baixado automaticamente, a cópia existente na nuvem será preservada e os vínculos locais com PDFs serão removidos sem apagar os arquivos. Deseja continuar?"
     );
     if (!confirmed) return;
-    resetAllData();
-    window.location.reload();
+    setResetting(true);
+    try {
+      triggerExport();
+      await cloud.prepareForLocalReset();
+      await clearAllPrivatePdfAssociations();
+      resetAllData();
+      window.location.reload();
+    } finally {
+      setResetting(false);
+    }
   };
 
   return (
@@ -162,6 +181,14 @@ export default function BackupSettingsView() {
             Armazenamento local do navegador
           </span>
         </header>
+
+        <OperationalScreenGuide
+          icon={Settings2}
+          title="Configurações e backup"
+          purpose="Ajuste disponibilidade, duração das sessões e segurança dos dados. Evite alterar parâmetros diariamente sem motivo real."
+          whenToUse="quando sua rotina mudar ou antes de trocar de dispositivo"
+          outcome="parâmetros operacionais e cópia de segurança"
+        />
 
         <section className="grid gap-6 xl:grid-cols-[1.35fr_0.65fr]">
           <div className="rounded-xl border border-zinc-800 bg-zinc-900/10 p-5">
@@ -294,7 +321,7 @@ export default function BackupSettingsView() {
               <span className="text-[11px] text-zinc-400">Importar backup JSON</span>
             </label>
             {importStatus.success && (
-              <div className="mt-3 text-xs text-emerald-400">Backup importado.</div>
+              <div className="mt-3 text-xs text-emerald-400">{importStatus.message ?? "Backup importado."}</div>
             )}
             {importStatus.error && (
               <div className="mt-3 text-xs text-red-400">{importStatus.error}</div>
@@ -421,14 +448,15 @@ export default function BackupSettingsView() {
             </span>
           </div>
           <p className="mt-3 max-w-3xl text-xs leading-relaxed text-zinc-500">
-            O reset remove os dados registrados e restaura o pacote inicial da DATAPREV 2026 — Perfil 3. Exporte um backup antes de continuar.
+            Restaura somente este navegador para o pacote inicial da DATAPREV 2026 — Perfil 3. Antes do reset, o aplicativo baixa um backup, desconecta a conta, preserva a cópia da nuvem e remove apenas os vínculos locais com PDFs. Os arquivos PDF originais não são apagados.
           </p>
           <button
             type="button"
             onClick={handleFullReset}
-            className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-5 py-2.5 text-xs font-semibold text-red-300 hover:bg-red-600 hover:text-white"
+            disabled={resetting}
+            className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-5 py-2.5 text-xs font-semibold text-red-300 hover:bg-red-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Limpar dados e restaurar configuração inicial
+            {resetting ? "Preparando restauração segura..." : "Baixar backup e restaurar este dispositivo"}
           </button>
         </section>
       </div>

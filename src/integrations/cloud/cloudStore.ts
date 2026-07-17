@@ -3,10 +3,13 @@ import { describeAuthError, normalizeAuthEmail } from "./authPolicy";
 import type { Session } from "@supabase/supabase-js";
 import { useConcurseiroStore } from "../../store";
 import type { ItemBiblioteca } from "../../types";
-import { getCloudEnvironment } from "./environment";
+import { getCloudEnvironment, loadRuntimeConfiguration } from "./environment";
+import { resetSupabaseClient } from "./supabaseClient";
 import { getOrCreateDeviceId } from "./deviceIdentity";
 import {
   buildPrivateStoragePath,
+  calculatePrivateDocumentSha256,
+  findPrivateDocumentDuplicate,
   isAllowedPrivateDocument,
   normalizeMaterialFileName
 } from "./privateDocumentPolicy";
@@ -26,9 +29,11 @@ import {
   uploadPrivateDocument
 } from "./cloudRepository";
 import {
+  decideSyncReconciliation,
   detectSyncConflict,
   fingerprintSnapshot,
   readSyncMetadata,
+  resetSyncMetadata,
   validateBackupSnapshot,
   writeSyncMetadata
 } from "./snapshotPolicy";
@@ -39,17 +44,20 @@ import type {
   CloudUserSummary,
   LocalSyncMetadata,
   PrivateCloudDocument,
+  RuntimeServiceStatus,
   SyncConflict
 } from "./types";
 
 interface UploadResult {
   uploaded: number;
+  duplicates: Array<{ name: string; existingName: string }>;
   rejected: string[];
   failed: Array<{ name: string; error: string }>;
 }
 
 interface CloudAccountState {
   environment: CloudEnvironmentConfig;
+  runtimeStatus: RuntimeServiceStatus;
   authStatus: CloudAuthStatus;
   phase: CloudSyncPhase;
   user: CloudUserSummary | null;
@@ -62,6 +70,7 @@ interface CloudAccountState {
   passwordRecoveryActive: boolean;
 
   initialize: () => Promise<void>;
+  refreshRuntimeConfiguration: () => Promise<void>;
   signUp: (email: string, password: string) => Promise<boolean>;
   signIn: (email: string, password: string) => Promise<boolean>;
   signOut: () => Promise<void>;
@@ -71,6 +80,7 @@ interface CloudAccountState {
   restoreFromCloud: () => Promise<boolean>;
   resolveConflictWithLocal: () => Promise<boolean>;
   resolveConflictWithCloud: () => Promise<boolean>;
+  prepareForLocalReset: () => Promise<void>;
   refreshPrivateDocuments: () => Promise<void>;
   uploadPrivateDocuments: (files: File[]) => Promise<UploadResult>;
   openPrivateDocument: (storagePath: string) => Promise<string | null>;
@@ -106,6 +116,36 @@ function findMatchingPrivateItem(items: readonly ItemBiblioteca[], fileName: str
   );
 }
 
+function privateDocumentFingerprints(
+  items: readonly ItemBiblioteca[],
+  documents: readonly PrivateCloudDocument[]
+): Array<{
+  name: string;
+  sizeBytes: number | null;
+  sha256: string | null;
+  storagePath?: string;
+}> {
+  const result = documents.map((document) => ({
+    name: document.name,
+    sizeBytes: document.sizeBytes,
+    sha256: document.sha256,
+    storagePath: document.storagePath
+  }));
+
+  for (const item of items) {
+    const metadata = item.privateMaterial;
+    if (!metadata) continue;
+    result.push({
+      name: metadata.sourceFileName,
+      sizeBytes: metadata.sourceSizeBytes ?? null,
+      sha256: metadata.sourceSha256 ?? null,
+      storagePath: metadata.storagePath
+    });
+  }
+
+  return result;
+}
+
 function scheduleAutoSync(): void {
   if (typeof window === "undefined") return;
   if (autoSyncTimer !== null) window.clearTimeout(autoSyncTimer);
@@ -132,6 +172,14 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
 
   return {
     environment,
+    runtimeStatus: {
+      configurationSource: environment.source,
+      authMode: "unknown",
+      allowSelfSignup: false,
+      geminiConfigured: null,
+      geminiModel: null,
+      runtimeEndpointReachable: false
+    },
     authStatus: "UNKNOWN",
     phase: "IDLE",
     user: null,
@@ -147,7 +195,11 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
       if (get().initialized) return;
       set({ initialized: true, phase: "INITIALIZING", error: null });
 
-      if (environment.availability !== "CONFIGURED") {
+      const runtime = await loadRuntimeConfiguration();
+      resetSupabaseClient();
+      set({ environment: runtime.environment, runtimeStatus: runtime.services });
+
+      if (runtime.environment.availability !== "CONFIGURED") {
         set({ authStatus: "SIGNED_OUT", phase: "IDLE" });
         return;
       }
@@ -195,13 +247,14 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
         if (session) {
           await get().refreshPrivateDocuments();
           const remote = await loadCloudSnapshot(session.user.id);
-          if (!remote) {
-            await get().syncNow(true);
-          } else {
-            const conflict = detectSyncConflict(remote, get().metadata);
-            if (conflict) {
-              set({ phase: "CONFLICT", conflict });
-            }
+          const localSnapshot = useConcurseiroStore.getState().exportBackup();
+          const action = decideSyncReconciliation(remote, get().metadata, localSnapshot);
+          if (action === "RESTORE_CLOUD") {
+            await get().restoreFromCloud();
+          } else if (action === "CONFLICT" && remote) {
+            set({ phase: "CONFLICT", conflict: detectSyncConflict(remote, get().metadata) });
+          } else if (action === "PUSH_LOCAL") {
+            await get().syncNow(!remote);
           }
         }
       } catch (error) {
@@ -209,7 +262,22 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
       }
     },
 
+    refreshRuntimeConfiguration: async () => {
+      unsubscribeAuth?.();
+      unsubscribeAuth = null;
+      set({ initialized: false, authStatus: "UNKNOWN", user: null, privateDocuments: [] });
+      await get().initialize();
+    },
+
     signUp: async (email, password) => {
+      if (!get().runtimeStatus.allowSelfSignup) {
+        set({
+          phase: "ERROR",
+          error: "O cadastro público está desativado. Solicite um convite ao administrador.",
+          notice: null
+        });
+        return false;
+      }
       set({ phase: "AUTHENTICATING", error: null, notice: null });
       try {
         const user = await signUpWithPassword(normalizeAuthEmail(email), password);
@@ -237,15 +305,15 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
         });
         await get().refreshPrivateDocuments();
         const remote = await loadCloudSnapshot(user.id);
-        if (!remote) {
-          return get().syncNow(true);
-        }
-        const conflict = detectSyncConflict(remote, get().metadata);
-        if (conflict) {
-          set({ phase: "CONFLICT", conflict });
+        const localSnapshot = useConcurseiroStore.getState().exportBackup();
+        const action = decideSyncReconciliation(remote, get().metadata, localSnapshot);
+        if (action === "RESTORE_CLOUD") return get().restoreFromCloud();
+        if (action === "CONFLICT" && remote) {
+          set({ phase: "CONFLICT", conflict: detectSyncConflict(remote, get().metadata) });
           return true;
         }
-        return get().syncNow(false);
+        if (action === "NOOP") return true;
+        return get().syncNow(!remote);
       } catch (error) {
         set({ phase: "ERROR", error: describeAuthError(error), authStatus: "SIGNED_OUT" });
         return false;
@@ -313,13 +381,20 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
       try {
         const remote = await loadCloudSnapshot(user.id);
         const currentMetadata = get().metadata;
-        const conflict = force ? null : detectSyncConflict(remote, currentMetadata);
-        if (conflict) {
-          set({ phase: "CONFLICT", conflict });
-          return false;
+        const snapshot = useConcurseiroStore.getState().exportBackup();
+        if (!force) {
+          const action = decideSyncReconciliation(remote, currentMetadata, snapshot);
+          if (action === "RESTORE_CLOUD") return get().restoreFromCloud();
+          if (action === "NOOP") {
+            set({ phase: "IDLE", conflict: null, notice: "Este dispositivo já está sincronizado." });
+            return true;
+          }
+          if (action === "CONFLICT" && remote) {
+            set({ phase: "CONFLICT", conflict: detectSyncConflict(remote, currentMetadata) });
+            return false;
+          }
         }
 
-        const snapshot = useConcurseiroStore.getState().exportBackup();
         const saved = await saveCloudSnapshot({
           userId: user.id,
           snapshot,
@@ -379,19 +454,26 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
         const imported = useConcurseiroStore.getState().importBackup(remote.snapshot);
         if (!imported.success) throw new Error(imported.error || "IMPORT_FAILED");
 
+        // The cloud may contain a valid snapshot produced by an older schema.
+        // Fingerprint the actual imported state, not the pre-migration payload,
+        // otherwise the next local-save event is misclassified as a user edit.
+        const importedSnapshot = useConcurseiroStore.getState().exportBackup();
+
         const nextMetadata: LocalSyncMetadata = {
           ...get().metadata,
           baseRevision: remote.revision,
           remoteUpdatedAt: remote.updated_at,
           lastSuccessfulSyncAt: new Date().toISOString(),
-          localFingerprint: fingerprintSnapshot(remote.snapshot)
+          localFingerprint: fingerprintSnapshot(importedSnapshot)
         };
         writeSyncMetadata(nextMetadata);
         set({
           phase: "IDLE",
           metadata: nextMetadata,
           conflict: null,
-          notice: "Este dispositivo foi restaurado com os dados da nuvem."
+          notice: imported.migrated
+            ? "Dados da nuvem restaurados e atualizados com segurança para o formato atual. Nenhuma evidência antiga foi inventada."
+            : "Este dispositivo foi restaurado com os dados da nuvem."
         });
         return true;
       } catch (error) {
@@ -402,6 +484,14 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
 
     resolveConflictWithLocal: async () => get().syncNow(true),
     resolveConflictWithCloud: async () => get().restoreFromCloud(),
+
+    prepareForLocalReset: async () => {
+      if (get().authStatus === "SIGNED_IN") {
+        await get().signOut();
+      }
+      const metadata = resetSyncMetadata(deviceId);
+      set({ metadata, conflict: null, notice: "A nuvem foi preservada e este dispositivo foi desconectado." });
+    },
 
     refreshPrivateDocuments: async () => {
       const user = get().user;
@@ -418,25 +508,63 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
       const user = get().user;
       if (!user) {
         set({ phase: "ERROR", error: "AUTH_REQUIRED" });
-        return { uploaded: 0, rejected: files.map((file) => file.name), failed: [] };
+        return { uploaded: 0, duplicates: [], rejected: files.map((file) => file.name), failed: [] };
       }
 
       set({ phase: "UPLOADING", error: null, notice: null });
       const rejected: string[] = [];
+      const duplicates: Array<{ name: string; existingName: string }> = [];
       const failed: Array<{ name: string; error: string }> = [];
       let uploaded = 0;
+      const app = useConcurseiroStore.getState();
+      const knownFingerprints = privateDocumentFingerprints(
+        app.biblioteca,
+        get().privateDocuments
+      );
 
       for (const file of files) {
         if (!isAllowedPrivateDocument(file)) {
           rejected.push(file.name);
           continue;
         }
-        const path = buildPrivateStoragePath(user.id, file.name);
         try {
+          const sha256 = await calculatePrivateDocumentSha256(file);
+          const duplicate = findPrivateDocumentDuplicate(
+            { name: file.name, sizeBytes: file.size, sha256 },
+            knownFingerprints
+          );
+          if (duplicate) {
+            duplicates.push({ name: file.name, existingName: duplicate.existingName });
+            const matching = findMatchingPrivateItem(app.biblioteca, file.name);
+            if (matching?.privateMaterial) {
+              app.updateBibliotecaItem(matching.id, {
+                privateMaterial: {
+                  ...matching.privateMaterial,
+                  sourceSha256: sha256,
+                  sourceSizeBytes: file.size,
+                  sourceMimeType: file.type || "application/pdf",
+                  ...(duplicate.storagePath
+                    ? {
+                        accessMode: "USER_PRIVATE_CLOUD_COPY" as const,
+                        storageProvider: "SUPABASE" as const,
+                        storageBucket: get().environment.privateBucket,
+                        storagePath: duplicate.storagePath,
+                        storageStatus: "AVAILABLE" as const
+                      }
+                    : {})
+                },
+                ...(duplicate.storagePath
+                  ? { linkAcesso: `private-cloud://${duplicate.storagePath}` }
+                  : {})
+              });
+            }
+            continue;
+          }
+
+          const path = buildPrivateStoragePath(user.id, file.name, sha256);
           await uploadPrivateDocument(user.id, path, file);
           uploaded += 1;
 
-          const app = useConcurseiroStore.getState();
           const matching = findMatchingPrivateItem(app.biblioteca, file.name);
           if (matching?.privateMaterial) {
             app.updateBibliotecaItem(matching.id, {
@@ -444,11 +572,12 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
                 ...matching.privateMaterial,
                 accessMode: "USER_PRIVATE_CLOUD_COPY",
                 storageProvider: "SUPABASE",
-                storageBucket: environment.privateBucket,
+                storageBucket: get().environment.privateBucket,
                 storagePath: path,
                 storageStatus: "AVAILABLE",
                 sourceSizeBytes: file.size,
                 sourceMimeType: file.type || "application/pdf",
+                sourceSha256: sha256,
                 uploadedAt: new Date().toISOString()
               },
               linkAcesso: `private-cloud://${path}`
@@ -478,17 +607,24 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
                 courseTitle: "Material privado",
                 lessonLabel: "Não classificado",
                 storageProvider: "SUPABASE",
-                storageBucket: environment.privateBucket,
+                storageBucket: get().environment.privateBucket,
                 storagePath: path,
                 storageStatus: "AVAILABLE",
                 sourceSizeBytes: file.size,
                 sourceMimeType: file.type || "application/pdf",
+                sourceSha256: sha256,
                 uploadedAt: now
               },
               createdAt: now,
               updatedAt: now
             });
           }
+          knownFingerprints.push({
+            name: file.name,
+            sizeBytes: file.size,
+            sha256,
+            storagePath: path
+          });
         } catch (error) {
           failed.push({ name: file.name, error: errorMessage(error) });
         }
@@ -497,10 +633,12 @@ export const useCloudAccountStore = create<CloudAccountState>((set, get) => {
       await get().refreshPrivateDocuments();
       set({
         phase: "IDLE",
-        notice: `${uploaded} PDF(s) armazenado(s) no cofre privado.`
+        notice: duplicates.length > 0
+          ? `${uploaded} PDF(s) armazenado(s); ${duplicates.length} cópia(s) idêntica(s) não foram reenviadas.`
+          : `${uploaded} PDF(s) armazenado(s) no cofre privado.`
       });
       if (uploaded > 0) await get().syncNow(false);
-      return { uploaded, rejected, failed };
+      return { uploaded, duplicates, rejected, failed };
     },
 
     openPrivateDocument: async (storagePath) => {

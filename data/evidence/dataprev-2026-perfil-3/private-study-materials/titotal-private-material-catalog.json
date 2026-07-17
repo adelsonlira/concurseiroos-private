@@ -1,0 +1,1698 @@
+{
+  "schemaVersion": "1.0.0",
+  "concursoId": "dataprev-2026-perfil-3",
+  "materials": [
+    {
+      "id": "titotal-312574149126fdce",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "1_TI TOTAL - Aula 01 - T01Q03 - Questões FGV - Parte I.pdf",
+      "sourceRelativePath": "TI Total/1_TI TOTAL - Aula 01 - T01Q03 - Questões FGV - Parte I.pdf",
+      "sourceSha256": "312574149126fdcec16a56382098ff4b299bd4541f3c71c1e63e7f943705c747",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "01",
+      "courseTitle": "T01Q03 - Questões FGV - Parte I",
+      "displayTitle": "TI Total — T01Q03 - Questões FGV - Parte I",
+      "totalPages": 14,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-banco-dados",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "T01Q03 - Questões FGV - Parte I",
+          "startPage": 1,
+          "endPage": 14,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-banco-dados",
+          "subtopicIds": [],
+          "mappingStatus": "TOPIC_ONLY",
+          "confidence": 0.94,
+          "matchedTerms": [
+            "T01Q03 - Questões FGV - Parte I"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-a52b1a48c80f995f",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "1_TI TOTAL - Aula 06 - T06Q03 - Questões FGV.pdf",
+      "sourceRelativePath": "TI Total/1_TI TOTAL - Aula 06 - T06Q03 - Questões FGV.pdf",
+      "sourceSha256": "a52b1a48c80f995f9ef0ba9629fb901e24873a404fbfdc107be66a1d313e83ad",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "06",
+      "courseTitle": "T06Q03 - Questões FGV",
+      "displayTitle": "TI Total — T06Q03 - Questões FGV",
+      "totalPages": 14,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-bi",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "T06Q03 - Questões FGV",
+          "startPage": 1,
+          "endPage": 14,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-bi",
+          "subtopicIds": [],
+          "mappingStatus": "TOPIC_ONLY",
+          "confidence": 0.94,
+          "matchedTerms": [
+            "T06Q03 - Questões FGV"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-5f565698ad530895",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "1_TI TOTAL - Aula 07 - T07Q3 - Questões FGV.pdf",
+      "sourceRelativePath": "TI Total/1_TI TOTAL - Aula 07 - T07Q3 - Questões FGV.pdf",
+      "sourceSha256": "5f565698ad530895e144892a99c8f779fe524e27f18731a1918ecf7aa266a313",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "07",
+      "courseTitle": "T07Q3 - Questões FGV",
+      "displayTitle": "TI Total — T07Q3 - Questões FGV",
+      "totalPages": 13,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-bi",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "T07Q3 - Questões FGV",
+          "startPage": 1,
+          "endPage": 13,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-bi",
+          "subtopicIds": [
+            "dp26-p3-esp-bi-dw-mining"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.98,
+          "matchedTerms": [
+            "T07Q3 - Questões FGV"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-12e68b121f7be1e2",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "1_TI TOTAL - Aula 30 - Análise de pontos de função - Teoria.pdf",
+      "sourceRelativePath": "TI Total/1_TI TOTAL - Aula 30 - Análise de pontos de função - Teoria.pdf",
+      "sourceSha256": "12e68b121f7be1e25bb29ac2b1bbcaeb3b9dba162ebd20169787c8208cada316",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "30",
+      "courseTitle": "Análise de pontos de função",
+      "displayTitle": "TI Total — Análise de pontos de função",
+      "totalPages": 40,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "ANÁLISE DE PONTOS DE FUNÇÃO",
+          "startPage": 4,
+          "endPage": 4,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Análise de pontos de função"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "title": "Introdução",
+          "startPage": 4,
+          "endPage": 4,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Análise de pontos de função"
+          ]
+        },
+        {
+          "ordinal": 3,
+          "title": "Esquema 1 – Análise de Pontos de Função.",
+          "startPage": 5,
+          "endPage": 5,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Análise de pontos de função"
+          ]
+        },
+        {
+          "ordinal": 4,
+          "title": "Processo de Medição",
+          "startPage": 6,
+          "endPage": 30,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Análise de pontos de função"
+          ]
+        },
+        {
+          "ordinal": 5,
+          "title": "ESQUEMAS DE AULA",
+          "startPage": 31,
+          "endPage": 39,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Análise de pontos de função"
+          ]
+        },
+        {
+          "ordinal": 6,
+          "title": "REFERÊNCIAS",
+          "startPage": 40,
+          "endPage": 40,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Análise de pontos de função"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-24b7f7c217f882df",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "1_TI TOTAL - Aula 30 - TI30T1  - Introdução e processo de APF.pdf",
+      "sourceRelativePath": "TI Total/1_TI TOTAL - Aula 30 - TI30T1  - Introdução e processo de APF.pdf",
+      "sourceSha256": "24b7f7c217f882df21567244cfe65b4da246e19178e57ba1c9d3037b3a80c3b3",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "30",
+      "courseTitle": "TI30T1  - Introdução e processo de APF",
+      "displayTitle": "TI Total — TI30T1  - Introdução e processo de APF",
+      "totalPages": 28,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "TI30T1  - Introdução e processo de APF",
+          "startPage": 1,
+          "endPage": 28,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "TI30T1  - Introdução e processo de APF"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-c9cc0d2f8678d4fd",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "1_TI TOTAL - Aula 30 - TI30T2  - Funções de dados e de transação.pdf",
+      "sourceRelativePath": "TI Total/1_TI TOTAL - Aula 30 - TI30T2  - Funções de dados e de transação.pdf",
+      "sourceSha256": "c9cc0d2f8678d4fd5febe76ac958ef10bfe61273eb9091cbc6a32c031bb163e1",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "30",
+      "courseTitle": "TI30T2  - Funções de dados e de transação",
+      "displayTitle": "TI Total — TI30T2  - Funções de dados e de transação",
+      "totalPages": 71,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "TI30T2  - Funções de dados e de transação",
+          "startPage": 1,
+          "endPage": 71,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "TI30T2  - Funções de dados e de transação"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-f74520f0371474d3",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "1_TI TOTAL - Aula 30 - TI30T3  - Conversão, contagem e fatores de ajuste.pdf",
+      "sourceRelativePath": "TI Total/1_TI TOTAL - Aula 30 - TI30T3  - Conversão, contagem e fatores de ajuste.pdf",
+      "sourceSha256": "f74520f0371474d33b21b5a76d3ab20b503df71fdd6509cce356eefabdda9891",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "30",
+      "courseTitle": "TI30T3  - Conversão, contagem e fatores de ajuste",
+      "displayTitle": "TI Total — TI30T3  - Conversão, contagem e fatores de ajuste",
+      "totalPages": 21,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "TI30T3  - Conversão, contagem e fatores de ajuste",
+          "startPage": 1,
+          "endPage": 21,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "TI30T3  - Conversão, contagem e fatores de ajuste"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-ca31e683369e29f7",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "1_TI TOTAL - Aula 49 - Padrões de Projeto - Questões.pdf",
+      "sourceRelativePath": "TI Total/1_TI TOTAL - Aula 49 - Padrões de Projeto - Questões.pdf",
+      "sourceSha256": "ca31e683369e29f70a1bec373c935f78b015d835d987eb7b93d77a5c3ffc89d2",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "49",
+      "courseTitle": "Padrões de Projeto",
+      "displayTitle": "TI Total — Padrões de Projeto",
+      "totalPages": 23,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Questões comentadas — CESPE/CEBRASPE",
+          "startPage": 3,
+          "endPage": 7,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "CEBRASPE",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "CESPE/CEBRASPE"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "title": "Questões comentadas — FCC",
+          "startPage": 8,
+          "endPage": 8,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FCC",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FCC"
+          ]
+        },
+        {
+          "ordinal": 3,
+          "title": "Questões comentadas — FGV",
+          "startPage": 9,
+          "endPage": 13,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FGV"
+          ]
+        },
+        {
+          "ordinal": 4,
+          "title": "Questões comentadas — INSTITUTO AOCP",
+          "startPage": 14,
+          "endPage": 15,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "INSTITUTO_AOCP",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "INSTITUTO AOCP"
+          ]
+        },
+        {
+          "ordinal": 5,
+          "title": "Questões comentadas — CESPE/CEBRASPE",
+          "startPage": 16,
+          "endPage": 17,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "CEBRASPE",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "CESPE/CEBRASPE"
+          ]
+        },
+        {
+          "ordinal": 6,
+          "title": "Questões comentadas — FCC",
+          "startPage": 18,
+          "endPage": 18,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FCC",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FCC"
+          ]
+        },
+        {
+          "ordinal": 7,
+          "title": "Questões comentadas — FGV",
+          "startPage": 19,
+          "endPage": 21,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FGV"
+          ]
+        },
+        {
+          "ordinal": 8,
+          "title": "Questões comentadas — INSTITUTO AOCP",
+          "startPage": 22,
+          "endPage": 22,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "INSTITUTO_AOCP",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "INSTITUTO AOCP"
+          ]
+        },
+        {
+          "ordinal": 9,
+          "title": "Questões comentadas — CESPE/CEBRASPE",
+          "startPage": 23,
+          "endPage": 23,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "CEBRASPE",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "CESPE/CEBRASPE"
+          ]
+        },
+        {
+          "ordinal": 10,
+          "title": "Questões comentadas — FCC",
+          "startPage": 23,
+          "endPage": 23,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FCC",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FCC"
+          ]
+        },
+        {
+          "ordinal": 11,
+          "title": "Questões comentadas — FGV",
+          "startPage": 23,
+          "endPage": 23,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FGV"
+          ]
+        },
+        {
+          "ordinal": 12,
+          "title": "Questões comentadas — INSTITUTO AOCP",
+          "startPage": 23,
+          "endPage": 23,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "INSTITUTO_AOCP",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "INSTITUTO AOCP"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-46e4e3c0cfd69b64",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "1_TI TOTAL - Aula 51 - Gerenciamento de identidade e acesso - Teoria.pdf",
+      "sourceRelativePath": "TI Total/1_TI TOTAL - Aula 51 - Gerenciamento de identidade e acesso - Teoria.pdf",
+      "sourceSha256": "46e4e3c0cfd69b647bf0a590a279ed6cf08b183ddb8fffce2c72c19f790e8010",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "51",
+      "courseTitle": "Gerenciamento de identidade e acesso",
+      "displayTitle": "TI Total — Gerenciamento de identidade e acesso",
+      "totalPages": 20,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-seguranca",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "GERENCIAMENTO DE ACESSO E IDENTIDADE",
+          "startPage": 3,
+          "endPage": 3,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-acesso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Gerenciamento de identidade e acesso"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "title": "Conceitos fundamentais",
+          "startPage": 3,
+          "endPage": 4,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-acesso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Gerenciamento de identidade e acesso"
+          ]
+        },
+        {
+          "ordinal": 3,
+          "title": "Identidade digital e fatores de autenticação",
+          "startPage": 5,
+          "endPage": 7,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-acesso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Gerenciamento de identidade e acesso"
+          ]
+        },
+        {
+          "ordinal": 4,
+          "title": "Ferramentas e métodos",
+          "startPage": 8,
+          "endPage": 10,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-acesso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Gerenciamento de identidade e acesso"
+          ]
+        },
+        {
+          "ordinal": 5,
+          "title": "CONTROLE DE ACESSO",
+          "startPage": 11,
+          "endPage": 11,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-acesso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Gerenciamento de identidade e acesso"
+          ]
+        },
+        {
+          "ordinal": 6,
+          "title": "Conceitos fundamentais e etapas",
+          "startPage": 11,
+          "endPage": 13,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-acesso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Gerenciamento de identidade e acesso"
+          ]
+        },
+        {
+          "ordinal": 7,
+          "title": "Tipos de controle de acesso",
+          "startPage": 14,
+          "endPage": 17,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-acesso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Gerenciamento de identidade e acesso"
+          ]
+        },
+        {
+          "ordinal": 8,
+          "title": "ESQUEMAS DE AULA",
+          "startPage": 18,
+          "endPage": 19,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-acesso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Gerenciamento de identidade e acesso"
+          ]
+        },
+        {
+          "ordinal": 9,
+          "title": "REFERÊNCIAS",
+          "startPage": 20,
+          "endPage": 20,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-acesso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Gerenciamento de identidade e acesso"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-a76d08180cde8f27",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "1_TI TOTAL - Aula 52 - Desenvolvimento seguro OWASP - Teoria.pdf",
+      "sourceRelativePath": "TI Total/1_TI TOTAL - Aula 52 - Desenvolvimento seguro OWASP - Teoria.pdf",
+      "sourceSha256": "a76d08180cde8f2754ad3ba9692501b13651b11becadd84af65faa126fb615f9",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "52",
+      "courseTitle": "Desenvolvimento seguro OWASP",
+      "displayTitle": "TI Total — Desenvolvimento seguro OWASP",
+      "totalPages": 43,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-seguranca",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "OWASP TOP 10",
+          "startPage": 4,
+          "endPage": 10,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-sdl-owasp"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Desenvolvimento seguro OWASP"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "title": "Esquema 1 – OWASP TOP 10.",
+          "startPage": 11,
+          "endPage": 14,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-sdl-owasp"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Desenvolvimento seguro OWASP"
+          ]
+        },
+        {
+          "ordinal": 3,
+          "title": "Melhores práticas de programação segura",
+          "startPage": 15,
+          "endPage": 36,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-sdl-owasp"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Desenvolvimento seguro OWASP"
+          ]
+        },
+        {
+          "ordinal": 4,
+          "title": "ESQUEMAS DE AULA",
+          "startPage": 37,
+          "endPage": 42,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-sdl-owasp"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Desenvolvimento seguro OWASP"
+          ]
+        },
+        {
+          "ordinal": 5,
+          "title": "REFERÊNCIAS",
+          "startPage": 43,
+          "endPage": 43,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-sdl-owasp"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Desenvolvimento seguro OWASP"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-50ba0779754d4dd4",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "2_TI TOTAL - Aula 01 - T01Q03 - Questões FGV - Parte II.pdf",
+      "sourceRelativePath": "TI Total/2_TI TOTAL - Aula 01 - T01Q03 - Questões FGV - Parte II.pdf",
+      "sourceSha256": "50ba0779754d4dd418033f81d0b9968f51d9a0fc3ad95e316d4597e803ae6138",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "01",
+      "courseTitle": "T01Q03 - Questões FGV - Parte II",
+      "displayTitle": "TI Total — T01Q03 - Questões FGV - Parte II",
+      "totalPages": 14,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-banco-dados",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "T01Q03 - Questões FGV - Parte II",
+          "startPage": 1,
+          "endPage": 14,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-banco-dados",
+          "subtopicIds": [],
+          "mappingStatus": "TOPIC_ONLY",
+          "confidence": 0.94,
+          "matchedTerms": [
+            "T01Q03 - Questões FGV - Parte II"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-ddbfdda028eb823e",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "2_TI TOTAL - Aula 30 - Análise de pontos de função - Questões.pdf",
+      "sourceRelativePath": "TI Total/2_TI TOTAL - Aula 30 - Análise de pontos de função - Questões.pdf",
+      "sourceSha256": "ddbfdda028eb823e3897b87225e3ce9f7d0b90ea310a386cd3cd6f33e63e69ac",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "30",
+      "courseTitle": "Análise de pontos de função",
+      "displayTitle": "TI Total — Análise de pontos de função",
+      "totalPages": 96,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Questões comentadas — FCC",
+          "startPage": 23,
+          "endPage": 41,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FCC",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FCC"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "title": "Questões comentadas — FGV",
+          "startPage": 42,
+          "endPage": 59,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FGV"
+          ]
+        },
+        {
+          "ordinal": 3,
+          "title": "Questões comentadas — VUNESP",
+          "startPage": 60,
+          "endPage": 60,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "VUNESP",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "VUNESP"
+          ]
+        },
+        {
+          "ordinal": 4,
+          "title": "Questões comentadas — IDIB",
+          "startPage": 61,
+          "endPage": 61,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "IDIB",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "IDIB"
+          ]
+        },
+        {
+          "ordinal": 5,
+          "title": "Questões comentadas — AOCP",
+          "startPage": 62,
+          "endPage": 71,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "INSTITUTO_AOCP",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "AOCP"
+          ]
+        },
+        {
+          "ordinal": 6,
+          "title": "Questões comentadas — FCC",
+          "startPage": 72,
+          "endPage": 82,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FCC",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FCC"
+          ]
+        },
+        {
+          "ordinal": 7,
+          "title": "Questões comentadas — FGV",
+          "startPage": 83,
+          "endPage": 91,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FGV"
+          ]
+        },
+        {
+          "ordinal": 8,
+          "title": "Questões comentadas — VUNESP",
+          "startPage": 92,
+          "endPage": 92,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "VUNESP",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "VUNESP"
+          ]
+        },
+        {
+          "ordinal": 9,
+          "title": "Questões comentadas — IDIB",
+          "startPage": 93,
+          "endPage": 93,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "IDIB",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "IDIB"
+          ]
+        },
+        {
+          "ordinal": 10,
+          "title": "Questões comentadas — AOCP",
+          "startPage": 94,
+          "endPage": 95,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "INSTITUTO_AOCP",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "AOCP"
+          ]
+        },
+        {
+          "ordinal": 11,
+          "title": "Questões comentadas — FCC",
+          "startPage": 96,
+          "endPage": 96,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FCC",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FCC"
+          ]
+        },
+        {
+          "ordinal": 12,
+          "title": "Questões comentadas — FGV",
+          "startPage": 96,
+          "endPage": 96,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "FGV"
+          ]
+        },
+        {
+          "ordinal": 13,
+          "title": "Questões comentadas — VUNESP",
+          "startPage": 96,
+          "endPage": 96,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "VUNESP",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "VUNESP"
+          ]
+        },
+        {
+          "ordinal": 14,
+          "title": "Questões comentadas — IDIB",
+          "startPage": 96,
+          "endPage": 96,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "IDIB",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "IDIB"
+          ]
+        },
+        {
+          "ordinal": 15,
+          "title": "Questões comentadas — AOCP",
+          "startPage": 96,
+          "endPage": 96,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "INSTITUTO_AOCP",
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "AOCP"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-4f8c31b122c8c6c4",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "2_TI TOTAL - Aula 49 - Padrões de Projeto - Teoria.pdf",
+      "sourceRelativePath": "TI Total/2_TI TOTAL - Aula 49 - Padrões de Projeto - Teoria.pdf",
+      "sourceSha256": "4f8c31b122c8c6c45e27daf240ad1c4da09ac02aba0b27f9986c3588319c40a7",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "49",
+      "courseTitle": "Padrões de Projeto",
+      "displayTitle": "TI Total — Padrões de Projeto",
+      "totalPages": 23,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "PADRÕES DE PROJETO",
+          "startPage": 3,
+          "endPage": 3,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Padrões de Projeto"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "title": "Introdução",
+          "startPage": 3,
+          "endPage": 4,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Padrões de Projeto"
+          ]
+        },
+        {
+          "ordinal": 3,
+          "title": "Padrões GoF",
+          "startPage": 5,
+          "endPage": 11,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Padrões de Projeto"
+          ]
+        },
+        {
+          "ordinal": 4,
+          "title": "Padrões GRASP",
+          "startPage": 12,
+          "endPage": 13,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Padrões de Projeto"
+          ]
+        },
+        {
+          "ordinal": 5,
+          "title": "Princípios SOLID",
+          "startPage": 14,
+          "endPage": 15,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Padrões de Projeto"
+          ]
+        },
+        {
+          "ordinal": 6,
+          "title": "Arquitetura hexagonal",
+          "startPage": 16,
+          "endPage": 17,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Padrões de Projeto"
+          ]
+        },
+        {
+          "ordinal": 7,
+          "title": "ESQUEMAS DE AULA",
+          "startPage": 18,
+          "endPage": 22,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Padrões de Projeto"
+          ]
+        },
+        {
+          "ordinal": 8,
+          "title": "REFERÊNCIAS",
+          "startPage": 23,
+          "endPage": 23,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Padrões de Projeto"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-5cf0ebad90871198",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "2_TI TOTAL - Aula 51 - Gerenciamento de identidade e acesso - Resumo.pdf",
+      "sourceRelativePath": "TI Total/2_TI TOTAL - Aula 51 - Gerenciamento de identidade e acesso - Resumo.pdf",
+      "sourceSha256": "5cf0ebad908711981358aa34ba52cd75028a431f94c9a74f6ec1afa65a06652c",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "51",
+      "courseTitle": "Gerenciamento de identidade e acesso",
+      "displayTitle": "TI Total — Gerenciamento de identidade e acesso",
+      "totalPages": 3,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-seguranca",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Gerenciamento de identidade e acesso",
+          "startPage": 1,
+          "endPage": 3,
+          "contentKind": "SUMMARY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-acesso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Gerenciamento de identidade e acesso"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-9574b6481577498c",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "2_TI TOTAL - Aula 52 - Desenvolvimento seguro OWASP - Resumo.pdf",
+      "sourceRelativePath": "TI Total/2_TI TOTAL - Aula 52 - Desenvolvimento seguro OWASP - Resumo.pdf",
+      "sourceSha256": "9574b6481577498c6233d117cf3bf139886016ca8483ad2b9d37070cd067e671",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "52",
+      "courseTitle": "Desenvolvimento seguro OWASP",
+      "displayTitle": "TI Total — Desenvolvimento seguro OWASP",
+      "totalPages": 6,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-seguranca",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Desenvolvimento seguro OWASP",
+          "startPage": 1,
+          "endPage": 6,
+          "contentKind": "SUMMARY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-seguranca",
+          "subtopicIds": [
+            "dp26-p3-esp-si-sdl-owasp"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Desenvolvimento seguro OWASP"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-80fd7e702ed7162c",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "3_TI TOTAL - Aula 30 - Análise de pontos de função - Resumo.pdf",
+      "sourceRelativePath": "TI Total/3_TI TOTAL - Aula 30 - Análise de pontos de função - Resumo.pdf",
+      "sourceSha256": "80fd7e702ed7162c826714ee7ebd8a08552a9df254ad28f9314ed933dcf024c4",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "30",
+      "courseTitle": "Análise de pontos de função",
+      "displayTitle": "TI Total — Análise de pontos de função",
+      "totalPages": 5,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Análise de pontos de função",
+          "startPage": 1,
+          "endPage": 5,
+          "contentKind": "SUMMARY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-metricas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Análise de pontos de função"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "titotal-ac2c08d6f6e3f3fe",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "TI Total — seleção DATAPREV",
+      "sourceProvider": "TI_TOTAL",
+      "sourceRole": "COMPLEMENTARY",
+      "sourcePriority": 60,
+      "sourceFileName": "3_TI TOTAL - Aula 49 - Padrões de Projeto - Resumo.pdf",
+      "sourceRelativePath": "TI Total/3_TI TOTAL - Aula 49 - Padrões de Projeto - Resumo.pdf",
+      "sourceSha256": "ac2c08d6f6e3f3fe2f6c058492820ffad2380dfd516c3e045337e3e2108f9ec3",
+      "sourcePortalCourseId": null,
+      "lessonLabel": "49",
+      "courseTitle": "Padrões de Projeto",
+      "displayTitle": "TI Total — Padrões de Projeto",
+      "totalPages": 4,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Padrões de Projeto",
+          "startPage": 1,
+          "endPage": 4,
+          "contentKind": "SUMMARY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-conhecimentos-especificos",
+          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "subtopicIds": [
+            "dp26-p3-esp-padroes-reuso"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "Padrões de Projeto"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    }
+  ]
+}

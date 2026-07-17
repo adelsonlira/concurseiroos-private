@@ -95,6 +95,15 @@ function action(
       tipo === "revisao" ? "REVISION_EXPIRED" :
       tipo === "flashcards" ? "FLASHCARDS_PENDING" :
       tipo === "simulado" ? "SIMULADO_ELIGIBLE" : "OBSERVED_PRACTICE",
+    decisionEvidence: {
+      knowledgeState: "OBSERVED" as never,
+      sampleSize: 10,
+      confidenceScore: 0.5,
+      confidenceLevel: "MEDIUM",
+      topicWeightSource: "OFFICIAL",
+      historicalIncidenceSource: "UNAVAILABLE",
+      historicalIncidenceRate: null
+    },
     ...overrides
   };
 }

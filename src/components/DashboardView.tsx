@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo } from "react";
 import {
   AlertTriangle,
   BookOpen,
@@ -7,25 +7,26 @@ import {
   Clock3,
   FileQuestion,
   MapPin,
-  RefreshCw,
+  Play,
   ShieldCheck,
   Target,
-  Timer,
-  TrendingUp
+  Timer
 } from "lucide-react";
 import { APP_RELEASE_CHANNEL, APP_VERSION } from "../config/appMetadata";
 import { useConcurseiroStore } from "../store";
-import { StudySession } from "../core/sde/planner/plannerTypes";
-import { StrategicAction } from "../core/sde/prioritization/types";
-import { routePrivateStudyMaterial } from "../core/materials/materialPolicy";
-import { DATAPREV_2026_PRIVATE_STUDY_MATERIALS } from "../config/concursos/dataprev-2026-perfil-3/privateStudyMaterials";
-import { DATAPREV_2026_ANSWER_KEY_EVIDENCE } from "../config/concursos/dataprev-2026-perfil-3/answerKeyEvidence";
-import { DATAPREV_2026_QUESTION_BANK_READINESS } from "../config/concursos/dataprev-2026-perfil-3/questionBankReadiness";
+import { privateMaterialProviderLabel, privateMaterialSourceRoleLabel } from "../core/materials/materialPresentation";
+import type { StudyActivityKind } from "../types";
+import ExternalQuestionSourcePlanCard from "./ExternalQuestionSourcePlanCard";
+import StudyFocusGuideCard from "./StudyFocusGuideCard";
+import PrivatePdfOpenButton from "./PrivatePdfOpenButton";
+import { buildCoachOperationalCommand } from "../core/coach/operationalCoach";
+import { buildOnboardingPlan } from "../core/onboarding/onboarding";
+import { presentDecisionWarning } from "../core/presentation/decisionWarnings";
 
-const ACTIVITY_LABELS: Record<StrategicAction["tipo"], string> = {
-  teoria: "Teoria",
+const ACTIVITY_LABELS: Record<StudyActivityKind, string> = {
+  teoria: "Teoria ativa",
   questoes: "Questões",
-  revisao: "Revisão",
+  revisao: "Revisão ativa",
   flashcards: "Flashcards",
   simulado: "Simulado"
 };
@@ -49,139 +50,117 @@ function formatMinutes(minutes: number): string {
   return `${hours} h ${remainder} min`;
 }
 
-function flattenSessions(result: ReturnType<typeof useConcurseiroStore.getState>["ultimaDecisaoSDE"]): StudySession[] {
-  if (result?.planner?.status !== "SUCCESS") return [];
-  return result.planner.plan.blocos.flatMap((block) => block.sessões);
-}
-
-export default function DashboardView() {
+export default function DashboardView({ onStartSession, onAskCoach }: { onStartSession?: () => void; onAskCoach?: () => void }) {
   const {
     concursos,
     assuntos,
     tentativasQuestoes,
     sessoesEstudo,
     configuracao,
+    biblioteca,
+    isTimerRunning,
     activeConcursoId,
     setActiveConcurso,
     ultimaDecisaoSDE,
     executarSDEParaData
   } = useConcurseiroStore();
 
-  const [referenceDate, setReferenceDate] = useState(() =>
-    currentDateKey(configuracao.disponibilidadeEstudo.timeZone)
-  );
-
+  const referenceDate = currentDateKey(configuracao.disponibilidadeEstudo.timeZone);
   const activeConcurso =
     concursos.find((item) => item.id === activeConcursoId) ?? concursos[0] ?? null;
 
   useEffect(() => {
     if (!configuracao.concursoAlvoId || assuntos.length === 0) return;
-    executarSDEParaData(referenceDate);
+    if (ultimaDecisaoSDE?.referenceDate !== referenceDate) {
+      executarSDEParaData(referenceDate);
+    }
   }, [
     referenceDate,
-    configuracao,
+    configuracao.concursoAlvoId,
     assuntos.length,
-    tentativasQuestoes,
-    sessoesEstudo,
+    ultimaDecisaoSDE?.referenceDate,
     executarSDEParaData
   ]);
 
-  const realMetrics = useMemo(() => {
+  const metrics = useMemo(() => {
     const totalMinutes = sessoesEstudo.reduce(
       (sum, session) => sum + Math.ceil(session.tempoGastoSegundos / 60),
       0
     );
     const correct = tentativasQuestoes.filter((attempt) => attempt.acertou).length;
-    const touchedTopics = new Set<string>();
-    for (const attempt of tentativasQuestoes) touchedTopics.add(attempt.assuntoId);
-    for (const session of sessoesEstudo) {
-      if (session.assuntoId) touchedTopics.add(session.assuntoId);
-    }
-    const studiedDays = new Set(
-      sessoesEstudo.map(
-        (session) =>
-          session.dataLocal ?? session.dataFim.slice(0, 10)
-      )
-    ).size;
     return {
       totalMinutes,
       attempts: tentativasQuestoes.length,
-      correct,
       hitRate:
         tentativasQuestoes.length > 0
           ? Math.round((correct / tentativasQuestoes.length) * 100)
           : null,
-      touchedTopics: touchedTopics.size,
-      studiedDays
+      studiedDays: new Set(
+        sessoesEstudo.map((session) => session.dataLocal ?? session.dataFim.slice(0, 10))
+      ).size
     };
   }, [sessoesEstudo, tentativasQuestoes]);
 
-  const topAction = ultimaDecisaoSDE?.actions[0] ?? null;
-  const topMaterial = useMemo(() => {
-    if (!topAction || !configuracao.concursoAlvoId) return null;
-    return routePrivateStudyMaterial(DATAPREV_2026_PRIVATE_STUDY_MATERIALS, {
-      concursoId: configuracao.concursoAlvoId,
-      activity: topAction.tipo,
-      disciplineId: topAction.disciplinaId,
-      topicId: topAction.assuntoId,
-      subtopicId: topAction.subassuntoId
-    });
-  }, [topAction, configuracao.concursoAlvoId]);
-  const plannedSessions = flattenSessions(ultimaDecisaoSDE);
+  const prescription = ultimaDecisaoSDE?.prescription?.current ?? null;
+  const upcoming = ultimaDecisaoSDE?.prescription?.upcoming ?? [];
   const availability = ultimaDecisaoSDE?.availability;
+  const operationalCommand = buildCoachOperationalCommand({ prescription, timerRunning: isTimerRunning });
+  const onboardingPlan = buildOnboardingPlan({
+    competitionSelected: Boolean(configuracao.concursoAlvoId),
+    examDateKnown: Boolean(activeConcurso?.dataProva),
+    availabilityConfigured: configuracao.disponibilidadeEstudo.weekly.some((day) => day.enabled && day.totalMinutes > 0),
+    hasMaterialLocator: biblioteca.some((item) => Boolean(item.privateMaterial)),
+    hasQuestionSource: true,
+    backupConfigured: Boolean(configuracao.ultimoSyncTimestamp),
+  });
+  const externalQuestionSourceIsPrimary = Boolean(
+    prescription?.questionPractice?.externalSourcePlan?.recommendations.some(
+      (item) => item.usage === "PRIMARY"
+    )
+  );
+  const localQuestionSourceIsPrimary = Boolean(
+    prescription?.activity === "questoes" &&
+      prescription.material &&
+      ["COMMENTED_QUESTIONS", "QUESTION_LIST", "SIMULATION"].includes(
+        prescription.material.contentKind
+      ) &&
+      !externalQuestionSourceIsPrimary
+  );
 
   return (
-    <div className="flex-1 overflow-y-auto bg-zinc-950 p-6 text-zinc-100">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <section className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5">
-          <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
+    <div className="flex-1 overflow-y-auto bg-zinc-950 p-4 text-zinc-100 sm:p-6">
+      <div className="mx-auto flex max-w-6xl flex-col gap-5">
+        <header className="rounded-2xl border border-zinc-800 bg-zinc-900/35 p-5">
+          <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
             <div>
-              <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-mono text-zinc-400">
+              <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-zinc-500">
                 <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-2 py-1 text-blue-300">
-                  {activeConcurso?.status ?? "SEM CONCURSO"}
+                  Seu coach de hoje
                 </span>
-                <span>Decisão baseada nos dados registrados</span>
-                <span className="rounded-full border border-zinc-700 bg-zinc-900 px-2 py-1 text-zinc-400">
-                  v{APP_VERSION} · {APP_RELEASE_CHANNEL}
-                </span>
+                <span>{referenceDate}</span>
+                <span>v{APP_VERSION} · {APP_RELEASE_CHANNEL}</span>
               </div>
-              <h1 className="text-xl font-bold text-zinc-100">
+              <h1 className="mt-3 text-xl font-bold text-zinc-100">
                 {activeConcurso?.nome ?? "Nenhum concurso selecionado"}
               </h1>
+              <p className="mt-2 max-w-3xl text-xs leading-relaxed text-zinc-500">
+                O Coach elimina escolhas operacionais desnecessárias, mas mantém incertezas visíveis e nunca transforma estudo em promessa de aprovação.
+              </p>
               <div className="mt-2 flex flex-wrap gap-x-5 gap-y-2 text-xs text-zinc-400">
                 <span className="flex items-center gap-1.5">
                   <MapPin className="h-4 w-4 text-blue-400" />
-                  Prova e lotação: {configuracao.localProva ?? "não definido"}
+                  {configuracao.localProva ?? "Local ainda não definido"}
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <CalendarDays className="h-4 w-4 text-purple-400" />
-                  Prova: 11/10/2026
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <FileQuestion className="h-4 w-4 text-amber-400" />
-                  70 questões · 115 pontos
-                </span>
+                {activeConcurso?.dataProva && (
+                  <span className="flex items-center gap-1.5">
+                    <CalendarDays className="h-4 w-4 text-purple-400" />
+                    Prova em {new Date(activeConcurso.dataProva).toLocaleDateString("pt-BR")}
+                  </span>
+                )}
               </div>
             </div>
 
-            <div className="flex flex-wrap items-end gap-3">
-              <label className="flex flex-col gap-1 text-[10px] font-mono uppercase tracking-wide text-zinc-500">
-                Data do plano
-                <input
-                  type="date"
-                  value={referenceDate}
-                  onChange={(event) => setReferenceDate(event.target.value)}
-                  className="rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs text-zinc-200 outline-none focus:border-blue-500"
-                />
-              </label>
-              <button
-                type="button"
-                onClick={() => executarSDEParaData(referenceDate)}
-                className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-blue-500"
-              >
-                <RefreshCw className="h-4 w-4" />
-                Recalcular
-              </button>
+            <div className="flex flex-wrap items-center gap-2">
               {concursos.length > 1 && (
                 <select
                   value={activeConcursoId ?? ""}
@@ -197,272 +176,367 @@ export default function DashboardView() {
               )}
             </div>
           </div>
-        </section>
+        </header>
 
-        <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <MetricCard
-            label="Saldo de hoje"
-            value={availability ? formatMinutes(availability.remainingMinutes) : "—"}
-            detail={
-              availability
-                ? `${formatMinutes(availability.completedMinutes)} concluídos de ${formatMinutes(availability.scheduledMinutes)}`
-                : "Aguardando cálculo"
-            }
-            icon={<Clock3 className="h-5 w-5 text-blue-400" />}
-          />
-          <MetricCard
-            label="Tempo registrado"
-            value={formatMinutes(realMetrics.totalMinutes)}
-            detail={`${realMetrics.studiedDays} dia(s) com sessão registrada`}
-            icon={<Timer className="h-5 w-5 text-emerald-400" />}
-          />
-          <MetricCard
-            label="Questões reais"
-            value={String(realMetrics.attempts)}
-            detail={
-              realMetrics.hitRate === null
-                ? "Sem taxa de acerto calculável"
-                : `${realMetrics.correct} acertos · ${realMetrics.hitRate}% observado`
-            }
-            icon={<FileQuestion className="h-5 w-5 text-amber-400" />}
-          />
-          <MetricCard
-            label="Assuntos com contato"
-            value={`${realMetrics.touchedTopics}/${assuntos.length}`}
-            detail="Contato registrado, não domínio presumido"
-            icon={<BookOpen className="h-5 w-5 text-purple-400" />}
-          />
-        </section>
+        {!onboardingPlan.readyToStudy && (
+          <StatusCard tone="danger" icon={<AlertTriangle className="h-5 w-5" />} title="Configuração mínima ainda incompleta">
+            {onboardingPlan.primaryInstruction}
+          </StatusCard>
+        )}
 
         {ultimaDecisaoSDE?.status === "INVALID_INPUT" && (
-          <section className="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-red-400" />
-              <div>
-                <h2 className="text-sm font-semibold text-red-300">Não foi possível calcular uma decisão segura</h2>
-                <ul className="mt-2 space-y-1 text-xs text-red-200/80">
-                  {ultimaDecisaoSDE.errors.map((error) => (
-                    <li key={error}>• {error}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </section>
+          <StatusCard
+            tone="danger"
+            icon={<AlertTriangle className="h-5 w-5" />}
+            title="O coach não conseguiu calcular uma decisão segura"
+          >
+            <ul className="space-y-1">
+              {ultimaDecisaoSDE.errors.map((error) => (
+                <li key={error}>• {error}</li>
+              ))}
+            </ul>
+          </StatusCard>
         )}
 
         {ultimaDecisaoSDE?.status === "NO_TIME_AVAILABLE" && (
-          <section className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-5">
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-400" />
-              <div>
-                <h2 className="text-sm font-semibold text-emerald-300">Sem janela planejável nesta data</h2>
-                <p className="mt-1 text-xs leading-relaxed text-zinc-400">
-                  O dia está configurado como descanso ou todo o tempo disponível já foi concluído. O motor não cria atividades para preencher tempo artificialmente.
-                </p>
-              </div>
-            </div>
-          </section>
+          <StatusCard
+            tone="success"
+            icon={<CheckCircle2 className="h-5 w-5" />}
+            title="Seu estudo planejado de hoje está concluído"
+          >
+            O dia está configurado como descanso ou todo o tempo disponível já foi registrado. O sistema não cria tarefas apenas para preencher espaço.
+          </StatusCard>
         )}
 
-        {topAction && ultimaDecisaoSDE?.status === "SUCCESS" && (
-          <section className="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
-            <article className="rounded-2xl border border-blue-500/25 bg-blue-500/5 p-5">
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-blue-300">
-                    <Target className="h-4 w-4" />
-                    Próxima ação recomendada
-                  </div>
-                  <h2 className="mt-3 text-lg font-bold text-zinc-100">
-                    {ACTIVITY_LABELS[topAction.tipo]} · {topAction.assuntoNome}
-                  </h2>
-                  <p className="mt-1 text-xs text-zinc-400">
-                    {topAction.disciplinaNome}
-                    {topAction.subassuntoNome ? ` · ${topAction.subassuntoNome}` : ""}
-                  </p>
+        {prescription && ultimaDecisaoSDE?.status === "SUCCESS" && (
+          <section className="rounded-2xl border border-blue-500/30 bg-gradient-to-br from-blue-500/10 via-zinc-900/50 to-zinc-950 p-5 sm:p-6">
+            <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.18em] text-blue-300">
+                  <Target className="h-4 w-4" />
+                  Faça agora
                 </div>
-                <div className="rounded-lg border border-zinc-700 bg-zinc-950/70 px-3 py-2 text-right">
-                  <div className="text-[9px] font-mono uppercase text-zinc-500">Duração operacional</div>
-                  <div className="mt-1 text-sm font-bold text-zinc-100">
-                    {topAction.estimatedDurationMinutes === null
-                      ? "não informada"
-                      : formatMinutes(topAction.estimatedDurationMinutes)}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-5 rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-                <h3 className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">Por que agora</h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-                  {topAction.justificativaXAI.porQue}
+                <h2 className="mt-3 text-2xl font-bold leading-tight text-white">
+                  {operationalCommand.headline}
+                </h2>
+                <p className="mt-2 text-sm text-zinc-400">
+                  {prescription.disciplineName} · {prescription.topicName}
+                </p>
+                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-blue-100/80">
+                  {operationalCommand.instruction}
                 </p>
               </div>
 
-              {topMaterial && (
-                <div className="mt-4 rounded-xl border border-indigo-500/25 bg-indigo-500/5 p-4">
-                  <h3 className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-indigo-300">
-                    <BookOpen className="h-4 w-4" />
-                    Onde estudar no material privado
-                  </h3>
-                  <p className="mt-2 text-xs font-semibold text-zinc-200">
-                    {topMaterial.materialTitle}
-                  </p>
-                  <p className="mt-1 text-xs leading-relaxed text-zinc-400">
-                    {topMaterial.sectionTitle} · páginas {topMaterial.startPage}–{topMaterial.endPage}
-                    {topMaterial.questionBank ? ` · questões ${topMaterial.questionBank}` : ""}
-                  </p>
-                  <p className="mt-2 text-[10px] leading-relaxed text-zinc-500">
-                    Localizador pedagógico. O conteúdo permanece na cópia privada do usuário e não participa do cálculo de prioridade.
-                  </p>
-                </div>
-              )}
+              <div className="grid shrink-0 grid-cols-2 gap-2 lg:grid-cols-1">
+                <CoachMetric label="Duração" value={formatMinutes(prescription.durationMinutes)} />
+                {prescription.questionPractice && (
+                  <CoachMetric
+                    label="Meta de questões"
+                    value={`${prescription.questionPractice.targetQuestions}–${prescription.questionPractice.stretchTargetQuestions}`}
+                  />
+                )}
+              </div>
+            </div>
 
-              {topAction.rankingContext?.isTied && (
-                <div className="mt-4 rounded-xl border border-sky-500/20 bg-sky-500/5 p-4">
-                  <h3 className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-sky-300">
-                    <AlertTriangle className="h-4 w-4" />
-                    Empate estratégico
+            <div className="mt-5 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="space-y-4">
+                {prescription.focusGuide && <StudyFocusGuideCard guide={prescription.focusGuide} />}
+                <div className="rounded-xl border border-zinc-800 bg-zinc-950/55 p-4">
+                  <h3 className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
+                    Como executar
                   </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-zinc-400">
-                    {topAction.rankingContext.note}
-                  </p>
+                  <ol className="mt-3 space-y-3">
+                    {prescription.executionSteps.map((step) => (
+                      <li key={`${step.passo}-${step.phase}`} className="flex gap-3 text-sm leading-relaxed text-zinc-300">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10 text-[10px] font-bold text-blue-300">
+                          {step.passo}
+                        </span>
+                        <span className="flex-1">{step.descricao}</span>
+                        <span className="shrink-0 text-[11px] font-mono text-zinc-500">
+                          {step.tempoMinutos} min
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
                 </div>
-              )}
 
-              <div className="mt-4 grid gap-3 md:grid-cols-2">
-                <InfoBlock
-                  title="Confiança"
-                  text={topAction.justificativaXAI.nivelConfianca}
-                  icon={<ShieldCheck className="h-4 w-4 text-emerald-400" />}
-                />
-                <InfoBlock
-                  title="Camada constitucional"
-                  text={topAction.camadaConstitucional}
-                  icon={<TrendingUp className="h-4 w-4 text-purple-400" />}
-                />
+                {prescription.questionPractice && (
+                  <>
+                    <div className="rounded-xl border border-amber-500/25 bg-amber-500/5 p-4">
+                      <h3 className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-amber-300">
+                        <FileQuestion className="h-4 w-4" />
+                        Bateria prescrita
+                      </h3>
+                      <p className="mt-2 text-sm font-semibold text-zinc-200">
+                        Resolva {prescription.questionPractice.targetQuestions} questões; faça até {prescription.questionPractice.stretchTargetQuestions} se mantiver qualidade e tempo.
+                      </p>
+                      <p className="mt-1 text-xs leading-relaxed text-zinc-400">
+                        {prescription.questionPractice.practiceMinutes} min para responder e {prescription.questionPractice.correctionMinutes} min para corrigir, fechar a solução e refazer os erros.
+                      </p>
+                    </div>
+                    {prescription.diagnosticFollowUp && (
+                      <div className="rounded-xl border border-cyan-500/25 bg-cyan-500/[0.04] p-4">
+                        <h3 className="text-[10px] font-mono uppercase tracking-wider text-cyan-300">
+                          O objetivo desta primeira bateria
+                        </h3>
+                        <p className="mt-2 text-xs leading-relaxed text-zinc-300">
+                          Esta é uma triagem de conhecimento prévio, não a rotina inteira do assunto. O aplicativo não inventa questões: use a fonte indicada e responda antes de estudar a teoria.
+                        </p>
+                        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                          <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/[0.04] p-3">
+                            <p className="text-[10px] font-mono uppercase text-emerald-300">
+                              Se demonstrar conhecimento
+                            </p>
+                            <p className="mt-1 text-[11px] leading-relaxed text-zinc-400">
+                              {prescription.diagnosticFollowUp.onPass}
+                            </p>
+                          </div>
+                          <div className="rounded-lg border border-amber-500/20 bg-amber-500/[0.04] p-3">
+                            <p className="text-[10px] font-mono uppercase text-amber-300">
+                              Se a evidência for insuficiente
+                            </p>
+                            <p className="mt-1 text-[11px] leading-relaxed text-zinc-400">
+                              {prescription.diagnosticFollowUp.onFail}
+                            </p>
+                          </div>
+                        </div>
+                        <p className="mt-3 text-[10px] leading-relaxed text-zinc-500">
+                          Para adiar teoria: pelo menos {prescription.diagnosticFollowUp.minimumQuestions} questões, {prescription.diagnosticFollowUp.minimumHitRatePercent}% de acerto, nenhum branco, nenhuma consulta e todos os acertos com confiança média ou alta.
+                        </p>
+                      </div>
+                    )}
+                    {prescription.questionPractice.externalSourcePlan && (
+                      <ExternalQuestionSourcePlanCard plan={prescription.questionPractice.externalSourcePlan} />
+                    )}
+                  </>
+                )}
               </div>
 
-              {topAction.justificativaXAI.dadosAusentes.length > 0 && (
-                <div className="mt-4 rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
-                  <h3 className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-amber-300">
-                    <AlertTriangle className="h-4 w-4" />
-                    Dados ainda ausentes
+              <div className="space-y-4">
+                {prescription.material ? (
+                  <div className="rounded-xl border border-indigo-500/25 bg-indigo-500/5 p-4">
+                    <h3 className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-indigo-300">
+                      <BookOpen className="h-4 w-4" />
+                      {externalQuestionSourceIsPrimary
+                        ? "Material para correção opcional"
+                        : localQuestionSourceIsPrimary
+                          ? prescription.diagnosticPurpose
+                            ? "Fonte das questões · não leia a solução antes"
+                            : "Fonte principal das questões"
+                          : "Material indicado"}
+                    </h3>
+                    <p className="mt-2 text-[10px] font-mono uppercase tracking-wider text-indigo-300/80">
+                      {privateMaterialSourceRoleLabel(prescription.material.sourceRole)} · {privateMaterialProviderLabel(prescription.material.sourceProvider)}
+                    </p>
+                    <p className="mt-1 text-sm font-semibold text-zinc-200">
+                      {prescription.material.sectionTitle}
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-zinc-400">
+                      Arquivo: {prescription.material.materialTitle}
+                    </p>
+                    <p className="mt-2 text-sm font-bold text-indigo-200">
+                      Páginas {prescription.material.startPage}–{prescription.material.endPage}
+                    </p>
+                    {prescription.material.questionBank && (
+                      <p className="mt-1 text-[11px] text-zinc-500">
+                        Banco identificado: {prescription.material.questionBank}
+                      </p>
+                    )}
+                    {prescription.diagnosticPurpose && localQuestionSourceIsPrimary && (
+                      <p className="mt-2 rounded-lg border border-amber-500/20 bg-amber-500/[0.04] p-2 text-[11px] leading-relaxed text-amber-100/70">
+                        Abra diretamente nesta seção e responda as questões ainda não vistas. Não leia teoria, comentários nem gabarito antes da tentativa.
+                      </p>
+                    )}
+                    <PrivatePdfOpenButton material={prescription.material} compact />
+                  </div>
+                ) : externalQuestionSourceIsPrimary ? null : (
+                  <div className="rounded-xl border border-amber-500/25 bg-amber-500/5 p-4">
+                    <h3 className="text-[10px] font-mono uppercase tracking-wider text-amber-300">
+                      Material ainda não localizado
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+                      A prioridade continua válida, mas o catálogo privado ainda não possui uma seção mapeada com confiança suficiente para esta sessão.
+                    </p>
+                  </div>
+                )}
+
+                <div className="rounded-xl border border-zinc-800 bg-zinc-950/55 p-4">
+                  <h3 className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
+                    Registre ao terminar
                   </h3>
-                  <ul className="mt-2 space-y-1 text-xs leading-relaxed text-zinc-400">
-                    {topAction.justificativaXAI.dadosAusentes.map((item) => (
-                      <li key={item}>• {item}</li>
+                  <ul className="mt-3 space-y-2 text-xs leading-relaxed text-zinc-300">
+                    {prescription.completionEvidence.map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                        <span>{item}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
-              )}
-            </article>
 
-            <article className="rounded-2xl border border-zinc-800 bg-zinc-900/20 p-5">
-              <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-300">
-                Plano operacional do dia
-              </h2>
-              {plannedSessions.length === 0 ? (
-                <p className="mt-4 text-xs leading-relaxed text-zinc-500">
-                  O planner não encontrou sessões válidas para a janela disponível.
-                </p>
-              ) : (
-                <ol className="mt-4 space-y-3">
-                  {plannedSessions.map((session) => (
-                    <li
-                      key={session.id}
-                      className="rounded-xl border border-zinc-800 bg-zinc-950/50 p-3"
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <div className="text-[10px] font-mono text-zinc-500">
-                            SESSÃO {session.sequencia}
-                          </div>
-                          <div className="mt-1 text-xs font-semibold text-zinc-200">
-                            {session.tipo === "descanso"
-                              ? "Pausa cognitiva"
-                              : `${ACTIVITY_LABELS[session.tipo]} · ${session.assuntoNome}`}
-                          </div>
-                          {session.tipo !== "descanso" && (
-                            <div className="mt-1 text-[11px] text-zinc-500">
-                              {session.disciplinaNome}
-                            </div>
-                          )}
-                        </div>
-                        <span className="shrink-0 rounded bg-zinc-800 px-2 py-1 text-[10px] font-mono text-zinc-300">
-                          {session.tempoMinutos} min
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </article>
-          </section>
-        )}
-
-        {ultimaDecisaoSDE && ultimaDecisaoSDE.warnings.length > 0 && (
-          <section className="rounded-xl border border-zinc-800 bg-zinc-900/20 p-5">
-            <h2 className="text-[10px] font-mono font-semibold uppercase tracking-wider text-zinc-400">
-              Limitações declaradas pelo motor
-            </h2>
-            <ul className="mt-3 grid gap-2 text-xs leading-relaxed text-zinc-500 lg:grid-cols-2">
-              {ultimaDecisaoSDE.warnings.map((warning) => (
-                <li key={warning} className="rounded-lg border border-zinc-800/80 bg-zinc-950/40 p-3">
-                  {warning}
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        <section className="rounded-xl border border-zinc-800 bg-zinc-900/20 p-4">
-          <div className="flex items-start gap-3">
-            <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" />
-            <div>
-              <h2 className="text-[10px] font-mono font-semibold uppercase tracking-wider text-zinc-300">
-                Cobertura de gabaritos do corpus
-              </h2>
-              <p className="mt-2 text-xs leading-relaxed text-zinc-400">
-                {DATAPREV_2026_ANSWER_KEY_EVIDENCE.corpusCoverage.recordsWithAnswerKey} registros possuem correspondência exata de caderno em {DATAPREV_2026_ANSWER_KEY_EVIDENCE.exactMatches} provas.
-                São {DATAPREV_2026_ANSWER_KEY_EVIDENCE.definitive} gabaritos definitivos, {DATAPREV_2026_ANSWER_KEY_EVIDENCE.preliminary} preliminares e {DATAPREV_2026_ANSWER_KEY_EVIDENCE.publishedUnqualified} sem qualificação explícita. {DATAPREV_2026_ANSWER_KEY_EVIDENCE.officialUserSupplied} foram substituídos por publicações oficiais fornecidas pelo usuário.
-              </p>
-              <p className="mt-1 text-[10px] text-zinc-600">
-                Após os gates de revisão temática, {DATAPREV_2026_QUESTION_BANK_READINESS.manuallyReviewedAnalyticEligibleRecords} questões únicas estão aptas para análise descritiva auditada. Nenhuma foi liberada como questão interna porque o corpus derivado ainda não contém enunciado e alternativas completos.
-              </p>
-              {DATAPREV_2026_ANSWER_KEY_EVIDENCE.headerStatusMismatches > 0 && (
-                <p className="mt-1 text-[10px] text-amber-500/80">
-                  Há {DATAPREV_2026_ANSWER_KEY_EVIDENCE.headerStatusMismatches} publicação oficial com divergência editorial entre a classificação da página da FGV e o cabeçalho interno do PDF; a divergência permanece registrada na proveniência.
-                </p>
-              )}
-              <p className="mt-1 text-[10px] text-zinc-600">
-                Gabaritos e questões aptas para análise não produzem incidência estratégica por si só.
-              </p>
+                <div className="rounded-xl border border-cyan-500/25 bg-cyan-500/5 p-4">
+                  <h3 className="text-[10px] font-mono uppercase tracking-wider text-cyan-300">
+                    Próxima ação
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-zinc-300">
+                    {prescription.nextAction.afterCompletion}
+                  </p>
+                  {prescription.nextAction.preview && (
+                    <p className="mt-2 text-xs font-semibold text-cyan-200">
+                      Prévia: {prescription.nextAction.preview}
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
+
+            <div className="mt-5 flex flex-col gap-3 border-t border-zinc-800 pt-5 sm:flex-row sm:items-center sm:justify-between">
+              <details className="max-w-3xl text-xs text-zinc-400">
+                <summary className="cursor-pointer font-semibold text-zinc-300">Por que esta sessão agora?</summary>
+                <p className="mt-2 leading-relaxed">{prescription.whyNow}</p>
+                {prescription.questionPractice && (
+                  <p className="mt-2 leading-relaxed text-zinc-500">
+                    {prescription.questionPractice.rationale}
+                  </p>
+                )}
+                <p className="mt-2 text-[10px] font-mono uppercase text-zinc-600">
+                  Confiança da decisão: {prescription.confidence} · modo {prescription.decisionReliability.mode}
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-zinc-500">
+                  Prontidão: {prescription.executionReadiness.reason}
+                </p>
+                {prescription.decisionReliability.caveats.map((caveat) => (
+                  <p key={caveat} className="mt-2 text-xs leading-relaxed text-amber-300/80">
+                    {caveat}
+                  </p>
+                ))}
+              </details>
+              <div className="flex shrink-0 flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={onAskCoach}
+                  className="flex items-center justify-center gap-2 rounded-xl border border-zinc-700 px-4 py-3 text-sm font-semibold text-zinc-200 transition hover:border-cyan-500/50"
+                >
+                  Tirar dúvida com o Coach
+                </button>
+                <button
+                  type="button"
+                  onClick={onStartSession}
+                  className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-500"
+                >
+                  <Play className="h-4 w-4 fill-current" />
+                  {operationalCommand.primaryActionLabel}
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {ultimaDecisaoSDE?.status === "SUCCESS" && !prescription && (
+          <StatusCard
+            tone="neutral"
+            icon={<ShieldCheck className="h-5 w-5" />}
+            title="Ainda não há uma sessão executável"
+          >
+            O SDE calculou o estado, mas o planner não conseguiu formar uma sessão segura dentro da janela disponível.
+          </StatusCard>
+        )}
+
+        {upcoming.length > 0 && (
+          <section className="rounded-2xl border border-zinc-800 bg-zinc-900/25 p-5">
+            <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-400">
+              Depois desta sessão
+            </h2>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              {upcoming.map((item) => (
+                <article key={item.id} className="rounded-xl border border-zinc-800 bg-zinc-950/50 p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="text-[10px] font-mono uppercase text-zinc-600">
+                        Próxima {item.sequence}
+                      </div>
+                      <div className="mt-1 text-sm font-semibold text-zinc-200">
+                        {ACTIVITY_LABELS[item.activity]} · {item.subtopicName ?? item.topicName}
+                      </div>
+                      <div className="mt-1 text-[11px] text-zinc-500">{item.disciplineName}</div>
+                    </div>
+                    <span className="rounded bg-zinc-800 px-2 py-1 text-[10px] font-mono text-zinc-300">
+                      {item.durationMinutes} min
+                    </span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          <MetricCard
+            label="Saldo de hoje"
+            value={availability ? formatMinutes(availability.remainingMinutes) : "—"}
+            detail={availability ? `${formatMinutes(availability.completedMinutes)} já registrados` : "Aguardando cálculo"}
+            icon={<Clock3 className="h-5 w-5 text-blue-400" />}
+          />
+          <MetricCard
+            label="Tempo total"
+            value={formatMinutes(metrics.totalMinutes)}
+            detail={`${metrics.studiedDays} dia(s) com estudo real`}
+            icon={<Timer className="h-5 w-5 text-emerald-400" />}
+          />
+          <MetricCard
+            label="Questões registradas"
+            value={String(metrics.attempts)}
+            detail={metrics.hitRate === null ? "Ainda sem taxa observada" : `${metrics.hitRate}% de acerto observado`}
+            icon={<FileQuestion className="h-5 w-5 text-amber-400" />}
+          />
+          <MetricCard
+            label="Estado do coach"
+            value={prescription ? "Guiando" : "Aguardando"}
+            detail="Ausência de dados nunca vira domínio presumido"
+            icon={<ShieldCheck className="h-5 w-5 text-cyan-400" />}
+          />
         </section>
 
-        <section className="rounded-xl border border-zinc-800 bg-zinc-900/10 p-4 text-[11px] leading-relaxed text-zinc-500">
-          O dashboard apresenta somente registros reais e resultados calculados pelo SDE. Ausência de dados não é convertida em rendimento zero, domínio, probabilidade de aprovação ou ganho estimado de pontos.
-        </section>
+        {(ultimaDecisaoSDE?.warnings.length ?? 0) > 0 && (
+          <details className="rounded-xl border border-zinc-800 bg-zinc-900/15 p-4 text-xs text-zinc-500">
+            <summary className="cursor-pointer font-semibold text-zinc-400">
+              Limites e observações metodológicas · não bloqueiam o estudo
+            </summary>
+            <ul className="mt-3 space-y-2 leading-relaxed">
+              {[...(ultimaDecisaoSDE?.warnings ?? []), ...(ultimaDecisaoSDE?.prescription?.warnings ?? [])]
+                .map(presentDecisionWarning)
+                .map((warning) => (
+                  <li key={`${warning.kind}-${warning.text}`} className="rounded-lg border border-zinc-800 bg-zinc-950/40 p-3">
+                    <span className="mr-2 rounded-full border border-zinc-700 px-2 py-0.5 text-[9px] font-mono uppercase text-zinc-400">
+                      {warning.label}
+                    </span>
+                    <span>{warning.text}</span>
+                  </li>
+                ))}
+            </ul>
+          </details>
+        )}
       </div>
     </div>
   );
 }
 
-function MetricCard(props: {
-  label: string;
-  value: string;
-  detail: string;
-  icon: ReactNode;
-}) {
+function CoachMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="min-w-32 rounded-xl border border-zinc-700 bg-zinc-950/70 px-4 py-3 text-right">
+      <div className="text-[9px] font-mono uppercase tracking-wider text-zinc-500">{label}</div>
+      <div className="mt-1 text-lg font-bold text-zinc-100">{value}</div>
+    </div>
+  );
+}
+
+function MetricCard(props: { label: string; value: string; detail: string; icon: ReactNode }) {
   return (
     <article className="rounded-xl border border-zinc-800 bg-zinc-900/20 p-4">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
-            {props.label}
-          </div>
-          <div className="mt-2 text-2xl font-bold text-zinc-100">{props.value}</div>
+          <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">{props.label}</div>
+          <div className="mt-2 text-xl font-bold text-zinc-100">{props.value}</div>
         </div>
         {props.icon}
       </div>
@@ -471,14 +545,26 @@ function MetricCard(props: {
   );
 }
 
-function InfoBlock(props: { title: string; text: string; icon: ReactNode }) {
+function StatusCard(props: {
+  tone: "danger" | "success" | "neutral";
+  icon: ReactNode;
+  title: string;
+  children: ReactNode;
+}) {
+  const tones = {
+    danger: "border-red-500/30 bg-red-500/10 text-red-300",
+    success: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300",
+    neutral: "border-zinc-700 bg-zinc-900/30 text-zinc-300"
+  };
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-950/50 p-3">
-      <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-zinc-500">
-        {props.icon}
-        {props.title}
+    <section className={`rounded-xl border p-5 ${tones[props.tone]}`}>
+      <div className="flex items-start gap-3">
+        <div className="mt-0.5 shrink-0">{props.icon}</div>
+        <div>
+          <h2 className="text-sm font-semibold">{props.title}</h2>
+          <div className="mt-2 text-xs leading-relaxed text-zinc-400">{props.children}</div>
+        </div>
       </div>
-      <div className="mt-2 text-xs font-semibold text-zinc-300">{props.text}</div>
-    </div>
+    </section>
   );
 }

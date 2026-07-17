@@ -1,10 +1,10 @@
 from __future__ import annotations
-import fitz, re, json
+import fitz, re, json, os
 from pathlib import Path
 from collections import Counter
 
-PDF=Path('/mnt/data/fgv37_corpus/Provas/analista_de_tecnologia_da_informacao_desenvolvimento_de_software.pdf')
-OUT=Path('/mnt/data/concurseiroos_evidence_base/data/evidence/dataprev-2026-perfil-3/fgv-exams-37')
+PDF=Path(os.environ.get('FGV_DATAPREV_REFERENCE_PDF', 'data/input/fgv37/analista_de_tecnologia_da_informacao_desenvolvimento_de_software.pdf'))
+OUT=Path(os.environ.get('FGV_DATAPREV_REFERENCE_OUTPUT', 'data/evidence/dataprev-2026-perfil-3/fgv-exams-37'))
 OUT.mkdir(parents=True,exist_ok=True)
 
 def extract_questions():
@@ -77,8 +77,8 @@ for n in range(41,71):
         'topicLabel':label,
         'style':style,
         'classificationStatus':'MANUALLY_REVIEWED_TOPIC_ONLY',
-        'answerKeyStatus':'NOT_AVAILABLE',
-        'questionText':q['text'],
+        'answerKeyStatus':'AVAILABLE_IN_CANONICAL_CORPUS_REVIEW_PENDING',
+        'excerpt':' '.join(q['text'].split())[:280],
     })
 
 topic_counts=Counter(i['primaryTopicId'] for i in items)
@@ -91,9 +91,9 @@ obj={
  'specificQuestionRange':[41,70],
  'specificQuestionCount':30,
  'mappingStatus':'MANUALLY_REVIEWED_TOPIC_ONLY',
- 'answerKeyStatus':'NOT_AVAILABLE',
+ 'answerKeyStatus':'AVAILABLE_IN_CANONICAL_CORPUS_REVIEW_PENDING',
  'activationStatus':'NOT_ELIGIBLE_FOR_SDE_INCIDENCE',
- 'activationReason':'Uma única prova e contagens por tópico abaixo da política mínima; ausência de gabarito não impede incidência temática, mas impede análise de alternativas corretas/anuladas.',
+ 'activationReason':'Uma única prova não sustenta incidência ampla; o gabarito definitivo está ligado no corpus canônico, mas continua pendente de revisão e em shadow mode.',
  'topicCounts':dict(sorted(topic_counts.items(),key=lambda kv:(-kv[1],kv[0]))),
  'styleCounts':dict(sorted(style_counts.items(),key=lambda kv:(-kv[1],kv[0]))),
  'questions':items,
@@ -104,9 +104,9 @@ obj={
 lines=['# Mapeamento manual - prova DATAPREV Desenvolvimento de Software','',
 '## Status','',
 '- 30 questões específicas (41 a 70) classificadas contra o edital DATAPREV 2026 Perfil 3.',
-'- Gabarito não disponível.',
+'- Gabarito definitivo disponível no corpus canônico, com vínculo automático ainda pendente de revisão.',
 '- Uso permitido: aderência temática, estilo de cobrança e seleção de questões para revisão externa.',
-'- Uso proibido neste estágio: ativar incidência no SDE ou analisar padrão de distratores corretos/anulações.',
+'- Uso proibido neste estágio: ativar incidência no SDE; análises de resposta exigem revisão do vínculo canônico.',
 '', '## Distribuição observada por subassunto','', '| Subassunto | Questões |', '|---|---:|']
 for topic,count in sorted(topic_counts.items(),key=lambda kv:(-kv[1],kv[0])):
     label=next(i['topicLabel'] for i in items if i['primaryTopicId']==topic)

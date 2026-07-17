@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.1.0",
+  "policy": "OFFICIAL_CORPUS_SHADOW_ONLY",
+  "generatedFrom": {
+    "sourceRootLabel": "FGV_Acervo_Organizado_2026-07-16",
+    "documentCatalogSha256": "7435d2271681d5cfaafd0c26bcc406a05bd518c1b30f8b55df166b43a725d170"
+  },
+  "shadowMode": true,
+  "eligibleForSDEHistoricalIncidence": false,
+  "counts": {
+    "catalogExamDocuments": 95,
+    "objectiveOrMixedExamsExtracted": 93,
+    "discursiveOnlyExamsExcluded": 2,
+    "failedExamExtractions": 0,
+    "questionsExtracted": 6462,
+    "answerKeyDocuments": 48,
+    "answerKeySectionsParsed": 1344,
+    "highConfidenceExamAnswerKeyLinks": 44,
+    "candidateExamAnswerKeyLinks": 2,
+    "ambiguousExamAnswerKeyLinks": 36,
+    "unresolvedExamAnswerKeyLinks": 11,
+    "questionsLinkedToDefinitiveAnswerKey": 2840,
+    "reviewQueueItems": 646,
+    "duplicateGroups": 596,
+    "exactDuplicateRecords": 1670,
+    "nearDuplicateRecords": 64,
+    "uniqueCanonicalQuestions": 5324
+  },
+  "extractionStatusCounts": {
+    "EXTRACTED_REVIEW_PENDING": 92,
+    "EXCLUDED_DISCURSIVE_ONLY": 2,
+    "PARTIAL_REVIEW_REQUIRED": 1
+  },
+  "answerKeyLinkStatusCounts": {
+    "AMBIGUOUS_REVIEW_REQUIRED": 36,
+    "AUTO_LINKED_HIGH_CONFIDENCE": 44,
+    "UNRESOLVED": 11,
+    "CANDIDATE_REVIEW_REQUIRED": 2,
+    "NOT_APPLICABLE": 2
+  },
+  "sourceIntegrity": {
+    "valid": true,
+    "errors": []
+  },
+  "activationBlockers": [
+    "Question extraction and answer-key links are machine-generated and still require review.",
+    "Question classifications against source notices and DATAPREV 2026 taxonomy are not complete.",
+    "Duplicate groups require human confirmation before incidence statistics.",
+    "No historical signal is connected to the SDE."
+  ],
+  "dataMinimization": {
+    "fullQuestionTextStored": false,
+    "fullAlternativesStored": false,
+    "shortExcerptMaxCharacters": 280,
+    "sourcePdfRequiredForAuthoritativeReview": true
+  }
+}

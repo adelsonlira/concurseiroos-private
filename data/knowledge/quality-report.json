@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-17T03:01:36.664Z",
+  "shadowMode": true,
+  "counts": {
+    "documents": 181,
+    "contests": 54,
+    "declaredLogicalDuplicates": 20,
+    "links": 95,
+    "incidenceEligibleLinks": 77,
+    "confirmedLinks": 77,
+    "inferredLinks": 9,
+    "insufficientLinks": 9
+  },
+  "integrity": {
+    "valid": true,
+    "errors": []
+  },
+  "questionCorpus": {
+    "extractedQuestions": 6462,
+    "canonicalQuestions": 5324,
+    "definitiveAnswerLinks": 2840,
+    "reviewQueueItems": 646,
+    "status": "EXTRACTED_SHADOW_REVIEW_REQUIRED",
+    "eligibleForSDEHistoricalIncidence": false
+  },
+  "policy": "Historical incidence is not connected to the SDE. Document links are package-level evidence only.",
+  "catalogSha256": "27d98d3344d7f61d53f474a91886c45b5c0ee08d6bb41e4fa14f9794b6a08f16"
+}

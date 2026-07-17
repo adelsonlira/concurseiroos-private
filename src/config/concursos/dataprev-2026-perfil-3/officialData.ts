@@ -13,6 +13,7 @@ import {
 import { CompetitionConfigurationPackage } from "../types";
 import { buildHistoricalIncidenceMap } from "../../../core/evidence/evidencePolicy";
 import { DATAPREV_2026_PROFILE_3_STRATEGIC_EVIDENCE } from "./strategicEvidence";
+import { DATAPREV_2026_PROFILE_3_STUDY_GUIDANCE } from "./studyGuidance";
 
 export const DATAPREV_2026_PROFILE_3_ID = "dataprev-2026-perfil-3";
 
@@ -448,6 +449,7 @@ export const DATAPREV_2026_PROFILE_3_PACKAGE: CompetitionConfigurationPackage = 
     { document: "Edital DATAPREV 001/2026", section: "Anexo III", page: 56, note: "Remuneração inicial" }
   ],
   strategicEvidence: DATAPREV_2026_PROFILE_3_STRATEGIC_EVIDENCE,
+  studyGuidance: DATAPREV_2026_PROFILE_3_STUDY_GUIDANCE,
   assumptions: [
     {
       id: "neutral-topic-weight",

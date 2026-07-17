@@ -12,6 +12,7 @@ export interface NavigationItemDefinition {
   group: NavigationGroupId;
   keywords: readonly string[];
   subitems: readonly string[];
+  primary: boolean;
 }
 
 export interface NavigationSearchResult {
@@ -20,8 +21,8 @@ export interface NavigationSearchResult {
 }
 
 export const NAVIGATION_GROUPS: readonly NavigationGroupDefinition[] = [
-  { id: "daily", label: "ESTUDO DE HOJE" },
-  { id: "intelligence", label: "PLANEJAMENTO E INTELIGÊNCIA" },
+  { id: "daily", label: "AGORA" },
+  { id: "intelligence", label: "PLANO E BASE" },
   { id: "system", label: "CONTA E SISTEMA" },
 ] as const;
 
@@ -30,107 +31,111 @@ export const NAVIGATION_GROUPS: readonly NavigationGroupDefinition[] = [
 export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   {
     id: "dashboard",
-    label: "Dashboard",
+    label: "Hoje — Seu Coach",
     badge: "G D",
     group: "daily",
     keywords: ["inicio", "hoje", "resumo", "prioridade", "proxima acao"],
-    subitems: ["Próxima recomendação", "Saldo diário", "Resumo do dia"],
+    subitems: ["Prescrição atual", "Saldo diário", "Próximas sessões"],
+    primary: true,
   },
   {
     id: "focus",
-    label: "Desk de Foco",
+    label: "Sessão guiada",
     badge: "Alt P",
     group: "daily",
     keywords: ["sessao", "cronometro", "estudar", "executar", "pomodoro"],
-    subitems: ["Sessão atual", "Cronômetro", "Registro de execução"],
+    subitems: ["Sessão atual", "Cronômetro", "Material e páginas"],
+    primary: true,
   },
   {
     id: "roadmap",
-    label: "Rota Estratégica",
+    label: "Plano e Progresso",
     badge: "G E",
-    group: "daily",
-    keywords: ["rota", "plano", "semana", "diagnostico", "cobertura"],
+    group: "intelligence",
+    keywords: ["rota", "plano", "progresso", "semana", "diagnostico", "cobertura"],
     subitems: ["Mapa de evidências", "Próximos sete dias", "Fila estratégica"],
+    primary: true,
   },
   {
     id: "reviews",
-    label: "Revisões & Erros",
+    label: "Revisões e erros",
     badge: "G R",
     group: "daily",
     keywords: ["revisao", "erro", "recuperacao", "memoria", "caderno"],
     subitems: ["Revisões vencidas", "Caderno de erros", "Recuperação adaptativa"],
+    primary: true,
   },
   {
     id: "exercises",
-    label: "Banco de Questões",
+    label: "Registrar questões",
     badge: "G Q",
     group: "daily",
     keywords: ["questoes", "tentativa", "acerto", "erro", "fgv", "diagnostico"],
-    subitems: ["Registrar questão externa", "Tentativas", "Diagnóstico por questões"],
+    subitems: ["Registrar resultados", "Tentativas", "Diagnóstico por questões"],
+    primary: true,
   },
   {
     id: "flashcards",
-    label: "Flashcards Ativos",
+    label: "Flashcards prescritos",
     badge: "G F",
     group: "daily",
     keywords: ["cartoes", "memorizacao", "recuperacao", "baralho"],
     subitems: ["Cartões pendentes", "Recuperação ativa", "Agendamento adaptativo"],
+    primary: false,
   },
   {
     id: "weekly",
-    label: "Calibração Semanal",
+    label: "Revisão da semana",
     badge: "G W",
     group: "daily",
     keywords: ["semana", "calibracao", "execucao", "planejado", "tempo"],
     subitems: ["Planejado versus executado", "Eficiência observada", "Proteção de avanço"],
+    primary: false,
   },
   {
     id: "coach",
-    label: "Coach IA Mentoria",
+    label: "Perguntar ao Coach",
     badge: "G C",
     group: "daily",
     keywords: ["coach", "ia", "mentor", "explicacao", "ajuda", "duvida"],
     subitems: ["Mentoria", "Explicar recomendação", "Preparar sessão"],
-  },
-  {
-    id: "parser",
-    label: "Edital Inteligente",
-    badge: "G P",
-    group: "intelligence",
-    keywords: ["edital", "parser", "conteudo", "programa"],
-    subitems: ["Estrutura do edital", "Importação", "Conteúdo programático"],
+    primary: false,
   },
   {
     id: "syllabus",
-    label: "Edital Verticalizado",
+    label: "Edital e cobertura",
     badge: "G V",
     group: "intelligence",
     keywords: ["edital", "verticalizado", "topicos", "cobertura", "progresso"],
     subitems: ["Disciplinas", "Assuntos", "Subassuntos", "Cobertura confirmada"],
+    primary: true,
   },
   {
     id: "library",
-    label: "Biblioteca Inteligente",
+    label: "Materiais e páginas",
     badge: "G L",
     group: "intelligence",
     keywords: ["biblioteca", "material", "pdf", "aula", "paginas", "estrategia"],
     subitems: ["Materiais privados", "Localizador de aulas", "Páginas recomendadas"],
+    primary: true,
   },
   {
     id: "online",
-    label: "Conta & Nuvem",
+    label: "Conta e sincronização",
     badge: "G O",
     group: "system",
     keywords: ["conta", "login", "nuvem", "supabase", "sincronizacao", "pdf"],
     subitems: ["Autenticação", "Sincronização", "Cofre privado"],
+    primary: true,
   },
   {
     id: "backup",
-    label: "Ajustes & Backup",
+    label: "Configurações e backup",
     badge: "G B",
     group: "system",
     keywords: ["ajustes", "backup", "perfil", "disponibilidade", "restaurar", "exportar"],
     subitems: ["Disponibilidade semanal", "Exportar backup", "Restaurar dados"],
+    primary: true,
   },
 ] as const;
 
@@ -146,7 +151,7 @@ export function filterNavigationItems(query: string): NavigationSearchResult[] {
   const normalizedQuery = normalizeNavigationText(query);
 
   if (!normalizedQuery) {
-    return NAVIGATION_ITEMS.map((item) => ({ item, matchContext: null }));
+    return NAVIGATION_ITEMS.filter((item) => item.primary).map((item) => ({ item, matchContext: null }));
   }
 
   return NAVIGATION_ITEMS.flatMap((item) => {

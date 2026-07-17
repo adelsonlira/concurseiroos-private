@@ -142,6 +142,11 @@ function createMockEdital(): EditalConfig {
       "a-licitacoes": 0.60,
       "a-atos": 0.20
     },
+    assuntoModelMetadata: {
+      "a-propriedade": { topicWeightSource: "OFFICIAL", historicalIncidenceSource: "EMPIRICAL" },
+      "a-licitacoes": { topicWeightSource: "OFFICIAL", historicalIncidenceSource: "EMPIRICAL" },
+      "a-atos": { topicWeightSource: "OFFICIAL", historicalIncidenceSource: "EMPIRICAL" }
+    },
     duracaoEstimadaProvaMinutos: 240
   };
 }
@@ -557,7 +562,7 @@ describe("Strategic Decision Engine (SDE) - Sprint Corretivo P0.1-A", () => {
   });
 
   // --- REQUISITO 4: ELEGIBILIDADE ---
-  it("12. Elegibilidade: teoria é elegível se UNSEEN", () => {
+  it("12. Elegibilidade: tópico UNSEEN inicia por diagnóstico, não por teoria", () => {
     const assessment: any = {
       state: "UNSEEN",
       hitRate: null,
@@ -566,8 +571,10 @@ describe("Strategic Decision Engine (SDE) - Sprint Corretivo P0.1-A", () => {
       theoryCompleted: false
     };
 
-    const eligibility = evaluateActivityEligibility("teoria", assessment, undefined, 0, new Date("2026-07-12"));
-    expect(eligibility.eligible).toBe(true);
+    const theory = evaluateActivityEligibility("teoria", assessment, undefined, 0, new Date("2026-07-12"));
+    const questions = evaluateActivityEligibility("questoes", assessment, undefined, 0, new Date("2026-07-12"));
+    expect(theory.eligible).toBe(false);
+    expect(questions).toMatchObject({ eligible: true, reasonCode: "DIAGNOSTIC_QUESTIONS", diagnosticPurpose: true });
   });
 
   it("13. Elegibilidade: teoria é elegível se hitRate < 50% com sampleSize > 40", () => {
@@ -1550,16 +1557,13 @@ describe("Strategic Decision Engine (SDE) - Sprint Corretivo P0.1-A", () => {
     // GRUPO 3: ELEGIBILIDADE DE ATIVIDADE (Tests 11-15)
     // ==========================================
 
-    it("11. Elegibilidade de Teoria - Permitido se o tópico for UNSEEN", () => {
-      const eligibility = evaluateActivityEligibility(
-        "teoria",
-        createMockAssessment({ state: "UNSEEN" }),
-        undefined,
-        0,
-        referenceDate
-      );
-      expect(eligibility.eligible).toBe(true);
-      expect(eligibility.reasonCode).toBe("UNSEEN_THEORY");
+    it("11. Primeiro contato - Diagnóstico vem antes da teoria", () => {
+      const assessment = createMockAssessment({ state: "UNSEEN" });
+      const theory = evaluateActivityEligibility("teoria", assessment, undefined, 0, referenceDate);
+      const questions = evaluateActivityEligibility("questoes", assessment, undefined, 0, referenceDate);
+      expect(theory.eligible).toBe(false);
+      expect(questions.eligible).toBe(true);
+      expect(questions.reasonCode).toBe("DIAGNOSTIC_QUESTIONS");
     });
 
     it("12. Elegibilidade de Teoria - Permitido se o tópico tiver rendimento baixo (< 50%) e base observada robusta", () => {
@@ -1867,7 +1871,7 @@ describe("Strategic Decision Engine (SDE) - Sprint Corretivo P0.1-A", () => {
         learningLeveragePolicy: DEFAULT_LEARNING_LEVERAGE_POLICY
       });
 
-      const unseenAction = actions.find(a => a.subassuntoId === "sub-propriedade-1" && a.tipo === "teoria");
+      const unseenAction = actions.find(a => a.subassuntoId === "sub-propriedade-1" && a.tipo === "questoes");
       expect(unseenAction).toBeDefined();
       const xaiStr = JSON.stringify(unseenAction!.justificativaXAI);
       expect(xaiStr.toLowerCase()).not.toContain("lacuna");

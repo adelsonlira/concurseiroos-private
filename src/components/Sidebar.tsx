@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  BookOpen,
   Brain,
   CalendarRange,
   Cloud,
@@ -49,7 +48,6 @@ const ICONS_BY_ID: Readonly<Record<string, LucideIcon>> = {
   flashcards: Layers,
   weekly: CalendarRange,
   coach: Brain,
-  parser: BookOpen,
   syllabus: Target,
   library: Library,
   online: Cloud,
@@ -69,6 +67,7 @@ export default function Sidebar({
   const cloudAvailability = useCloudAccountStore((state) => state.environment.availability);
   const cloudAuthStatus = useCloudAccountStore((state) => state.authStatus);
   const cloudPhase = useCloudAccountStore((state) => state.phase);
+  const cloudUser = useCloudAccountStore((state) => state.user);
   const [query, setQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -118,12 +117,20 @@ export default function Sidebar({
 
   const cloudStatusText =
     cloudAvailability !== "CONFIGURED"
-      ? "local-first"
+      ? "salvo neste navegador"
       : cloudAuthStatus === "SIGNED_IN"
         ? cloudPhase === "SYNCING" || cloudPhase === "UPLOADING"
           ? "sincronizando"
           : "nuvem conectada"
         : "nuvem desconectada";
+  const profileLabel =
+    cloudAuthStatus === "SIGNED_IN" && cloudUser?.email
+      ? cloudUser.email
+      : "Perfil de estudos";
+  const profileInitials =
+    cloudAuthStatus === "SIGNED_IN" && cloudUser?.email
+      ? cloudUser.email.slice(0, 2).toUpperCase()
+      : "PE";
 
   return (
     <>
@@ -314,13 +321,18 @@ export default function Sidebar({
             desktopCollapsed ? "lg:px-3" : ""
           }`}
         >
-          <div className={`flex items-center gap-2 ${desktopCollapsed ? "lg:justify-center" : "justify-between"}`}>
+          <button
+            type="button"
+            onClick={() => navigate("online")}
+            className={`flex w-full items-center gap-2 rounded-lg p-1 text-left transition hover:bg-zinc-900 ${desktopCollapsed ? "lg:justify-center" : "justify-between"}`}
+            title="Abrir conta e diagnóstico dos serviços"
+          >
             <div className={`flex min-w-0 items-center gap-2 ${desktopCollapsed ? "lg:hidden" : ""}`}>
               <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800 text-xs font-bold uppercase text-zinc-300">
-                CL
+                {profileInitials}
               </div>
               <div className="min-w-0">
-                <p className="truncate text-[11px] font-semibold text-zinc-200">Concurseiro Lendário</p>
+                <p className="truncate text-[11px] font-semibold text-zinc-200">{profileLabel}</p>
                 <p className="truncate font-mono text-[9px] text-zinc-500">{cloudStatusText}</p>
               </div>
             </div>
@@ -332,7 +344,7 @@ export default function Sidebar({
             ) : (
               <CloudOff title={cloudStatusText} className="h-4 w-4 shrink-0 text-zinc-600" />
             )}
-          </div>
+          </button>
         </div>
       </aside>
     </>

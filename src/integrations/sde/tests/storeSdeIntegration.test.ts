@@ -1,7 +1,10 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { buildDataprev2026Profile3AppSeed } from "../../../config/concursos/dataprev-2026-perfil-3";
 import { useConcurseiroStore } from "../../../store";
 import { StudySessionType } from "../../../types";
+import { buildCanonicalEvidenceFromStore } from "../storeEvidenceAdapter";
+import { assessSubassunto } from "../../../core/sde/prioritization/priorityScore";
+import { evaluateActivityEligibility } from "../../../core/sde/prioritization/constraints";
 
 function seedStore() {
   const seed = buildDataprev2026Profile3AppSeed();
@@ -26,7 +29,13 @@ function seedStore() {
 
 describe("Zustand → SDE integration", () => {
   beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-07-13T12:00:00.000Z"));
     seedStore();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it("calcula e mantém a decisão apenas como estado efêmero", () => {
@@ -55,7 +64,8 @@ describe("Zustand → SDE integration", () => {
       fonteExterna: "Prova FGV consultada externamente",
       nivelConfianca: "MEDIA",
       erroCausa: "LACUNA_CONTEUDO",
-      erroNota: "Confundi a finalidade dos conceitos."
+      erroNota: "Confundi a finalidade dos conceitos.",
+      contextId: "prescription-question-batch-1"
     });
 
     expect(result).toEqual({ success: true });
@@ -72,7 +82,8 @@ describe("Zustand → SDE integration", () => {
       fonteExterna: "Prova FGV consultada externamente",
       nivelConfianca: "MEDIA",
       erroCausa: "LACUNA_CONTEUDO",
-      erroNota: "Confundi a finalidade dos conceitos."
+      erroNota: "Confundi a finalidade dos conceitos.",
+      contextoId: "prescription-question-batch-1"
     });
     expect(state.cronogramasRevisao).toHaveLength(1);
     expect(state.cronogramasRevisao[0]).toMatchObject({
@@ -83,6 +94,7 @@ describe("Zustand → SDE integration", () => {
     });
     expect(state.historicoAtividades[0].metadata).toMatchObject({
       manual: true,
+      contextId: "prescription-question-batch-1",
       source: "Prova FGV consultada externamente"
     });
 
@@ -104,6 +116,197 @@ describe("Zustand → SDE integration", () => {
         (action) => action.subassuntoId === subtopic.id && action.diagnosticPurpose
       )
     ).toBe(true);
+  });
+
+  it("registra uma bateria externa em lote sem exigir cinquenta lançamentos manuais", () => {
+    const seed = seedStore();
+    const subtopic = seed.subassuntos[0];
+    const subject = seed.assuntos.find((item) => item.id === subtopic.assuntoId)!;
+    const discipline = seed.disciplinas.find((item) => item.id === subject.disciplinaId)!;
+
+    const result = useConcurseiroStore.getState().registrarBateriaExterna({
+      disciplinaId: discipline.id,
+      assuntoId: subject.id,
+      subassuntoId: subtopic.id,
+      totalQuestoes: 50,
+      acertos: 38,
+      emBranco: 2,
+      tempoTotalSegundos: 3000,
+      fonteExterna: "Qconcursos",
+      nivelConfianca: "MEDIA",
+      contextId: "prescription-batch-50"
+    });
+
+    expect(result).toEqual({ success: true });
+    const state = useConcurseiroStore.getState();
+    expect(state.tentativasQuestoes).toHaveLength(50);
+    expect(state.tentativasQuestoes.filter((item) => item.acertou)).toHaveLength(38);
+    expect(state.tentativasQuestoes.filter((item) => item.respostaEmBranco)).toHaveLength(2);
+    expect(state.tentativasQuestoes.every((item) => item.registradaEmLote)).toBe(true);
+    expect(state.tentativasQuestoes.every((item) => item.tempoRespostaEstimado)).toBe(true);
+    expect(new Set(state.tentativasQuestoes.map((item) => item.loteRegistroId)).size).toBe(1);
+    expect(state.tentativasQuestoes[0]).toMatchObject({
+      tempoRespostaSegundos: 60,
+      fonteExterna: "Qconcursos",
+      contextoId: "prescription-batch-50"
+    });
+    expect(state.estatisticas.questoesRespondidas).toBe(50);
+    expect(state.estatisticas.questoesAcertadas).toBe(38);
+    expect(state.cronogramasRevisao).toHaveLength(1);
+    expect(state.historicoAtividades[0].metadata).toMatchObject({
+      aggregate: true,
+      totalQuestions: 50,
+      correctQuestions: 38,
+      wrongQuestions: 10,
+      blankQuestions: 2,
+      source: "Qconcursos"
+    });
+  });
+
+  it("usa diagnóstico confiante de 90% para adiar teoria integral sem declarar domínio", () => {
+    const seed = seedStore();
+    const subtopic = seed.subassuntos[0];
+    const subject = seed.assuntos.find((item) => item.id === subtopic.assuntoId)!;
+    const discipline = seed.disciplinas.find((item) => item.id === subject.disciplinaId)!;
+
+    const result = useConcurseiroStore.getState().registrarBateriaExterna({
+      disciplinaId: discipline.id,
+      assuntoId: subject.id,
+      subassuntoId: subtopic.id,
+      totalQuestoes: 10,
+      acertos: 9,
+      acertosConfiantes: 9,
+      emBranco: 0,
+      tempoTotalSegundos: 600,
+      diagnosticoInicial: true,
+      consultouMaterial: false,
+      fonteExterna: "FGV"
+    });
+
+    expect(result.success).toBe(true);
+    const state = useConcurseiroStore.getState();
+    expect(state.subassuntos.find((item) => item.id === subtopic.id)?.completado).toBe(false);
+    expect(state.cronogramasRevisao[0]?.gatilhoOrigem).toBe("DIAGNOSTICO_APTO_SEM_TEORIA");
+
+    const evidence = buildCanonicalEvidenceFromStore({
+      concursoId: seed.concurso.id,
+      referenceDate: "2026-07-13",
+      timeZone: seed.configuracao.disponibilidadeEstudo.timeZone,
+      subassuntos: state.subassuntos,
+      tentativasQuestoes: state.tentativasQuestoes,
+      sessoesEstudo: state.sessoesEstudo,
+      flashcards: state.flashcards,
+      cronogramasRevisao: state.cronogramasRevisao
+    });
+    const assessment = assessSubassunto(subtopic.id, evidence, new Date("2026-07-13"));
+    expect(assessment.diagnosticPlacement?.status).toBe("THEORY_BYPASS_ELIGIBLE");
+    expect(evaluateActivityEligibility("teoria", assessment, evidence.porSubassunto[subtopic.id], 0, new Date("2026-07-13")).eligible).toBe(false);
+    const questionEligibility = evaluateActivityEligibility(
+      "questoes",
+      assessment,
+      evidence.porSubassunto[subtopic.id],
+      0,
+      new Date("2026-07-13")
+    );
+    expect(questionEligibility).toMatchObject({ eligible: true, reasonCode: "OBSERVED_PRACTICE" });
+    expect(questionEligibility.diagnosticPurpose).not.toBe(true);
+  });
+
+  it("exige teoria quando o diagnóstico teve consulta ou acertos sem segurança", () => {
+    const seed = seedStore();
+    const subtopic = seed.subassuntos[0];
+    const subject = seed.assuntos.find((item) => item.id === subtopic.assuntoId)!;
+    const discipline = seed.disciplinas.find((item) => item.id === subject.disciplinaId)!;
+
+    const result = useConcurseiroStore.getState().registrarBateriaExterna({
+      disciplinaId: discipline.id,
+      assuntoId: subject.id,
+      subassuntoId: subtopic.id,
+      totalQuestoes: 10,
+      acertos: 10,
+      acertosConfiantes: 8,
+      emBranco: 0,
+      tempoTotalSegundos: 600,
+      diagnosticoInicial: true,
+      consultouMaterial: true
+    });
+
+    expect(result.success).toBe(true);
+    const state = useConcurseiroStore.getState();
+    const evidence = buildCanonicalEvidenceFromStore({
+      concursoId: seed.concurso.id,
+      referenceDate: "2026-07-13",
+      timeZone: seed.configuracao.disponibilidadeEstudo.timeZone,
+      subassuntos: state.subassuntos,
+      tentativasQuestoes: state.tentativasQuestoes,
+      sessoesEstudo: state.sessoesEstudo,
+      flashcards: state.flashcards,
+      cronogramasRevisao: state.cronogramasRevisao
+    });
+    const assessment = assessSubassunto(subtopic.id, evidence, new Date("2026-07-13"));
+    expect(assessment.diagnosticPlacement?.status).toBe("THEORY_REQUIRED");
+    expect(evaluateActivityEligibility("teoria", assessment, evidence.porSubassunto[subtopic.id], 0, new Date("2026-07-13")).eligible).toBe(true);
+    expect(evaluateActivityEligibility("questoes", assessment, evidence.porSubassunto[subtopic.id], 0, new Date("2026-07-13")).eligible).toBe(false);
+  });
+
+  it("mantém o diagnóstico aberto enquanto a amostra mínima não foi concluída", () => {
+    const seed = seedStore();
+    const subtopic = seed.subassuntos[0];
+    const subject = seed.assuntos.find((item) => item.id === subtopic.assuntoId)!;
+    const discipline = seed.disciplinas.find((item) => item.id === subject.disciplinaId)!;
+
+    useConcurseiroStore.getState().registrarBateriaExterna({
+      disciplinaId: discipline.id,
+      assuntoId: subject.id,
+      subassuntoId: subtopic.id,
+      totalQuestoes: 8,
+      acertos: 8,
+      acertosConfiantes: 8,
+      emBranco: 0,
+      tempoTotalSegundos: 480,
+      diagnosticoInicial: true,
+      consultouMaterial: false
+    });
+
+    const state = useConcurseiroStore.getState();
+    const evidence = buildCanonicalEvidenceFromStore({
+      concursoId: seed.concurso.id,
+      referenceDate: "2026-07-13",
+      timeZone: seed.configuracao.disponibilidadeEstudo.timeZone,
+      subassuntos: state.subassuntos,
+      tentativasQuestoes: state.tentativasQuestoes,
+      sessoesEstudo: state.sessoesEstudo,
+      flashcards: state.flashcards,
+      cronogramasRevisao: state.cronogramasRevisao
+    });
+    const assessment = assessSubassunto(subtopic.id, evidence, new Date("2026-07-13"));
+    expect(assessment.diagnosticPlacement).toMatchObject({ status: "INSUFFICIENT_SAMPLE", missingQuestions: 2 });
+    expect(evaluateActivityEligibility("questoes", assessment, evidence.porSubassunto[subtopic.id], 0, new Date("2026-07-13"))).toMatchObject({
+      eligible: true,
+      diagnosticPurpose: true
+    });
+    expect(state.cronogramasRevisao).toHaveLength(0);
+  });
+
+  it("rejeita resumo de bateria matematicamente inconsistente", () => {
+    const seed = seedStore();
+    const subtopic = seed.subassuntos[0];
+    const subject = seed.assuntos.find((item) => item.id === subtopic.assuntoId)!;
+    const discipline = seed.disciplinas.find((item) => item.id === subject.disciplinaId)!;
+
+    const result = useConcurseiroStore.getState().registrarBateriaExterna({
+      disciplinaId: discipline.id,
+      assuntoId: subject.id,
+      subassuntoId: subtopic.id,
+      totalQuestoes: 10,
+      acertos: 9,
+      emBranco: 2,
+      tempoTotalSegundos: 600
+    });
+
+    expect(result.success).toBe(false);
+    expect(result.error).toMatch(/não podem superar/i);
+    expect(useConcurseiroStore.getState().tentativasQuestoes).toEqual([]);
   });
 
   it("rejeita tentativa externa com hierarquia contraditória sem alterar evidências", () => {

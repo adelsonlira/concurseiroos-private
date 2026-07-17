@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CheckCircle2, Layers, Plus, Trash2 } from "lucide-react";
+import OperationalScreenGuide from "./OperationalScreenGuide";
 import { useConcurseiroStore } from "../store";
 import { CardStatus, type Flashcard } from "../types";
 import type { FlashcardRetrievalPerformance } from "../core/flashcards/types";
@@ -113,6 +114,14 @@ export default function FlashcardView() {
           <span>Novo card</span>
         </button>
       </div>
+
+      <OperationalScreenGuide
+        icon={Layers}
+        title="Flashcards prescritos"
+        purpose="Use cartões apenas quando estiverem vencidos ou forem prescritos. Criar e revisar cartões não é uma obrigação diária."
+        whenToUse="o coach ou a fila indicar recuperação curta"
+        outcome="evidência de lembrança e dificuldade"
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Metric label="PENDENTES AGORA" value={`${dueCards.length} cards`} accent="amber" />

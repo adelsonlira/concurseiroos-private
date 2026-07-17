@@ -1,13 +1,38 @@
 import express from "express";
 import { createClient } from "@supabase/supabase-js";
 import dotenv from "dotenv";
+import readinessReport from "../../data/quality/product-readiness-report.json";
+import { assessProductReadiness } from "../core/readiness/productReadiness";
+import type { ReadinessCheck } from "../core/readiness/types";
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
+const GEMINI_MODEL = process.env.GEMINI_MODEL?.trim() || "gemini-3.5-flash";
+const runtimeSupabaseUrl = process.env.SUPABASE_URL?.trim() || process.env.VITE_SUPABASE_URL?.trim() || null;
+const runtimeSupabaseAnonKey = process.env.SUPABASE_ANON_KEY?.trim() || process.env.VITE_SUPABASE_ANON_KEY?.trim() || null;
+const runtimeSupabaseConfigured = Boolean(runtimeSupabaseUrl && runtimeSupabaseAnonKey);
+const runtimeNodeMajor = Number(process.versions.node.split(".")[0]);
+const runtimeGeminiConfigured = Boolean(
+  process.env.GEMINI_API_KEY?.trim() &&
+    process.env.GEMINI_API_KEY !== "MY_GEMINI_API_KEY" &&
+    process.env.GEMINI_API_KEY !== "SUA_CHAVE_DO_GEMINI"
+);
 
 app.use(express.json({ limit: "50mb" }));
+
+const requestedAuthMode = process.env.AUTH_MODE?.trim().toLowerCase();
+const normalizedRequestedAuthMode =
+  requestedAuthMode === "disabled" || requestedAuthMode === "optional" || requestedAuthMode === "required"
+    ? requestedAuthMode
+    : null;
+const apiAuthMode =
+  process.env.NODE_ENV === "production"
+    ? normalizedRequestedAuthMode === "disabled"
+      ? "disabled"
+      : "required"
+    : normalizedRequestedAuthMode ?? "optional";
 
 // 1. Gemini is loaded lazily only when an AI endpoint is invoked.
 // This keeps health/auth routes independent from the SDK and from GEMINI_API_KEY.
@@ -20,8 +45,8 @@ const SchemaType = {
 } as const;
 
 async function createAiClient() {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey || apiKey === "MY_GEMINI_API_KEY") {
+  const apiKey = process.env.GEMINI_API_KEY?.trim();
+  if (!apiKey || apiKey === "MY_GEMINI_API_KEY" || apiKey === "SUA_CHAVE_DO_GEMINI") {
     const error = new Error("GEMINI_API_KEY não configurada no servidor.");
     (error as Error & { statusCode?: number }).statusCode = 503;
     throw error;
@@ -43,8 +68,82 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok", time: new Date().toISOString() });
 });
 
-const apiAuthMode =
-  process.env.AUTH_MODE ?? (process.env.NODE_ENV === "production" ? "required" : "optional");
+app.get("/api/readiness", (_req, res) => {
+  const checks = (readinessReport.checks as ReadinessCheck[]).map((check) => {
+    if (check.id === "node-runtime") {
+      return {
+        ...check,
+        status: runtimeNodeMajor === 24 ? "PASS" as const : "WARN" as const,
+        detail: runtimeNodeMajor === 24
+          ? `Runtime-alvo confirmado: Node.js ${process.versions.node}.`
+          : `Servidor em Node.js ${process.versions.node}; alvo declarado 24.x.`
+      };
+    }
+    if (check.id === "supabase-authenticated") {
+      return {
+        ...check,
+        status: runtimeSupabaseConfigured ? "WARN" as const : "NOT_TESTED" as const,
+        detail: runtimeSupabaseConfigured
+          ? "Configuração pública presente no servidor. O login e a leitura autenticada precisam ser confirmados pela interface com uma conta real."
+          : "Supabase não está configurado neste processo do servidor."
+      };
+    }
+    if (check.id === "gemini-live") {
+      return {
+        ...check,
+        status: runtimeGeminiConfigured ? "WARN" as const : "NOT_TESTED" as const,
+        detail: runtimeGeminiConfigured
+          ? "Chave presente no backend. Uma chamada autenticada em /api/ai-health confirma a resposta real do modelo."
+          : "Gemini não está configurado neste processo; o Coach determinístico continua operacional."
+      };
+    }
+    return check;
+  });
+  const assessment = assessProductReadiness(checks);
+  res.setHeader("Cache-Control", "no-store");
+  res.json({
+    status: assessment.status,
+    confidence: assessment.confidence,
+    blockingChecks: assessment.blockingChecks,
+    warnings: assessment.warnings,
+    runtime: {
+      supabaseConfigured: runtimeSupabaseConfigured,
+      geminiConfigured: runtimeGeminiConfigured,
+      authMode: apiAuthMode,
+      nodeVersion: process.versions.node,
+      note: "Configuração presente não substitui o smoke test autenticado com uma conta real."
+    },
+    checks: checks.map((check) => ({
+      id: check.id,
+      label: check.label,
+      status: check.status,
+      requiredForDailyUse: check.requiredForDailyUse,
+      detail: check.detail,
+    })),
+  });
+});
+
+app.get("/api/runtime-config", (_req, res) => {
+  res.setHeader("Cache-Control", "no-store");
+  res.json({
+    supabase: {
+      configured: runtimeSupabaseConfigured,
+      url: runtimeSupabaseUrl,
+      anonKey: runtimeSupabaseAnonKey,
+      snapshotTable: process.env.VITE_SUPABASE_SNAPSHOT_TABLE?.trim() || "user_snapshots",
+      privateBucket: process.env.VITE_SUPABASE_PRIVATE_BUCKET?.trim() || "private-study-materials"
+    },
+    auth: {
+      mode: apiAuthMode,
+      allowSelfSignup: process.env.AUTH_ALLOW_SELF_SIGNUP?.trim().toLowerCase() === "true"
+    },
+    ai: {
+      configured: runtimeGeminiConfigured,
+      model: GEMINI_MODEL
+    }
+  });
+});
+
 const supabaseAuthUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
 const supabaseAuthKey = process.env.SUPABASE_ANON_KEY ?? process.env.VITE_SUPABASE_ANON_KEY;
 const authVerifier =
@@ -73,7 +172,10 @@ app.use("/api", async (req: any, res: any, next: any) => {
   const authorization = req.header("authorization") ?? "";
   const match = authorization.match(/^Bearer\s+(.+)$/i);
   if (!match) {
-    return res.status(401).json({ error: "Sessão autenticada obrigatória." });
+    if (apiAuthMode === "required") {
+      return res.status(401).json({ error: "Sessão autenticada obrigatória." });
+    }
+    return next();
   }
 
   try {
@@ -86,6 +188,32 @@ app.use("/api", async (req: any, res: any, next: any) => {
   } catch (error) {
     console.error("[API Auth Error]", error);
     return res.status(401).json({ error: "Não foi possível validar a sessão." });
+  }
+});
+
+app.post("/api/ai-health", async (_req, res) => {
+  const startedAt = Date.now();
+  try {
+    const ai = await createAiClient();
+    const response = await ai.models.generateContent({
+      model: GEMINI_MODEL,
+      contents: "Responda somente com a palavra OK.",
+      config: { temperature: 0 }
+    });
+    res.json({
+      status: "ok",
+      model: GEMINI_MODEL,
+      latencyMs: Date.now() - startedAt,
+      responseReceived: Boolean(response.text?.trim())
+    });
+  } catch (error: any) {
+    const status = Number(error?.statusCode) || 502;
+    if (status !== 503) console.error("[AI Health Error]", error);
+    res.status(status).json({
+      error: status === 503 ? "Gemini não configurado no servidor." : "Falha ao validar a conexão com o Gemini.",
+      model: GEMINI_MODEL,
+      details: error?.message || String(error)
+    });
   }
 });
 
@@ -110,9 +238,11 @@ app.post("/api/parse-edital", async (req: any, res: any) => {
       1. Extraia todas as disciplinas citadas (ex: Direito Constitucional, Língua Portuguesa).
       2. Para cada disciplina, extraia os Assuntos correspondentes de forma lógica e sequencial.
       3. Para cada Assunto, extraia os Subassuntos (detalhes ou tópicos menores descritos).
-      4. Identifique o PESO de cada disciplina se estiver explícito no texto (número inteiro ou decimal). Se não estiver, use 1.
-      5. Se encontrar tópicos duplicados ou redundantes, MESCLE-OS de forma inteligente. Não repita assuntos em uma mesma disciplina.
-      6. Mantenha os nomes dos assuntos e disciplinas claros, profissionais e gramaticalmente corretos em português do Brasil.
+      4. Identifique o PESO de cada disciplina somente se estiver explícito no texto. Se não estiver, use 1 como valor neutro e não inferido.
+      5. Para a prioridade do assunto, retorne ALTA, MEDIA ou BAIXA somente quando o documento declarar essa hierarquia de forma explícita. Caso contrário, retorne NAO_INFORMADA.
+      6. Não estime incidência da banca, relevância histórica, tendência ou prioridade com conhecimento externo. Esta rota apenas extrai o documento.
+      7. Se encontrar tópicos duplicados ou redundantes, mescle-os sem criar conteúdo ausente.
+      8. Mantenha os nomes claros e gramaticalmente corretos em português do Brasil.
     `;
 
     // Strict schema to return the structured syllabus structure
@@ -143,7 +273,7 @@ app.post("/api/parse-edital", async (req: any, res: any) => {
               },
               peso: {
                 type: SchemaType.NUMBER,
-                description: "Peso da disciplina no certame ou relevância estimada. Valor numérico (padrão: 1)."
+                description: "Peso explícito da disciplina no certame. Quando ausente, usar 1 como valor neutro, sem inferência."
               },
               assuntos: {
                 type: SchemaType.ARRAY,
@@ -157,7 +287,7 @@ app.post("/api/parse-edital", async (req: any, res: any) => {
                     },
                     prioridade: {
                       type: SchemaType.STRING,
-                      description: "Prioridade estimada do assunto: ALTA, MEDIA, BAIXA (com base na incidência em concursos daquela área)."
+                      description: "Prioridade explicitamente declarada no documento: ALTA, MEDIA, BAIXA ou NAO_INFORMADA. Nunca estimar por incidência externa."
                     },
                     subassuntos: {
                       type: SchemaType.ARRAY,
@@ -175,7 +305,7 @@ app.post("/api/parse-edital", async (req: any, res: any) => {
       }
     };
 
-    console.log(`[AI Parser] Calling gemini-3.5-flash to parse document: ${filename}`);
+    console.log(`[AI Parser] Calling ${GEMINI_MODEL} to parse document: ${filename}`);
 
     let contents: any;
 
@@ -213,7 +343,7 @@ app.post("/api/parse-edital", async (req: any, res: any) => {
 
     const ai = await createAiClient();
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: GEMINI_MODEL,
       contents,
       config: {
         systemInstruction,
@@ -228,7 +358,7 @@ app.post("/api/parse-edital", async (req: any, res: any) => {
 
   } catch (error: any) {
     console.error("[AI Parser Error]", error);
-    res.status(500).json({
+    res.status(Number(error?.statusCode) || 500).json({
       error: "Falha ao processar o arquivo com Inteligência Artificial.",
       details: error.message || String(error)
     });
@@ -259,14 +389,14 @@ app.post("/api/explain-question", async (req: any, res: any) => {
       Por favor, forneça:
       1. Uma explicação objetiva da resposta correta.
       2. Uma tabela ou lista resumindo a regra jurídica ou teórica por trás do assunto.
-      3. Dicas de 'Armadilhas da Banca' (como evitar pegadinhas semelhantes).
+      3. Armadilhas observáveis nesta questão concreta e como identificar alternativas semelhantes. Não generalize para toda a banca sem evidência validada.
     `;
 
     console.log("[AI Coach] Explaining question...");
 
     const ai = await createAiClient();
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: GEMINI_MODEL,
       contents: userPrompt,
       config: {
         systemInstruction,
@@ -277,120 +407,56 @@ app.post("/api/explain-question", async (req: any, res: any) => {
     res.json({ explanation: response.text });
   } catch (error: any) {
     console.error("[AI Coach Error]", error);
-    res.status(500).json({ error: "Falha ao gerar explicação da IA.", details: error.message });
+    res.status(Number(error?.statusCode) || 500).json({ error: "Falha ao gerar explicação da IA.", details: error.message });
   }
 });
 
 // Helper function to get specialized system instructions for each of the 12 AI Coaches
 function getSystemInstructionForAgent(agentId: string): string {
   const baseRules = `
-    Você é a camada conversacional do ConcurseiroOS. O Strategic Decision Engine (SDE), e não o modelo generativo, determina prioridades, duração, vetos, risco categórico e plano de estudos.
+    Você é a camada conversacional do ConcurseiroOS. O Strategic Decision Engine (SDE), e não o modelo generativo, determina prioridades, duração, vetos, risco categórico, materiais localizados e plano de estudos.
 
     REGRAS INVIOLÁVEIS:
-    - Para perguntas estratégicas, explique somente a decisão estruturada enviada em decisaoSDE. Não altere a ordem, não crie uma atividade alternativa e não recomende duração diferente.
-    - Se decisaoSDE estiver ausente, inválida ou sem dados suficientes, diga explicitamente que não há base para uma recomendação estratégica. Você pode ajudar didaticamente, mas não decidir o que estudar.
-    - Use apenas os registros granulares enviados: tentativas reais, sessões reais e resultados do SDE. Ausência de dados nunca significa rendimento zero.
+    - Para perguntas estratégicas, explique somente a decisão estruturada enviada em decisaoSDE. Não altere a ordem, não crie atividade alternativa e não recomende duração diferente.
+    - Se decisaoSDE estiver ausente, inválida ou sem dados suficientes, diga explicitamente que não há base para uma recomendação estratégica.
+    - Use apenas registros granulares enviados: tentativas, sessões, revisões e resultados do SDE. Ausência de dados nunca significa rendimento zero.
     - Não invente pesos, incidência histórica da banca, probabilidade de aprovação, ganho esperado de pontos, retorno marginal, tendência, domínio, esquecimento ou risco.
-    - Não trate uma heurística interna como pontos por hora ou garantia de resultado.
-    - Diferencie claramente: FATO REGISTRADO, RESULTADO DO SDE, INFERÊNCIA DIDÁTICA e DADO AUSENTE.
+    - Diferencie claramente FATO REGISTRADO, RESULTADO DO SDE, INFERÊNCIA DIDÁTICA e DADO AUSENTE.
     - Não prometa aprovação e não use linguagem de certeza quando houver baixa confiança.
-    - Padrões de banca só podem ser afirmados quando houver fonte fornecida no contexto ou quando estiver analisando uma questão concreta enviada pelo usuário. Caso contrário, trate-os como informação não verificada.
-    - Um campo materialSugerido é apenas um LOCALIZADOR PEDAGÓGICO de material privado. Ele pode ser citado pelo título, seção e páginas recebidas, mas nunca muda prioridade, duração, confiança ou incidência.
-    - Não reproduza, transcreva, resuma extensamente nem alegue ter lido o conteúdo do material privado a partir do localizador. Não gere links de compartilhamento ou exportação.
-    - Dados de recuperação e caderno de erros são descritivos: causas são declarações do usuário; autoavaliações de revisão não equivalem a acertos; dois acertos posteriores são evidência observada de recuperação, não domínio definitivo.
-    - A política de revisão é híbrida e adaptativa. A comparação entre métodos usa resultados tardios observados do próprio usuário; é observacional, reversível e não prova causalidade nem superioridade universal.
-    - Nunca declare um método vencedor quando statusComparacaoMetodos for INSUFFICIENT_DATA ou INCONCLUSIVE. Quando houver OBSERVED_PREFERENCE ou OBSERVED_EFFICIENCY_PREFERENCE, descreva apenas como preferência observada, informe se a base foi retenção ou eficiência e mencione que a exploração controlada continua.
-    - Métricas de tempo por método descrevem recuperações tardias observadas por minutos registrados; não equivalem a pontos por hora, produtividade causal ou garantia de retenção futura.
-    - A calibração semanal é descritiva. Não transforme minutos, presença, diferença entre planejado e executado ou taxa semanal em nota moral, nota de produtividade ou previsão de aprovação.
-    - A fila de revisão não pode congelar o avanço do edital. Quando o contexto trouxer uma proteção de novo conteúdo no Planner, explique-a; não remova essa sessão nem transforme revisões acumuladas em obrigação de ocupar todo o dia.
-    - Ao explicar conteúdo, seja didático e direto em português do Brasil. Ao explicar estratégia, cite a ação, a camada constitucional, a confiança e os dados ausentes exatamente como recebidos.
+    - Padrões da FGV só podem ser afirmados quando houver fonte validada no contexto ou quando o usuário fornecer uma questão concreta. Caso contrário, declare que a tendência não está validada.
+    - Quando prescricaoAtual.focusGuide existir, use exatamente suas perguntas, pontos de atenção, fonte e limites. Não invente novos padrões de cobrança da FGV.
+    - materialSugerido é apenas um localizador de cópia privada. Cite título, seção e páginas recebidas, mas não alegue ter lido, transcrito ou inferido o conteúdo desse material.
+    - Causas de erro são declarações do usuário. Autoavaliação de revisão não equivale a acerto; acertos posteriores são evidência observada de recuperação, não domínio definitivo.
+    - Nunca declare um método vencedor quando statusComparacaoMetodos for INSUFFICIENT_DATA ou INCONCLUSIVE. Uma preferência observada permanece reversível e não prova causalidade.
+    - A calibração semanal é descritiva. Não transforme presença, minutos ou taxa em nota moral, produtividade causal ou previsão de aprovação.
+    - A fila de revisão não pode congelar o avanço do edital. Explique as proteções do Planner sem removê-las.
+    - Responda em português do Brasil, de forma direta, estruturada e compatível com a confiança dos dados.
   `;
 
-  switch (agentId) {
-    case "fgv":
-      return `${baseRules}
-        Você é o **Coach FGV**, especialista implacável na banca Fundação Getulio Vargas (FGV).
-        **Personalidade**: Analítico, atento aos mínimos detalhes, focado na precisão absoluta e na desconstrução de pegadinhas complexas.
-        **Conhecimento específico**: Estilo FGV de cobrança, o temido Português da FGV (interpretação de texto extrema, pressupostos textuais, reescrita de frases), Direito Constitucional e Administrativo analíticos e profundos, e raciocínio lógico formal.
-        **Forma de responder**: Desafiador, focado em dicas de pegadinhas de enunciados da FGV. Mostre ao aluno que a aprovação na FGV exige engenharia reversa de questões e conhecimento de jurisprudência pacificada. Cite exemplos práticos de como a FGV costuma derrubar candidatos desatentos.`;
-
-    case "cespe":
-      return `${baseRules}
-        Você é o **Coach CESPE**, estrategista tático focado na banca Cebraspe/Cespe.
-        **Personalidade**: Gerenciador de riscos nato, focado em controle mental, táticas de resolução de itens de Certo/Errado e mitigação de perdas.
-        **Conhecimento específico**: Modelo Cespe de Certo/Errado (fator de correção: uma errada anula uma certa), doutrina sumulada dos tribunais superiores (STF e STJ), informativos e teses repetitivas.
-        **Forma de responder**: Explique o formato Certo/Errado e a análise de itens quando houver questão concreta. Não estime risco, probabilidade ou estratégia de chute sem regra oficial e decisão estruturada do SDE.`;
-
-    case "fcc":
-      return `${baseRules}
-        Você é o **Coach FCC**, mentor focado na banca Fundação Carlos Chagas (FCC).
-        **Personalidade**: Extremamente preciso, metódico e pragmático, voltado para decorebas de altíssimo nível e memorização de prazos.
-        **Conhecimento específico**: Padrão FCC de cobrança ("Fundação Copia e Cola"), com foco extremo na literalidade das leis (lei seca), constituições, regimentos internos de tribunais e doutrinas majoritárias de prateleira.
-        **Forma de responder**: Sistemático e focado na leitura de lei seca, indicando técnicas de revisão acelerada de códigos, esquemas de prazos e mnemônicos rápidos de literalidade.`;
-
-    case "portugues":
-      return `${baseRules}
-        Você é o **Coach Português**, professor apaixonado pela norma culta e especialista em gabaritar a disciplina de Língua Portuguesa.
-        **Personalidade**: Altamente didático, paciente e focado na clareza gramatical e lógica linguística.
-        **Conhecimento específico**: Sintaxe do período simples e composto, regência verbal/nominal, crase de alto nível, coesão, coerência e interpretação de texto voltada para as principais bancas.
-        **Forma de responder**: Explica as regras fundamentais com esquemas lógicos passo a passo, detalha análises sintáticas dos enunciados e monta resumos mnemônicos de regras que os alunos costumam confundir.`;
-
-    case "ti":
-      return `${baseRules}
-        Você é o **Coach TI**, engenheiro de sistemas focado em concursos de Tecnologia da Informação de alto nível (Fiscais de TI, Tribunais Federais, Carreiras de Tecnologia).
-        **Personalidade**: Altamente técnico, pragmático e direto ao ponto.
-        **Conhecimento específico**: Governança de TI (COBIT, ITIL), Gerenciamento de Projetos (PMBOK), Arquitetura de Computadores, Sistemas Operacionais modernos e infraestrutura complexa.
-        **Forma de responder**: Estruturado, usa terminologia de engenharia de sistemas, diagramas textuais e analogias práticas com sistemas reais para simplificar teorias densas de TI.`;
-
-    case "db":
-      return `${baseRules}
-        Você é o **Coach Banco de Dados**, o mestre de dados e otimização de consultas.
-        **Personalidade**: Obsessivo com performance, modelagem elegante e normalização de tabelas.
-        **Conhecimento específico**: Modelagem relacional e dimensional (E-R, Star e Snowflake schema), linguagem SQL nativa (Joins complexos, subqueries, DDL/DML/DQL), bancos NoSQL (documento, chave-valor, grafos), Data Warehouse, BI e Big Data.
-        **Forma de responder**: Demonstra explicações com blocos de códigos de simulação SQL, tabelas relacionais de exemplo e detalha as regras de normalização (1FN, 2FN, 3FN).`;
-
-    case "java":
-      return `${baseRules}
-        Você é o **Coach Java**, desenvolvedor sênior que pensa em linhas de código orientadas a objetos.
-        **Personalidade**: Pragmatico, lógico e extremamente focado na mecânica da linguagem e ecossistema corporativo.
-        **Conhecimento específico**: Linguagem Java de ponta a ponta (Java 8 a 17/21), Programação Orientada a Objetos (POO), concorrência, JVM (garbage collection, memory management), Spring Framework, JPA/Hibernate e Padrões de Projeto (GoF).
-        **Forma de responder**: Fornece snippets de código Java limpos e bem comentados, explica conceitos através de diagramas de herança/polimorfismo e analisa erros clássicos que caem nas provas.`;
-
-    case "eng_software":
-      return `${baseRules}
-        Você é o **Coach Engenharia de Software**, o arquiteto de processos e metodologias de desenvolvimento.
-        **Personalidade**: Metódico, estruturado e defensor absoluto de boas práticas de design e arquiteturas de software de qualidade.
-        **Conhecimento específico**: Ciclos de vida de software, Metodologias Ágeis (Scrum, Kanban), Engenharia de Requisitos, Padrões de Projeto (GoF), Arquitetura de Software (Microsserviços, Clean Arch, DDD), Testes de Software (TDD, BDD) e DevOps.
-        **Forma de responder**: Estrutura suas análises em frameworks conceituais, compara vantagens e desvantagens de cada padrão arquitetural e usa termos metodológicos precisos.`;
-
-    case "linux":
-      return `${baseRules}
-        Você é o **Coach Linux**, administrador de sistemas linux terminal-centric.
-        **Personalidade**: Direto, técnico de baixo nível e focado em comandos rápidos e scripts de automação.
-        **Conhecimento específico**: Kernel do Linux, comandos avançados de shell (sed, awk, grep, find, chmod), permissões octais e simbólicas, estrutura de diretórios padrão (FHS), gerenciamento de processos (systemd, ps, top) e serviços de sistema.
-        **Forma de responder**: Sempre fornece exemplos diretos de terminal de comandos, sintaxes exatas de shell e caminhos de diretórios do sistema, detalhando o que cada flag faz.`;
-
-    case "redes":
-      return `${baseRules}
-        Você é o **Coach Redes**, engenheiro de infraestrutura que rastreia pacotes até o último bit.
-        **Personalidade**: Analítico, detalhista e focado no fluxo lógico e físico de pacotes de dados.
-        **Conhecimento específico**: Modelos OSI e TCP/IP, protocolos de transporte (TCP, UDP), roteamento (OSPF, BGP), endereçamento e subredes IP (IPv4 e IPv6), DNS, protocolo HTTP/HTTPS, SSL/TLS e serviços de rede corporativa.
-        **Forma de responder**: Desenha diagramas conceituais com fluxos de pacotes, detalha análises de cabeçalhos e explica passo a passo os processos de handshake ou resolução de redes.`;
-
-    case "seguranca":
-      return `${baseRules}
-        Você é o **Coach Segurança**, auditor e hacker ético especializado em segurança da informação.
-        **Personalidade**: Atento, focado na mitigação de riscos, confidencialidade absoluta e resposta defensiva a incidentes.
-        **Conhecimento específico**: Criptografia simétrica e assimétrica, algoritmos de hash, assinaturas e certificados digitais, tipos de ataques digitais (phishing, DDoS, SQL injection), Firewalls, IDS, IPS, normas ISO 27001 e ISO 27002, segurança em nuvem e LGPD.
-        **Forma de responder**: Detalha cenários práticos de contenção de incidentes, explica vulnerabilidades clássicas e foca fortemente em políticas de segurança e menor privilégio.`;
-
-    default: // geral
-      return `${baseRules}
-        Você é o **Coach Geral**, mentor didático e explicador das decisões estruturadas do SDE para concursos públicos.
-        **Personalidade**: Motivador, empático, altamente focado no planejamento, ciclos e consistência.
-        **Conhecimento específico**: Técnicas gerais de organização, prática de recuperação, revisão espaçada e gestão de sessões. Não apresente uma técnica como universalmente superior nem crie um cronograma fora do planner.
-        **Forma de responder**: Estruturado e encorajador, explicando o plano calculado sem prometer resultado nem criar um cronograma paralelo.`;
+  if (agentId === "tutor") {
+    return `${baseRules}
+      PAPEL: Tutor do tópico atual.
+      - Ensine somente o conteúdo solicitado ou o tópico presente na prescrição atual.
+      - Você pode explicar definições, mecanismos, exemplos, contrastes e formular perguntas de recuperação ativa.
+      - Não altere prioridade, duração, material ou sequência do plano.
+      - Não diga que determinada forma de cobrança é típica da FGV sem evidência validada no contexto.
+      - Não reproduza conteúdo protegido nem alegue conhecer páginas privadas apenas porque recebeu um localizador.`;
   }
+
+  if (agentId === "erros") {
+    return `${baseRules}
+      PAPEL: Analista de erros e recuperação.
+      - Organize erros observados, causas declaradas e acertos posteriores.
+      - Separe explicitamente fato, declaração do candidato e hipótese didática.
+      - Pode sugerir um protocolo curto de correção e nova tentativa, mas não criar uma prioridade ou agenda paralela ao SDE.
+      - Não classifique automaticamente a causa de um erro nem declare domínio recuperado.`;
+  }
+
+  return `${baseRules}
+    PAPEL: Coach Estratégico explicativo.
+    - Explique por que a prescrição atual veio primeiro, quais dados foram usados, qual a confiança e quais dados faltam.
+    - Não substitua a decisão, não crie plano alternativo e não use linguagem de marketing.
+    - Quando o usuário perguntar o que fazer, direcione-o para a prescrição atual do SDE e seu protocolo executável.`;
 }
 
 // AI Coach Conversational Chat Route
@@ -429,7 +495,7 @@ app.post("/api/coach-chat", async (req: any, res: any) => {
 
     const ai = await createAiClient();
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: GEMINI_MODEL,
       contents: fullPrompt,
       config: {
         systemInstruction,
@@ -440,7 +506,7 @@ app.post("/api/coach-chat", async (req: any, res: any) => {
     res.json({ reply: response.text });
   } catch (error: any) {
     console.error("[AI Coach Chat Error]", error);
-    res.status(500).json({ error: "Erro ao consultar a Central de Inteligência.", details: error.message });
+    res.status(Number(error?.statusCode) || 500).json({ error: "Erro ao consultar a Central de Inteligência.", details: error.message });
   }
 });
 
@@ -506,7 +572,7 @@ app.post("/api/semantic-search", async (req: any, res: any) => {
 
     const ai = await createAiClient();
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: GEMINI_MODEL,
       contents: userPrompt,
       config: {
         systemInstruction,
@@ -519,7 +585,7 @@ app.post("/api/semantic-search", async (req: any, res: any) => {
     res.json(JSON.parse(response.text || "{\"results\": []}"));
   } catch (error: any) {
     console.error("[Semantic Search Error]", error);
-    res.status(500).json({ error: "Falha na busca semântica com IA.", details: error.message });
+    res.status(Number(error?.statusCode) || 500).json({ error: "Falha na busca semântica com IA.", details: error.message });
   }
 });
 
@@ -536,10 +602,13 @@ app.post("/api/organize-material", async (req: any, res: any) => {
     if (sensitivity === "METADATA_ONLY" && fileContent) {
       return res.status(400).json({ error: "METADATA_ONLY não aceita conteúdo do arquivo." });
     }
+    if (sensitivity === "DERIVED_OUTLINE_ONLY" && String(fileContent || "").length > 12000) {
+      return res.status(400).json({ error: "O sumário derivado excede o limite permitido." });
+    }
 
     const systemInstruction = `
       Você é o organizador automático de arquivos do ConcurseiroOS.
-      Sua tarefa é analisar os metadados de um material de estudo enviado pelo usuário (como o nome do arquivo, tipo, e um trecho do conteúdo se disponível) e classificá-lo de forma extremamente precisa dentro da grade de disciplinas e assuntos de concurso do estudante.
+      Sua tarefa é classificar um material usando nome, tipo e, quando explicitamente autorizado, somente um sumário derivado localmente com títulos e intervalos de páginas. Nunca presuma que recebeu ou leu o PDF integral.
       
       Selecione a disciplina e o assunto existentes que mais se aproximam do assunto do material.
       Se nenhum assunto existente for compatível, sugira a disciplina mais próxima e sugira um novo assunto adequado.
@@ -592,7 +661,7 @@ app.post("/api/organize-material", async (req: any, res: any) => {
 
     const ai = await createAiClient();
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: GEMINI_MODEL,
       contents: userPrompt,
       config: {
         systemInstruction,
@@ -605,7 +674,7 @@ app.post("/api/organize-material", async (req: any, res: any) => {
     res.json(JSON.parse(response.text || "{}"));
   } catch (error: any) {
     console.error("[Auto-Organize Error]", error);
-    res.status(500).json({ error: "Falha ao organizar material com IA.", details: error.message });
+    res.status(Number(error?.statusCode) || 500).json({ error: "Falha ao organizar material com IA.", details: error.message });
   }
 });
 

@@ -106,6 +106,13 @@ interface EligibleCandidate extends RawCandidate {
   diagnosticPurpose: boolean;
   reasonCode: string;
   constraintChecks: ConstraintCheck[];
+  disciplineSafetyCoverageFront?: boolean;
+}
+
+interface EvaluatedCandidate {
+  candidate: EligibleCandidate;
+  opportunityCostResult: OpportunityCostResult;
+  marginalReturnEstimate: MarginalReturnEstimate;
 }
 
 function buildMarginalReturnEstimate(): MarginalReturnEstimate {
@@ -121,6 +128,50 @@ function buildMarginalReturnEstimate(): MarginalReturnEstimate {
       "desempenhoDepois"
     ]
   };
+}
+
+function zeroSafetySeverity(status: ScoreBreakdown["disciplineZeroSafetyStatus"]): number {
+  switch (status) {
+    case "NO_CORRECT_ANSWER": return 0;
+    case "UNASSESSED": return 1;
+    case "MINIMUM_EVIDENCE": return 2;
+    default: return 3;
+  }
+}
+
+function prioritizeNoZeroDisciplineCoverage(
+  items: EvaluatedCandidate[],
+  edital: EditalConfig
+): EvaluatedCandidate[] {
+  if (edital.eliminaAoZerarDisciplina !== true) return items;
+
+  const representatives = new Map<string, EvaluatedCandidate>();
+  for (const item of items) {
+    const status = item.candidate.scoreBreakdown.disciplineZeroSafetyStatus;
+    if (status === "NOT_APPLICABLE" || status === "PROTECTED") continue;
+    if (!representatives.has(item.candidate.disciplinaId)) {
+      representatives.set(item.candidate.disciplinaId, item);
+    }
+  }
+
+  const safetyFront = [...representatives.values()].sort((left, right) => {
+    const leftBreakdown = left.candidate.scoreBreakdown;
+    const rightBreakdown = right.candidate.scoreBreakdown;
+    return (
+      zeroSafetySeverity(leftBreakdown.disciplineZeroSafetyStatus) -
+        zeroSafetySeverity(rightBreakdown.disciplineZeroSafetyStatus) ||
+      leftBreakdown.disciplineSampleSize - rightBreakdown.disciplineSampleSize ||
+      rightBreakdown.finalScore - leftBreakdown.finalScore ||
+      left.candidate.disciplinaId.localeCompare(right.candidate.disciplinaId)
+    );
+  });
+
+  if (safetyFront.length === 0) return items;
+  for (const item of safetyFront) {
+    item.candidate.disciplineSafetyCoverageFront = true;
+  }
+  const frontIds = new Set(safetyFront.map((item) => item.candidate.id));
+  return [...safetyFront, ...items.filter((item) => !frontIds.has(item.candidate.id))];
 }
 
 export function generateStrategicActions(inputs: PriorityEngineInputs): StrategicAction[] {
@@ -322,7 +373,7 @@ export function generateStrategicActions(inputs: PriorityEngineInputs): Strategi
     tier: candidate.scoreBreakdown.camadaConstitucional
   }));
 
-  const evaluated = eligibleCandidates.map((candidate) => ({
+  const evaluated: EvaluatedCandidate[] = eligibleCandidates.map((candidate) => ({
     candidate,
     opportunityCostResult: calculateComparativeOpportunityCost({
       actionId: candidate.id,
@@ -349,13 +400,15 @@ export function generateStrategicActions(inputs: PriorityEngineInputs): Strategi
     return left.candidate.id.localeCompare(right.candidate.id);
   });
 
+  const orderedEvaluated = prioritizeNoZeroDisciplineCoverage(evaluated, edital);
+
   const tieCounts = new Map<string, number>();
-  for (const item of evaluated) {
+  for (const item of orderedEvaluated) {
     const key = `${item.candidate.scoreBreakdown.camadaConstitucional}|${item.candidate.scoreBreakdown.finalScore.toFixed(12)}`;
     tieCounts.set(key, (tieCounts.get(key) ?? 0) + 1);
   }
 
-  return evaluated.map((item, index) => {
+  return orderedEvaluated.map((item, index) => {
     const candidate = item.candidate;
     return generateStrategicAction({
       prioridade: index + 1,
@@ -379,6 +432,7 @@ export function generateStrategicActions(inputs: PriorityEngineInputs): Strategi
       reasonCode: candidate.reasonCode,
       eliminationRiskResult: candidate.scoreBreakdown.elimRiskResult,
       marginalReturnEstimate: item.marginalReturnEstimate,
+      disciplineSafetyCoverageFront: candidate.disciplineSafetyCoverageFront === true,
       rankingContext: (() => {
         const key = `${candidate.scoreBreakdown.camadaConstitucional}|${candidate.scoreBreakdown.finalScore.toFixed(12)}`;
         const tiedActionCount = tieCounts.get(key) ?? 1;

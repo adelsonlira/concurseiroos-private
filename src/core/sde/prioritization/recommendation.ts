@@ -61,6 +61,16 @@ function buildWhy(params: {
     eliminationRiskResult
   } = params;
 
+  if (scoreBreakdown.disciplineZeroSafetyStatus === "NO_CORRECT_ANSWER") {
+    return `A disciplina ${disciplinaNome} ainda não possui acerto registrado. Como o edital elimina quem zera uma disciplina, o Coach protege primeiro uma base mínima antes de concentrar o restante do esforço nos conteúdos de maior pontuação.`;
+  }
+  if (scoreBreakdown.disciplineZeroSafetyStatus === "UNASSESSED") {
+    return `A disciplina ${disciplinaNome} ainda não possui amostra diagnóstica. Como o edital elimina quem zera uma disciplina, esta ação abre uma evidência mínima sem presumir domínio.`;
+  }
+  if (scoreBreakdown.disciplineZeroSafetyStatus === "MINIMUM_EVIDENCE") {
+    return `A disciplina ${disciplinaNome} já possui ao menos um acerto, mas a amostra ainda é pequena. O Coach mantém uma proteção mínima contra o risco de zerar antes de liberar concentração integral nos conteúdos de maior retorno.`;
+  }
+
   if (diagnosticPurpose || reasonCode === "DIAGNOSTIC_QUESTIONS") {
     return `Existem evidências insuficientes para estimar o rendimento de '${topicDisplay}' com segurança. As questões foram recomendadas com finalidade diagnóstica.`;
   }
@@ -169,6 +179,7 @@ export function generateStrategicAction(params: {
   reasonCode?: string;
   eliminationRiskResult?: EliminationRiskResult;
   marginalReturnEstimate?: MarginalReturnEstimate;
+  disciplineSafetyCoverageFront?: boolean;
   rankingContext: RankingContext;
 }): StrategicAction {
   const {
@@ -192,6 +203,7 @@ export function generateStrategicAction(params: {
     reasonCode,
     eliminationRiskResult,
     marginalReturnEstimate,
+    disciplineSafetyCoverageFront,
     rankingContext
   } = params;
 
@@ -236,6 +248,12 @@ export function generateStrategicAction(params: {
   if (scoreBreakdown.dependenciasBonus > 0) {
     fatos.push(`Bônus estrutural de dependências: ${scoreBreakdown.dependenciasBonus}`);
   }
+  if (scoreBreakdown.disciplineZeroSafetyStatus !== "NOT_APPLICABLE") {
+    fatos.push(
+      `Proteção contra zero na disciplina: ${scoreBreakdown.disciplineZeroSafetyStatus}; ` +
+      `${scoreBreakdown.disciplineCorrectAnswers} acerto(s) em ${scoreBreakdown.disciplineSampleSize} tentativa(s)`
+    );
+  }
 
   if (hitRate === null) missingData.push("rendimento observado");
   if (questionsCount === 0) missingData.push("questões registradas");
@@ -258,10 +276,6 @@ export function generateStrategicAction(params: {
   }
 
   let custoIgnorar: string;
-  if (rankingContext.isTied && rankingContext.note) {
-    inferenceParts.push(rankingContext.note);
-  }
-
   if (mappedReasonCode === "UNSEEN_THEORY") {
     custoIgnorar = `Adiar a construção da base conceitual de '${topicDisplay}' pode limitar o avanço posterior para questões e revisões.`;
   } else if (diagnosticPurpose) {
@@ -325,6 +339,22 @@ export function generateStrategicAction(params: {
     reasonCode: mappedReasonCode,
     opportunityCostResult,
     eliminationRiskResult,
-    marginalReturnEstimate
+    marginalReturnEstimate,
+    decisionEvidence: {
+      knowledgeState: scoreBreakdown.knowledgeState,
+      sampleSize: questionsCount,
+      confidenceScore: scoreBreakdown.confiancaEstatistica,
+      confidenceLevel: scoreBreakdown.confidenceLevel,
+      topicWeightSource: scoreBreakdown.topicWeightSource,
+      historicalIncidenceSource: scoreBreakdown.historicalIncidenceSource,
+      historicalIncidenceRate:
+        scoreBreakdown.historicalIncidenceSource === "EMPIRICAL"
+          ? scoreBreakdown.historicalIncidenceRate
+          : null,
+      disciplineZeroSafetyStatus: scoreBreakdown.disciplineZeroSafetyStatus,
+      disciplineSampleSize: scoreBreakdown.disciplineSampleSize,
+      disciplineCorrectAnswers: scoreBreakdown.disciplineCorrectAnswers,
+      disciplineSafetyCoverageFront: disciplineSafetyCoverageFront === true
+    }
   };
 }

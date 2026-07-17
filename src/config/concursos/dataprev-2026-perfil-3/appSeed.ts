@@ -16,7 +16,6 @@ import {
   Subassunto
 } from "../../../types";
 import { createSixDayAvailability } from "../../../core/availability/availabilityEngine";
-import { ConfigUsuario } from "../../../types";
 import {
   DATAPREV_2026_PROFILE_3_ID,
   DATAPREV_2026_PROFILE_3_PACKAGE
@@ -25,18 +24,12 @@ import { buildPrivateStudyMaterialLibraryItems } from "./privateStudyMaterials";
 
 const CREATED_AT = "2026-07-03T00:00:00-03:00";
 
-export interface DataprevAppSeed {
-  concurso: Concurso;
-  edital: Edital;
-  disciplinas: Disciplina[];
-  assuntos: Assunto[];
-  subassuntos: Subassunto[];
-  estatisticas: Estatisticas;
-  configuracao: ConfigUsuario;
-  biblioteca: ItemBiblioteca[];
-}
+import type { CompetitionAppSeed } from "../types";
 
-export function buildDataprev2026Profile3AppSeed(): DataprevAppSeed {
+/** @deprecated Use CompetitionAppSeed for package-independent integrations. */
+export type DataprevAppSeed = CompetitionAppSeed;
+
+export function buildDataprev2026Profile3AppSeed(): CompetitionAppSeed {
   const pkg = DATAPREV_2026_PROFILE_3_PACKAGE;
 
   const concurso: Concurso = {
@@ -160,7 +153,7 @@ export function buildDataprev2026Profile3AppSeed(): DataprevAppSeed {
     updatedAt: CREATED_AT
   };
 
-  const configuracao: ConfigUsuario = {
+  const configuracao: CompetitionAppSeed["configuracao"] = {
     id: "global_config",
     estudanteNome: "Concurseiro",
     metaHorariaDiariaMinutos: 180,

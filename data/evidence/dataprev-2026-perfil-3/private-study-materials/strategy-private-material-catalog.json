@@ -7,6 +7,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Atualidades - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "a-questao-hidrica-completo-2d30.pdf",
       "sourceRelativePath": "Atualidades - F/a-questao-hidrica-completo-2d30.pdf",
       "sourceSha256": "3fbdd1ffa5fcc8e21ad5a00e3ee22301cbc16a4d156f981aa7dc220212c318e1",
@@ -52,6 +55,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Atualidades - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392245-aula-00-b7f4-grifado.pdf",
       "sourceRelativePath": "Atualidades - F/curso-392245-aula-00-b7f4-grifado.pdf",
       "sourceSha256": "2360a267370aa79c6699b093fee25b44d634350deff429aff53ffcf32cd80bc4",
@@ -97,6 +103,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Atualidades - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392245-aula-01-0dba-completo.pdf",
       "sourceRelativePath": "Atualidades - F/curso-392245-aula-01-0dba-completo.pdf",
       "sourceSha256": "2bf9c4a768d019ac53974fdd2d40ccdeeeea01017d02adb2f041934750a1f455",
@@ -320,6 +329,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Atualidades - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392245-aula-02-245e-completo.pdf",
       "sourceRelativePath": "Atualidades - F/curso-392245-aula-02-245e-completo.pdf",
       "sourceSha256": "10be058999d17b08e159151d76fcd8644d32b8dd0f2aca0d7f9b1110fb450c51",
@@ -627,6 +639,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Atualidades - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392245-aula-03-09ef-completo.pdf",
       "sourceRelativePath": "Atualidades - F/curso-392245-aula-03-09ef-completo.pdf",
       "sourceSha256": "a2a2f7dc04c6365bbb2ce02079fa09036607b831d6d27111efc23251481c0545",
@@ -1118,6 +1133,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Atualidades - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392245-aula-04-cfc8-completo.pdf",
       "sourceRelativePath": "Atualidades - F/curso-392245-aula-04-cfc8-completo.pdf",
       "sourceSha256": "c6f53b3b35e105d824248f243441045ffb9a1f09b521ff66b3c5c072bf962328",
@@ -1369,6 +1387,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Atualidades - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392245-aula-05-2e80-completo.pdf",
       "sourceRelativePath": "Atualidades - F/curso-392245-aula-05-2e80-completo.pdf",
       "sourceSha256": "331386ca553654302ff32d0534a6698da5ef842b95d590e0f775311a7d50cfa2",
@@ -1612,6 +1633,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Atualidades - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392245-aula-07-1a46-completo.pdf",
       "sourceRelativePath": "Atualidades - F/curso-392245-aula-07-1a46-completo.pdf",
       "sourceSha256": "1bfa4855202b283a66554ed0ef45e3bbc55036bf610d49592bfdeec21f9f5014",
@@ -1677,6 +1701,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Atualidades - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392245-aula-08-ad40-completo.pdf",
       "sourceRelativePath": "Atualidades - F/curso-392245-aula-08-ad40-completo.pdf",
       "sourceSha256": "05c6d4bbc94d1818ef5d59d52fab2e47a7453038cfb1df4f3e5de8f202e8a4a2",
@@ -1740,6 +1767,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Atualidades - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392245-aula-09-348a-completo.pdf",
       "sourceRelativePath": "Atualidades - F/curso-392245-aula-09-348a-completo.pdf",
       "sourceSha256": "706ad76516ea7e1befc9dbd12e66aa9359c5fed72f236bb164ca6e32b549e9fc",
@@ -1823,6 +1853,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Atualidades - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392245-aula-10-43bf-completo.pdf",
       "sourceRelativePath": "Atualidades - F/curso-392245-aula-10-43bf-completo.pdf",
       "sourceSha256": "ef48b269e8ed54b316e9cd42a8eb2bd1faa4d27e40763cb500548276bfca9466",
@@ -1904,6 +1937,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-00-82ec-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-00-82ec-completo.pdf",
       "sourceSha256": "180fde86dba0c948c786763e3b4fcc68698fbbaaebf1b9c5fd8cede9089fa4b3",
@@ -2017,6 +2053,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-01-40c4-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-01-40c4-completo.pdf",
       "sourceSha256": "bcbc9cb7e943213cfb2b45ebc586aa68a47a3ef7efd1300b2caa33a220e11037",
@@ -2172,6 +2211,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-02-35b5-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-02-35b5-completo.pdf",
       "sourceSha256": "1df7b47aa9bdecd246fd60ce153b4a9dcd8ec9ef3328c6cbe213d1b5cebfdf9d",
@@ -2271,6 +2313,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-03-56d3-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-03-56d3-completo.pdf",
       "sourceSha256": "8350d299f83a6ea39029dfe217b794637cbf520aac0999aa2c6f469f7c862a49",
@@ -2352,6 +2397,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-04-68a7-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-04-68a7-completo.pdf",
       "sourceSha256": "94c08981a065d0172674b326d2fc60687a36e2da1742efa66bb1e737e5ba1a76",
@@ -2487,6 +2535,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-05-83c8-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-05-83c8-completo.pdf",
       "sourceSha256": "9e7e2d56208eec001dd7e28a42b11880f2b756844d7083769ddd4cc7cbf57e75",
@@ -2561,15 +2612,11 @@
           "contentKind": "THEORY",
           "questionBank": null,
           "disciplineId": "dp26-p3-conhecimentos-especificos",
-          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
-          "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
-          ],
-          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
-          "confidence": 0.97,
-          "matchedTerms": [
-            "ios"
-          ]
+          "topicId": "dp26-p3-esp-banco-dados",
+          "subtopicIds": [],
+          "mappingStatus": "TOPIC_ONLY",
+          "confidence": 0.75,
+          "matchedTerms": []
         },
         {
           "ordinal": 5,
@@ -2628,6 +2675,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-06-4978-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-06-4978-completo.pdf",
       "sourceSha256": "b45fc4b01ba6f686cc3cdecae3aee4a5c0782e69233c76fdcabffa5aaedee59e",
@@ -2763,6 +2813,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-07-9fdf-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-07-9fdf-completo.pdf",
       "sourceSha256": "f23d1422f305a174284e07cd1e25b62e5887a6a6e44719ec9fb4fb925b1eaa59",
@@ -2844,6 +2897,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-08-b41c-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-08-b41c-completo.pdf",
       "sourceSha256": "44565b694421122f32e56447ad39f3e05650a000e7ed08e55bc01e93f7c5f55d",
@@ -2939,6 +2995,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-09-a0fe-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-09-a0fe-completo.pdf",
       "sourceSha256": "f5682d2ef111d9fce27610b1a74e2f125260b6b6c5877abac4e2dbd460cc294e",
@@ -3038,6 +3097,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-10-edd9-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-10-edd9-completo.pdf",
       "sourceSha256": "1ab094e8b560ad1fa95f60a10ab23058884d58167f3e01a303783845d6e73ef9",
@@ -3119,6 +3181,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Banco de dados - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393320-aula-11-562d-completo.pdf",
       "sourceRelativePath": "Banco de dados - C/curso-393320-aula-11-562d-completo.pdf",
       "sourceSha256": "52f6d03f7c3c60ef3e976499a9cee816811648457c2eb47ee0b06f2bfe283f4b",
@@ -3327,6 +3392,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-00-vinicius-borges-raphael-lacerda-4d11-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-00-vinicius-borges-raphael-lacerda-4d11-completo.pdf",
       "sourceSha256": "8fc7809c51712eb129425f4501d4a45fe5fd43260c0b161ca78753f99015b995",
@@ -3422,6 +3490,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-01-07da-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-01-07da-completo.pdf",
       "sourceSha256": "5a1c3c17981f34e3ea0ec01a4bdc71076b98bc86d48627afe2bfcaebaf643c80",
@@ -3506,6 +3577,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-02-9917-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-02-9917-completo.pdf",
       "sourceSha256": "ad58b06226d583ba4869a430574f2073dbe47d17d816fe1432262fa9472a7131",
@@ -3587,6 +3661,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-03-41c5-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-03-41c5-completo.pdf",
       "sourceSha256": "5f86de7dcf8fb5f42c5d0f4bdbb0fc17a704b10eabcc5bab4f17be2b91daf431",
@@ -3770,6 +3847,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-04-d4d4-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-04-d4d4-completo.pdf",
       "sourceSha256": "781cc496cdf5609eb5c014541b2d19d50958ad2e4410b8c8d80573fdf0df77e4",
@@ -3905,6 +3985,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-05-254f-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-05-254f-completo.pdf",
       "sourceSha256": "b1f66544aebd0f3e88d42c401679f92361e1cf23aca5a6f76c2072052a245888",
@@ -4190,6 +4273,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-06-bba1-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-06-bba1-completo.pdf",
       "sourceSha256": "e3e8b19df7b0c040cda7cd61f5ed89f6635d5acf535ef429311beeca62759474",
@@ -4293,6 +4379,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-07-b620-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-07-b620-completo.pdf",
       "sourceSha256": "038c8f8064eec440c8c3c5195f7dd72b673cdb228d5a7e14c0a87be8597d2286",
@@ -4434,6 +4523,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-08-e2ba-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-08-e2ba-completo.pdf",
       "sourceSha256": "17f2f1e498a62d013d9e2fab859edcb9f15b3afe3db3b37d0f6f32e1bf44361b",
@@ -4515,6 +4607,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-09-f232-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-09-f232-completo.pdf",
       "sourceSha256": "1ab79636e615db47e4b36c9e62d53024018c812a90f8d9ebcfe5e70447ef20f7",
@@ -4752,14 +4847,10 @@
           "questionBank": null,
           "disciplineId": "dp26-p3-conhecimentos-especificos",
           "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
-          "subtopicIds": [
-            "dp26-p3-esp-frontend"
-          ],
-          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
-          "confidence": 0.97,
-          "matchedTerms": [
-            "vue"
-          ]
+          "subtopicIds": [],
+          "mappingStatus": "TOPIC_ONLY",
+          "confidence": 0.75,
+          "matchedTerms": []
         },
         {
           "ordinal": 14,
@@ -4770,14 +4861,10 @@
           "questionBank": null,
           "disciplineId": "dp26-p3-conhecimentos-especificos",
           "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
-          "subtopicIds": [
-            "dp26-p3-esp-frontend"
-          ],
-          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
-          "confidence": 0.97,
-          "matchedTerms": [
-            "vue"
-          ]
+          "subtopicIds": [],
+          "mappingStatus": "TOPIC_ONLY",
+          "confidence": 0.75,
+          "matchedTerms": []
         },
         {
           "ordinal": 15,
@@ -4788,14 +4875,10 @@
           "questionBank": null,
           "disciplineId": "dp26-p3-conhecimentos-especificos",
           "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
-          "subtopicIds": [
-            "dp26-p3-esp-frontend"
-          ],
-          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
-          "confidence": 0.97,
-          "matchedTerms": [
-            "vue"
-          ]
+          "subtopicIds": [],
+          "mappingStatus": "TOPIC_ONLY",
+          "confidence": 0.75,
+          "matchedTerms": []
         },
         {
           "ordinal": 16,
@@ -4920,6 +5003,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-10-d473-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-10-d473-completo.pdf",
       "sourceSha256": "8fbea1b9eec895b908c1c179f39c0f845185edd5b7b5e24d07a72dd918453807",
@@ -5001,6 +5087,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-11-ea1b-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-11-ea1b-completo.pdf",
       "sourceSha256": "eaf64a6a1cf00401439c75f34729132b22c558e5eb472e254b1cd4abc4bb5776",
@@ -5196,6 +5285,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-12-756f-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-12-756f-completo.pdf",
       "sourceSha256": "9e8ff4661d805f7274759351e57dc1aa8746dea7f9c5af13528523f27af450ce",
@@ -5277,7 +5369,6 @@
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.98,
           "matchedTerms": [
-            "git ",
             "gitlab"
           ]
         },
@@ -5296,7 +5387,6 @@
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.98,
           "matchedTerms": [
-            "git ",
             "gitlab"
           ]
         },
@@ -5315,7 +5405,6 @@
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.98,
           "matchedTerms": [
-            "git ",
             "gitlab"
           ]
         }
@@ -5334,6 +5423,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-13-1ff4-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-13-1ff4-completo.pdf",
       "sourceSha256": "8bdab6d45fd257f80a3630aaae180db0996352d72c6d43a3d8c1376599a6ab80",
@@ -5415,6 +5507,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-14-530d-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-14-530d-completo.pdf",
       "sourceSha256": "04b9504fdc7bdf120a42c2f5791185b782240b4c0f549036ef34d5c634bad63d",
@@ -5564,6 +5659,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-15-533b-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-15-533b-completo.pdf",
       "sourceSha256": "083e53ccb34b72831b9d41cac6a103d838047c27f41ea100516f5c62c9b033d0",
@@ -5816,6 +5914,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-16-7056-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-16-7056-completo.pdf",
       "sourceSha256": "3a8a9ee3bca81816ab7708f8005a18ab66965121765e593879a158f1234e06d4",
@@ -5951,6 +6052,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-17-8148-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-17-8148-completo.pdf",
       "sourceSha256": "749e1f808a9b2abb32f75901574337d2baf5546e865513107759c80118a43d33",
@@ -6032,6 +6136,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-18-a6aa-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-18-a6aa-completo.pdf",
       "sourceSha256": "9f0be2f99f539b14a4ae7e09d1f58fc1011403fb5449e8569a6cf0d3298c59be",
@@ -6329,6 +6436,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-19-c3e6-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-19-c3e6-completo.pdf",
       "sourceSha256": "a3bedf6e9034c5daa14856b9e3f3917a7ea927a774496d11f755b92c54959c17",
@@ -6410,6 +6520,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-20-67a9-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-20-67a9-completo.pdf",
       "sourceSha256": "a3572f46d300dcc021efd4285ebcc6a1f198365bcbf8f53ef2f0de86c41cef4f",
@@ -6491,6 +6604,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Desenvolvimento - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393315-aula-21-4abd-completo.pdf",
       "sourceRelativePath": "Desenvolvimento - C/curso-393315-aula-21-4abd-completo.pdf",
       "sourceSha256": "ac69dee48a950e3b20cb4ba8804a0597f872e014f2f27953a041789625a17ca4",
@@ -6680,6 +6796,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-00-c020-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-00-c020-completo.pdf",
       "sourceSha256": "cf42c5e3c92d44a4f8725771878e1759e0e3c228d697ecb27f1dd68c1058c4ec",
@@ -6791,6 +6910,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-01-2f45-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-01-2f45-completo.pdf",
       "sourceSha256": "a09cd1abbbf8816a70e865787ad52b03cae9b825357436db4bfabe72ca089c0a",
@@ -6926,6 +7048,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-02-b69d-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-02-b69d-completo.pdf",
       "sourceSha256": "a2307c9322d9760baeba12f3ce5414a081957b9545686c984af1b543d3b096a3",
@@ -7025,6 +7150,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-03-f1d7-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-03-f1d7-completo.pdf",
       "sourceSha256": "05c39ffd13f606b724b995d33be91f7e0167395b5d189e6bf994aa8496ee1ba4",
@@ -7160,6 +7288,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-04-e9d4-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-04-e9d4-completo.pdf",
       "sourceSha256": "2a7c2cd7893b01fe810f929d22d0e12defe152e0e93309bb494e75684bbc0ffe",
@@ -7313,6 +7444,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-05-f13c-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-05-f13c-completo.pdf",
       "sourceSha256": "77814aa5fdc79b3e1d8179029a5b1fa2e0a891f4a1099194defeff3f3b116d7d",
@@ -7416,6 +7550,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-06-6653-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-06-6653-completo.pdf",
       "sourceSha256": "5aa59e82184fdd7cf862c5e9aac42d99a8fe1cc0d64221e754346f71ec30dcdd",
@@ -7587,6 +7724,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-07-3d7e-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-07-3d7e-completo.pdf",
       "sourceSha256": "23100b509c62fba6ad41bcc3c90a2cc02f80180fb9e04484cc4728d4e3d890ae",
@@ -7722,6 +7862,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-08-bb86-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-08-bb86-completo.pdf",
       "sourceSha256": "74d97a82184f8d45f1a7cd649f09ad6d718d2049069d8c3535aadd9e71d2b704",
@@ -7821,6 +7964,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-09-bf90-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-09-bf90-completo.pdf",
       "sourceSha256": "1240e93847f9bb0da5ee599226cea9987939b58bb0656d1e5956af88ca6eab80",
@@ -7920,6 +8066,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-10-591e-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-10-591e-completo.pdf",
       "sourceSha256": "52a0e5580792887d53135c6c3e5abc4f1752d1e8f84736c9dac2a3a8c53133c1",
@@ -8019,6 +8168,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-12-c328-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-12-c328-completo.pdf",
       "sourceSha256": "1b48baa2bf11831f4bb1f800fd11413dac57b08c77a1ccc1340df5d938cd3182",
@@ -8059,12 +8211,12 @@
           "disciplineId": "dp26-p3-conhecimentos-especificos",
           "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
           "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
+            "dp26-p3-esp-padroes-reuso"
           ],
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
-          "confidence": 0.97,
+          "confidence": 0.95,
           "matchedTerms": [
-            "ios"
+            "solid"
           ]
         },
         {
@@ -8077,12 +8229,12 @@
           "disciplineId": "dp26-p3-conhecimentos-especificos",
           "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
           "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
+            "dp26-p3-esp-padroes-reuso"
           ],
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
-          "confidence": 0.97,
+          "confidence": 0.95,
           "matchedTerms": [
-            "ios"
+            "solid"
           ]
         },
         {
@@ -8095,12 +8247,12 @@
           "disciplineId": "dp26-p3-conhecimentos-especificos",
           "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
           "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
+            "dp26-p3-esp-padroes-reuso"
           ],
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
-          "confidence": 0.97,
+          "confidence": 0.95,
           "matchedTerms": [
-            "ios"
+            "solid"
           ]
         }
       ],
@@ -8118,6 +8270,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-13-c206-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-13-c206-completo.pdf",
       "sourceSha256": "11bf92e4ccdff2ad0a699f43658b4d895ca10a507d39b06f14a3e16370f0d9a0",
@@ -8190,12 +8345,12 @@
           "disciplineId": "dp26-p3-conhecimentos-especificos",
           "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
           "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
+            "dp26-p3-esp-ux-cms"
           ],
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
-          "confidence": 0.97,
+          "confidence": 0.95,
           "matchedTerms": [
-            "ios"
+            "interface"
           ]
         },
         {
@@ -8431,6 +8586,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-14-3b2d-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-14-3b2d-completo.pdf",
       "sourceSha256": "daadab0720ee21c01b075bcbd6aa847226349b7cbf371c44703341a9d896fbaf",
@@ -8530,6 +8688,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-15-5323-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-15-5323-completo.pdf",
       "sourceSha256": "23de0b8c32c2359e13e5c25ddbba18cb7f76f27c3f2b417673b362eda973cd25",
@@ -8697,6 +8858,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-16-388c-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-16-388c-completo.pdf",
       "sourceSha256": "63e5daad83b0c1aca9f3f9721b70bb1ee044b78d8ea837141c8b7f6f4ec2b49d",
@@ -8990,6 +9154,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-17-1fab-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-17-1fab-completo.pdf",
       "sourceSha256": "0830351b444c6342d5dd70ff7d75ce9047c34efd11358f58bdd21b2ca15ec4d8",
@@ -9093,6 +9260,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Engenharia de software - F",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393318-aula-18-533e-completo.pdf",
       "sourceRelativePath": "Engenharia de software - F/curso-393318-aula-18-533e-completo.pdf",
       "sourceSha256": "09e6cbb95d2e827039f63fc711fe409f31603581ebdf54794dc060e2d5dc9574",
@@ -9215,6 +9385,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Gestão e Governança - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393319-aula-00-c289-completo.pdf",
       "sourceRelativePath": "Gestão e Governança - C/curso-393319-aula-00-c289-completo.pdf",
       "sourceSha256": "06b0ec1d56d11a7116195817e6a7c0f635b0a32e3cdd8279ec774148bfdf3d0f",
@@ -9598,6 +9771,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Gestão e Governança - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393319-aula-01-190d-completo.pdf",
       "sourceRelativePath": "Gestão e Governança - C/curso-393319-aula-01-190d-completo.pdf",
       "sourceSha256": "9d0bad221791accd66307d4bf65fb4ed6403685e2b69117b54c464c4a50376dc",
@@ -9720,6 +9896,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Gestão e Governança - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393319-aula-02-9a57-completo.pdf",
       "sourceRelativePath": "Gestão e Governança - C/curso-393319-aula-02-9a57-completo.pdf",
       "sourceSha256": "2e5d91171b1a16fdbb6cd7e86994a8de74148d4d7d1406623d391d3fb9d68c91",
@@ -9842,6 +10021,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Gestão e Governança - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393319-aula-03-5137-completo.pdf",
       "sourceRelativePath": "Gestão e Governança - C/curso-393319-aula-03-5137-completo.pdf",
       "sourceSha256": "1f537c8421eb599122fd70df550f334c918ca34c74fee1a70f4fb66ee1088d3e",
@@ -9959,6 +10141,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Gestão e Governança - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393319-aula-04-23cc-completo.pdf",
       "sourceRelativePath": "Gestão e Governança - C/curso-393319-aula-04-23cc-completo.pdf",
       "sourceSha256": "69bdd80374239d46abae501ee7557e64b6cb05c773434157417a10743fb75397",
@@ -10076,6 +10261,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Inglês - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392455-aula-00-english-general-presentation-a895-completo.pdf",
       "sourceRelativePath": "Inglês - C/curso-392455-aula-00-english-general-presentation-a895-completo.pdf",
       "sourceSha256": "9039d94cc0e585eb7f204f299fde4b95128cc1d6bdb9a7ec9ec608429d2c2f2c",
@@ -10117,6 +10305,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Inglês - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392455-aula-01-reading-techniques-cognates-and-idioms-545c-completo.pdf",
       "sourceRelativePath": "Inglês - C/curso-392455-aula-01-reading-techniques-cognates-and-idioms-545c-completo.pdf",
       "sourceSha256": "9549f3e2d6acb415372ed9c322123dbc6277dcb9b949c456338d34441775dbe2",
@@ -10163,6 +10354,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Inglês - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392455-aula-02-verbs-in-texts-92d0-completo.pdf",
       "sourceRelativePath": "Inglês - C/curso-392455-aula-02-verbs-in-texts-92d0-completo.pdf",
       "sourceSha256": "7d01e6c5112df9ba3cb3374327559313785653ea645691b2a70b3bd54795fb96",
@@ -10208,6 +10402,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Inglês - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392455-aula-03-articles-and-nouns-in-the-texts-19de-completo.pdf",
       "sourceRelativePath": "Inglês - C/curso-392455-aula-03-articles-and-nouns-in-the-texts-19de-completo.pdf",
       "sourceSha256": "18c6a757fc14f688f3ce70e172f1af970402d8dfd0f35480eb1f000cb1d3136c",
@@ -10254,6 +10451,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Inglês - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392455-aula-04-adjectives-and-adverbs-in-the-texts-c186-completo.pdf",
       "sourceRelativePath": "Inglês - C/curso-392455-aula-04-adjectives-and-adverbs-in-the-texts-c186-completo.pdf",
       "sourceSha256": "a1f057294f269f96c28350479db47e0f88add33644257943b50ca78d8e22a7d9",
@@ -10301,6 +10501,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Inglês - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392455-aula-05-pronouns-prepositions-and-conjunctions-in-the-texts-11e1-completo.pdf",
       "sourceRelativePath": "Inglês - C/curso-392455-aula-05-pronouns-prepositions-and-conjunctions-in-the-texts-11e1-completo.pdf",
       "sourceSha256": "d32436bd3efd8d1743fa7819e24f92cce505003a1d140efd13a285f8a5743bf6",
@@ -10349,6 +10552,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Inglês - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392455-aula-06-direct-speech-reported-speech-and-passive-voice-da86-completo.pdf",
       "sourceRelativePath": "Inglês - C/curso-392455-aula-06-direct-speech-reported-speech-and-passive-voice-da86-completo.pdf",
       "sourceSha256": "cda5102c7bc4765ede75ca9cf88093809ff0c1e5d80b3611826ec9c476099409",
@@ -10390,6 +10596,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Inglês - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392455-aula-07-if-clauses-and-quantifiers-5789-completo.pdf",
       "sourceRelativePath": "Inglês - C/curso-392455-aula-07-if-clauses-and-quantifiers-5789-completo.pdf",
       "sourceSha256": "6b6999c30d2939d9044be87c36effd8d369a3d56c25ffd2e93faaf8ff9c57e30",
@@ -10435,6 +10644,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "LGPD e IA - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392459-aula-unica-diego-carvalho-renato-da-costa-3264-completo.pdf",
       "sourceRelativePath": "LGPD e IA - C/curso-392459-aula-unica-diego-carvalho-renato-da-costa-3264-completo.pdf",
       "sourceSha256": "9eddc4648a68fe902c2ca210562a7999922ba99bbdd377a9805a73e55760fdee",
@@ -10592,6 +10804,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "LGPD e IA - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392461-aula-00-d3cc-completo.pdf",
       "sourceRelativePath": "LGPD e IA - C/curso-392461-aula-00-d3cc-completo.pdf",
       "sourceSha256": "5bd9ccd8202ce180793b85f845f854fdc655876378904f7df40f88a38742bb63",
@@ -10687,6 +10902,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "LGPD e IA - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392461-aula-02-cbb3-completo.pdf",
       "sourceRelativePath": "LGPD e IA - C/curso-392461-aula-02-cbb3-completo.pdf",
       "sourceSha256": "e020b01faad9f4e7cf0dfc363d9dd4ad7b5ebe9ee21c905c9de1e6a7a2d1767f",
@@ -10733,6 +10951,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "LGPD e IA - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392461-aula-03-7bd6-grifado.pdf",
       "sourceRelativePath": "LGPD e IA - C/curso-392461-aula-03-7bd6-grifado.pdf",
       "sourceSha256": "f3d49a1e748ba25c6e544961f4c01988d0b3a2678c789068e703a5c6b46b241c",
@@ -10774,6 +10995,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "LGPD e IA - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "lei-de-acesso-a-informacao-lei-n-12-5272011-grifado-f933.pdf",
       "sourceRelativePath": "LGPD e IA - C/lei-de-acesso-a-informacao-lei-n-12-5272011-grifado-f933.pdf",
       "sourceSha256": "b24d681e07bd1083d11ffd8622c0de961b38d2bab8a3c9ae62fbafc4c13c1073",
@@ -10815,6 +11039,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-00-somente-em-pdf-ff47-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-00-somente-em-pdf-ff47-grifado.pdf",
       "sourceSha256": "f18b39536d45f5eb0fd4d26fdace76a9e03d32ac98b3c371c218f82a46c084ce",
@@ -10856,6 +11083,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-01-ce54-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-01-ce54-grifado.pdf",
       "sourceSha256": "33f2c5c397cea8088fccfbb179f42b68c28beaec0c2f636ff276f077b08b7a5a",
@@ -10901,6 +11131,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-02-5d07-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-02-5d07-grifado.pdf",
       "sourceSha256": "504f3157051199b924d241825f620cdf6866ade04f1ca37d7e171f946cb1e47b",
@@ -10942,6 +11175,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-03-43fb-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-03-43fb-grifado.pdf",
       "sourceSha256": "a16cf82bcd179331afd9f47e71074daf87f7b5b3434948bceb786c6e12e76e51",
@@ -10983,6 +11219,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-04-1019-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-04-1019-grifado.pdf",
       "sourceSha256": "b8536d81f4467f5483026b40b3ece7de8dad0160ed6faded5bffc77ee2d0ee0b",
@@ -11024,6 +11263,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-05-c93b-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-05-c93b-grifado.pdf",
       "sourceSha256": "aac933ef43e87f26dc55dc1d75191eddaf9d0cdbf4ce3be69822c5230877f830",
@@ -11065,6 +11307,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-06-ebad-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-06-ebad-grifado.pdf",
       "sourceSha256": "e95f059c090dec8c5bd2eeeaee8d0e8916cf72b7fcf67eb38c49736282d6b930",
@@ -11110,6 +11355,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-07-0dd6-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-07-0dd6-grifado.pdf",
       "sourceSha256": "c67434d292b0f4e3dec3fc781fd34d4485e1d3ecfaf012d9e74f28be21f26c07",
@@ -11155,6 +11403,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-08-21e4-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-08-21e4-grifado.pdf",
       "sourceSha256": "1a20923d77882d6a07a3d00f0a35fea066ce0378262f6b1b362ec960887dbd4d",
@@ -11200,6 +11451,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-09-e3cf-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-09-e3cf-grifado.pdf",
       "sourceSha256": "5620fd955df3fa0abd47e987b8f03689a6dd2e4eafcfd49c80b08a4487b19967",
@@ -11241,6 +11495,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-10-2915-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-10-2915-grifado.pdf",
       "sourceSha256": "87aecb1c76dafc168974036be67362f5cd04423f96d39f9f224a89288616bdba",
@@ -11282,6 +11539,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-11-0181-grifado.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-11-0181-grifado.pdf",
       "sourceSha256": "e2810920ddb845275da4b5d53da92ed844d328a0cdb48217eae57afcdca057ad",
@@ -11323,6 +11583,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Português - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-392405-aula-12-21bb-completo.pdf",
       "sourceRelativePath": "Português - C/curso-392405-aula-12-21bb-completo.pdf",
       "sourceSha256": "3b2df7731af6506c559d16ff65a49d6ba8cc58c2aac407769bd11fa3ff990f0f",
@@ -11598,10 +11861,1037 @@
       }
     },
     {
+      "id": "strategy-928cd2f3cdf8b9cf",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-00-7af3-grifado.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-00-7af3-grifado.pdf",
+      "sourceSha256": "928cd2f3cdf8b9cf76c020bbcc1a8782ae4b9da9c228629d734f450244ae1433",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "00",
+      "courseTitle": "RLM",
+      "displayTitle": "RLM — Aula 00: Aviso Importante!",
+      "totalPages": 70,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": null,
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Aviso Importante!",
+          "startPage": 1,
+          "endPage": 70,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": null,
+          "subtopicIds": [],
+          "mappingStatus": "REVIEW_REQUIRED",
+          "confidence": 0.0,
+          "matchedTerms": []
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": false,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "strategy-0bfb43cc709ab1e9",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-01-d9bd-grifado.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-01-d9bd-grifado.pdf",
+      "sourceSha256": "0bfb43cc709ab1e98d75fdad8cee7409f2c9d068e6eb91c308af498aff4dbeb2",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "01",
+      "courseTitle": "RLM",
+      "displayTitle": "RLM — Aula 01: Apresentação Da Aula",
+      "totalPages": 43,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": null,
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Apresentação Da Aula",
+          "startPage": 1,
+          "endPage": 43,
+          "contentKind": "REFERENCE",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": null,
+          "subtopicIds": [],
+          "mappingStatus": "REVIEW_REQUIRED",
+          "confidence": 0.0,
+          "matchedTerms": []
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": false,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "strategy-c618998d2c1bfb3d",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-02-8aee-grifado.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-02-8aee-grifado.pdf",
+      "sourceSha256": "c618998d2c1bfb3d4aa870a65ac994e1970a338d771b7a97a4b4ee0844251150",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "02",
+      "courseTitle": "RLM",
+      "displayTitle": "RLM — Aula 02: Apresentação Da Aula",
+      "totalPages": 73,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": null,
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Apresentação Da Aula",
+          "startPage": 1,
+          "endPage": 73,
+          "contentKind": "REFERENCE",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": null,
+          "subtopicIds": [],
+          "mappingStatus": "REVIEW_REQUIRED",
+          "confidence": 0.0,
+          "matchedTerms": []
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": false,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "strategy-0a992a251b243962",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-03-562e-grifado.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-03-562e-grifado.pdf",
+      "sourceSha256": "0a992a251b243962ff327b1a23096f3ed4715887a3380c9d51ddbfc077e5a17f",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "03",
+      "courseTitle": "RLM",
+      "displayTitle": "RLM — Aula 03: Proposições Quantificadas E Diagramas Lógicos",
+      "totalPages": 20,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": "dp26-p3-rlm-sentencial",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Proposições Quantificadas E Diagramas Lógicos",
+          "startPage": 1,
+          "endPage": 20,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-sentencial",
+          "subtopicIds": [
+            "dp26-p3-rlm-diagramas"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.96,
+          "matchedTerms": [
+            "diagramas logicos",
+            "proposicoes quantificadas"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": false,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "strategy-59f64551b2906fe3",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-05-beea-grifado.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-05-beea-grifado.pdf",
+      "sourceSha256": "59f64551b2906fe3d931e755fe1ef8377fcdad0420ba4395cbaa680bbbe9111a",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "05",
+      "courseTitle": "RLM",
+      "displayTitle": "RLM — Aula 05: Apresentação Da Aula",
+      "totalPages": 73,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": null,
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Apresentação Da Aula",
+          "startPage": 1,
+          "endPage": 73,
+          "contentKind": "REFERENCE",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": null,
+          "subtopicIds": [],
+          "mappingStatus": "REVIEW_REQUIRED",
+          "confidence": 0.0,
+          "matchedTerms": []
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": false,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "strategy-b8069f50ee3e0f41",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-06-grifado.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-06-grifado.pdf",
+      "sourceSha256": "b8069f50ee3e0f41affdb7b1b4c05c3bfa743cc7f1649bbb3f6225eebf13f609",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "06",
+      "courseTitle": "RLM",
+      "displayTitle": "RLM — Aula 06: Lógica De Primeira Ordem",
+      "totalPages": 12,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": "dp26-p3-rlm-primeira-ordem",
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Lógica De Primeira Ordem",
+          "startPage": 1,
+          "endPage": 12,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-primeira-ordem",
+          "subtopicIds": [
+            "dp26-p3-rlm-primeira-ordem-fundamentos"
+          ],
+          "mappingStatus": "AUTO_HIGH_CONFIDENCE",
+          "confidence": 0.99,
+          "matchedTerms": [
+            "logica de primeira ordem"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": false,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "strategy-582a00befb7bcfbe",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-07-b4ab-grifado.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-07-b4ab-grifado.pdf",
+      "sourceSha256": "582a00befb7bcfbe66d82efdba3c931c0555456804605f7b91985056bfa08729",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "07",
+      "courseTitle": "RLM",
+      "displayTitle": "RLM — Aula 07: Apresentação Da Aula",
+      "totalPages": 40,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": null,
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Apresentação Da Aula",
+          "startPage": 1,
+          "endPage": 40,
+          "contentKind": "REFERENCE",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": null,
+          "subtopicIds": [],
+          "mappingStatus": "REVIEW_REQUIRED",
+          "confidence": 0.0,
+          "matchedTerms": []
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": false,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "strategy-d95209667745a409",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-08-03e9-grifado.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-08-03e9-grifado.pdf",
+      "sourceSha256": "d95209667745a4090229d63becbd9a1a2185244e6aaa6499d8ed1ae26462c8cc",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "08",
+      "courseTitle": "RLM",
+      "displayTitle": "RLM — Aula 08: Problemas De Lógica Ii",
+      "totalPages": 34,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": null,
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Problemas De Lógica Ii",
+          "startPage": 1,
+          "endPage": 34,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "problemas de logica"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": false,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "strategy-9f253c65f56ee296",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-09-a045-completo.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-09-a045-completo.pdf",
+      "sourceSha256": "9f253c65f56ee296928a254f09d0b8968cb33a887e257ca2f8c0dedccb85b59d",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "09",
+      "courseTitle": "Raciocínio Lógico",
+      "displayTitle": "Raciocínio Lógico — Aula 09: Operações Básicas",
+      "totalPages": 178,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": null,
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Operações Básicas",
+          "startPage": 3,
+          "endPage": 33,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "operacoes basicas"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "title": "MMC e MDC",
+          "startPage": 34,
+          "endPage": 50,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "mmc",
+            "mdc"
+          ]
+        },
+        {
+          "ordinal": 3,
+          "title": "Razão e Proporção",
+          "startPage": 51,
+          "endPage": 73,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "razao e proporcao"
+          ]
+        },
+        {
+          "ordinal": 4,
+          "title": "Regra de Três",
+          "startPage": 74,
+          "endPage": 80,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "regra de tres"
+          ]
+        },
+        {
+          "ordinal": 5,
+          "title": "Porcentagem",
+          "startPage": 81,
+          "endPage": 91,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "porcentagem"
+          ]
+        },
+        {
+          "ordinal": 6,
+          "title": "Questões Comentadas - Operações Básicas - FGV",
+          "startPage": 92,
+          "endPage": 99,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "operacoes basicas"
+          ]
+        },
+        {
+          "ordinal": 7,
+          "title": "Questões Comentadas - MMC e MDC - FGV",
+          "startPage": 100,
+          "endPage": 109,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "mmc",
+            "mdc"
+          ]
+        },
+        {
+          "ordinal": 8,
+          "title": "Questões Comentadas - Razão e Proporção - FGV.",
+          "startPage": 110,
+          "endPage": 130,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "razao e proporcao"
+          ]
+        },
+        {
+          "ordinal": 9,
+          "title": "Questões Comentadas - Regra de Três - FGV",
+          "startPage": 131,
+          "endPage": 141,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "regra de tres"
+          ]
+        },
+        {
+          "ordinal": 10,
+          "title": "Questões Comentadas - Porcentagem - FGV",
+          "startPage": 142,
+          "endPage": 154,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "porcentagem"
+          ]
+        },
+        {
+          "ordinal": 11,
+          "title": "Lista de Questões - Operações Básicas - FGV",
+          "startPage": 155,
+          "endPage": 158,
+          "contentKind": "QUESTION_LIST",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "operacoes basicas"
+          ]
+        },
+        {
+          "ordinal": 12,
+          "title": "Lista de Questões - MMC e MDC - FGV",
+          "startPage": 159,
+          "endPage": 162,
+          "contentKind": "QUESTION_LIST",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "mmc",
+            "mdc"
+          ]
+        },
+        {
+          "ordinal": 13,
+          "title": "Lista de Questões - Razão e Proporção - FGV.",
+          "startPage": 163,
+          "endPage": 169,
+          "contentKind": "QUESTION_LIST",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "razao e proporcao"
+          ]
+        },
+        {
+          "ordinal": 14,
+          "title": "Lista de Questões - Regra de Três - FGV",
+          "startPage": 170,
+          "endPage": 173,
+          "contentKind": "QUESTION_LIST",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "regra de tres"
+          ]
+        },
+        {
+          "ordinal": 15,
+          "title": "Lista de Questões - Porcentagem - FGV",
+          "startPage": 174,
+          "endPage": 178,
+          "contentKind": "QUESTION_LIST",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "porcentagem"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "strategy-5feb2d2b6148036b",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-10-6ddd-completo.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-10-6ddd-completo.pdf",
+      "sourceSha256": "5feb2d2b6148036b33bf7c3f52a0bbe7ac890cdffab604b544a9d6f07f97f1aa",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "10",
+      "courseTitle": "Raciocínio Lógico",
+      "displayTitle": "Raciocínio Lógico — Aula 10: Geometria Plana",
+      "totalPages": 111,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": null,
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Geometria Plana",
+          "startPage": 3,
+          "endPage": 33,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "geometria plana"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "title": "Geometria Espacial",
+          "startPage": 34,
+          "endPage": 55,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "geometria espacial"
+          ]
+        },
+        {
+          "ordinal": 3,
+          "title": "Questões Comentadas - Geometria Plana - FGV",
+          "startPage": 56,
+          "endPage": 75,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "geometria plana"
+          ]
+        },
+        {
+          "ordinal": 4,
+          "title": "Questões Comentadas - Geometria Espacial - FGV",
+          "startPage": 76,
+          "endPage": 97,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "geometria espacial"
+          ]
+        },
+        {
+          "ordinal": 5,
+          "title": "Lista de Questões - Geometria Plana - FGV",
+          "startPage": 98,
+          "endPage": 103,
+          "contentKind": "QUESTION_LIST",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "geometria plana"
+          ]
+        },
+        {
+          "ordinal": 6,
+          "title": "Lista de Questões - Geometria Espacial - FGV",
+          "startPage": 104,
+          "endPage": 111,
+          "contentKind": "QUESTION_LIST",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "geometria espacial"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "strategy-a28376f8f6bf84c2",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-11-fc0f-grifado.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-11-fc0f-grifado.pdf",
+      "sourceSha256": "a28376f8f6bf84c2127205c05319e0b52bf5e03eddd3272d23a11c13253cdaa6",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "11",
+      "courseTitle": "RLM",
+      "displayTitle": "RLM — Aula 11: Apresentação Da Aula",
+      "totalPages": 79,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": null,
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Apresentação Da Aula",
+          "startPage": 1,
+          "endPage": 79,
+          "contentKind": "REFERENCE",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": null,
+          "subtopicIds": [],
+          "mappingStatus": "REVIEW_REQUIRED",
+          "confidence": 0.0,
+          "matchedTerms": []
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": false,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
+      "id": "strategy-7471501f912cde60",
+      "schemaVersion": "1.0.0",
+      "concursoId": "dataprev-2026-perfil-3",
+      "sourceGroup": "RLM - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
+      "sourceFileName": "curso-392458-aula-12-a3f5-completo.pdf",
+      "sourceRelativePath": "RLM - C/curso-392458-aula-12-a3f5-completo.pdf",
+      "sourceSha256": "7471501f912cde605737f8c5af1499c5ee9f90405baf6fb44d1d9f34fe7ff1d0",
+      "sourcePortalCourseId": "392458",
+      "lessonLabel": "12",
+      "courseTitle": "Raciocínio Lógico",
+      "displayTitle": "Raciocínio Lógico — Aula 12: Solução de Sistemas Lineares",
+      "totalPages": 161,
+      "textLayer": "NATIVE_TEXT",
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "topicId": null,
+      "sections": [
+        {
+          "ordinal": 1,
+          "title": "Solução de Sistemas Lineares",
+          "startPage": 3,
+          "endPage": 45,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "sistemas lineares"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "title": "Discussão de Sistemas Lineares",
+          "startPage": 46,
+          "endPage": 59,
+          "contentKind": "THEORY",
+          "questionBank": null,
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "sistemas lineares"
+          ]
+        },
+        {
+          "ordinal": 3,
+          "title": "Questões Comentadas - Solução de Sistemas Lineares - FGV",
+          "startPage": 60,
+          "endPage": 69,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "sistemas lineares"
+          ]
+        },
+        {
+          "ordinal": 4,
+          "title": "Questões Comentadas - Solução de Sistemas Lineares - Multibancas",
+          "startPage": 70,
+          "endPage": 100,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "MULTIBANCAS",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "sistemas lineares"
+          ]
+        },
+        {
+          "ordinal": 5,
+          "title": "Questões Comentadas - Discussão de Sistemas Lineares - Multibancas",
+          "startPage": 101,
+          "endPage": 137,
+          "contentKind": "COMMENTED_QUESTIONS",
+          "questionBank": "MULTIBANCAS",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "sistemas lineares"
+          ]
+        },
+        {
+          "ordinal": 6,
+          "title": "Lista de Questões - Solução de Sistemas Lineares - FGV",
+          "startPage": 138,
+          "endPage": 141,
+          "contentKind": "QUESTION_LIST",
+          "questionBank": "FGV",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "sistemas lineares"
+          ]
+        },
+        {
+          "ordinal": 7,
+          "title": "Lista de Questões - Solução de Sistemas Lineares - Multibancas",
+          "startPage": 142,
+          "endPage": 151,
+          "contentKind": "QUESTION_LIST",
+          "questionBank": "MULTIBANCAS",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "sistemas lineares"
+          ]
+        },
+        {
+          "ordinal": 8,
+          "title": "Lista de Questões - Discussão de Sistemas Lineares - Multibancas",
+          "startPage": 152,
+          "endPage": 161,
+          "contentKind": "QUESTION_LIST",
+          "questionBank": "MULTIBANCAS",
+          "disciplineId": "dp26-p3-raciocinio-logico",
+          "topicId": "dp26-p3-rlm-problemas",
+          "subtopicIds": [
+            "dp26-p3-rlm-problemas-aritmeticos-geometricos"
+          ],
+          "mappingStatus": "AUTO_REVIEWABLE",
+          "confidence": 0.93,
+          "matchedTerms": [
+            "sistemas lineares"
+          ]
+        }
+      ],
+      "rights": {
+        "classification": "PRIVATE_LICENSED_USER_COPY",
+        "sharingAllowed": false,
+        "contentExportAllowed": false,
+        "metadataExportAllowed": true,
+        "containsPersonalWatermark": true,
+        "retentionPolicy": "DERIVED_METADATA_ONLY"
+      }
+    },
+    {
       "id": "strategy-80fe64c0e38f1b35",
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Segurança da informação - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393317-aula-00-d870-completo.pdf",
       "sourceRelativePath": "Segurança da informação - C/curso-393317-aula-00-d870-completo.pdf",
       "sourceSha256": "80fe64c0e38f1b35d73cc6d961275c1e4c0a323e304c9112ee3eacb9cbf4025d",
@@ -11612,7 +12902,7 @@
       "totalPages": 272,
       "textLayer": "NATIVE_TEXT",
       "disciplineId": "dp26-p3-conhecimentos-especificos",
-      "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "topicId": "dp26-p3-esp-seguranca",
       "sections": [
         {
           "ordinal": 1,
@@ -11622,14 +12912,14 @@
           "contentKind": "THEORY",
           "questionBank": null,
           "disciplineId": "dp26-p3-conhecimentos-especificos",
-          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "topicId": "dp26-p3-esp-seguranca",
           "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
+            "dp26-p3-esp-si-cid"
           ],
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "ios"
+            "principios de seguranca"
           ]
         },
         {
@@ -11640,14 +12930,14 @@
           "contentKind": "COMMENTED_QUESTIONS",
           "questionBank": "CEBRASPE",
           "disciplineId": "dp26-p3-conhecimentos-especificos",
-          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "topicId": "dp26-p3-esp-seguranca",
           "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
+            "dp26-p3-esp-si-cid"
           ],
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "ios"
+            "principios de seguranca"
           ]
         },
         {
@@ -11658,14 +12948,14 @@
           "contentKind": "COMMENTED_QUESTIONS",
           "questionBank": "FCC",
           "disciplineId": "dp26-p3-conhecimentos-especificos",
-          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "topicId": "dp26-p3-esp-seguranca",
           "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
+            "dp26-p3-esp-si-cid"
           ],
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "ios"
+            "principios de seguranca"
           ]
         },
         {
@@ -11676,14 +12966,14 @@
           "contentKind": "COMMENTED_QUESTIONS",
           "questionBank": "FGV",
           "disciplineId": "dp26-p3-conhecimentos-especificos",
-          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "topicId": "dp26-p3-esp-seguranca",
           "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
+            "dp26-p3-esp-si-cid"
           ],
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "ios"
+            "principios de seguranca"
           ]
         },
         {
@@ -11694,14 +12984,14 @@
           "contentKind": "QUESTION_LIST",
           "questionBank": "CEBRASPE",
           "disciplineId": "dp26-p3-conhecimentos-especificos",
-          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "topicId": "dp26-p3-esp-seguranca",
           "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
+            "dp26-p3-esp-si-cid"
           ],
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "ios"
+            "principios de seguranca"
           ]
         },
         {
@@ -11712,14 +13002,14 @@
           "contentKind": "QUESTION_LIST",
           "questionBank": "FCC",
           "disciplineId": "dp26-p3-conhecimentos-especificos",
-          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "topicId": "dp26-p3-esp-seguranca",
           "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
+            "dp26-p3-esp-si-cid"
           ],
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "ios"
+            "principios de seguranca"
           ]
         },
         {
@@ -11730,14 +13020,14 @@
           "contentKind": "QUESTION_LIST",
           "questionBank": "FGV",
           "disciplineId": "dp26-p3-conhecimentos-especificos",
-          "topicId": "dp26-p3-esp-desenvolvimento-sistemas",
+          "topicId": "dp26-p3-esp-seguranca",
           "subtopicIds": [
-            "dp26-p3-esp-mobile-lowcode"
+            "dp26-p3-esp-si-cid"
           ],
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "ios"
+            "principios de seguranca"
           ]
         },
         {
@@ -11755,8 +13045,7 @@
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "controle de acesso",
-            "sso"
+            "controle de acesso"
           ]
         },
         {
@@ -11774,8 +13063,7 @@
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "controle de acesso",
-            "sso"
+            "controle de acesso"
           ]
         },
         {
@@ -11793,8 +13081,7 @@
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "controle de acesso",
-            "sso"
+            "controle de acesso"
           ]
         },
         {
@@ -11812,8 +13099,7 @@
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "controle de acesso",
-            "sso"
+            "controle de acesso"
           ]
         },
         {
@@ -11831,8 +13117,7 @@
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "controle de acesso",
-            "sso"
+            "controle de acesso"
           ]
         },
         {
@@ -11850,8 +13135,7 @@
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "controle de acesso",
-            "sso"
+            "controle de acesso"
           ]
         },
         {
@@ -11869,8 +13153,7 @@
           "mappingStatus": "AUTO_HIGH_CONFIDENCE",
           "confidence": 0.97,
           "matchedTerms": [
-            "controle de acesso",
-            "sso"
+            "controle de acesso"
           ]
         },
         {
@@ -12317,6 +13600,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Segurança da informação - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393317-aula-01-72c0-completo.pdf",
       "sourceRelativePath": "Segurança da informação - C/curso-393317-aula-01-72c0-completo.pdf",
       "sourceSha256": "2e8c5ce69f937628bb0dce38f9be249c6af9ed3dca58117f1a6c9d2766935f8a",
@@ -12639,6 +13925,9 @@
       "schemaVersion": "1.0.0",
       "concursoId": "dataprev-2026-perfil-3",
       "sourceGroup": "Segurança da informação - C",
+      "sourceProvider": "ESTRATEGIA_CONCURSOS",
+      "sourceRole": "PRIMARY",
+      "sourcePriority": 100,
       "sourceFileName": "curso-393317-aula-02-fc15-completo.pdf",
       "sourceRelativePath": "Segurança da informação - C/curso-393317-aula-02-fc15-completo.pdf",
       "sourceSha256": "2acf29402115122bee172d49777b09d9eff6d6e6cf30e76ef9b302dc5d1eb5e0",

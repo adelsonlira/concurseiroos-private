@@ -73,7 +73,11 @@ function mapAttempts(
       acertou: attempt.acertou,
       data: toDateKey(attempt.respondidaEm, timeZone),
       origem: attempt.origem,
-      tempoRespostaSegundos: attempt.tempoRespostaSegundos
+      tempoRespostaSegundos: attempt.tempoRespostaSegundos,
+      nivelConfianca: attempt.nivelConfianca,
+      respostaEmBranco: attempt.respostaEmBranco,
+      diagnosticoInicial: attempt.diagnosticoInicial,
+      consultouMaterial: attempt.consultouMaterial
     }));
 }
 

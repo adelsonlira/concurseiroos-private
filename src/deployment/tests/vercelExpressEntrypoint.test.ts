@@ -13,7 +13,9 @@ describe("Vercel serverless entrypoints", () => {
     "explain-question",
     "coach-chat",
     "semantic-search",
-    "organize-material"
+    "organize-material",
+    "runtime-config",
+    "ai-health"
   ];
 
   it("keeps local Vite/static serving outside the serverless HTTP app", () => {

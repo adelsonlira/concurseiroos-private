@@ -114,3 +114,11 @@ npm audit --omit=dev
 ```
 
 Testes cobrem configuração oficial, evidências, SDE, planner, revisão, flashcards adaptativos, disponibilidade, materiais, nuvem, integração do store, Coach, diagnóstico e roteiro semanal.
+
+## Pacotes de concurso
+
+O núcleo não importa configurações específicas de concursos. `src/config/concursos/registry.ts` resolve um `CompetitionRuntimeDefinition` por `concursoAlvoId`.
+
+Cada pacote instalado reúne configuração oficial, políticas do SDE, seed operacional, evidências e catálogo privado de materiais. A DATAPREV 2026 — Perfil 3 é o pacote padrão inicial. Um novo concurso deve ser adicionado como pacote isolado e registrado, sem alterar os algoritmos do SDE.
+
+Concursos importados sem pacote registrado podem permanecer no cadastro, mas não recebem decisões estratégicas como se estivessem validados.

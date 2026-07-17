@@ -1,0 +1,2048 @@
+{
+  "schemaVersion": "1.0.0",
+  "competitionId": "dataprev-2026-perfil-3",
+  "competitionVersion": "1.0.0",
+  "generatedAt": "2026-07-16T10:27:00-03:00",
+  "shadowMode": true,
+  "nodes": [
+    {
+      "id": "dp26-p3-portugues",
+      "kind": "DISCIPLINE",
+      "name": "Língua Portuguesa",
+      "parentId": null,
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2,
+      "questionCount": 12,
+      "pointsPerQuestion": 1
+    },
+    {
+      "id": "dp26-p3-ingles",
+      "kind": "DISCIPLINE",
+      "name": "Língua Inglesa",
+      "parentId": null,
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2,
+      "questionCount": 12,
+      "pointsPerQuestion": 1
+    },
+    {
+      "id": "dp26-p3-raciocinio-logico",
+      "kind": "DISCIPLINE",
+      "name": "Raciocínio Lógico Matemático",
+      "parentId": null,
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2,
+      "questionCount": 5,
+      "pointsPerQuestion": 1
+    },
+    {
+      "id": "dp26-p3-atualidades-ia",
+      "kind": "DISCIPLINE",
+      "name": "Atualidades e Inteligência Artificial",
+      "parentId": null,
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2,
+      "questionCount": 6,
+      "pointsPerQuestion": 1
+    },
+    {
+      "id": "dp26-p3-legislacao-si-dados",
+      "kind": "DISCIPLINE",
+      "name": "Legislação de Segurança da Informação e Proteção de Dados",
+      "parentId": null,
+      "order": 5,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2,
+      "questionCount": 5,
+      "pointsPerQuestion": 1
+    },
+    {
+      "id": "dp26-p3-conhecimentos-especificos",
+      "kind": "DISCIPLINE",
+      "name": "Conhecimentos Específicos",
+      "parentId": null,
+      "order": 6,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2,
+      "questionCount": 30,
+      "pointsPerQuestion": 2.5
+    },
+    {
+      "id": "dp26-p3-por-interpretacao",
+      "kind": "TOPIC",
+      "name": "Compreensão e interpretação de textos",
+      "parentId": "dp26-p3-portugues",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-tipos-generos",
+      "kind": "TOPIC",
+      "name": "Tipos e gêneros textuais",
+      "parentId": "dp26-p3-portugues",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-ortografia",
+      "kind": "TOPIC",
+      "name": "Ortografia oficial",
+      "parentId": "dp26-p3-portugues",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-coesao",
+      "kind": "TOPIC",
+      "name": "Mecanismos de coesão textual",
+      "parentId": "dp26-p3-portugues",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-morfossintaxe",
+      "kind": "TOPIC",
+      "name": "Estrutura morfossintática do período",
+      "parentId": "dp26-p3-portugues",
+      "order": 5,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-reescrita",
+      "kind": "TOPIC",
+      "name": "Reescrita de frases e parágrafos",
+      "parentId": "dp26-p3-portugues",
+      "order": 6,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-ing-compreensao",
+      "kind": "TOPIC",
+      "name": "Compreensão de textos em língua inglesa",
+      "parentId": "dp26-p3-ingles",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-estruturas",
+      "kind": "TOPIC",
+      "name": "Estruturas lógicas",
+      "parentId": "dp26-p3-raciocinio-logico",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-argumentacao",
+      "kind": "TOPIC",
+      "name": "Lógica de argumentação",
+      "parentId": "dp26-p3-raciocinio-logico",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-sentencial",
+      "kind": "TOPIC",
+      "name": "Lógica sentencial ou proposicional",
+      "parentId": "dp26-p3-raciocinio-logico",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-primeira-ordem",
+      "kind": "TOPIC",
+      "name": "Lógica de primeira ordem",
+      "parentId": "dp26-p3-raciocinio-logico",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-problemas",
+      "kind": "TOPIC",
+      "name": "Problemas de raciocínio lógico",
+      "parentId": "dp26-p3-raciocinio-logico",
+      "order": 5,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-atualidades",
+      "kind": "TOPIC",
+      "name": "Atualidades",
+      "parentId": "dp26-p3-atualidades-ia",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-ia-fundamentos",
+      "kind": "TOPIC",
+      "name": "Inteligência Artificial: fundamentos e aplicações",
+      "parentId": "dp26-p3-atualidades-ia",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-leg-lai",
+      "kind": "TOPIC",
+      "name": "Lei de Acesso à Informação",
+      "parentId": "dp26-p3-legislacao-si-dados",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-leg-delitos-informaticos",
+      "kind": "TOPIC",
+      "name": "Lei de Delitos Informáticos",
+      "parentId": "dp26-p3-legislacao-si-dados",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-leg-marco-civil",
+      "kind": "TOPIC",
+      "name": "Marco Civil da Internet",
+      "parentId": "dp26-p3-legislacao-si-dados",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-leg-lgpd",
+      "kind": "TOPIC",
+      "name": "Lei Geral de Proteção de Dados Pessoais",
+      "parentId": "dp26-p3-legislacao-si-dados",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-desenvolvimento-sistemas",
+      "kind": "TOPIC",
+      "name": "Desenvolvimento de Sistemas",
+      "parentId": "dp26-p3-conhecimentos-especificos",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bi",
+      "kind": "TOPIC",
+      "name": "Inteligência de Negócios — Business Intelligence",
+      "parentId": "dp26-p3-conhecimentos-especificos",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-seguranca",
+      "kind": "TOPIC",
+      "name": "Segurança da Informação",
+      "parentId": "dp26-p3-conhecimentos-especificos",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-banco-dados",
+      "kind": "TOPIC",
+      "name": "Banco de Dados",
+      "parentId": "dp26-p3-conhecimentos-especificos",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-gestao-governanca",
+      "kind": "TOPIC",
+      "name": "Gestão e Governança de Tecnologia da Informação",
+      "parentId": "dp26-p3-conhecimentos-especificos",
+      "order": 5,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-interpretacao-generos",
+      "kind": "SUBTOPIC",
+      "name": "Compreensão e interpretação de textos de gêneros variados",
+      "parentId": "dp26-p3-por-interpretacao",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-tipos-generos-reconhecimento",
+      "kind": "SUBTOPIC",
+      "name": "Reconhecimento de tipos e gêneros textuais",
+      "parentId": "dp26-p3-por-tipos-generos",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-ortografia-dominio",
+      "kind": "SUBTOPIC",
+      "name": "Domínio da ortografia oficial",
+      "parentId": "dp26-p3-por-ortografia",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-coesao-referenciacao",
+      "kind": "SUBTOPIC",
+      "name": "Referenciação, substituição, repetição, conectores e sequenciação textual",
+      "parentId": "dp26-p3-por-coesao",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-coesao-tempos-modos",
+      "kind": "SUBTOPIC",
+      "name": "Emprego de tempos e modos verbais",
+      "parentId": "dp26-p3-por-coesao",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-classes-palavras",
+      "kind": "SUBTOPIC",
+      "name": "Emprego das classes de palavras",
+      "parentId": "dp26-p3-por-morfossintaxe",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-coordenacao",
+      "kind": "SUBTOPIC",
+      "name": "Relações de coordenação entre orações e termos",
+      "parentId": "dp26-p3-por-morfossintaxe",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-subordinacao",
+      "kind": "SUBTOPIC",
+      "name": "Relações de subordinação entre orações e termos",
+      "parentId": "dp26-p3-por-morfossintaxe",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-pontuacao",
+      "kind": "SUBTOPIC",
+      "name": "Emprego dos sinais de pontuação",
+      "parentId": "dp26-p3-por-morfossintaxe",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-concordancia",
+      "kind": "SUBTOPIC",
+      "name": "Concordância verbal e nominal",
+      "parentId": "dp26-p3-por-morfossintaxe",
+      "order": 5,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-regencia",
+      "kind": "SUBTOPIC",
+      "name": "Regência verbal e nominal",
+      "parentId": "dp26-p3-por-morfossintaxe",
+      "order": 6,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-crase",
+      "kind": "SUBTOPIC",
+      "name": "Emprego do sinal indicativo de crase",
+      "parentId": "dp26-p3-por-morfossintaxe",
+      "order": 7,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-colocacao-pronominal",
+      "kind": "SUBTOPIC",
+      "name": "Colocação dos pronomes átonos",
+      "parentId": "dp26-p3-por-morfossintaxe",
+      "order": 8,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-significacao",
+      "kind": "SUBTOPIC",
+      "name": "Significação das palavras",
+      "parentId": "dp26-p3-por-reescrita",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-substituicao",
+      "kind": "SUBTOPIC",
+      "name": "Substituição de palavras ou trechos",
+      "parentId": "dp26-p3-por-reescrita",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-reorganizacao",
+      "kind": "SUBTOPIC",
+      "name": "Reorganização de orações e períodos",
+      "parentId": "dp26-p3-por-reescrita",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-por-reescrita-generos",
+      "kind": "SUBTOPIC",
+      "name": "Reescrita de textos de diferentes gêneros e níveis de formalidade",
+      "parentId": "dp26-p3-por-reescrita",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-ing-textos",
+      "kind": "SUBTOPIC",
+      "name": "Compreensão de textos em língua inglesa",
+      "parentId": "dp26-p3-ing-compreensao",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-ing-gramatica-contextual",
+      "kind": "SUBTOPIC",
+      "name": "Itens gramaticais relevantes para o entendimento dos sentidos dos textos",
+      "parentId": "dp26-p3-ing-compreensao",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-estruturas-basicas",
+      "kind": "SUBTOPIC",
+      "name": "Estruturas lógicas",
+      "parentId": "dp26-p3-rlm-estruturas",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-argumentacao-processos",
+      "kind": "SUBTOPIC",
+      "name": "Analogias, inferências, deduções e conclusões",
+      "parentId": "dp26-p3-rlm-argumentacao",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-proposicoes",
+      "kind": "SUBTOPIC",
+      "name": "Proposições simples e compostas",
+      "parentId": "dp26-p3-rlm-sentencial",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-tabelas-verdade",
+      "kind": "SUBTOPIC",
+      "name": "Tabelas-verdade",
+      "parentId": "dp26-p3-rlm-sentencial",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-equivalencias",
+      "kind": "SUBTOPIC",
+      "name": "Equivalências",
+      "parentId": "dp26-p3-rlm-sentencial",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-diagramas",
+      "kind": "SUBTOPIC",
+      "name": "Diagramas lógicos",
+      "parentId": "dp26-p3-rlm-sentencial",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-primeira-ordem-fundamentos",
+      "kind": "SUBTOPIC",
+      "name": "Lógica de primeira ordem",
+      "parentId": "dp26-p3-rlm-primeira-ordem",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-rlm-problemas-aritmeticos-geometricos",
+      "kind": "SUBTOPIC",
+      "name": "Problemas aritméticos, geométricos e matriciais",
+      "parentId": "dp26-p3-rlm-problemas",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-atualidades-areas",
+      "kind": "SUBTOPIC",
+      "name": "Segurança, transportes, política, economia, sociedade, educação, saúde, cultura, tecnologia, energia, relações internacionais, desenvolvimento sustentável e ecologia",
+      "parentId": "dp26-p3-atualidades",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-ia-conceitos",
+      "kind": "SUBTOPIC",
+      "name": "Conceitos de inteligência artificial",
+      "parentId": "dp26-p3-ia-fundamentos",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-ia-machine-learning",
+      "kind": "SUBTOPIC",
+      "name": "Aprendizado de máquina",
+      "parentId": "dp26-p3-ia-fundamentos",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-ia-generativa-llm",
+      "kind": "SUBTOPIC",
+      "name": "Modelos generativos e modelos de linguagem",
+      "parentId": "dp26-p3-ia-fundamentos",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-ia-etica-governanca",
+      "kind": "SUBTOPIC",
+      "name": "Ética, governança e privacidade em IA",
+      "parentId": "dp26-p3-ia-fundamentos",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-leg-lai-capitulos",
+      "kind": "SUBTOPIC",
+      "name": "Lei nº 12.527/2011, capítulos I a V; Decretos nº 7.724 e nº 7.845",
+      "parentId": "dp26-p3-leg-lai",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-leg-delitos-art2",
+      "kind": "SUBTOPIC",
+      "name": "Lei nº 12.737/2012, art. 2º",
+      "parentId": "dp26-p3-leg-delitos-informaticos",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-leg-marco-civil-capitulos",
+      "kind": "SUBTOPIC",
+      "name": "Lei nº 12.965/2014, capítulos II, Seção I, e III, Seções I e II",
+      "parentId": "dp26-p3-leg-marco-civil",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-leg-lgpd-capitulos",
+      "kind": "SUBTOPIC",
+      "name": "Lei nº 13.709/2018, capítulos I, II, III, IV, VII, VIII e IX",
+      "parentId": "dp26-p3-leg-lgpd",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-linguagens-frameworks",
+      "kind": "SUBTOPIC",
+      "name": "Java 6+, JavaEE 6+, JakartaEE, JPA 2+, JavaScript, JUnit, Hibernate, JSF, PrimeFaces, Spring, Spring Cloud e Spring Boot",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-mobile-lowcode",
+      "kind": "SUBTOPIC",
+      "name": "Desenvolvimento móvel Android e iOS; ferramentas low-code e no-code",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-clean-code-sonarqube",
+      "kind": "SUBTOPIC",
+      "name": "Análise estática de código, clean code e SonarQube",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-arquitetura-software",
+      "kind": "SUBTOPIC",
+      "name": "Arquitetura de software, interoperabilidade, SOA, web services, mensageria, APIs e Swagger",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-orientacao-objetos-web",
+      "kind": "SUBTOPIC",
+      "name": "Orientação a objetos, aplicações web, servidor de aplicações e servidor web",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 5,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-ambientes-web",
+      "kind": "SUBTOPIC",
+      "name": "Internet, extranet, intranet e portal",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 6,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-padroes-dados-web",
+      "kind": "SUBTOPIC",
+      "name": "XML, XSLT, UDDI, REST e JSON",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 7,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-devops-git",
+      "kind": "SUBTOPIC",
+      "name": "DevOps e gestão de configuração com Git",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 8,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-testes",
+      "kind": "SUBTOPIC",
+      "name": "Testes unitários, integração, ágeis, usabilidade, automatizados, tipos de testes, TDD e ciclo de vida de testes",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 9,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-rpa",
+      "kind": "SUBTOPIC",
+      "name": "RPA — robotic process automation",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 10,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-metodologias-ageis",
+      "kind": "SUBTOPIC",
+      "name": "Scrum, Kanban e XP",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 11,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-padroes-reuso",
+      "kind": "SUBTOPIC",
+      "name": "Padrões de desenvolvimento e reuso",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 12,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-codificacao",
+      "kind": "SUBTOPIC",
+      "name": "Codificação de software transacional, analítico, mobile e API",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 13,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-metricas",
+      "kind": "SUBTOPIC",
+      "name": "Pontos de Função e Story Points",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 14,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-requisitos",
+      "kind": "SUBTOPIC",
+      "name": "Classificação, processo e elicitação de requisitos",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 15,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-frontend",
+      "kind": "SUBTOPIC",
+      "name": "HTML, CSS, UX, Ajax, VueJS, Angular, React, padrões frontend, SPA e PWA",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 16,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-https-tls",
+      "kind": "SUBTOPIC",
+      "name": "Protocolos HTTPS e SSL/TLS",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 17,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-blockchain",
+      "kind": "SUBTOPIC",
+      "name": "Blockchain",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 18,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-design-arquitetura",
+      "kind": "SUBTOPIC",
+      "name": "Design de software, arquitetura hexagonal, microsserviços, API gateway, containers e transações distribuídas",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 19,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-ux-cms",
+      "kind": "SUBTOPIC",
+      "name": "UX, CMS, arquitetura da informação, portais, workflow, acessibilidade, usabilidade e interação web",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 20,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-ia-dados-bigdata",
+      "kind": "SUBTOPIC",
+      "name": "Inteligência Artificial, Análise de Dados e Big Data",
+      "parentId": "dp26-p3-esp-desenvolvimento-sistemas",
+      "order": 21,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bi-conceitos",
+      "kind": "SUBTOPIC",
+      "name": "Conceitos, fundamentos, características, técnicas e métodos de BI",
+      "parentId": "dp26-p3-esp-bi",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bi-suporte-decisao",
+      "kind": "SUBTOPIC",
+      "name": "Sistemas de suporte a decisão e gestão de conteúdo",
+      "parentId": "dp26-p3-esp-bi",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bi-dw-etl-olap",
+      "kind": "SUBTOPIC",
+      "name": "Data warehouse com ETL e OLAP",
+      "parentId": "dp26-p3-esp-bi",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bi-dw-mining",
+      "kind": "SUBTOPIC",
+      "name": "Data warehouse e data mining",
+      "parentId": "dp26-p3-esp-bi",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bi-visualizacao",
+      "kind": "SUBTOPIC",
+      "name": "Visualização de dados, bancos individuais e cubos",
+      "parentId": "dp26-p3-esp-bi",
+      "order": 5,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bi-fontes",
+      "kind": "SUBTOPIC",
+      "name": "Mapeamento de fontes e técnicas de coleta de dados",
+      "parentId": "dp26-p3-esp-bi",
+      "order": 6,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bi-arquitetura",
+      "kind": "SUBTOPIC",
+      "name": "Arquitetura de business intelligence",
+      "parentId": "dp26-p3-esp-bi",
+      "order": 7,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-si-politicas",
+      "kind": "SUBTOPIC",
+      "name": "Políticas e procedimentos de segurança da informação",
+      "parentId": "dp26-p3-esp-seguranca",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-si-iso",
+      "kind": "SUBTOPIC",
+      "name": "ABNT NBR ISO/IEC 27001:2022 e 27002:2022",
+      "parentId": "dp26-p3-esp-seguranca",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-si-cid",
+      "kind": "SUBTOPIC",
+      "name": "Confiabilidade, integridade e disponibilidade",
+      "parentId": "dp26-p3-esp-seguranca",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-si-acesso",
+      "kind": "SUBTOPIC",
+      "name": "Mecanismos de segurança, controle de acesso, OAuth2 e SSO",
+      "parentId": "dp26-p3-esp-seguranca",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-si-riscos",
+      "kind": "SUBTOPIC",
+      "name": "Gerência de riscos: ameaça, vulnerabilidade e impacto",
+      "parentId": "dp26-p3-esp-seguranca",
+      "order": 5,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-si-sdl-owasp",
+      "kind": "SUBTOPIC",
+      "name": "SDL e OWASP Top 10",
+      "parentId": "dp26-p3-esp-seguranca",
+      "order": 6,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-si-sast-dast",
+      "kind": "SUBTOPIC",
+      "name": "SAST e DAST",
+      "parentId": "dp26-p3-esp-seguranca",
+      "order": 7,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-modelagem",
+      "kind": "SUBTOPIC",
+      "name": "Modelagem conceitual, lógica e física",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-relacional-multidimensional",
+      "kind": "SUBTOPIC",
+      "name": "Abordagem relacional e multidimensional",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-normalizacao",
+      "kind": "SUBTOPIC",
+      "name": "Normalização",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-integridade",
+      "kind": "SUBTOPIC",
+      "name": "Integridade referencial",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-metadados",
+      "kind": "SUBTOPIC",
+      "name": "Metadados",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 5,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-dimensional",
+      "kind": "SUBTOPIC",
+      "name": "Modelagem dimensional",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 6,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-sql",
+      "kind": "SUBTOPIC",
+      "name": "SQL",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 7,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-ddl",
+      "kind": "SUBTOPIC",
+      "name": "DDL",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 8,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-dml",
+      "kind": "SUBTOPIC",
+      "name": "DML",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 9,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-sgbd",
+      "kind": "SUBTOPIC",
+      "name": "SGBD",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 10,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-propriedades",
+      "kind": "SUBTOPIC",
+      "name": "Propriedades de banco de dados",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 11,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-nosql",
+      "kind": "SUBTOPIC",
+      "name": "Banco de dados NoSQL",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 12,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-memoria",
+      "kind": "SUBTOPIC",
+      "name": "Banco de dados em memória",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 13,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-datalake-bigdata",
+      "kind": "SUBTOPIC",
+      "name": "Data lakes e soluções para big data",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 14,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-estruturados",
+      "kind": "SUBTOPIC",
+      "name": "Dados estruturados e não estruturados",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 15,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-avaliacao-modelos",
+      "kind": "SUBTOPIC",
+      "name": "Avaliação de modelos de dados",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 16,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-bd-integracao-ingestao",
+      "kind": "SUBTOPIC",
+      "name": "ETL/ELT, transferência de arquivos e integração via base de dados",
+      "parentId": "dp26-p3-esp-banco-dados",
+      "order": 17,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-gov-projetos",
+      "kind": "SUBTOPIC",
+      "name": "Gerenciamento de projetos, programas, portfólio e abordagens tradicional, híbrida e ágil",
+      "parentId": "dp26-p3-esp-gestao-governanca",
+      "order": 1,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-gov-processos",
+      "kind": "SUBTOPIC",
+      "name": "Processos, grupos de processos e áreas de conhecimento",
+      "parentId": "dp26-p3-esp-gestao-governanca",
+      "order": 2,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-gov-riscos",
+      "kind": "SUBTOPIC",
+      "name": "Gestão de riscos",
+      "parentId": "dp26-p3-esp-gestao-governanca",
+      "order": 3,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-gov-itil",
+      "kind": "SUBTOPIC",
+      "name": "ITIL v4",
+      "parentId": "dp26-p3-esp-gestao-governanca",
+      "order": 4,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-gov-cobit",
+      "kind": "SUBTOPIC",
+      "name": "COBIT 2019",
+      "parentId": "dp26-p3-esp-gestao-governanca",
+      "order": 5,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    },
+    {
+      "id": "dp26-p3-esp-gov-bpmn",
+      "kind": "SUBTOPIC",
+      "name": "Gestão de processos e BPMN",
+      "parentId": "dp26-p3-esp-gestao-governanca",
+      "order": 6,
+      "official": true,
+      "sourceDocument": "Edital DATAPREV 001/2026",
+      "sourceSection": "3.1",
+      "sourcePage": 2
+    }
+  ],
+  "coverage": {
+    "totalSubtopics": 94,
+    "ready": 0,
+    "materialOnly": 62,
+    "questionOnly": 0,
+    "gaps": 32,
+    "records": [
+      {
+        "subtopicId": "dp26-p3-por-interpretacao-generos",
+        "materialLocatorCount": 2,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-por-tipos-generos-reconhecimento",
+        "materialLocatorCount": 2,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-por-ortografia-dominio",
+        "materialLocatorCount": 3,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-por-coesao-referenciacao",
+        "materialLocatorCount": 2,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-por-coesao-tempos-modos",
+        "materialLocatorCount": 2,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-por-classes-palavras",
+        "materialLocatorCount": 2,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-por-coordenacao",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-por-subordinacao",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-por-pontuacao",
+        "materialLocatorCount": 1,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-por-concordancia",
+        "materialLocatorCount": 1,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-por-regencia",
+        "materialLocatorCount": 1,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-por-crase",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-por-colocacao-pronominal",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-por-significacao",
+        "materialLocatorCount": 2,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-por-substituicao",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-por-reorganizacao",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-por-reescrita-generos",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-ing-textos",
+        "materialLocatorCount": 1,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-ing-gramatica-contextual",
+        "materialLocatorCount": 5,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-rlm-estruturas-basicas",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-rlm-argumentacao-processos",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-rlm-proposicoes",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-rlm-tabelas-verdade",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-rlm-equivalencias",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-rlm-diagramas",
+        "materialLocatorCount": 1,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-rlm-primeira-ordem-fundamentos",
+        "materialLocatorCount": 1,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-rlm-problemas-aritmeticos-geometricos",
+        "materialLocatorCount": 30,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-atualidades-areas",
+        "materialLocatorCount": 42,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-ia-conceitos",
+        "materialLocatorCount": 4,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-ia-machine-learning",
+        "materialLocatorCount": 3,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-ia-generativa-llm",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-ia-etica-governanca",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-leg-lai-capitulos",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-leg-delitos-art2",
+        "materialLocatorCount": 1,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-leg-marco-civil-capitulos",
+        "materialLocatorCount": 3,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-leg-lgpd-capitulos",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-linguagens-frameworks",
+        "materialLocatorCount": 32,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-mobile-lowcode",
+        "materialLocatorCount": 10,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-clean-code-sonarqube",
+        "materialLocatorCount": 9,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-arquitetura-software",
+        "materialLocatorCount": 33,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-orientacao-objetos-web",
+        "materialLocatorCount": 3,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-ambientes-web",
+        "materialLocatorCount": 5,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-padroes-dados-web",
+        "materialLocatorCount": 9,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-devops-git",
+        "materialLocatorCount": 9,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-testes",
+        "materialLocatorCount": 7,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-rpa",
+        "materialLocatorCount": 4,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-metodologias-ageis",
+        "materialLocatorCount": 20,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-padroes-reuso",
+        "materialLocatorCount": 24,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-codificacao",
+        "materialLocatorCount": 3,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-metricas",
+        "materialLocatorCount": 29,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-requisitos",
+        "materialLocatorCount": 5,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-frontend",
+        "materialLocatorCount": 28,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-https-tls",
+        "materialLocatorCount": 16,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-blockchain",
+        "materialLocatorCount": 3,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-design-arquitetura",
+        "materialLocatorCount": 20,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-ux-cms",
+        "materialLocatorCount": 39,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-ia-dados-bigdata",
+        "materialLocatorCount": 9,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bi-conceitos",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bi-suporte-decisao",
+        "materialLocatorCount": 4,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bi-dw-etl-olap",
+        "materialLocatorCount": 5,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bi-dw-mining",
+        "materialLocatorCount": 5,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bi-visualizacao",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bi-fontes",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bi-arquitetura",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-si-politicas",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-si-iso",
+        "materialLocatorCount": 9,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-si-cid",
+        "materialLocatorCount": 7,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-si-acesso",
+        "materialLocatorCount": 24,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-si-riscos",
+        "materialLocatorCount": 3,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-si-sdl-owasp",
+        "materialLocatorCount": 18,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-si-sast-dast",
+        "materialLocatorCount": 1,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-modelagem",
+        "materialLocatorCount": 8,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-relacional-multidimensional",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-normalizacao",
+        "materialLocatorCount": 4,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-integridade",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-metadados",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-dimensional",
+        "materialLocatorCount": 3,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-sql",
+        "materialLocatorCount": 9,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-ddl",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-dml",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-sgbd",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-propriedades",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-nosql",
+        "materialLocatorCount": 4,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-memoria",
+        "materialLocatorCount": 3,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-datalake-bigdata",
+        "materialLocatorCount": 3,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-estruturados",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-avaliacao-modelos",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-bd-integracao-ingestao",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-gov-projetos",
+        "materialLocatorCount": 19,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-gov-processos",
+        "materialLocatorCount": 5,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-gov-riscos",
+        "materialLocatorCount": 0,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "GAP"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-gov-itil",
+        "materialLocatorCount": 5,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-gov-cobit",
+        "materialLocatorCount": 5,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      },
+      {
+        "subtopicId": "dp26-p3-esp-gov-bpmn",
+        "materialLocatorCount": 5,
+        "questionEvidenceCount": 0,
+        "humanReviewedQuestionCount": 0,
+        "status": "MATERIAL_ONLY"
+      }
+    ]
+  },
+  "policy": {
+    "officialTaxonomyDefinesScope": true,
+    "pedagogicalMaterialsMayRouteStudy": true,
+    "pedagogicalMaterialsMayChangePriority": false,
+    "historicalQuestionsMayChangePriority": false,
+    "reason": "Question classification and target equivalence remain under human-review gates."
+  }
+}

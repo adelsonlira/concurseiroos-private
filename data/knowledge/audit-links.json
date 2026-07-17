@@ -1,0 +1,1579 @@
+[
+  {
+    "id": "ale_sp_pss_2025:03a29238027ecc17",
+    "contestId": "ale_sp_pss_2025",
+    "examDocumentId": "03a29238027ecc17",
+    "noticeDocumentIds": [
+      "63721b31e133991a"
+    ],
+    "answerKeyDocumentIds": [
+      "cd1dbb28e85e3d91"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "aleam_2025:32015bc9fc01e30e",
+    "contestId": "aleam_2025",
+    "examDocumentId": "32015bc9fc01e30e",
+    "noticeDocumentIds": [
+      "a55eb3b43e470614"
+    ],
+    "answerKeyDocumentIds": [
+      "d9ac5659213abcb5"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "aleam_2025:6e50947405b35321",
+    "contestId": "aleam_2025",
+    "examDocumentId": "6e50947405b35321",
+    "noticeDocumentIds": [
+      "a55eb3b43e470614"
+    ],
+    "answerKeyDocumentIds": [
+      "d9ac5659213abcb5"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "aleam_2025:d0f8b1068eaf556d",
+    "contestId": "aleam_2025",
+    "examDocumentId": "d0f8b1068eaf556d",
+    "noticeDocumentIds": [
+      "a55eb3b43e470614"
+    ],
+    "answerKeyDocumentIds": [
+      "d9ac5659213abcb5"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "alego_2025:c9246f1b23a674ac",
+    "contestId": "alego_2025",
+    "examDocumentId": "c9246f1b23a674ac",
+    "noticeDocumentIds": [
+      "a34d1b9b60307abb"
+    ],
+    "answerKeyDocumentIds": [
+      "3054d3d500ab949d"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "alema_2023:0ed992d9706fee9d",
+    "contestId": "alema_2023",
+    "examDocumentId": "0ed992d9706fee9d",
+    "noticeDocumentIds": [
+      "59219529ae5b0716"
+    ],
+    "answerKeyDocumentIds": [
+      "3805a8d931755ddb"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "alema_2023:0d6c9a545fe35c50",
+    "contestId": "alema_2023",
+    "examDocumentId": "0d6c9a545fe35c50",
+    "noticeDocumentIds": [
+      "59219529ae5b0716"
+    ],
+    "answerKeyDocumentIds": [
+      "3805a8d931755ddb"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "alema_2023:256e87ee5c4bc5c8",
+    "contestId": "alema_2023",
+    "examDocumentId": "256e87ee5c4bc5c8",
+    "noticeDocumentIds": [
+      "59219529ae5b0716"
+    ],
+    "answerKeyDocumentIds": [
+      "3805a8d931755ddb"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "alema_2023:d366053cf55fde6f",
+    "contestId": "alema_2023",
+    "examDocumentId": "d366053cf55fde6f",
+    "noticeDocumentIds": [
+      "59219529ae5b0716"
+    ],
+    "answerKeyDocumentIds": [
+      "3805a8d931755ddb"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "alep_2024:c381a1e8d997a98c",
+    "contestId": "alep_2024",
+    "examDocumentId": "c381a1e8d997a98c",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [
+      "942d063395ed7b4e"
+    ],
+    "confidence": {
+      "score": 0.65,
+      "status": "INFERRED"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "alero_2025:03318bdf3eb55562",
+    "contestId": "alero_2025",
+    "examDocumentId": "03318bdf3eb55562",
+    "noticeDocumentIds": [
+      "df654d5f4d4541db"
+    ],
+    "answerKeyDocumentIds": [
+      "28e342613940bc7d"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "amazul_2025:dad6e7b1a4025fe4",
+    "contestId": "amazul_2025",
+    "examDocumentId": "dad6e7b1a4025fe4",
+    "noticeDocumentIds": [
+      "ddfdaa6febf95d4a"
+    ],
+    "answerKeyDocumentIds": [
+      "42e6ed09506ae0e2"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "amazul_2025:7259f26718204761",
+    "contestId": "amazul_2025",
+    "examDocumentId": "7259f26718204761",
+    "noticeDocumentIds": [
+      "ddfdaa6febf95d4a"
+    ],
+    "answerKeyDocumentIds": [
+      "42e6ed09506ae0e2"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "amazul_2025:44eb00d491e76e2c",
+    "contestId": "amazul_2025",
+    "examDocumentId": "44eb00d491e76e2c",
+    "noticeDocumentIds": [
+      "ddfdaa6febf95d4a"
+    ],
+    "answerKeyDocumentIds": [
+      "42e6ed09506ae0e2"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "banestes_2021:6f2d7f6458e55727",
+    "contestId": "banestes_2021",
+    "examDocumentId": "6f2d7f6458e55727",
+    "noticeDocumentIds": [
+      "3816d2de334c3618"
+    ],
+    "answerKeyDocumentIds": [
+      "ca148daf1343db6b"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "banestes_2021:c9e7a98c61425b5a",
+    "contestId": "banestes_2021",
+    "examDocumentId": "c9e7a98c61425b5a",
+    "noticeDocumentIds": [
+      "3816d2de334c3618"
+    ],
+    "answerKeyDocumentIds": [
+      "ca148daf1343db6b"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "banestes_2021:8679bdf5168a6868",
+    "contestId": "banestes_2021",
+    "examDocumentId": "8679bdf5168a6868",
+    "noticeDocumentIds": [
+      "3816d2de334c3618"
+    ],
+    "answerKeyDocumentIds": [
+      "ca148daf1343db6b"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "cge_sc_2022:12ec61f98efef2e5",
+    "contestId": "cge_sc_2022",
+    "examDocumentId": "12ec61f98efef2e5",
+    "noticeDocumentIds": [
+      "d9ffe8e4b5523829"
+    ],
+    "answerKeyDocumentIds": [
+      "0034b2c496195389"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "cge_sc_2022:f660460eafbf3f24",
+    "contestId": "cge_sc_2022",
+    "examDocumentId": "f660460eafbf3f24",
+    "noticeDocumentIds": [
+      "d9ffe8e4b5523829"
+    ],
+    "answerKeyDocumentIds": [
+      "0034b2c496195389"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "cgu_2021:a4eaf8534e92aafb",
+    "contestId": "cgu_2021",
+    "examDocumentId": "a4eaf8534e92aafb",
+    "noticeDocumentIds": [
+      "8e4ee9a6602cabbf"
+    ],
+    "answerKeyDocumentIds": [
+      "0b88c649168b0929"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "cmt_taubate_2022:4b57997f838d6f22",
+    "contestId": "cmt_taubate_2022",
+    "examDocumentId": "4b57997f838d6f22",
+    "noticeDocumentIds": [
+      "697ae9b5c83e081b"
+    ],
+    "answerKeyDocumentIds": [
+      "38578715c4e34a9c"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "cprm_2025:9f332bf50b9f616f",
+    "contestId": "cprm_2025",
+    "examDocumentId": "9f332bf50b9f616f",
+    "noticeDocumentIds": [
+      "6649928ba5ee79b2"
+    ],
+    "answerKeyDocumentIds": [
+      "4d20c0d356cb6811"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "cvm_2024:055dd83af36a1c17",
+    "contestId": "cvm_2024",
+    "examDocumentId": "055dd83af36a1c17",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [
+      "b047417172fa083a"
+    ],
+    "confidence": {
+      "score": 0.65,
+      "status": "INFERRED"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "cvm_2024:da477c0171d2c093",
+    "contestId": "cvm_2024",
+    "examDocumentId": "da477c0171d2c093",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [
+      "b047417172fa083a"
+    ],
+    "confidence": {
+      "score": 0.65,
+      "status": "INFERRED"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "dataprev_2024:8c3c6ad4a89db43e",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "8c3c6ad4a89db43e",
+    "noticeDocumentIds": [
+      "99359930f141c235"
+    ],
+    "answerKeyDocumentIds": [
+      "9522629babb79cf8",
+      "4a02a3d2229343ba"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "dataprev_2024:00f64f8a4d8e1d7a",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "00f64f8a4d8e1d7a",
+    "noticeDocumentIds": [
+      "99359930f141c235"
+    ],
+    "answerKeyDocumentIds": [
+      "9522629babb79cf8",
+      "4a02a3d2229343ba"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "dataprev_2024:51957b8d539f8815",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "51957b8d539f8815",
+    "noticeDocumentIds": [
+      "99359930f141c235"
+    ],
+    "answerKeyDocumentIds": [
+      "9522629babb79cf8",
+      "4a02a3d2229343ba"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "dataprev_2024:e7a1c34d1730d45c",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "e7a1c34d1730d45c",
+    "noticeDocumentIds": [
+      "99359930f141c235"
+    ],
+    "answerKeyDocumentIds": [
+      "9522629babb79cf8",
+      "4a02a3d2229343ba"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "dataprev_2024:3b056b70c97253bd",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "3b056b70c97253bd",
+    "noticeDocumentIds": [
+      "99359930f141c235"
+    ],
+    "answerKeyDocumentIds": [
+      "9522629babb79cf8",
+      "4a02a3d2229343ba"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "dataprev_2024:0624ddd41804e6fc",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "0624ddd41804e6fc",
+    "noticeDocumentIds": [
+      "99359930f141c235"
+    ],
+    "answerKeyDocumentIds": [
+      "9522629babb79cf8",
+      "4a02a3d2229343ba"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "dnit_2023:0f48952c0b3163dc",
+    "contestId": "dnit_2023",
+    "examDocumentId": "0f48952c0b3163dc",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [],
+    "confidence": {
+      "score": 0.25,
+      "status": "INSUFFICIENT"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "dpe_ro_2025:4f589edca88b1ab9",
+    "contestId": "dpe_ro_2025",
+    "examDocumentId": "4f589edca88b1ab9",
+    "noticeDocumentIds": [
+      "8583ee186761ca21"
+    ],
+    "answerKeyDocumentIds": [
+      "a046ffc183883301"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "dpe_ro_2025:affb6b12e9d40121",
+    "contestId": "dpe_ro_2025",
+    "examDocumentId": "affb6b12e9d40121",
+    "noticeDocumentIds": [
+      "8583ee186761ca21"
+    ],
+    "answerKeyDocumentIds": [
+      "a046ffc183883301"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "dpe_ro_2025:bc08f807f7bd458e",
+    "contestId": "dpe_ro_2025",
+    "examDocumentId": "bc08f807f7bd458e",
+    "noticeDocumentIds": [
+      "8583ee186761ca21"
+    ],
+    "answerKeyDocumentIds": [
+      "a046ffc183883301"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "dpe_ro_2025:044c006d82537c35",
+    "contestId": "dpe_ro_2025",
+    "examDocumentId": "044c006d82537c35",
+    "noticeDocumentIds": [
+      "8583ee186761ca21"
+    ],
+    "answerKeyDocumentIds": [
+      "a046ffc183883301"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "dpers_2023:85e4178b6b053158",
+    "contestId": "dpers_2023",
+    "examDocumentId": "85e4178b6b053158",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [
+      "70bde85c8df9241f"
+    ],
+    "confidence": {
+      "score": 0.65,
+      "status": "INFERRED"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "ebserh_2024:1453087fdf659962",
+    "contestId": "ebserh_2024",
+    "examDocumentId": "1453087fdf659962",
+    "noticeDocumentIds": [
+      "73b192616767bda6"
+    ],
+    "answerKeyDocumentIds": [
+      "859f530de9c8f600"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "funsaude_ce_2021:8832e499653d1525",
+    "contestId": "funsaude_ce_2021",
+    "examDocumentId": "8832e499653d1525",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [],
+    "confidence": {
+      "score": 0.25,
+      "status": "INSUFFICIENT"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "imbel_2021:515f0a285f33409e",
+    "contestId": "imbel_2021",
+    "examDocumentId": "515f0a285f33409e",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [],
+    "confidence": {
+      "score": 0.25,
+      "status": "INSUFFICIENT"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "macaeprev_2024:e3aa142ff860b175",
+    "contestId": "macaeprev_2024",
+    "examDocumentId": "e3aa142ff860b175",
+    "noticeDocumentIds": [
+      "17677cf683b2bbdc"
+    ],
+    "answerKeyDocumentIds": [
+      "8eab0a64f90972e4",
+      "2e95d846051cf0d8"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "macaeprev_2024:0965b9ded590c05a",
+    "contestId": "macaeprev_2024",
+    "examDocumentId": "0965b9ded590c05a",
+    "noticeDocumentIds": [
+      "17677cf683b2bbdc"
+    ],
+    "answerKeyDocumentIds": [
+      "8eab0a64f90972e4",
+      "2e95d846051cf0d8"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "mpgo_2022:284272973ac2bd5d",
+    "contestId": "mpgo_2022",
+    "examDocumentId": "284272973ac2bd5d",
+    "noticeDocumentIds": [
+      "e75e279dbd90658f"
+    ],
+    "answerKeyDocumentIds": [
+      "6d4ea55f75fbe1f9"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "mpgo_2022:e6a7898e1128fbed",
+    "contestId": "mpgo_2022",
+    "examDocumentId": "e6a7898e1128fbed",
+    "noticeDocumentIds": [
+      "e75e279dbd90658f"
+    ],
+    "answerKeyDocumentIds": [
+      "6d4ea55f75fbe1f9"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "mpgo_2022:5620158a32604629",
+    "contestId": "mpgo_2022",
+    "examDocumentId": "5620158a32604629",
+    "noticeDocumentIds": [
+      "e75e279dbd90658f"
+    ],
+    "answerKeyDocumentIds": [
+      "6d4ea55f75fbe1f9"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "mprj_2025:2633c7b0cba2f008",
+    "contestId": "mprj_2025",
+    "examDocumentId": "2633c7b0cba2f008",
+    "noticeDocumentIds": [
+      "359dacafb7e25aa0"
+    ],
+    "answerKeyDocumentIds": [
+      "ed4f3ea65db22ce6"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "mpsc_2022:2627a8a7d2cba367",
+    "contestId": "mpsc_2022",
+    "examDocumentId": "2627a8a7d2cba367",
+    "noticeDocumentIds": [
+      "21fcd8ceafb6f884"
+    ],
+    "answerKeyDocumentIds": [
+      "91f875844576f810"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "mpu_2025:da254537add9002c",
+    "contestId": "mpu_2025",
+    "examDocumentId": "da254537add9002c",
+    "noticeDocumentIds": [
+      "fc2a46173cd0eb3c"
+    ],
+    "answerKeyDocumentIds": [
+      "8d0a8317270eda9a",
+      "8f2e936e39f37aba"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "mpu_2025:022c547a025ad7cf",
+    "contestId": "mpu_2025",
+    "examDocumentId": "022c547a025ad7cf",
+    "noticeDocumentIds": [
+      "fc2a46173cd0eb3c"
+    ],
+    "answerKeyDocumentIds": [
+      "8d0a8317270eda9a",
+      "8f2e936e39f37aba"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "mpu_2025:e2d80ce132b95834",
+    "contestId": "mpu_2025",
+    "examDocumentId": "e2d80ce132b95834",
+    "noticeDocumentIds": [
+      "fc2a46173cd0eb3c"
+    ],
+    "answerKeyDocumentIds": [
+      "8d0a8317270eda9a",
+      "8f2e936e39f37aba"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "pgm_niteroi_2023:4ab6ebcf7c9de4ba",
+    "contestId": "pgm_niteroi_2023",
+    "examDocumentId": "4ab6ebcf7c9de4ba",
+    "noticeDocumentIds": [
+      "2f97796d671668cc"
+    ],
+    "answerKeyDocumentIds": [
+      "0ac432c94f74db94"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "sead_ap_peritos_2022:4d2cd8733f412c7b",
+    "contestId": "sead_ap_peritos_2022",
+    "examDocumentId": "4d2cd8733f412c7b",
+    "noticeDocumentIds": [
+      "21f186e866c95a96"
+    ],
+    "answerKeyDocumentIds": [
+      "a6a94c8cfd45b4d6"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "sead_ap_peritos_2022:9f3b91ccb8f863af",
+    "contestId": "sead_ap_peritos_2022",
+    "examDocumentId": "9f3b91ccb8f863af",
+    "noticeDocumentIds": [
+      "21f186e866c95a96"
+    ],
+    "answerKeyDocumentIds": [
+      "a6a94c8cfd45b4d6"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "sefaz_ba_2022:67b02819451f8f59",
+    "contestId": "sefaz_ba_2022",
+    "examDocumentId": "67b02819451f8f59",
+    "noticeDocumentIds": [
+      "e980555097df56a4"
+    ],
+    "answerKeyDocumentIds": [
+      "79e1b2731824faf9"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "sefaz_mg_2022:76548ec70a65fab7",
+    "contestId": "sefaz_mg_2022",
+    "examDocumentId": "76548ec70a65fab7",
+    "noticeDocumentIds": [
+      "c52ddc2f7c029ca6"
+    ],
+    "answerKeyDocumentIds": [
+      "f770abab0e3b6155"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "sefaz_mg_2022:fb10267f2d6eb15c",
+    "contestId": "sefaz_mg_2022",
+    "examDocumentId": "fb10267f2d6eb15c",
+    "noticeDocumentIds": [
+      "c52ddc2f7c029ca6"
+    ],
+    "answerKeyDocumentIds": [
+      "f770abab0e3b6155"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "semsa_manaus_2021:dbe330044faa79ba",
+    "contestId": "semsa_manaus_2021",
+    "examDocumentId": "dbe330044faa79ba",
+    "noticeDocumentIds": [
+      "7c45fac1ccf25b05"
+    ],
+    "answerKeyDocumentIds": [
+      "979307ff068871b5"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "senado_2022_ed1:7c5e26e14fd8638f",
+    "contestId": "senado_2022_ed1",
+    "examDocumentId": "7c5e26e14fd8638f",
+    "noticeDocumentIds": [
+      "fe616f22b49bc42b"
+    ],
+    "answerKeyDocumentIds": [
+      "a806df31d5aa09d7"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "senado_2022_ed1:3d21930dea755dc1",
+    "contestId": "senado_2022_ed1",
+    "examDocumentId": "3d21930dea755dc1",
+    "noticeDocumentIds": [
+      "fe616f22b49bc42b"
+    ],
+    "answerKeyDocumentIds": [
+      "a806df31d5aa09d7"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "senado_2022_ed4:b02e04f54dc6c046",
+    "contestId": "senado_2022_ed4",
+    "examDocumentId": "b02e04f54dc6c046",
+    "noticeDocumentIds": [
+      "d8901ccb82f95f28"
+    ],
+    "answerKeyDocumentIds": [
+      "5d77b244c438b0d5"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "smf_cuiaba_2024:69ca4e66ab0ad4a8",
+    "contestId": "smf_cuiaba_2024",
+    "examDocumentId": "69ca4e66ab0ad4a8",
+    "noticeDocumentIds": [
+      "ef50a6e418546f09"
+    ],
+    "answerKeyDocumentIds": [
+      "3ebce96473703a0c"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "smf_cuiaba_2024:feec3af822969e4f",
+    "contestId": "smf_cuiaba_2024",
+    "examDocumentId": "feec3af822969e4f",
+    "noticeDocumentIds": [
+      "ef50a6e418546f09"
+    ],
+    "answerKeyDocumentIds": [
+      "3ebce96473703a0c"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_es_2022:3df84138cf497d7e",
+    "contestId": "tce_es_2022",
+    "examDocumentId": "3df84138cf497d7e",
+    "noticeDocumentIds": [
+      "3528826cc4c1b96c"
+    ],
+    "answerKeyDocumentIds": [
+      "cb3b51e1ade3b397"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_pa_2024:d752191f76178c85",
+    "contestId": "tce_pa_2024",
+    "examDocumentId": "d752191f76178c85",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [
+      "daafbb9211d9edb6"
+    ],
+    "confidence": {
+      "score": 0.65,
+      "status": "INFERRED"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_pe_2025:dd7f0e61e58ce2e1",
+    "contestId": "tce_pe_2025",
+    "examDocumentId": "dd7f0e61e58ce2e1",
+    "noticeDocumentIds": [
+      "d4869793b4cd3f36"
+    ],
+    "answerKeyDocumentIds": [
+      "0ea19ed7e583faa5"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_pe_2025:84cb1983f522b281",
+    "contestId": "tce_pe_2025",
+    "examDocumentId": "84cb1983f522b281",
+    "noticeDocumentIds": [
+      "d4869793b4cd3f36"
+    ],
+    "answerKeyDocumentIds": [
+      "0ea19ed7e583faa5"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_pi_2024:deafd9d54832e9e0",
+    "contestId": "tce_pi_2024",
+    "examDocumentId": "deafd9d54832e9e0",
+    "noticeDocumentIds": [
+      "5e332ba45d4c8c78"
+    ],
+    "answerKeyDocumentIds": [
+      "9af8dcca3f9a61e0"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_pi_2024:d07402c55af14449",
+    "contestId": "tce_pi_2024",
+    "examDocumentId": "d07402c55af14449",
+    "noticeDocumentIds": [
+      "5e332ba45d4c8c78"
+    ],
+    "answerKeyDocumentIds": [
+      "9af8dcca3f9a61e0"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_pi_2024:38ef401deccb31c0",
+    "contestId": "tce_pi_2024",
+    "examDocumentId": "38ef401deccb31c0",
+    "noticeDocumentIds": [
+      "5e332ba45d4c8c78"
+    ],
+    "answerKeyDocumentIds": [
+      "9af8dcca3f9a61e0"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_pi_2024:65d0ae70b5dc8858",
+    "contestId": "tce_pi_2024",
+    "examDocumentId": "65d0ae70b5dc8858",
+    "noticeDocumentIds": [
+      "5e332ba45d4c8c78"
+    ],
+    "answerKeyDocumentIds": [
+      "9af8dcca3f9a61e0"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_rr_2024:11eed84aa2272929",
+    "contestId": "tce_rr_2024",
+    "examDocumentId": "11eed84aa2272929",
+    "noticeDocumentIds": [
+      "df0f8009a273c5c9"
+    ],
+    "answerKeyDocumentIds": [
+      "011d7018476233cf"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_sc_2026:016319e302e95a05",
+    "contestId": "tce_sc_2026",
+    "examDocumentId": "016319e302e95a05",
+    "noticeDocumentIds": [
+      "76dc7c1e2216de31"
+    ],
+    "answerKeyDocumentIds": [
+      "9a003140d1695ca0"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_se_2015:0cc1a50b2d067be5",
+    "contestId": "tce_se_2015",
+    "examDocumentId": "0cc1a50b2d067be5",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [],
+    "confidence": {
+      "score": 0.25,
+      "status": "INSUFFICIENT"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_to_2022:e1b53dbdbc312c90",
+    "contestId": "tce_to_2022",
+    "examDocumentId": "e1b53dbdbc312c90",
+    "noticeDocumentIds": [
+      "11aa4352f6e6446f"
+    ],
+    "answerKeyDocumentIds": [
+      "4b6c76bcc39ff162"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tce_to_2022:d671acf8e674d56d",
+    "contestId": "tce_to_2022",
+    "examDocumentId": "d671acf8e674d56d",
+    "noticeDocumentIds": [
+      "11aa4352f6e6446f"
+    ],
+    "answerKeyDocumentIds": [
+      "4b6c76bcc39ff162"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjap_2023:cf157c8b8c6d4353",
+    "contestId": "tjap_2023",
+    "examDocumentId": "cf157c8b8c6d4353",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [
+      "aaf71ee9015e9798"
+    ],
+    "confidence": {
+      "score": 0.65,
+      "status": "INFERRED"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "tjba_2014:fddba487918323c5",
+    "contestId": "tjba_2014",
+    "examDocumentId": "fddba487918323c5",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [],
+    "confidence": {
+      "score": 0.25,
+      "status": "INSUFFICIENT"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "tjdft_2022:060f56645a4dcacf",
+    "contestId": "tjdft_2022",
+    "examDocumentId": "060f56645a4dcacf",
+    "noticeDocumentIds": [
+      "d2d58d4239372aae"
+    ],
+    "answerKeyDocumentIds": [
+      "f20530c63b4d25af"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjdft_2022:7b9540427ec37b0c",
+    "contestId": "tjdft_2022",
+    "examDocumentId": "7b9540427ec37b0c",
+    "noticeDocumentIds": [
+      "d2d58d4239372aae"
+    ],
+    "answerKeyDocumentIds": [
+      "f20530c63b4d25af"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjdft_2022:07f893dbc7343e86",
+    "contestId": "tjdft_2022",
+    "examDocumentId": "07f893dbc7343e86",
+    "noticeDocumentIds": [
+      "d2d58d4239372aae"
+    ],
+    "answerKeyDocumentIds": [
+      "f20530c63b4d25af"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjmt_2024:1e077b9c73df6e22",
+    "contestId": "tjmt_2024",
+    "examDocumentId": "1e077b9c73df6e22",
+    "noticeDocumentIds": [
+      "bb20a4e554e50ad7"
+    ],
+    "answerKeyDocumentIds": [
+      "a27cde15dcd3a708"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjmt_2024:da48b1f08d8ce81a",
+    "contestId": "tjmt_2024",
+    "examDocumentId": "da48b1f08d8ce81a",
+    "noticeDocumentIds": [
+      "bb20a4e554e50ad7"
+    ],
+    "answerKeyDocumentIds": [
+      "a27cde15dcd3a708"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjmt_2024:a1bb19cd37576d7b",
+    "contestId": "tjmt_2024",
+    "examDocumentId": "a1bb19cd37576d7b",
+    "noticeDocumentIds": [
+      "bb20a4e554e50ad7"
+    ],
+    "answerKeyDocumentIds": [
+      "a27cde15dcd3a708"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjrj_unknown:87caf8c871a61bf9",
+    "contestId": "tjrj_unknown",
+    "examDocumentId": "87caf8c871a61bf9",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [],
+    "confidence": {
+      "score": 0.25,
+      "status": "INSUFFICIENT"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "tjrn_2023:18c654c0910b7862",
+    "contestId": "tjrn_2023",
+    "examDocumentId": "18c654c0910b7862",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [
+      "4fde3f2a39651b24"
+    ],
+    "confidence": {
+      "score": 0.65,
+      "status": "INFERRED"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "tjro_tce_ro_unknown:6abcdc8781491632",
+    "contestId": "tjro_tce_ro_unknown",
+    "examDocumentId": "6abcdc8781491632",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [],
+    "confidence": {
+      "score": 0.25,
+      "status": "INSUFFICIENT"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "tjrr_2024:a1fc8a1aa4682ffb",
+    "contestId": "tjrr_2024",
+    "examDocumentId": "a1fc8a1aa4682ffb",
+    "noticeDocumentIds": [
+      "e88d9869426da788"
+    ],
+    "answerKeyDocumentIds": [
+      "8fd7098962f5f723",
+      "29386052446eb2dd"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjrr_2024:dc009444bc8968ed",
+    "contestId": "tjrr_2024",
+    "examDocumentId": "dc009444bc8968ed",
+    "noticeDocumentIds": [
+      "e88d9869426da788"
+    ],
+    "answerKeyDocumentIds": [
+      "8fd7098962f5f723",
+      "29386052446eb2dd"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjrr_2024:69a5a9ebc9794d84",
+    "contestId": "tjrr_2024",
+    "examDocumentId": "69a5a9ebc9794d84",
+    "noticeDocumentIds": [
+      "e88d9869426da788"
+    ],
+    "answerKeyDocumentIds": [
+      "8fd7098962f5f723",
+      "29386052446eb2dd"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjrr_2024:ebc2d0dee5c57bf3",
+    "contestId": "tjrr_2024",
+    "examDocumentId": "ebc2d0dee5c57bf3",
+    "noticeDocumentIds": [
+      "e88d9869426da788"
+    ],
+    "answerKeyDocumentIds": [
+      "8fd7098962f5f723",
+      "29386052446eb2dd"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjrr_2024:888b21b9e48e2b9a",
+    "contestId": "tjrr_2024",
+    "examDocumentId": "888b21b9e48e2b9a",
+    "noticeDocumentIds": [
+      "e88d9869426da788"
+    ],
+    "answerKeyDocumentIds": [
+      "8fd7098962f5f723",
+      "29386052446eb2dd"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  },
+  {
+    "id": "tjse_unknown:f7eb0800277974ac",
+    "contestId": "tjse_unknown",
+    "examDocumentId": "f7eb0800277974ac",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [],
+    "confidence": {
+      "score": 0.25,
+      "status": "INSUFFICIENT"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "trf1_2024:77b3fc9072c48115",
+    "contestId": "trf1_2024",
+    "examDocumentId": "77b3fc9072c48115",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [
+      "9a7503311530bc5d"
+    ],
+    "confidence": {
+      "score": 0.65,
+      "status": "INFERRED"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "trf1_2024:d765c82af2673d94",
+    "contestId": "trf1_2024",
+    "examDocumentId": "d765c82af2673d94",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [
+      "9a7503311530bc5d"
+    ],
+    "confidence": {
+      "score": 0.65,
+      "status": "INFERRED"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "trt16_unknown:c3416d3ca3d8a1da",
+    "contestId": "trt16_unknown",
+    "examDocumentId": "c3416d3ca3d8a1da",
+    "noticeDocumentIds": [],
+    "answerKeyDocumentIds": [],
+    "confidence": {
+      "score": 0.25,
+      "status": "INSUFFICIENT"
+    },
+    "incidenceEligible": false,
+    "shadowMode": true
+  },
+  {
+    "id": "trt24_2024:16c4b936421dea2b",
+    "contestId": "trt24_2024",
+    "examDocumentId": "16c4b936421dea2b",
+    "noticeDocumentIds": [
+      "165c1a32572af11b"
+    ],
+    "answerKeyDocumentIds": [
+      "bf291c79f2c5467e"
+    ],
+    "confidence": {
+      "score": 0.95,
+      "status": "CONFIRMED"
+    },
+    "incidenceEligible": true,
+    "shadowMode": true
+  }
+]

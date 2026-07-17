@@ -177,6 +177,27 @@ export function validateEditalConfig(edital: EditalConfig): void {
     validateNumeric(incidence, `incidência histórica do assunto '${assuntoId}'`, { isRate: true });
   }
 
+  if (!edital.assuntoModelMetadata) {
+    throw new Error("Configuração incompleta: 'assuntoModelMetadata' é obrigatório para separar dado oficial, prior neutro e incidência empírica.");
+  }
+  for (const assuntoId of Object.keys(edital.pesosAssuntos)) {
+    const metadata = edital.assuntoModelMetadata[assuntoId];
+    if (!metadata) {
+      throw new Error(`Proveniência ausente para o assunto '${assuntoId}'.`);
+    }
+    if (!(["OFFICIAL", "NEUTRAL_PRIOR"] as const).includes(metadata.topicWeightSource)) {
+      throw new Error(`topicWeightSource inválido para o assunto '${assuntoId}'.`);
+    }
+    if (!(["EMPIRICAL", "UNAVAILABLE"] as const).includes(metadata.historicalIncidenceSource)) {
+      throw new Error(`historicalIncidenceSource inválido para o assunto '${assuntoId}'.`);
+    }
+  }
+  for (const assuntoId of Object.keys(edital.assuntoModelMetadata)) {
+    if (!(assuntoId in edital.pesosAssuntos)) {
+      throw new Error(`Proveniência cadastrada para assunto inexistente '${assuntoId}'.`);
+    }
+  }
+
   for (const [discId, qCount] of Object.entries(edital.quantidadeQuestoesProva)) {
     validateNumeric(qCount, `quantidade de questões da disciplina '${discId}'`, { min: 0, integer: true });
   }

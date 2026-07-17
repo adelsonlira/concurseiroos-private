@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0.0",
   "concursoId": "dataprev-2026-perfil-3",
-  "materialCount": 97,
-  "totalPages": 9782,
-  "totalSourceBytes": 472411093,
-  "sectionCount": 583,
+  "materialCount": 109,
+  "totalPages": 10676,
+  "totalSourceBytes": 496382727,
+  "sectionCount": 621,
   "materialsByGroup": {
     "Atualidades - F": 11,
     "Banco de dados - C": 12,
@@ -14,22 +14,23 @@
     "Inglês - C": 8,
     "LGPD e IA - C": 5,
     "Português - C": 13,
+    "RLM - C": 12,
     "Segurança da informação - C": 3
   },
   "mappingStatusCounts": {
-    "AUTO_HIGH_CONFIDENCE": 410,
-    "AUTO_REVIEWABLE": 74,
-    "REVIEW_REQUIRED": 8,
-    "TOPIC_ONLY": 91
+    "AUTO_HIGH_CONFIDENCE": 408,
+    "AUTO_REVIEWABLE": 104,
+    "REVIEW_REQUIRED": 14,
+    "TOPIC_ONLY": 95
   },
   "contentKindCounts": {
-    "COMMENTED_QUESTIONS": 163,
+    "COMMENTED_QUESTIONS": 173,
     "MIND_MAP": 7,
-    "QUESTION_LIST": 160,
-    "REFERENCE": 15,
+    "QUESTION_LIST": 170,
+    "REFERENCE": 20,
     "SIMULATION": 5,
     "SUMMARY": 48,
-    "THEORY": 185
+    "THEORY": 198
   },
   "mappedSubtopicCounts": {
     "dp26-p3-atualidades-areas": 42,
@@ -50,7 +51,7 @@
     "dp26-p3-esp-codificacao": 3,
     "dp26-p3-esp-design-arquitetura": 20,
     "dp26-p3-esp-devops-git": 9,
-    "dp26-p3-esp-frontend": 31,
+    "dp26-p3-esp-frontend": 28,
     "dp26-p3-esp-gov-bpmn": 5,
     "dp26-p3-esp-gov-cobit": 5,
     "dp26-p3-esp-gov-itil": 5,
@@ -61,18 +62,20 @@
     "dp26-p3-esp-linguagens-frameworks": 32,
     "dp26-p3-esp-metodologias-ageis": 20,
     "dp26-p3-esp-metricas": 4,
-    "dp26-p3-esp-mobile-lowcode": 22,
+    "dp26-p3-esp-mobile-lowcode": 10,
     "dp26-p3-esp-orientacao-objetos-web": 3,
     "dp26-p3-esp-padroes-dados-web": 9,
+    "dp26-p3-esp-padroes-reuso": 3,
     "dp26-p3-esp-requisitos": 5,
     "dp26-p3-esp-rpa": 4,
     "dp26-p3-esp-si-acesso": 14,
+    "dp26-p3-esp-si-cid": 7,
     "dp26-p3-esp-si-iso": 9,
     "dp26-p3-esp-si-riscos": 3,
     "dp26-p3-esp-si-sast-dast": 1,
     "dp26-p3-esp-si-sdl-owasp": 12,
     "dp26-p3-esp-testes": 7,
-    "dp26-p3-esp-ux-cms": 38,
+    "dp26-p3-esp-ux-cms": 39,
     "dp26-p3-ia-conceitos": 4,
     "dp26-p3-ia-machine-learning": 3,
     "dp26-p3-ing-gramatica-contextual": 5,
@@ -88,11 +91,12 @@
     "dp26-p3-por-pontuacao": 1,
     "dp26-p3-por-regencia": 1,
     "dp26-p3-por-significacao": 2,
-    "dp26-p3-por-tipos-generos-reconhecimento": 2
+    "dp26-p3-por-tipos-generos-reconhecimento": 2,
+    "dp26-p3-rlm-diagramas": 1,
+    "dp26-p3-rlm-primeira-ordem-fundamentos": 1,
+    "dp26-p3-rlm-problemas-aritmeticos-geometricos": 30
   },
-  "groupsWithoutPdf": [
-    "RLM - F"
-  ],
+  "groupsWithoutPdf": [],
   "privacy": {
     "rawPdfIncludedInDerivedCatalog": false,
     "rawTextIncludedInDerivedCatalog": false,

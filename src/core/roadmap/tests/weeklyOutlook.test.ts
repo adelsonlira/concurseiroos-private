@@ -34,7 +34,16 @@ function action(id: string, reasonCode: StrategicAction["reasonCode"] = "UNSEEN_
       vetosConsiderados: []
     },
     camadaConstitucional: ConstitutionalTier.EXPANSAO_EDITAL,
-    reasonCode
+    reasonCode,
+    decisionEvidence: {
+      knowledgeState: "UNSEEN" as never,
+      sampleSize: 0,
+      confidenceScore: 0,
+      confidenceLevel: "LOW",
+      topicWeightSource: "OFFICIAL",
+      historicalIncidenceSource: "UNAVAILABLE",
+      historicalIncidenceRate: null
+    }
   };
 }
 
@@ -53,6 +62,7 @@ function decision(actions: StrategicAction[], scheduled = 180, remaining = 180):
     },
     actions,
     planner: null,
+    prescription: null,
     warnings: [],
     errors: []
   };

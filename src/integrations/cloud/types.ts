@@ -13,10 +13,20 @@ export type CloudSyncPhase =
 
 export interface CloudEnvironmentConfig {
   availability: CloudAvailability;
+  source: "BUILD_TIME" | "SERVER_RUNTIME" | "NONE";
   supabaseUrl: string | null;
   supabaseAnonKey: string | null;
   snapshotTable: string;
   privateBucket: string;
+}
+
+export interface RuntimeServiceStatus {
+  configurationSource: CloudEnvironmentConfig["source"];
+  authMode: string;
+  allowSelfSignup: boolean;
+  geminiConfigured: boolean | null;
+  geminiModel: string | null;
+  runtimeEndpointReachable: boolean;
 }
 
 export interface CloudUserSummary {
@@ -61,6 +71,7 @@ export interface CloudSyncResult {
 export interface PrivateCloudDocument {
   name: string;
   storagePath: string;
+  sha256: string | null;
   sizeBytes: number | null;
   mimeType: string | null;
   createdAt: string | null;

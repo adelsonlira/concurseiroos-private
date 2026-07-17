@@ -1,10 +1,19 @@
 import { create } from "zustand";
-import { buildDataprev2026Profile3AppSeed, DATAPREV_2026_PROFILE_3_ID } from "./config/concursos/dataprev-2026-perfil-3";
+import { calculateBackupChecksum, prepareBackupForImport } from "./core/backup/backupIntegrity";
+import { persistSnapshotAtomically, readRecoverableSnapshot } from "./integrations/localStorage/resilientSnapshot";
+import {
+  DEFAULT_COMPETITION_ID,
+  getCompetitionRuntimeDefinition,
+  getDefaultCompetitionRuntimeDefinition
+} from "./config/concursos/registry";
 import { calculateDailyAvailability } from "./core/availability/availabilityEngine";
 import { scheduleFlashcardReview } from "./core/flashcards/flashcardScheduler";
+import { assessGuidedLearningCycle } from "./core/learning/learningCycle";
+import { assessDiagnosticPlacement } from "./core/diagnostic/diagnosticPlacement";
+import type { GuidedLearningEvidence, GuidedLearningEvidenceInput, LearningCycleAssessment } from "./core/learning/types";
 import type { FlashcardRetrievalPerformance } from "./core/flashcards/types";
 import { AvailabilityOverride, DailyAvailabilityResult, WeeklyAvailabilityDay } from "./core/availability/types";
-import { runDataprevDecisionForDate } from "./integrations/sde/dataprevDecisionAdapter";
+import { runCompetitionDecisionForDate } from "./integrations/sde/competitionDecisionAdapter";
 import { SDEApplicationResult } from "./integrations/sde/types";
 import { mergeLibrarySeedItems, sanitizeLibraryForBackup } from "./core/materials/libraryPrivacy";
 import { completeReviewSchedule, createOrRefreshReviewSchedule } from "./core/review/reviewEngine";
@@ -18,7 +27,7 @@ import {
   Concurso, Edital, Disciplina, Assunto, Subassunto, Questao, 
   Flashcard, Documento, Resumo, Anotacao, PlanoEstudo, Simulado, 
   Estatisticas, AgendaEvento, LogHistoricoAtividade, CronogramaRevisao, 
-  ConfigUsuario, HistoricoChatIA, SessaoEstudo, ItemBiblioteca, TentativaQuestaoUsuario, ExternalQuestionAttemptInput, StudySessionDecisionContext,
+  ConfigUsuario, HistoricoChatIA, SessaoEstudo, ItemBiblioteca, TentativaQuestaoUsuario, ExternalQuestionAttemptInput, ExternalQuestionBatchInput, StudySessionDecisionContext,
   ConcursoStatus, ParseStatus, CardStatus, StudySessionType, 
   TaskType, DifficultyLevel, FileType, BackupExportSchema, MensagemChat
 } from "./types";
@@ -45,6 +54,7 @@ interface ConcurseiroState {
   configuracao: ConfigUsuario;
   conversasIA: HistoricoChatIA[];
   sessoesEstudo: SessaoEstudo[];
+  evidenciasAprendizagemGuiada: GuidedLearningEvidence[];
   biblioteca: ItemBiblioteca[];
   /** Ephemeral SDE output. It is recalculated from source data and is not persisted. */
   ultimaDecisaoSDE: SDEApplicationResult | null;
@@ -66,7 +76,12 @@ interface ConcurseiroState {
   // Core Actions
   hydrateStore: () => void;
   resetAllData: () => void;
-  importBackup: (backup: BackupExportSchema) => { success: boolean; error?: string };
+  importBackup: (backup: BackupExportSchema) => {
+    success: boolean;
+    error?: string;
+    warnings?: string[];
+    migrated?: boolean;
+  };
   exportBackup: () => BackupExportSchema;
 
   updateConfiguracao: (updates: Partial<ConfigUsuario>) => void;
@@ -93,7 +108,7 @@ interface ConcurseiroState {
       peso: number;
       assuntos: Array<{
         nome: string;
-        prioridade: "ALTA" | "MEDIA" | "BAIXA";
+        prioridade: "ALTA" | "MEDIA" | "BAIXA" | "NAO_INFORMADA";
         subassuntos: string[];
       }>;
     }>;
@@ -117,11 +132,13 @@ interface ConcurseiroState {
   stopStudyTimer: () => void;
   tickStudyTimer: () => void;
   finishStudySession: (disciplinaId: string, assuntoId?: string, subassuntoId?: string, notes?: string, context?: StudySessionDecisionContext) => void;
+  registrarEvidenciaAprendizagemGuiada: (input: GuidedLearningEvidenceInput) => { success: boolean; assessment?: LearningCycleAssessment; error?: string };
 
   // Exercises
   addQuestao: (questao: Questao) => void;
   resolveQuestao: (questaoId: string, selectedOptionId: string, isCorrect: boolean, timeSpentSeconds: number, origin?: "TREINO_ISOLADO" | "SIMULADO", contextId?: string) => void;
   registrarTentativaExterna: (input: ExternalQuestionAttemptInput) => { success: boolean; error?: string };
+  registrarBateriaExterna: (input: ExternalQuestionBatchInput) => { success: boolean; error?: string };
 
   // Review cycle and error recovery
   agendarRevisaoSubassunto: (subassuntoId: string, trigger?: ReviewTrigger, triggerId?: string) => { success: boolean; error?: string };
@@ -156,21 +173,39 @@ interface ConcurseiroState {
 }
 
 // -------------------------------------------------------------
-// Initial official package: DATAPREV 2026 — Perfil 3
+// Initial package selected by the competition registry
 // -------------------------------------------------------------
-const DATAPREV_SEED = buildDataprev2026Profile3AppSeed();
-const DEFAULT_CONFIG: ConfigUsuario = DATAPREV_SEED.configuracao;
-const DEFAULT_STATS: Estatisticas = DATAPREV_SEED.estatisticas;
-const DEFAULT_ACTIVE_DISCIPLINE_ID = DATAPREV_SEED.disciplinas[0]?.id ?? null;
-const DEFAULT_ACTIVE_ASSUNTO_ID = DATAPREV_SEED.assuntos[0]?.id ?? null;
+const DEFAULT_RUNTIME = getDefaultCompetitionRuntimeDefinition();
+const DEFAULT_SEED = DEFAULT_RUNTIME.buildAppSeed();
+const DEFAULT_CONFIG: ConfigUsuario = DEFAULT_SEED.configuracao;
+const DEFAULT_STATS: Estatisticas = DEFAULT_SEED.estatisticas;
+const DEFAULT_ACTIVE_DISCIPLINE_ID = DEFAULT_SEED.disciplinas[0]?.id ?? null;
+const DEFAULT_ACTIVE_ASSUNTO_ID = DEFAULT_SEED.assuntos[0]?.id ?? null;
 
-function cloneDefaultAvailability() {
-  return structuredClone(DEFAULT_CONFIG.disponibilidadeEstudo);
+function getRuntimeOrDefault(competitionId?: string | null) {
+  try {
+    return getCompetitionRuntimeDefinition(competitionId);
+  } catch {
+    return DEFAULT_RUNTIME;
+  }
+}
+
+function buildSeedForCompetition(competitionId?: string | null) {
+  return getRuntimeOrDefault(competitionId).buildAppSeed();
+}
+
+function coachTitleForCompetition(competitionId?: string | null): string {
+  return getRuntimeOrDefault(competitionId).coachChatTitle;
+}
+
+function cloneAvailability(config: ConfigUsuario = DEFAULT_CONFIG) {
+  return structuredClone(config.disponibilidadeEstudo);
 }
 
 function normalizeConfig(input?: Partial<ConfigUsuario> | null): ConfigUsuario {
-  const base = DEFAULT_CONFIG;
-  const defaultAvailability = cloneDefaultAvailability();
+  const runtime = getRuntimeOrDefault(input?.concursoAlvoId);
+  const base = runtime.buildAppSeed().configuracao;
+  const defaultAvailability = cloneAvailability(base);
   const suppliedAvailability = input?.disponibilidadeEstudo;
   const availability = suppliedAvailability
     ? {
@@ -192,9 +227,9 @@ function normalizeConfig(input?: Partial<ConfigUsuario> | null): ConfigUsuario {
     ...input,
     metaHorariaDiariaMinutos:
       input?.metaHorariaDiariaMinutos ?? base.metaHorariaDiariaMinutos,
-    concursoAlvoId: input?.concursoAlvoId ?? DATAPREV_2026_PROFILE_3_ID,
-    localProva: input?.localProva ?? "Natal/RN",
-    localLotacao: input?.localLotacao ?? "Natal/RN",
+    concursoAlvoId: runtime.id ?? DEFAULT_COMPETITION_ID,
+    localProva: input?.localProva ?? base.localProva,
+    localLotacao: input?.localLotacao ?? base.localLotacao,
     disponibilidadeEstudo: availability,
     duracaoSessaoPreferidaMinutos: {
       ...base.duracaoSessaoPreferidaMinutos,
@@ -326,6 +361,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
   configuracao: DEFAULT_CONFIG,
   conversasIA: [],
   sessoesEstudo: [],
+  evidenciasAprendizagemGuiada: [],
   biblioteca: [],
   ultimaDecisaoSDE: null,
 
@@ -343,11 +379,12 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
 
   hydrateStore: () => {
     try {
-      const stored = localStorage.getItem("CONCURSEIRO_OS_STORE");
-      if (stored) {
-        const parsed = JSON.parse(stored);
+      const snapshot = readRecoverableSnapshot<Record<string, any>>(localStorage, "CONCURSEIRO_OS_STORE");
+      if (snapshot.errors.length > 0) console.warn("ConcurseiroOS snapshot recovery", snapshot.errors);
+      if (snapshot.value) {
+        const parsed = snapshot.value;
         if (isUntouchedLegacyDemo(parsed)) {
-          const seed = buildDataprev2026Profile3AppSeed();
+          const seed = buildSeedForCompetition();
           set({
             concursos: [seed.concurso],
             editais: [seed.edital],
@@ -369,6 +406,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             configuracao: seed.configuracao,
             conversasIA: [],
             sessoesEstudo: [],
+            evidenciasAprendizagemGuiada: [],
             biblioteca: seed.biblioteca,
             ultimaDecisaoSDE: null,
             activeConcursoId: seed.concurso.id,
@@ -381,15 +419,16 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             timerSecondsElapsed: 0,
             timerIntervalId: null
           });
-          get().createNewChat(seed.concurso.id, "Coach DATAPREV — Perfil 3");
+          get().createNewChat(seed.concurso.id, coachTitleForCompetition(seed.concurso.id));
           get().saveToLocalStorage();
           return;
         }
 
-        const seed = buildDataprev2026Profile3AppSeed();
+        const seed = buildSeedForCompetition(parsed.configuracao?.concursoAlvoId);
         set({
           ...parsed,
           tentativasQuestoes: parsed.tentativasQuestoes ?? [],
+          evidenciasAprendizagemGuiada: parsed.evidenciasAprendizagemGuiada ?? [],
           configuracao: normalizeConfig(parsed.configuracao),
           biblioteca: mergeLibrarySeedItems(parsed.biblioteca ?? [], seed.biblioteca),
           ultimaDecisaoSDE: null,
@@ -398,7 +437,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           timerIntervalId: null
         });
       } else {
-        const seed = buildDataprev2026Profile3AppSeed();
+        const seed = buildSeedForCompetition();
         set({
           concursos: [seed.concurso],
           editais: [seed.edital],
@@ -420,6 +459,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           configuracao: seed.configuracao,
           conversasIA: [],
           sessoesEstudo: [],
+          evidenciasAprendizagemGuiada: [],
           biblioteca: seed.biblioteca,
           ultimaDecisaoSDE: null,
           activeConcursoId: seed.concurso.id,
@@ -432,7 +472,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           timerSecondsElapsed: 0,
           timerIntervalId: null
         });
-        get().createNewChat(seed.concurso.id, "Coach DATAPREV — Perfil 3");
+        get().createNewChat(seed.concurso.id, coachTitleForCompetition(seed.concurso.id));
         get().saveToLocalStorage();
       }
     } catch (e) {
@@ -441,8 +481,11 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
   },
 
   resetAllData: () => {
+    const activeCompetitionId = get().configuracao.concursoAlvoId;
     localStorage.removeItem("CONCURSEIRO_OS_STORE");
-    const seed = buildDataprev2026Profile3AppSeed();
+    localStorage.removeItem("CONCURSEIRO_OS_STORE_RECOVERY");
+    localStorage.removeItem("CONCURSEIRO_OS_STORE_PENDING");
+    const seed = buildSeedForCompetition(activeCompetitionId);
     set({
       concursos: [seed.concurso],
       editais: [seed.edital],
@@ -464,6 +507,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       configuracao: seed.configuracao,
       conversasIA: [],
       sessoesEstudo: [],
+      evidenciasAprendizagemGuiada: [],
       biblioteca: seed.biblioteca,
       ultimaDecisaoSDE: null,
       activeConcursoId: seed.concurso.id,
@@ -476,7 +520,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       timerSecondsElapsed: 0,
       timerIntervalId: null
     });
-    get().createNewChat(seed.concurso.id, "Coach DATAPREV — Perfil 3");
+    get().createNewChat(seed.concurso.id, coachTitleForCompetition(seed.concurso.id));
     get().saveToLocalStorage();
   },
 
@@ -486,7 +530,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     } = get();
@@ -495,12 +539,12 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     };
     
-    localStorage.setItem("CONCURSEIRO_OS_STORE", JSON.stringify(rawToSave));
+    persistSnapshotAtomically(localStorage, "CONCURSEIRO_OS_STORE", JSON.stringify(rawToSave));
     if (typeof window !== "undefined") {
       window.dispatchEvent(new CustomEvent("concurseiroos:local-save"));
     }
@@ -508,11 +552,12 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
 
   importBackup: (backup: BackupExportSchema) => {
     try {
-      if (backup.metadata?.appSource !== "ConcurseiroOS") {
-        return { success: false, error: "Formato de arquivo inválido. Backup desconhecido." };
+      const preparation = prepareBackupForImport(backup);
+      if (!preparation.backup) {
+        return { success: false, error: preparation.errors.join(" ") };
       }
-      
-      const d = backup.dados;
+
+      const d = preparation.backup.dados;
       set({
         concursos: d.concursos || [],
         editais: d.editais || [],
@@ -534,9 +579,10 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         configuracao: normalizeConfig(d.configuracao),
         conversasIA: d.conversasIA || [],
         sessoesEstudo: d.sessoesEstudo || [],
+        evidenciasAprendizagemGuiada: d.evidenciasAprendizagemGuiada || [],
         biblioteca: mergeLibrarySeedItems(
           sanitizeLibraryForBackup(d.itensBiblioteca || []),
-          buildDataprev2026Profile3AppSeed().biblioteca
+          buildSeedForCompetition(d.configuracao?.concursoAlvoId).biblioteca
         ),
         ultimaDecisaoSDE: null,
         activeConcursoId: d.concursos?.[0]?.id || null,
@@ -547,7 +593,11 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       });
       
       get().saveToLocalStorage();
-      return { success: true };
+      return {
+        success: true,
+        warnings: preparation.warnings,
+        migrated: preparation.migrated
+      };
     } catch (err: any) {
       return { success: false, error: err.message || "Erro desconhecido ao processar JSON." };
     }
@@ -555,13 +605,14 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
 
   exportBackup: () => {
     const s = get();
-    return {
+    const backup: BackupExportSchema = {
       metadata: {
-        versaoBackup: "1.0.0",
+        versaoBackup: "2.0.0",
         exportadoEm: new Date().toISOString(),
         estudanteNome: s.configuracao.estudanteNome,
-        totalTamanhoBytes: JSON.stringify(s).length,
-        appSource: "ConcurseiroOS"
+        totalTamanhoBytes: 0,
+        appSource: "ConcurseiroOS",
+        integrityAlgorithm: "FNV1A64_CANONICAL_JSON"
       },
       dados: {
         concursos: s.concursos,
@@ -584,9 +635,13 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         configuracao: s.configuracao,
         conversasIA: s.conversasIA,
         sessoesEstudo: s.sessoesEstudo,
+        evidenciasAprendizagemGuiada: s.evidenciasAprendizagemGuiada,
         itensBiblioteca: sanitizeLibraryForBackup(s.biblioteca)
       }
     };
+    backup.metadata.checksum = calculateBackupChecksum(backup);
+    backup.metadata.totalTamanhoBytes = JSON.stringify(backup).length;
+    return backup;
   },
 
   updateConfiguracao: (updates) => {
@@ -667,14 +722,15 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
 
   executarSDEParaData: (date) => {
     const state = get();
-    const result = runDataprevDecisionForDate(
+    const result = runCompetitionDecisionForDate(
       {
         configuracao: state.configuracao,
         subassuntos: state.subassuntos,
         tentativasQuestoes: state.tentativasQuestoes,
         sessoesEstudo: state.sessoesEstudo,
         flashcards: state.flashcards,
-        cronogramasRevisao: state.cronogramasRevisao
+        cronogramasRevisao: state.cronogramasRevisao,
+        biblioteca: state.biblioteca
       },
       date
     );
@@ -765,7 +821,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           disciplinaId: discId,
           nome: a.nome,
           ordem: aIdx + 1,
-          prioridadeEdital: a.prioridade || "MEDIA",
+          prioridadeEdital: a.prioridade || "NAO_INFORMADA",
           metaQuestoesResolvidas: 100,
           questoesRespondidas: 0,
           questoesAcertadas: 0,
@@ -889,7 +945,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
   },
 
   stopStudyTimer: () => {
-    set({ isTimerRunning: false });
+    set({ isTimerRunning: false, timerSecondsElapsed: 0 });
   },
 
   tickStudyTimer: () => {
@@ -926,7 +982,16 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             sdePrioridade: context.sdePrioridade,
             sdeReasonCode: context.sdeReasonCode,
             sdeDiagnosticPurpose: context.sdeDiagnosticPurpose,
-            duracaoPlanejadaMinutos: context.duracaoPlanejadaMinutos
+            duracaoPlanejadaMinutos: context.duracaoPlanejadaMinutos,
+            prescriptionId: context.prescriptionId,
+            targetQuestionCount: context.targetQuestionCount,
+            stretchQuestionCount: context.stretchQuestionCount,
+            materialId: context.materialId,
+            materialStartPage: context.materialStartPage,
+            materialEndPage: context.materialEndPage,
+            questionSourceId: context.questionSourceId,
+            questionSourceLabel: context.questionSourceLabel,
+            questionSourceKind: context.questionSourceKind
           }
         : undefined,
       tempoGastoSegundos: elapsedSeconds,
@@ -1022,6 +1087,15 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             sdeReasonCode: context.sdeReasonCode ?? null,
             diagnosticPurpose: context.sdeDiagnosticPurpose ?? false,
             duracaoPlanejadaMinutos: context.duracaoPlanejadaMinutos ?? null,
+            prescriptionId: context.prescriptionId ?? null,
+            targetQuestionCount: context.targetQuestionCount ?? null,
+            stretchQuestionCount: context.stretchQuestionCount ?? null,
+            materialId: context.materialId ?? null,
+            materialStartPage: context.materialStartPage ?? null,
+            materialEndPage: context.materialEndPage ?? null,
+            questionSourceId: context.questionSourceId ?? null,
+            questionSourceLabel: context.questionSourceLabel ?? null,
+            questionSourceKind: context.questionSourceKind ?? null,
             markTheoryCompleted: context.markTheoryCompleted ?? false
           }
         : undefined
@@ -1036,10 +1110,82 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       cronogramasRevisao: updatedReviewSchedules,
       historicoAtividades: [activity, ...state.historicoAtividades],
       isTimerRunning: false,
-      timerSecondsElapsed: 0
+      timerSecondsElapsed: 0,
+      ultimaDecisaoSDE: null
     }));
 
     get().saveToLocalStorage();
+  },
+
+  registrarEvidenciaAprendizagemGuiada: (input) => {
+    try {
+      if (!input.prescriptionId.trim()) return { success: false, error: "A evidência precisa estar ligada a uma prescrição." };
+      const matchingSession = [...get().sessoesEstudo]
+        .reverse()
+        .find((session) => session.decisaoSDE?.prescriptionId === input.prescriptionId);
+      const evidence: GuidedLearningEvidence = {
+        ...input,
+        id: `guided-learning-${Date.now()}`,
+        sessionId: input.sessionId ?? matchingSession?.id ?? `unlinked-${input.prescriptionId}`,
+        preStudyResponses: input.preStudyResponses.map((item) => ({ ...item })),
+        postStudyResponses: input.postStudyResponses.map((item) => ({ ...item })),
+        remainingDoubts: input.remainingDoubts.map((item) => item.trim()).filter(Boolean),
+      };
+      const assessment = assessGuidedLearningCycle(evidence);
+      const canUpdateLearningState = Boolean(
+        matchingSession?.disciplinaId && matchingSession.assuntoId && matchingSession.subassuntoId
+      );
+      const reviewDate = new Date(input.recordedAt);
+      if (assessment.reviewDelayDays !== null) {
+        reviewDate.setUTCDate(reviewDate.getUTCDate() + assessment.reviewDelayDays);
+      }
+      const reviewDateKey = reviewDate.toISOString().slice(0, 10);
+      let reviewSchedules = get().cronogramasRevisao;
+      if (canUpdateLearningState && assessment.status !== "INSUFFICIENT_EVIDENCE") {
+        reviewSchedules = upsertReviewScheduleForSubtopic({
+          schedules: reviewSchedules,
+          disciplinaId: matchingSession!.disciplinaId,
+          assuntoId: matchingSession!.assuntoId!,
+          subassuntoId: matchingSession!.subassuntoId!,
+          trigger: assessment.status === "MASTERED_FOR_NOW" ? "TEORIA_CONCLUIDA" : "MANUAL",
+          triggerTimestamp: input.recordedAt,
+          triggerId: evidence.id,
+          examDate: get().concursos.find((item) => item.id === get().configuracao.concursoAlvoId)?.dataProva,
+        }).map((schedule) =>
+          schedule.subassuntoId === matchingSession!.subassuntoId
+            ? {
+                ...schedule,
+                proximaRevisaoData: reviewDateKey,
+                requerReaprendizagemImediata: assessment.status === "RELEARN_REQUIRED",
+                modoProximaRevisao: assessment.status === "RELEARN_REQUIRED"
+                  ? "REAPRENDIZAGEM_IMEDIATA"
+                  : schedule.modoProximaRevisao,
+                updatedAt: input.recordedAt,
+              }
+            : schedule
+        );
+      }
+      set((state) => ({
+        evidenciasAprendizagemGuiada: [...state.evidenciasAprendizagemGuiada, evidence],
+        subassuntos: canUpdateLearningState
+          ? state.subassuntos.map((subtopic) =>
+              subtopic.id === matchingSession!.subassuntoId
+                ? {
+                    ...subtopic,
+                    completado: assessment.status === "MASTERED_FOR_NOW",
+                    updatedAt: input.recordedAt,
+                  }
+                : subtopic
+            )
+          : state.subassuntos,
+        cronogramasRevisao: reviewSchedules,
+        ultimaDecisaoSDE: null,
+      }));
+      get().saveToLocalStorage();
+      return { success: true, assessment };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : "Não foi possível registrar a recuperação guiada." };
+    }
   },
 
   // -------------------------------------------------------------
@@ -1182,7 +1328,8 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       subassuntos: updatedSubassuntos,
       estatisticas: stats,
       cronogramasRevisao: updatedReviewSchedules,
-      historicoAtividades: [activity, ...state.historicoAtividades]
+      historicoAtividades: [activity, ...state.historicoAtividades],
+      ultimaDecisaoSDE: null
     }));
 
     get().saveToLocalStorage();
@@ -1220,11 +1367,14 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       opcaoSelecionadaId: input.acertou ? "MANUAL_ACERTO" : "MANUAL_ERRO",
       acertou: input.acertou,
       origem: "TREINO_ISOLADO",
+      contextoId: input.contextId,
       tempoRespostaSegundos: Math.round(input.tempoRespostaSegundos),
       respondidaEm: respondedAt,
       registradaManualmente: true,
       fonteExterna: input.fonteExterna?.trim() || undefined,
       nivelConfianca: input.nivelConfianca,
+      diagnosticoInicial: input.diagnosticoInicial,
+      consultouMaterial: input.consultouMaterial,
       erroCausa: input.acertou ? undefined : input.erroCausa ?? "DESCONHECIDA",
       erroNota: input.acertou ? undefined : input.erroNota?.trim() || undefined
     };
@@ -1295,20 +1445,35 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       tempoGastoSegundos: Math.round(input.tempoRespostaSegundos),
       metadata: {
         origin: "TREINO_ISOLADO",
+        contextId: input.contextId ?? null,
         manual: true,
         source: input.fonteExterna?.trim() || null,
         isCorrect: input.acertou,
         confidence: input.nivelConfianca ?? null,
+        initialDiagnostic: input.diagnosticoInicial === true,
+        consultedMaterial: input.consultouMaterial === true,
         declaredErrorCause: attempt.erroCausa ?? null,
         hasPrivateErrorNote: Boolean(attempt.erroNota)
       }
     };
 
-    const reviewTrigger: ReviewTrigger | null = !input.acertou
-      ? "ERRO_QUESTAO"
-      : input.nivelConfianca === "BAIXA"
-        ? "ACERTO_BAIXA_CONFIANCA"
-        : null;
+    const diagnosticAssessment = input.diagnosticoInicial
+      ? assessDiagnosticPlacement([
+          ...state.tentativasQuestoes.filter(
+            (item) => item.subassuntoId === subtopic.id && item.diagnosticoInicial === true
+          ),
+          attempt
+        ])
+      : null;
+    const reviewTrigger: ReviewTrigger | null = input.diagnosticoInicial
+      ? diagnosticAssessment?.status === "THEORY_BYPASS_ELIGIBLE"
+        ? "DIAGNOSTICO_APTO_SEM_TEORIA"
+        : null
+      : !input.acertou
+        ? "ERRO_QUESTAO"
+        : input.nivelConfianca === "BAIXA"
+          ? "ACERTO_BAIXA_CONFIANCA"
+          : null;
     const updatedReviewSchedules = reviewTrigger
       ? upsertReviewScheduleForSubtopic({
           schedules: state.cronogramasRevisao,
@@ -1324,6 +1489,226 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
 
     set({
       tentativasQuestoes: [...state.tentativasQuestoes, attempt],
+      disciplinas: updatedDisciplinas,
+      assuntos: updatedAssuntos,
+      subassuntos: updatedSubassuntos,
+      estatisticas: stats,
+      cronogramasRevisao: updatedReviewSchedules,
+      historicoAtividades: [activity, ...state.historicoAtividades],
+      ultimaDecisaoSDE: null
+    });
+    get().saveToLocalStorage();
+    return { success: true };
+  },
+
+  registrarBateriaExterna: (input) => {
+    const state = get();
+    const discipline = state.disciplinas.find((item) => item.id === input.disciplinaId);
+    const subject = state.assuntos.find((item) => item.id === input.assuntoId);
+    const subtopic = state.subassuntos.find((item) => item.id === input.subassuntoId);
+
+    if (!discipline) return { success: false, error: "Disciplina inexistente." };
+    if (!subject || subject.disciplinaId !== discipline.id) {
+      return { success: false, error: "O assunto não pertence à disciplina selecionada." };
+    }
+    if (!subtopic || subtopic.assuntoId !== subject.id) {
+      return { success: false, error: "O subassunto não pertence ao assunto selecionado." };
+    }
+
+    const total = Number(input.totalQuestoes);
+    const correct = Number(input.acertos);
+    const blank = Number(input.emBranco ?? 0);
+    const totalSeconds = Number(input.tempoTotalSegundos);
+    const values = [total, correct, blank];
+
+    if (!values.every((value) => Number.isInteger(value) && value >= 0) || total <= 0) {
+      return {
+        success: false,
+        error: "Total, acertos e questões em branco devem ser números inteiros não negativos; o total deve ser maior que zero."
+      };
+    }
+    if (correct + blank > total) {
+      return { success: false, error: "Acertos e questões em branco não podem superar o total da bateria." };
+    }
+    const confidentCorrect = Number(input.acertosConfiantes ?? 0);
+    if (
+      input.diagnosticoInicial &&
+      (!Number.isInteger(confidentCorrect) || confidentCorrect < 0 || confidentCorrect > correct)
+    ) {
+      return {
+        success: false,
+        error: "No diagnóstico, os acertos com segurança devem ser um inteiro entre zero e o total de acertos."
+      };
+    }
+    if (!Number.isFinite(totalSeconds) || totalSeconds < 0) {
+      return { success: false, error: "O tempo total deve ser um número não negativo." };
+    }
+
+    const wrong = total - correct - blank;
+    const respondedAt = new Date().toISOString();
+    const batchId = `batch-${Date.now()}-${state.tentativasQuestoes.length + 1}`;
+    const averageSeconds = total > 0 ? Math.round(totalSeconds / total) : 0;
+    const source = input.fonteExterna?.trim() || undefined;
+
+    const attempts: TentativaQuestaoUsuario[] = Array.from({ length: total }, (_, index) => {
+      const isCorrect = index < correct;
+      const isBlank = index >= correct + wrong;
+      const externalId = `${batchId}-${index + 1}`;
+
+      return {
+        id: `attempt-${externalId}`,
+        questaoId: externalId,
+        concursoId: discipline.concursoId,
+        disciplinaId: discipline.id,
+        assuntoId: subject.id,
+        subassuntoId: subtopic.id,
+        opcaoSelecionadaId: isCorrect
+          ? "BATCH_ACERTO"
+          : isBlank
+            ? "BATCH_EM_BRANCO"
+            : "BATCH_ERRO",
+        acertou: isCorrect,
+        origem: "TREINO_ISOLADO",
+        contextoId: input.contextId,
+        tempoRespostaSegundos: averageSeconds,
+        respondidaEm: respondedAt,
+        registradaManualmente: true,
+        registradaEmLote: true,
+        loteRegistroId: batchId,
+        respostaEmBranco: isBlank || undefined,
+        tempoRespostaEstimado: true,
+        fonteExterna: source,
+        nivelConfianca: input.diagnosticoInicial
+          ? isCorrect
+            ? index < confidentCorrect
+              ? "MEDIA"
+              : "BAIXA"
+            : input.nivelConfianca
+          : input.nivelConfianca,
+        diagnosticoInicial: input.diagnosticoInicial,
+        consultouMaterial: input.consultouMaterial,
+        erroCausa: isCorrect ? undefined : "DESCONHECIDA",
+        erroNota: isCorrect
+          ? undefined
+          : "Resultado registrado em lote; a causa individual do erro não foi informada."
+      };
+    });
+
+    const updatedDisciplinas = state.disciplinas.map((item) =>
+      item.id === discipline.id
+        ? {
+            ...item,
+            totalQuestoesRespondidas: item.totalQuestoesRespondidas + total,
+            totalQuestoesAcertadas: item.totalQuestoesAcertadas + correct,
+            updatedAt: respondedAt
+          }
+        : item
+    );
+
+    const updatedAssuntos = state.assuntos.map((item) => {
+      if (item.id !== subject.id) return item;
+      const nextTotal = item.questoesRespondidas + total;
+      return {
+        ...item,
+        questoesRespondidas: nextTotal,
+        questoesAcertadas: item.questoesAcertadas + correct,
+        progressoPorcentagem:
+          item.metaQuestoesResolvidas > 0
+            ? Math.min(100, Math.round((nextTotal / item.metaQuestoesResolvidas) * 100))
+            : 0,
+        updatedAt: respondedAt
+      };
+    });
+
+    const updatedSubassuntos = state.subassuntos.map((item) =>
+      item.id === subtopic.id
+        ? {
+            ...item,
+            questoesRespondidas: item.questoesRespondidas + total,
+            questoesAcertadas: item.questoesAcertadas + correct,
+            updatedAt: respondedAt
+          }
+        : item
+    );
+
+    const stats = structuredClone(state.estatisticas);
+    const disciplineStats = stats.desempenhoGeralPorDisciplina[discipline.id] ?? {
+      nomeDisciplina: discipline.nome,
+      questoesRespondidas: 0,
+      questoesAcertadas: 0,
+      tempoMinutosEstudo: 0
+    };
+    stats.desempenhoGeralPorDisciplina[discipline.id] = {
+      ...disciplineStats,
+      questoesRespondidas: disciplineStats.questoesRespondidas + total,
+      questoesAcertadas: disciplineStats.questoesAcertadas + correct
+    };
+    stats.questoesRespondidas += total;
+    stats.questoesAcertadas += correct;
+    stats.updatedAt = respondedAt;
+
+    const activity: LogHistoricoAtividade = {
+      id: `act-${batchId}`,
+      tipoAtividade: "RESOLUCAO_QUESTAO",
+      dataHora: respondedAt,
+      descricao: `Registrou bateria externa em ${subtopic.nome}: ${correct} acerto(s), ${wrong} erro(s) e ${blank} em branco de ${total}.`,
+      concursoId: discipline.concursoId,
+      disciplinaId: discipline.id,
+      assuntoId: subject.id,
+      subassuntoId: subtopic.id,
+      questaoId: batchId,
+      tempoGastoSegundos: Math.round(totalSeconds),
+      metadata: {
+        origin: "TREINO_ISOLADO",
+        contextId: input.contextId ?? null,
+        manual: true,
+        aggregate: true,
+        batchId,
+        source: source ?? null,
+        totalQuestions: total,
+        correctQuestions: correct,
+        wrongQuestions: wrong,
+        blankQuestions: blank,
+        confidence: input.nivelConfianca ?? null,
+        confidentCorrectQuestions: input.diagnosticoInicial ? confidentCorrect : null,
+        initialDiagnostic: input.diagnosticoInicial === true,
+        consultedMaterial: input.consultouMaterial === true,
+        averageTimeEstimated: true
+      }
+    };
+
+    const diagnosticAssessment = input.diagnosticoInicial
+      ? assessDiagnosticPlacement([
+          ...state.tentativasQuestoes.filter(
+            (item) => item.subassuntoId === subtopic.id && item.diagnosticoInicial === true
+          ),
+          ...attempts
+        ])
+      : null;
+    const reviewTrigger: ReviewTrigger | null = input.diagnosticoInicial
+      ? diagnosticAssessment?.status === "THEORY_BYPASS_ELIGIBLE"
+        ? "DIAGNOSTICO_APTO_SEM_TEORIA"
+        : null
+      : wrong + blank > 0
+        ? "ERRO_QUESTAO"
+        : input.nivelConfianca === "BAIXA"
+          ? "ACERTO_BAIXA_CONFIANCA"
+          : null;
+    const updatedReviewSchedules = reviewTrigger
+      ? upsertReviewScheduleForSubtopic({
+          schedules: state.cronogramasRevisao,
+          disciplinaId: discipline.id,
+          assuntoId: subject.id,
+          subassuntoId: subtopic.id,
+          trigger: reviewTrigger,
+          triggerTimestamp: respondedAt,
+          triggerId: batchId,
+          examDate: state.concursos.find((item) => item.id === state.configuracao.concursoAlvoId)?.dataProva
+        })
+      : state.cronogramasRevisao;
+
+    set({
+      tentativasQuestoes: [...state.tentativasQuestoes, ...attempts],
       disciplinas: updatedDisciplinas,
       assuntos: updatedAssuntos,
       subassuntos: updatedSubassuntos,
@@ -1757,7 +2142,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         {
           id: "m-welcome",
           remetente: "AI",
-          conteudo: "Olá! Sou seu Coach IA ConcurseiroOS. Estou pronto para criar planos de estudo, analisar seu progresso ou dar dicas sobre disciplinas específicas para o seu concurso público. Como posso ajudar você hoje?",
+          conteudo: "Olá! Sou a camada conversacional do ConcurseiroOS. Posso explicar a decisão atual do SDE, ensinar o tópico prescrito e ajudar a analisar erros registrados. Não crio um plano paralelo ao motor decisório.",
           timestamp: new Date().toISOString()
         }
       ],

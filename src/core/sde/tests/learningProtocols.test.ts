@@ -33,8 +33,8 @@ describe("planner learning protocols", () => {
   it("adds correction and a second attempt to diagnostic questions", () => {
     const steps = buildExecutionSteps("questoes", 45, "SQL", context, "DIAGNOSTIC_QUESTIONS");
     expect(total(steps)).toBe(45);
-    expect(steps.map((step) => step.descricao).join(" ")).toMatch(/amostra diagnóstica/i);
-    expect(steps.map((step) => step.descricao).join(" ")).toMatch(/questão contrastiva/i);
+    expect(steps.map((step) => step.descricao).join(" ")).toMatch(/não consultar teoria/i);
+    expect(steps.map((step) => step.descricao).join(" ")).toMatch(/alternativas erradas|outra questão equivalente/i);
   });
 
   it("uses retrieval-feedback-retrieval for review sessions", () => {

@@ -1,6 +1,14 @@
 import { DailyAvailabilityResult } from "../../core/availability/types";
 import { MaterialLocatorRecommendation } from "../../core/materials/types";
+import type { ExternalQuestionSourcePlan } from "../../core/questions/externalQuestionBanks";
 import type { WeeklyCalibrationReport } from "../../core/weekly/types";
+import type { StudyFocusGuide } from "../../core/prescription/studyFocusGuide";
+import type {
+  DiagnosticFollowUpPlan,
+  PrescriptionDecisionReliability,
+  PrescriptionExecutionReadiness,
+  PrescriptionNextAction
+} from "../../core/prescription/types";
 
 export interface CoachDisciplineEvidence {
   disciplinaId: string;
@@ -38,6 +46,24 @@ export interface CoachPlannedSession {
   disciplina: string;
   assunto: string;
   duracaoMinutos: number;
+}
+
+export interface CoachCurrentPrescription {
+  activity: string;
+  discipline: string;
+  topic: string;
+  subtopic: string | null;
+  durationMinutes: number;
+  targetQuestions: number | null;
+  stretchTargetQuestions: number | null;
+  material: MaterialLocatorRecommendation | null;
+  externalQuestionSourcePlan: ExternalQuestionSourcePlan | null;
+  focusGuide: StudyFocusGuide | null;
+  decisionReliability: PrescriptionDecisionReliability;
+  executionReadiness: PrescriptionExecutionReadiness;
+  nextAction: PrescriptionNextAction;
+  completionEvidence: string[];
+  diagnosticFollowUp: DiagnosticFollowUpPlan | null;
 }
 
 
@@ -146,6 +172,7 @@ export interface CoachGroundingContext {
     status: "SUCCESS" | "NO_TIME_AVAILABLE" | "INVALID_INPUT";
     disponibilidade: DailyAvailabilityResult | null;
     acoesPrioritarias: CoachDecisionAction[];
+    prescricaoAtual: CoachCurrentPrescription | null;
     plano: CoachPlannedSession[] | null;
     protecoesPlanner: string[];
     avisos: string[];

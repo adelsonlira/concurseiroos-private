@@ -19,7 +19,7 @@ import {
   selectObservedPreferredReviewMethod
 } from "../../core/review/reviewEngine";
 import { buildWeeklyCalibrationReport } from "../../core/weekly/weeklyCalibration";
-import { buildDataprevEvidenceCoverage } from "../sde/dataprevRoadmapAdapter";
+import { buildCompetitionEvidenceCoverage } from "../sde/competitionRoadmapAdapter";
 
 export function buildCoachGroundingContext(params: {
   referenceDate: string;
@@ -83,7 +83,7 @@ export function buildCoachGroundingContext(params: {
       }))
   );
   const reviewMethodPreference = selectObservedPreferredReviewMethod(reviewMethodEvidence);
-  const evidenceCoverage = buildDataprevEvidenceCoverage({
+  const evidenceCoverage = buildCompetitionEvidenceCoverage({
     configuracao,
     subassuntos,
     tentativasQuestoes,
@@ -256,6 +256,7 @@ export function buildCoachGroundingContext(params: {
             ? routePrivateStudyMaterial(privateMaterialCatalog, {
                 concursoId: configuracao.concursoAlvoId,
                 activity: action.tipo,
+                diagnosticPurpose: action.diagnosticPurpose === true,
                 disciplineId: action.disciplinaId,
                 topicId: action.assuntoId,
                 subtopicId: action.subassuntoId
@@ -268,6 +269,28 @@ export function buildCoachGroundingContext(params: {
           note: action.rankingContext?.note ?? null
         }
       })),
+      prescricaoAtual: decision.prescription?.current
+        ? {
+            activity: decision.prescription.current.activity,
+            discipline: decision.prescription.current.disciplineName,
+            topic: decision.prescription.current.topicName,
+            subtopic: decision.prescription.current.subtopicName ?? null,
+            durationMinutes: decision.prescription.current.durationMinutes,
+            targetQuestions:
+              decision.prescription.current.questionPractice?.targetQuestions ?? null,
+            stretchTargetQuestions:
+              decision.prescription.current.questionPractice?.stretchTargetQuestions ?? null,
+            material: decision.prescription.current.material,
+            externalQuestionSourcePlan:
+              decision.prescription.current.questionPractice?.externalSourcePlan ?? null,
+            focusGuide: decision.prescription.current.focusGuide,
+            decisionReliability: decision.prescription.current.decisionReliability,
+            executionReadiness: decision.prescription.current.executionReadiness,
+            nextAction: decision.prescription.current.nextAction,
+            completionEvidence: [...decision.prescription.current.completionEvidence],
+            diagnosticFollowUp: decision.prescription.current.diagnosticFollowUp
+          }
+        : null,
       plano:
         decision.planner?.status === "SUCCESS"
           ? decision.planner.plan.blocos.flatMap((block) =>

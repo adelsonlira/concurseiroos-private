@@ -88,6 +88,31 @@ describe("DATAPREV decision integration", () => {
     expect(result.availability?.remainingMinutes).toBe(180);
     expect(result.actions.length).toBeGreaterThan(0);
     expect(result.planner?.status).toBe("SUCCESS");
+    expect(result.prescription?.status).toBe("READY");
+    expect(result.prescription?.current).toMatchObject({
+      durationMinutes: expect.any(Number),
+      disciplineId: expect.any(String),
+      topicId: expect.any(String),
+      actionId: expect.any(String),
+      completionEvidence: expect.any(Array)
+    });
+    expect(result.prescription?.current?.executionSteps.length).toBeGreaterThan(0);
+  });
+
+  it("protege uma frente inicial em todas as disciplinas quando o edital elimina quem zera", () => {
+    const result = runDataprevDecisionForDate(snapshot(), "2026-07-13");
+    expect(result.status).toBe("SUCCESS");
+    const safetyFront = result.actions.filter(
+      (action) => action.decisionEvidence.disciplineSafetyCoverageFront === true
+    );
+    expect(safetyFront).toHaveLength(6);
+    expect(new Set(safetyFront.map((action) => action.disciplinaId)).size).toBe(6);
+    expect(
+      safetyFront.every(
+        (action) => action.decisionEvidence.disciplineZeroSafetyStatus === "UNASSESSED"
+      )
+    ).toBe(true);
+    expect(safetyFront.map((action) => action.prioridade)).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
   it("desconta sessão concluída do saldo diário antes do planner", () => {

@@ -145,13 +145,13 @@ export function buildExecutionSteps(
     case "teoria": {
       const [activation, study, recall, check] = allocate([0.1, 0.55, 0.2, 0.15]);
       if (check === undefined) {
-        return [{ passo: 1, descricao: `Estudo ativo de '${topicName}'`, tempoMinutos: tempoTotal }];
+        return [{ passo: 1, phase: "GUIDED_STUDY", descricao: `Estudo ativo de '${topicName}'`, tempoMinutos: tempoTotal }];
       }
       return [
-        { passo: 1, descricao: "Ativar conhecimentos prévios e formular o que precisa ser respondido", tempoMinutos: activation },
-        { passo: 2, descricao: `Estudar seletivamente os conceitos de '${topicName}' no material indicado`, tempoMinutos: study },
-        { passo: 3, descricao: "Fechar o material e recuperar os pontos centrais sem consulta", tempoMinutos: recall },
-        { passo: 4, descricao: "Verificar a recuperação, registrar lacunas e confirmar a cobertura somente se executada", tempoMinutos: check }
+        { passo: 1, phase: "ACTIVATION", descricao: "Responder rapidamente às perguntas definidas pelo coach; em primeiro contato, registrar 'ainda não sei' quando necessário", tempoMinutos: activation },
+        { passo: 2, phase: "GUIDED_STUDY", descricao: `Ler somente o trecho indicado sobre '${topicName}' para responder às perguntas e completar lacunas`, tempoMinutos: study },
+        { passo: 3, phase: "CLOSED_BOOK_RECALL", descricao: "Fechar o material, recuperar e responder novamente às perguntas sem consulta", tempoMinutos: recall },
+        { passo: 4, phase: "VERIFICATION", descricao: "Conferir as respostas, registrar lacunas e confirmar a cobertura somente se os critérios forem atendidos", tempoMinutos: check }
       ];
     }
     case "questoes": {
@@ -160,52 +160,64 @@ export function buildExecutionSteps(
         diagnostic ? [0.1, 0.45, 0.3, 0.15] : [0.08, 0.52, 0.28, 0.12]
       );
       if (retry === undefined) {
-        return [{ passo: 1, descricao: `Resolver e corrigir questões de '${topicName}'`, tempoMinutos: tempoTotal }];
+        return [{ passo: 1, phase: "QUESTION_PRACTICE", descricao: `Resolver e corrigir questões de '${topicName}'`, tempoMinutos: tempoTotal }];
       }
       const paceText = context.tempoAlvoPorQuestaoSegundos
         ? ` usando como referência ${context.tempoAlvoPorQuestaoSegundos} segundos por questão`
         : " registrando o tempo real por questão";
       return [
-        { passo: 1, descricao: diagnostic ? "Definir uma pequena amostra diagnóstica sem consulta" : "Preparar a bateria e o registro de respostas", tempoMinutos: setup },
-        { passo: 2, descricao: `Resolver questões de '${topicName}'${paceText}`, tempoMinutos: practice },
-        { passo: 3, descricao: "Corrigir e classificar a causa declarada de cada erro", tempoMinutos: correction },
-        { passo: 4, descricao: "Refazer o raciocínio ou responder uma questão contrastiva sem olhar a solução", tempoMinutos: retry }
+        {
+          passo: 1,
+          phase: "SETUP",
+          descricao: diagnostic
+            ? "Abrir a fonte indicada e separar questões ainda não respondidas; não consultar teoria, comentários ou gabarito"
+            : "Abrir a fonte indicada e preparar o registro da bateria",
+          tempoMinutos: setup
+        },
+        { passo: 2, phase: "QUESTION_PRACTICE", descricao: `Resolver questões de '${topicName}'${paceText}`, tempoMinutos: practice },
+        { passo: 3, phase: "CORRECTION", descricao: "Corrigir e classificar a causa declarada de cada erro", tempoMinutos: correction },
+        {
+          passo: 4,
+          phase: "RETRY",
+          descricao: "Fechar a solução e refazer cada erro; se a resposta já estiver memorizada, explicar por que as alternativas erradas estão erradas ou resolver outra questão equivalente",
+          tempoMinutos: retry
+        }
       ];
     }
     case "revisao": {
       const [recall, feedback, secondRetrieval] = allocate([0.5, 0.25, 0.25]);
       if (secondRetrieval === undefined) {
-        return [{ passo: 1, descricao: `Recuperação ativa de '${topicName}'`, tempoMinutos: tempoTotal }];
+        return [{ passo: 1, phase: "RETRIEVAL", descricao: `Recuperação ativa de '${topicName}'`, tempoMinutos: tempoTotal }];
       }
       return [
-        { passo: 1, descricao: `Recuperar '${topicName}' sem consulta inicial`, tempoMinutos: recall },
-        { passo: 2, descricao: "Conferir, corrigir apenas as lacunas e evitar releitura integral", tempoMinutos: feedback },
-        { passo: 3, descricao: "Executar uma segunda recuperação ou discriminação entre conceitos próximos", tempoMinutos: secondRetrieval }
+        { passo: 1, phase: "RETRIEVAL", descricao: `Recuperar '${topicName}' sem consulta inicial`, tempoMinutos: recall },
+        { passo: 2, phase: "FEEDBACK", descricao: "Conferir, corrigir apenas as lacunas e evitar releitura integral", tempoMinutos: feedback },
+        { passo: 3, phase: "SECOND_RETRIEVAL", descricao: "Executar uma segunda recuperação ou discriminação entre conceitos próximos", tempoMinutos: secondRetrieval }
       ];
     }
     case "flashcards": {
       const [recall, feedback] = allocate([0.75, 0.25]);
       if (feedback === undefined) {
-        return [{ passo: 1, descricao: `Executar os flashcards pendentes de '${topicName}'`, tempoMinutos: tempoTotal }];
+        return [{ passo: 1, phase: "FLASHCARD_RETRIEVAL", descricao: `Executar os flashcards pendentes de '${topicName}'`, tempoMinutos: tempoTotal }];
       }
       return [
-        { passo: 1, descricao: `Responder os flashcards de '${topicName}' antes de revelar a resposta`, tempoMinutos: recall },
-        { passo: 2, descricao: "Conferir somente após a tentativa e marcar o resultado observado", tempoMinutos: feedback }
+        { passo: 1, phase: "FLASHCARD_RETRIEVAL", descricao: `Responder os flashcards de '${topicName}' antes de revelar a resposta`, tempoMinutos: recall },
+        { passo: 2, phase: "FEEDBACK", descricao: "Conferir somente após a tentativa e marcar o resultado observado", tempoMinutos: feedback }
       ];
     }
     case "simulado": {
       const [executionTime, correctionTime] = allocate([0.8, 0.2]);
       if (correctionTime === undefined) {
-        return [{ passo: 1, descricao: "Executar o simulado sem consulta", tempoMinutos: tempoTotal }];
+        return [{ passo: 1, phase: "SIMULATION", descricao: "Executar o simulado sem consulta", tempoMinutos: tempoTotal }];
       }
       return [
-        { passo: 1, descricao: "Executar o simulado sem consulta", tempoMinutos: executionTime },
-        { passo: 2, descricao: "Registrar gabarito, tempo, erros e itens sem resposta", tempoMinutos: correctionTime }
+        { passo: 1, phase: "SIMULATION", descricao: "Executar o simulado sem consulta", tempoMinutos: executionTime },
+        { passo: 2, phase: "CORRECTION", descricao: "Registrar gabarito, tempo, erros e itens sem resposta", tempoMinutos: correctionTime }
       ];
     }
     case "descanso":
       return [
-        { passo: 1, descricao: "Pausa para água, movimento e descanso da atenção", tempoMinutos: tempoTotal }
+        { passo: 1, phase: "BREAK", descricao: "Pausa para água, movimento e descanso da atenção", tempoMinutos: tempoTotal }
       ];
   }
 }

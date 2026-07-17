@@ -3,6 +3,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import type { AnswerConfidence } from "../../review/types";
+import type { DiagnosticPlacementAssessment } from "../../diagnostic/diagnosticPlacement";
+
 export enum KnowledgeState {
   UNKNOWN = "UNKNOWN",
   UNSEEN = "UNSEEN",
@@ -68,7 +71,7 @@ export interface EditalConfig {
   incidenciaHistoricaAssuntos: { [assuntoId: string]: number }; // 0 to 1
   duracaoEstimadaProvaMinutos: number;
   /** Provenance for topic-level values used by the generic engine. */
-  assuntoModelMetadata?: { [assuntoId: string]: AssuntoModelMetadata };
+  assuntoModelMetadata: { [assuntoId: string]: AssuntoModelMetadata };
   /** Official global cut score, when the edital defines one. */
   pontuacaoMinimaGlobal?: number;
   /** Official maximum score, when the edital defines one. */
@@ -85,6 +88,10 @@ export interface TentativaQuestao {
   data: string; // ISO Date e.g. "2026-07-12"
   origem: "TREINO_ISOLADO" | "SIMULADO";
   tempoRespostaSegundos: number;
+  nivelConfianca?: AnswerConfidence;
+  respostaEmBranco?: boolean;
+  diagnosticoInicial?: boolean;
+  consultouMaterial?: boolean;
 }
 
 export interface RevisaoHistorico {
@@ -154,6 +161,13 @@ export enum EliminationRiskLevel {
   UNKNOWN = "UNKNOWN"
 }
 
+export type DisciplineZeroSafetyStatus =
+  | "NOT_APPLICABLE"
+  | "UNASSESSED"
+  | "NO_CORRECT_ANSWER"
+  | "MINIMUM_EVIDENCE"
+  | "PROTECTED";
+
 export interface OpportunityCostPolicy {
   minimumComparableActions: number;
   durationToleranceRatio: number;
@@ -205,6 +219,7 @@ export interface KnowledgeAssessment {
   theoryCompleted: boolean;
   confidenceLevel: "LOW" | "MEDIUM" | "HIGH";
   confidenceScore: number;
+  diagnosticPlacement?: DiagnosticPlacementAssessment;
 }
 
 export interface XAIJustification {
@@ -227,6 +242,20 @@ export interface RankingContext {
   isTied: boolean;
   tieBreakRule: "DETERMINISTIC_ACTION_ID" | null;
   note: string | null;
+}
+
+export interface StrategicActionDecisionEvidence {
+  knowledgeState: KnowledgeState;
+  sampleSize: number;
+  confidenceScore: number;
+  confidenceLevel: "LOW" | "MEDIUM" | "HIGH";
+  topicWeightSource: TopicWeightSource;
+  historicalIncidenceSource: HistoricalIncidenceSource;
+  historicalIncidenceRate: number | null;
+  disciplineZeroSafetyStatus?: DisciplineZeroSafetyStatus;
+  disciplineSampleSize?: number;
+  disciplineCorrectAnswers?: number;
+  disciplineSafetyCoverageFront?: boolean;
 }
 
 export interface StrategicAction {
@@ -253,6 +282,7 @@ export interface StrategicAction {
   opportunityCostResult?: OpportunityCostResult;
   marginalReturnEstimate?: MarginalReturnEstimate;
   eliminationRiskResult?: EliminationRiskResult;
+  decisionEvidence: StrategicActionDecisionEvidence;
 }
 
 export interface EliminationRiskPolicy {

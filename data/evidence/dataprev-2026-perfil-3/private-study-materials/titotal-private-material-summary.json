@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "concursoId": "dataprev-2026-perfil-3",
+  "provider": "TI_TOTAL",
+  "sourceRole": "COMPLEMENTARY",
+  "materialCount": 17,
+  "totalPages": 438,
+  "sectionCount": 66,
+  "invalidFileCount": 4,
+  "contentKindCounts": {
+    "COMMENTED_QUESTIONS": 31,
+    "SUMMARY": 4,
+    "THEORY": 31
+  },
+  "questionBankSectionCounts": {
+    "CEBRASPE": 3,
+    "FCC": 6,
+    "FGV": 10,
+    "IDIB": 3,
+    "INSTITUTO_AOCP": 6,
+    "VUNESP": 3
+  },
+  "mappedSubtopicCounts": {
+    "dp26-p3-esp-bi-dw-mining": 1,
+    "dp26-p3-esp-metricas": 25,
+    "dp26-p3-esp-padroes-reuso": 21,
+    "dp26-p3-esp-si-acesso": 10,
+    "dp26-p3-esp-si-sdl-owasp": 6
+  },
+  "privacy": {
+    "rawPdfIncludedInDerivedCatalog": false,
+    "rawTextIncludedInDerivedCatalog": false,
+    "personalIdentifierIncluded": false,
+    "retentionPolicy": "DERIVED_METADATA_ONLY"
+  }
+}

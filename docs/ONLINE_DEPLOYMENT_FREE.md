@@ -1,52 +1,59 @@
-# Implantação on-line gratuita — ConcurseiroOS
+# Implantação on-line — ConcurseiroOS
 
-## Arquitetura adotada
+## Arquitetura
 
-- Aplicação React + Express publicada no Google AI Studio/Cloud Run ou em outro host compatível.
-- Supabase para autenticação, snapshot sincronizado e cofre privado de PDFs.
-- Funcionamento local-first: o navegador continua sendo a fonte operacional durante quedas de conexão.
-- O SDE e o Planner são recalculados; suas saídas não são gravadas como verdade persistente.
+- React + Express em host compatível.
+- Supabase para autenticação, snapshot e cofre privado.
+- Funcionamento local-first durante quedas de rede.
+- SDE e Planner recalculados; suas saídas não são persistidas como verdade.
 
 ## Preparação do Supabase
 
-1. Crie um projeto Supabase.
-2. No SQL Editor, execute `supabase/001_online_foundation.sql`.
-3. Em Authentication, mantenha login por e-mail e senha.
-4. Copie a Project URL e a chave `anon`/publishable para as variáveis `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`.
-5. Nunca use `service_role` no navegador.
+1. Crie ou reutilize o projeto Supabase.
+2. Execute `supabase/001_online_foundation.sql` no SQL Editor.
+3. Mantenha login por e-mail e senha.
+4. Desative novos cadastros públicos para o deploy privado.
+5. Crie ou convide somente a conta autorizada pelo painel administrativo.
+6. Copie Project URL e chave anon/publishable para o host.
+7. Nunca use `service_role` no navegador.
 
-O script cria:
+O script cria RLS na tabela `user_snapshots`, função de escrita com revisão otimista, bucket privado e políticas limitadas à pasta do usuário autenticado.
 
-- tabela `user_snapshots` com Row Level Security;
-- função atômica de sincronização com controle de revisão;
-- bucket privado `private-study-materials`;
-- políticas que limitam cada arquivo ao diretório do usuário autenticado.
+## Variáveis de produção
 
-## Variáveis de ambiente
+```env
+AUTH_MODE=required
+AUTH_ALLOW_SELF_SIGNUP=false
+SUPABASE_URL=https://SEU_PROJETO.supabase.co
+SUPABASE_ANON_KEY=SUA_CHAVE_ANON_OU_PUBLISHABLE
+VITE_SUPABASE_SNAPSHOT_TABLE=user_snapshots
+VITE_SUPABASE_PRIVATE_BUCKET=private-study-materials
+GEMINI_API_KEY=SUA_CHAVE_REAL
+GEMINI_MODEL=gemini-3.5-flash
+```
 
-Copie `.env.example` para `.env` no desenvolvimento local, pois o servidor usa `dotenv.config()` sem caminho alternativo. Em produção, cadastre as mesmas variáveis no painel do publicador.
-
-A chave Gemini deve existir somente no backend. As variáveis iniciadas por `VITE_` entram no bundle do navegador e não podem conter segredo. Configure também `AUTH_MODE=required`, `SUPABASE_URL` e `SUPABASE_ANON_KEY` no processo Node para que todas as rotas de IA validem o token do usuário antes de consumir a API.
+A aplicação bloqueia a interface antes do login. Rotas de IA também exigem token válido. `optional` é promovido a `required` em produção para evitar publicação acidental aberta.
 
 ## Primeiro acesso
 
-1. Abra **Conta & Nuvem**.
-2. Crie a conta individual.
-3. Entre com e-mail e senha.
-4. A primeira sincronização cria o snapshot remoto a partir do estado local.
-5. Em outro dispositivo, ao entrar, o aplicativo exige escolha explícita caso existam dados locais e remotos diferentes.
+1. Abra o domínio e confirme a tela privada de login.
+2. Entre com a conta previamente criada ou convidada.
+3. Um dispositivo limpo restaura o snapshot remoto automaticamente.
+4. Conflito só deve aparecer quando local e nuvem mudaram a partir da mesma base.
+
+## Computador público
+
+Ao terminar, use **Sair e limpar este dispositivo**. O aplicativo sincroniza antes de sair, preserva a nuvem e apaga o estado local do navegador. Feche todas as abas e não salve a senha.
 
 ## Materiais privados
 
-- O upload aceita somente PDF.
-- As rotas de IA exigem um token Supabase válido em produção; a URL pública do app não libera o consumo anônimo da chave Gemini.
-- O arquivo é enviado diretamente ao bucket privado, não ao Coach ou à Gemini.
-- A abertura usa URL assinada com validade de dez minutos.
-- O pacote do aplicativo contém apenas metadados derivados; os PDFs permanecem fora do repositório e do ZIP distribuível.
-- Antes de uma futura versão pública, remova os objetos do bucket individual e gere o build sem o catálogo privado.
+- somente PDF;
+- SHA-256 evita novo upload de conteúdo idêntico;
+- envio direto ao bucket privado;
+- abertura por URL assinada temporária;
+- metadados seguros no snapshot;
+- nenhum conteúdo integral em prompt de IA ou pacote distribuível.
 
-## Hosts compatíveis
+## Limite atual
 
-O projeto pode ser publicado no Google AI Studio quando o ambiente full-stack estiver disponível para a conta. O mesmo pacote também é compatível com um serviço Node gratuito ou de cota gratuita que execute `npm run build` e `npm start`.
-
-A camada Supabase é independente do host. Isso reduz o custo de migração caso a cota ou política do publicador mude.
+O produto permanece de usuário único. O estado local não é separado por conta dentro do mesmo perfil de navegador. Não convide outros usuários antes de uma decisão explícita de multiusuário.

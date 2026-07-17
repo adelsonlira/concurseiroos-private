@@ -1,0 +1,142 @@
+[
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/a06-analista-do-mpu-desenvolvimento-de-sistemasa06-tipo-1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_do_mpu_desenvolvimento_de_sistemas.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/analista-de-controle-externo-tecnologia-da-informacaocns103-tipo-1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/TCE - PE - analista_de_controle_externo_tecnologia_da_informacao.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/analista-de-sistemas-classe-bcns010-tipo-1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/2025 DPE RO - analista_de_sistemas_classe_b.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/analista-previdenciario-especialidade-analista-de-sistemascns103-tipo-1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_previdenciario_especialidade_analista_de_sistemas.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/analista_em_tecnologia_da_informacao_-_desenvolvimento_de_sistemasan-sist_tipo_1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_em_tecnologia_da_informacao_desenvolvimento_de_sistemas.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/analista_judiciario_-_analise_de_sistemasns-asa_tipo_1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_judiciario_analise_de_sistemas (1).pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/analista_tecnico_-_tecnologia_da_informacaoanatecinf_tipo_1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_tecnico_tecnologia_da_informacao.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/area-apoio-especializado-tecnologia-da-informacaocns110-tipo-1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_judiciario_area_apoio_especializado_tecnologia_da_informacao.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/ati-desenvolvimento-de-software-cns003-tipo-01.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_de_tecnologia_da_informacao_desenvolvimento_de_software.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/banestes2021_gabarito_definitivo.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip3_gabaritos/gabarito_definitivo - Baneste.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/cns102-analista-judiciario-analista-de-ti-t01.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_judiciario_tecnologia_da_informacao.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/cns102t01-analista-judiciario-desenvolvimento-de-sistemas.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_judiciario_desenvolvimento_de_sistemas.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/cns105-tecnico-de-gestao-administrativa-analista-de-sistemascns105-tipo-1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/tecnico_de_gestao_administrativa_analista_de_sistemas.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/e1cns09_-_analista_legislativo_-_informatica_legislativa_analise_de_sistemase1cns09_tipo_1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_legislativo_informatica_legislativa_analise_de_sistemas.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/e1cns10_-_analista_legislativo_-_informatica_legislativa_analise_de_suporte_de_sistemase1cns10_tipo_1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_legislativo_informatica_legislativa_analise_de_suporte_de_sistemas.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/edital-tjmt-servidores-retificado-2-24.10.2024.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip1_provas_gabaritos_editais/prova novas/edital-tjmt-servidores-retificado-2-24.10.2024 (1).pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/grupo-10-analista-de-tecnologia-da-informacaoe4cnsgp10-tipo-1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/EBSERH analista_de_tecnologia_da_informacao.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/mp_sc_2022_analista_em_tecnologia_da_informacao_tipo_1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/analista_em_tecnologia_da_informacao.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip1_provas_gabaritos_editais/prova novas/ok-analista-de-desenvolvimento-de-sistemas-cnsa103-tipo-1.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip2_Provas_FGV/Provas/2025 AMAZUL - analista_de_desenvolvimento_de_sistemas.pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  },
+  {
+    "canonical_original_path": "zip3_gabaritos/gabaritos_preliminares CVM.pdf",
+    "duplicates_removed_from_organized_copy": [
+      "zip3_gabaritos/gabaritos_preliminares CVM .pdf"
+    ],
+    "detection_method": "conteúdo textual normalizado com similaridade 1.0; hash binário quando aplicável"
+  }
+]

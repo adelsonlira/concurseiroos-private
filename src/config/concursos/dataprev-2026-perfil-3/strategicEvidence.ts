@@ -11,7 +11,7 @@ import { FGV37_WAVE3_SOURCE } from "./wave3Evidence";
 const RAW_CORPUS_ALLOWED_USES = ["QUESTION_STYLE", "TOPIC_CANDIDATE_DISCOVERY"] as const;
 
 export const DATAPREV_2026_PROFILE_3_STRATEGIC_EVIDENCE: StrategicEvidencePackage = {
-  version: "1.5.0",
+  version: "1.6.0",
   activationPolicy: {
     minimumManuallyReviewedQuestionsPerTopic: 20,
     requireDeduplication: true,
@@ -141,7 +141,7 @@ export const DATAPREV_2026_PROFILE_3_STRATEGIC_EVIDENCE: StrategicEvidencePackag
       notes: [
         "Fonte de maior proximidade: mesmo órgão e especialidade de Desenvolvimento de Software.",
         "As 30 questões específicas, de 41 a 70, foram classificadas manualmente por tópico no arquivo dataprev-reference-exam-question-map.json.",
-        "O gabarito não foi fornecido; a fonte pode sustentar análise temática e de formato, mas não análise de acertos, distratores, anulações ou ativação automática de incidência.",
+        "O gabarito definitivo está ligado no corpus canônico 3.12.0 com alta confiança automática, incluindo a anulação da questão 13; a relação ainda aguarda revisão humana e não ativa incidência.",
         "A prova também está contida no arquivo agregado Provas FGV.zip; contagens entre fontes não devem ser somadas sem deduplicação."
       ]
     },
@@ -155,7 +155,7 @@ export const DATAPREV_2026_PROFILE_3_STRATEGIC_EVIDENCE: StrategicEvidencePackag
       allowedUses: [...RAW_CORPUS_ALLOWED_USES],
       forbiddenUses: ["SDE_HISTORICAL_INCIDENCE", "OFFICIAL_FACTS"],
       notes: [
-        "Arquivo com 37 cadernos de prova e 703 páginas, sem gabaritos, inventariado em data/evidence/dataprev-2026-perfil-3/fgv-exams-37.",
+        "Arquivo histórico com 37 cadernos de prova e 703 páginas; foi sucedido pelo catálogo canônico de 95 provas e 48 gabaritos da versão 3.12.0.",
         "Uma prova é da própria DATAPREV para Desenvolvimento de Software; as demais possuem graus diferentes de proximidade temática.",
         "O ranking de relevância é somente uma triagem automática e não constitui matriz de incidência.",
         "A ativação no SDE exige segmentação por questão, deduplicação, classificação no edital e revisão manual reproduzível."

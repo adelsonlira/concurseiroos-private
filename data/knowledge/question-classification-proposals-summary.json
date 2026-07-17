@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-16T10:27:00-03:00",
+  "shadowMode": true,
+  "processedQuestions": 6462,
+  "skippedNonCanonicalDuplicates": 1138,
+  "proposedClassifications": 656,
+  "humanApprovedClassifications": 0,
+  "incidenceEligibleClassifications": 0,
+  "policy": "Rule-based proposals support the curation queue only. They do not define source taxonomy, target equivalence or SDE incidence.",
+  "byTarget": {
+    "dp26-p3-esp-bd-sql": 123,
+    "dp26-p3-esp-bd-integracao-ingestao": 16,
+    "dp26-p3-esp-ia-dados-bigdata": 74,
+    "dp26-p3-esp-si-acesso": 57,
+    "dp26-p3-esp-metodologias-ageis": 50,
+    "dp26-p3-esp-design-arquitetura": 36,
+    "dp26-p3-esp-testes": 15,
+    "dp26-p3-esp-si-sdl-owasp": 11,
+    "dp26-p3-esp-metricas": 18,
+    "dp26-p3-esp-requisitos": 18,
+    "dp26-p3-esp-padroes-dados-web": 36,
+    "dp26-p3-esp-arquitetura-software": 25,
+    "dp26-p3-esp-linguagens-frameworks": 65,
+    "dp26-p3-esp-devops-git": 32,
+    "dp26-p3-esp-si-politicas": 12,
+    "dp26-p3-leg-lgpd-capitulos": 39,
+    "dp26-p3-leg-lai-capitulos": 11,
+    "dp26-p3-esp-bd-nosql": 18
+  }
+}

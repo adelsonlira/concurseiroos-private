@@ -26,8 +26,8 @@ export default defineConfig(() => {
         output: {
           manualChunks(id) {
             if (!id.includes('node_modules')) {
-              if (id.includes('/src/config/concursos/dataprev-2026-perfil-3/')) {
-                return 'dataprev-domain';
+              if (id.includes('/src/config/concursos/')) {
+                return 'competition-packages';
               }
               if (
                 id.includes('/src/core/sde/') ||

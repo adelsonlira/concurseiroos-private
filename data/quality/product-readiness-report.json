@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectVersion": "3.26.0",
+  "generatedAt": "2026-07-17T03:01:39.376Z",
+  "status": "READY_WITH_LIMITATIONS",
+  "confidence": "MEDIUM",
+  "blockingChecks": [],
+  "warnings": [
+    "Paridade Node.js 24: Executado em Node.js 22.16.0; alvo declarado 24.x.",
+    "Supabase autenticado: Credenciais públicas não disponíveis neste ambiente.",
+    "Gemini no backend: Sem chave no ambiente; o Coach determinístico continua operacional."
+  ],
+  "checks": [
+    {
+      "id": "sde-audit",
+      "label": "Auditoria decisória do SDE",
+      "status": "PASS",
+      "requiredForDailyUse": true,
+      "detail": "117 ações auditadas."
+    },
+    {
+      "id": "corpus-shadow-gate",
+      "label": "Isolamento do corpus histórico",
+      "status": "PASS",
+      "requiredForDailyUse": true,
+      "detail": "A incidência histórica deve permanecer fora do ranking até os portões de curadoria."
+    },
+    {
+      "id": "taxonomy",
+      "label": "Taxonomia oficial DATAPREV",
+      "status": "PASS",
+      "requiredForDailyUse": true,
+      "detail": "Escopo oficial e cobertura pedagógica versionados."
+    },
+    {
+      "id": "local-persistence",
+      "label": "Persistência local e backup",
+      "status": "PASS",
+      "requiredForDailyUse": true,
+      "detail": "Registros locais e exportação de backup disponíveis."
+    },
+    {
+      "id": "private-access-gate",
+      "label": "Gate de acesso privado",
+      "status": "PASS",
+      "requiredForDailyUse": true,
+      "detail": "Interface bloqueada antes do login; RLS e bucket privado versionados."
+    },
+    {
+      "id": "diagnostic-placement",
+      "label": "Diagnóstico antes da teoria",
+      "status": "PASS",
+      "requiredForDailyUse": true,
+      "detail": "Amostra, consulta, branco e confiança governam a elegibilidade para adiar teoria."
+    },
+    {
+      "id": "node-runtime",
+      "label": "Paridade Node.js 24",
+      "status": "WARN",
+      "requiredForDailyUse": false,
+      "detail": "Executado em Node.js 22.16.0; alvo declarado 24.x."
+    },
+    {
+      "id": "supabase-authenticated",
+      "label": "Supabase autenticado",
+      "status": "NOT_TESTED",
+      "requiredForDailyUse": false,
+      "detail": "Credenciais públicas não disponíveis neste ambiente."
+    },
+    {
+      "id": "gemini-live",
+      "label": "Gemini no backend",
+      "status": "NOT_TESTED",
+      "requiredForDailyUse": false,
+      "detail": "Sem chave no ambiente; o Coach determinístico continua operacional."
+    }
+  ],
+  "guaranteePolicy": "The product may guide and reduce decision error, but it never guarantees approval."
+}

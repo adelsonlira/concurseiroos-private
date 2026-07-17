@@ -171,7 +171,7 @@ describe("DATAPREV 2026 — Perfil 3 official configuration", () => {
       uniqueQuestionCount: 413
     });
     expect(wave3?.forbiddenUses).toContain("SDE_HISTORICAL_INCIDENCE");
-    expect(pkg.strategicEvidence.version).toBe("1.5.0");
+    expect(pkg.strategicEvidence.version).toBe("1.6.0");
 
     expect(pkg.strategicEvidence.incidenceEvidence).toHaveLength(8);
     expect(pkg.strategicEvidence.incidenceEvidence.every(
@@ -229,8 +229,11 @@ describe("DATAPREV 2026 — Perfil 3 official configuration", () => {
   it("cataloga os materiais privados sem incorporar conteúdo licenciado", () => {
     const seed = buildDataprev2026Profile3AppSeed();
     const privateItems = seed.biblioteca.filter((item) => item.privateMaterial);
-    expect(privateItems).toHaveLength(97);
-    expect(DATAPREV_2026_PRIVATE_STUDY_MATERIAL_SUMMARY.totalPages).toBe(9782);
+    expect(privateItems).toHaveLength(126);
+    expect(DATAPREV_2026_PRIVATE_STUDY_MATERIAL_SUMMARY.totalPages).toBe(11114);
+    expect(DATAPREV_2026_PRIVATE_STUDY_MATERIAL_SUMMARY.providers.ESTRATEGIA_CONCURSOS.materialCount).toBe(109);
+    expect(DATAPREV_2026_PRIVATE_STUDY_MATERIAL_SUMMARY.providers.TI_TOTAL.materialCount).toBe(17);
+    expect(DATAPREV_2026_PRIVATE_STUDY_MATERIAL_SUMMARY.pendingInvalidSources).toHaveLength(4);
     expect(privateItems.every((item) => item.linkAcesso.startsWith("private-material://"))).toBe(true);
     expect(privateItems.every((item) => !item.dadosPDF?.textoExtraido)).toBe(true);
     expect(privateItems.every((item) => item.privateMaterial?.strategicUse === "PEDAGOGICAL_ROUTING_ONLY")).toBe(true);
@@ -238,25 +241,30 @@ describe("DATAPREV 2026 — Perfil 3 official configuration", () => {
 
   it("registra gabaritos exatos para correção sem convertê-los em incidência", () => {
     expect(DATAPREV_2026_ANSWER_KEY_EVIDENCE).toMatchObject({
-      records: 12,
-      exactMatches: 12,
-      definitive: 8,
-      preliminary: 3,
-      publishedUnqualified: 1,
-      officialUserSupplied: 6,
-      headerStatusMismatches: 1,
-      annulledQuestions: 12
+      answerKeyDocuments: 48,
+      answerKeySections: 1344,
+      highConfidenceExamLinks: 44,
+      candidateExamLinks: 2,
+      ambiguousExamLinks: 36,
+      unresolvedExamLinks: 11,
+      definitiveQuestionLinks: 2840,
+      humanReviewedExamLinks: 0,
+      shadowMode: true,
+      eligibleForSDEHistoricalIncidence: false
     });
-    expect(DATAPREV_2026_ANSWER_KEY_EVIDENCE.corpusCoverage.recordsWithAnswerKey).toBe(890);
+    expect(ANSWER_KEY_EVIDENCE_POLICY.automaticHighConfidenceStillRequiresReview).toBe(true);
     expect(ANSWER_KEY_EVIDENCE_POLICY.mayDriveStrategicIncidence).toBe(false);
   });
 
   it("bloqueia questões incompletas no banco interno mesmo quando há gabarito", () => {
     expect(DATAPREV_2026_QUESTION_BANK_READINESS).toMatchObject({
-      exactAnswerKeyRecords: 890,
-      manuallyReviewedAnalyticEligibleRecords: 88,
-      uniqueAnalyticEligibleRecords: 88,
-      inAppPracticeEligibleRecords: 0
+      totalCorpusRecords: 6462,
+      canonicalQuestionRecords: 5324,
+      definitiveAnswerKeyRecords: 2840,
+      manuallyReviewedAnalyticEligibleRecords: 0,
+      uniqueAnalyticEligibleRecords: 0,
+      inAppPracticeEligibleRecords: 0,
+      reviewQueueItems: 646
     });
     expect(DATAPREV_2026_QUESTION_BANK_READINESS.policy.completeQuestionAndOptionsRequiredForPractice).toBe(true);
     expect(DATAPREV_2026_QUESTION_BANK_READINESS.policy.mayDriveStrategicIncidence).toBe(false);

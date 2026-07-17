@@ -13,7 +13,7 @@ import {
   Target
 } from "lucide-react";
 import { useConcurseiroStore } from "../store";
-import { buildDataprevStrategicRoadmap } from "../integrations/sde/dataprevRoadmapAdapter";
+import { buildCompetitionStrategicRoadmap } from "../integrations/sde/competitionRoadmapAdapter";
 import type {
   EvidenceCoverageState,
   EvidenceRoadmapActionKind
@@ -80,7 +80,7 @@ export default function StrategicRoadmapView() {
 
   const roadmap = useMemo(
     () =>
-      buildDataprevStrategicRoadmap(
+      buildCompetitionStrategicRoadmap(
         {
           configuracao,
           subassuntos,
@@ -112,9 +112,9 @@ export default function StrategicRoadmapView() {
         <header className="flex flex-col gap-4 rounded-2xl border border-zinc-800 bg-zinc-900/35 p-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-blue-400">
-              <Route className="h-4 w-4" /> Rota estratégica recalculável
+              <Route className="h-4 w-4" /> Plano recalculável pelo coach
             </div>
-            <h1 className="mt-2 text-xl font-semibold text-zinc-100">Evidências e próximos 7 dias</h1>
+            <h1 className="mt-2 text-xl font-semibold text-zinc-100">Seu progresso e os próximos 7 dias</h1>
             <p className="mt-1 max-w-3xl text-[11px] leading-relaxed text-zinc-500">
               Separa avanço, diagnóstico e recuperação sem transformar ausência de dados em fraqueza presumida. A prévia semanal não engessa o estudo: o SDE refaz a decisão depois de cada registro real.
             </p>
@@ -133,10 +133,12 @@ export default function StrategicRoadmapView() {
             <button
               type="button"
               onClick={() => setReferenceDate(currentDateInTimeZone(configuracao.disponibilidadeEstudo.timeZone))}
-              className="rounded-lg border border-zinc-800 p-2 text-zinc-500 hover:text-zinc-200"
-              aria-label="Recalcular a partir de hoje"
+              className="flex items-center gap-2 rounded-lg border border-zinc-800 px-3 py-2 text-xs font-semibold text-zinc-500 hover:text-zinc-200"
+              aria-label="Voltar a referência para hoje"
+              title="Altera somente a data de referência da prévia para o dia atual."
             >
               <RefreshCw className="h-4 w-4" />
+              Hoje
             </button>
           </div>
         </header>

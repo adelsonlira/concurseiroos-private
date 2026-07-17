@@ -1,27 +1,37 @@
-import summaryJson from "../../../../data/evidence/dataprev-2026-perfil-3/fgv-gabaritos/fgv-gabarito-summary.json";
+import qualityJson from "../../../../data/knowledge/official-corpus-quality.json";
 
 export interface AnswerKeyEvidenceSummary {
-  records: number;
-  exactMatches: number;
-  definitive: number;
-  preliminary: number;
-  publishedUnqualified: number;
-  officialUserSupplied: number;
-  headerStatusMismatches: number;
-  annulledQuestions: number;
-  corpusCoverage: {
-    corpusFilesProcessed: number;
-    totalCorpusRecords: number;
-    recordsWithAnswerKey: number;
-  };
+  answerKeyDocuments: number;
+  answerKeySections: number;
+  highConfidenceExamLinks: number;
+  candidateExamLinks: number;
+  ambiguousExamLinks: number;
+  unresolvedExamLinks: number;
+  definitiveQuestionLinks: number;
+  humanReviewedExamLinks: number;
+  shadowMode: true;
+  eligibleForSDEHistoricalIncidence: false;
 }
 
-export const DATAPREV_2026_ANSWER_KEY_EVIDENCE =
-  summaryJson as AnswerKeyEvidenceSummary;
+const counts = qualityJson.counts;
+
+export const DATAPREV_2026_ANSWER_KEY_EVIDENCE: AnswerKeyEvidenceSummary = Object.freeze({
+  answerKeyDocuments: counts.answerKeyDocuments,
+  answerKeySections: counts.answerKeySectionsParsed,
+  highConfidenceExamLinks: counts.highConfidenceExamAnswerKeyLinks,
+  candidateExamLinks: counts.candidateExamAnswerKeyLinks,
+  ambiguousExamLinks: counts.ambiguousExamAnswerKeyLinks,
+  unresolvedExamLinks: counts.unresolvedExamAnswerKeyLinks,
+  definitiveQuestionLinks: counts.questionsLinkedToDefinitiveAnswerKey,
+  humanReviewedExamLinks: 0,
+  shadowMode: true,
+  eligibleForSDEHistoricalIncidence: false,
+});
 
 export const ANSWER_KEY_EVIDENCE_POLICY = Object.freeze({
   exactCadernoRequired: true,
   preliminaryMayBeSuperseded: true,
+  automaticHighConfidenceStillRequiresReview: true,
   mayCorrectQuestionRecords: true,
-  mayDriveStrategicIncidence: false
+  mayDriveStrategicIncidence: false,
 });

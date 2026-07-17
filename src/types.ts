@@ -3,6 +3,7 @@ import type {
   FlashcardRetrievalHistoryEntry,
   FlashcardRetrievalPerformance,
 } from "./core/flashcards/types";
+import type { GuidedLearningEvidence } from "./core/learning/types";
 import type {
   AnswerConfidence,
   ErrorCause,
@@ -61,6 +62,15 @@ export interface StudySessionDecisionContext {
   sdeReasonCode?: string;
   sdeDiagnosticPurpose?: boolean;
   duracaoPlanejadaMinutos?: number | null;
+  prescriptionId?: string;
+  targetQuestionCount?: number | null;
+  stretchQuestionCount?: number | null;
+  materialId?: string;
+  materialStartPage?: number;
+  materialEndPage?: number;
+  questionSourceId?: string;
+  questionSourceLabel?: string;
+  questionSourceKind?: "PRIVATE_MATERIAL" | "EXTERNAL_BANK";
   /** Explicit user confirmation after a theory session; never inferred automatically. */
   markTheoryCompleted?: boolean;
 }
@@ -257,6 +267,18 @@ export interface TentativaQuestaoUsuario {
   erroCausa?: ErrorCause;
   /** Short private note about the mistake. Does not contain or reproduce the source question by default. */
   erroNota?: string;
+  /** True when the result came from a summarized batch instead of one-by-one entry. */
+  registradaEmLote?: boolean;
+  /** Identifier shared by all attempts expanded from the same summarized batch. */
+  loteRegistroId?: string;
+  /** A blank answer is counted as incorrect but remains distinguishable from a marked error. */
+  respostaEmBranco?: boolean;
+  /** Time per item was estimated from total batch time rather than observed individually. */
+  tempoRespostaEstimado?: boolean;
+  /** True only for questions explicitly prescribed as the first-contact diagnostic. */
+  diagnosticoInicial?: boolean;
+  /** True when the learner consulted material, solution or answer key during the attempt. */
+  consultouMaterial?: boolean;
 }
 
 export interface ExternalQuestionAttemptInput {
@@ -269,6 +291,28 @@ export interface ExternalQuestionAttemptInput {
   nivelConfianca?: AnswerConfidence;
   erroCausa?: ErrorCause;
   erroNota?: string;
+  /** Identificador da prescrição ou simulado que originou o registro. */
+  contextId?: string;
+  diagnosticoInicial?: boolean;
+  consultouMaterial?: boolean;
+}
+
+export interface ExternalQuestionBatchInput {
+  disciplinaId: string;
+  assuntoId: string;
+  subassuntoId: string;
+  totalQuestoes: number;
+  acertos: number;
+  /** In an initial diagnostic, correct answers explicitly recalled with medium/high confidence. */
+  acertosConfiantes?: number;
+  emBranco?: number;
+  tempoTotalSegundos: number;
+  fonteExterna?: string;
+  nivelConfianca?: AnswerConfidence;
+  /** Identificador da prescrição ou simulado que originou o registro. */
+  contextId?: string;
+  diagnosticoInicial?: boolean;
+  consultouMaterial?: boolean;
 }
 
 // ------------------------------------------
@@ -595,6 +639,7 @@ export interface PrivateLibraryMaterialMetadata {
   sourceSizeBytes?: number;
   sourceMimeType?: string;
   uploadedAt?: string;
+  sourceSha256?: string;
 }
 
 export interface ItemBiblioteca {
@@ -619,6 +664,18 @@ export interface ItemBiblioteca {
     textoExtraido?: string;
     totalPaginas?: number;
     notasEstudo?: { pagina: number; texto: string; }[];
+    indice?: Array<{
+      titulo: string;
+      paginaInicial: number;
+      paginaFinal: number;
+      disciplinaId?: string;
+      assuntoId?: string;
+      subassuntoIds?: string[];
+      confianca: number;
+      status: "AUTO_REVIEWABLE" | "USER_CONFIRMED";
+    }>;
+    indexStatus?: "NOT_INDEXED" | "AUTO_REVIEWABLE" | "USER_CONFIRMED";
+    indexedAt?: string;
   };
   /** Metadata-only pointer to a private licensed study PDF. Never contains source text. */
   privateMaterial?: PrivateLibraryMaterialMetadata;
@@ -718,6 +775,8 @@ export interface BackupExportSchema {
     estudanteNome: string;
     totalTamanhoBytes: number;
     appSource: "ConcurseiroOS";
+    integrityAlgorithm?: "FNV1A64_CANONICAL_JSON";
+    checksum?: string;
   };
   dados: {
     concursos: Concurso[];
@@ -740,6 +799,7 @@ export interface BackupExportSchema {
     configuracao: ConfigUsuario | null;
     conversasIA: HistoricoChatIA[];
     sessoesEstudo: SessaoEstudo[];
+    evidenciasAprendizagemGuiada: GuidedLearningEvidence[];
     itensBiblioteca: ItemBiblioteca[];
   };
 }

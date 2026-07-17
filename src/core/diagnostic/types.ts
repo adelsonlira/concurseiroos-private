@@ -81,6 +81,7 @@ export interface SubtopicEvidenceProfile {
   lastEvidenceAt: string | null;
   lastErrorAt: string | null;
   correctAfterLastError: number;
+  rawFgvQuestionMatchCount?: number;
   state: EvidenceCoverageState;
   missingEvidence: string[];
 }
@@ -108,6 +109,7 @@ export interface EvidenceRoadmapAction {
   state: EvidenceCoverageState;
   reason: string;
   evidenceFacts: string[];
+  rawFgvQuestionMatchCount?: number;
 }
 
 export interface EvidenceCoverageReport {

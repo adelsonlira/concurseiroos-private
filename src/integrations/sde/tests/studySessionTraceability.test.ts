@@ -32,7 +32,17 @@ describe("Rastreabilidade da sessão de estudo", () => {
       historicoAtividades: [],
       isTimerRunning: true,
       timerSecondsElapsed: 1800,
-      timerType: StudySessionType.STOPWATCH
+      timerType: StudySessionType.STOPWATCH,
+      ultimaDecisaoSDE: {
+        status: "SUCCESS",
+        referenceDate: "2026-07-13",
+        availability: null,
+        actions: [],
+        planner: null,
+        prescription: null,
+        warnings: [],
+        errors: []
+      }
     });
   });
 
@@ -48,7 +58,13 @@ describe("Rastreabilidade da sessão de estudo", () => {
         sdePrioridade: 1,
         sdeReasonCode: "UNSEEN_THEORY",
         sdeDiagnosticPurpose: false,
-        duracaoPlanejadaMinutos: 40
+        duracaoPlanejadaMinutos: 40,
+        prescriptionId: "prescription-session-1",
+        targetQuestionCount: 12,
+        stretchQuestionCount: 13,
+        materialId: "material-portugues-1",
+        materialStartPage: 72,
+        materialEndPage: 80
       }
     );
 
@@ -60,12 +76,63 @@ describe("Rastreabilidade da sessão de estudo", () => {
       sdePrioridade: 1,
       sdeReasonCode: "UNSEEN_THEORY",
       sdeDiagnosticPurpose: false,
-      duracaoPlanejadaMinutos: 40
+      duracaoPlanejadaMinutos: 40,
+      prescriptionId: "prescription-session-1",
+      targetQuestionCount: 12,
+      stretchQuestionCount: 13,
+      materialId: "material-portugues-1",
+      materialStartPage: 72,
+      materialEndPage: 80
     });
     expect(state.historicoAtividades[0].metadata).toMatchObject({
       atividadeEstudo: "teoria",
       sdeReasonCode: "UNSEEN_THEORY",
-      sdePrioridade: 1
+      sdePrioridade: 1,
+      prescriptionId: "prescription-session-1",
+      targetQuestionCount: 12,
+      stretchQuestionCount: 13,
+      materialId: "material-portugues-1",
+      materialStartPage: 72,
+      materialEndPage: 80
+    });
+    expect(state.ultimaDecisaoSDE).toBeNull();
+  });
+
+
+  it("descarta integralmente o tempo ao cancelar uma sessão", () => {
+    useConcurseiroStore.getState().stopStudyTimer();
+
+    const state = useConcurseiroStore.getState();
+    expect(state.isTimerRunning).toBe(false);
+    expect(state.timerSecondsElapsed).toBe(0);
+  });
+
+  it("preserva qual plataforma executou a bateria prescrita", () => {
+    useConcurseiroStore.getState().finishStudySession(
+      "dp26-p3-portugues",
+      "dp26-p3-por-interpretacao",
+      "dp26-p3-por-interpretacao-generos",
+      "Bateria no banco externo.",
+      {
+        atividadeEstudo: "questoes",
+        prescriptionId: "prescription-questions-1",
+        targetQuestionCount: 8,
+        stretchQuestionCount: 9,
+        questionSourceId: "external:qconcursos",
+        questionSourceLabel: "Qconcursos",
+        questionSourceKind: "EXTERNAL_BANK"
+      }
+    );
+
+    const state = useConcurseiroStore.getState();
+    expect(state.sessoesEstudo[0].decisaoSDE).toMatchObject({
+      questionSourceId: "external:qconcursos",
+      questionSourceLabel: "Qconcursos",
+      questionSourceKind: "EXTERNAL_BANK"
+    });
+    expect(state.historicoAtividades[0].metadata).toMatchObject({
+      questionSourceLabel: "Qconcursos",
+      questionSourceKind: "EXTERNAL_BANK"
     });
   });
 

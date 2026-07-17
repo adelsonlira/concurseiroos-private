@@ -5,9 +5,10 @@ import Sidebar from "./components/Sidebar";
 import { useCloudAccountStore } from "./integrations/cloud/cloudStore";
 import { getNavigationItem } from "./navigation/navigationModel";
 import { WORKSPACE_CONTENT_CLASS_NAME } from "./layout/appShellLayout";
+import AccessGate from "./components/AccessGate";
+import { decideAppAccess } from "./integrations/cloud/appAccessPolicy";
 
 const DashboardView = lazy(() => import("./components/DashboardView"));
-const SyllabusParserView = lazy(() => import("./components/SyllabusParserView"));
 const LibraryView = lazy(() => import("./components/LibraryView"));
 const ExerciseDeskView = lazy(() => import("./components/ExerciseDeskView"));
 const FlashcardView = lazy(() => import("./components/FlashcardView"));
@@ -24,7 +25,8 @@ const SIDEBAR_COLLAPSED_STORAGE_KEY = "concurseiroos.sidebar.desktop-collapsed";
 
 export default function App() {
   const { hydrateStore, estatisticas } = useConcurseiroStore();
-  const initializeCloud = useCloudAccountStore((state) => state.initialize);
+  const cloud = useCloudAccountStore();
+  const initializeCloud = cloud.initialize;
   const [activeTab, setActiveTab] = useState<string>("dashboard");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [searchFocusToken, setSearchFocusToken] = useState(0);
@@ -85,7 +87,6 @@ export default function App() {
       if (lastKey === "g" && now - lastKeyTime < 1500) {
         const shortcuts: Readonly<Record<string, string>> = {
           d: "dashboard",
-          p: "parser",
           l: "library",
           v: "syllabus",
           q: "exercises",
@@ -116,14 +117,34 @@ export default function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [navigateTo, openNavigationSearch]);
 
+  const accessDecision = useMemo(
+    () => decideAppAccess({
+      initialized: cloud.initialized,
+      phase: cloud.phase,
+      authStatus: cloud.authStatus,
+      environment: cloud.environment,
+      runtimeStatus: cloud.runtimeStatus
+    }),
+    [cloud.authStatus, cloud.environment, cloud.initialized, cloud.phase, cloud.runtimeStatus]
+  );
+
   const activeNavigationItem = useMemo(() => getNavigationItem(activeTab), [activeTab]);
+
+  if (accessDecision.status === "INITIALIZING") {
+    return (
+      <div className="flex min-h-dvh items-center justify-center bg-zinc-950 text-sm text-zinc-500">
+        Verificando acesso privado…
+      </div>
+    );
+  }
+
+  if (accessDecision.status === "LOGIN_REQUIRED") return <AccessGate />;
+  if (accessDecision.status === "MISCONFIGURED") return <AccessGate misconfigured />;
 
   const renderActiveView = () => {
     switch (activeTab) {
       case "dashboard":
-        return <DashboardView />;
-      case "parser":
-        return <SyllabusParserView />;
+        return <DashboardView onStartSession={() => navigateTo("focus")} onAskCoach={() => navigateTo("coach")} />;
       case "library":
         return <LibraryView />;
       case "exercises":
@@ -133,13 +154,19 @@ export default function App() {
       case "reviews":
         return <ReviewAndErrorsView />;
       case "focus":
-        return <FocusModeDesk />;
+        return <FocusModeDesk onOpenQuestions={() => navigateTo("exercises")} onAskCoach={() => navigateTo("coach")} />;
       case "weekly":
         return <WeeklyCalibrationView />;
       case "roadmap":
         return <StrategicRoadmapView />;
       case "coach":
-        return <CoachIAView />;
+        return (
+          <CoachIAView
+            onOpenSession={() => navigateTo("focus")}
+            onOpenReviews={() => navigateTo("reviews")}
+            onOpenQuestions={() => navigateTo("exercises")}
+          />
+        );
       case "backup":
         return <BackupSettingsView />;
       case "online":
@@ -147,7 +174,7 @@ export default function App() {
       case "syllabus":
         return <VerticalizedSyllabusView />;
       default:
-        return <DashboardView />;
+        return <DashboardView onStartSession={() => navigateTo("focus")} onAskCoach={() => navigateTo("coach")} />;
     }
   };
 

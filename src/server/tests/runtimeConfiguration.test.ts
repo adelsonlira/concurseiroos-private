@@ -1,0 +1,112 @@
+import type { Server } from "node:http";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+let server: Server | null = null;
+
+async function startApp(env: Record<string, string | undefined>) {
+  vi.resetModules();
+  for (const key of ["SUPABASE_URL", "SUPABASE_ANON_KEY", "VITE_SUPABASE_URL", "VITE_SUPABASE_ANON_KEY", "GEMINI_API_KEY", "GEMINI_MODEL", "AUTH_MODE", "AUTH_ALLOW_SELF_SIGNUP", "NODE_ENV"]) {
+    delete process.env[key];
+  }
+  Object.entries(env).forEach(([key, value]) => {
+    if (value !== undefined) process.env[key] = value;
+  });
+  const { default: app } = await import("../httpApp");
+  server = app.listen(0, "127.0.0.1");
+  await new Promise<void>((resolve) => server!.once("listening", resolve));
+  const address = server.address();
+  if (!address || typeof address === "string") throw new Error("Servidor de teste sem porta");
+  return `http://127.0.0.1:${address.port}`;
+}
+
+afterEach(async () => {
+  if (server) await new Promise<void>((resolve) => server!.close(() => resolve()));
+  server = null;
+});
+
+describe("runtime service configuration", () => {
+  it("exposes only public Supabase configuration and a Gemini boolean", async () => {
+    const base = await startApp({
+      AUTH_MODE: "optional",
+      SUPABASE_URL: "https://project.supabase.co",
+      SUPABASE_ANON_KEY: "public-anon-key",
+      GEMINI_API_KEY: "secret-gemini-key",
+      GEMINI_MODEL: "gemini-3.5-flash"
+    });
+    const response = await fetch(`${base}/api/runtime-config`);
+    const text = await response.text();
+    const payload = JSON.parse(text);
+    expect(response.status).toBe(200);
+    expect(payload.supabase.configured).toBe(true);
+    expect(payload.supabase.anonKey).toBe("public-anon-key");
+    expect(payload.auth).toEqual({ mode: "optional", allowSelfSignup: false });
+    expect(payload.ai).toEqual({ configured: true, model: "gemini-3.5-flash" });
+    expect(text).not.toContain("secret-gemini-key");
+  });
+
+
+
+  it("promove modo optional para required em produção", async () => {
+    const base = await startApp({
+      NODE_ENV: "production",
+      AUTH_MODE: "optional",
+      SUPABASE_URL: "https://project.supabase.co",
+      SUPABASE_ANON_KEY: "public-anon-key"
+    });
+    const response = await fetch(`${base}/api/runtime-config`);
+    const payload = await response.json();
+    expect(payload.auth.mode).toBe("required");
+  });
+
+  it("habilita cadastro público somente quando configurado explicitamente", async () => {
+    const base = await startApp({
+      AUTH_MODE: "required",
+      AUTH_ALLOW_SELF_SIGNUP: "true",
+      SUPABASE_URL: "https://project.supabase.co",
+      SUPABASE_ANON_KEY: "public-anon-key"
+    });
+    const response = await fetch(`${base}/api/runtime-config`);
+    const payload = await response.json();
+    expect(payload.auth).toEqual({ mode: "required", allowSelfSignup: true });
+  });
+
+  it("exposes a public readiness report without credentials or private content", async () => {
+    const base = await startApp({ AUTH_MODE: "optional" });
+    const response = await fetch(`${base}/api/readiness`);
+    const text = await response.text();
+    const payload = JSON.parse(text);
+    expect(response.status).toBe(200);
+    expect(["READY_FOR_LOCAL_DAILY_USE", "READY_WITH_LIMITATIONS", "NOT_READY"]).toContain(payload.status);
+    expect(Array.isArray(payload.checks)).toBe(true);
+    expect(text).not.toContain("GEMINI_API_KEY");
+    expect(text).not.toContain("SUPABASE_ANON_KEY");
+  });
+
+  it("combines the static audit with the configuration of the running server", async () => {
+    const base = await startApp({
+      AUTH_MODE: "optional",
+      SUPABASE_URL: "https://project.supabase.co",
+      SUPABASE_ANON_KEY: "public-anon-key",
+      GEMINI_API_KEY: "secret-gemini-key"
+    });
+    const response = await fetch(`${base}/api/readiness`);
+    const payload = await response.json();
+    expect(payload.runtime).toMatchObject({
+      supabaseConfigured: true,
+      geminiConfigured: true,
+      authMode: "optional",
+      nodeVersion: process.versions.node
+    });
+    const nodeCheck = payload.checks.find((check: { id: string }) => check.id === "node-runtime");
+    expect(nodeCheck.detail).toContain(process.versions.node);
+    expect(payload.warnings.join(" ")).toMatch(/configuração pública presente/i);
+    expect(payload.warnings.join(" ")).toMatch(/chave presente no backend/i);
+    expect(payload.warnings.join(" ")).not.toMatch(/credenciais públicas não disponíveis/i);
+  });
+
+  it("returns 503 for the Gemini probe without a key in optional auth mode", async () => {
+    const base = await startApp({ AUTH_MODE: "optional" });
+    const response = await fetch(`${base}/api/ai-health`, { method: "POST" });
+    expect(response.status).toBe(503);
+  });
+});

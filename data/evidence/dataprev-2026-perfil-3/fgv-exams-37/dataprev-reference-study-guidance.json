@@ -1,0 +1,62 @@
+{
+  "version": "1.0.0",
+  "sourceLabel": "Prova oficial FGV/DATAPREV de referência",
+  "sourceScope": "Metadados descritivos de uma prova oficial de Desenvolvimento de Software; sem inferência de frequência histórica.",
+  "banca": "FGV",
+  "evidenceStatus": "DESCRIPTIVE_REFERENCE_ONLY",
+  "questionStyleCounts": {
+    "DIRECT_KNOWLEDGE": 9,
+    "CONCEPT_COMPARISON": 7,
+    "SCENARIO": 6,
+    "ASSERTION_SET": 4,
+    "SCENARIO_COMPARISON": 2,
+    "CODE_SCENARIO": 2
+  },
+  "topicSignals": [
+    {
+      "topicId": "dp26-p3-esp-banco-dados",
+      "subtopicId": "dp26-p3-esp-bd-avaliacao-modelos",
+      "referenceLabel": "modelagem e avaliação de dados",
+      "observedFocus": [
+        "critérios para avaliar correção, consistência e adequação de um modelo de dados",
+        "diferenças entre níveis conceitual, lógico e físico"
+      ],
+      "attentionPoints": [
+        "Não confundir qualidade do modelo com desempenho físico do banco.",
+        "Verificar integridade, redundância, normalização e aderência aos requisitos.",
+        "Distinguir modelo conceitual, lógico e físico pelo propósito, não apenas pela notação."
+      ],
+      "questionStyles": ["CONCEPT_COMPARISON", "SCENARIO"],
+      "referenceQuestionCount": 2
+    },
+    {
+      "topicId": "dp26-p3-esp-banco-dados",
+      "referenceLabel": "bancos de dados e SQL",
+      "observedFocus": ["aplicação de regras de modelagem, integridade e consultas em cenários concretos"],
+      "attentionPoints": [
+        "Efeito de chaves, restrições e dependências.",
+        "Resultado exato de operações e consultas.",
+        "Diferença entre definição lógica e implementação física."
+      ],
+      "questionStyles": ["SCENARIO", "CODE_SCENARIO"],
+      "referenceQuestionCount": 5
+    },
+    {
+      "topicId": "dp26-p3-esp-seguranca",
+      "referenceLabel": "segurança no desenvolvimento",
+      "observedFocus": ["associação correta entre ameaça, vulnerabilidade, controle e etapa do ciclo seguro"],
+      "attentionPoints": [
+        "Distinguir autenticação, autorização e gestão de sessão.",
+        "Relacionar vulnerabilidade ao controle adequado.",
+        "Evitar tratar SAST, DAST e análise de dependências como equivalentes."
+      ],
+      "questionStyles": ["CONCEPT_COMPARISON", "SCENARIO_COMPARISON"],
+      "referenceQuestionCount": 3
+    }
+  ],
+  "limitations": [
+    "Uma prova de referência não permite afirmar o que a FGV 'sempre' ou 'mais' cobra.",
+    "Os sinais são usados para guiar a leitura e não para alterar o ranking estratégico.",
+    "A matriz histórica ampla permanece em shadow mode até classificação e validação do corpus."
+  ]
+}

@@ -4,6 +4,7 @@ import {
   Upload, FileText, ChevronRight, ChevronDown, Plus, Trash2, 
   Edit3, Sparkles, Check, CheckSquare, Settings2, Trash, FileDown, AlertTriangle
 } from "lucide-react";
+import OperationalScreenGuide from "./OperationalScreenGuide";
 import { authenticatedFetch } from "../integrations/cloud/authenticatedFetch";
 import { Disciplina, Assunto, Subassunto, DifficultyLevel } from "../types";
 
@@ -214,7 +215,7 @@ A Inteligência Artificial (Gemini 3.5) lerá este edital em PDF diretamente par
         disciplinaId: parentDiscId,
         nome: addFormName,
         ordem: brotherAssuntos.length + 1,
-        prioridadeEdital: "MEDIA",
+        prioridadeEdital: "NAO_INFORMADA",
         metaQuestoesResolvidas: 100,
         questoesRespondidas: 0,
         questoesAcertadas: 0,
@@ -248,6 +249,13 @@ A Inteligência Artificial (Gemini 3.5) lerá este edital em PDF diretamente par
 
   return (
     <div className="flex-1 p-6 overflow-y-auto bg-zinc-950 flex flex-col gap-6" id="syllabus-parser-container">
+      <OperationalScreenGuide
+        icon={FileText}
+        title="Importar novo edital"
+        purpose="Ferramenta administrativa para extrair a estrutura de um novo concurso. Ela não estima incidência nem substitui revisão humana."
+        whenToUse="ao cadastrar ou atualizar um concurso"
+        outcome="rascunho de disciplinas e tópicos para validação"
+      />
       {/* Importer Section */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         
@@ -259,7 +267,7 @@ A Inteligência Artificial (Gemini 3.5) lerá este edital em PDF diretamente par
               <h3 className="text-sm font-semibold text-zinc-300 font-mono tracking-wide uppercase">Importador de Editais Inteligente</h3>
             </div>
             <p className="text-xs text-zinc-500">
-              Faça upload de editais em PDF, DOCX, CSV ou simplesmente cole o texto programático para estruturação via IA.
+              Faça upload de PDF ou arquivo textual, ou cole o conteúdo programático. A IA apenas extrai a estrutura; prioridades ausentes permanecem não informadas.
             </p>
           </div>
 
@@ -267,7 +275,7 @@ A Inteligência Artificial (Gemini 3.5) lerá este edital em PDF diretamente par
           <div className="relative border border-dashed border-zinc-800 rounded-lg p-5 flex flex-col items-center justify-center bg-zinc-900/20 hover:bg-zinc-900/30 hover:border-zinc-700 transition-all cursor-pointer">
             <input 
               type="file" 
-              accept=".pdf,.docx,.txt,.md,.html,.csv,.xlsx" 
+              accept=".pdf,.txt,.md,.html,.csv" 
               onChange={handleFileChange}
               className="absolute inset-0 opacity-0 cursor-pointer" 
             />
@@ -276,7 +284,7 @@ A Inteligência Artificial (Gemini 3.5) lerá este edital em PDF diretamente par
               {fileSelected ? fileSelected.name : "Arraste ou clique para selecionar seu edital"}
             </span>
             <span className="text-[10px] text-zinc-600 font-mono mt-1">
-              PDF, DOCX, CSV, XLSX, TXT, MD, HTML (Até 50MB)
+              PDF, CSV, TXT, MD ou HTML (Até 50MB)
             </span>
           </div>
 
@@ -464,10 +472,11 @@ A Inteligência Artificial (Gemini 3.5) lerá este edital em PDF diretamente par
                                     className="bg-zinc-950 border border-zinc-800 rounded px-2 py-0.5 text-xs text-zinc-100 outline-none"
                                   />
                                   <select
-                                    value={editFormExtra.prioridadeEdital || "MEDIA"}
+                                    value={editFormExtra.prioridadeEdital || "NAO_INFORMADA"}
                                     onChange={(e) => setEditFormExtra({ ...editFormExtra, prioridadeEdital: e.target.value })}
                                     className="bg-zinc-950 border border-zinc-800 text-xs text-zinc-300 rounded"
                                   >
+                                    <option value="NAO_INFORMADA">NÃO INFORMADA</option>
                                     <option value="ALTA">ALTA</option>
                                     <option value="MEDIA">MEDIA</option>
                                     <option value="BAIXA">BAIXA</option>

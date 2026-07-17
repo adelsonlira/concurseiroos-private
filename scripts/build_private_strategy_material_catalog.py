@@ -40,10 +40,24 @@ TOPICS = {
     "seguranca": "dp26-p3-esp-seguranca",
     "bd": "dp26-p3-esp-banco-dados",
     "governanca": "dp26-p3-esp-gestao-governanca",
+    "rlm_estruturas": "dp26-p3-rlm-estruturas",
+    "rlm_argumentacao": "dp26-p3-rlm-argumentacao",
+    "rlm_sentencial": "dp26-p3-rlm-sentencial",
+    "rlm_primeira_ordem": "dp26-p3-rlm-primeira-ordem",
+    "rlm_problemas": "dp26-p3-rlm-problemas",
 }
 
 # Rules are ordered from more specific to more general. Confidence is intentionally conservative.
 SUBTOPIC_RULES: list[tuple[str, list[str], str, float]] = [
+    # Logic / mathematical reasoning
+    ("dp26-p3-rlm-tabelas-verdade", ["tabela verdade", "tabelas verdade"], "rlm_sentencial", 0.98),
+    ("dp26-p3-rlm-equivalencias", ["equivalencia logica", "equivalencias logicas", "leis de morgan"], "rlm_sentencial", 0.97),
+    ("dp26-p3-rlm-diagramas", ["diagramas logicos", "diagrama logico", "proposicoes quantificadas"], "rlm_sentencial", 0.96),
+    ("dp26-p3-rlm-proposicoes", ["proposicoes simples", "proposicoes compostas", "logica proposicional", "logica sentencial"], "rlm_sentencial", 0.97),
+    ("dp26-p3-rlm-primeira-ordem-fundamentos", ["logica de primeira ordem"], "rlm_primeira_ordem", 0.99),
+    ("dp26-p3-rlm-argumentacao-processos", ["logica de argumentacao", "analogias", "inferencias", "deducoes", "conclusoes"], "rlm_argumentacao", 0.95),
+    ("dp26-p3-rlm-estruturas-basicas", ["estruturas logicas"], "rlm_estruturas", 0.97),
+    ("dp26-p3-rlm-problemas-aritmeticos-geometricos", ["problemas de logica", "raciocinio logico", "operacoes basicas", "mmc", "mdc", "razao e proporcao", "regra de tres", "porcentagem", "geometria plana", "geometria espacial", "sistemas lineares", "matrizes"], "rlm_problemas", 0.93),
     # Portuguese
     ("dp26-p3-por-ortografia-dominio", ["ortografia", "acentuacao", "fonema", "digrafo"], "portugues", 0.98),
     ("dp26-p3-por-classes-palavras", ["classes de palavras", "substantivo", "adjetivo", "adverbio", "pronome"], "portugues", 0.96),
@@ -143,6 +157,7 @@ FOLDER_DEFAULTS = {
     "Atualidades - F": (DISCIPLINES["atualidades_ia"], TOPICS["atualidades"]),
     "LGPD e IA - C": (DISCIPLINES["atualidades_ia"], None),
     "RLM - F": (DISCIPLINES["rlm"], None),
+    "RLM - C": (DISCIPLINES["rlm"], None),
 }
 
 WATERMARK_PATTERNS = [
@@ -157,6 +172,15 @@ def normalize(text: str) -> str:
     text = text.lower().replace("–", "-").replace("—", "-")
     text = re.sub(r"[^a-z0-9+.#/ -]+", " ", text)
     return re.sub(r"\s+", " ", text).strip()
+
+
+def term_matches(pattern: str, normalized_text: str) -> bool:
+    term = normalize(pattern)
+    if not term:
+        return False
+    if " " not in term and len(term) <= 3:
+        return re.search(rf"(?<![a-z0-9]){re.escape(term)}(?![a-z0-9])", normalized_text) is not None
+    return term in normalized_text
 
 
 def sha256_file(path: Path) -> str:
@@ -286,7 +310,7 @@ def map_section(title: str, folder: str, source_name: str, course_title: str) ->
     discipline_id, default_topic_id = special_folder_context(folder, source_name, course_title)
     candidates = []
     for subtopic_id, patterns, rule_topic, confidence in SUBTOPIC_RULES:
-        matched = [pattern for pattern in patterns if normalize(pattern) in n]
+        matched = [pattern for pattern in patterns if term_matches(pattern, n)]
         if matched:
             candidates.append({
                 "subtopicId": subtopic_id,
@@ -302,6 +326,8 @@ def map_section(title: str, folder: str, source_name: str, course_title: str) ->
         if discipline_id == DISCIPLINES["atualidades_ia"] and candidate["topicId"] not in {TOPICS["atualidades"], TOPICS["ia_geral"]}:
             continue
         if discipline_id == DISCIPLINES["legislacao"] and candidate["topicId"] not in {TOPICS["lair"], TOPICS["delitos"], TOPICS["marco_civil"], TOPICS["lgpd"]}:
+            continue
+        if discipline_id == DISCIPLINES["rlm"] and not candidate["ruleTopic"].startswith("rlm_"):
             continue
         if discipline_id == DISCIPLINES["portugues"] and candidate["ruleTopic"] != "portugues":
             continue
@@ -401,6 +427,9 @@ def build_catalog(root: Path) -> dict:
                 "schemaVersion": SCHEMA_VERSION,
                 "concursoId": CONCURSO_ID,
                 "sourceGroup": folder,
+                "sourceProvider": "ESTRATEGIA_CONCURSOS",
+                "sourceRole": "PRIMARY",
+                "sourcePriority": 100,
                 "sourceFileName": path.name,
                 "sourceRelativePath": str(path.relative_to(root)),
                 "sourceSha256": source_hash,
@@ -440,6 +469,11 @@ def build_summary(catalog: dict, root: Path) -> dict:
                 mapped_subtopics[subtopic_id] += 1
     known_groups = sorted(set(FOLDER_DEFAULTS) | set(groups))
     missing_groups = [group for group in known_groups if groups.get(group, 0) == 0]
+    # RLM appears as "RLM - C" in the current package and as "RLM - F" in older exports.
+    # They are aliases of the same syllabus group, so do not report one as missing when
+    # the other is present.
+    if groups.get("RLM - C", 0) > 0 or groups.get("RLM - F", 0) > 0:
+        missing_groups = [group for group in missing_groups if group not in {"RLM - C", "RLM - F"}]
     total_bytes = sum((root / material["sourceRelativePath"]).stat().st_size for material in materials)
     return {
         "schemaVersion": SCHEMA_VERSION,

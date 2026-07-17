@@ -7,13 +7,18 @@ import {
   Search, Sparkles, Upload, Eye, Heart, Plus, Trash2, Edit2, Check, 
   ArrowRight, Video, FileText, Share2, Layers, HelpCircle, Link as LinkIcon, 
   FileCode, StickyNote, Play, Pause, ChevronLeft, ChevronRight, X, 
-  ArrowUpRight, CheckCircle, AlertTriangle, RefreshCw, Bookmark, Map, ShieldAlert
+  ArrowUpRight, CheckCircle, AlertTriangle, RefreshCw, Bookmark, Map, ShieldAlert,
+  Cloud, HardDrive, Loader2
 } from "lucide-react";
 import { authenticatedFetch } from "../integrations/cloud/authenticatedFetch";
+import { useCloudAccountStore } from "../integrations/cloud/cloudStore";
+import { normalizeMaterialFileName } from "../integrations/cloud/privateDocumentPolicy";
+import { indexPrivatePdfLocally, type PrivatePdfIndexDraft } from "../integrations/localFiles/privatePdfIndexer";
 import type { FlashcardRetrievalPerformance } from "../core/flashcards/types";
 import { motion, AnimatePresence } from "motion/react";
 
 export default function LibraryView() {
+  const cloud = useCloudAccountStore();
   const { 
     biblioteca, disciplinas, assuntos, questoes, flashcards, resumos,
     addBibliotecaItem, updateBibliotecaItem, deleteBibliotecaItem,
@@ -37,6 +42,9 @@ export default function LibraryView() {
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [pastedUrl, setPastedUrl] = useState<string>("");
   const [isOrganizing, setIsOrganizing] = useState<boolean>(false);
+  const [pdfIndexDraft, setPdfIndexDraft] = useState<PrivatePdfIndexDraft | null>(null);
+  const [storagePreference, setStoragePreference] = useState<"CLOUD" | "LOCAL">("CLOUD");
+  const [materialSaveMessage, setMaterialSaveMessage] = useState<string>("");
 
   // Organization Form state (returned by AI or filled manually)
   const [formTitulo, setFormTitulo] = useState<string>("");
@@ -234,61 +242,73 @@ export default function LibraryView() {
     return items;
   };
 
-  // Catalog a local file using metadata only. File contents are never sent to the AI organizer.
+  // Index a private PDF locally. Only derived outline metadata may be sent to the organizer.
   const handleFileUpload = async (e: any) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files?.[0] as File | undefined;
     if (!file) return;
 
     setUploadFile(file);
     setIsOrganizing(true);
+    setMaterialSaveMessage("");
     setFormConteudoMarkdown("");
+    setPdfIndexDraft(null);
 
     const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
-    if (isPdf) {
+    if (!isPdf) {
       setFormTitulo(file.name.replace(/\.[^/.]+$/, ""));
-      setFormDescricao("PDF catalogado por metadados. O conteúdo do arquivo não foi enviado à IA.");
-      setFormDisciplinaId("");
-      setFormAssuntoId("");
-      setFormNovoAssuntoNome("");
-      setFormTipoMaterial("PDF");
-      setFormTags("pdf, local, privado");
+      setFormDescricao("Arquivo catalogado manualmente por metadados.");
+      setFormTipoMaterial("LINK");
+      setFormTags("local, manual");
       setIsOrganizing(false);
       return;
     }
 
+    setStoragePreference(cloud.authStatus === "SIGNED_IN" ? "CLOUD" : "LOCAL");
+    setFormTitulo(file.name.replace(/\.[^/.]+$/, ""));
+    setFormDescricao("PDF privado em indexação local. O arquivo completo não é enviado ao Gemini.");
+    setFormDisciplinaId("");
+    setFormAssuntoId("");
+    setFormNovoAssuntoNome("");
+    setFormTipoMaterial("PDF");
+    setFormTags("pdf, privado, indexado-localmente");
+
     try {
-      const response = await authenticatedFetch("/api/organize-material", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          filename: file.name,
-          fileContent: "",
-          fileType: file.type || "ARQUIVO",
-          sensitivity: "METADATA_ONLY",
-          disciplinasList: disciplinas.map((discipline) => ({
-            id: discipline.id,
-            nome: discipline.nome,
-            assuntos: assuntos.filter((topic) => topic.disciplinaId === discipline.id)
-          }))
-        })
-      });
-      if (!response.ok) throw new Error();
-      const organized = await response.json();
-      setFormTitulo(organized.tituloOtimizado || file.name);
-      setFormDescricao(organized.descricaoSintetizada || "Material catalogado somente por metadados.");
-      setFormDisciplinaId(organized.disciplinaId || "");
-      setFormAssuntoId(organized.assuntoId || "");
-      setFormNovoAssuntoNome(organized.novoAssuntoNome || "");
-      setFormTipoMaterial(organized.tipoMaterialSugerido || "LINK");
-      setFormTags(organized.tagsSugeridas?.join(", ") || "material, local");
-    } catch (err) {
-      console.error(err);
-      setFormTitulo(file.name.replace(/\.[^/.]+$/, ""));
-      setFormDescricao("Arquivo catalogado manualmente por metadados.");
-      setFormDisciplinaId("");
-      setFormAssuntoId("");
-      setFormTipoMaterial(isPdf ? "PDF" : "LINK");
-      setFormTags("local, manual");
+      const index = await indexPrivatePdfLocally(file);
+      setPdfIndexDraft(index);
+      setFormDescricao(`PDF privado com ${index.totalPages} páginas e ${index.sections.length} seção(ões) detectada(s) localmente.`);
+
+      try {
+        const response = await authenticatedFetch("/api/organize-material", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            filename: file.name,
+            fileContent: index.outlineText.slice(0, 12000),
+            fileType: "PDF",
+            sensitivity: "DERIVED_OUTLINE_ONLY",
+            disciplinasList: disciplinas.map((discipline) => ({
+              id: discipline.id,
+              nome: discipline.nome,
+              assuntos: assuntos.filter((topic) => topic.disciplinaId === discipline.id)
+            }))
+          })
+        });
+        if (response.ok) {
+          const organized = await response.json();
+          setFormTitulo(organized.tituloOtimizado || file.name.replace(/\.pdf$/i, ""));
+          setFormDescricao(organized.descricaoSintetizada || `PDF indexado localmente com ${index.totalPages} páginas.`);
+          setFormDisciplinaId(organized.disciplinaId || "");
+          setFormAssuntoId(organized.assuntoId || "");
+          setFormNovoAssuntoNome(organized.novoAssuntoNome || "");
+          setFormTags(organized.tagsSugeridas?.join(", ") || "pdf, privado, indexado-localmente");
+        }
+      } catch {
+        // Manual review remains available when Gemini/auth is unavailable.
+      }
+    } catch (error) {
+      console.error(error);
+      setFormDescricao("Não foi possível detectar o índice automaticamente. Informe disciplina e assunto; o PDF ainda pode ser armazenado e usado integralmente.");
+      setMaterialSaveMessage("Índice automático indisponível. O material será salvo com um localizador do documento inteiro.");
     } finally {
       setIsOrganizing(false);
     }
@@ -337,30 +357,26 @@ export default function LibraryView() {
     }
   };
 
-  // Save the cataloged item to the store
-  const handleSaveItem = () => {
-    let finalAssuntoId = formAssuntoId;
-
-    // Handle new topic recommendation
-    if (!formAssuntoId && formNovoAssuntoNome.trim() && formDisciplinaId) {
-      const newAssuntoId = "ass-" + Date.now();
-      // Add subject to store directly
-      useConcurseiroStore.getState().addAssunto({
-        id: newAssuntoId,
-        disciplinaId: formDisciplinaId,
-        nome: formNovoAssuntoNome.trim(),
-        ordem: assuntos.length + 1,
-        prioridadeEdital: "MEDIA",
-        metaQuestoesResolvidas: 100,
-        questoesRespondidas: 0,
-        questoesAcertadas: 0,
-        tempoEstudadoMinutos: 0,
-        progressoPorcentagem: 0,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      });
-      finalAssuntoId = newAssuntoId;
-    }
+  // Save metadata and optionally upload the private PDF to the user's Supabase vault.
+  const handleSaveItem = async () => {
+    const finalAssuntoId = formAssuntoId || undefined;
+    const aiClassificationNote =
+      !formAssuntoId && formNovoAssuntoNome.trim()
+        ? `\n\nSugestão de classificação não validada: ${formNovoAssuntoNome.trim()}. O edital não foi alterado.`
+        : "";
+    const now = new Date().toISOString();
+    const isPrivatePdf = formTipoMaterial === "PDF" && Boolean(uploadFile);
+    const catalogMaterialId = `user-material-${pdfIndexDraft?.sha256.slice(0, 16) ?? Date.now()}`;
+    const indexSections = (pdfIndexDraft?.sections ?? []).map((section) => ({
+      titulo: section.title,
+      paginaInicial: section.startPage,
+      paginaFinal: section.endPage,
+      disciplinaId: formDisciplinaId || undefined,
+      assuntoId: finalAssuntoId,
+      subassuntoIds: [],
+      confianca: section.confidence,
+      status: "AUTO_REVIEWABLE" as const
+    }));
 
     const newItem: ItemBiblioteca = {
       id: "lib-" + Date.now(),
@@ -368,33 +384,115 @@ export default function LibraryView() {
       disciplinaId: formDisciplinaId,
       assuntoId: finalAssuntoId,
       titulo: formTitulo,
-      descricao: formDescricao,
+      descricao: `${formDescricao}${aiClassificationNote}`,
       categoria: formCategoria,
       linkAcesso: pastedUrl || (uploadFile ? `local-metadata://${encodeURIComponent(uploadFile.name)}` : "local-metadata://manual"),
       isFavorito: false,
       tags: formTags.split(",").map(t => t.trim().toLowerCase()).filter(Boolean),
       tipoMaterial: formTipoMaterial as any,
-      conteudoMarkdown: formConteudoMarkdown || `# ${formTitulo}\n\n${formDescricao}`,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      conteudoMarkdown: isPrivatePdf ? undefined : (formConteudoMarkdown || `# ${formTitulo}\n\n${formDescricao}`),
+      dadosPDF: isPrivatePdf ? {
+        totalPaginas: pdfIndexDraft?.totalPages,
+        indice: indexSections.length ? indexSections : undefined,
+        indexStatus: indexSections.length ? "AUTO_REVIEWABLE" : "NOT_INDEXED",
+        indexedAt: pdfIndexDraft ? now : undefined
+      } : undefined,
+      privateMaterial: isPrivatePdf && uploadFile ? {
+        catalogMaterialId,
+        accessMode: "USER_PRIVATE_LOCAL_COPY",
+        rightsClassification: "PRIVATE_LICENSED_USER_COPY",
+        sharingAllowed: false,
+        contentExportAllowed: false,
+        metadataExportAllowed: true,
+        strategicUse: "PEDAGOGICAL_ROUTING_ONLY",
+        sourceFileName: uploadFile.name,
+        sourceGroup: "Envio privado do usuário",
+        courseTitle: "Material complementar",
+        lessonLabel: formTitulo,
+        storageStatus: "NOT_UPLOADED",
+        sourceSizeBytes: uploadFile.size,
+        sourceMimeType: uploadFile.type || "application/pdf",
+        sourceSha256: pdfIndexDraft?.sha256
+      } : undefined,
+      createdAt: now,
+      updatedAt: now
     };
 
-    // If it's a Mind Map, seed it with default empty nodes
     if (formTipoMaterial === "MAPA_MENTAL") {
       newItem.dadosMapaMental = JSON.stringify({
-        nodes: [
-          { id: "1", label: formTitulo, x: 250, y: 150, color: "#3b82f6" }
-        ],
+        nodes: [{ id: "1", label: formTitulo, x: 250, y: 150, color: "#3b82f6" }],
         links: []
       });
     }
 
-    addBibliotecaItem(newItem);
+    const existingByHash = pdfIndexDraft?.sha256
+      ? biblioteca.find(
+          (item) => item.privateMaterial?.sourceSha256 === pdfIndexDraft.sha256
+        )
+      : undefined;
+    const existingByLegacyName = uploadFile && !existingByHash
+      ? biblioteca.find(
+          (item) =>
+            item.privateMaterial &&
+            !item.privateMaterial.sourceSha256 &&
+            normalizeMaterialFileName(item.privateMaterial.sourceFileName) ===
+              normalizeMaterialFileName(uploadFile.name) &&
+            (item.privateMaterial.sourceSizeBytes === undefined ||
+              item.privateMaterial.sourceSizeBytes === uploadFile.size)
+        )
+      : undefined;
+    const existing = existingByHash ?? existingByLegacyName ?? null;
+    if (existing) {
+      const preservedPrivate = existing.privateMaterial
+        ? {
+            ...newItem.privateMaterial!,
+            catalogMaterialId: existing.privateMaterial.catalogMaterialId,
+            sourceGroup: existing.privateMaterial.sourceGroup,
+            courseTitle: existing.privateMaterial.courseTitle,
+            lessonLabel: existing.privateMaterial.lessonLabel,
+            accessMode: existing.privateMaterial.storagePath
+              ? existing.privateMaterial.accessMode
+              : newItem.privateMaterial!.accessMode,
+            storageProvider: existing.privateMaterial.storageProvider,
+            storageBucket: existing.privateMaterial.storageBucket,
+            storagePath: existing.privateMaterial.storagePath,
+            storageStatus: existing.privateMaterial.storageStatus,
+            uploadedAt: existing.privateMaterial.uploadedAt,
+            sourceSha256:
+              newItem.privateMaterial!.sourceSha256 ?? existing.privateMaterial.sourceSha256
+          }
+        : newItem.privateMaterial;
+      updateBibliotecaItem(existing.id, {
+        ...newItem,
+        id: existing.id,
+        createdAt: existing.createdAt,
+        linkAcesso: existing.privateMaterial?.storagePath
+          ? existing.linkAcesso
+          : newItem.linkAcesso,
+        privateMaterial: preservedPrivate,
+        dadosPDF: existing.dadosPDF?.totalPaginas && !pdfIndexDraft
+          ? existing.dadosPDF
+          : newItem.dadosPDF
+      });
+    } else addBibliotecaItem(newItem);
+
+    if (isPrivatePdf && uploadFile && storagePreference === "CLOUD" && cloud.authStatus === "SIGNED_IN") {
+      setMaterialSaveMessage("Enviando PDF ao cofre privado…");
+      const result = await cloud.uploadPrivateDocuments([uploadFile]);
+      if (result.duplicates.length === 1) {
+        setMaterialSaveMessage("Este mesmo PDF já existia no cofre; o índice foi vinculado sem criar outra cópia.");
+      } else
+      if (result.uploaded !== 1) {
+        setMaterialSaveMessage("O índice foi salvo, mas o upload ao cofre falhou. Você poderá tentar novamente na tela Conta e sincronização.");
+        return;
+      }
+    }
+
     setShowUploadModal(false);
     setUploadFile(null);
+    setPdfIndexDraft(null);
     setPastedUrl("");
-
-    // Clear Form
+    setMaterialSaveMessage("");
     setFormTitulo("");
     setFormDescricao("");
     setFormDisciplinaId("");
@@ -552,7 +650,7 @@ export default function LibraryView() {
         <div className="p-4 border-b border-zinc-900 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Layers className="h-5 w-5 text-blue-500" />
-            <h2 className="text-sm font-semibold text-zinc-100">Grade Curricular</h2>
+            <h2 className="text-sm font-semibold text-zinc-100">Materiais por conteúdo</h2>
           </div>
           <button 
             onClick={() => {
@@ -563,7 +661,7 @@ export default function LibraryView() {
             title="Importar ou Criar Item"
           >
             <Plus className="h-4 w-4" />
-            <span>Adicionar</span>
+            <span>Adicionar material</span>
           </button>
         </div>
 
@@ -668,7 +766,7 @@ export default function LibraryView() {
             {/* Live active scope tags */}
             <div className="flex items-center gap-1.5 text-xs text-zinc-400">
               <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-              <span>Sincronizado offline-first</span>
+              <span>Catálogo disponível neste dispositivo</span>
             </div>
           </div>
 
@@ -676,7 +774,7 @@ export default function LibraryView() {
           <div className="relative">
             <input
               type="text"
-              placeholder={isSemanticSearch ? "Conceitual: 'onde explica imunidade tributária recíproca?' ou 'limitações do estado'..." : "Digite termos, tags, títulos de leis..."}
+              placeholder={isSemanticSearch ? "Conceitual: 'onde está normalização?', 'OAuth2' ou 'padrões de projeto'..." : "Busque por aula, assunto, tecnologia ou páginas..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => {
@@ -1468,6 +1566,44 @@ export default function LibraryView() {
                   </div>
                 )}
 
+                {uploadFile?.name.toLowerCase().endsWith(".pdf") && !isOrganizing && (
+                  <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 text-xs">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <p className="font-semibold text-zinc-200">Índice privado do PDF</p>
+                        <p className="mt-1 text-zinc-500">
+                          {pdfIndexDraft
+                            ? `${pdfIndexDraft.totalPages} páginas · ${pdfIndexDraft.sections.length} seção(ões) detectada(s). Apenas títulos e intervalos de páginas são salvos.`
+                            : "O PDF será catalogado como documento integral até que um índice seja detectado ou revisado."}
+                        </p>
+                      </div>
+                      <span className="rounded-full border border-emerald-500/20 bg-emerald-500/5 px-2 py-1 text-[10px] text-emerald-300">conteúdo permanece privado</span>
+                    </div>
+                    {pdfIndexDraft && (
+                      <div className="mt-3 max-h-28 overflow-y-auto rounded-lg border border-zinc-800 bg-zinc-950/70 p-2 text-[10px] text-zinc-400">
+                        {pdfIndexDraft.sections.slice(0, 12).map((section, index) => (
+                          <div key={`${section.title}-${index}`} className="flex justify-between gap-3 py-1">
+                            <span className="truncate">{section.title}</span>
+                            <span className="shrink-0 text-zinc-600">p. {section.startPage}–{section.endPage}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                      <button type="button" onClick={() => setStoragePreference("CLOUD")} disabled={cloud.authStatus !== "SIGNED_IN"} className={`flex items-start gap-2 rounded-lg border p-3 text-left ${storagePreference === "CLOUD" ? "border-blue-500/50 bg-blue-500/10" : "border-zinc-800"} disabled:opacity-40`}>
+                        <Cloud className="mt-0.5 h-4 w-4 text-blue-400" />
+                        <span><strong className="block text-zinc-200">Cofre Supabase</strong><span className="text-[10px] text-zinc-500">Acesso em qualquer dispositivo autenticado.</span></span>
+                      </button>
+                      <button type="button" onClick={() => setStoragePreference("LOCAL")} className={`flex items-start gap-2 rounded-lg border p-3 text-left ${storagePreference === "LOCAL" ? "border-zinc-500 bg-zinc-800/70" : "border-zinc-800"}`}>
+                        <HardDrive className="mt-0.5 h-4 w-4 text-zinc-300" />
+                        <span><strong className="block text-zinc-200">Somente local</strong><span className="text-[10px] text-zinc-500">Mais privado, mas não disponível fora deste dispositivo.</span></span>
+                      </button>
+                    </div>
+                    {cloud.authStatus !== "SIGNED_IN" && <p className="mt-2 text-[10px] text-amber-300">Faça login em Conta e sincronização para habilitar o cofre.</p>}
+                    {materialSaveMessage && <p className="mt-2 text-[10px] text-amber-200">{materialSaveMessage}</p>}
+                  </div>
+                )}
+
                 {/* Custom review form */}
                 {!isOrganizing && (
                   <div className="space-y-3 pt-3 border-t border-zinc-900/60 text-xs">
@@ -1530,7 +1666,7 @@ export default function LibraryView() {
                           onChange={(e) => setFormAssuntoId(e.target.value)}
                           className="w-full bg-zinc-900 border border-zinc-800 rounded px-2.5 py-1.5 text-xs text-zinc-300 focus:outline-none cursor-pointer"
                         >
-                          <option value="">-- Assunto Recomendado / Criar Novo --</option>
+                          <option value="">Sem vínculo específico</option>
                           {assuntos.filter(a => a.disciplinaId === formDisciplinaId).map(a => (
                             <option key={a.id} value={a.id}>{a.nome}</option>
                           ))}
@@ -1541,7 +1677,7 @@ export default function LibraryView() {
                     {/* New subject prediction name text field */}
                     {!formAssuntoId && (
                       <div className="p-3 bg-blue-500/5 rounded-lg border border-blue-500/10">
-                        <label className="text-[10px] font-bold text-blue-400 uppercase block mb-1">Novo Assunto Recomendado pela IA</label>
+                        <label className="text-[10px] font-bold text-blue-400 uppercase block mb-1">Sugestão da IA (não altera o edital)</label>
                         <input
                           type="text"
                           placeholder="Ex: Teoria de Atos e Classificação..."
@@ -1549,7 +1685,7 @@ export default function LibraryView() {
                           onChange={(e) => setFormNovoAssuntoNome(e.target.value)}
                           className="w-full bg-zinc-900 border border-blue-500/20 focus:border-blue-500/50 rounded px-2.5 py-1.5 text-xs text-zinc-200 focus:outline-none"
                         />
-                        <p className="text-[9px] text-zinc-500 mt-1">Este assunto será criado automaticamente e o material será catalogado nele.</p>
+                        <p className="text-[9px] text-amber-300 mt-1">A sugestão será salva apenas como observação do material. O edital não foi alterado.</p>
                       </div>
                     )}
 
@@ -1597,7 +1733,7 @@ export default function LibraryView() {
                   Cancelar
                 </button>
                 <button
-                  onClick={handleSaveItem}
+                  onClick={() => void handleSaveItem()}
                   disabled={isOrganizing || !formTitulo || !formDisciplinaId}
                   className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 disabled:opacity-50 text-white text-xs font-bold rounded-lg transition-all cursor-pointer shadow-md shadow-blue-500/10"
                 >

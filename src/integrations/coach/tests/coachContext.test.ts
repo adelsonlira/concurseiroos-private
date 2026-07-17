@@ -69,6 +69,13 @@ describe("Coach grounding context", () => {
       decision.actions[0].assuntoNome
     );
     expect(context.decisaoSDE.plano).not.toBeNull();
+    expect(context.decisaoSDE.prescricaoAtual).toMatchObject({
+      activity: decision.prescription?.current?.activity,
+      topic: decision.prescription?.current?.topicName,
+      decisionReliability: decision.prescription?.current?.decisionReliability,
+      executionReadiness: decision.prescription?.current?.executionReadiness,
+      nextAction: decision.prescription?.current?.nextAction
+    });
   });
 
   it("preserva para o coach a transparência de empates estratégicos", () => {

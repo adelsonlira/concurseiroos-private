@@ -1,0 +1,4086 @@
+[
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:10d955f6c683a3160e71",
+    "contestId": "ale_sp_pss_2025",
+    "examDocumentId": "03a29238027ecc17",
+    "year": 2025,
+    "organizedPath": "ale_sp_pss_2025/provas/01_prova-4-tecnologia-da-informacao-cursos-de-ciencia-de-dados-e-desenvolvimento-de-sistemaspefme04-tipo-1-0.pdf",
+    "sourceSha256": "3208da598329b8bec913a72a1eaab43ac8fb96d60078b42a3dcc4efa10955230",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "(CURSOS DE CIÊNCIA DE DADOS E DESENVOLVIMENTO DE SISTEMAS)",
+    "expectedQuestionCount": 30,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 30,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2692,
+      "rationale": "Best title score 53.84; margin 2.40; status definitivo; variant 1.",
+      "sectionId": "key-section:b1bd8e79fcc023b9cfad",
+      "answerKeyDocumentId": "cd1dbb28e85e3d91",
+      "answerKeyStatus": "definitivo",
+      "score": 53.8444,
+      "margin": 2.405,
+      "candidates": [
+        {
+          "sectionId": "key-section:b1bd8e79fcc023b9cfad",
+          "score": 53.8444,
+          "heading": "PROCESSO SELETIVO SIMPLIFICADO PARA CONTRATAÇÃO | TEMPORÁRIA DE DOCENTES PARA A EDUCAÇÃO PROFISSIONAL | Gabaritos Definitivos | Provas Aplicadas no dia 02/11/2025 | Página 1 de 9 | Eixo I - Gestão e Negócios - 1 - Turno Manhã | Eixo I - Gestão e Negócios - 2 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:efd1e817424850c91f36",
+          "score": 51.4395,
+          "heading": "PROCESSO SELETIVO SIMPLIFICADO PARA CONTRATAÇÃO | TEMPORÁRIA DE DOCENTES PARA A EDUCAÇÃO PROFISSIONAL | Gabaritos Definitivos | Provas Aplicadas no dia 02/11/2025 | Página 3 de 9 | Eixo II - Saúde e Meio Ambiente - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:e29b0ffd88f0cffa1185",
+          "score": 50.623,
+          "heading": "PROCESSO SELETIVO SIMPLIFICADO PARA CONTRATAÇÃO | TEMPORÁRIA DE DOCENTES PARA A EDUCAÇÃO PROFISSIONAL | Gabaritos Definitivos | Provas Aplicadas no dia 02/11/2025 | Página 8 de 9 | Eixo V - Recursos Naturais - 1 - Turno Tarde"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:bd4e633629a680e4f059",
+    "contestId": "aleam_2025",
+    "examDocumentId": "32015bc9fc01e30e",
+    "year": 2025,
+    "organizedPath": "aleam_2025/provas/01_analista-legislativo-analista-de-redes-de-comunicacao-de-dados-cns302-tipo-1.pdf",
+    "sourceSha256": "25104b56880f15b61ecba561347da1bc3c34ce4d70a3e20257da298702c7e99d",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA LEGISLATIVO - ANALISTA DE REDES DE COMUNICAÇÃO",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 23.62; status definitivo; variant 1.",
+      "sectionId": "key-section:807e119c3b60c40a8da7",
+      "answerKeyDocumentId": "d9ac5659213abcb5",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 23.6164,
+      "candidates": [
+        {
+          "sectionId": "key-section:807e119c3b60c40a8da7",
+          "score": 97.0,
+          "heading": "ASSEMBLEIA LEGISLATIVA DO | ESTADO DO AMAZONAS | EDITAL Nº 1/2025 | Gabaritos definitivos da prova aplicada no dia 14/12/2025 | Página 23 de 30 | Analista Legislativo - Analista de Redes de Comunicação de Dados - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:87fd2f8e03039bfd9959",
+          "score": 73.3836,
+          "heading": "* Questão anulada | Analista Legislativo - Analista de Sistema - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:4d89e444212d29d5d967",
+          "score": 73.0346,
+          "heading": "ASSEMBLEIA LEGISLATIVA DO | ESTADO DO AMAZONAS | EDITAL Nº 1/2025 | Gabaritos definitivos da prova aplicada no dia 14/12/2025 | Página 6 de 30 | Analista Legislativo - Redator - 1 - Turno Manhã"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:90d41745a5d0b9de39da",
+    "contestId": "aleam_2025",
+    "examDocumentId": "6e50947405b35321",
+    "year": 2025,
+    "organizedPath": "aleam_2025/provas/02_analista-legislativo-analista-de-sistema-cns303-tipo-1.pdf",
+    "sourceSha256": "e05f6e9c80b1c1ac6432e723458c334faf1dce2bbcbf6af09447f893df1bfa21",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA LEGISLATIVO - ANALISTA DE SISTEMA",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 98.50; margin 12.51; status definitivo; variant 1.",
+      "sectionId": "key-section:87fd2f8e03039bfd9959",
+      "answerKeyDocumentId": "d9ac5659213abcb5",
+      "answerKeyStatus": "definitivo",
+      "score": 98.5,
+      "margin": 12.5052,
+      "candidates": [
+        {
+          "sectionId": "key-section:87fd2f8e03039bfd9959",
+          "score": 98.5,
+          "heading": "* Questão anulada | Analista Legislativo - Analista de Sistema - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:eccc1951679a4262884d",
+          "score": 85.9948,
+          "heading": "* Questão anulada | Analista Legislativo - Profissional de Educação Física - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:5300774bc5082f3e490d",
+          "score": 85.9948,
+          "heading": "* Questão anulada | Analista Legislativo - Intérprete de Libras e sinais - 1 - Turno Manhã"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:250ca7d9f8191b802287",
+    "contestId": "aleam_2025",
+    "examDocumentId": "d0f8b1068eaf556d",
+    "year": 2025,
+    "organizedPath": "aleam_2025/provas/03_analista-legislativo-programador-cns326-tipo-1.pdf",
+    "sourceSha256": "472c78cddbca4f56a71221ee0f921791e92fba62734726e214b409786a494498",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA LEGISLATIVO - PROGRAMADOR",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 16.35; status definitivo; variant 1.",
+      "sectionId": "key-section:8c90add2879ee2221208",
+      "answerKeyDocumentId": "d9ac5659213abcb5",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 16.35,
+      "candidates": [
+        {
+          "sectionId": "key-section:8c90add2879ee2221208",
+          "score": 97.0,
+          "heading": "ASSEMBLEIA LEGISLATIVA DO | ESTADO DO AMAZONAS | EDITAL Nº 1/2025 | Gabaritos definitivos da prova aplicada no dia 14/12/2025 | Página 8 de 30 | Analista Legislativo - Programador - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:4d89e444212d29d5d967",
+          "score": 80.65,
+          "heading": "ASSEMBLEIA LEGISLATIVA DO | ESTADO DO AMAZONAS | EDITAL Nº 1/2025 | Gabaritos definitivos da prova aplicada no dia 14/12/2025 | Página 6 de 30 | Analista Legislativo - Redator - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:700ddf3582773f63a5e1",
+          "score": 80.65,
+          "heading": "ASSEMBLEIA LEGISLATIVA DO | ESTADO DO AMAZONAS | EDITAL Nº 1/2025 | Gabaritos definitivos da prova aplicada no dia 14/12/2025 | Página 7 de 30 | Analista Legislativo - Psicológo - 1 - Turno Manhã"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:fdd8ee8f2fd1b6e77616",
+    "contestId": "alego_2025",
+    "examDocumentId": "c9246f1b23a674ac",
+    "year": 2025,
+    "organizedPath": "alego_2025/provas/01_analista-legislativo-desenvolvedor-de-sistemas-cns105-tipo-1.pdf",
+    "sourceSha256": "9640232b4fb351cf58aa3c73a8e87fa24b5e7d47a8358d3eb2218cc0cc4f6fac",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "ANALISTA LEGISLATIVO - DESENVOLVEDOR DE",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 16.66; status definitivo; variant 1.",
+      "sectionId": "key-section:d0c85b1486ead2fa2a09",
+      "answerKeyDocumentId": "3054d3d500ab949d",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 16.6625,
+      "candidates": [
+        {
+          "sectionId": "key-section:d0c85b1486ead2fa2a09",
+          "score": 97.0,
+          "heading": "* Questão anulada | Analista Legislativo - Desenvolvedor de Sistemas - 1 - Turno Tarde"
+        },
+        {
+          "sectionId": "key-section:b6ba34a02aa51abb6f11",
+          "score": 80.3375,
+          "heading": "ASSEMBLEIA LEGISLATIVA DO ESTADO DE GOIÁS - ALEGO | CONCURSO PÚBLICO – EDITAL Nº 1/2025 | Gabaritos definitivos da prova aplicada no dia 08/02/2026 | Página 1 de 13 | Analista Legislativo - Analista Administrativo - 1 - Turno Tarde"
+        },
+        {
+          "sectionId": "key-section:00b7b75361a0af69e75f",
+          "score": 80.3375,
+          "heading": "ASSEMBLEIA LEGISLATIVA DO ESTADO DE GOIÁS - ALEGO | CONCURSO PÚBLICO – EDITAL Nº 1/2025 | Gabaritos definitivos da prova aplicada no dia 08/02/2026 | Página 7 de 13 | Analista Legislativo - Economista - 1 - Turno Tarde"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:1dac5ad6e90ff1848525",
+    "contestId": "alema_2023",
+    "examDocumentId": "0ed992d9706fee9d",
+    "year": 2023,
+    "organizedPath": "alema_2023/provas/01_cnm201-assistente-legislativo-administrativo-criador-e-desenvolvedor-de-web-e-plataformas-digitaiscnm201tipo1.pdf",
+    "sourceSha256": "0f1e8dbe6fc9c2759bd0675e8dd281a11cfa3ef40faea332981baa85263b1a3e",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Confira seu cargo, cor e tipo do caderno de questões.",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2949,
+      "rationale": "Best title score 58.98; margin 0.28; status definitivo; variant 1.",
+      "sectionId": "key-section:bff323afa17bac509fbd",
+      "answerKeyDocumentId": "3805a8d931755ddb",
+      "answerKeyStatus": "definitivo",
+      "score": 58.9833,
+      "margin": 0.2778,
+      "candidates": [
+        {
+          "sectionId": "key-section:bff323afa17bac509fbd",
+          "score": 58.9833,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 4 de 40 | Técnico de Gestão Administrativa - Controlador - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:c9081e1d1902fe160971",
+          "score": 58.7056,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 3 de 40 | Técnico de Gestão Administrativa - Contador - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:b949ea7daef0c8d88398",
+          "score": 57.7519,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 3 de 40 | Técnico de Gestão Administrativa - Técnico em Comunicação Social - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:d08d2c01127b393558dc",
+    "contestId": "alema_2023",
+    "examDocumentId": "0d6c9a545fe35c50",
+    "year": 2023,
+    "organizedPath": "alema_2023/provas/02_cns105-tecnico-de-gestao-administrativa-analista-de-sistemascns105-tipo-1.pdf",
+    "sourceSha256": "652a01cc767b46fae3b884cf1fa93d6a09dadbf4bd5b153b30182d4a13f40177",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "o seu interior. Havia alguns restos de fogueiras e ossos de animais",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2734,
+      "rationale": "Best title score 54.67; margin 0.03; status definitivo; variant 1.",
+      "sectionId": "key-section:d9ae5676fe07ed370ef4",
+      "answerKeyDocumentId": "3805a8d931755ddb",
+      "answerKeyStatus": "definitivo",
+      "score": 54.6744,
+      "margin": 0.0303,
+      "candidates": [
+        {
+          "sectionId": "key-section:d9ae5676fe07ed370ef4",
+          "score": 54.6744,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 5 de 40 | Técnico de Gestão Administrativa - Engenheiro Civil - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:e63fc2ba830c88d44e5c",
+          "score": 54.6441,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 9 de 40 | Técnico de Gestão Administrativa - Analista de Suporte de Rede - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:b2eadf7e4f2d55125017",
+          "score": 54.4985,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 8 de 40 | Técnico de Gestão Administrativa - Analista de Sistemas - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:5e03cf08b77a459550a4",
+    "contestId": "alema_2023",
+    "examDocumentId": "256e87ee5c4bc5c8",
+    "year": 2023,
+    "organizedPath": "alema_2023/provas/03_cns106-tecnico-de-gestao-administrativa-analista-de-suporte-de-redecns106-tipo-1.pdf",
+    "sourceSha256": "4c1bb433c0aa07847413c063cf8c3d56342e8dd27dfb0c7ae87d5ae7f73adca8",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "o seu interior. Havia alguns restos de fogueiras e ossos de animais",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2734,
+      "rationale": "Best title score 54.67; margin 0.03; status definitivo; variant 1.",
+      "sectionId": "key-section:d9ae5676fe07ed370ef4",
+      "answerKeyDocumentId": "3805a8d931755ddb",
+      "answerKeyStatus": "definitivo",
+      "score": 54.6744,
+      "margin": 0.0303,
+      "candidates": [
+        {
+          "sectionId": "key-section:d9ae5676fe07ed370ef4",
+          "score": 54.6744,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 5 de 40 | Técnico de Gestão Administrativa - Engenheiro Civil - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:e63fc2ba830c88d44e5c",
+          "score": 54.6441,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 9 de 40 | Técnico de Gestão Administrativa - Analista de Suporte de Rede - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:b2eadf7e4f2d55125017",
+          "score": 54.4985,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 8 de 40 | Técnico de Gestão Administrativa - Analista de Sistemas - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:39fd28feaabd5bea447f",
+    "contestId": "alema_2023",
+    "examDocumentId": "d366053cf55fde6f",
+    "year": 2023,
+    "organizedPath": "alema_2023/provas/04_cns133-tecnico-de-gestao-administrativa-programador-de-sistemascns133-tipo-1.pdf",
+    "sourceSha256": "591158b4781fa88e1748f3732d18b9932413b058879b0875458dcc8893046963",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "cartão de respostas e da sua folha de textos definitivos.",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2905,
+      "rationale": "Best title score 58.10; margin 0.81; status definitivo; variant 1.",
+      "sectionId": "key-section:512f5ab7a97ac8bcc096",
+      "answerKeyDocumentId": "3805a8d931755ddb",
+      "answerKeyStatus": "definitivo",
+      "score": 58.1003,
+      "margin": 0.8065,
+      "candidates": [
+        {
+          "sectionId": "key-section:512f5ab7a97ac8bcc096",
+          "score": 58.1003,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 5 de 40 | Técnico de Gestão Administrativa - Administrador - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:68320f86d1153440c329",
+          "score": 57.2938,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 2 de 40 | Técnico de Gestão Administrativa - Dentista - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:bff323afa17bac509fbd",
+          "score": 56.6567,
+          "heading": "ASSEMBLÉIA LEGISLATIVA DO ESTADO DO MARANHÃO | CONCURSO PÚBLICO – EDITAL Nº 01/2023 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 21/08/2023 | Página 4 de 40 | Técnico de Gestão Administrativa - Controlador - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:e7130ff9a17733ea556e",
+    "contestId": "alep_2024",
+    "examDocumentId": "c381a1e8d997a98c",
+    "year": 2024,
+    "organizedPath": "alep_2024/provas/01_analista-legislativo-desenvolvedor-de-sistemas.pdf",
+    "sourceSha256": "b5627644592c0aaa05392c5887b5b7fa1207419af31e05340814d6c5f96365a3",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "ANALISTA LEGISLATIVO",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status preliminar; variant 1.",
+      "sectionId": "key-section:6b67d0c914bc0a3459ec",
+      "answerKeyDocumentId": "942d063395ed7b4e",
+      "answerKeyStatus": "preliminar",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:6b67d0c914bc0a3459ec",
+          "score": 97.0,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowNjozMCAtMDMwMA== | www.pciconcursos.com.br | ASSEMBLEIA LEGISLATIVA DO ESTADO DO PARANÁ | CONCURSO PÚBLICO – EDITAL Nº 02/2024 | GABARITO PRELIMINAR DA PROVA APLICADA NO DIA 07/04/2024 | Página 1 de 11 | ANALISTA LEGISLATIVO - ADMINISTRADOR - PROVA TIPO 1"
+        },
+        {
+          "sectionId": "key-section:42f6fd668d2cb514aa55",
+          "score": 97.0,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowNjozMCAtMDMwMA== | www.pciconcursos.com.br | ASSEMBLEIA LEGISLATIVA DO ESTADO DO PARANÁ | CONCURSO PÚBLICO – EDITAL Nº 02/2024 | GABARITO PRELIMINAR DA PROVA APLICADA NO DIA 07/04/2024 | Página 2 de 11 | ANALISTA LEGISLATIVO - ADVOGADO - PROVA TIPO 1"
+        },
+        {
+          "sectionId": "key-section:edb38c89a2e56fee3999",
+          "score": 97.0,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowNjozMCAtMDMwMA== | www.pciconcursos.com.br | ASSEMBLEIA LEGISLATIVA DO ESTADO DO PARANÁ | CONCURSO PÚBLICO – EDITAL Nº 02/2024 | GABARITO PRELIMINAR DA PROVA APLICADA NO DIA 07/04/2024 | Página 3 de 11 | ANALISTA LEGISLATIVO - ANALISTA DE REDES - PROVA TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:86f43a048e7aca150956",
+    "contestId": "alero_2025",
+    "examDocumentId": "03318bdf3eb55562",
+    "year": 2025,
+    "organizedPath": "alero_2025/provas/01_cnmas08-assistente-legislativo-tecnico-em-informatica-cnmas08-tipo-1.pdf",
+    "sourceSha256": "53bd995ad2edea5c012331111729d054c1f913e0bb3fc709cb95219ac885e533",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Verifique se este caderno de questões está completo e",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2829,
+      "rationale": "Best title score 56.57; margin 0.41; status definitivo; variant 1.",
+      "sectionId": "key-section:2873a678356429d26a47",
+      "answerKeyDocumentId": "28e342613940bc7d",
+      "answerKeyStatus": "definitivo",
+      "score": 56.5702,
+      "margin": 0.4074,
+      "candidates": [
+        {
+          "sectionId": "key-section:2873a678356429d26a47",
+          "score": 56.5702,
+          "heading": "ASSEMBLEIA LEGISLATIVA DO ESTADO DE RONDÔNIA - ALERO | GABARITO DEFINITIVO | (provas aplicadas no dia 08/02/2026) | Página 5 de 27 | Assistente Legislativo - Técnico em Logística - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:f7fb1b06cf74e4a940f7",
+          "score": 56.1628,
+          "heading": "ASSEMBLEIA LEGISLATIVA DO ESTADO DE RONDÔNIA - ALERO | GABARITO DEFINITIVO | (provas aplicadas no dia 08/02/2026) | Página 2 de 27 | Consultor Legislativo - Assessoramento Legislativo - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:fb9115ee7ce0a7754f54",
+          "score": 55.4725,
+          "heading": "ASSEMBLEIA LEGISLATIVA DO ESTADO DE RONDÔNIA - ALERO | GABARITO DEFINITIVO | (provas aplicadas no dia 08/02/2026) | Página 3 de 27 | Consultor Legislativo - Assessoramento em Orçamento - 1 - Turno Manhã"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:63411f3d27bfb30f13da",
+    "contestId": "amazul_2025",
+    "examDocumentId": "dad6e7b1a4025fe4",
+    "year": 2025,
+    "organizedPath": "amazul_2025/provas/01_ok-analista-de-desenvolvimento-de-sistemas-cnsa103-tipo-1.pdf",
+    "sourceSha256": "4b88dd694108b364712af52e4ba93e2726bad16f010b5aa93b045f459617a39e",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA DE DESENVOLVIMENTO DE SISTEMAS",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 11.35; status definitivo; variant 1.",
+      "sectionId": "key-section:afeb304bddb5abf135d2",
+      "answerKeyDocumentId": "42e6ed09506ae0e2",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 11.35,
+      "candidates": [
+        {
+          "sectionId": "key-section:afeb304bddb5abf135d2",
+          "score": 97.0,
+          "heading": "Analista em Desenvolvimento de Tecnologia Nuclear e Defesa - Analista de Desenvolvimento de Sistemas (CBO: | 212405) - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:d00447a07e2775af33c7",
+          "score": 85.65,
+          "heading": "AMAZÔNIA AZUL TECNOLOGIAS DE DEFESA S.A. - AMAZUL | CONCURSO PÚBLICO – EDITAL 01/2025 | GABARITOS DEFINITIVOS DAS PROVAS REALIZADAS NO DIA 25/01/2026 | Página 1 de 21 | Analista em Desenvolvimento de Tecnologia Nuclear e Defesa - Advogado (CBO: 241005) - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:fafb365a8e17a6ada06f",
+          "score": 85.65,
+          "heading": "* Questão anulada | Analista em Desenvolvimento de Tecnologia Nuclear e Defesa - Psicólogo (CBO: 211510) - 1 - Turno Manhã"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:fa0adacf0ac75dcc2a5e",
+    "contestId": "amazul_2025",
+    "examDocumentId": "7259f26718204761",
+    "year": 2025,
+    "organizedPath": "amazul_2025/provas/02_ok-analista-de-infraestrutura-de-tecnologia-da-informacao-cnsa104-tipo-1.pdf",
+    "sourceSha256": "9099b274fd3cf05a862edf04b39693deb15f1742622aa7bc81541ff684593a9d",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 88.00; margin 13.16; status definitivo; variant 1.",
+      "sectionId": "key-section:cf698113c3a5f21be909",
+      "answerKeyDocumentId": "42e6ed09506ae0e2",
+      "answerKeyStatus": "definitivo",
+      "score": 88.0,
+      "margin": 13.1608,
+      "candidates": [
+        {
+          "sectionId": "key-section:cf698113c3a5f21be909",
+          "score": 88.0,
+          "heading": "AMAZÔNIA AZUL TECNOLOGIAS DE DEFESA S.A. - AMAZUL | CONCURSO PÚBLICO – EDITAL 01/2025 | GABARITOS DEFINITIVOS DAS PROVAS REALIZADAS NO DIA 25/01/2026 | Página 4 de 21 | Analista em Desenvolvimento de Tecnologia Nuclear e Defesa - Analista de Infraestrutura de Tecnologia da | Informação (CBO: 212410) - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:7aaef03b79fd6c76772a",
+          "score": 74.8392,
+          "heading": "* Questão anulada | Especialista em Desenvolvimento de Tecnologia Nuclear e Defesa - Engenheiro de Controle da Qualidade (CBO: | 214910) - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:d00447a07e2775af33c7",
+          "score": 66.8265,
+          "heading": "AMAZÔNIA AZUL TECNOLOGIAS DE DEFESA S.A. - AMAZUL | CONCURSO PÚBLICO – EDITAL 01/2025 | GABARITOS DEFINITIVOS DAS PROVAS REALIZADAS NO DIA 25/01/2026 | Página 1 de 21 | Analista em Desenvolvimento de Tecnologia Nuclear e Defesa - Advogado (CBO: 241005) - 1 - Turno Manhã"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:8e18eaacb048d9269a59",
+    "contestId": "amazul_2025",
+    "examDocumentId": "44eb00d491e76e2c",
+    "year": 2025,
+    "organizedPath": "amazul_2025/provas/03_ok-engenheiro-de-computacao-cnse216-tipo-1.pdf",
+    "sourceSha256": "1b60f54917908f79ccf3f99762295fc560b52e5dae8b28b71d9794a4b13b6e1b",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ENGENHEIRO DE COMPUTAÇÃO",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 22.16; status definitivo; variant 1.",
+      "sectionId": "key-section:b40fb530b5f76b7bb852",
+      "answerKeyDocumentId": "42e6ed09506ae0e2",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 22.1608,
+      "candidates": [
+        {
+          "sectionId": "key-section:b40fb530b5f76b7bb852",
+          "score": 97.0,
+          "heading": "Especialista em Desenvolvimento de Tecnologia Nuclear e Defesa - Engenheiro de Computação (CBO: 212215) - 1 | - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:7689d280f736c9d8b796",
+          "score": 74.8392,
+          "heading": "AMAZÔNIA AZUL TECNOLOGIAS DE DEFESA S.A. - AMAZUL | CONCURSO PÚBLICO – EDITAL 01/2025 | GABARITOS DEFINITIVOS DAS PROVAS REALIZADAS NO DIA 25/01/2026 | Página 7 de 21 | Especialista em Desenvolvimento de Tecnologia Nuclear e Defesa - Engenheiro Químico (CBO: 214505) - 1 - | Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:8bd1290bd660ed8d106b",
+          "score": 74.8392,
+          "heading": "* Questão anulada | Especialista em Desenvolvimento de Tecnologia Nuclear e Defesa - Engenheiro Nuclear (CBO: 214415) - 1 - Turno | Manhã"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:5de09e89d99e5c4107d0",
+    "contestId": "banestes_2021",
+    "examDocumentId": "6f2d7f6458e55727",
+    "year": 2021,
+    "organizedPath": "banestes_2021/provas/01_analista-em-tecnologia-da-informacao-desenvolvimento-de-sistemasan-sist-tipo-1.pdf",
+    "sourceSha256": "84b679c65baf15d43ef2b6f963114babc81bd13f3f631fde5b4f17ddf9fc5711",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "INFORMAÇÃO - DESENVOLVIMENTO DE",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 32.28; status definitivo; variant 1.",
+      "sectionId": "key-section:007a4c7aada2efe25c26",
+      "answerKeyDocumentId": "ca148daf1343db6b",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 32.2802,
+      "candidates": [
+        {
+          "sectionId": "key-section:007a4c7aada2efe25c26",
+          "score": 97.0,
+          "heading": "BANCO DO ESTADO DO ESPÍRITO SANTO | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 19/12/2021 | GABARITO DEFINITIVO | Analista em Tecnologia da Informação - Desenvolvimento de Sistemas – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:1131cb9b86b2d9544f49",
+          "score": 64.7198,
+          "heading": "BANCO DO ESTADO DO ESPÍRITO SANTO | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 19/12/2021 | GABARITO DEFINITIVO | Analista em Tecnologia da Informação - Segurança da Informação – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:bc6a4bb988ca32a9acd1",
+          "score": 64.7198,
+          "heading": "BANCO DO ESTADO DO ESPÍRITO SANTO | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 19/12/2021 | GABARITO DEFINITIVO | Analista em Tecnologia da Informação - Suporte e Infraestrutura – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:55a8e2593653e9ad495d",
+    "contestId": "banestes_2021",
+    "examDocumentId": "c9e7a98c61425b5a",
+    "year": 2021,
+    "organizedPath": "banestes_2021/provas/02_analista-em-tecnologia-da-informacao-seguranca-da-informacaoan-seg-tipo-1.pdf",
+    "sourceSha256": "2627a8ed298ebc38cfa47f7a5896ad0a449b75fb81d6ece5d153c985571fa13e",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA EM TECNOLOGIA DA",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:007a4c7aada2efe25c26",
+      "answerKeyDocumentId": "ca148daf1343db6b",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:007a4c7aada2efe25c26",
+          "score": 97.0,
+          "heading": "BANCO DO ESTADO DO ESPÍRITO SANTO | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 19/12/2021 | GABARITO DEFINITIVO | Analista em Tecnologia da Informação - Desenvolvimento de Sistemas – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:1131cb9b86b2d9544f49",
+          "score": 97.0,
+          "heading": "BANCO DO ESTADO DO ESPÍRITO SANTO | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 19/12/2021 | GABARITO DEFINITIVO | Analista em Tecnologia da Informação - Segurança da Informação – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:bc6a4bb988ca32a9acd1",
+          "score": 97.0,
+          "heading": "BANCO DO ESTADO DO ESPÍRITO SANTO | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 19/12/2021 | GABARITO DEFINITIVO | Analista em Tecnologia da Informação - Suporte e Infraestrutura – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:53eb1fb117514b5ab007",
+    "contestId": "banestes_2021",
+    "examDocumentId": "8679bdf5168a6868",
+    "year": 2021,
+    "organizedPath": "banestes_2021/provas/03_analista-em-tecnologia-da-informacao-suporte-e-infraestruturaan-sup-tipo-1.pdf",
+    "sourceSha256": "a2aa461831b1d3956c047450725b6c999ee8c7176abc6f24ed3e48cffe67607b",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "INFRAESTRUTURA",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 49.93; status definitivo; variant 1.",
+      "sectionId": "key-section:bc6a4bb988ca32a9acd1",
+      "answerKeyDocumentId": "ca148daf1343db6b",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 49.9265,
+      "candidates": [
+        {
+          "sectionId": "key-section:bc6a4bb988ca32a9acd1",
+          "score": 97.0,
+          "heading": "BANCO DO ESTADO DO ESPÍRITO SANTO | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 19/12/2021 | GABARITO DEFINITIVO | Analista em Tecnologia da Informação - Suporte e Infraestrutura – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:1131cb9b86b2d9544f49",
+          "score": 47.0735,
+          "heading": "BANCO DO ESTADO DO ESPÍRITO SANTO | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 19/12/2021 | GABARITO DEFINITIVO | Analista em Tecnologia da Informação - Segurança da Informação – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:007a4c7aada2efe25c26",
+          "score": 45.9788,
+          "heading": "BANCO DO ESTADO DO ESPÍRITO SANTO | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 19/12/2021 | GABARITO DEFINITIVO | Analista em Tecnologia da Informação - Desenvolvimento de Sistemas – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:f594a57a724d9fc2d1d7",
+    "contestId": "cge_sc_2022",
+    "examDocumentId": "12ec61f98efef2e5",
+    "year": 2022,
+    "organizedPath": "cge_sc_2022/provas/01_cns102-auditor-do-estado-ciencias-da-computacao-manhacns102-tipo-1.pdf",
+    "sourceSha256": "3df00712a520bb4348b24c3462f937faaffa916a996da17676b1fecfd9437fdc",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "cartão de respostas e da folha de textos definitivos em",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2631,
+      "rationale": "Best title score 52.61; margin 6.51; status definitivo; variant 1.",
+      "sectionId": "key-section:3f173450b3d4910deacb",
+      "answerKeyDocumentId": "0034b2c496195389",
+      "answerKeyStatus": "definitivo",
+      "score": 52.613,
+      "margin": 6.5098,
+      "candidates": [
+        {
+          "sectionId": "key-section:3f173450b3d4910deacb",
+          "score": 52.613,
+          "heading": "CONCURSO PÚBLICO | EDITAL Nº 01/2022 – CGE-SC | GABARITOS DEFINITIVO DAS PROVAS | APLICADAS NO DIA 29/01/2023 | Página 4 de 8 | Auditor do Estado - Ciências da Computação - TIPO 1 (Manhã)"
+        },
+        {
+          "sectionId": "key-section:942e31ba78f97fe5ff31",
+          "score": 46.1031,
+          "heading": "(*) Questão anulada | Auditor do Estado - Ciências da Computação - TIPO 1 (Tarde)"
+        },
+        {
+          "sectionId": "key-section:02655221eeef2b597d13",
+          "score": 45.6945,
+          "heading": "(*) Questão anulada | Auditor do Estado - Economia - TIPO 1 (Tarde)"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:adb8a2cbba6c5062c556",
+    "contestId": "cge_sc_2022",
+    "examDocumentId": "f660460eafbf3f24",
+    "year": 2022,
+    "organizedPath": "cge_sc_2022/provas/02_cns202-auditor-do-estado-ciencias-da-computacao-tardecns202-tipo-1-0.pdf",
+    "sourceSha256": "b35a36e1756917bcc5824f1e34a3688886b5e8f19782953d1cbfde1907d048f4",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "height, initial-scale=100\">",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.1855,
+      "rationale": "Best title score 37.09; margin 1.79; status definitivo; variant 1.",
+      "sectionId": "key-section:6eac0141a290d9feabd4",
+      "answerKeyDocumentId": "0034b2c496195389",
+      "answerKeyStatus": "definitivo",
+      "score": 37.0917,
+      "margin": 1.7863,
+      "candidates": [
+        {
+          "sectionId": "key-section:6eac0141a290d9feabd4",
+          "score": 37.0917,
+          "heading": "(*) Questão anulada | Auditor do Estado - Ciências Contábeis - TIPO 1 (Tarde)"
+        },
+        {
+          "sectionId": "key-section:942e31ba78f97fe5ff31",
+          "score": 35.3054,
+          "heading": "(*) Questão anulada | Auditor do Estado - Ciências da Computação - TIPO 1 (Tarde)"
+        },
+        {
+          "sectionId": "key-section:4fbaff23307eb71f7cab",
+          "score": 33.8036,
+          "heading": "CONCURSO PÚBLICO | EDITAL Nº 01/2022 – CGE-SC | GABARITOS DEFINITIVO DAS PROVAS | APLICADAS NO DIA 29/01/2023 | Página 2 de 8 | Auditor do Estado - Administração - TIPO 1 (Tarde)"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:197fdf63aae904d77320",
+    "contestId": "cgu_2021",
+    "examDocumentId": "a4eaf8534e92aafb",
+    "year": 2021,
+    "organizedPath": "cgu_2021/provas/01_cgu-2021-auditor-federal-de-financas-e-controle-area-tecnologia-da-informacaoaffc-ti-tipo-1-tarde.pdf",
+    "sourceSha256": "ec486fa66469172d186f215e091efbcd6d2d33489c343b4383011b691a514145",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "- ÁREA TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 89.51; margin 33.19; status definitivo; variant 1.",
+      "sectionId": "key-section:5fd44869fd2b3cb3e262",
+      "answerKeyDocumentId": "0b88c649168b0929",
+      "answerKeyStatus": "definitivo",
+      "score": 89.5096,
+      "margin": 33.193,
+      "candidates": [
+        {
+          "sectionId": "key-section:5fd44869fd2b3cb3e262",
+          "score": 89.5096,
+          "heading": "Controladoria Geral da União | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 20/03/2022 - Tarde | GABARITO DEFINITIVO | Auditor Federal de Finanças e Controle - Tecnologia da Informação – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:dff86e805834d305088d",
+          "score": 56.3167,
+          "heading": "Controladoria Geral da União | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 20/03/2022 | GABARITO PRELIMINAR | Técnico Federal de Finanças e Controle – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:0ec017adebd24d45c5df",
+          "score": 51.4962,
+          "heading": "Controladoria Geral da União | CONCURSO PÚBLICO 2021 | GABARITOS – PROVAS DO DIA 20/03/2022 - Tarde | GABARITO DEFINITIVO | Auditor Federal de Finanças e Controle - Auditoria e Fiscalização – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:aa2dff9f68555bc2de24",
+    "contestId": "cmt_taubate_2022",
+    "examDocumentId": "4b57997f838d6f22",
+    "year": 2022,
+    "organizedPath": "cmt_taubate_2022/provas/01_tecnico-legislativo-de-informatica-tardee1t2cns02-tipo-1.pdf",
+    "sourceSha256": "5c5596554a8d4221d678760c065435e521ea4cd085972b19a865da30dc9b4e60",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Técnico Legislativo de Informática (Tarde)",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 89.97; margin 14.65; status definitivo; variant 1.",
+      "sectionId": "key-section:175840daaf3ce9560fd8",
+      "answerKeyDocumentId": "38578715c4e34a9c",
+      "answerKeyStatus": "definitivo",
+      "score": 89.9743,
+      "margin": 14.6469,
+      "candidates": [
+        {
+          "sectionId": "key-section:175840daaf3ce9560fd8",
+          "score": 89.9743,
+          "heading": "CÂMARA MUNICIPAL DE TAUBATÉ-SP | CONCURSO PÚBLICO – EDITAL Nº 1/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 16/10/2022 | Página 1 de 5 | TÉCNICO LEGISLATIVO DE INFORMÁTICA - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:c4497b7c80ef1f5f135b",
+          "score": 75.3274,
+          "heading": "CÂMARA MUNICIPAL DE TAUBATÉ-SP | CONCURSO PÚBLICO – EDITAL Nº 1/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 16/10/2022 | Página 1 de 5 | TÉCNICO LEGISLATIVO DE ADMINISTRAÇÃO - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:e0cb0b0078316ae93a63",
+          "score": 65.2726,
+          "heading": "CÂMARA MUNICIPAL DE TAUBATÉ-SP | CONCURSO PÚBLICO – EDITAL Nº 1/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 16/10/2022 | Página 1 de 5 | CERIMONIALISTA LEGISLATIVO - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:8bc582641a0e5e5f17b0",
+    "contestId": "cprm_2025",
+    "examDocumentId": "9f332bf50b9f616f",
+    "year": 2025,
+    "organizedPath": "cprm_2025/provas/01_analista-em-geociencias-analise-e-desenvolvimento-de-sistemas-cns02e02-tipo-1.pdf",
+    "sourceSha256": "32e602ccc224ba4d3bfdf581a0497c4a980c41e27ebf296218c69e121b152c33",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA EM GEOCIÊNCIAS",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:803e67a8daba9782ace8",
+      "answerKeyDocumentId": "4d20c0d356cb6811",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:803e67a8daba9782ace8",
+          "score": 97.0,
+          "heading": "* Questão anulada | Analista em Geociências - Química - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:1b495f3ed6483764b31d",
+          "score": 97.0,
+          "heading": "Companhia de Pesquisa de Recursos Minerais – CPRM | EDITAL Nº 01/2025 | Gabaritos definitivos da prova aplicada no dia 30/11/2025 | Página 10 de 27 | Analista em Geociências - Museologia - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:ac5c18c7858be59c5e9b",
+          "score": 97.0,
+          "heading": "Analista em Geociências - Letras - 1 - Turno Manhã"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:4c7e65328d3cb618da1e",
+    "contestId": "cvm_2024",
+    "examDocumentId": "055dd83af36a1c17",
+    "year": 2024,
+    "organizedPath": "cvm_2024/provas/01_analista-cvm-perfil-8-ti-sistemas-e-desenvolvimento-manha.pdf",
+    "sourceSha256": "06dc4d76004fe598fb1b474df2dc270c5f01ecb897bdb0b9f333859b546b5726",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "DESENVOLVIMENTO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 40,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 50.73; status preliminar; variant 1.",
+      "sectionId": "key-section:be9f904d89cc127b3505",
+      "answerKeyDocumentId": "b047417172fa083a",
+      "answerKeyStatus": "preliminar",
+      "score": 97.0,
+      "margin": 50.7288,
+      "candidates": [
+        {
+          "sectionId": "key-section:be9f904d89cc127b3505",
+          "score": 97.0,
+          "heading": "Analista CVM - Perfil 8 - TI - Sistemas e Desenvolvimento - Tipo 1"
+        },
+        {
+          "sectionId": "key-section:f1dca695b76389b1a683",
+          "score": 46.2712,
+          "heading": "Analista CVM - Perfil 9 - TI - Infraestrutura e Segurança - Tipo 1"
+        },
+        {
+          "sectionId": "key-section:d18f5fe6497933d1eae1",
+          "score": 44.011,
+          "heading": "Analista CVM - Perfil 7 - Ciência de Dados - Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:b05175b452ae339ed534",
+    "contestId": "cvm_2024",
+    "examDocumentId": "da477c0171d2c093",
+    "year": 2024,
+    "organizedPath": "cvm_2024/provas/02_analista-cvm-perfil-8-ti-sistemas-e-desenvolvimento-tarde.pdf",
+    "sourceSha256": "98409060fc88d5734d869e6b83b8f8cf3a6cd9f7b2d0baf91a218f74f7ca7464",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "DESENVOLVIMENTO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 50.73; status preliminar; variant 1.",
+      "sectionId": "key-section:595088449c2e89202e28",
+      "answerKeyDocumentId": "b047417172fa083a",
+      "answerKeyStatus": "preliminar",
+      "score": 97.0,
+      "margin": 50.7288,
+      "candidates": [
+        {
+          "sectionId": "key-section:595088449c2e89202e28",
+          "score": 97.0,
+          "heading": "Analista CVM - Perfil 8 - TI - Sistemas e Desenvolvimento - Tipo 1"
+        },
+        {
+          "sectionId": "key-section:2714a4e0641bda920229",
+          "score": 46.2712,
+          "heading": "Analista CVM - Perfil 9 - TI - Infraestrutura e Segurança - Tipo 1"
+        },
+        {
+          "sectionId": "key-section:99cc062bde56c4d14f47",
+          "score": 44.011,
+          "heading": "Analista CVM - Perfil 7 - Ciência de Dados - Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:ef825e63ca5516fe5e6a",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "8c3c6ad4a89db43e",
+    "year": 2024,
+    "organizedPath": "dataprev_2024/provas/01_ati-analise-de-negocio-de-ti-cns001-tipo-01.pdf",
+    "sourceSha256": "6aa4f9a6f93df7963e5f87294d358c2a484fadab78670ae6fe3743f3ffb18e10",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ATI - ANÁLISE DE NEGÓCIO DE TI",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 90.05; margin 37.08; status definitivo; variant 1.",
+      "sectionId": "key-section:5cc3c815e4787fd334f2",
+      "answerKeyDocumentId": "9522629babb79cf8",
+      "answerKeyStatus": "definitivo",
+      "score": 90.05,
+      "margin": 37.0829,
+      "candidates": [
+        {
+          "sectionId": "key-section:5cc3c815e4787fd334f2",
+          "score": 90.05,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 3 de 17 | Analista de Tecnologia da Informação - Análise de Negócio de TI - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:cdc612b7dab3155ffcd8",
+          "score": 52.9671,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 15 de 17 | Analista de Processamento - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:c31013c9e8843f81391c",
+          "score": 51.9658,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 6 de 17 | Analista de Tecnologia da Informação - Inteligência da Informação - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:2e1b27f9c8876e35c49c",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "00f64f8a4d8e1d7a",
+    "year": 2024,
+    "organizedPath": "dataprev_2024/provas/02_ati-arquitetura-engenharia-e-sustentacao-tecnologica-cns002-tipo-01.pdf",
+    "sourceSha256": "8cd74283a6a52e2127bbbcddabf45b0aa1f884f7caa1e843c981c4e80a40f399",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ATI - ARQUITETURA, ENGENHARIA E SUSTENTAÇÃO",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 92.21; margin 31.56; status definitivo; variant 1.",
+      "sectionId": "key-section:39ac9116c5ab74f3e586",
+      "answerKeyDocumentId": "9522629babb79cf8",
+      "answerKeyStatus": "definitivo",
+      "score": 92.2143,
+      "margin": 31.5643,
+      "candidates": [
+        {
+          "sectionId": "key-section:39ac9116c5ab74f3e586",
+          "score": 92.2143,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 4 de 17 | Analista de Tecnologia da Informação - Arquitetura, Engenharia e Sustentação Tecnológica - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:c66cab345ffe7f2b4bde",
+          "score": 60.65,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 14 de 17 | Analista de Tecnologia da Informação - Engenharia - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:cdc612b7dab3155ffcd8",
+          "score": 55.0703,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 15 de 17 | Analista de Processamento - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:8a352fe1170100c584f3",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "51957b8d539f8815",
+    "year": 2024,
+    "organizedPath": "dataprev_2024/provas/03_ati-desenvolvimento-de-software-cns003-tipo-01.pdf",
+    "sourceSha256": "371563e3716f875087e62a7d9cff407c977d3cceeddaa0530d506928b7b222a4",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ATI - DESENVOLVIMENTO DE SOFTWARE",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 91.13; margin 39.44; status definitivo; variant 1.",
+      "sectionId": "key-section:dcb0066994bdb6860b6f",
+      "answerKeyDocumentId": "9522629babb79cf8",
+      "answerKeyStatus": "definitivo",
+      "score": 91.1339,
+      "margin": 39.4374,
+      "candidates": [
+        {
+          "sectionId": "key-section:dcb0066994bdb6860b6f",
+          "score": 91.1339,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 5 de 17 | Analista de Tecnologia da Informação - Desenvolvimento de Software - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:cdc612b7dab3155ffcd8",
+          "score": 51.6965,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 15 de 17 | Analista de Processamento - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:72eb03c1b15448268e07",
+          "score": 51.41,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 17 de 17 | Médico do Trabalho - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:b97a7ac1f4b0285c5f44",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "e7a1c34d1730d45c",
+    "year": 2024,
+    "organizedPath": "dataprev_2024/provas/04_ati-gestao-de-servicos-de-tic-cns006-tipo-01.pdf",
+    "sourceSha256": "00db044a68418a13be7d5d47196c0fe9a18498e120b5c21d1b57e93c9c2ce600",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ATI - GESTÃO DE SERVIÇOS DE TIC",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 90.27; margin 25.13; status definitivo; variant 1.",
+      "sectionId": "key-section:6e4085de9b71ee574eec",
+      "answerKeyDocumentId": "9522629babb79cf8",
+      "answerKeyStatus": "definitivo",
+      "score": 90.2654,
+      "margin": 25.1282,
+      "candidates": [
+        {
+          "sectionId": "key-section:6e4085de9b71ee574eec",
+          "score": 90.2654,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 8 de 17 | Analista de Tecnologia da Informação - Gestão de Serviços de TIC - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:a9d2a47fa43aee7eb3d8",
+          "score": 65.1372,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 12 de 17 | Analista de Tecnologia da Informação - Gestão Econômico-Financeira - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:72eb03c1b15448268e07",
+          "score": 51.3167,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 17 de 17 | Médico do Trabalho - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:5535516e40e010edddbd",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "3b056b70c97253bd",
+    "year": 2024,
+    "organizedPath": "dataprev_2024/provas/05_ati-inteligencia-da-informacao-cns004-tipo-01.pdf",
+    "sourceSha256": "a4f28a946ea647a4d7ada237e85b878c012f915545d000a95277aae6d5dfce0e",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ATI - INTELIGÊNCIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 90.98; margin 20.65; status definitivo; variant 1.",
+      "sectionId": "key-section:c31013c9e8843f81391c",
+      "answerKeyDocumentId": "9522629babb79cf8",
+      "answerKeyStatus": "definitivo",
+      "score": 90.9833,
+      "margin": 20.6525,
+      "candidates": [
+        {
+          "sectionId": "key-section:c31013c9e8843f81391c",
+          "score": 90.9833,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 6 de 17 | Analista de Tecnologia da Informação - Inteligência da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:5cc3c815e4787fd334f2",
+          "score": 70.3309,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 3 de 17 | Analista de Tecnologia da Informação - Análise de Negócio de TI - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:39ac9116c5ab74f3e586",
+          "score": 70.3309,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 4 de 17 | Analista de Tecnologia da Informação - Arquitetura, Engenharia e Sustentação Tecnológica - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:9414e437e5c85da94264",
+    "contestId": "dataprev_2024",
+    "examDocumentId": "0624ddd41804e6fc",
+    "year": 2024,
+    "organizedPath": "dataprev_2024/provas/06_ati-seguranca-cibernetica-e-protecao-de-dados-cns005-tipo-01.pdf",
+    "sourceSha256": "5520e1739e4ac328ac343d3c4a95a6a93f4f396518b51be27b4da5cb93e7fb33",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ATI - SEGURANÇA CIBERNÉTICA E PROTEÇÃO DE DADOS",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 92.74; margin 31.53; status definitivo; variant 1.",
+      "sectionId": "key-section:b6e1334313e3564b78a0",
+      "answerKeyDocumentId": "9522629babb79cf8",
+      "answerKeyStatus": "definitivo",
+      "score": 92.74,
+      "margin": 31.5344,
+      "candidates": [
+        {
+          "sectionId": "key-section:b6e1334313e3564b78a0",
+          "score": 92.74,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 7 de 17 | Analista de Tecnologia da Informação - Segurança Cibernética e Proteção de Dados - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:202ea81a68e56eeb129b",
+          "score": 61.2056,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 2 de 17 | Técnico de Segurança do Trabalho - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:c95b5d3243b1c878c144",
+          "score": 61.2056,
+          "heading": "EMPRESA DE TECNOLOGIA E INFORMAÇÕES DA PREVIDÊNCIA S.A. – DATAPREV | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/11/2024 | Página 16 de 17 | Engenheiro de Segurança do Trabalho - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:4948e0211fa7df1766ce",
+    "contestId": "dnit_2023",
+    "examDocumentId": "0f48952c0b3163dc",
+    "year": 2023,
+    "organizedPath": "dnit_2023/provas/01_2023-dnit-analista-administrativo-tecnologia-da-informacao.pdf",
+    "sourceSha256": "6e25f83dd473d068f2a4fc02b0bd7a49a9f4e7607adbee32fbcebbf5b5111f3f",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA ADMINISTRATIVO",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "UNRESOLVED",
+      "confidence": 0.0,
+      "rationale": "No answer-key section with matching contest and question count.",
+      "candidates": []
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:54f10ccb712e98122665",
+    "contestId": "dpe_ro_2025",
+    "examDocumentId": "4f589edca88b1ab9",
+    "year": 2025,
+    "organizedPath": "dpe_ro_2025/provas/01_analista-de-redes-e-comunicacao-de-dados-classe-bcns012-tipo-1.pdf",
+    "sourceSha256": "fb078a5cacacd776f06d673a95369336e96197c8733f032524f73d531cce3787",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA DE REDES E COMUNICAÇÃO DE DADOS -",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 14.08; status definitivo; variant 1.",
+      "sectionId": "key-section:a4d7038b17ab3b7ff8a2",
+      "answerKeyDocumentId": "a046ffc183883301",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 14.0773,
+      "candidates": [
+        {
+          "sectionId": "key-section:a4d7038b17ab3b7ff8a2",
+          "score": 97.0,
+          "heading": "* Questão anulada | Analista de Redes e Comunicação de Dados - Classe B - Prova Tipo 1"
+        },
+        {
+          "sectionId": "key-section:78594d9425255cb573d5",
+          "score": 82.9227,
+          "heading": "DEFENSORIA PÚBLICA DO ESTADO DE | RONDÔNIA | CONCURSO PÚBLICO – EDITAL 01/2025 | Gabarito Definitivo | Página 4 de 14 | Analista em Comunicação Social (Publicidade e Propaganda) - Classe A - Prova Tipo 1"
+        },
+        {
+          "sectionId": "key-section:e1c533bd9b8e76ddbda8",
+          "score": 76.1418,
+          "heading": "* Questão anulada | Analista em Comunicação Social (Jornalismo) - Classe A - Prova Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:72f5bb14caf969672383",
+    "contestId": "dpe_ro_2025",
+    "examDocumentId": "affb6b12e9d40121",
+    "year": 2025,
+    "organizedPath": "dpe_ro_2025/provas/02_analista-de-sistemas-classe-bcns010-tipo-1.pdf",
+    "sourceSha256": "50c9a47d874c21afa9fe4fc635bcb058052c7c4371a4b2902f1abc51203bbde6",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA DE SISTEMAS - CLASSE B",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 13.24; status definitivo; variant 1.",
+      "sectionId": "key-section:b53aac2828c77a230d2c",
+      "answerKeyDocumentId": "a046ffc183883301",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 13.2368,
+      "candidates": [
+        {
+          "sectionId": "key-section:b53aac2828c77a230d2c",
+          "score": 97.0,
+          "heading": "DEFENSORIA PÚBLICA DO ESTADO DE | RONDÔNIA | CONCURSO PÚBLICO – EDITAL 01/2025 | Gabarito Definitivo | Página 2 de 14 | Analista de Sistemas - Classe B - Prova Tipo 1"
+        },
+        {
+          "sectionId": "key-section:a4d7038b17ab3b7ff8a2",
+          "score": 83.7632,
+          "heading": "* Questão anulada | Analista de Redes e Comunicação de Dados - Classe B - Prova Tipo 1"
+        },
+        {
+          "sectionId": "key-section:7746aa185a29a18ce9f3",
+          "score": 83.7632,
+          "heading": "DEFENSORIA PÚBLICA DO ESTADO DE | RONDÔNIA | CONCURSO PÚBLICO – EDITAL 01/2025 | Gabarito Definitivo | Página 5 de 14 | Analista em Engenharia Civil - Classe B - Prova Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:a527c2a3f442f3bab12d",
+    "contestId": "dpe_ro_2025",
+    "examDocumentId": "bc08f807f7bd458e",
+    "year": 2025,
+    "organizedPath": "dpe_ro_2025/provas/03_analista-programador-classe-bcns011-tipo-1.pdf",
+    "sourceSha256": "5a251542dbb962ca4b5f50fe28b317e17e5a6c87ea05dee183597b19d2926d3d",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA PROGRAMADOR - CLASSE B",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 98.50; margin 19.65; status definitivo; variant 1.",
+      "sectionId": "key-section:89c53521121bbb93b72c",
+      "answerKeyDocumentId": "a046ffc183883301",
+      "answerKeyStatus": "definitivo",
+      "score": 98.5,
+      "margin": 19.65,
+      "candidates": [
+        {
+          "sectionId": "key-section:89c53521121bbb93b72c",
+          "score": 98.5,
+          "heading": "* Questão anulada | Analista Programador - Classe B - Prova Tipo 1"
+        },
+        {
+          "sectionId": "key-section:a4d7038b17ab3b7ff8a2",
+          "score": 78.85,
+          "heading": "* Questão anulada | Analista de Redes e Comunicação de Dados - Classe B - Prova Tipo 1"
+        },
+        {
+          "sectionId": "key-section:b53aac2828c77a230d2c",
+          "score": 78.85,
+          "heading": "DEFENSORIA PÚBLICA DO ESTADO DE | RONDÔNIA | CONCURSO PÚBLICO – EDITAL 01/2025 | Gabarito Definitivo | Página 2 de 14 | Analista de Sistemas - Classe B - Prova Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:490e8502ab936aa5c9a5",
+    "contestId": "dpe_ro_2025",
+    "examDocumentId": "044c006d82537c35",
+    "year": 2025,
+    "organizedPath": "dpe_ro_2025/provas/04_tecnico-em-informatica-classe-acnm002-tipo-1.pdf",
+    "sourceSha256": "7bca85e18252e169c8c92198b814c54e6e8ab32264bbe91d2211faffa909657f",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "TÉCNICO EM INFORMÁTICA - CLASSE A",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 16.91; status definitivo; variant 1.",
+      "sectionId": "key-section:03ecf24f3a3c879609ce",
+      "answerKeyDocumentId": "a046ffc183883301",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 16.9056,
+      "candidates": [
+        {
+          "sectionId": "key-section:03ecf24f3a3c879609ce",
+          "score": 97.0,
+          "heading": "DEFENSORIA PÚBLICA DO ESTADO DE | RONDÔNIA | CONCURSO PÚBLICO – EDITAL 01/2025 | Gabarito Definitivo | Página 14 de 14 | Técnico em Informática - Classe A - Prova Tipo 1"
+        },
+        {
+          "sectionId": "key-section:88c114ebcbd70b7a241f",
+          "score": 80.0944,
+          "heading": "DEFENSORIA PÚBLICA DO ESTADO DE | RONDÔNIA | CONCURSO PÚBLICO – EDITAL 01/2025 | Gabarito Definitivo | Página 12 de 14 | Técnico em Artes Gráficas - Classe A - Prova Tipo 1"
+        },
+        {
+          "sectionId": "key-section:ee8145835d2593246774",
+          "score": 80.0944,
+          "heading": "DEFENSORIA PÚBLICA DO ESTADO DE | RONDÔNIA | CONCURSO PÚBLICO – EDITAL 01/2025 | Gabarito Definitivo | Página 13 de 14 | Técnico em Contabilidade - Classe A - Prova Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:39e6bc25ef16c10f15eb",
+    "contestId": "dpers_2023",
+    "examDocumentId": "85e4178b6b053158",
+    "year": 2023,
+    "organizedPath": "dpers_2023/provas/01_dpers-analista-area-de-apoio-especializado-tecnologia-da-informacao-desenvolvimento-de-sistemas.pdf",
+    "sourceSha256": "924ad5543b5536face4a40292b38eafca6e17afa7e845e00d803476f50dc6029",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "DESENVOLVIMENTO DE SISTEMAS",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 44.54; status definitivo; variant 1.",
+      "sectionId": "key-section:9b407451030f6d9574a2",
+      "answerKeyDocumentId": "70bde85c8df9241f",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 44.5423,
+      "candidates": [
+        {
+          "sectionId": "key-section:9b407451030f6d9574a2",
+          "score": 97.0,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowODo1OCAtMDMwMA== | www.pciconcursos.com.br | DEFENSORIA PÚBLICA DO ESTADO DO RIO GRANDE DO SUL | CONCURSO PÚBLICO 2023 – EDITAL Nº 01 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 09/07/2023 | Página 1 de 16 | Analista - Área de Apoio Especializado - Tecnologia da Informação - Desenvolvimento de Sistemas - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:c81cfac7ccd6a70b138d",
+          "score": 52.4577,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowODo1OCAtMDMwMA== | www.pciconcursos.com.br | DEFENSORIA PÚBLICA DO ESTADO DO RIO GRANDE DO SUL | CONCURSO PÚBLICO 2023 – EDITAL Nº 01 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 09/07/2023 | Página 3 de 16 | Analista - Área de Apoio Especializado - Tecnologia da Informação - Segurança da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:1e178abe2663af86e6f7",
+          "score": 51.5704,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowODo1OCAtMDMwMA== | www.pciconcursos.com.br | DEFENSORIA PÚBLICA DO ESTADO DO RIO GRANDE DO SUL | CONCURSO PÚBLICO 2023 – EDITAL Nº 01 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 09/07/2023 | Página 2 de 16 | Analista - Área de Apoio Especializado - Tecnologia da Informação - Infraestrutura e Redes - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:1fbae14193e204e812d9",
+    "contestId": "ebserh_2024",
+    "examDocumentId": "1453087fdf659962",
+    "year": 2024,
+    "organizedPath": "ebserh_2024/provas/01_grupo-10-analista-de-tecnologia-da-informacaoe4cnsgp10-tipo-1.pdf",
+    "sourceSha256": "5ad81159e83134d00ec1462d3b33d74ebb48a9801461f28739429dba0f57ec9a",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "GRUPO ANALISTA DE TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 95.71; margin 39.06; status definitivo; variant 1.",
+      "sectionId": "key-section:eed05b537fa768f558e1",
+      "answerKeyDocumentId": "859f530de9c8f600",
+      "answerKeyStatus": "definitivo",
+      "score": 95.7143,
+      "margin": 39.0643,
+      "candidates": [
+        {
+          "sectionId": "key-section:eed05b537fa768f558e1",
+          "score": 95.7143,
+          "heading": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES – EBSERH | CONCURSO PÚBLICO – EDITAL Nº 03/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 16/03/2025 | Página 12 de 12 | Grupo - Analista de Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:b038f75d42755cbb8044",
+          "score": 56.65,
+          "heading": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES – EBSERH | CONCURSO PÚBLICO – EDITAL Nº 03/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 16/03/2025 | Página 1 de 12 | Grupo - Técnico em Segurança do Trabalho - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:df43ed021a8ac8e3f8ca",
+          "score": 56.3518,
+          "heading": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES – EBSERH | CONCURSO PÚBLICO – EDITAL Nº 03/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 16/03/2025 | Página 4 de 12 | Grupo - Gestão - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:2643cfd36ed75e528212",
+    "contestId": "funsaude_ce_2021",
+    "examDocumentId": "8832e499653d1525",
+    "year": 2021,
+    "organizedPath": "funsaude_ce_2021/provas/01_2021-funsaude-ce-analista-da-tecnologia-da-informacao.pdf",
+    "sourceSha256": "946187d6a060599a3a8100b8cf3413dcc7f9e9c328db0b2049130b42ce451b4b",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Fundação Regional de Saúde",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 52,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "UNRESOLVED",
+      "confidence": 0.0,
+      "rationale": "No answer-key section with matching contest and question count.",
+      "candidates": []
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:752d9235deb581d7e4e6",
+    "contestId": "imbel_2021",
+    "examDocumentId": "515f0a285f33409e",
+    "year": 2021,
+    "organizedPath": "imbel_2021/provas/01_analista-especializado-analista-de-sistemas.pdf",
+    "sourceSha256": "92d998f8c3ef2dcd2190261cef9e4ddc7a24f04261f2c3d637ed76e61b7deea6",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA ESPECIALIZADO -",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "UNRESOLVED",
+      "confidence": 0.0,
+      "rationale": "No answer-key section with matching contest and question count.",
+      "candidates": []
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:cb9cf74b97d5dc57ad52",
+    "contestId": "macaeprev_2024",
+    "examDocumentId": "e3aa142ff860b175",
+    "year": 2024,
+    "organizedPath": "macaeprev_2024/provas/01_analista-previdenciario-especialidade-analista-de-sistemascns103-tipo-1.pdf",
+    "sourceSha256": "28d28189c721fe2e08e699d3da60924c546781c4f56963daa12f9aed0721c11a",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA PREVIDENCIÁRIO",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.49,
+      "rationale": "Best title score 98.50; margin 1.50; status definitivo; variant 1.",
+      "sectionId": "key-section:f0ba78c6bcc3de7424e9",
+      "answerKeyDocumentId": "8eab0a64f90972e4",
+      "answerKeyStatus": "definitivo",
+      "score": 98.5,
+      "margin": 1.5,
+      "candidates": [
+        {
+          "sectionId": "key-section:f0ba78c6bcc3de7424e9",
+          "score": 98.5,
+          "heading": "Página 4 de 15 | Analista Previdenciário - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:4c0322825647e2617cd9",
+          "score": 97.0,
+          "heading": "Página 5 de 15 | Analista Previdenciário - Especialidade Administração - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:c8438b0d10cc87e94992",
+          "score": 97.0,
+          "heading": "Página 6 de 15 | Analista Previdenciário - Especialidade Analista de Sistemas - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:69970c8b8bef8c9640fe",
+    "contestId": "macaeprev_2024",
+    "examDocumentId": "0965b9ded590c05a",
+    "year": 2024,
+    "organizedPath": "macaeprev_2024/provas/02_assistente-previdenciario-informaticacnm103-tipo-1.pdf",
+    "sourceSha256": "38aa6bb63235549a5d13dc1d70d2d788452a1c36c2683769ea5069962c6ab897",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ASSISTENTE PREVIDENCIÁRIO",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.49,
+      "rationale": "Best title score 98.50; margin 1.50; status definitivo; variant 1.",
+      "sectionId": "key-section:99a477b1d93f17d309b4",
+      "answerKeyDocumentId": "8eab0a64f90972e4",
+      "answerKeyStatus": "definitivo",
+      "score": 98.5,
+      "margin": 1.5,
+      "candidates": [
+        {
+          "sectionId": "key-section:99a477b1d93f17d309b4",
+          "score": 98.5,
+          "heading": "Página 1 de 15 | Assistente Previdenciário - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:c89a125605ffe52cce0c",
+          "score": 97.0,
+          "heading": "Página 2 de 15 | Assistente Previdenciário Técnico - Arquivo - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:0e7f0e2fc5f07441ba5a",
+          "score": 97.0,
+          "heading": "Página 3 de 15 | Assistente Previdenciário Técnico - Informática - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:4a4dd8bf5377fd80a34c",
+    "contestId": "mpgo_2022",
+    "examDocumentId": "284272973ac2bd5d",
+    "year": 2022,
+    "organizedPath": "mpgo_2022/provas/01_analista-em-informaticampgons003-tipo-1.pdf",
+    "sourceSha256": "8c460cc0d250c5b86cd05e9c75048146843542bb66ec60d413daa5a0f3db3805",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "ANALISTA EM INFORMÁTICA",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 26.06; status definitivo; variant 1.",
+      "sectionId": "key-section:b3f8b2d55a334cccf3dd",
+      "answerKeyDocumentId": "6d4ea55f75fbe1f9",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 26.0559,
+      "candidates": [
+        {
+          "sectionId": "key-section:b3f8b2d55a334cccf3dd",
+          "score": 97.0,
+          "heading": "Ministério Público do Estado de | Goiás | CONCURSO PÚBLICO 2022 | Quadro de Serviços Auxiliares | GABARITOS – PROVAS DO DIA 01/05/2022 | GABARITO DEFINITIVO | Analista em Informática – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:cc9a896d7b325efd7d9a",
+          "score": 70.9441,
+          "heading": "Ministério Público do Estado de | Goiás | CONCURSO PÚBLICO 2022 | Quadro de Serviços Auxiliares | GABARITOS – PROVAS DO DIA 01/05/2022 | GABARITO DEFINITIVO | Analista em Edificações - Arquitetura e Urbanismo – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:bd0c9aba6ba20adeeee4",
+          "score": 70.9441,
+          "heading": "Ministério Público do Estado de | Goiás | CONCURSO PÚBLICO 2022 | Quadro de Serviços Auxiliares | GABARITOS – PROVAS DO DIA 01/05/2022 | GABARITO DEFINITIVO | Analista em Serviço Social – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:ffb3d7d7d1624e3328a7",
+    "contestId": "mpgo_2022",
+    "examDocumentId": "e6a7898e1128fbed",
+    "year": 2022,
+    "organizedPath": "mpgo_2022/provas/02_assistente-de-informaticampgo-nm002-tipo-1.pdf",
+    "sourceSha256": "afb128de3046a0a3b63fb1b2493daf337df0dddd73917a75e1f03026fb63ece9",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ASSISTENTE DE",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 1.35; status definitivo; variant 1.",
+      "sectionId": "key-section:924a326d4eedaaf20c06",
+      "answerKeyDocumentId": "6d4ea55f75fbe1f9",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 1.35,
+      "candidates": [
+        {
+          "sectionId": "key-section:924a326d4eedaaf20c06",
+          "score": 97.0,
+          "heading": "Ministério Público do Estado de | Goiás | CONCURSO PÚBLICO 2022 | Quadro de Serviços Auxiliares | GABARITOS – PROVAS DO DIA 01/05/2022 | GABARITO DEFINITIVO | Assistente de Informática – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:d25e991744a678c1e6d4",
+          "score": 95.65,
+          "heading": "Ministério Público do Estado de | Goiás | CONCURSO PÚBLICO 2022 | Quadro de Serviços Auxiliares | GABARITOS – PROVAS DO DIA 01/05/2022 | GABARITO DEFINITIVO | Assistente Administrativo – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:6e79560fe3db15e2da72",
+          "score": 95.65,
+          "heading": "Ministério Público do Estado de | Goiás | CONCURSO PÚBLICO 2022 | Quadro de Serviços Auxiliares | GABARITOS – PROVAS DO DIA 01/05/2022 | GABARITO DEFINITIVO | Assistente Programador – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:030227b936daf0b7c827",
+    "contestId": "mpgo_2022",
+    "examDocumentId": "5620158a32604629",
+    "year": 2022,
+    "organizedPath": "mpgo_2022/provas/03_assistente-programadormpgo-nm003-tipo-1.pdf",
+    "sourceSha256": "e9cab67e8266ad71ca1f1648ac8a65021de1f459f98ad6cdb0c1c0be8acf0f7f",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Assistente Programador",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 27.60; status definitivo; variant 1.",
+      "sectionId": "key-section:6e79560fe3db15e2da72",
+      "answerKeyDocumentId": "6d4ea55f75fbe1f9",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 27.6,
+      "candidates": [
+        {
+          "sectionId": "key-section:6e79560fe3db15e2da72",
+          "score": 97.0,
+          "heading": "Ministério Público do Estado de | Goiás | CONCURSO PÚBLICO 2022 | Quadro de Serviços Auxiliares | GABARITOS – PROVAS DO DIA 01/05/2022 | GABARITO DEFINITIVO | Assistente Programador – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:d25e991744a678c1e6d4",
+          "score": 69.4,
+          "heading": "Ministério Público do Estado de | Goiás | CONCURSO PÚBLICO 2022 | Quadro de Serviços Auxiliares | GABARITOS – PROVAS DO DIA 01/05/2022 | GABARITO DEFINITIVO | Assistente Administrativo – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:924a326d4eedaaf20c06",
+          "score": 69.4,
+          "heading": "Ministério Público do Estado de | Goiás | CONCURSO PÚBLICO 2022 | Quadro de Serviços Auxiliares | GABARITOS – PROVAS DO DIA 01/05/2022 | GABARITO DEFINITIVO | Assistente de Informática – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:e520ef5a5bb6395b20c3",
+    "contestId": "mprj_2025",
+    "examDocumentId": "2633c7b0cba2f008",
+    "year": 2025,
+    "organizedPath": "mprj_2025/provas/01_analista-do-ministerio-publico-area-administrativa-tecnologia-da-informacaocns102-tipo-1.pdf",
+    "sourceSha256": "66b3d50d33dd08a224b4ba1915b6a9bb5391f796daa28223c7e9ab354ba1b7f1",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ADMINISTRATIVA - TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "CANDIDATE_REVIEW_REQUIRED",
+      "confidence": 0.6695,
+      "rationale": "Best title score 64.95; margin 15.13; status definitivo; variant 1.",
+      "sectionId": "key-section:630b58b78d136d9cc889",
+      "answerKeyDocumentId": "ed4f3ea65db22ce6",
+      "answerKeyStatus": "definitivo",
+      "score": 64.9482,
+      "margin": 15.1316,
+      "candidates": [
+        {
+          "sectionId": "key-section:630b58b78d136d9cc889",
+          "score": 64.9482,
+          "heading": "CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS DO QUADRO | PERMANENTE DOS SERVIÇOS AUXILIARES DO MINISTÉRIO PÚBLICO | DO ESTADO DO RIO DE JANEIRO | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 11/05/2025 | Página 1 de 3 | Técnico do Ministério Público - Área Administrativa - 1"
+        },
+        {
+          "sectionId": "key-section:f5c43bd72fdcfda4252f",
+          "score": 49.8167,
+          "heading": "Página 3 de 3 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS DO QUADRO | PERMANENTE DOS SERVIÇOS AUXILIARES DO MINISTÉRIO PÚBLICO | DO ESTADO DO RIO DE JANEIRO | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 11/05/2025 | Técnico do Ministério Público - Área Notificação e Atos Intimatórios - 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:535a18ae11c7fb66f35b",
+    "contestId": "mpsc_2022",
+    "examDocumentId": "2627a8a7d2cba367",
+    "year": 2022,
+    "organizedPath": "mpsc_2022/provas/01_mp-sc-2022-analista-em-tecnologia-da-informacao-tipo-1.pdf",
+    "sourceSha256": "49f2ccd8e6c12f3398980d3bc90406fc7841ac186cc1a23df205f42116dd9a16",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA EM TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 39.65; status definitivo; variant 1.",
+      "sectionId": "key-section:9057c8a04ecfdb12cccf",
+      "answerKeyDocumentId": "91f875844576f810",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 39.6456,
+      "candidates": [
+        {
+          "sectionId": "key-section:9057c8a04ecfdb12cccf",
+          "score": 97.0,
+          "heading": "MP-SC 2022 | CONCURSO PÚBLICO 2022 | GABARITOS – PROVAS DO DIA 12/06/2022 | GABARITO DEFINITIVO | Analista em Tecnologia da Informação – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:ddab4a3bbd219bee6317",
+          "score": 57.3544,
+          "heading": "MP-SC 2022 | CONCURSO PÚBLICO 2022 | GABARITOS – PROVAS DO DIA 12/06/2022 | GABARITO DEFINITIVO | Analista em Administração – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:ab5371dd3abafadb3ee9",
+          "score": 54.25,
+          "heading": "MP-SC 2022 | CONCURSO PÚBLICO 2022 | GABARITOS – PROVAS DO DIA 12/06/2022 | GABARITO DEFINITIVO | Analista em Serviço Social – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:4fa88defc19297fdfe7f",
+    "contestId": "mpu_2025",
+    "examDocumentId": "da254537add9002c",
+    "year": 2025,
+    "organizedPath": "mpu_2025/provas/01_a06-analista-do-mpu-desenvolvimento-de-sistemasa06-tipo-1.pdf",
+    "sourceSha256": "8ffcfd67cbf1adda266da959bad51e89ab393b9735f44f2391475ba104fcbd82",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "A06 - ANALISTA DO MPU - DESENVOLVIMENTO DE",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 91.97; margin 19.65; status definitivo; variant 1.",
+      "sectionId": "key-section:1fd47b9417f923d53672",
+      "answerKeyDocumentId": "8d0a8317270eda9a",
+      "answerKeyStatus": "definitivo",
+      "score": 91.9658,
+      "margin": 19.6491,
+      "candidates": [
+        {
+          "sectionId": "key-section:1fd47b9417f923d53672",
+          "score": 91.9658,
+          "heading": "MINISTÉRIO PÚBLICODA UNIÃO | Concurso Público 2025 – Editalnº 1 | Provas Aplicadas em 04/05/2025 – Manhã e Tarde | GABARITO DEFINITIVO | Página 1 de 2 | Analista do MPU - Desenvolvimento de Sistemas - 1"
+        },
+        {
+          "sectionId": "key-section:27f34f6fa4428e3929be",
+          "score": 72.3167,
+          "heading": "MINISTÉRIO PÚBLICODA UNIÃO | Concurso Público 2025 – Editalnº 1 | Provas Aplicadas em 04/05/2025 – Manhã e Tarde | GABARITO DEFINITIVO | Página 1 de 1 | Analista do MPU - Perito em Engenharia de Segurança do Trabalho - 1"
+        },
+        {
+          "sectionId": "key-section:c1c934c2e5a734cdc988",
+          "score": 67.4044,
+          "heading": "MINISTÉRIO PÚBLICODA UNIÃO | Concurso Público 2025 – Editalnº 1 | Provas Aplicadas em 04/05/2025 – Manhã e Tarde | GABARITO DEFINITIVO | Página 1 de 1 | Analista do MPU - Biblioteconomia - 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:b8273ba9c7cf0715594e",
+    "contestId": "mpu_2025",
+    "examDocumentId": "022c547a025ad7cf",
+    "year": 2025,
+    "organizedPath": "mpu_2025/provas/02_a29-analista-do-mpu-perito-em-tecnologia-da-informacao-e-comunicacaoa29-tipo-1.pdf",
+    "sourceSha256": "e959865eb08ce8b3f0cfaa4eea36b424db9eda5022766f4f40fb7763fd1903fc",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "INFORMAÇÃO E COMUNICAÇÃO",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 27.35; status definitivo; variant 1.",
+      "sectionId": "key-section:344947ae4773f0300271",
+      "answerKeyDocumentId": "8d0a8317270eda9a",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 27.35,
+      "candidates": [
+        {
+          "sectionId": "key-section:344947ae4773f0300271",
+          "score": 97.0,
+          "heading": "MINISTÉRIO PÚBLICODA UNIÃO | Concurso Público 2025 – Editalnº 1 | Provas Aplicadas em 04/05/2025 – Manhã e Tarde | GABARITO DEFINITIVO | Página 1 de 1 | Analista do MPU - Perito em Tecnologia da Informação e Comunicação - 1"
+        },
+        {
+          "sectionId": "key-section:05497f46a6e8801fc33c",
+          "score": 69.65,
+          "heading": "MINISTÉRIO PÚBLICODA UNIÃO | Concurso Público 2025 – Editalnº 1 | Provas Aplicadas em 04/05/2025 – Manhã e Tarde | GABARITO DEFINITIVO | Página 1 de 1 | Analista do MPU - Comunicação Social - 1"
+        },
+        {
+          "sectionId": "key-section:970f19eff3686bd2213e",
+          "score": 48.8682,
+          "heading": "MINISTÉRIO PÚBLICODA UNIÃO | Concurso Público 2025 – Editalnº 1 | Provas Aplicadas em 04/05/2025 – Manhã e Tarde | GABARITO DEFINITIVO | Página 1 de 2 | Analista do MPU - Psicologia - 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:b945a51ef717601cbe1f",
+    "contestId": "mpu_2025",
+    "examDocumentId": "e2d80ce132b95834",
+    "year": 2025,
+    "organizedPath": "mpu_2025/provas/03_a32-analista-do-mpu-suporte-e-infraestruturaa32-tipo-1.pdf",
+    "sourceSha256": "bcf80006cb26387406d1bd83f7d621b73ea335867eff6f0e49191f719b38d71c",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "INFRAESTRUTURA",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 51.97; status definitivo; variant 1.",
+      "sectionId": "key-section:c20ef9b69daf5587f40b",
+      "answerKeyDocumentId": "8d0a8317270eda9a",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 51.9714,
+      "candidates": [
+        {
+          "sectionId": "key-section:c20ef9b69daf5587f40b",
+          "score": 97.0,
+          "heading": "MINISTÉRIO PÚBLICODA UNIÃO | Concurso Público 2025 – Editalnº 1 | Provas Aplicadas em 04/05/2025 – Manhã e Tarde | GABARITO DEFINITIVO | Página 1 de 1 | Analista do MPU - Suporte e Infraestrutura - 1"
+        },
+        {
+          "sectionId": "key-section:563dfbec2f77602a4147",
+          "score": 45.0286,
+          "heading": "MINISTÉRIO PÚBLICODA UNIÃO | Concurso Público 2025 – Editalnº 1 | Provas Aplicadas em 04/05/2025 – Manhã e Tarde | GABARITO DEFINITIVO | Página 1 de 2 | Analista do MPU - Enfermagem - 1"
+        },
+        {
+          "sectionId": "key-section:9df2fde1c014a8270623",
+          "score": 43.876,
+          "heading": "MINISTÉRIO PÚBLICODA UNIÃO | Concurso Público 2025 – Editalnº 1 | Provas Aplicadas em 04/05/2025 – Manhã e Tarde | GABARITO DEFINITIVO | Página 1 de 1 | Analista do MPU - Perito em Medicina do Trabalho - 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:4847ea64f99a64530028",
+    "contestId": "pgm_niteroi_2023",
+    "examDocumentId": "4ab6ebcf7c9de4ba",
+    "year": 2023,
+    "organizedPath": "pgm_niteroi_2023/provas/01_pgm-niteroi-2023-analista-de-tecnologia-da-informacao-tipo-1.pdf",
+    "sourceSha256": "005f1e091f3676fa23d4149dcc3ddaed5c208d4e1265be46547999462698e761",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "ANALISTA DE TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 98.50; margin 38.18; status definitivo; variant 1.",
+      "sectionId": "key-section:788802af788474afe402",
+      "answerKeyDocumentId": "0ac432c94f74db94",
+      "answerKeyStatus": "definitivo",
+      "score": 98.5,
+      "margin": 38.1833,
+      "candidates": [
+        {
+          "sectionId": "key-section:788802af788474afe402",
+          "score": 98.5,
+          "heading": "(*) questão anulada | Analista de Tecnologia da Informação - Tipo 1"
+        },
+        {
+          "sectionId": "key-section:47000c0657d1f47359aa",
+          "score": 60.3167,
+          "heading": "Procuradoria Geral do Município de Niterói | CONCURSO PÚBLICO 2023 – Edital nº 01 | GABARITOS – PROVAS DO DIA 14/05/2023 | GABARITO DEFINITIVO | Analista Contábil - Tipo 1"
+        },
+        {
+          "sectionId": "key-section:fa2de45facbd1c4229ac",
+          "score": 59.6687,
+          "heading": "Procuradoria Geral do Município de Niterói | CONCURSO PÚBLICO 2023 – Edital nº 01 | GABARITOS – PROVAS DO DIA 14/05/2023 | GABARITO DEFINITIVO | Analista Processual - Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:a32c69962840aa5ef8cf",
+    "contestId": "sead_ap_peritos_2022",
+    "examDocumentId": "4d2cd8733f412c7b",
+    "year": 2022,
+    "organizedPath": "sead_ap_peritos_2022/provas/01_auxiliar-tecnico-pericial-tecnico-em-informaticacnmt010-tipo-1.pdf",
+    "sourceSha256": "10385e9056114b9af812fb29afac7c9f3cabe878595de04c84bbb7d4880aaf3a",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Auxiliar Técnico Pericial (Técnico em Informática)",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 95.88; margin 12.58; status definitivo; variant 1.",
+      "sectionId": "key-section:5c6e909b88280afafebc",
+      "answerKeyDocumentId": "a6a94c8cfd45b4d6",
+      "answerKeyStatus": "definitivo",
+      "score": 95.875,
+      "margin": 12.5779,
+      "candidates": [
+        {
+          "sectionId": "key-section:5c6e909b88280afafebc",
+          "score": 95.875,
+          "heading": "SECRETARIA DE ESTADO DE ADMINISTRAÇÃO DO AMAPÁ | CONCURSO PÚBLICO (PERITOS) | EDITAL Nº 001/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 04/12/2022 | Auxiliar Técnico Pericial - Técnico em Informática – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:d016315973fa824c0276",
+          "score": 83.2971,
+          "heading": "SECRETARIA DE ESTADO DE ADMINISTRAÇÃO DO AMAPÁ | CONCURSO PÚBLICO (PERITOS) | EDITAL Nº 001/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 04/12/2022 | Auxiliar Técnico Pericial - Técnico em Agrimensura – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:ef9bacba18345c15fd5f",
+          "score": 83.2971,
+          "heading": "SECRETARIA DE ESTADO DE ADMINISTRAÇÃO DO AMAPÁ | CONCURSO PÚBLICO (PERITOS) | EDITAL Nº 001/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 04/12/2022 | Auxiliar Técnico Pericial - Técnico em Edificações – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:238a875db34950947440",
+    "contestId": "sead_ap_peritos_2022",
+    "examDocumentId": "9f3b91ccb8f863af",
+    "year": 2022,
+    "organizedPath": "sead_ap_peritos_2022/provas/02_perito-criminal-ciencia-da-computacao-analista-de-sistemacnsm001-tipo-1.pdf",
+    "sourceSha256": "19599fa087a0a3523c2012be2b0f99487a85d1e86cf7f84424efdce5d25ffd2a",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "PERITO CRIMINAL",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:f3822cd36556c8a13d00",
+      "answerKeyDocumentId": "a6a94c8cfd45b4d6",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:f3822cd36556c8a13d00",
+          "score": 97.0,
+          "heading": "SECRETARIA DE ESTADO DE ADMINISTRAÇÃO DO AMAPÁ | CONCURSO PÚBLICO (PERITOS) | EDITAL Nº 001/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 04/12/2022 | Perito Criminal - Bacharel: Biólogo – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:334dcccae30caed9f031",
+          "score": 97.0,
+          "heading": "SECRETARIA DE ESTADO DE ADMINISTRAÇÃO DO AMAPÁ | CONCURSO PÚBLICO (PERITOS) | EDITAL Nº 001/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 04/12/2022 | Perito Criminal - Bacharel: Ciências Contábeis – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:d3572078da7d59b1769d",
+          "score": 97.0,
+          "heading": "SECRETARIA DE ESTADO DE ADMINISTRAÇÃO DO AMAPÁ | CONCURSO PÚBLICO (PERITOS) | EDITAL Nº 001/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 04/12/2022 | Perito Criminal - Bacharel: Engenheiro Civil – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:25b16a4bf9a50ec94642",
+    "contestId": "sefaz_ba_2022",
+    "examDocumentId": "67b02819451f8f59",
+    "year": 2022,
+    "organizedPath": "sefaz_ba_2022/provas/01_agente-de-tributos-estaduais-tecnologia-da-informacaocns002-tipo-1.pdf",
+    "sourceSha256": "b036f0345197365e6f75bcf01aa5738ee8e2659e7d4fb064b436f5393970958f",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 49.11; status definitivo; variant 1.",
+      "sectionId": "key-section:940f674b404ed168597b",
+      "answerKeyDocumentId": "79e1b2731824faf9",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 49.107,
+      "candidates": [
+        {
+          "sectionId": "key-section:940f674b404ed168597b",
+          "score": 97.0,
+          "heading": "Governo do Estado da Bahia | Secretaria de Administração do Estado da Bahia – SAEB | Secretaria da Fazenda do Estado da Bahia – SEFAZ | CONCURSO PÚBLICO 2022 | GABARITOS – PROVAS DO DIA 05/06/2022 | GABARITO DEFINITIVO | Tecnologia da Informação – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:cf6440de7b49a6f7ebf4",
+          "score": 47.893,
+          "heading": "Governo do Estado da Bahia | Secretaria de Administração do Estado da Bahia – SAEB | Secretaria da Fazenda do Estado da Bahia – SEFAZ | CONCURSO PÚBLICO 2022 | GABARITOS – PROVAS DO DIA 05/06/2022 | GABARITO DEFINITIVO | Administração Tributária – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:2dbf5d1e9c84d70f389f",
+          "score": 46.5846,
+          "heading": "Governo do Estado da Bahia | Secretaria de Administração do Estado da Bahia – SAEB | Secretaria da Fazenda do Estado da Bahia – SEFAZ | CONCURSO PÚBLICO 2022 | GABARITOS – PROVAS DO DIA 05/06/2022 | GABARITO DEFINITIVO | Administração e Finanças – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:193509cdee3a6b1e594a",
+    "contestId": "sefaz_mg_2022",
+    "examDocumentId": "76548ec70a65fab7",
+    "year": 2022,
+    "organizedPath": "sefaz_mg_2022/provas/01_auditor-fiscal-da-receita-estadual-tecnologia-da-informacao-manha-tipo-1.pdf",
+    "sourceSha256": "8f0b77b05b6312d3e0cb5a3baae181159249f5052eeb8c62363eefe80eaf9065",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 46.64; status definitivo; variant 1.",
+      "sectionId": "key-section:456f40bd75fbefec63c1",
+      "answerKeyDocumentId": "f770abab0e3b6155",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 46.6441,
+      "candidates": [
+        {
+          "sectionId": "key-section:456f40bd75fbefec63c1",
+          "score": 97.0,
+          "heading": "CONCURSO PÚBLICO | EDITAL Nº 01/2022 – SEFAZ-MG | GABARITOS DEFINITIVOS DA PROVA | APLICADA NO DIA 08/01/2023 | Atualizado em 24/02/2023 | Tecnologia da Informação - MANHÃ - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:d9efd9335a9fdf3c3034",
+          "score": 50.3559,
+          "heading": "CONCURSO PÚBLICO | EDITAL Nº 01/2022 – SEFAZ-MG | GABARITOS DEFINITIVOS DA PROVA | APLICADA NO DIA 08/01/2023 | Atualizado em 24/02/2023 | Auditoria e Fiscalização - MANHÃ - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:d6a954c788139de514e2",
+          "score": 34.3854,
+          "heading": "CONCURSO PÚBLICO | EDITAL Nº 01/2022 – SEFAZ-MG | GABARITOS DEFINITIVOS DA PROVA | APLICADA NO DIA 08/01/2023 | Atualizado em 24/02/2023 | Tributação - MANHÃ - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:787f30d2fa73827eb227",
+    "contestId": "sefaz_mg_2022",
+    "examDocumentId": "fb10267f2d6eb15c",
+    "year": 2022,
+    "organizedPath": "sefaz_mg_2022/provas/02_auditor-fiscal-da-receita-estadual-tecnologia-da-informacaocns004-tipo-1.pdf",
+    "sourceSha256": "59417fe1cc9f9d680cd661dfdf4eeb787aaf1c67cbfe856cb41d7569156f26a2",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Auditor Fiscal da Receita Estadual (Tecnologia da Informação) – Tarde",
+    "expectedQuestionCount": 50,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 50,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "CANDIDATE_REVIEW_REQUIRED",
+      "confidence": 0.6624,
+      "rationale": "Best title score 64.24; margin 20.46; status definitivo; variant 1.",
+      "sectionId": "key-section:7a8a338352abb3c8f4d2",
+      "answerKeyDocumentId": "f770abab0e3b6155",
+      "answerKeyStatus": "definitivo",
+      "score": 64.2391,
+      "margin": 20.4614,
+      "candidates": [
+        {
+          "sectionId": "key-section:7a8a338352abb3c8f4d2",
+          "score": 64.2391,
+          "heading": "CONCURSO PÚBLICO | EDITAL Nº 01/2022 – SEFAZ-MG | GABARITOS DEFINITIVOS DA PROVA | APLICADA NO DIA 08/01/2023 | Atualizado em 24/02/2023 | Tecnologia da Informação - TARDE - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:c4cfc9a32fb935e6993e",
+          "score": 43.7778,
+          "heading": "CONCURSO PÚBLICO | EDITAL Nº 01/2022 – SEFAZ-MG | GABARITOS DEFINITIVOS DA PROVA | APLICADA NO DIA 08/01/2023 | Atualizado em 24/02/2023 | Auditoria e Fiscalização - TARDE - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:74de60eba92f0a1cd42e",
+          "score": 41.292,
+          "heading": "CONCURSO PÚBLICO | EDITAL Nº 01/2022 – SEFAZ-MG | GABARITOS DEFINITIVOS DA PROVA | APLICADA NO DIA 08/01/2023 | Atualizado em 24/02/2023 | Tributação - TARDE - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:e151c63d30e1cf40ac0e",
+    "contestId": "semsa_manaus_2021",
+    "examDocumentId": "dbe330044faa79ba",
+    "year": 2021,
+    "organizedPath": "semsa_manaus_2021/provas/01_as-tecnico-em-manutencao-de-equipamentos-de-informaticanm206-tipo-1.pdf",
+    "sourceSha256": "7c0d0c995f346002e22f1620ba4c7d02516e657a0f03cb4441f12033434b5971",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "EQUIPAMENTOS DE INFORMÁTICA",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 48.22; status definitivo; variant 1.",
+      "sectionId": "key-section:b8bada84ce59058ad959",
+      "answerKeyDocumentId": "979307ff068871b5",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 48.2196,
+      "candidates": [
+        {
+          "sectionId": "key-section:b8bada84ce59058ad959",
+          "score": 97.0,
+          "heading": "SEMSA – Secretaria Municipal de Saúde | SEMAD – Secretaria Municipal de | Administração, Planejamento e Gestão | CONCURSO PÚBLICO 2021 – Edital 02 | GABARITOS – PROVAS DO DIA 05/06/2022 | GABARITO DEFINITIVO | AS-Técnico em Manutenção de Equipamentos de Informática – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:311d5166349bd1a2f5c1",
+          "score": 48.7804,
+          "heading": "SEMSA – Secretaria Municipal de Saúde | SEMAD – Secretaria Municipal de | Administração, Planejamento e Gestão | CONCURSO PÚBLICO 2021 – Edital 02 | GABARITOS – PROVAS DO DIA 05/06/2022 | GABARITO DEFINITIVO | AS-Contramestre – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:0eb2f1723988b448061f",
+          "score": 48.0927,
+          "heading": "SEMSA – Secretaria Municipal de Saúde | SEMAD – Secretaria Municipal de | Administração, Planejamento e Gestão | CONCURSO PÚBLICO 2021 – Edital 02 | GABARITOS – PROVAS DO DIA 05/06/2022 | GABARITO DEFINITIVO | AS-Técnico em Radiologia Médica – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:f4d2e15584bfa82480a7",
+    "contestId": "senado_2022_ed1",
+    "examDocumentId": "7c5e26e14fd8638f",
+    "year": 2022,
+    "organizedPath": "senado_2022_ed1/provas/01_e1cns09-analista-legislativo-informatica-legislativa-analise-de-sistemase1cns09-tipo-1.pdf",
+    "sourceSha256": "cc7ca77291a87c17e0d289fea028b5bb102c2731219c4e98b23b77846cbff0f0",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "Para fins de avaliação, serão levadas em consideração",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2918,
+      "rationale": "Best title score 58.35; margin 0.31; status definitivo; variant 1.",
+      "sectionId": "key-section:60d0d25369f037ae1383",
+      "answerKeyDocumentId": "a806df31d5aa09d7",
+      "answerKeyStatus": "definitivo",
+      "score": 58.3507,
+      "margin": 0.3127,
+      "candidates": [
+        {
+          "sectionId": "key-section:60d0d25369f037ae1383",
+          "score": 58.3507,
+          "heading": "SENADO FEDERAL | EDITAL Nº 1, DE 22 DE AGOSTO DE 2022 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS | E FORMAÇÃO DE CADASTRO DE RESERVA PARA CARGOS | VAGOS DO QUADRO DE PESSOAL DO SENADO FEDERAL | ANALISTA LEGISLATIVO | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS EM 06/11/2022 | Página 3 de 10 | Analista Legislativo - Contabilidade - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:9bc817a38e3480ffc948",
+          "score": 58.0381,
+          "heading": "SENADO FEDERAL | EDITAL Nº 1, DE 22 DE AGOSTO DE 2022 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS | E FORMAÇÃO DE CADASTRO DE RESERVA PARA CARGOS | VAGOS DO QUADRO DE PESSOAL DO SENADO FEDERAL | ANALISTA LEGISLATIVO | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS EM 06/11/2022 | Página 4 de 10 | Analista Legislativo - Enfermagem - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:0f438b82009322bb072d",
+          "score": 57.5618,
+          "heading": "SENADO FEDERAL | EDITAL Nº 1, DE 22 DE AGOSTO DE 2022 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS | E FORMAÇÃO DE CADASTRO DE RESERVA PARA CARGOS | VAGOS DO QUADRO DE PESSOAL DO SENADO FEDERAL | ANALISTA LEGISLATIVO | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS EM 06/11/2022 | Página 1 de 10 | Analista Legislativo - Arquivologia - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:313954954fc4ca650a34",
+    "contestId": "senado_2022_ed1",
+    "examDocumentId": "3d21930dea755dc1",
+    "year": 2022,
+    "organizedPath": "senado_2022_ed1/provas/02_e1cns10-analista-legislativo-informatica-legislativa-analise-de-suporte-de-sistemase1cns10-tipo-1.pdf",
+    "sourceSha256": "e68668b58aa1151631a16ea33081c27cb64deb1a42aa81c622e008e4d4259bb1",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "Para fins de avaliação, serão levadas em consideração",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2918,
+      "rationale": "Best title score 58.35; margin 0.31; status definitivo; variant 1.",
+      "sectionId": "key-section:60d0d25369f037ae1383",
+      "answerKeyDocumentId": "a806df31d5aa09d7",
+      "answerKeyStatus": "definitivo",
+      "score": 58.3507,
+      "margin": 0.3127,
+      "candidates": [
+        {
+          "sectionId": "key-section:60d0d25369f037ae1383",
+          "score": 58.3507,
+          "heading": "SENADO FEDERAL | EDITAL Nº 1, DE 22 DE AGOSTO DE 2022 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS | E FORMAÇÃO DE CADASTRO DE RESERVA PARA CARGOS | VAGOS DO QUADRO DE PESSOAL DO SENADO FEDERAL | ANALISTA LEGISLATIVO | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS EM 06/11/2022 | Página 3 de 10 | Analista Legislativo - Contabilidade - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:9bc817a38e3480ffc948",
+          "score": 58.0381,
+          "heading": "SENADO FEDERAL | EDITAL Nº 1, DE 22 DE AGOSTO DE 2022 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS | E FORMAÇÃO DE CADASTRO DE RESERVA PARA CARGOS | VAGOS DO QUADRO DE PESSOAL DO SENADO FEDERAL | ANALISTA LEGISLATIVO | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS EM 06/11/2022 | Página 4 de 10 | Analista Legislativo - Enfermagem - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:0f438b82009322bb072d",
+          "score": 57.5618,
+          "heading": "SENADO FEDERAL | EDITAL Nº 1, DE 22 DE AGOSTO DE 2022 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS | E FORMAÇÃO DE CADASTRO DE RESERVA PARA CARGOS | VAGOS DO QUADRO DE PESSOAL DO SENADO FEDERAL | ANALISTA LEGISLATIVO | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS EM 06/11/2022 | Página 1 de 10 | Analista Legislativo - Arquivologia - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:0ff760a47a19855c87cc",
+    "contestId": "senado_2022_ed4",
+    "examDocumentId": "b02e04f54dc6c046",
+    "year": 2022,
+    "organizedPath": "senado_2022_ed4/provas/01_assessoramento-legislativo-comunicacao-e-tecnologia-da-informacaoe4cns04-tipo-1.pdf",
+    "sourceSha256": "87ee13a8f5402da33cc658da030273d4469f8fe255f44c1f954cc461c0448ab2",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ASSESSORAMENTO LEGISLATIVO",
+    "expectedQuestionCount": 100,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 100,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.3364,
+      "rationale": "Best title score 67.27; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:1525e591afc8fde6ea8e",
+      "answerKeyDocumentId": "5d77b244c438b0d5",
+      "answerKeyStatus": "definitivo",
+      "score": 67.2716,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:1525e591afc8fde6ea8e",
+          "score": 67.2716,
+          "heading": "SENADO FEDERAL | EDITAL Nº 4, DE 22 DE AGOSTO DE 2022 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS | E FORMAÇÃO DE CADASTRO DE RESERVA PARA CARGOS | VAGOS DO QUADRO DE PESSOAL DO SENADO FEDERAL | CONSULTOR LEGISLATIVO | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS EM 06/11/2022 | Página 1 de 24 | Consultor Legislativo - AL - Agricultura - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:c44475e87517aaa01511",
+          "score": 67.2716,
+          "heading": "SENADO FEDERAL | EDITAL Nº 4, DE 22 DE AGOSTO DE 2022 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS | E FORMAÇÃO DE CADASTRO DE RESERVA PARA CARGOS | VAGOS DO QUADRO DE PESSOAL DO SENADO FEDERAL | CONSULTOR LEGISLATIVO | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS EM 06/11/2022 | Página 2 de 24 | Consultor Legislativo - AL - Comunicações e Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:e93d9a855442ebe381a7",
+          "score": 67.2716,
+          "heading": "SENADO FEDERAL | EDITAL Nº 4, DE 22 DE AGOSTO DE 2022 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS | E FORMAÇÃO DE CADASTRO DE RESERVA PARA CARGOS | VAGOS DO QUADRO DE PESSOAL DO SENADO FEDERAL | CONSULTOR LEGISLATIVO | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS EM 06/11/2022 | Página 3 de 24 | Consultor Legislativo - AL - Desporto e Cultura - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:59fae0cda319ff729562",
+    "contestId": "smf_cuiaba_2024",
+    "examDocumentId": "69ca4e66ab0ad4a8",
+    "year": 2024,
+    "organizedPath": "smf_cuiaba_2024/provas/01_smf-cuiaba-area-tecnologia-da-informacao-prova-i-manha-tipo-1.pdf",
+    "sourceSha256": "b29a75bcfcea54afffd7fcba5fc07cae8672de45bb735c4d7c0646dd0ce8062e",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.3809,
+      "rationale": "Best title score 76.19; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:68d42277ad0e8403d075",
+      "answerKeyDocumentId": "3ebce96473703a0c",
+      "answerKeyStatus": "definitivo",
+      "score": 76.1892,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:68d42277ad0e8403d075",
+          "score": 76.1892,
+          "heading": "PROCESSO SELETIVO PARA A FORMAÇÃO DE CADASTRO DE RESERVA PARA O CARGO DE | AUDITOR FISCAL TRIBUTÁRIO DA RECEITA MUNICIPAL DA SECRETARIA MUNICIAL DE | FAZENDA DE CUIABÁ | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 15/12/2024 | Página 1 de 2 | Auditor Fiscal Tributário da Receita Municipal - Tecnologia da Informação- Manhã - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:e4042b56f7c344302f89",
+          "score": 76.1892,
+          "heading": "(*) Questão anulada | Auditor Fiscal Tributário da Receita Municipal - Tecnologia da Informação- Tarde - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:126ddc0273bbcd63bc33",
+          "score": 49.4798,
+          "heading": "(*) Questão anulada | Auditor Fiscal Tributário da Receita Municipal - Direito/Processo Tributário- Manhã - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:b729aeafd73c14e38b02",
+    "contestId": "smf_cuiaba_2024",
+    "examDocumentId": "feec3af822969e4f",
+    "year": 2024,
+    "organizedPath": "smf_cuiaba_2024/provas/02_smf-cuiaba-area-tecnologia-da-informacao-prova-ii-tarde-tipo-1.pdf",
+    "sourceSha256": "0083daaadea0c00b3df16afd4e795eeb9c82bad67f56b0812f08f3b5abeccd22",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.3809,
+      "rationale": "Best title score 76.19; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:68d42277ad0e8403d075",
+      "answerKeyDocumentId": "3ebce96473703a0c",
+      "answerKeyStatus": "definitivo",
+      "score": 76.1892,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:68d42277ad0e8403d075",
+          "score": 76.1892,
+          "heading": "PROCESSO SELETIVO PARA A FORMAÇÃO DE CADASTRO DE RESERVA PARA O CARGO DE | AUDITOR FISCAL TRIBUTÁRIO DA RECEITA MUNICIPAL DA SECRETARIA MUNICIAL DE | FAZENDA DE CUIABÁ | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 15/12/2024 | Página 1 de 2 | Auditor Fiscal Tributário da Receita Municipal - Tecnologia da Informação- Manhã - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:e4042b56f7c344302f89",
+          "score": 76.1892,
+          "heading": "(*) Questão anulada | Auditor Fiscal Tributário da Receita Municipal - Tecnologia da Informação- Tarde - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:5960317be2a95d9ac557",
+          "score": 49.5324,
+          "heading": "PROCESSO SELETIVO PARA A FORMAÇÃO DE CADASTRO DE RESERVA PARA O CARGO DE | AUDITOR FISCAL TRIBUTÁRIO DA RECEITA MUNICIPAL DA SECRETARIA MUNICIAL DE | FAZENDA DE CUIABÁ | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 15/12/2024 | Página 1 de 2 | Auditor Fiscal Tributário da Receita Municipal - Gestão Tributária- Manhã - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:ff1ad2b597b0e1e5eb2f",
+    "contestId": "tce_es_2022",
+    "examDocumentId": "3df84138cf497d7e",
+    "year": 2022,
+    "organizedPath": "tce_es_2022/provas/01_auditor-de-controle-externo-ace-tecnologia-da-informacaotecnologiadainformacao-tipo-1.pdf",
+    "sourceSha256": "8cbb3d06979d374a52e9e31aeb13b9844cff9c40815f55e74805931201be2bb6",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 50.88; status definitivo; variant 1.",
+      "sectionId": "key-section:55131f87825cdd3f9125",
+      "answerKeyDocumentId": "cb3b51e1ade3b397",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 50.875,
+      "candidates": [
+        {
+          "sectionId": "key-section:55131f87825cdd3f9125",
+          "score": 97.0,
+          "heading": "CONCURSO PÚBLICO TRIBUNAL DE CONTAS DO | ESTADO DO ESPÍRITO SANTO | EDITAL Nº 01/2022 | GABARITOS DEFINITIVO | DA PROVA APLICADA NO DIA 12/02/2023 | Auditor de Controle Externo - Tecnologia da Informação – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:bb6f3d617f03dc7434f4",
+          "score": 46.125,
+          "heading": "CONCURSO PÚBLICO TRIBUNAL DE CONTAS DO | ESTADO DO ESPÍRITO SANTO | EDITAL Nº 01/2022 | GABARITOS DEFINITIVO | DA PROVA APLICADA NO DIA 12/02/2023 | Auditor de Controle Externo - Ciências Econômicas – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:1d652fec002acec8f82f",
+          "score": 45.6579,
+          "heading": "CONCURSO PÚBLICO TRIBUNAL DE CONTAS DO | ESTADO DO ESPÍRITO SANTO | EDITAL Nº 01/2022 | GABARITOS DEFINITIVO | DA PROVA APLICADA NO DIA 12/02/2023 | Auditor de Controle Externo - Estatística – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:82caa57d31f981afbd9b",
+    "contestId": "tce_pa_2024",
+    "examDocumentId": "d752191f76178c85",
+    "year": 2024,
+    "organizedPath": "tce_pa_2024/provas/01_auditor-de-controle-externo-informatica-analista-de-sistemas.pdf",
+    "sourceSha256": "376c476cc56214d2004da9eb39503ee80707c6a9f3e10f7c4660cd8c2a9f2652",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA DE SISTEMAS",
+    "expectedQuestionCount": 100,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 100,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 21.67; status preliminar; variant 1.",
+      "sectionId": "key-section:7e4ca919e8b4187e20c0",
+      "answerKeyDocumentId": "daafbb9211d9edb6",
+      "answerKeyStatus": "preliminar",
+      "score": 97.0,
+      "margin": 21.6726,
+      "candidates": [
+        {
+          "sectionId": "key-section:7e4ca919e8b4187e20c0",
+          "score": 97.0,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowMjoyNSAtMDMwMA== | www.pciconcursos.com.br | TRIBUNAL DE CONTAS DO ESTADO DO PARÁ – TCE-PA | GABARITOS PRELIMINARES DAS PROVAS APLICADAS | EM 11/08/2024 | Página 1 de 19 | AUDITOR DE CONTROLE EXTERNO - ÁREA DE INFORMÁTICA | ANALISTA DE SISTEMAS - PROVA TIPO 1"
+        },
+        {
+          "sectionId": "key-section:dbcf2f5420b937668928",
+          "score": 75.3274,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowMjoyNSAtMDMwMA== | www.pciconcursos.com.br | TRIBUNAL DE CONTAS DO ESTADO DO PARÁ – TCE-PA | GABARITOS PRELIMINARES DAS PROVAS APLICADAS | EM 11/08/2024 | Página 1 de 19 | AUDITOR DE CONTROLE EXTERNO - ÁREA DE INFORMÁTICA | ANALISTA DE SEGURANÇA - PROVA TIPO 1"
+        },
+        {
+          "sectionId": "key-section:8dd27bdbad81fef9601a",
+          "score": 75.3274,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowMjoyNSAtMDMwMA== | www.pciconcursos.com.br | TRIBUNAL DE CONTAS DO ESTADO DO PARÁ – TCE-PA | GABARITOS PRELIMINARES DAS PROVAS APLICADAS | EM 11/08/2024 | Página 1 de 19 | AUDITOR DE CONTROLE EXTERNO - ÁREA DE INFORMÁTICA | ANALISTA DE SUPORTE - PROVA TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:6a286ec290739809c300",
+    "contestId": "tce_pe_2025",
+    "examDocumentId": "dd7f0e61e58ce2e1",
+    "year": 2025,
+    "organizedPath": "tce_pe_2025/provas/01_analista-de-controle-externo-tecnologia-da-informacaocns103-tipo-1.pdf",
+    "sourceSha256": "1d71e6f87656cf53984c12f6fa6fea6d84a4f27e41a8296b649637d8262bbbbc",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:b4996b827839e87e4ed3",
+      "answerKeyDocumentId": "0ea19ed7e583faa5",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:b4996b827839e87e4ed3",
+          "score": 97.0,
+          "heading": "Página 4 de 13 | Gabaritos definitivos da prova aplicada no dia 31/08/2025 e 07/09/2025 | Analista de Controle Externo - Tecnologia da Informação - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:106920307ace341729b3",
+          "score": 97.0,
+          "heading": "Página 12 de 13 | Gabaritos definitivos da prova aplicada no dia 31/08/2025 e 07/09/2025 | Auditor de Controle Externo - Tecnologia da Informação - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:d7bb3e8dc4a738a11db9",
+          "score": 57.8879,
+          "heading": "Página 3 de 13 | Gabaritos definitivos da prova aplicada no dia 31/08/2025 e 07/09/2025 | Analista de Controle Externo - Obras Públicas - 1 - Turno Manhã"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:b0e5731998d7c061a2e6",
+    "contestId": "tce_pe_2025",
+    "examDocumentId": "84cb1983f522b281",
+    "year": 2025,
+    "organizedPath": "tce_pe_2025/provas/02_auditor-de-controle-externo-tecnologia-da-informacaocns203-tipo-1.pdf",
+    "sourceSha256": "e18f72745103d7212fb3424132ff72f0e1e9badecfd5f5f3fda86dd4798c4d9b",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:b4996b827839e87e4ed3",
+      "answerKeyDocumentId": "0ea19ed7e583faa5",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:b4996b827839e87e4ed3",
+          "score": 97.0,
+          "heading": "Página 4 de 13 | Gabaritos definitivos da prova aplicada no dia 31/08/2025 e 07/09/2025 | Analista de Controle Externo - Tecnologia da Informação - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:106920307ace341729b3",
+          "score": 97.0,
+          "heading": "Página 12 de 13 | Gabaritos definitivos da prova aplicada no dia 31/08/2025 e 07/09/2025 | Auditor de Controle Externo - Tecnologia da Informação - 1 - Turno Manhã"
+        },
+        {
+          "sectionId": "key-section:cec03806955480db2868",
+          "score": 57.1292,
+          "heading": "Página 11 de 13 | Gabaritos definitivos da prova aplicada no dia 31/08/2025 e 07/09/2025 | Auditor de Controle Externo - Obras Públicas - 1 - Turno Manhã"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:74d7f240fa65ed562a5e",
+    "contestId": "tce_pi_2024",
+    "examDocumentId": "deafd9d54832e9e0",
+    "year": 2024,
+    "organizedPath": "tce_pi_2024/provas/01_auditor-de-controle-externo-tec-informacao-infrestrutura-e-seguranca-manha-tipo-1.pdf",
+    "sourceSha256": "91a499ef1da94d644013dc6d61b913f644ad343bd0c8950ec3050597d861c94d",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "AUDITOR DE CONTROLE EXTERNO",
+    "expectedQuestionCount": 100,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 100,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:846fd54b85bef730a96d",
+      "answerKeyDocumentId": "9af8dcca3f9a61e0",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:846fd54b85bef730a96d",
+          "score": 97.0,
+          "heading": "CONCURSO PÚBLICO PARA O TRIBUNAL DE CONTAS | DO | ESTADO DO PIAUÍ (TCE-PI) | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 12/01/2025 | Página 1 de 1 | Auditor de Controle Externo - Controle Externo - Tecnologia da Informação (Infraestrutura e Segurança) - 1"
+        },
+        {
+          "sectionId": "key-section:32355d798069d1355034",
+          "score": 97.0,
+          "heading": "CONCURSO PÚBLICO PARA O TRIBUNAL DE CONTAS DO | ESTADO DO PIAUÍ (TCE-PI) | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 12/01/2025 | Página 1 de 1 | Auditor de Controle Externo - Controle Externo - Tecnologia da Informação (Sistemas Engenharia de Dados e Ciência de Dados) - 1"
+        },
+        {
+          "sectionId": "key-section:bfc6796755dd619579bb",
+          "score": 97.0,
+          "heading": "CONCURSO PÚBLICO PARA O TRIBUNAL DE | CONTAS DO | ESTADO DO PIAUÍ (TCE-PI) | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 12/01/2025 | Página 1 de 1 | Auditor de Controle Externo - Controle Externo (Específica de Área Comum) - 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:4d1c8ae988d0f6b6d98a",
+    "contestId": "tce_pi_2024",
+    "examDocumentId": "d07402c55af14449",
+    "year": 2024,
+    "organizedPath": "tce_pi_2024/provas/02_auditor-de-controle-externo-tec-informacao-infrestrutura-e-seguranca-tarde.pdf",
+    "sourceSha256": "bf8499ad1400966864ac4a98420b022428d9ff05fd7b74588f5e48d961dc3663",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "DISCURSIVE_ONLY",
+    "bookletLabel": "AUDITOR DE CONTROLE EXTERNO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXCLUDED_DISCURSIVE_ONLY",
+    "extractedQuestionCount": 0,
+    "sequenceComplete": false,
+    "issues": [
+      "NO_OBJECTIVE_QUESTION_SEQUENCE"
+    ],
+    "answerKeyLink": {
+      "status": "NOT_APPLICABLE",
+      "confidence": 1.0
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:1b6075d306f2c0ef73f9",
+    "contestId": "tce_pi_2024",
+    "examDocumentId": "38ef401deccb31c0",
+    "year": 2024,
+    "organizedPath": "tce_pi_2024/provas/03_auditor-de-controle-externo-tec-informacao-sistema-de-engenharia-de-dados-e-ciencias-de-dados-manha-tipo-1.pdf",
+    "sourceSha256": "729aae0720a70701c2f2255225c17bd7ef125d68df0151e5499a9e9d79ec99a2",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "AUDITOR DE CONTROLE EXTERNO",
+    "expectedQuestionCount": 100,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 100,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:846fd54b85bef730a96d",
+      "answerKeyDocumentId": "9af8dcca3f9a61e0",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:846fd54b85bef730a96d",
+          "score": 97.0,
+          "heading": "CONCURSO PÚBLICO PARA O TRIBUNAL DE CONTAS | DO | ESTADO DO PIAUÍ (TCE-PI) | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 12/01/2025 | Página 1 de 1 | Auditor de Controle Externo - Controle Externo - Tecnologia da Informação (Infraestrutura e Segurança) - 1"
+        },
+        {
+          "sectionId": "key-section:32355d798069d1355034",
+          "score": 97.0,
+          "heading": "CONCURSO PÚBLICO PARA O TRIBUNAL DE CONTAS DO | ESTADO DO PIAUÍ (TCE-PI) | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 12/01/2025 | Página 1 de 1 | Auditor de Controle Externo - Controle Externo - Tecnologia da Informação (Sistemas Engenharia de Dados e Ciência de Dados) - 1"
+        },
+        {
+          "sectionId": "key-section:bfc6796755dd619579bb",
+          "score": 97.0,
+          "heading": "CONCURSO PÚBLICO PARA O TRIBUNAL DE | CONTAS DO | ESTADO DO PIAUÍ (TCE-PI) | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 12/01/2025 | Página 1 de 1 | Auditor de Controle Externo - Controle Externo (Específica de Área Comum) - 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:e51d015a63a820d86253",
+    "contestId": "tce_pi_2024",
+    "examDocumentId": "65d0ae70b5dc8858",
+    "year": 2024,
+    "organizedPath": "tce_pi_2024/provas/04_auditor-de-controle-externo-tec-informacao-sistema-de-engenharia-de-dados-e-ciencias-de-dados-tarde.pdf",
+    "sourceSha256": "632695432d18b957ec3b79867a85f9c847dfb3b94b449027852d2ac6b67f3b3e",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "DISCURSIVE_ONLY",
+    "bookletLabel": "AUDITOR DE CONTROLE EXTERNO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXCLUDED_DISCURSIVE_ONLY",
+    "extractedQuestionCount": 0,
+    "sequenceComplete": false,
+    "issues": [
+      "NO_OBJECTIVE_QUESTION_SEQUENCE"
+    ],
+    "answerKeyLink": {
+      "status": "NOT_APPLICABLE",
+      "confidence": 1.0
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:5190e9cf6111cc89f723",
+    "contestId": "tce_rr_2024",
+    "examDocumentId": "11eed84aa2272929",
+    "year": 2024,
+    "organizedPath": "tce_rr_2024/provas/01_auditor-de-controle-externo-tecnologia-com-especialidade-em-analise-de-dadoscns306-tipo-1.pdf",
+    "sourceSha256": "43e04e6fad02879d98dad3e0bdec36e333b4dddad46b65dacaf8fd194d755ff9",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "TECNOLOGIA COM ESPECIALIDADE",
+    "expectedQuestionCount": 100,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 100,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.1814,
+      "rationale": "Best title score 36.29; margin 36.29; status definitivo; variant 1.",
+      "sectionId": "key-section:d627b0f886940598260d",
+      "answerKeyDocumentId": "011d7018476233cf",
+      "answerKeyStatus": "definitivo",
+      "score": 36.2895,
+      "margin": 36.2895,
+      "candidates": [
+        {
+          "sectionId": "key-section:d627b0f886940598260d",
+          "score": 36.2895,
+          "heading": "TRIBUNAL DE CONTAS DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 001/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 26/01/2025 | Página 1 de 1 | Auditor Substituto de Conselheiro - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:9f7f63a4251e0367d9a4",
+    "contestId": "tce_sc_2026",
+    "examDocumentId": "016319e302e95a05",
+    "year": 2026,
+    "organizedPath": "tce_sc_2026/provas/01_cns003-auditor-fiscal-de-controle-externo-ciencias-da-computacao-sistemas-de-informacao-engenharia-de-computacao-e-engen.pdf",
+    "sourceSha256": "deb0cf95bd694f23b0731f4aa49b78d865528042c6a3a617f7f6d3783ede56e3",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Verifique se este caderno de questões está completo e",
+    "expectedQuestionCount": 100,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 100,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2817,
+      "rationale": "Best title score 56.33; margin 1.02; status definitivo; variant 1.",
+      "sectionId": "key-section:3cc538f7f6dbf4e29dc4",
+      "answerKeyDocumentId": "9a003140d1695ca0",
+      "answerKeyStatus": "definitivo",
+      "score": 56.3349,
+      "margin": 1.0161,
+      "candidates": [
+        {
+          "sectionId": "key-section:3cc538f7f6dbf4e29dc4",
+          "score": 56.3349,
+          "heading": "TRIBUNAL DE CONTAS DO ESTADO DE SANTA CATARINA | EDITAL Nº 1/2026 | Gabaritos definitivos das provas aplicadas no dia 24/05/2026 | Página 8 de 8 | Auditor Fiscal de Controle Externo - Administração - 1"
+        },
+        {
+          "sectionId": "key-section:8c0d9a635e442e9c4052",
+          "score": 55.3189,
+          "heading": "TRIBUNAL DE CONTAS DO ESTADO DE SANTA CATARINA | EDITAL Nº 1/2026 | Gabaritos definitivos das provas aplicadas no dia 24/05/2026 | Página 1 de 8 | Auditor Fiscal de Controle Externo - Ciências Contábeis - 1"
+        },
+        {
+          "sectionId": "key-section:112835e8bdf7594ffa33",
+          "score": 55.3189,
+          "heading": "TRIBUNAL DE CONTAS DO ESTADO DE SANTA CATARINA | EDITAL Nº 1/2026 | Gabaritos definitivos das provas aplicadas no dia 24/05/2026 | Página 4 de 8 | Auditor Fiscal de Controle Externo -Ciências Atuarias - 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:5609c1943d96d86fd328",
+    "contestId": "tce_se_2015",
+    "examDocumentId": "0cc1a50b2d067be5",
+    "year": 2015,
+    "organizedPath": "tce_se_2015/provas/01_analista-tecnolo-inform-desenv-tipo-1.pdf",
+    "sourceSha256": "443b77063e59046b995303ee246c314811a4ec434bc3543391984290a64f244d",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA DE TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "UNRESOLVED",
+      "confidence": 0.0,
+      "rationale": "No answer-key section with matching contest and question count.",
+      "candidates": []
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:3428c08bb2917189be91",
+    "contestId": "tce_to_2022",
+    "examDocumentId": "e1b53dbdbc312c90",
+    "year": 2022,
+    "organizedPath": "tce_to_2022/provas/01_analista-tecnico-tecnologia-da-informacaoanatecinf-tipo-1.pdf",
+    "sourceSha256": "3f85338a875374b87e73b1622c4e9dbca315ab0c50ac00953667f5dae28d66c6",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "ANALISTA TÉCNICO - TECNOLOGIA DA",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 20.95; status definitivo; variant 1.",
+      "sectionId": "key-section:7cb4b183c608a8921425",
+      "answerKeyDocumentId": "4b6c76bcc39ff162",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 20.95,
+      "candidates": [
+        {
+          "sectionId": "key-section:7cb4b183c608a8921425",
+          "score": 97.0,
+          "heading": "TRIBUNAL DE CONTAS DO ESTADO DO TOCANTINS | CONCURSO PÚBLICO PARA PROVIMENTO DE CARGOS EFETIVOS DO QUADRO DE PESSOAL | EDITAL Nº 01/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 16/10/2022 | Página 11 de 20 | Analista Técnico - Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:04f74c6ae412ad34b952",
+          "score": 76.05,
+          "heading": "TRIBUNAL DE CONTAS DO ESTADO DO TOCANTINS | CONCURSO PÚBLICO PARA PROVIMENTO DE CARGOS EFETIVOS DO QUADRO DE PESSOAL | EDITAL Nº 01/2022 | GABARITOS DEFINITIVOS DAS PROVAS OBJETIVAS APLICADAS NO DIA 16/10/2022 | Página 1 de 20 | Analista Técnico - Ciências Contábeis - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:366192e0c2ab366e9fa1",
+          "score": 76.05,
+          "heading": "TRIBUNAL DE CONTAS DO ESTADO DO TOCANTINS | CONCURSO PÚBLICO PARA PROVIMENTO DE CARGOS EFETIVOS DO QUADRO DE PESSOAL | EDITAL Nº 01/2022 | GABARITOS DEFINITIVOS DAS PROVAS OBJETIVAS APLICADAS NO DIA 16/10/2022 | Página 2 de 20 | Analista Técnico - Direito - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:d332e165261a65572f80",
+    "contestId": "tce_to_2022",
+    "examDocumentId": "d671acf8e674d56d",
+    "year": 2022,
+    "organizedPath": "tce_to_2022/provas/02_auditor-de-controle-externo-tecnologia-da-informacaoaudtecinf-tipo-1.pdf",
+    "sourceSha256": "f1c703fa5db77f38adc3fc278d15ab38e6c8898b9a34e83fcbeacc63ee5eb0fb",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:7cb4b183c608a8921425",
+      "answerKeyDocumentId": "4b6c76bcc39ff162",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:7cb4b183c608a8921425",
+          "score": 97.0,
+          "heading": "TRIBUNAL DE CONTAS DO ESTADO DO TOCANTINS | CONCURSO PÚBLICO PARA PROVIMENTO DE CARGOS EFETIVOS DO QUADRO DE PESSOAL | EDITAL Nº 01/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 16/10/2022 | Página 11 de 20 | Analista Técnico - Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:b5bc21fa3dc97e6d4d46",
+          "score": 97.0,
+          "heading": "TRIBUNAL DE CONTAS DO ESTADO DO TOCANTINS | CONCURSO PÚBLICO PARA PROVIMENTO DE CARGOS EFETIVOS DO QUADRO DE PESSOAL | EDITAL Nº 01/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 16/10/2022 | Página 20 de 20 | Auditor de Controle Externo - Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:443420a125e66bf5f98d",
+          "score": 46.377,
+          "heading": "TRIBUNAL DE CONTAS DO ESTADO DO TOCANTINS | CONCURSO PÚBLICO PARA PROVIMENTO DE CARGOS EFETIVOS DO QUADRO DE PESSOAL | EDITAL Nº 01/2022 | GABARITOS DEFINITIVOS DAS PROVAS APLICADAS NO DIA 16/10/2022 | Página 13 de 20 | Auditor de Controle Externo - Administração - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:7e172052269e4b132b62",
+    "contestId": "tjap_2023",
+    "examDocumentId": "cf157c8b8c6d4353",
+    "year": 2023,
+    "organizedPath": "tjap_2023/provas/01_analista-judiciario-apoio-especializado-tecnologia-da-informacao-desenvolvimento-de-sistemas.pdf",
+    "sourceSha256": "4db9c0dfdbd6b76f2f1c766e01ef2e471b784abfb008d26c66830066e84b7750",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA JUDICIÁRIO - APOIO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.4783,
+      "rationale": "Best title score 95.65; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:4a838cfbb2c326aead99",
+      "answerKeyDocumentId": "aaf71ee9015e9798",
+      "answerKeyStatus": "definitivo",
+      "score": 95.65,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:4a838cfbb2c326aead99",
+          "score": 95.65,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowNzoxOSAtMDMwMA== | www.pciconcursos.com.br | Página 1 de 18 | TRIBUNAL DE JUSTIÇA DO ESTADO DO AMAPÁ | EDITAL Nº 1/2023 | CONCURSO PARA PROVIMENTO DE CARGOS EFETIVOS DO | QUADRO DE PESSOAL PERMANENTE. | GABARITO DEFINITIVO - PROVA APLICADA EM 24/03/2024 | Analista Judiciário - Área Apoio Especializado - Especialidade Administração – TIPO 1"
+        },
+        {
+          "sectionId": "key-section:b1cd30b3208386c93aaa",
+          "score": 95.65,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowNzoxOSAtMDMwMA== | www.pciconcursos.com.br | Página 2 de 18 | TRIBUNAL DE JUSTIÇA DO ESTADO DO AMAPÁ | EDITAL Nº 1/2023 | CONCURSO PARA PROVIMENTO DE CARGOS EFETIVOS DO | QUADRO DE PESSOAL PERMANENTE. | GABARITO DEFINITIVO - PROVA APLICADA EM 24/03/2024 | Analista Judiciário - Área Apoio Especializado - Especialidade Assistente Social – TIPO 1"
+        },
+        {
+          "sectionId": "key-section:be9c7830a0e67edf16bc",
+          "score": 95.65,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowNzoxOSAtMDMwMA== | www.pciconcursos.com.br | Página 3 de 18 | TRIBUNAL DE JUSTIÇA DO ESTADO DO AMAPÁ | EDITAL Nº 1/2023 | CONCURSO PARA PROVIMENTO DE CARGOS EFETIVOS DO | QUADRO DE PESSOAL PERMANENTE. | GABARITO DEFINITIVO - PROVA APLICADA EM 24/03/2024 | Analista Judiciário - Área Apoio Especializado - Especialidade Biblioteconomia/Documentação – TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:1c8fa0835fbd846ce03e",
+    "contestId": "tjba_2014",
+    "examDocumentId": "fddba487918323c5",
+    "year": 2014,
+    "organizedPath": "tjba_2014/provas/01_analista-judiciario-tecnologia-da-informacao-tipo-1.pdf",
+    "sourceSha256": "7dfa6e70987b4c3e6539c321b93e21e4aac72a163abdee341edbd67239f10fcf",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Tecnologia da Informação",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "PARTIAL_REVIEW_REQUIRED",
+    "extractedQuestionCount": 30,
+    "sequenceComplete": false,
+    "issues": [
+      "QUESTION_SEQUENCE_INCOMPLETE"
+    ],
+    "answerKeyLink": {
+      "status": "UNRESOLVED",
+      "confidence": 0.0,
+      "rationale": "No answer-key section with matching contest and question count.",
+      "candidates": []
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:a98c7fa3b67c56bfa1d5",
+    "contestId": "tjdft_2022",
+    "examDocumentId": "060f56645a4dcacf",
+    "year": 2022,
+    "organizedPath": "tjdft_2022/provas/01_analista-judiciario-analise-de-sistemasns-asa-tipo-1.pdf",
+    "sourceSha256": "312d33b997ea56995cec8a3705986dd679e0ed305fd2d5827f2beb290e12d28d",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "ANALISTA JUDICIÁRIO - ANÁLISE DE",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:7ce54ba48c4d593e48d3",
+      "answerKeyDocumentId": "f20530c63b4d25af",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:7ce54ba48c4d593e48d3",
+          "score": 97.0,
+          "heading": "Tribunal de Justiça do | Distrito Federal e dos Territórios | CONCURSO PÚBLICO 2022 – Edital nº 01 | GABARITOS – PROVAS DO DIA 29/05/2022 | GABARITO DEFINITIVO | Analista Judiciário - Análise de Dados – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:4a38e65fbb2efdc204e4",
+          "score": 97.0,
+          "heading": "Tribunal de Justiça do | Distrito Federal e dos Territórios | CONCURSO PÚBLICO 2022 – Edital nº 01 | GABARITOS – PROVAS DO DIA 29/05/2022 | GABARITO DEFINITIVO | Analista Judiciário - Análise de Sistemas – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:018a3b11266fa74e6529",
+          "score": 85.65,
+          "heading": "Tribunal de Justiça do | Distrito Federal e dos Territórios | CONCURSO PÚBLICO 2022 – Edital nº 01 | GABARITOS – PROVAS DO DIA 29/05/2022 | GABARITO DEFINITIVO | Analista Judiciário - Administração – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:12e964b43bfaed0048ac",
+    "contestId": "tjdft_2022",
+    "examDocumentId": "7b9540427ec37b0c",
+    "year": 2022,
+    "organizedPath": "tjdft_2022/provas/02_analista-judiciario-seguranca-da-informacaons-sin-tipo-1.pdf",
+    "sourceSha256": "2000ffd43a8f81f9af7a8a4177f8d2e48a8c8c2e9e2f57de3a0691905a0b0020",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "ANALISTA JUDICIÁRIO - SEGURANÇA DA",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 13.42; status definitivo; variant 1.",
+      "sectionId": "key-section:7683e5e061a14d35bd4f",
+      "answerKeyDocumentId": "f20530c63b4d25af",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 13.419,
+      "candidates": [
+        {
+          "sectionId": "key-section:7683e5e061a14d35bd4f",
+          "score": 97.0,
+          "heading": "Tribunal de Justiça do | Distrito Federal e dos Territórios | CONCURSO PÚBLICO 2022 – Edital nº 01 | GABARITOS – PROVAS DO DIA 29/05/2022 | GABARITO DEFINITIVO | Analista Judiciário - Segurança da Informação – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:ca152a9824ad0300b12d",
+          "score": 83.581,
+          "heading": "Tribunal de Justiça do | Distrito Federal e dos Territórios | CONCURSO PÚBLICO 2022 – Edital nº 01 | GABARITOS – PROVAS DO DIA 29/05/2022 | GABARITO DEFINITIVO | Analista Judiciário - Suporte em Tecnologia da Informação – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:018a3b11266fa74e6529",
+          "score": 79.1045,
+          "heading": "Tribunal de Justiça do | Distrito Federal e dos Territórios | CONCURSO PÚBLICO 2022 – Edital nº 01 | GABARITOS – PROVAS DO DIA 29/05/2022 | GABARITO DEFINITIVO | Analista Judiciário - Administração – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:c483b63c292e09a362e1",
+    "contestId": "tjdft_2022",
+    "examDocumentId": "07f893dbc7343e86",
+    "year": 2022,
+    "organizedPath": "tjdft_2022/provas/03_analista-judiciario-suporte-em-tecnologia-da-informacaons-sti-tipo-1.pdf",
+    "sourceSha256": "6e7b702af0893cac95b0a668d591077f19f8d13dc451dc41613be98a5cfe2a61",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 22.16; status definitivo; variant 1.",
+      "sectionId": "key-section:ca152a9824ad0300b12d",
+      "answerKeyDocumentId": "f20530c63b4d25af",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 22.1608,
+      "candidates": [
+        {
+          "sectionId": "key-section:ca152a9824ad0300b12d",
+          "score": 97.0,
+          "heading": "Tribunal de Justiça do | Distrito Federal e dos Territórios | CONCURSO PÚBLICO 2022 – Edital nº 01 | GABARITOS – PROVAS DO DIA 29/05/2022 | GABARITO DEFINITIVO | Analista Judiciário - Suporte em Tecnologia da Informação – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:7683e5e061a14d35bd4f",
+          "score": 74.8392,
+          "heading": "Tribunal de Justiça do | Distrito Federal e dos Territórios | CONCURSO PÚBLICO 2022 – Edital nº 01 | GABARITOS – PROVAS DO DIA 29/05/2022 | GABARITO DEFINITIVO | Analista Judiciário - Segurança da Informação – Tipo 1"
+        },
+        {
+          "sectionId": "key-section:8d81b006dac69451ff30",
+          "score": 45.2122,
+          "heading": "Tribunal de Justiça do | Distrito Federal e dos Territórios | CONCURSO PÚBLICO 2022 – Edital nº 01 | GABARITOS – PROVAS DO DIA 29/05/2022 | GABARITO DEFINITIVO | Analista Judiciário - Psicologia – Tipo 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:719ed1d9d748b191fb3d",
+    "contestId": "tjmt_2024",
+    "examDocumentId": "1e077b9c73df6e22",
+    "year": 2024,
+    "organizedPath": "tjmt_2024/provas/01_cns102-analista-judiciario-analista-de-ti-t01.pdf",
+    "sourceSha256": "821c367691a1a01f1556757f9f03104b8b6e02f8320e9545540437eef7799e18",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "sua folha de textos definitivos, o fiscal de sala deve ser",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2592,
+      "rationale": "Best title score 51.84; margin 8.15; status definitivo; variant 1.",
+      "sectionId": "key-section:f2a997b089c17739fc92",
+      "answerKeyDocumentId": "a27cde15dcd3a708",
+      "answerKeyStatus": "definitivo",
+      "score": 51.8371,
+      "margin": 8.1457,
+      "candidates": [
+        {
+          "sectionId": "key-section:f2a997b089c17739fc92",
+          "score": 51.8371,
+          "heading": "TRIBUNAL DE JUSTIÇA DE MATO GROSSO | CONCURSO PÚBLICO – EDITAL 74/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 15/12/2024 | Página 2 de 9 | Analista Judiciário - Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:93dee4deb710703fceaa",
+          "score": 43.6913,
+          "heading": "TRIBUNAL DE JUSTIÇA DE MATO GROSSO | CONCURSO PÚBLICO – EDITAL 74/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 15/12/2024 | Página 6 de 9 | Oficial de Justiça - Direito - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:476c705805ab38cde90f",
+          "score": 40.3493,
+          "heading": "TRIBUNAL DE JUSTIÇA DE MATO GROSSO | CONCURSO PÚBLICO – EDITAL 74/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 15/12/2024 | Página 1 de 9 | Analista Judiciário - Administração - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:49523f3daa348e377e77",
+    "contestId": "tjmt_2024",
+    "examDocumentId": "da48b1f08d8ce81a",
+    "year": 2024,
+    "organizedPath": "tjmt_2024/provas/02_tecnico-de-nivel-superior-analista-de-sistemas-computacionais-analista-de-sistemas.pdf",
+    "sourceSha256": "6cfe1a84f62cab9c6a064909c3cee1dcf9f0bf9a7e2c881d0b272cd3420dfd5f",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "SISTEMAS COMPUTACIONAIS - ANALISTA DE",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "UNRESOLVED",
+      "confidence": 0.0,
+      "rationale": "No answer-key section with matching contest and question count.",
+      "candidates": []
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:9fb2fce664fb05cd688c",
+    "contestId": "tjmt_2024",
+    "examDocumentId": "a1bb19cd37576d7b",
+    "year": 2024,
+    "organizedPath": "tjmt_2024/provas/03_tecnico-de-nivel-superior-analista-de-sistemas-computacionais-analista-de-suporte-de-ti.pdf",
+    "sourceSha256": "5a222067918c60fdc81f7c8d775bb6b1bd6dbeda7b3f080ce9210d1f10742cab",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "SISTEMAS COMPUTACIONAIS - ANALISTA DE",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "UNRESOLVED",
+      "confidence": 0.0,
+      "rationale": "No answer-key section with matching contest and question count.",
+      "candidates": []
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:95a9a4fd4fcbd845de1b",
+    "contestId": "tjrj_unknown",
+    "examDocumentId": "87caf8c871a61bf9",
+    "year": null,
+    "organizedPath": "tjrj_unknown/provas/01_analista-judiciario-tecnologia-da-informacao-analista-de-sistemas.pdf",
+    "sourceSha256": "524931dc4676b3711a911763d73370572be40d314ccbe8469ae9c848ceeecef0",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "ANALISTA DE SISTEMAS",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "UNRESOLVED",
+      "confidence": 0.0,
+      "rationale": "No answer-key section with matching contest and question count.",
+      "candidates": []
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:8c9104444d10527d5db3",
+    "contestId": "tjrn_2023",
+    "examDocumentId": "18c654c0910b7862",
+    "year": 2023,
+    "organizedPath": "tjrn_2023/provas/01_analista-judiciario-tecnologia-de-informacao-analise-de-sistemas.pdf",
+    "sourceSha256": "268a6bfd9c86f4a3e0273b23bc82ee5c2c80cd0670a21e69b21c53dace2fbab2",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "TECNOLOGIA DE INFORMAÇÃO - ANÁLISE DE",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status definitivo; variant 1.",
+      "sectionId": "key-section:6847b0da6e3b928e21a3",
+      "answerKeyDocumentId": "4fde3f2a39651b24",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:6847b0da6e3b928e21a3",
+          "score": 97.0,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowOToxMiAtMDMwMA== | www.pciconcursos.com.br | TRIBUNAL DE JUSTIÇA DO RIO GRANDE DO NORTE – TJRN | EDITAL Nº 2/2023 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS NOS CARGOS DE ANALISTA JUDICIÁRIO E | DE OFICIAL DE JUSTIÇA DO QUADRO DE PESSOAL DO TJRN, E CADASTRO DE RESERVA. | GABARITO DA PROVA APLICADA EM 04/06/2023 | Página 1 de 2 | Analista Judiciário - Apoio Especializado - Especialidade - Tecnologia de Informação - Análise de Sistemas - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:79c93c9d9de8105b1ebe",
+          "score": 97.0,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowOToxMiAtMDMwMA== | www.pciconcursos.com.br | TRIBUNAL DE JUSTIÇA DO RIO GRANDE DO NORTE – TJRN | EDITAL Nº 2/2023 | CONCURSO PÚBLICO PARA PROVIMENTO DE VAGAS NOS CARGOS DE ANALISTA JUDICIÁRIO E | DE OFICIAL DE JUSTIÇA DO QUADRO DE PESSOAL DO TJRN, E CADASTRO DE RESERVA. | GABARITO DA PROVA APLICADA EM 04/06/2023 | Página 2 de 2 | Analista Judiciário - Apoio Especializado - Especialidade - Tecnologia de Informação - Análise de Suporte - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:dab4352b2f412e1985c5",
+          "score": 55.65,
+          "heading": "Analista Judiciário - Apoio Especializado - Especialidade - Biblioteconomia - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:d5de0a826e7e2c53282f",
+    "contestId": "tjro_tce_ro_unknown",
+    "examDocumentId": "6abcdc8781491632",
+    "year": null,
+    "organizedPath": "tjro_tce_ro_unknown/provas/01_analista-de-tecnologia-da-informacao-desenvolvimento-de-sistemas.pdf",
+    "sourceSha256": "02a70265763c9dfa3c1339e91817a182809d735f6d4c74a8c82128f022ca8b3b",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "INFORMAÇÃO - DESENVOLVIMENTO DE",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "UNRESOLVED",
+      "confidence": 0.0,
+      "rationale": "No answer-key section with matching contest and question count.",
+      "candidates": []
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:abce8002b12b939593b9",
+    "contestId": "tjrr_2024",
+    "examDocumentId": "a1fc8a1aa4682ffb",
+    "year": 2024,
+    "organizedPath": "tjrr_2024/provas/01_cns102t01-analista-judiciario-desenvolvimento-de-sistemas.pdf",
+    "sourceSha256": "39dd205b33f93c7492c6d4e37a698590486287c842cd7b1bbb47dd68c9560495",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Sobre a estruturação ou a significação dessa frase, é correto afirmar",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2746,
+      "rationale": "Best title score 54.92; margin 12.11; status definitivo; variant 1.",
+      "sectionId": "key-section:55928554d0ab0b499961",
+      "answerKeyDocumentId": "8fd7098962f5f723",
+      "answerKeyStatus": "definitivo",
+      "score": 54.9155,
+      "margin": 12.1132,
+      "candidates": [
+        {
+          "sectionId": "key-section:55928554d0ab0b499961",
+          "score": 54.9155,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Gestão e Governança de Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:a3143c7eb3a59d14826c",
+          "score": 42.8023,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Infraestrutura de Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:9dcf729ead55d2d0b98b",
+          "score": 41.7381,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Apoio à Gestão - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:de9ec1c8bc462298f34c",
+    "contestId": "tjrr_2024",
+    "examDocumentId": "dc009444bc8968ed",
+    "year": 2024,
+    "organizedPath": "tjrr_2024/provas/02_cns103t01-analista-judiciario-gestao-e-governanca-de-tecnologia-da-informacao.pdf",
+    "sourceSha256": "d28cfeacaa9505a80be887752478f34264c15d7564c4acdcc1b76ebcededb291",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA JUDICIÁRIO – GESTÃO E GOVERNANÇA DE TECNOLOGIA DA INFORMAÇÃO (MANHÃ)",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 92.65; margin 12.17; status definitivo; variant 1.",
+      "sectionId": "key-section:55928554d0ab0b499961",
+      "answerKeyDocumentId": "8fd7098962f5f723",
+      "answerKeyStatus": "definitivo",
+      "score": 92.65,
+      "margin": 12.1667,
+      "candidates": [
+        {
+          "sectionId": "key-section:55928554d0ab0b499961",
+          "score": 92.65,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Gestão e Governança de Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:a3143c7eb3a59d14826c",
+          "score": 80.4833,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Infraestrutura de Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:9dcf729ead55d2d0b98b",
+          "score": 62.6818,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Apoio à Gestão - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:f1c0add33cd61a41983c",
+    "contestId": "tjrr_2024",
+    "examDocumentId": "69a5a9ebc9794d84",
+    "year": 2024,
+    "organizedPath": "tjrr_2024/provas/03_cns104t01-analista-judiciario-ciberseguranca.pdf",
+    "sourceSha256": "57909b1a0f9dc9ffa2a3673889022be43edf0ef510a635cc38530e395ec94bb7",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Sobre a estruturação ou a significação dessa frase, é correto afirmar",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2746,
+      "rationale": "Best title score 54.92; margin 12.11; status definitivo; variant 1.",
+      "sectionId": "key-section:55928554d0ab0b499961",
+      "answerKeyDocumentId": "8fd7098962f5f723",
+      "answerKeyStatus": "definitivo",
+      "score": 54.9155,
+      "margin": 12.1132,
+      "candidates": [
+        {
+          "sectionId": "key-section:55928554d0ab0b499961",
+          "score": 54.9155,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Gestão e Governança de Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:a3143c7eb3a59d14826c",
+          "score": 42.8023,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Infraestrutura de Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:9dcf729ead55d2d0b98b",
+          "score": 41.7381,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Apoio à Gestão - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:cebc530063a629aca383",
+    "contestId": "tjrr_2024",
+    "examDocumentId": "ebc2d0dee5c57bf3",
+    "year": 2024,
+    "organizedPath": "tjrr_2024/provas/04_cns105t01-analista-judiciario-infraestrutura-de-tecnologia-da-informacao.pdf",
+    "sourceSha256": "f951ea03c84f8c14ac1fe193a30cc833b9a3fb8e01f4c0337af4d77b4085e835",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA JUDICIÁRIO – INFRAESTRUTURA DE TECNOLOGIA DA INFORMAÇÃO (MANHÃ)",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 92.42; margin 9.55; status definitivo; variant 1.",
+      "sectionId": "key-section:a3143c7eb3a59d14826c",
+      "answerKeyDocumentId": "8fd7098962f5f723",
+      "answerKeyStatus": "definitivo",
+      "score": 92.4192,
+      "margin": 9.5518,
+      "candidates": [
+        {
+          "sectionId": "key-section:a3143c7eb3a59d14826c",
+          "score": 92.4192,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Infraestrutura de Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:55928554d0ab0b499961",
+          "score": 82.8674,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Gestão e Governança de Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:28da405d98b03fc2b980",
+          "score": 59.4966,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Cibersegurança - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:4a13120332dae584cae9",
+    "contestId": "tjrr_2024",
+    "examDocumentId": "888b21b9e48e2b9a",
+    "year": 2024,
+    "organizedPath": "tjrr_2024/provas/05_cns106t01-analista-judiciario-ciencia-de-dados-e-analytics.pdf",
+    "sourceSha256": "a478504b65473fddbd5b79c1e51723f3732434865ff4423134e079eb91a10020",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "Sobre a estruturação ou a significação dessa frase, é correto afirmar",
+    "expectedQuestionCount": 70,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.2746,
+      "rationale": "Best title score 54.92; margin 12.11; status definitivo; variant 1.",
+      "sectionId": "key-section:55928554d0ab0b499961",
+      "answerKeyDocumentId": "8fd7098962f5f723",
+      "answerKeyStatus": "definitivo",
+      "score": 54.9155,
+      "margin": 12.1132,
+      "candidates": [
+        {
+          "sectionId": "key-section:55928554d0ab0b499961",
+          "score": 54.9155,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Gestão e Governança de Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:a3143c7eb3a59d14826c",
+          "score": 42.8023,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Infraestrutura de Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:9dcf729ead55d2d0b98b",
+          "score": 41.7381,
+          "heading": "TRIBUNAL DE JUSTIÇA DO ESTADO DE RORAIMA | CONCURSO PÚBLICO – EDITAL Nº 01/2024 | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 17/12/2024 | Analista Judiciário - Apoio à Gestão - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:0c3669bfab3f00edc6a9",
+    "contestId": "tjse_unknown",
+    "examDocumentId": "f7eb0800277974ac",
+    "year": null,
+    "organizedPath": "tjse_unknown/provas/01_analista-judiciario-analise-de-sistemas.pdf",
+    "sourceSha256": "2ab540853158bdbd6270736b64c5ce8df18df2050ec14ea404269291bc30bec3",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANÁLISE DE SISTEMAS",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 70,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "UNRESOLVED",
+      "confidence": 0.0,
+      "rationale": "No answer-key section with matching contest and question count.",
+      "candidates": []
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:202497224f939ea996e5",
+    "contestId": "trf1_2024",
+    "examDocumentId": "77b3fc9072c48115",
+    "year": 2024,
+    "organizedPath": "trf1_2024/provas/01_analista-judiciario-area-apoio-especializado-especialidade-analise-de-sistemas-de-informacao.pdf",
+    "sourceSha256": "61ad9926e9c5bc99433f6b818cce7b49c4dd2fe3a7e68a49968d6a96d1420f69",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "ANALISTA JUDICIÁRIO - ÁREA APOIO ESPECIALIZADO –",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status preliminar; variant 1.",
+      "sectionId": "key-section:0bf0e526ca0dba1175ae",
+      "answerKeyDocumentId": "9a7503311530bc5d",
+      "answerKeyStatus": "preliminar",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:0bf0e526ca0dba1175ae",
+          "score": 97.0,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowNzowNCAtMDMwMA== | www.pciconcursos.com.br | TRIBUNAL REGIONAL FEDERAL DA 1ª REGIÃO | Concurso Público 2024 – Edital nº 1 | Provas Aplicadas em 29/09/2024 - Manhã | GABARITO PRELIMINAR | Página 4 de 29 | Analista Judiciário - Área Apoio Especializado - Especialidade: Análise de Sistemas de | Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:09a18d53a5c68ee04bc7",
+          "score": 97.0,
+          "heading": "Analista Judiciário - Área Apoio Especializado - Especialidade: Arquitetura - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:b785b046f8e929f34bac",
+          "score": 97.0,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowNzowNCAtMDMwMA== | www.pciconcursos.com.br | TRIBUNAL REGIONAL FEDERAL DA 1ª REGIÃO | Concurso Público 2024 – Edital nº 1 | Provas Aplicadas em 29/09/2024 - Manhã | GABARITO PRELIMINAR | Página 5 de 29 | Analista Judiciário - Área Apoio Especializado - Especialidade: Contabilidade - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:b3f91d8939e5d9a284e6",
+    "contestId": "trf1_2024",
+    "examDocumentId": "d765c82af2673d94",
+    "year": 2024,
+    "organizedPath": "trf1_2024/provas/02_analista-judiciario-area-apoio-especializado-especialidade-tecnologia-da-informacao.pdf",
+    "sourceSha256": "38e7c9f9571b62731c0a46ed96274c15cbe7a8b65b7f0f3eb9b28f33446042f5",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "MIXED",
+    "bookletLabel": "ESPECIALIDADE: TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": null,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AMBIGUOUS_REVIEW_REQUIRED",
+      "confidence": 0.485,
+      "rationale": "Best title score 97.00; margin 0.00; status preliminar; variant 1.",
+      "sectionId": "key-section:69b557ad17a21df60b58",
+      "answerKeyDocumentId": "9a7503311530bc5d",
+      "answerKeyStatus": "preliminar",
+      "score": 97.0,
+      "margin": 0.0,
+      "candidates": [
+        {
+          "sectionId": "key-section:69b557ad17a21df60b58",
+          "score": 97.0,
+          "heading": "Analista Judiciário - Área Apoio Especializado - Especialidade: Tecnologia da | Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:cda83e68276729ce68aa",
+          "score": 97.0,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowNzowNCAtMDMwMA== | www.pciconcursos.com.br | TRIBUNAL REGIONAL FEDERAL DA 1ª REGIÃO | Concurso Público 2024 – Edital nº 1 | Provas Aplicadas em 29/09/2024 - Tarde | GABARITO PRELIMINAR | Página 29 de 29 | Técnico Judiciário - Área Apoio Especializado - Especialidade: Tecnologia da | Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:d01c64cdbc3f7cd04d07",
+          "score": 95.65,
+          "heading": "pcimarkpci MjgwNDowMTRkOmJlOGE6YWQ1NDo4MWNiOmFmZmY6YmQzYjpmM2Qx:TW9uLCAxMyBKdWwgMjAyNiAwMTowNzowNCAtMDMwMA== | www.pciconcursos.com.br | TRIBUNAL REGIONAL FEDERAL DA 1ª REGIÃO | Concurso Público 2024 – Edital nº 1 | Provas Aplicadas em 29/09/2024 - Manhã | GABARITO PRELIMINAR | Página 10 de 29 | Analista Judiciário - Área Apoio Especializado - Especialidade: Governança e Gestão de | Tecnologia da Informação - TIPO 1"
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:27515ba17d443e000d72",
+    "contestId": "trt16_unknown",
+    "examDocumentId": "c3416d3ca3d8a1da",
+    "year": null,
+    "organizedPath": "trt16_unknown/provas/01_analista-judiciario-area-administrativa-tecnologia-da-informacao.pdf",
+    "sourceSha256": "0cca0d7deee07f5e49c49a09f12df629a9785a801e5f2971f1f363921f037eac",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ANALISTA JUDICIÁRIO - ÁREA ADMINISTRATIVA",
+    "expectedQuestionCount": 80,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 80,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "UNRESOLVED",
+      "confidence": 0.0,
+      "rationale": "No answer-key section with matching contest and question count.",
+      "candidates": []
+    }
+  },
+  {
+    "schemaVersion": "1.1.0",
+    "id": "exam:4c824a578fa302544654",
+    "contestId": "trt24_2024",
+    "examDocumentId": "16c4b936421dea2b",
+    "year": 2024,
+    "organizedPath": "trt24_2024/provas/01_area-apoio-especializado-tecnologia-da-informacaocns110-tipo-1.pdf",
+    "sourceSha256": "63f84060b602b203c328e14945922589a4db03add0db30ee736ed2aefd58f864",
+    "sourceVerified": true,
+    "shadowMode": true,
+    "incidenceEligible": false,
+    "examKind": "OBJECTIVE",
+    "bookletLabel": "ÁREA APOIO ESPECIALIZADO - TECNOLOGIA DA INFORMAÇÃO",
+    "expectedQuestionCount": 60,
+    "extractionStatus": "EXTRACTED_REVIEW_PENDING",
+    "extractedQuestionCount": 60,
+    "sequenceComplete": true,
+    "issues": [],
+    "answerKeyLink": {
+      "status": "AUTO_LINKED_HIGH_CONFIDENCE",
+      "confidence": 0.99,
+      "rationale": "Best title score 97.00; margin 24.08; status definitivo; variant 1.",
+      "sectionId": "key-section:6742ec42e666d4dfff9d",
+      "answerKeyDocumentId": "bf291c79f2c5467e",
+      "answerKeyStatus": "definitivo",
+      "score": 97.0,
+      "margin": 24.0773,
+      "candidates": [
+        {
+          "sectionId": "key-section:6742ec42e666d4dfff9d",
+          "score": 97.0,
+          "heading": "TRIBUNAL REGIONAL DO TRABALHO DA 24ª REGIÃO | (TRT-24) | CONCURSO PÚBLICO PARA O PROVIMENTO DE CARGOS VAGOS DE ANALISTA | JUDICIÁRIO E TÉCNICO JUDICIÁRIO | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 09/03/2025 | Página 1 de 4 | Técnico Judiciário - Área Apoio Especializado - Tecnologia da Informação - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:640b99f8a3a1f6bc1dbc",
+          "score": 72.9227,
+          "heading": "TRIBUNAL REGIONAL DO TRABALHO DA 24ª REGIÃO | (TRT-24) | CONCURSO PÚBLICO PARA O PROVIMENTO DE CARGOS VAGOS DE ANALISTA | JUDICIÁRIO E TÉCNICO JUDICIÁRIO | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 09/03/2025 | Página 2 de 4 | Técnico Judiciário - Área Apoio Especializado - Enfermagem do Trabalho - TIPO 1"
+        },
+        {
+          "sectionId": "key-section:e240e4a8f42a3c56e20f",
+          "score": 60.1276,
+          "heading": "TRIBUNAL REGIONAL DO TRABALHO DA 24ª REGIÃO | (TRT-24) | CONCURSO PÚBLICO PARA O PROVIMENTO DE CARGOS VAGOS DE ANALISTA | JUDICIÁRIO E TÉCNICO JUDICIÁRIO | GABARITO DEFINITIVO DA PROVA APLICADA NO DIA 09/03/2025 | Página 3 de 4 | Técnico Judiciário - Área Administrativa - Agente da Polícia Judicial - TIPO 1"
+        }
+      ]
+    }
+  }
+]

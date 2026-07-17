@@ -10,9 +10,9 @@ import unicodedata
 from pathlib import Path
 from typing import Any
 
-INPUT = Path('/mnt/data/fgv37_corpus/Provas')
-TEXT_DIR = Path('/mnt/data/fgv37_text')
-OUT = Path('/mnt/data/fgv37_analysis')
+INPUT = Path(os.environ.get('FGV37_INPUT_DIR', 'data/input/fgv37/Provas'))
+TEXT_DIR = Path(os.environ.get('FGV37_TEXT_DIR', 'data/input/fgv37/text'))
+OUT = Path(os.environ.get('FGV37_OUTPUT_DIR', 'data/evidence/dataprev-2026-perfil-3/fgv-exams-37/inventory'))
 OUT.mkdir(parents=True, exist_ok=True)
 
 

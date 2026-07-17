@@ -16,6 +16,7 @@ import {
   ConstraintCheck
 } from "./types";
 import { getDaysSinceLastStudy, getReferenceDate, assessSubassunto } from "./priorityScore";
+import { SDE_CONFIG } from "../config/sdeConfig";
 
 /**
  * Evaluates the cognitive eligibility of an activity type for a given knowledge level.
@@ -35,28 +36,56 @@ export function evaluateActivityEligibility(
   evidence?: string[];
 } {
   if (tipo === "teoria") {
-    if (assessment.state === "UNSEEN") {
+    const placement = assessment.diagnosticPlacement;
+
+    if (!assessment.theoryCompleted && placement?.status === "THEORY_REQUIRED") {
       return {
         eligible: true,
-        reasonCode: "UNSEEN_THEORY",
-        reason: "Tópico inédito. Estudo de teoria recomendado."
+        reasonCode: "LOW_PERFORMANCE_THEORY",
+        reason: "O diagnóstico inicial não sustentou dispensa de teoria. Estudo teórico direcionado recomendado."
       };
     }
-    // Theory for low performance requires hitRate < 50% and sampleSize > 40
-    if (assessment.state === "OBSERVED" && assessment.hitRate !== null && assessment.hitRate < 0.50) {
-      if (assessment.sampleSize > 40) {
+
+    if (!assessment.theoryCompleted && placement?.status === "THEORY_BYPASS_ELIGIBLE") {
+      return {
+        eligible: false,
+        reasonCode: "NOT_ELIGIBLE",
+        reason: "Conhecimento prévio demonstrado provisoriamente. Teoria integral adiada; prossiga com prática e revisão."
+      };
+    }
+
+    if (assessment.state === "UNSEEN" || placement?.status === "INSUFFICIENT_SAMPLE") {
+      return {
+        eligible: false,
+        reasonCode: "NOT_ELIGIBLE",
+        reason: "Antes da teoria, conclua o diagnóstico inicial curto para medir conhecimento prévio sem consulta."
+      };
+    }
+
+    if (
+      assessment.state === "OBSERVED" &&
+      assessment.hitRate !== null &&
+      assessment.hitRate < SDE_CONFIG.ELIGIBILITY.LOW_PERFORMANCE_HIT_RATE
+    ) {
+      const isInitialTheoryRecovery = !assessment.theoryCompleted;
+      const hasStrongRemediationSample =
+        assessment.sampleSize >= SDE_CONFIG.ELIGIBILITY.STRONG_THEORY_REMEDIATION_MIN_SAMPLE_SIZE;
+
+      if (isInitialTheoryRecovery || hasStrongRemediationSample) {
         return {
           eligible: true,
           reasonCode: "LOW_PERFORMANCE_THEORY",
-          reason: "Desempenho abaixo de 50% com amostra estatística suficiente. Necessidade de reforço teórico."
-        };
-      } else {
-        return {
-          eligible: false,
-          reasonCode: "NOT_ELIGIBLE",
-          reason: "Rendimento abaixo de 50%, mas com amostra insuficiente para comprovar deficiência teórica (amostra <= 40)."
+          reason: isInitialTheoryRecovery
+            ? "Desempenho observado baixo sem conclusão teórica registrada. Reforço teórico liberado para evitar bloqueio cognitivo."
+            : "Desempenho baixo persistente após teoria concluída e com amostra forte. Reforço teórico recomendado."
         };
       }
+
+      return {
+        eligible: false,
+        reasonCode: "NOT_ELIGIBLE",
+        reason: "A teoria já foi concluída e a amostra ainda não justifica reabrir teoria; prossiga com prática e correção para ampliar a evidência."
+      };
     }
     return {
       eligible: false,
@@ -66,13 +95,39 @@ export function evaluateActivityEligibility(
   }
 
   if (tipo === "questoes") {
-    if (assessment.state === "UNSEEN") {
+    const placement = assessment.diagnosticPlacement;
+
+    if (
+      assessment.state === "UNSEEN" ||
+      placement?.status === "NOT_STARTED" ||
+      placement?.status === "INSUFFICIENT_SAMPLE"
+    ) {
+      return {
+        eligible: true,
+        reasonCode: "DIAGNOSTIC_QUESTIONS",
+        reason: placement?.status === "INSUFFICIENT_SAMPLE"
+          ? `Continue o diagnóstico inicial: faltam ${placement.missingQuestions} questão(ões) para uma decisão segura.`
+          : "Primeiro contato: resolva uma bateria diagnóstica curta, sem consulta, antes de abrir teoria.",
+        diagnosticPurpose: true
+      };
+    }
+
+    if (!assessment.theoryCompleted && placement?.status === "THEORY_REQUIRED") {
       return {
         eligible: false,
         reasonCode: "NOT_ELIGIBLE",
-        reason: "Tópico inédito exige estudo teórico antes da resolução de questões."
+        reason: "O diagnóstico indicou necessidade de teoria antes de uma nova bateria de consolidação."
       };
     }
+
+    if (placement?.status === "THEORY_BYPASS_ELIGIBLE") {
+      return {
+        eligible: true,
+        reasonCode: "OBSERVED_PRACTICE",
+        reason: "Conhecimento prévio demonstrado provisoriamente. Prática e revisão substituem a teoria integral por enquanto."
+      };
+    }
+
     if (assessment.state === "UNKNOWN") {
       return {
         eligible: true,
@@ -84,7 +139,7 @@ export function evaluateActivityEligibility(
     if (
       assessment.state === "OBSERVED" &&
       (assessment.theoryCompleted ||
-        (assessment.hitRate !== null && assessment.hitRate >= 0.50))
+        (assessment.hitRate !== null && assessment.hitRate >= SDE_CONFIG.ELIGIBILITY.PRACTICE_MIN_HIT_RATE))
     ) {
       return {
         eligible: true,
@@ -127,7 +182,7 @@ export function evaluateActivityEligibility(
     }
 
     if (assessment.state === "OBSERVED") {
-      if (decayRate > 0.20) {
+      if (decayRate > SDE_CONFIG.ELIGIBILITY.HIGH_DECAY_THRESHOLD) {
         return {
           eligible: true,
           reasonCode: "HIGH_DECAY",
@@ -136,7 +191,7 @@ export function evaluateActivityEligibility(
       }
 
       // Check for performance drop or revision countdown
-      if (evidence && evidence.tentativas && evidence.tentativas.length >= 6) {
+      if (evidence && evidence.tentativas && evidence.tentativas.length >= SDE_CONFIG.ELIGIBILITY.PERFORMANCE_DROP_MIN_ATTEMPTS) {
         const sorted = [...evidence.tentativas].sort(
           (a, b) => new Date(a.data).getTime() - new Date(b.data).getTime()
         );
@@ -150,7 +205,7 @@ export function evaluateActivityEligibility(
         const earlierHits = earlier.filter(t => t.acertou).length;
         const earlierHitRate = earlierHits / earlier.length;
         
-        if (earlier.length > 0 && recentHitRate < earlierHitRate - 0.20) {
+        if (earlier.length > 0 && recentHitRate < earlierHitRate - SDE_CONFIG.ELIGIBILITY.PERFORMANCE_DROP_THRESHOLD) {
           return {
             eligible: true,
             reasonCode: "HISTORICAL_DROP",
@@ -161,7 +216,7 @@ export function evaluateActivityEligibility(
 
       if (assessment.lastEvidenceAt) {
         const daysSinceLast = getDaysSinceLastStudy(assessment.lastEvidenceAt, referenceDate);
-        if (daysSinceLast > 30) {
+        if (daysSinceLast > SDE_CONFIG.ELIGIBILITY.REVISION_EXPIRED_DAYS) {
           return {
             eligible: true,
             reasonCode: "REVISION_EXPIRED",
@@ -265,7 +320,11 @@ export function evaluateConstraints(params: {
     throw new Error(`Erro estruturado: Incidência histórica do assunto '${assuntoId}' ausente no edital.`);
   }
 
-  const historicalIncidenceSource = edital.assuntoModelMetadata?.[assuntoId]?.historicalIncidenceSource ?? "EMPIRICAL";
+  const topicMetadata = edital.assuntoModelMetadata[assuntoId];
+  if (!topicMetadata) {
+    throw new Error(`Erro estruturado: Metadados de proveniência do assunto '${assuntoId}' ausentes no edital.`);
+  }
+  const historicalIncidenceSource = topicMetadata.historicalIncidenceSource;
   const hasOfficialZeroWeight = disciplineWeight === 0 || topicWeight === 0;
   const hasValidatedZeroIncidence = historicalIncidenceSource === "EMPIRICAL" && historicalIncidence === 0;
 
@@ -298,8 +357,20 @@ export function evaluateConstraints(params: {
   });
 
   // --- 2. VETO DE DESPERDÍCIO ENERGÉTICO (Custo de Oportunidade Crítico & Overstudy) ---
-  if (tipo === "teoria" && hitRate !== null && hitRate >= 0.85) {
-    const vetoReason = "Candidato já superou 85% de rendimento neste assunto. Estudar teoria avançada é um desperdício energético.";
+  const theoryEvidenceAssessment = subassuntoId
+    ? (subAssessment ?? assessSubassunto(subassuntoId, history, refDate))
+    : assAssessment;
+  const theoryAvoidanceSupported =
+    theoryEvidenceAssessment?.theoryCompleted === true ||
+    theoryEvidenceAssessment?.diagnosticPlacement?.status === "THEORY_BYPASS_ELIGIBLE";
+
+  if (
+    tipo === "teoria" &&
+    theoryAvoidanceSupported &&
+    hitRate !== null &&
+    hitRate >= SDE_CONFIG.ELIGIBILITY.THEORY_OVERSTUDY_HIT_RATE
+  ) {
+    const vetoReason = "Desempenho elevado foi demonstrado com evidência suficiente. Reabrir teoria integral seria um desperdício energético.";
     checksPerformed.push({
       type: "VETO_DESPERDICIO_ENERGETICO",
       result: "VETOED",
@@ -343,7 +414,7 @@ export function evaluateConstraints(params: {
           throw new Error(`Erro estruturado: Pré-requisito '${reqId}' possui estado INVALID.`);
         }
 
-        if (reqAssessment.hitRate !== null && reqAssessment.hitRate < 0.50) {
+        if (reqAssessment.hitRate !== null && reqAssessment.hitRate < SDE_CONFIG.CONSTRAINTS.PREREQUISITE_MIN_HIT_RATE) {
           preReqVetoed = true;
           preReqReason = `Veto de pré-requisito: Desempenho no pré-requisito '${reqId}' (${(reqAssessment.hitRate * 100).toFixed(0)}%) está abaixo do mínimo exigido de 50%.`;
           preReqVetoType = "VETO_PRE_REQUISITO_PERFORMANCE";

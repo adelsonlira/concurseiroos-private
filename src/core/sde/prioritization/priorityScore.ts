@@ -19,28 +19,36 @@ import {
   LearningLeveragePolicy,
   OpportunityCostResult,
   MarginalReturnEstimate,
-  EliminationRiskResult
+  EliminationRiskResult,
+  DisciplineZeroSafetyStatus
 } from "./types";
 import { SDE_CONFIG } from "../config/sdeConfig";
+import { assessDiagnosticPlacement } from "../../diagnostic/diagnosticPlacement";
 
 export interface ScoreBreakdown {
   finalScore: number;
   pesoEdital: number;
-  disciplineWeight?: number;
-  topicWeight?: number;
-  topicWeightSource?: "OFFICIAL" | "NEUTRAL_PRIOR";
+  disciplineWeight: number;
+  topicWeight: number;
+  topicWeightSource: "OFFICIAL" | "NEUTRAL_PRIOR";
   incidenciaHistorica: number;
   historicalIncidenceRate: number;
-  historicalIncidenceSource?: "EMPIRICAL" | "UNAVAILABLE";
+  historicalIncidenceSource: "EMPIRICAL" | "UNAVAILABLE";
   deficienciaUsuario: number | null;
   riscoEsquecimento: number | null;
   retornoMarginal: number | null;
   learningLeverageScore: number | null;
   riscoEliminacao: number | null;
   dependenciasBonus: number;
+  confidenceAdjustment: number;
+  activitySuitabilityAdjustment: number;
+  unclampedFinalScore: number;
   confiancaEstatistica: number;
   confidenceLevel: "LOW" | "MEDIUM" | "HIGH";
   elimRiskLevel: EliminationRiskLevel;
+  disciplineZeroSafetyStatus: DisciplineZeroSafetyStatus;
+  disciplineSampleSize: number;
+  disciplineCorrectAnswers: number;
   knowledgeState: KnowledgeState;
   camadaConstitucional: ConstitutionalTier;
   elimRiskResult?: EliminationRiskResult;
@@ -74,9 +82,11 @@ export function calculateStatisticalConfidence(
   }
   const sampleConfidence = questionsCount / (questionsCount + 10);
   
-  let recencyFactor = 0.5;
+  let recencyFactor = SDE_CONFIG.EVIDENCE.MISSING_DATE_RECENCY_FACTOR;
   if (daysSinceLastStudy !== Infinity && daysSinceLastStudy >= 0) {
-    recencyFactor = 1 / (1 + daysSinceLastStudy / 45);
+    recencyFactor = 1 / (
+      1 + daysSinceLastStudy / SDE_CONFIG.EVIDENCE.CONFIDENCE_RECENCY_SCALE_DAYS
+    );
   }
   
   const confidence = sampleConfidence * recencyFactor;
@@ -178,7 +188,7 @@ export function assessSubassunto(
   let state: "UNSEEN" | "UNKNOWN" | "OBSERVED" = "UNSEEN";
   if (!theoryCompleted && sampleSize === 0 && !lastEvidenceAt) {
     state = "UNSEEN";
-  } else if (sampleSize >= 5) {
+  } else if (sampleSize >= SDE_CONFIG.EVIDENCE.OBSERVED_MIN_SAMPLE_SIZE) {
     state = "OBSERVED";
   } else {
     state = "UNKNOWN";
@@ -190,17 +200,23 @@ export function assessSubassunto(
     daysSinceLast = getDaysSinceLastStudy(lastEvidenceAt, referenceDate);
   }
 
-  if (sampleSize > 100 && daysSinceLast <= 15) {
+  if (
+    sampleSize >= SDE_CONFIG.EVIDENCE.HIGH_CONFIDENCE_MIN_SAMPLE_SIZE &&
+    daysSinceLast <= SDE_CONFIG.EVIDENCE.HIGH_CONFIDENCE_MAX_AGE_DAYS
+  ) {
     confidenceLevel = "HIGH";
-  } else if ((sampleSize >= 20 && sampleSize <= 100) || (sampleSize > 100 && daysSinceLast > 15)) {
+  } else if (sampleSize >= SDE_CONFIG.EVIDENCE.MEDIUM_CONFIDENCE_MIN_SAMPLE_SIZE) {
     confidenceLevel = "MEDIUM";
   } else {
     confidenceLevel = "LOW";
   }
 
   const sampleConfidence = sampleSize / (sampleSize + 10);
-  const recencyFactor = daysSinceLast !== Infinity ? 1 / (1 + daysSinceLast / 45) : 0.5;
+  const recencyFactor = daysSinceLast !== Infinity
+    ? 1 / (1 + daysSinceLast / SDE_CONFIG.EVIDENCE.CONFIDENCE_RECENCY_SCALE_DAYS)
+    : SDE_CONFIG.EVIDENCE.MISSING_DATE_RECENCY_FACTOR;
   const confidenceScore = parseFloat((sampleConfidence * recencyFactor).toFixed(4));
+  const diagnosticPlacement = assessDiagnosticPlacement(evidence.tentativas ?? []);
 
   return {
     state,
@@ -210,7 +226,8 @@ export function assessSubassunto(
     lastEvidenceAt,
     theoryCompleted,
     confidenceLevel,
-    confidenceScore
+    confidenceScore,
+    diagnosticPlacement
   };
 }
 
@@ -261,7 +278,7 @@ export function assessAssunto(
 
   let state: "UNSEEN" | "UNKNOWN" | "OBSERVED" | "INVALID" = "UNSEEN";
   if (hasInvalid) state = "INVALID";
-  else if (totalTentativas >= 5) state = "OBSERVED";
+  else if (totalTentativas >= SDE_CONFIG.EVIDENCE.OBSERVED_MIN_SAMPLE_SIZE) state = "OBSERVED";
   else if (totalTentativas > 0 || hasUnknown || hasObserved || hasUnseen) {
     if (totalTentativas === 0 && !hasUnknown && !hasObserved) {
       state = "UNSEEN";
@@ -276,16 +293,21 @@ export function assessAssunto(
     daysSinceLast = getDaysSinceLastStudy(latestDate, referenceDate);
   }
 
-  if (totalTentativas > 100 && daysSinceLast <= 15) {
+  if (
+    totalTentativas >= SDE_CONFIG.EVIDENCE.HIGH_CONFIDENCE_MIN_SAMPLE_SIZE &&
+    daysSinceLast <= SDE_CONFIG.EVIDENCE.HIGH_CONFIDENCE_MAX_AGE_DAYS
+  ) {
     confidenceLevel = "HIGH";
-  } else if ((totalTentativas >= 20 && totalTentativas <= 100) || (totalTentativas > 100 && daysSinceLast > 15)) {
+  } else if (totalTentativas >= SDE_CONFIG.EVIDENCE.MEDIUM_CONFIDENCE_MIN_SAMPLE_SIZE) {
     confidenceLevel = "MEDIUM";
   } else {
     confidenceLevel = "LOW";
   }
 
   const sampleConfidence = totalTentativas / (totalTentativas + 10);
-  const recencyFactor = daysSinceLast !== Infinity ? 1 / (1 + daysSinceLast / 45) : 0.5;
+  const recencyFactor = daysSinceLast !== Infinity
+    ? 1 / (1 + daysSinceLast / SDE_CONFIG.EVIDENCE.CONFIDENCE_RECENCY_SCALE_DAYS)
+    : SDE_CONFIG.EVIDENCE.MISSING_DATE_RECENCY_FACTOR;
   const confidenceScore = parseFloat((sampleConfidence * recencyFactor).toFixed(4));
 
   return {
@@ -358,7 +380,7 @@ export function assessDisciplina(
 
   let state: "UNSEEN" | "UNKNOWN" | "OBSERVED" | "INVALID" = "UNSEEN";
   if (hasInvalid) state = "INVALID";
-  else if (totalTentativas >= 5) state = "OBSERVED";
+  else if (totalTentativas >= SDE_CONFIG.EVIDENCE.OBSERVED_MIN_SAMPLE_SIZE) state = "OBSERVED";
   else if (totalTentativas > 0 || hasUnknown || hasObserved) {
     state = "UNKNOWN";
   }
@@ -369,16 +391,21 @@ export function assessDisciplina(
     daysSinceLast = getDaysSinceLastStudy(latestDate, referenceDate);
   }
 
-  if (totalTentativas > 100 && daysSinceLast <= 15) {
+  if (
+    totalTentativas >= SDE_CONFIG.EVIDENCE.HIGH_CONFIDENCE_MIN_SAMPLE_SIZE &&
+    daysSinceLast <= SDE_CONFIG.EVIDENCE.HIGH_CONFIDENCE_MAX_AGE_DAYS
+  ) {
     confidenceLevel = "HIGH";
-  } else if ((totalTentativas >= 20 && totalTentativas <= 100) || (totalTentativas > 100 && daysSinceLast > 15)) {
+  } else if (totalTentativas >= SDE_CONFIG.EVIDENCE.MEDIUM_CONFIDENCE_MIN_SAMPLE_SIZE) {
     confidenceLevel = "MEDIUM";
   } else {
     confidenceLevel = "LOW";
   }
 
   const sampleConfidence = totalTentativas / (totalTentativas + 10);
-  const recencyFactor = daysSinceLast !== Infinity ? 1 / (1 + daysSinceLast / 45) : 0.5;
+  const recencyFactor = daysSinceLast !== Infinity
+    ? 1 / (1 + daysSinceLast / SDE_CONFIG.EVIDENCE.CONFIDENCE_RECENCY_SCALE_DAYS)
+    : SDE_CONFIG.EVIDENCE.MISSING_DATE_RECENCY_FACTOR;
   const confidenceScore = parseFloat((sampleConfidence * recencyFactor).toFixed(4));
 
   // Differentiate Treino and Simulado
@@ -570,6 +597,22 @@ export function calculateEliminationRisk(
   };
 }
 
+export function assessDisciplineZeroSafety(
+  edital: EditalConfig,
+  assessment: DisciplinaAssessment
+): DisciplineZeroSafetyStatus {
+  if (edital.eliminaAoZerarDisciplina !== true) return "NOT_APPLICABLE";
+  if (assessment.sampleSize === 0) return "UNASSESSED";
+  if (assessment.totalAcertos === 0) return "NO_CORRECT_ANSWER";
+  if (
+    assessment.sampleSize <
+    SDE_CONFIG.ELIGIBILITY.ZERO_DISCIPLINE_SAFETY_MIN_SAMPLE_SIZE
+  ) {
+    return "MINIMUM_EVIDENCE";
+  }
+  return "PROTECTED";
+}
+
 /**
  * Classifies an action into its strict Constitutional Tier.
  */
@@ -582,23 +625,35 @@ export function classifyConstitutionalTier(params: {
   elimRiskLevel: EliminationRiskLevel;
   topicWeight: number;
   historicalIncidence: number;
+  historicalIncidenceSource: "EMPIRICAL" | "UNAVAILABLE";
   decayRate: number;
   knowledgeState: KnowledgeState;
   sampleSize: number;
   diagnosticPurpose?: boolean;
   scheduledReviewDue?: boolean;
+  disciplineZeroSafetyStatus?: DisciplineZeroSafetyStatus;
 }): ConstitutionalTier {
   const {
     hitRate,
     elimRiskLevel,
     topicWeight,
     historicalIncidence,
+    historicalIncidenceSource,
     decayRate,
     knowledgeState,
     sampleSize,
     diagnosticPurpose,
-    scheduledReviewDue
+    scheduledReviewDue,
+    disciplineZeroSafetyStatus = "NOT_APPLICABLE"
   } = params;
+
+  if (
+    disciplineZeroSafetyStatus === "UNASSESSED" ||
+    disciplineZeroSafetyStatus === "NO_CORRECT_ANSWER" ||
+    disciplineZeroSafetyStatus === "MINIMUM_EVIDENCE"
+  ) {
+    return ConstitutionalTier.RISCO_ELIMINACAO;
+  }
 
   if (diagnosticPurpose) {
     return ConstitutionalTier.EXPANSAO_EDITAL;
@@ -608,12 +663,19 @@ export function classifyConstitutionalTier(params: {
     return ConstitutionalTier.RISCO_ELIMINACAO;
   }
 
+  const incidenceForDecision = historicalIncidenceSource === "EMPIRICAL"
+    ? historicalIncidence
+    : 0;
+
   if (
     knowledgeState === KnowledgeState.OBSERVED &&
     hitRate !== null &&
-    sampleSize >= 5 &&
-    (topicWeight >= 4 || historicalIncidence >= 0.4) &&
-    hitRate < 0.60
+    sampleSize >= SDE_CONFIG.EVIDENCE.OBSERVED_MIN_SAMPLE_SIZE &&
+    (
+      topicWeight >= SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_HIGH_TOPIC_WEIGHT_THRESHOLD ||
+      incidenceForDecision >= SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_HIGH_INCIDENCE_THRESHOLD
+    ) &&
+    hitRate < SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_HIGH_GAP_HIT_RATE
   ) {
     return ConstitutionalTier.LACUNAS_ALTO_PESO;
   }
@@ -621,9 +683,9 @@ export function classifyConstitutionalTier(params: {
   if (
     knowledgeState === KnowledgeState.OBSERVED &&
     hitRate !== null &&
-    historicalIncidence >= 0.25 &&
-    hitRate >= 0.50 &&
-    hitRate < 0.75
+    incidenceForDecision >= SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_RETURN_INCIDENCE_THRESHOLD &&
+    hitRate >= SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_RETURN_MIN_HIT_RATE &&
+    hitRate < SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_RETURN_MAX_HIT_RATE
   ) {
     return ConstitutionalTier.RETORNO_ESPERADO;
   }
@@ -632,7 +694,10 @@ export function classifyConstitutionalTier(params: {
     return ConstitutionalTier.PROTECAO_MEMORIA;
   }
 
-  if (decayRate > 0.5 && knowledgeState !== KnowledgeState.UNSEEN) {
+  if (
+    decayRate > SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_MEMORY_DECAY_THRESHOLD &&
+    knowledgeState !== KnowledgeState.UNSEEN
+  ) {
     return ConstitutionalTier.PROTECAO_MEMORIA;
   }
 
@@ -695,9 +760,12 @@ export function calculatePriorityScore(
     throw new Error(`Erro estruturado: Peso do assunto '${assuntoId}' ausente no edital.`);
   }
 
-  const topicMetadata = edital.assuntoModelMetadata?.[assuntoId];
-  const topicWeightSource = topicMetadata?.topicWeightSource ?? "OFFICIAL";
-  const historicalIncidenceSource = topicMetadata?.historicalIncidenceSource ?? "EMPIRICAL";
+  const topicMetadata = edital.assuntoModelMetadata[assuntoId];
+  if (!topicMetadata) {
+    throw new Error(`Erro estruturado: Metadados de proveniência do assunto '${assuntoId}' ausentes no edital.`);
+  }
+  const topicWeightSource = topicMetadata.topicWeightSource;
+  const historicalIncidenceSource = topicMetadata.historicalIncidenceSource;
 
   const pesoEditalScore = (disciplineWeight * topicWeight) * SDE_CONFIG.PRIORITY_SCORE.PESO_EDITAL_MULT;
 
@@ -744,7 +812,8 @@ export function calculatePriorityScore(
   let riscoEsquecimentoScore: number | null = null;
   if (knowledgeState !== KnowledgeState.UNSEEN) {
     const daysSinceLast = lastEvidenceAt ? getDaysSinceLastStudy(lastEvidenceAt, refDate) : 0;
-    const recencyMultiplier = 1 + daysSinceLast * 0.05;
+    const recencyMultiplier = 1 +
+      daysSinceLast * SDE_CONFIG.PRIORITY_SCORE.FORGETTING_RECENCY_DAILY_MULTIPLIER;
     riscoEsquecimentoScore = parseFloat((decayRate * SDE_CONFIG.PRIORITY_SCORE.RISCO_ESQUECIMENTO_MULT * recencyMultiplier).toFixed(2));
   }
 
@@ -764,7 +833,30 @@ export function calculatePriorityScore(
   }
   const retornoMarginalScore: number | null = null;
 
-  const elimRisk = calculateEliminationRisk(disciplinaId, edital, history, assuntoToDisciplina, assuntoToSubassuntos, refDate, policy, discAssessment);
+  const resolvedDiscAssessment = discAssessment ?? assessDisciplina(
+    disciplinaId,
+    Object.keys(edital.pesosAssuntos).filter(
+      (candidateAssuntoId) => assuntoToDisciplina[candidateAssuntoId] === disciplinaId
+    ),
+    assuntoToSubassuntos,
+    edital,
+    history,
+    refDate
+  );
+  const disciplineZeroSafetyStatus = assessDisciplineZeroSafety(
+    edital,
+    resolvedDiscAssessment
+  );
+  const elimRisk = calculateEliminationRisk(
+    disciplinaId,
+    edital,
+    history,
+    assuntoToDisciplina,
+    assuntoToSubassuntos,
+    refDate,
+    policy,
+    resolvedDiscAssessment
+  );
   let riscoEliminacaoScore: number | null = null;
   if (elimRisk.level === EliminationRiskLevel.CRITICAL) {
     riscoEliminacaoScore = SDE_CONFIG.PRIORITY_SCORE.RISCO_ELIMINACAO_CRITICAL_SCORE;
@@ -791,31 +883,47 @@ export function calculatePriorityScore(
 
   const confiancaEstatistica = confidenceScore;
 
-  let finalScore = 
-    pesoEditalScore + 
-    incidenciaHistoricaScore + 
-    (deficienciaUsuarioScore ?? 0) + 
-    (riscoEsquecimentoScore ?? 0) + 
-    (learningLeverageScore ?? 0) + 
-    (riscoEliminacaoScore ?? 0) + 
+  const baseScore =
+    pesoEditalScore +
+    incidenciaHistoricaScore +
+    (deficienciaUsuarioScore ?? 0) +
+    (riscoEsquecimentoScore ?? 0) +
+    (learningLeverageScore ?? 0) +
+    (riscoEliminacaoScore ?? 0) +
     dependenciasBonusScore;
 
+  let confidenceAdjustment = 0;
   if (confiancaEstatistica < SDE_CONFIG.PRIORITY_SCORE.CONFIDENCE_DIAGNOSTIC_THRESHOLD) {
     if (tipo === "questoes") {
-      finalScore += SDE_CONFIG.PRIORITY_SCORE.CONFIDENCE_DIAGNOSTIC_BOOST;
+      confidenceAdjustment = SDE_CONFIG.PRIORITY_SCORE.CONFIDENCE_DIAGNOSTIC_BOOST;
     } else if (tipo === "teoria") {
-      finalScore -= SDE_CONFIG.PRIORITY_SCORE.CONFIDENCE_DIAGNOSTIC_PENALTY;
+      confidenceAdjustment = -SDE_CONFIG.PRIORITY_SCORE.CONFIDENCE_DIAGNOSTIC_PENALTY;
     }
   }
 
+  let activitySuitabilityAdjustment = 0;
   if (hitRate !== null) {
-    if (tipo === "flashcards" && ((riscoEsquecimentoScore ?? 0) < SDE_CONFIG.PRIORITY_SCORE.FLASHCARD_RISK_THRESHOLD || hitRate < SDE_CONFIG.PRIORITY_SCORE.FLASHCARD_HIT_RATE_THRESHOLD)) {
-      finalScore -= SDE_CONFIG.PRIORITY_SCORE.FLASHCARD_INAPPROPRIATE_PENALTY;
+    if (
+      tipo === "flashcards" &&
+      (
+        (riscoEsquecimentoScore ?? 0) < SDE_CONFIG.PRIORITY_SCORE.FLASHCARD_RISK_THRESHOLD ||
+        hitRate < SDE_CONFIG.PRIORITY_SCORE.FLASHCARD_HIT_RATE_THRESHOLD
+      )
+    ) {
+      activitySuitabilityAdjustment -= SDE_CONFIG.PRIORITY_SCORE.FLASHCARD_INAPPROPRIATE_PENALTY;
     }
-    if (tipo === "teoria" && hitRate > SDE_CONFIG.PRIORITY_SCORE.THEORY_MASTERED_HIT_RATE_THRESHOLD) {
-      finalScore -= SDE_CONFIG.PRIORITY_SCORE.THEORY_MASTERED_PENALTY;
+    if (
+      tipo === "teoria" &&
+      hitRate > SDE_CONFIG.PRIORITY_SCORE.THEORY_MASTERED_HIT_RATE_THRESHOLD
+    ) {
+      activitySuitabilityAdjustment -= SDE_CONFIG.PRIORITY_SCORE.THEORY_MASTERED_PENALTY;
     }
   }
+
+  const unclampedFinalScore = parseFloat((
+    baseScore + confidenceAdjustment + activitySuitabilityAdjustment
+  ).toFixed(2));
+  const finalScore = Math.max(0, unclampedFinalScore);
 
   const scheduledReviewDue =
     tipo === "revisao" &&
@@ -831,21 +939,25 @@ export function calculatePriorityScore(
     elimRiskLevel: elimRisk.level,
     topicWeight,
     historicalIncidence,
+    historicalIncidenceSource,
     decayRate,
     knowledgeState,
     sampleSize,
     diagnosticPurpose,
-    scheduledReviewDue
+    scheduledReviewDue,
+    disciplineZeroSafetyStatus
   });
 
   return {
-    finalScore: Math.max(0, parseFloat(finalScore.toFixed(2))),
+    finalScore,
     pesoEdital: parseFloat(pesoEditalScore.toFixed(2)),
     disciplineWeight,
     topicWeight,
     topicWeightSource,
     incidenciaHistorica: parseFloat(incidenciaHistoricaScore.toFixed(2)),
-    historicalIncidenceRate: historicalIncidence,
+    historicalIncidenceRate: historicalIncidenceSource === "EMPIRICAL"
+      ? historicalIncidence
+      : 0,
     historicalIncidenceSource,
     deficienciaUsuario: deficienciaUsuarioScore,
     riscoEsquecimento: riscoEsquecimentoScore,
@@ -853,9 +965,15 @@ export function calculatePriorityScore(
     learningLeverageScore,
     riscoEliminacao: riscoEliminacaoScore,
     dependenciasBonus: parseFloat(dependenciasBonusScore.toFixed(2)),
+    confidenceAdjustment,
+    activitySuitabilityAdjustment,
+    unclampedFinalScore,
     confiancaEstatistica,
     confidenceLevel,
     elimRiskLevel: elimRisk.level,
+    disciplineZeroSafetyStatus,
+    disciplineSampleSize: resolvedDiscAssessment.sampleSize,
+    disciplineCorrectAnswers: resolvedDiscAssessment.totalAcertos,
     knowledgeState,
     camadaConstitucional,
     elimRiskResult: elimRisk

@@ -1,6 +1,7 @@
 import type { AuthChangeEvent, Session, User } from "@supabase/supabase-js";
 import type { BackupExportSchema } from "../../types";
 import { getCloudEnvironment } from "./environment";
+import { parseContentAddressedStorageName } from "./privateDocumentPolicy";
 import { getSupabaseClient } from "./supabaseClient";
 import type { CloudSnapshotRow, PrivateCloudDocument } from "./types";
 
@@ -125,9 +126,11 @@ export async function listPrivateDocuments(userId: string): Promise<PrivateCloud
     if (error) throw error;
     for (const file of files ?? []) {
       if (!file.id) continue;
+      const parsed = parseContentAddressedStorageName(file.name);
       documents.push({
-        name: file.name,
+        name: parsed.name,
         storagePath: `${folderPath}/${file.name}`,
+        sha256: parsed.sha256,
         sizeBytes: typeof file.metadata?.size === "number" ? file.metadata.size : null,
         mimeType: typeof file.metadata?.mimetype === "string" ? file.metadata.mimetype : null,
         createdAt: file.created_at ?? null,

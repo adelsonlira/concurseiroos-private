@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 import type { BackupExportSchema } from "../../../types";
-import { detectSyncConflict, fingerprintSnapshot, validateBackupSnapshot } from "../snapshotPolicy";
+import {
+  decideSyncReconciliation,
+  detectSyncConflict,
+  fingerprintSnapshot,
+  validateBackupSnapshot
+} from "../snapshotPolicy";
 import type { CloudSnapshotRow, LocalSyncMetadata } from "../types";
 
 function backup(): BackupExportSchema {
@@ -33,6 +38,7 @@ function backup(): BackupExportSchema {
       configuracao: null,
       conversasIA: [],
       sessoesEstudo: [],
+      evidenciasAprendizagemGuiada: [],
       itensBiblioteca: []
     }
   };
@@ -45,6 +51,13 @@ function metadata(baseRevision: number | null): LocalSyncMetadata {
     remoteUpdatedAt: null,
     lastSuccessfulSyncAt: null,
     localFingerprint: null
+  };
+}
+
+function syncedMetadata(baseRevision: number, snapshot: BackupExportSchema): LocalSyncMetadata {
+  return {
+    ...metadata(baseRevision),
+    localFingerprint: fingerprintSnapshot(snapshot)
   };
 }
 
@@ -84,5 +97,40 @@ describe("cloud snapshot policy", () => {
     const first = backup();
     const second = JSON.parse(JSON.stringify(first)) as BackupExportSchema;
     expect(fingerprintSnapshot(first)).toBe(fingerprintSnapshot(second));
+  });
+
+  it("ignores volatile export metadata in the local fingerprint", () => {
+    const first = backup();
+    const second = backup();
+    second.metadata.exportadoEm = "2026-07-14T15:00:00.000Z";
+    second.metadata.totalTamanhoBytes = 9999;
+    expect(fingerprintSnapshot(first)).toBe(fingerprintSnapshot(second));
+  });
+
+  it("restores the cloud automatically on a clean new device", () => {
+    expect(decideSyncReconciliation(remote(3), metadata(null), backup())).toBe("RESTORE_CLOUD");
+  });
+
+  it("requires a decision when a new device already has meaningful local progress", () => {
+    const local = backup();
+    local.dados.sessoesEstudo = [{ id: "session-1" }] as never;
+    expect(decideSyncReconciliation(remote(3), metadata(null), local)).toBe("CONFLICT");
+  });
+
+  it("restores remote-only changes and pushes local-only changes", () => {
+    const local = backup();
+    const base = syncedMetadata(2, local);
+    expect(decideSyncReconciliation(remote(3), base, local)).toBe("RESTORE_CLOUD");
+
+    local.dados.anotacoes = [{ id: "note-1" }] as never;
+    expect(decideSyncReconciliation(remote(2), base, local)).toBe("PUSH_LOCAL");
+  });
+
+  it("interrupts only when local and remote changed from the same base", () => {
+    const original = backup();
+    const base = syncedMetadata(2, original);
+    const changed = backup();
+    changed.dados.anotacoes = [{ id: "note-1" }] as never;
+    expect(decideSyncReconciliation(remote(3), base, changed)).toBe("CONFLICT");
   });
 });

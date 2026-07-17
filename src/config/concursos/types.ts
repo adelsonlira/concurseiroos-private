@@ -15,6 +15,29 @@ import {
 } from "../../core/sde/prioritization/types";
 import { PlannerPolicy } from "../../core/sde/planner/plannerTypes";
 import { StrategicEvidencePackage } from "../../core/evidence/types";
+import type { CompetitionStudyGuidance } from "../../core/prescription/studyFocusGuide";
+import type {
+  Assunto,
+  Concurso,
+  ConfigUsuario,
+  Disciplina,
+  Edital,
+  Estatisticas,
+  ItemBiblioteca,
+  Subassunto
+} from "../../types";
+
+
+export interface CompetitionAppSeed {
+  concurso: Concurso;
+  edital: Edital;
+  disciplinas: Disciplina[];
+  assuntos: Assunto[];
+  subassuntos: Subassunto[];
+  estatisticas: Estatisticas;
+  configuracao: ConfigUsuario;
+  biblioteca: ItemBiblioteca[];
+}
 
 export interface OfficialSourceReference {
   document: string;
@@ -82,6 +105,7 @@ export interface CompetitionConfigurationPackage {
   sources: OfficialSourceReference[];
   assumptions: ModelingAssumption[];
   strategicEvidence: StrategicEvidencePackage;
+  studyGuidance: CompetitionStudyGuidance | null;
   sde: {
     edital: EditalConfig;
     disciplinas: SDEDisciplina[];

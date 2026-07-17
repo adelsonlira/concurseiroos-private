@@ -1,11 +1,13 @@
-import readinessJson from "../../../../data/evidence/dataprev-2026-perfil-3/fgv-gabaritos/question-bank-readiness.json";
+import qualityJson from "../../../../data/knowledge/official-corpus-quality.json";
 
 export interface QuestionBankReadinessSummary {
   totalCorpusRecords: number;
-  exactAnswerKeyRecords: number;
+  canonicalQuestionRecords: number;
+  definitiveAnswerKeyRecords: number;
   manuallyReviewedAnalyticEligibleRecords: number;
   uniqueAnalyticEligibleRecords: number;
   inAppPracticeEligibleRecords: number;
+  reviewQueueItems: number;
   reasonInAppPracticeIsZero: string;
   policy: {
     manualSyllabusReviewRequired: boolean;
@@ -17,5 +19,23 @@ export interface QuestionBankReadinessSummary {
   };
 }
 
-export const DATAPREV_2026_QUESTION_BANK_READINESS =
-  readinessJson as QuestionBankReadinessSummary;
+const counts = qualityJson.counts;
+
+export const DATAPREV_2026_QUESTION_BANK_READINESS: QuestionBankReadinessSummary = Object.freeze({
+  totalCorpusRecords: counts.questionsExtracted,
+  canonicalQuestionRecords: counts.uniqueCanonicalQuestions,
+  definitiveAnswerKeyRecords: counts.questionsLinkedToDefinitiveAnswerKey,
+  manuallyReviewedAnalyticEligibleRecords: 0,
+  uniqueAnalyticEligibleRecords: 0,
+  inAppPracticeEligibleRecords: 0,
+  reviewQueueItems: counts.reviewQueueItems,
+  reasonInAppPracticeIsZero: "O corpus canônico armazena somente metadados minimizados; enunciado e alternativas integrais permanecem nos PDFs oficiais.",
+  policy: {
+    manualSyllabusReviewRequired: true,
+    exactTitleAndCadernoKeyRequired: true,
+    canonicalRecordRequired: true,
+    completeQuestionAndOptionsRequiredForPractice: true,
+    preliminaryKeysMustRemainMarkedProvisional: true,
+    mayDriveStrategicIncidence: false,
+  },
+});

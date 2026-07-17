@@ -1,4 +1,18 @@
 const PDF_MIME = "application/pdf";
+const SHA256_PATTERN = /^[a-f0-9]{64}$/;
+
+export interface PrivateDocumentFingerprint {
+  name: string;
+  sizeBytes: number | null;
+  sha256: string | null;
+  storagePath?: string;
+}
+
+export interface PrivateDocumentDuplicateMatch {
+  kind: "EXACT_CONTENT" | "LEGACY_NAME_AND_SIZE";
+  existingName: string;
+  storagePath?: string;
+}
 
 export function isAllowedPrivateDocument(file: Pick<File, "name" | "type" | "size">): boolean {
   const hasPdfExtension = file.name.toLowerCase().endsWith(".pdf");
@@ -16,9 +30,9 @@ export function sanitizeStorageFileName(name: string): string {
   return normalized || "material.pdf";
 }
 
-export function buildPrivateStoragePath(userId: string, fileName: string, now = new Date()): string {
-  const datePrefix = now.toISOString().slice(0, 10);
-  return `${userId}/${datePrefix}/${Date.now()}-${sanitizeStorageFileName(fileName)}`;
+export function buildPrivateStoragePath(userId: string, fileName: string, sha256: string): string {
+  if (!SHA256_PATTERN.test(sha256)) throw new Error("INVALID_PRIVATE_DOCUMENT_SHA256");
+  return `${userId}/documents/${sha256}--${sanitizeStorageFileName(fileName)}`;
 }
 
 export function normalizeMaterialFileName(name: string): string {
@@ -28,4 +42,54 @@ export function normalizeMaterialFileName(name: string): string {
     .replace(/[-_.]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+export async function calculatePrivateDocumentSha256(file: Blob): Promise<string> {
+  const digest = await crypto.subtle.digest("SHA-256", await file.arrayBuffer());
+  return [...new Uint8Array(digest)]
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+export function parseContentAddressedStorageName(storageName: string): {
+  name: string;
+  sha256: string | null;
+} {
+  const match = storageName.match(/^([a-f0-9]{64})--(.+)$/i);
+  if (!match) return { name: storageName, sha256: null };
+  return { name: match[2], sha256: match[1].toLowerCase() };
+}
+
+export function findPrivateDocumentDuplicate(
+  candidate: PrivateDocumentFingerprint,
+  existing: readonly PrivateDocumentFingerprint[]
+): PrivateDocumentDuplicateMatch | null {
+  if (candidate.sha256 && SHA256_PATTERN.test(candidate.sha256)) {
+    const exact = existing.find(
+      (item) => item.sha256?.toLowerCase() === candidate.sha256!.toLowerCase()
+    );
+    if (exact) {
+      return {
+        kind: "EXACT_CONTENT",
+        existingName: exact.name,
+        storagePath: exact.storagePath
+      };
+    }
+  }
+
+  const normalizedName = normalizeMaterialFileName(candidate.name);
+  const legacy = existing.find(
+    (item) =>
+      !item.sha256 &&
+      candidate.sizeBytes !== null &&
+      item.sizeBytes !== null &&
+      candidate.sizeBytes === item.sizeBytes &&
+      normalizeMaterialFileName(item.name) === normalizedName
+  );
+  if (!legacy) return null;
+  return {
+    kind: "LEGACY_NAME_AND_SIZE",
+    existingName: legacy.name,
+    storagePath: legacy.storagePath
+  };
 }

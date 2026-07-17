@@ -1,17 +1,21 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useConcurseiroStore } from "../store";
 import { 
   FileQuestion, CheckCircle2, XCircle, ArrowRight, Brain, 
   HelpCircle, Sparkles, ChevronRight, Bookmark, Award, Clock,
-  CheckSquare
+  CheckSquare, Target, ListChecks
 } from "lucide-react";
+import OperationalScreenGuide from "./OperationalScreenGuide";
 import { authenticatedFetch } from "../integrations/cloud/authenticatedFetch";
 import { Questao } from "../types";
 import ExternalAttemptRecorder from "./ExternalAttemptRecorder";
+import { resolveLatestQuestionBatchProgress } from "../core/prescription/questionBatchProgress";
+import { findCompetitionRuntimeDefinition } from "../config/concursos/registry";
 
 export default function ExerciseDeskView() {
   const { 
-    questoes, disciplinas, assuntos, resolveQuestao, activeConcursoId 
+    questoes, disciplinas, assuntos, subassuntos, sessoesEstudo, tentativasQuestoes,
+    resolveQuestao, activeConcursoId, configuracao
   } = useConcurseiroStore();
 
   const [activeDiscFilter, setActiveDiscFilter] = useState<string>("ALL");
@@ -25,10 +29,78 @@ export default function ExerciseDeskView() {
   const [aiExplanation, setAiExplanation] = useState<string>("");
   const [showAiDrawer, setShowAiDrawer] = useState<boolean>(false);
 
-  // Filter questions based on selected discipline
-  const filteredQuestoes = questoes.filter(q => {
+  const questionBatch = useMemo(() =>
+    resolveLatestQuestionBatchProgress({
+      sessions: sessoesEstudo
+        .filter((session) => session.atividadeEstudo === "questoes")
+        .map((session) => ({
+          sessionId: session.id,
+          endedAt: session.dataFim,
+          disciplineId: session.disciplinaId,
+          topicId: session.assuntoId,
+          subtopicId: session.subassuntoId,
+          prescriptionId: session.decisaoSDE?.prescriptionId,
+          targetQuestionCount: session.decisaoSDE?.targetQuestionCount,
+          stretchQuestionCount: session.decisaoSDE?.stretchQuestionCount,
+          diagnosticPurpose: session.decisaoSDE?.sdeDiagnosticPurpose
+        })),
+      attempts: tentativasQuestoes.map((attempt) => ({
+        attemptedAt: attempt.respondidaEm,
+        disciplineId: attempt.disciplinaId,
+        topicId: attempt.assuntoId,
+        subtopicId: attempt.subassuntoId,
+        contextId: attempt.contextoId
+      }))
+    }),
+    [sessoesEstudo, tentativasQuestoes]
+  );
+
+  const batchSession = questionBatch
+    ? sessoesEstudo.find((session) => session.id === questionBatch.sessionId) ?? null
+    : null;
+  const batchDiscipline = questionBatch
+    ? disciplinas.find((item) => item.id === questionBatch.disciplineId) ?? null
+    : null;
+  const batchTopic = questionBatch?.topicId
+    ? assuntos.find((item) => item.id === questionBatch.topicId) ?? null
+    : null;
+  const batchSubtopic = questionBatch?.subtopicId
+    ? subassuntos.find((item) => item.id === questionBatch.subtopicId) ?? null
+    : null;
+  const privateMaterialCatalog =
+    findCompetitionRuntimeDefinition(configuracao.concursoAlvoId)?.privateStudyMaterials ?? [];
+  const batchMaterial = batchSession?.decisaoSDE?.materialId
+    ? privateMaterialCatalog.find(
+        (item) => item.id === batchSession.decisaoSDE?.materialId
+      ) ?? null
+    : null;
+  const batchMaterialSource = batchMaterial
+    ? `${batchMaterial.displayTitle}${
+        batchSession?.decisaoSDE?.materialStartPage && batchSession.decisaoSDE?.materialEndPage
+          ? ` · páginas ${batchSession.decisaoSDE.materialStartPage}–${batchSession.decisaoSDE.materialEndPage}`
+          : ""
+      }`
+    : undefined;
+
+  useEffect(() => {
+    if (questionBatch && activeDiscFilter !== questionBatch.disciplineId) {
+      setActiveDiscFilter(questionBatch.disciplineId);
+      setCurrentQuestaoIdx(0);
+      setIsSubmitted(false);
+      setSelectedOptionId(null);
+    }
+  }, [questionBatch?.sessionId, questionBatch?.disciplineId]);
+
+  // Filter questions based on the active prescription or selected discipline
+  const filteredQuestoes = questoes.filter((question) => {
+    if (questionBatch && !questionBatch.isStretchComplete) {
+      if (question.disciplinaId !== questionBatch.disciplineId) return false;
+      if (questionBatch.topicId && question.assuntoId !== questionBatch.topicId) return false;
+      if (questionBatch.subtopicId && question.subassuntoId !== questionBatch.subtopicId) return false;
+      return true;
+    }
     if (activeDiscFilter === "ALL") return true;
-    return q.disciplinaId === activeDiscFilter;
+    return question.disciplinaId === activeDiscFilter;
   });
 
   const activeQuestion: Questao | undefined = filteredQuestoes[currentQuestaoIdx];
@@ -89,7 +161,14 @@ export default function ExerciseDeskView() {
     const isCorrect = selectedOption ? selectedOption.isCorreta : false;
 
     // Trigger state store resolution to persist metrics & updates
-    resolveQuestao(activeQuestion.id, selectedOptionId, isCorrect, timeElapsed);
+    resolveQuestao(
+      activeQuestion.id,
+      selectedOptionId,
+      isCorrect,
+      timeElapsed,
+      "TREINO_ISOLADO",
+      questionBatch?.isStretchComplete ? undefined : questionBatch?.prescriptionId
+    );
     setIsSubmitted(true);
   };
 
@@ -158,7 +237,7 @@ export default function ExerciseDeskView() {
         <div className="flex items-center justify-between border-b border-zinc-900 pb-4">
           <div className="flex items-center gap-2">
             <FileQuestion className="h-5 w-5 text-blue-500" />
-            <h2 className="text-sm font-semibold text-zinc-300 font-mono tracking-wide uppercase">Banco de Questões</h2>
+            <h2 className="text-sm font-semibold text-zinc-300 font-mono tracking-wide uppercase">Questões e registro</h2>
           </div>
 
           <div className="flex items-center gap-3">
@@ -182,7 +261,87 @@ export default function ExerciseDeskView() {
           </div>
         </div>
 
-        <ExternalAttemptRecorder />
+        <OperationalScreenGuide
+          icon={FileQuestion}
+          title="Registrar e corrigir questões"
+          purpose="Registre o resultado que o coach usará para decidir a próxima ação. Para baterias grandes, prefira o resumo agregado; detalhe individualmente apenas erros importantes."
+          whenToUse="depois de concluir questões em qualquer fonte"
+          outcome="novas evidências de acerto, erro e ritmo"
+        />
+
+        {questionBatch && (
+          <section className={`rounded-2xl border p-5 ${
+            questionBatch.isTargetComplete
+              ? "border-emerald-500/30 bg-emerald-500/8"
+              : "border-amber-500/30 bg-amber-500/8"
+          }`}>
+            <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
+              <div>
+                <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-amber-300">
+                  <Target className="h-4 w-4" />
+                  Bateria prescrita pelo coach
+                </div>
+                <h3 className="mt-2 text-lg font-bold text-zinc-100">
+                  {batchSubtopic?.nome ?? batchTopic?.nome ?? "Questões prescritas"}
+                </h3>
+                <p className="mt-1 text-xs text-zinc-400">
+                  {batchDiscipline?.nome ?? "Disciplina"}
+                  {batchTopic?.nome ? ` · ${batchTopic.nome}` : ""}
+                </p>
+                {batchMaterialSource && (
+                  <p className="mt-2 text-xs text-indigo-300">Fonte sugerida: {batchMaterialSource}</p>
+                )}
+              </div>
+
+              <div className="min-w-[220px] rounded-xl border border-zinc-700 bg-zinc-950/60 p-4">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-zinc-500">Progresso</span>
+                  <span className="font-mono font-bold text-zinc-200">
+                    {questionBatch.completedQuestionCount}/{questionBatch.targetQuestionCount}
+                  </span>
+                </div>
+                <div className="mt-2 h-2 overflow-hidden rounded-full bg-zinc-800">
+                  <div
+                    className="h-full rounded-full bg-amber-500 transition-all"
+                    style={{
+                      width: `${Math.min(100, (questionBatch.completedQuestionCount / questionBatch.targetQuestionCount) * 100)}%`
+                    }}
+                  />
+                </div>
+                <p className="mt-2 text-[11px] leading-relaxed text-zinc-500">
+                  {questionBatch.isTargetComplete
+                    ? questionBatch.isStretchComplete
+                      ? "Meta e extensão concluídas. A próxima decisão usará estes resultados."
+                      : `Meta concluída. Extensão opcional até ${questionBatch.stretchQuestionCount} questões, somente se mantiver qualidade.`
+                    : `Faltam ${questionBatch.remainingQuestionCount} questão(ões) para a meta mínima.`}
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        <ExternalAttemptRecorder
+          defaultDisciplineId={questionBatch?.isStretchComplete ? undefined : questionBatch?.disciplineId}
+          defaultTopicId={questionBatch?.isStretchComplete ? undefined : questionBatch?.topicId}
+          defaultSubtopicId={questionBatch?.isStretchComplete ? undefined : questionBatch?.subtopicId}
+          defaultSource={questionBatch?.isStretchComplete ? undefined : batchMaterialSource}
+          defaultQuestionCount={questionBatch?.isStretchComplete ? undefined : questionBatch?.remainingQuestionCount}
+          contextId={questionBatch?.isStretchComplete ? undefined : questionBatch?.prescriptionId}
+          diagnosticPurpose={questionBatch?.isStretchComplete ? false : questionBatch?.diagnosticPurpose}
+          lockScope={Boolean(questionBatch && !questionBatch.isStretchComplete)}
+        />
+
+        {questionBatch && !questionBatch.isStretchComplete && filteredQuestoes.length === 0 && (
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/20 p-4 text-xs leading-relaxed text-zinc-400">
+            <div className="flex items-center gap-2 font-semibold text-zinc-200">
+              <ListChecks className="h-4 w-4 text-blue-400" />
+              Use sua plataforma ou PDF de questões
+            </div>
+            <p className="mt-1">
+              O banco interno não possui item publicável neste recorte. Resolva na fonte indicada e registre o resumo da bateria acima, sem copiar o enunciado.
+            </p>
+          </div>
+        )}
 
         {activeQuestion ? (
           <div className="max-w-3xl mx-auto w-full flex flex-col gap-5 py-2">

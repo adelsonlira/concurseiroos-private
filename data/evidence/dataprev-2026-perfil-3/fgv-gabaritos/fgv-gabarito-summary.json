@@ -19,17 +19,18 @@
     "recordsWithAnswerKey": 890,
     "files": [
       {
-        "file": "/mnt/data/p29_work/data/evidence/dataprev-2026-perfil-3/fgv-exams-37/wave1/wave1-question-corpus.ndjson",
+        "file": "data/evidence/dataprev-2026-perfil-3/fgv-exams-37/wave1/wave1-question-corpus.ndjson",
         "recordsUpdated": 890
       },
       {
-        "file": "/mnt/data/p29_work/data/evidence/dataprev-2026-perfil-3/fgv-exams-37/wave2/wave2-question-corpus.ndjson",
+        "file": "data/evidence/dataprev-2026-perfil-3/fgv-exams-37/wave2/wave2-question-corpus.ndjson",
         "recordsUpdated": 0
       },
       {
-        "file": "/mnt/data/p29_work/data/evidence/dataprev-2026-perfil-3/fgv-exams-37/wave3/wave3-question-corpus.ndjson",
+        "file": "data/evidence/dataprev-2026-perfil-3/fgv-exams-37/wave3/wave3-question-corpus.ndjson",
         "recordsUpdated": 0
       }
     ]
-  }
+  },
+  "status": "LEGACY_SUPERSEDED_BY_OFFICIAL_CORPUS_3.12.0"
 }

@@ -66,8 +66,25 @@ export interface StudyObjective {
   indicadorMeta: string;
 }
 
+export type ExecutionPhase =
+  | "ACTIVATION"
+  | "GUIDED_STUDY"
+  | "CLOSED_BOOK_RECALL"
+  | "VERIFICATION"
+  | "SETUP"
+  | "QUESTION_PRACTICE"
+  | "CORRECTION"
+  | "RETRY"
+  | "RETRIEVAL"
+  | "FEEDBACK"
+  | "SECOND_RETRIEVAL"
+  | "FLASHCARD_RETRIEVAL"
+  | "SIMULATION"
+  | "BREAK";
+
 export interface ExecutionStep {
   passo: number;
+  phase: ExecutionPhase;
   descricao: string;
   tempoMinutos: number;
 }

@@ -13,6 +13,7 @@ export type ReviewTrigger =
   | "ERRO_QUESTAO"
   | "ACERTO_BAIXA_CONFIANCA"
   | "TEORIA_CONCLUIDA"
+  | "DIAGNOSTICO_APTO_SEM_TEORIA"
   | "MANUAL";
 
 /**

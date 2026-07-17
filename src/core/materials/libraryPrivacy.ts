@@ -16,7 +16,10 @@ export function sanitizeLibraryItemForBackup(item: ItemBiblioteca): ItemBibliote
   delete sanitized.dadosMapaMental;
   if (sanitized.dadosPDF) {
     sanitized.dadosPDF = {
-      totalPaginas: sanitized.dadosPDF.totalPaginas
+      totalPaginas: sanitized.dadosPDF.totalPaginas,
+      indice: sanitized.dadosPDF.indice,
+      indexStatus: sanitized.dadosPDF.indexStatus,
+      indexedAt: sanitized.dadosPDF.indexedAt
     };
   }
   return sanitized;

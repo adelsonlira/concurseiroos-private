@@ -39,11 +39,23 @@ export interface PrivateStudyMaterialSection {
   matchedTerms: string[];
 }
 
+export type PrivateMaterialProvider =
+  | "ESTRATEGIA_CONCURSOS"
+  | "TI_TOTAL"
+  | "OTHER_PRIVATE";
+
+export type PrivateMaterialSourceRole = "PRIMARY" | "COMPLEMENTARY";
+
 export interface PrivateStudyMaterial {
   id: string;
   schemaVersion: string;
   concursoId: string;
   sourceGroup: string;
+  /** Provider metadata only; no licensed content is embedded. */
+  sourceProvider?: PrivateMaterialProvider;
+  sourceRole?: PrivateMaterialSourceRole;
+  /** Higher values are preferred only after pedagogical fit and banca fit. */
+  sourcePriority?: number;
   sourceFileName: string;
   sourceRelativePath: string;
   sourceSha256: string;
@@ -63,6 +75,8 @@ export interface MaterialLocatorRecommendation {
   materialId: string;
   materialTitle: string;
   sourceFileName: string;
+  sourceProvider: PrivateMaterialProvider;
+  sourceRole: PrivateMaterialSourceRole;
   sectionTitle: string;
   startPage: number;
   endPage: number;
@@ -78,6 +92,7 @@ export interface MaterialLocatorRecommendation {
 export interface MaterialRoutingInput {
   concursoId: string;
   activity: StudyActivityKind;
+  diagnosticPurpose?: boolean;
   disciplineId: string;
   topicId: string;
   subtopicId?: string;

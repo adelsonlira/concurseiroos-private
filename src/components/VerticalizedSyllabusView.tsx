@@ -4,6 +4,8 @@ import {
   BookOpen, ChevronRight, ChevronDown, CheckSquare, Square, 
   Clock, AlertTriangle, Target, FileText, Zap, Star
 } from "lucide-react";
+import OperationalScreenGuide from "./OperationalScreenGuide";
+import taxonomyArtifact from "../../data/knowledge/dataprev-2026-taxonomy.json";
 
 export default function VerticalizedSyllabusView() {
   const { 
@@ -16,6 +18,8 @@ export default function VerticalizedSyllabusView() {
   const concursoDisciplinas = disciplinas
     .filter(d => d.concursoId === activeConcurso?.id)
     .sort((a, b) => a.ordem - b.ordem);
+
+  const coverageBySubtopic = new Map(taxonomyArtifact.coverage.records.map((item) => [item.subtopicId, item]));
 
   const [expandedDisciplines, setExpandedDisciplines] = useState<{ [id: string]: boolean }>({});
   const [expandedAssuntos, setExpandedAssuntos] = useState<{ [id: string]: boolean }>({});
@@ -31,21 +35,36 @@ export default function VerticalizedSyllabusView() {
   return (
     <div className="flex-1 p-6 overflow-y-auto bg-zinc-950 flex flex-col gap-6" id="verticalized-syllabus-container">
       <h1 className="text-2xl font-bold text-zinc-100 flex items-center gap-3">
-        Edital Verticalizado Inteligente: {activeConcurso?.nome}
+        Edital e cobertura: {activeConcurso?.nome}
       </h1>
+
+      <OperationalScreenGuide
+        icon={BookOpen}
+        title="Edital e cobertura"
+        purpose="Veja o que o edital exige e quais itens já possuem evidência real. Esta tela não define sozinha a próxima sessão."
+        whenToUse="para consultar cobertura e localizar lacunas"
+        outcome="mapa auditável do conteúdo programático"
+      />
+
+      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <CoverageMetric label="Subassuntos oficiais" value={taxonomyArtifact.coverage.totalSubtopics} detail="Escopo canônico do edital" />
+        <CoverageMetric label="Com material localizado" value={taxonomyArtifact.coverage.materialOnly + taxonomyArtifact.coverage.ready} detail="Estratégia/TI Total apenas para execução" />
+        <CoverageMetric label="Com questão revisada" value={taxonomyArtifact.coverage.ready} detail="Ainda não ativa incidência" />
+        <CoverageMetric label="Lacunas de material" value={taxonomyArtifact.coverage.gaps + taxonomyArtifact.coverage.questionOnly} detail="O Coach aplica fallback explícito" />
+      </section>
 
       <div className="border border-zinc-900 rounded-lg overflow-x-auto">
         <table className="w-full text-left text-xs text-zinc-300">
           <thead className="bg-zinc-900 text-zinc-400 font-mono uppercase text-[10px]">
             <tr>
               <th className="px-4 py-3">Disciplina / Assunto / Sub</th>
-              <th className="px-4 py-3">Peso</th>
-              <th className="px-4 py-3">Relevância</th>
-              <th className="px-4 py-3">Qst</th>
+              <th className="px-4 py-3">Peso oficial</th>
+              <th className="px-4 py-3">Prioridade do edital</th>
+              <th className="px-4 py-3">Questões</th>
               <th className="px-4 py-3">Acertos</th>
               <th className="px-4 py-3">Erros</th>
-              <th className="px-4 py-3">Domínio</th>
-              <th className="px-4 py-3">Status</th>
+              <th className="px-4 py-3">Acerto observado</th>
+              <th className="px-4 py-3">Base executável</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-900">
@@ -123,7 +142,18 @@ export default function VerticalizedSyllabusView() {
                                   {sub.questoesRespondidas > 0 ? Math.round((sub.questoesAcertadas / sub.questoesRespondidas) * 100) : 0}%
                                 </td>
                                 <td className="px-4 py-2">
-                                   {sub.completado ? "Feito" : "Pendente"}
+                                  {(() => {
+                                    const coverage = coverageBySubtopic.get(sub.id);
+                                    if (!coverage) return <span className="text-zinc-600">Sem catálogo</span>;
+                                    const label = coverage.status === "READY"
+                                      ? "Material + questão revisada"
+                                      : coverage.status === "MATERIAL_ONLY"
+                                        ? `${coverage.materialLocatorCount} localizador(es) de material`
+                                        : coverage.status === "QUESTION_ONLY"
+                                          ? "Questão sem material"
+                                          : "Fallback necessário";
+                                    return <span className={coverage.status === "GAP" ? "text-amber-400" : "text-cyan-300"}>{label}</span>;
+                                  })()}
                                 </td>
                              </tr>
                            );
@@ -138,5 +168,15 @@ export default function VerticalizedSyllabusView() {
         </table>
       </div>
     </div>
+  );
+}
+
+function CoverageMetric({ label, value, detail }: { label: string; value: number; detail: string }) {
+  return (
+    <article className="rounded-xl border border-zinc-800 bg-zinc-900/25 p-4">
+      <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">{label}</div>
+      <div className="mt-2 text-2xl font-bold text-zinc-100">{value}</div>
+      <div className="mt-1 text-[11px] text-zinc-500">{detail}</div>
+    </article>
   );
 }

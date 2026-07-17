@@ -72,6 +72,10 @@ function createInput(
       regrasPenalizacao: "NENHUMA",
       dataProva: "2026-10-15",
       incidenciaHistoricaAssuntos: { a1: 0.6, a2: 0.4 },
+      assuntoModelMetadata: {
+        a1: { topicWeightSource: "OFFICIAL", historicalIncidenceSource: "EMPIRICAL" },
+        a2: { topicWeightSource: "OFFICIAL", historicalIncidenceSource: "EMPIRICAL" }
+      },
       duracaoEstimadaProvaMinutos: 240
     },
     diagnosis: {

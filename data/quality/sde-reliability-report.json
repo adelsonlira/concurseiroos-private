@@ -1,0 +1,637 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectVersion": "3.26.0",
+  "referenceDate": "2026-07-13",
+  "activeTarget": "DATAPREV 2026 — Analista de Tecnologia da Informação — Perfil 3",
+  "status": "PASS",
+  "shadowMode": {
+    "historicalIncidenceEnabled": false,
+    "rule": "Historical incidence with UNAVAILABLE provenance must contribute zero to score and constitutional tier."
+  },
+  "executableScenario": {
+    "decisionStatus": "SUCCESS",
+    "actionCount": 117,
+    "prescriptionStatus": "READY",
+    "currentPrescriptionId": "prescription-sess-dp26-p3-conhecimentos-especificos-dp26-p3-esp-banco-dados-dp26-p3-esp-bd-avaliacao-modelos-questoes-dataprev-2026-perfil-3-2026-07-13-1",
+    "actionAudit": {
+      "valid": true,
+      "issues": []
+    },
+    "prescriptionAudit": {
+      "valid": true,
+      "issues": []
+    }
+  },
+  "parameterCatalog": {
+    "count": 50,
+    "propertyTested": 6,
+    "scenarioTested": 38,
+    "pendingCalibration": 6,
+    "entries": [
+      {
+        "path": "DEFAULT_LEARNING_LEVERAGE_POLICY.leverageZoneLowerBound",
+        "value": 0.55,
+        "classification": "HEURISTIC",
+        "validationStatus": "PENDING_CALIBRATION",
+        "rationale": "Parâmetro de alavancagem pedagógica que exige validação prospectiva antes de interpretação causal.",
+        "expectedProperties": [
+          "faixas ordenadas",
+          "resultado determinístico",
+          "não prometer ganho causal"
+        ]
+      },
+      {
+        "path": "DEFAULT_LEARNING_LEVERAGE_POLICY.leverageZoneUpperBound",
+        "value": 0.75,
+        "classification": "HEURISTIC",
+        "validationStatus": "PENDING_CALIBRATION",
+        "rationale": "Parâmetro de alavancagem pedagógica que exige validação prospectiva antes de interpretação causal.",
+        "expectedProperties": [
+          "faixas ordenadas",
+          "resultado determinístico",
+          "não prometer ganho causal"
+        ]
+      },
+      {
+        "path": "DEFAULT_LEARNING_LEVERAGE_POLICY.lowPerformanceUpperBound",
+        "value": 0.4,
+        "classification": "HEURISTIC",
+        "validationStatus": "PENDING_CALIBRATION",
+        "rationale": "Parâmetro de alavancagem pedagógica que exige validação prospectiva antes de interpretação causal.",
+        "expectedProperties": [
+          "faixas ordenadas",
+          "resultado determinístico",
+          "não prometer ganho causal"
+        ]
+      },
+      {
+        "path": "DEFAULT_LEARNING_LEVERAGE_POLICY.masteredLowerBound",
+        "value": 0.85,
+        "classification": "HEURISTIC",
+        "validationStatus": "PENDING_CALIBRATION",
+        "rationale": "Parâmetro de alavancagem pedagógica que exige validação prospectiva antes de interpretação causal.",
+        "expectedProperties": [
+          "faixas ordenadas",
+          "resultado determinístico",
+          "não prometer ganho causal"
+        ]
+      },
+      {
+        "path": "DEFAULT_OPPORTUNITY_COST_POLICY.durationToleranceRatio",
+        "value": 0.5,
+        "classification": "HEURISTIC",
+        "validationStatus": "PENDING_CALIBRATION",
+        "rationale": "Define comparabilidade operacional entre ações; ainda depende de calibração prospectiva com uso real.",
+        "expectedProperties": [
+          "comparar somente durações compatíveis",
+          "não inventar retorno quando faltam dados"
+        ]
+      },
+      {
+        "path": "DEFAULT_OPPORTUNITY_COST_POLICY.minimumComparableActions",
+        "value": 2,
+        "classification": "HEURISTIC",
+        "validationStatus": "PENDING_CALIBRATION",
+        "rationale": "Define comparabilidade operacional entre ações; ainda depende de calibração prospectiva com uso real.",
+        "expectedProperties": [
+          "comparar somente durações compatíveis",
+          "não inventar retorno quando faltam dados"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.CONSTRAINTS.PREREQUISITE_MIN_HIT_RATE",
+        "value": 0.5,
+        "classification": "OPERATIONAL",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Controla transições cognitivas e vetos para impedir ações impossíveis, prematuras ou desperdiçadoras.",
+        "expectedProperties": [
+          "nenhum bloqueio cognitivo sem rota de recuperação",
+          "limites finitos",
+          "mesma entrada produz mesma elegibilidade"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.ELIGIBILITY.HIGH_DECAY_THRESHOLD",
+        "value": 0.2,
+        "classification": "OPERATIONAL",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Controla transições cognitivas e vetos para impedir ações impossíveis, prematuras ou desperdiçadoras.",
+        "expectedProperties": [
+          "nenhum bloqueio cognitivo sem rota de recuperação",
+          "limites finitos",
+          "mesma entrada produz mesma elegibilidade"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.ELIGIBILITY.LOW_PERFORMANCE_HIT_RATE",
+        "value": 0.5,
+        "classification": "OPERATIONAL",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Controla transições cognitivas e vetos para impedir ações impossíveis, prematuras ou desperdiçadoras.",
+        "expectedProperties": [
+          "nenhum bloqueio cognitivo sem rota de recuperação",
+          "limites finitos",
+          "mesma entrada produz mesma elegibilidade"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.ELIGIBILITY.PERFORMANCE_DROP_MIN_ATTEMPTS",
+        "value": 6,
+        "classification": "OPERATIONAL",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Controla transições cognitivas e vetos para impedir ações impossíveis, prematuras ou desperdiçadoras.",
+        "expectedProperties": [
+          "nenhum bloqueio cognitivo sem rota de recuperação",
+          "limites finitos",
+          "mesma entrada produz mesma elegibilidade"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.ELIGIBILITY.PERFORMANCE_DROP_THRESHOLD",
+        "value": 0.2,
+        "classification": "OPERATIONAL",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Controla transições cognitivas e vetos para impedir ações impossíveis, prematuras ou desperdiçadoras.",
+        "expectedProperties": [
+          "nenhum bloqueio cognitivo sem rota de recuperação",
+          "limites finitos",
+          "mesma entrada produz mesma elegibilidade"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.ELIGIBILITY.PRACTICE_MIN_HIT_RATE",
+        "value": 0.5,
+        "classification": "OPERATIONAL",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Controla transições cognitivas e vetos para impedir ações impossíveis, prematuras ou desperdiçadoras.",
+        "expectedProperties": [
+          "nenhum bloqueio cognitivo sem rota de recuperação",
+          "limites finitos",
+          "mesma entrada produz mesma elegibilidade"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.ELIGIBILITY.REVISION_EXPIRED_DAYS",
+        "value": 30,
+        "classification": "OPERATIONAL",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Controla transições cognitivas e vetos para impedir ações impossíveis, prematuras ou desperdiçadoras.",
+        "expectedProperties": [
+          "nenhum bloqueio cognitivo sem rota de recuperação",
+          "limites finitos",
+          "mesma entrada produz mesma elegibilidade"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.ELIGIBILITY.STRONG_THEORY_REMEDIATION_MIN_SAMPLE_SIZE",
+        "value": 41,
+        "classification": "OPERATIONAL",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Controla transições cognitivas e vetos para impedir ações impossíveis, prematuras ou desperdiçadoras.",
+        "expectedProperties": [
+          "nenhum bloqueio cognitivo sem rota de recuperação",
+          "limites finitos",
+          "mesma entrada produz mesma elegibilidade"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.ELIGIBILITY.THEORY_OVERSTUDY_HIT_RATE",
+        "value": 0.85,
+        "classification": "OPERATIONAL",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Controla transições cognitivas e vetos para impedir ações impossíveis, prematuras ou desperdiçadoras.",
+        "expectedProperties": [
+          "nenhum bloqueio cognitivo sem rota de recuperação",
+          "limites finitos",
+          "mesma entrada produz mesma elegibilidade"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.ELIGIBILITY.ZERO_DISCIPLINE_SAFETY_MIN_SAMPLE_SIZE",
+        "value": 5,
+        "classification": "OPERATIONAL",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Controla transições cognitivas e vetos para impedir ações impossíveis, prematuras ou desperdiçadoras.",
+        "expectedProperties": [
+          "nenhum bloqueio cognitivo sem rota de recuperação",
+          "limites finitos",
+          "mesma entrada produz mesma elegibilidade"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.EVIDENCE.CONFIDENCE_RECENCY_SCALE_DAYS",
+        "value": 45,
+        "classification": "OPERATIONAL",
+        "validationStatus": "PROPERTY_TESTED",
+        "rationale": "Classifica suficiência, confiança e recência das evidências sem declarar domínio do conteúdo.",
+        "expectedProperties": [
+          "determinismo",
+          "confiança não diminui ao aumentar a amostra",
+          "confiança decai com evidência mais antiga"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.EVIDENCE.HIGH_CONFIDENCE_MAX_AGE_DAYS",
+        "value": 15,
+        "classification": "OPERATIONAL",
+        "validationStatus": "PROPERTY_TESTED",
+        "rationale": "Classifica suficiência, confiança e recência das evidências sem declarar domínio do conteúdo.",
+        "expectedProperties": [
+          "determinismo",
+          "confiança não diminui ao aumentar a amostra",
+          "confiança decai com evidência mais antiga"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.EVIDENCE.HIGH_CONFIDENCE_MIN_SAMPLE_SIZE",
+        "value": 101,
+        "classification": "OPERATIONAL",
+        "validationStatus": "PROPERTY_TESTED",
+        "rationale": "Classifica suficiência, confiança e recência das evidências sem declarar domínio do conteúdo.",
+        "expectedProperties": [
+          "determinismo",
+          "confiança não diminui ao aumentar a amostra",
+          "confiança decai com evidência mais antiga"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.EVIDENCE.MEDIUM_CONFIDENCE_MIN_SAMPLE_SIZE",
+        "value": 20,
+        "classification": "OPERATIONAL",
+        "validationStatus": "PROPERTY_TESTED",
+        "rationale": "Classifica suficiência, confiança e recência das evidências sem declarar domínio do conteúdo.",
+        "expectedProperties": [
+          "determinismo",
+          "confiança não diminui ao aumentar a amostra",
+          "confiança decai com evidência mais antiga"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.EVIDENCE.MISSING_DATE_RECENCY_FACTOR",
+        "value": 0.5,
+        "classification": "OPERATIONAL",
+        "validationStatus": "PROPERTY_TESTED",
+        "rationale": "Classifica suficiência, confiança e recência das evidências sem declarar domínio do conteúdo.",
+        "expectedProperties": [
+          "determinismo",
+          "confiança não diminui ao aumentar a amostra",
+          "confiança decai com evidência mais antiga"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.EVIDENCE.OBSERVED_MIN_SAMPLE_SIZE",
+        "value": 5,
+        "classification": "OPERATIONAL",
+        "validationStatus": "PROPERTY_TESTED",
+        "rationale": "Classifica suficiência, confiança e recência das evidências sem declarar domínio do conteúdo.",
+        "expectedProperties": [
+          "determinismo",
+          "confiança não diminui ao aumentar a amostra",
+          "confiança decai com evidência mais antiga"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.CONFIDENCE_DIAGNOSTIC_BOOST",
+        "value": 25,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.CONFIDENCE_DIAGNOSTIC_PENALTY",
+        "value": 10,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.CONFIDENCE_DIAGNOSTIC_THRESHOLD",
+        "value": 0.5,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_HIGH_GAP_HIT_RATE",
+        "value": 0.6,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_HIGH_INCIDENCE_THRESHOLD",
+        "value": 0.4,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_HIGH_TOPIC_WEIGHT_THRESHOLD",
+        "value": 4,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_MEMORY_DECAY_THRESHOLD",
+        "value": 0.5,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_RETURN_INCIDENCE_THRESHOLD",
+        "value": 0.25,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_RETURN_MAX_HIT_RATE",
+        "value": 0.75,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.CONSTITUTIONAL_RETURN_MIN_HIT_RATE",
+        "value": 0.5,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.DEFICIENCIA_MULT",
+        "value": 20,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.DEPENDENCY_MULTIPLIER",
+        "value": 3.3,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.FLASHCARD_HIT_RATE_THRESHOLD",
+        "value": 0.4,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.FLASHCARD_INAPPROPRIATE_PENALTY",
+        "value": 15,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.FLASHCARD_RISK_THRESHOLD",
+        "value": 5,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.FORGETTING_RECENCY_DAILY_MULTIPLIER",
+        "value": 0.05,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.INCIDENCIA_MULT",
+        "value": 15,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.LEARNING_LEVERAGE_GOLDEN_SCORE",
+        "value": 15,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.LEARNING_LEVERAGE_HIGH_SCORE",
+        "value": 8,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.LEARNING_LEVERAGE_MASTERED_SCORE",
+        "value": 2,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.LEARNING_LEVERAGE_SUB_GOLDEN_SCORE",
+        "value": 10,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.MAX_DEPENDENCIES_BONUS",
+        "value": 10,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.PESO_EDITAL_MULT",
+        "value": 1,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.RISCO_ELIMINACAO_CRITICAL_SCORE",
+        "value": 30,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.RISCO_ELIMINACAO_WARN_SCORE",
+        "value": 20,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.RISCO_ESQUECIMENTO_MULT",
+        "value": 15,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.THEORY_MASTERED_HIT_RATE_THRESHOLD",
+        "value": 0.8,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      },
+      {
+        "path": "SDE_CONFIG.PRIORITY_SCORE.THEORY_MASTERED_PENALTY",
+        "value": 30,
+        "classification": "HEURISTIC",
+        "validationStatus": "SCENARIO_TESTED",
+        "rationale": "Ordena ações elegíveis; não representa probabilidade de aprovação nem ganho causal de pontos.",
+        "expectedProperties": [
+          "score finito e não negativo",
+          "componentes auditáveis",
+          "incidência indisponível não altera a decisão"
+        ]
+      }
+    ]
+  },
+  "knownLimitations": [
+    "Historical FGV incidence remains disabled until question-level extraction, definitive-answer linkage, deduplication and reviewed classification are validated.",
+    "Global cutoff risk is not used to rank actions because no prospectively calibrated model exists yet.",
+    "Expected causal points per hour remains unavailable until real before/after learning episodes are collected.",
+    "The production runtime target is Node.js 24.x; local validation under another major version is informative but not runtime parity."
+  ]
+}

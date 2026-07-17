@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   AlertTriangle,
   CalendarClock,
   CheckCircle2,
-  CircleAlert,
   ClipboardList,
   PauseCircle,
   PlayCircle,
@@ -13,6 +12,7 @@ import {
   XCircle
 } from "lucide-react";
 import { useConcurseiroStore } from "../store";
+import type { CronogramaRevisao } from "../types";
 import {
   ADAPTIVE_POLICY_SUMMARY,
   buildErrorTopicSummaries,
@@ -48,7 +48,7 @@ const RECOVERY_LABELS: Record<
   },
   DOIS_OU_MAIS_ACERTOS_POSTERIORES: {
     label: "Recuperação repetida observada",
-    detail: "Há pelo menos dois acertos registrados depois do último erro. Isso não prova domínio definitivo.",
+    detail: "Há pelo menos dois acertos depois do último erro. Isso não prova domínio definitivo.",
     className: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
   }
 };
@@ -67,6 +67,7 @@ const TRIGGER_LABELS: Record<ReviewTrigger, string> = {
   ERRO_QUESTAO: "Erro em questão",
   ACERTO_BAIXA_CONFIANCA: "Acerto com baixa confiança",
   TEORIA_CONCLUIDA: "Teoria concluída",
+  DIAGNOSTICO_APTO_SEM_TEORIA: "Conhecimento prévio demonstrado",
   MANUAL: "Agendamento manual"
 };
 
@@ -111,6 +112,13 @@ function formatDate(dateKeyOrTimestamp: string): string {
   }).format(new Date(`${dateKey}T12:00:00`));
 }
 
+function formatElapsed(seconds: number): string {
+  const safe = Math.max(0, Math.floor(seconds));
+  const minutes = Math.floor(safe / 60);
+  const remainder = safe % 60;
+  return `${String(minutes).padStart(2, "0")}:${String(remainder).padStart(2, "0")}`;
+}
+
 function performanceLabel(performance: ReviewPerformance): string {
   if (performance === "HARD") return "Não recuperei";
   if (performance === "MEDIUM") return "Recuperei com esforço";
@@ -123,11 +131,28 @@ function reviewModeLabel(mode: string | undefined): string {
   return "Recuperação ativa";
 }
 
-function formatElapsed(seconds: number): string {
-  const safe = Math.max(0, Math.floor(seconds));
-  const minutes = Math.floor(safe / 60);
-  const remainder = safe % 60;
-  return `${String(minutes).padStart(2, "0")}:${String(remainder).padStart(2, "0")}`;
+function reviewProtocol(schedule: CronogramaRevisao): string[] {
+  if (schedule.modoProximaRevisao === "REAPRENDIZAGEM_IMEDIATA") {
+    return [
+      "Tente responder ou explicar sem consultar o material.",
+      "Se falhar, consulte somente o trecho necessário e identifique a lacuna.",
+      "Feche o material e faça uma nova tentativa antes de registrar o resultado."
+    ];
+  }
+
+  if (schedule.modoProximaRevisao === "PRATICA_INTERCALADA") {
+    return [
+      "Recupere o conceito sem consulta e resolva um exemplo curto.",
+      "Compare-o com um conceito próximo para evitar reconhecimento superficial.",
+      "Registre o quanto conseguiu recuperar de forma independente."
+    ];
+  }
+
+  return [
+    "Explique o conceito ou resolva uma questão sem abrir o material.",
+    "Consulte apenas depois da tentativa e corrija diferenças importantes.",
+    "Registre se a recuperação foi independente, com esforço ou não ocorreu."
+  ];
 }
 
 export default function ReviewAndErrorsView() {
@@ -142,6 +167,7 @@ export default function ReviewAndErrorsView() {
     concluirRevisaoProgramada,
     definirRevisaoDesabilitada
   } = useConcurseiroStore();
+
   const [activeReviewTimer, setActiveReviewTimer] = useState<{
     scheduleId: string;
     startedAtMs: number;
@@ -174,19 +200,9 @@ export default function ReviewAndErrorsView() {
       cronogramasRevisao.map((item) => ({
         ...item,
         historicoTentativas: item.historicoTentativas.map((history) => ({
-          revisadoEm: history.revisadoEm,
+          ...history,
           desempenhoAutoAvaliado: history.desempenhoAutoAvaliado as ReviewPerformance,
-          recuperacaoIndependente: history.recuperacaoIndependente,
-          usouAjuda: history.usouAjuda,
-          intervaloDecididoDias: history.intervaloDecididoDias,
-          racionalIntervalo: history.racionalIntervalo ? [...history.racionalIntervalo] : undefined,
-          modoSeguinte: history.modoSeguinte,
-          metodoAplicado: history.metodoAplicado,
-          motivoSelecaoMetodo: history.motivoSelecaoMetodo,
-          selecaoExploratoria: history.selecaoExploratoria,
-          diasDesdeRevisaoAnterior: history.diasDesdeRevisaoAnterior,
-          tempoGastoSegundos: history.tempoGastoSegundos,
-          duracaoFonte: history.duracaoFonte
+          racionalIntervalo: history.racionalIntervalo ? [...history.racionalIntervalo] : undefined
         }))
       })),
     [cronogramasRevisao]
@@ -201,31 +217,10 @@ export default function ReviewAndErrorsView() {
       cronogramasRevisao
         .filter((item) => dueScheduleIds.has(item.id))
         .sort(
-          (a, b) =>
-            a.proximaRevisaoData.localeCompare(b.proximaRevisaoData) || a.id.localeCompare(b.id)
+          (left, right) =>
+            left.proximaRevisaoData.localeCompare(right.proximaRevisaoData) ||
+            left.id.localeCompare(right.id)
         ),
-    [cronogramasRevisao, dueScheduleIds]
-  );
-  useEffect(() => {
-    if (!activeReviewTimer) return;
-    const stillExists = cronogramasRevisao.some(
-      (item) => item.id === activeReviewTimer.scheduleId && !item.desabilitada && !item.isDeleted
-    );
-    if (!stillExists) {
-      sessionStorage.removeItem(ACTIVE_REVIEW_TIMER_KEY);
-      setActiveReviewTimer(null);
-    }
-  }, [activeReviewTimer, cronogramasRevisao]);
-
-  const futureSchedules = useMemo(
-    () =>
-      cronogramasRevisao
-        .filter((item) => !item.isDeleted && !dueScheduleIds.has(item.id))
-        .sort((a, b) => {
-          if (a.desabilitada !== b.desabilitada) return a.desabilitada ? 1 : -1;
-          return a.proximaRevisaoData.localeCompare(b.proximaRevisaoData) || a.id.localeCompare(b.id);
-        })
-        .slice(0, 12),
     [cronogramasRevisao, dueScheduleIds]
   );
 
@@ -233,22 +228,75 @@ export default function ReviewAndErrorsView() {
     () => buildErrorTopicSummaries(tentativasQuestoes),
     [tentativasQuestoes]
   );
-  const withoutLaterCorrect = errorSummaries.filter(
-    (item) => item.estadoRecuperacao === "SEM_ACERTO_POSTERIOR"
-  ).length;
-  const repeatedRecovery = errorSummaries.filter(
-    (item) => item.estadoRecuperacao === "DOIS_OU_MAIS_ACERTOS_POSTERIORES"
-  ).length;
-  const totalDeclaredErrors = errorSummaries.reduce((sum, item) => sum + item.totalErros, 0);
   const interleavedQueue = useMemo(
-    () => buildInterleavedReviewQueue({
-      schedules: coreSchedules,
-      errorSummaries,
-      referenceDate: today,
-      maxItems: 6
-    }),
+    () =>
+      buildInterleavedReviewQueue({
+        schedules: coreSchedules,
+        errorSummaries,
+        referenceDate: today,
+        maxItems: 12
+      }),
     [coreSchedules, errorSummaries, today]
   );
+
+  const orderedDueSchedules = useMemo(() => {
+    const dueById = new Map<string, CronogramaRevisao>(
+      dueSchedules.map((schedule): [string, CronogramaRevisao] => [schedule.id, schedule])
+    );
+    const ordered: CronogramaRevisao[] = [];
+    const seen = new Set<string>();
+
+    for (const item of interleavedQueue) {
+      const schedule = dueById.get(item.scheduleId);
+      if (!schedule || seen.has(schedule.id)) continue;
+      ordered.push(schedule);
+      seen.add(schedule.id);
+    }
+    for (const schedule of dueSchedules) {
+      if (seen.has(schedule.id)) continue;
+      ordered.push(schedule);
+      seen.add(schedule.id);
+    }
+    return ordered;
+  }, [dueSchedules, interleavedQueue]);
+
+  const priorityReasonsByScheduleId = useMemo(
+    () => new Map(interleavedQueue.map((item) => [item.scheduleId, item.priorityReasons])),
+    [interleavedQueue]
+  );
+  const activeSchedule = activeReviewTimer
+    ? cronogramasRevisao.find(
+        (item) => item.id === activeReviewTimer.scheduleId && !item.desabilitada && !item.isDeleted
+      ) ?? null
+    : null;
+  const primarySchedule = activeSchedule ?? orderedDueSchedules[0] ?? null;
+  const remainingDueSchedules = orderedDueSchedules.filter(
+    (schedule) => schedule.id !== primarySchedule?.id
+  );
+
+  useEffect(() => {
+    if (!activeReviewTimer) return;
+    if (!activeSchedule) {
+      sessionStorage.removeItem(ACTIVE_REVIEW_TIMER_KEY);
+      setActiveReviewTimer(null);
+    }
+  }, [activeReviewTimer, activeSchedule]);
+
+  const futureSchedules = useMemo(
+    () =>
+      cronogramasRevisao
+        .filter((item) => !item.isDeleted && !dueScheduleIds.has(item.id))
+        .sort((left, right) => {
+          if (left.desabilitada !== right.desabilitada) return left.desabilitada ? 1 : -1;
+          return (
+            left.proximaRevisaoData.localeCompare(right.proximaRevisaoData) ||
+            left.id.localeCompare(right.id)
+          );
+        })
+        .slice(0, 12),
+    [cronogramasRevisao, dueScheduleIds]
+  );
+
   const methodEvidence = useMemo(
     () => buildReviewMethodEvidence(coreSchedules),
     [coreSchedules]
@@ -261,6 +309,28 @@ export default function ReviewAndErrorsView() {
     (["ADAPTIVE_RETRIEVAL", "INTERLEAVED_RETRIEVAL"] as ReviewMethod[]).includes(item.method)
   );
 
+  const withoutLaterCorrect = errorSummaries.filter(
+    (item) => item.estadoRecuperacao === "SEM_ACERTO_POSTERIOR"
+  ).length;
+  const repeatedRecovery = errorSummaries.filter(
+    (item) => item.estadoRecuperacao === "DOIS_OU_MAIS_ACERTOS_POSTERIORES"
+  ).length;
+  const totalDeclaredErrors = errorSummaries.reduce((sum, item) => sum + item.totalErros, 0);
+
+  const startReviewTimer = (scheduleId: string) => {
+    if (activeReviewTimer && activeReviewTimer.scheduleId !== scheduleId) return;
+    const now = Date.now();
+    const timer = { scheduleId, startedAtMs: now };
+    setTimerNowMs(now);
+    sessionStorage.setItem(ACTIVE_REVIEW_TIMER_KEY, JSON.stringify(timer));
+    setActiveReviewTimer(timer);
+  };
+
+  const cancelReviewTimer = () => {
+    sessionStorage.removeItem(ACTIVE_REVIEW_TIMER_KEY);
+    setActiveReviewTimer(null);
+  };
+
   const handleReview = (scheduleId: string, performance: ReviewPerformance) => {
     if (!activeReviewTimer || activeReviewTimer.scheduleId !== scheduleId) return;
     const elapsedSeconds = Math.max(
@@ -272,278 +342,291 @@ export default function ReviewAndErrorsView() {
       tempoGastoSegundos: elapsedSeconds,
       duracaoFonte: "TIMER"
     });
-    if (result.success) {
-      sessionStorage.removeItem(ACTIVE_REVIEW_TIMER_KEY);
-      setActiveReviewTimer(null);
-    }
+    if (result.success) cancelReviewTimer();
   };
 
-  const startReviewTimer = (scheduleId: string) => {
-    if (activeReviewTimer && activeReviewTimer.scheduleId !== scheduleId) return;
-    const now = Date.now();
-    const timer = { scheduleId, startedAtMs: now };
-    setTimerNowMs(now);
-    sessionStorage.setItem(ACTIVE_REVIEW_TIMER_KEY, JSON.stringify(timer));
-    setActiveReviewTimer(timer);
-  };
+  const primaryDiscipline = primarySchedule
+    ? disciplineById.get(primarySchedule.disciplinaId)
+    : null;
+  const primarySubject = primarySchedule ? subjectById.get(primarySchedule.assuntoId) : null;
+  const primarySubtopic = primarySchedule ? subtopicById.get(primarySchedule.subassuntoId) : null;
+  const primaryReasons = primarySchedule
+    ? priorityReasonsByScheduleId.get(primarySchedule.id) ?? []
+    : [];
 
   return (
-    <div className="flex-1 overflow-y-auto bg-zinc-950 p-6 text-zinc-100">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <section className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5">
-          <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
-            <div>
-              <div className="mb-2 flex items-center gap-2 text-[11px] font-mono uppercase tracking-wide text-blue-300">
-                <RotateCcw className="h-4 w-4" /> Recuperação ativa
-              </div>
-              <h1 className="text-xl font-bold">Revisões e caderno de erros</h1>
-              <p className="mt-2 max-w-3xl text-xs leading-relaxed text-zinc-400">
-                O sistema usa recuperação sem consulta, correção imediata quando houver falha, crescimento adaptativo do intervalo e prática intercalada. A agenda responde às evidências registradas e ao tempo restante até a prova; nenhuma autoavaliação é tratada como domínio comprovado.
-              </p>
+    <div className="flex-1 overflow-y-auto bg-zinc-950 p-4 text-zinc-100 sm:p-6">
+      <div className="mx-auto flex max-w-6xl flex-col gap-5">
+        <header className="flex flex-col justify-between gap-3 border-b border-zinc-900 pb-4 sm:flex-row sm:items-end">
+          <div>
+            <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.18em] text-blue-300">
+              <RotateCcw className="h-4 w-4" /> Fila de recuperação do coach
             </div>
-            <div className="rounded-xl border border-zinc-700 bg-zinc-950/60 px-4 py-3 text-[11px] text-zinc-400">
-              <div className="flex items-center gap-2 font-mono text-zinc-300">
-                <ShieldCheck className="h-4 w-4 text-emerald-400" /> Política transparente
-              </div>
-              <p className="mt-1 max-w-sm leading-relaxed">
-                {ADAPTIVE_POLICY_SUMMARY}
-              </p>
-              <p className="mt-1 text-[10px] text-zinc-600">{REVIEW_POLICY_VERSION}</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <Metric
-            label="Revisões vencidas hoje"
-            value={String(dueSchedules.length)}
-            detail="Somente ciclos ativos e realmente vencidos"
-            icon={<CalendarClock className="h-5 w-5 text-blue-400" />}
-          />
-          <Metric
-            label="Erros registrados"
-            value={String(totalDeclaredErrors)}
-            detail={`${errorSummaries.length} subassunto(s) com erro`}
-            icon={<CircleAlert className="h-5 w-5 text-red-400" />}
-          />
-          <Metric
-            label="Sem acerto posterior"
-            value={String(withoutLaterCorrect)}
-            detail="Fila mais urgente do caderno de erros"
-            icon={<AlertTriangle className="h-5 w-5 text-amber-400" />}
-          />
-          <Metric
-            label="Recuperação repetida"
-            value={String(repeatedRecovery)}
-            detail="Dois ou mais acertos após o último erro"
-            icon={<CheckCircle2 className="h-5 w-5 text-emerald-400" />}
-          />
-        </section>
-
-        <section className="rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.035] p-5">
-          <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
-            <div className="max-w-3xl">
-              <h2 className="flex items-center gap-2 text-sm font-semibold text-zinc-200">
-                <ClipboardList className="h-4 w-4 text-emerald-400" /> Aprendizado do próprio sistema
-              </h2>
-              <p className="mt-1 text-[11px] leading-relaxed text-zinc-500">
-                O comparador usa somente resultados de recuperação registrados em uma sessão posterior. Ele não declara causalidade, não troca o método com amostra pequena e mantém uma parcela determinística de exploração para evitar ficar preso a uma escolha antiga.
-              </p>
-            </div>
-            <div className="rounded-lg border border-zinc-800 bg-zinc-950/60 px-3 py-2 text-[10px] text-zinc-400">
-              {(methodPreference.status === "OBSERVED_PREFERENCE" ||
-                methodPreference.status === "OBSERVED_EFFICIENCY_PREFERENCE") &&
-              methodPreference.preferredMethod
-                ? `Preferência observada (${methodPreference.basis === "EFFICIENCY" ? "eficiência" : "retenção"}): ${REVIEW_METHOD_LABELS[methodPreference.preferredMethod]}`
-                : methodPreference.status === "INCONCLUSIVE"
-                  ? "Comparação inconclusiva: alternância preservada"
-                  : "Coletando evidência comparável"}
-            </div>
-          </div>
-          <div className="mt-4 grid gap-3 md:grid-cols-2">
-            {flexibleMethodEvidence.map((item) => (
-              <div key={item.method} className="rounded-xl border border-zinc-800 bg-zinc-950/50 p-3">
-                <div className="text-xs font-semibold text-zinc-200">{REVIEW_METHOD_LABELS[item.method]}</div>
-                <div className="mt-2 grid grid-cols-2 gap-2 text-[10px] text-zinc-500 sm:grid-cols-4">
-                  <div><span className="block font-mono text-zinc-300">{item.delayedOutcomes}</span>resultados tardios</div>
-                  <div><span className="block font-mono text-zinc-300">{item.distinctSubtopics}</span>subassuntos</div>
-                  <div><span className="block font-mono text-zinc-300">{item.successRate === null ? "—" : `${Math.round(item.successRate * 100)}%`}</span>recuperação independente</div>
-                  <div><span className="block font-mono text-zinc-300">{item.observedIndependentRecoveriesPer10Minutes === null ? "—" : item.observedIndependentRecoveriesPer10Minutes.toFixed(2)}</span>recuperações/10 min</div>
-                </div>
-                <p className="mt-2 text-[10px] text-zinc-600">
-                  {item.preferenceEligible
-                    ? "Gate de retenção atingido."
-                    : "Retenção: faltam 8 resultados tardios e 3 subassuntos."}
-                  {" "}
-                  {item.efficiencyEligible
-                    ? "Gate de eficiência atingido."
-                    : `Eficiência: ${item.timedDelayedOutcomes}/12 resultados cronometrados, ${item.timedDistinctSubtopics}/4 subassuntos e ${Math.round(item.totalTimedMinutes)}/30 min.`}
-                </p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 rounded-lg border border-blue-500/20 bg-blue-500/[0.04] px-3 py-2 text-[10px] leading-relaxed text-blue-200/75">
-            Proteção de avanço: quando houver conteúdo ainda não estudado e a janela diária comportar, o Planner reserva uma sessão executável de teoria nova. Revisões excedentes permanecem na fila em vez de ocupar automaticamente todo o dia.
-          </div>
-        </section>
-
-        <section className="rounded-2xl border border-blue-500/20 bg-blue-500/[0.04] p-5">
-          <div className="mb-4">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-zinc-200">
-              <RotateCcw className="h-4 w-4 text-blue-400" /> Bloco intercalado sugerido
-            </h2>
-            <p className="mt-1 text-[11px] text-zinc-500">
-              Ordem determinística das revisões vencidas, alternando assuntos quando possível. Prioriza falhas sem recuperação e não mistura conteúdos ainda não compreendidos apenas por variedade.
+            <h1 className="mt-2 text-xl font-bold text-zinc-100">Revise uma lacuna por vez</h1>
+            <p className="mt-1 max-w-2xl text-xs leading-relaxed text-zinc-500">
+              O coach ordena o que está vencido. Você tenta recuperar sem consulta, corrige apenas o necessário e registra o resultado real.
             </p>
           </div>
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {interleavedQueue.map((item, index) => {
-              const subtopic = subtopicById.get(item.subassuntoId);
-              const subject = subjectById.get(item.assuntoId);
-              return (
-                <div key={item.scheduleId} className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
-                  <div className="text-[10px] font-mono text-blue-300">ETAPA {index + 1}</div>
-                  <div className="mt-1 text-xs font-semibold text-zinc-200">{subtopic?.nome ?? item.subassuntoId}</div>
-                  <div className="mt-1 text-[10px] text-zinc-600">{subject?.nome ?? item.assuntoId}</div>
-                  <div className="mt-2 text-[10px] leading-relaxed text-zinc-500">{item.priorityReasons.join(" · ")}</div>
-                </div>
-              );
-            })}
-            {interleavedQueue.length === 0 && (
-              <div className="text-xs text-zinc-600">Nenhuma revisão vencida para compor um bloco intercalado hoje.</div>
-            )}
+          <div className="rounded-full border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 text-[10px] font-mono text-zinc-400">
+            {formatDate(today)} · {dueSchedules.length} pendente(s)
           </div>
-        </section>
+        </header>
 
-        <section className="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-5">
-          <div className="mb-4 flex items-center justify-between gap-3">
-            <div>
-              <h2 className="text-sm font-semibold text-zinc-200">Fila de revisões vencidas</h2>
+        {primarySchedule ? (
+          <section className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.06] p-5">
+            <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-start">
+              <div className="min-w-0 flex-1">
+                <div className="text-[10px] font-mono uppercase tracking-wider text-blue-300">
+                  {activeReviewTimer?.scheduleId === primarySchedule.id ? "Revisão em andamento" : "Faça agora"}
+                </div>
+                <h2 className="mt-2 text-xl font-bold text-white">
+                  {primarySubtopic?.nome ?? primarySchedule.subassuntoId}
+                </h2>
+                <p className="mt-1 text-xs text-zinc-400">
+                  {primaryDiscipline?.nome ?? "Disciplina"} · {primarySubject?.nome ?? "Assunto"}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2 text-[10px] text-zinc-500">
+                  <span className="rounded border border-zinc-800 bg-zinc-950/50 px-2 py-1">
+                    {reviewModeLabel(primarySchedule.modoProximaRevisao)}
+                  </span>
+                  <span className="rounded border border-zinc-800 bg-zinc-950/50 px-2 py-1">
+                    {primarySchedule.gatilhoOrigem
+                      ? TRIGGER_LABELS[primarySchedule.gatilhoOrigem]
+                      : "Origem não informada"}
+                  </span>
+                  <span className="rounded border border-zinc-800 bg-zinc-950/50 px-2 py-1">
+                    Venceu em {formatDate(primarySchedule.proximaRevisaoData)}
+                  </span>
+                </div>
+              </div>
+
+              {activeReviewTimer?.scheduleId === primarySchedule.id ? (
+                <div className="rounded-xl border border-blue-500/30 bg-zinc-950/70 px-5 py-4 text-center">
+                  <div className="flex items-center justify-center gap-2 text-[10px] font-mono uppercase text-blue-300">
+                    <TimerReset className="h-4 w-4" /> Tempo de recuperação
+                  </div>
+                  <div className="mt-2 font-mono text-3xl font-bold text-white">
+                    {formatElapsed(
+                      Math.floor((timerNowMs - activeReviewTimer.startedAtMs) / 1000)
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => startReviewTimer(primarySchedule.id)}
+                  className="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
+                >
+                  <PlayCircle className="h-5 w-5" /> Iniciar revisão
+                </button>
+              )}
+            </div>
+
+            <div className="mt-5 grid gap-4 lg:grid-cols-[1.3fr_1fr]">
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/55 p-4">
+                <h3 className="text-[10px] font-mono uppercase text-zinc-500">Protocolo</h3>
+                <ol className="mt-3 space-y-3">
+                  {reviewProtocol(primarySchedule).map((step, index) => (
+                    <li key={step} className="flex gap-3 text-xs leading-relaxed text-zinc-300">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10 font-mono text-[10px] text-blue-300">
+                        {index + 1}
+                      </span>
+                      {step}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/55 p-4">
+                <h3 className="text-[10px] font-mono uppercase text-zinc-500">Por que veio primeiro</h3>
+                <p className="mt-3 text-xs leading-relaxed text-zinc-400">
+                  {primaryReasons.length > 0
+                    ? primaryReasons.join(" · ")
+                    : "É a revisão ativa mais antiga e vencida da fila."}
+                </p>
+                <p className="mt-3 text-[10px] leading-relaxed text-zinc-600">
+                  Método prescrito: {primarySchedule.metodoProximaRevisao
+                    ? REVIEW_METHOD_LABELS[primarySchedule.metodoProximaRevisao]
+                    : "protocolo de recuperação compatível com dados legados"}.
+                </p>
+              </div>
+            </div>
+
+            {activeReviewTimer?.scheduleId === primarySchedule.id && (
+              <div className="mt-5 rounded-xl border border-zinc-800 bg-zinc-950/65 p-4">
+                <div className="text-[10px] font-mono uppercase text-zinc-500">
+                  Como foi a recuperação sem consulta?
+                </div>
+                <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                  {(["HARD", "MEDIUM", "EASY"] as ReviewPerformance[]).map((performance) => (
+                    <button
+                      key={performance}
+                      type="button"
+                      onClick={() => handleReview(primarySchedule.id, performance)}
+                      className={`rounded-lg border px-3 py-3 text-xs font-semibold transition ${
+                        performance === "HARD"
+                          ? "border-red-500/30 bg-red-500/10 text-red-300 hover:bg-red-500/20"
+                          : performance === "MEDIUM"
+                            ? "border-amber-500/30 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20"
+                            : "border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20"
+                      }`}
+                    >
+                      {performanceLabel(performance)}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={cancelReviewTimer}
+                  className="mt-3 flex items-center gap-1.5 text-[11px] text-zinc-600 transition hover:text-zinc-300"
+                >
+                  <XCircle className="h-4 w-4" /> Cancelar sem registrar
+                </button>
+              </div>
+            )}
+          </section>
+        ) : (
+          <section className="rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.05] p-8 text-center">
+            <CheckCircle2 className="mx-auto h-8 w-8 text-emerald-400" />
+            <h2 className="mt-3 text-base font-semibold text-zinc-200">Fila de revisão em dia</h2>
+            <p className="mt-1 text-xs text-zinc-500">
+              O coach criará novos ciclos quando houver teoria concluída, erro ou acerto com baixa confiança.
+            </p>
+          </section>
+        )}
+
+        {remainingDueSchedules.length > 0 && (
+          <section className="rounded-2xl border border-zinc-800 bg-zinc-900/25 p-5">
+            <div className="mb-4">
+              <h2 className="text-sm font-semibold text-zinc-200">Depois desta</h2>
               <p className="mt-1 text-[11px] text-zinc-500">
-                Primeiro tente explicar ou resolver sem consultar. Se falhar, consulte apenas o necessário, corrija e faça uma nova tentativa na mesma sessão. Depois registre o resultado da recuperação.
+                A ordem alterna assuntos quando isso não compromete a recuperação de uma lacuna crítica.
               </p>
             </div>
-            <span className="rounded-full border border-blue-500/25 bg-blue-500/10 px-2.5 py-1 text-[10px] font-mono text-blue-300">
-              {formatDate(today)}
-            </span>
-          </div>
-
-          <div className="space-y-3">
-            {dueSchedules.map((schedule) => {
-              const discipline = disciplineById.get(schedule.disciplinaId);
-              const subject = subjectById.get(schedule.assuntoId);
-              const subtopic = subtopicById.get(schedule.subassuntoId);
-              return (
-                <article key={schedule.id} className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-                  <div className="flex flex-col justify-between gap-4 xl:flex-row xl:items-center">
-                    <div className="min-w-0">
-                      <div className="text-[10px] font-mono uppercase text-zinc-600">
-                        {discipline?.nome ?? "Disciplina"} · {subject?.nome ?? "Assunto"}
-                      </div>
-                      <h3 className="mt-1 text-sm font-semibold text-zinc-200">
-                        {subtopic?.nome ?? schedule.subassuntoId}
-                      </h3>
-                      <div className="mt-2 flex flex-wrap gap-2 text-[10px] text-zinc-500">
-                        <span className="rounded border border-zinc-800 px-2 py-1">
-                          Vencimento: {formatDate(schedule.proximaRevisaoData)}
-                        </span>
-                        <span className="rounded border border-zinc-800 px-2 py-1">
-                          Gatilho: {schedule.gatilhoOrigem ? TRIGGER_LABELS[schedule.gatilhoOrigem] : "legado/não informado"}
-                        </span>
-                        <span className="rounded border border-zinc-800 px-2 py-1">
-                          Recuperações registradas: {schedule.historicoTentativas.length}
-                        </span>
-                        <span className="rounded border border-zinc-800 px-2 py-1">
-                          Próximo modo: {reviewModeLabel(schedule.modoProximaRevisao)}
-                        </span>
-                        <span className="rounded border border-zinc-800 px-2 py-1">
-                          Método: {schedule.metodoProximaRevisao ? REVIEW_METHOD_LABELS[schedule.metodoProximaRevisao] : "migração pendente"}
-                        </span>
+            <div className="space-y-2">
+              {remainingDueSchedules.map((schedule, index) => {
+                const discipline = disciplineById.get(schedule.disciplinaId);
+                const subject = subjectById.get(schedule.assuntoId);
+                const subtopic = subtopicById.get(schedule.subassuntoId);
+                const reasons = priorityReasonsByScheduleId.get(schedule.id) ?? [];
+                return (
+                  <article
+                    key={schedule.id}
+                    className="flex flex-col justify-between gap-3 rounded-xl border border-zinc-800 bg-zinc-950/50 p-4 sm:flex-row sm:items-center"
+                  >
+                    <div className="flex min-w-0 gap-3">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-zinc-700 font-mono text-[10px] text-zinc-500">
+                        {index + 2}
+                      </span>
+                      <div className="min-w-0">
+                        <h3 className="truncate text-sm font-semibold text-zinc-300">
+                          {subtopic?.nome ?? schedule.subassuntoId}
+                        </h3>
+                        <p className="mt-1 text-[10px] text-zinc-600">
+                          {discipline?.nome ?? "Disciplina"} · {subject?.nome ?? "Assunto"}
+                        </p>
+                        {reasons.length > 0 && (
+                          <p className="mt-1 line-clamp-2 text-[10px] leading-relaxed text-zinc-600">
+                            {reasons.join(" · ")}
+                          </p>
+                        )}
                       </div>
                     </div>
-
-                    <div className="flex flex-wrap items-center gap-2">
-                      {activeReviewTimer?.scheduleId === schedule.id ? (
-                        <>
-                          <div className="flex items-center gap-2 rounded-lg border border-blue-500/30 bg-blue-500/10 px-3 py-2 font-mono text-xs text-blue-200">
-                            <TimerReset className="h-4 w-4" />
-                            {formatElapsed(Math.floor((timerNowMs - activeReviewTimer.startedAtMs) / 1000))}
-                          </div>
-                          {(["HARD", "MEDIUM", "EASY"] as ReviewPerformance[]).map((performance) => (
-                            <button
-                              key={performance}
-                              type="button"
-                              onClick={() => handleReview(schedule.id, performance)}
-                              className={`rounded-lg border px-3 py-2 text-xs transition ${
-                                performance === "HARD"
-                                  ? "border-red-500/30 bg-red-500/10 text-red-300 hover:bg-red-500/20"
-                                  : performance === "MEDIUM"
-                                    ? "border-amber-500/30 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20"
-                                    : "border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20"
-                              }`}
-                            >
-                              {performanceLabel(performance)}
-                            </button>
-                          ))}
-                          <button
-                            type="button"
-                            onClick={() => {
-                              sessionStorage.removeItem(ACTIVE_REVIEW_TIMER_KEY);
-                              setActiveReviewTimer(null);
-                            }}
-                            className="flex items-center gap-1.5 rounded-lg border border-zinc-700 px-3 py-2 text-xs text-zinc-500 transition hover:text-zinc-300"
-                          >
-                            <XCircle className="h-4 w-4" /> Cancelar
-                          </button>
-                        </>
-                      ) : (
-                        <button
-                          type="button"
-                          disabled={Boolean(activeReviewTimer)}
-                          onClick={() => startReviewTimer(schedule.id)}
-                          className="flex items-center gap-1.5 rounded-lg border border-blue-500/30 bg-blue-500/10 px-3 py-2 text-xs text-blue-300 transition hover:bg-blue-500/20 disabled:cursor-not-allowed disabled:opacity-40"
-                          title={activeReviewTimer ? "Finalize ou cancele a revisão em andamento." : undefined}
-                        >
-                          <PlayCircle className="h-4 w-4" /> Iniciar revisão
-                        </button>
-                      )}
+                    <div className="flex shrink-0 gap-2">
                       <button
                         type="button"
-                        disabled={activeReviewTimer?.scheduleId === schedule.id}
-                        onClick={() => definirRevisaoDesabilitada(schedule.id, true)}
-                        className="flex items-center gap-1.5 rounded-lg border border-zinc-700 px-3 py-2 text-xs text-zinc-500 transition hover:text-zinc-300 disabled:cursor-not-allowed disabled:opacity-40"
+                        disabled={Boolean(activeReviewTimer)}
+                        onClick={() => startReviewTimer(schedule.id)}
+                        className="flex items-center gap-1.5 rounded-lg border border-blue-500/30 bg-blue-500/10 px-3 py-2 text-xs text-blue-300 transition hover:bg-blue-500/20 disabled:cursor-not-allowed disabled:opacity-40"
                       >
-                        <PauseCircle className="h-4 w-4" /> Pausar ciclo
+                        <PlayCircle className="h-4 w-4" /> Iniciar
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => definirRevisaoDesabilitada(schedule.id, true)}
+                        className="flex items-center gap-1.5 rounded-lg border border-zinc-800 px-3 py-2 text-xs text-zinc-600 transition hover:text-zinc-300"
+                      >
+                        <PauseCircle className="h-4 w-4" /> Pausar
                       </button>
                     </div>
-                  </div>
-                </article>
-              );
-            })}
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        )}
 
-            {dueSchedules.length === 0 && (
-              <div className="rounded-xl border border-dashed border-zinc-800 px-4 py-8 text-center">
-                <CheckCircle2 className="mx-auto h-7 w-7 text-emerald-500/70" />
-                <p className="mt-2 text-sm text-zinc-300">Nenhuma revisão programada está vencida.</p>
-                <p className="mt-1 text-[11px] text-zinc-600">
-                  Novos ciclos surgem de teoria explicitamente concluída, erros e acertos com baixa confiança.
+        <details className="rounded-2xl border border-zinc-800 bg-zinc-900/20 p-5">
+          <summary className="cursor-pointer list-none">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h2 className="flex items-center gap-2 text-sm font-semibold text-zinc-200">
+                  <ShieldCheck className="h-4 w-4 text-emerald-400" /> Como o coach está decidindo
+                </h2>
+                <p className="mt-1 text-[11px] text-zinc-500">
+                  Métricas e política ficam disponíveis para auditoria, sem competir com a próxima ação.
                 </p>
               </div>
-            )}
-          </div>
-        </section>
+              <span className="text-[10px] font-mono text-zinc-600">DETALHES</span>
+            </div>
+          </summary>
 
-        <section className="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-5">
-          <div className="mb-4">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-zinc-200">
-              <ClipboardList className="h-4 w-4 text-red-400" /> Caderno de erros derivado
-            </h2>
-            <p className="mt-1 text-[11px] text-zinc-500">
-              Cada item nasce de um erro real. O estado de recuperação considera apenas acertos registrados depois do erro mais recente naquele subassunto.
+          <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+            <Metric label="Vencidas" value={String(dueSchedules.length)} detail="Ciclos ativos realmente vencidos" />
+            <Metric label="Erros" value={String(totalDeclaredErrors)} detail={`${errorSummaries.length} subassunto(s)`} />
+            <Metric label="Sem acerto posterior" value={String(withoutLaterCorrect)} detail="Maior necessidade de recuperação" />
+            <Metric label="Recuperação repetida" value={String(repeatedRecovery)} detail="Dois ou mais acertos posteriores" />
+          </div>
+
+          <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950/50 p-4">
+            <div className="text-xs font-semibold text-zinc-300">Política adaptativa</div>
+            <p className="mt-2 text-[11px] leading-relaxed text-zinc-500">{ADAPTIVE_POLICY_SUMMARY}</p>
+            <p className="mt-2 text-[10px] font-mono text-zinc-700">{REVIEW_POLICY_VERSION}</p>
+          </div>
+
+          <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-950/50 p-4">
+            <div className="text-xs font-semibold text-zinc-300">Aprendizado do próprio sistema</div>
+            <p className="mt-2 text-[11px] leading-relaxed text-zinc-500">
+              {methodPreference.status === "OBSERVED_PREFERENCE" ||
+              methodPreference.status === "OBSERVED_EFFICIENCY_PREFERENCE"
+                ? methodPreference.preferredMethod
+                  ? `Preferência observada: ${REVIEW_METHOD_LABELS[methodPreference.preferredMethod]}.`
+                  : "Preferência observada sem método elegível."
+                : methodPreference.status === "INCONCLUSIVE"
+                  ? "Comparação inconclusiva; alternância preservada."
+                  : "Ainda coletando evidência comparável."}
             </p>
+            <div className="mt-3 grid gap-3 md:grid-cols-2">
+              {flexibleMethodEvidence.map((item) => (
+                <div key={item.method} className="rounded-lg border border-zinc-800 p-3 text-[10px] text-zinc-500">
+                  <div className="font-semibold text-zinc-300">{REVIEW_METHOD_LABELS[item.method]}</div>
+                  <p className="mt-1">
+                    {item.delayedOutcomes} resultado(s) tardio(s) · {item.distinctSubtopics} subassunto(s) · recuperação independente {item.successRate === null ? "indisponível" : `${Math.round(item.successRate * 100)}%`}.
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
+        </details>
 
-          <div className="space-y-3">
+        <details className="rounded-2xl border border-zinc-800 bg-zinc-900/20 p-5">
+          <summary className="cursor-pointer list-none">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h2 className="flex items-center gap-2 text-sm font-semibold text-zinc-200">
+                  <ClipboardList className="h-4 w-4 text-red-400" /> Caderno de erros
+                </h2>
+                <p className="mt-1 text-[11px] text-zinc-500">
+                  Consulte quando precisar entender a origem da fila ou reforçar manualmente um ciclo.
+                </p>
+              </div>
+              <span className="rounded-full border border-zinc-800 px-2.5 py-1 text-[10px] text-zinc-500">
+                {errorSummaries.length} tópico(s)
+              </span>
+            </div>
+          </summary>
+
+          <div className="mt-5 space-y-3">
             {errorSummaries.map((summary) => {
               const discipline = disciplineById.get(summary.disciplinaId);
               const subject = subjectById.get(summary.assuntoId);
@@ -557,7 +640,7 @@ export default function ReviewAndErrorsView() {
               ).filter((entry): entry is [ErrorCause, number] => (entry[1] ?? 0) > 0);
 
               return (
-                <article key={summary.subassuntoId} className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
+                <article key={summary.subassuntoId} className="rounded-xl border border-zinc-800 bg-zinc-950/55 p-4">
                   <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
                     <div className="min-w-0 flex-1">
                       <div className="text-[10px] font-mono uppercase text-zinc-600">
@@ -567,17 +650,12 @@ export default function ReviewAndErrorsView() {
                         {subtopic?.nome ?? summary.subassuntoId}
                       </h3>
                       <div className="mt-2 flex flex-wrap gap-2 text-[10px] text-zinc-500">
-                        <span className="rounded border border-zinc-800 px-2 py-1">
-                          {summary.totalErros} erro(s)
-                        </span>
-                        <span className="rounded border border-zinc-800 px-2 py-1">
-                          Último erro: {formatDate(summary.ultimoErroEm)}
-                        </span>
-                        <span className="rounded border border-zinc-800 px-2 py-1">
-                          {summary.acertosAposUltimoErro} acerto(s) posterior(es)
-                        </span>
+                        <span>{summary.totalErros} erro(s)</span>
+                        <span>·</span>
+                        <span>Último: {formatDate(summary.ultimoErroEm)}</span>
+                        <span>·</span>
+                        <span>{summary.acertosAposUltimoErro} acerto(s) posterior(es)</span>
                       </div>
-
                       {causes.length > 0 && (
                         <div className="mt-3 flex flex-wrap gap-2">
                           {causes.map(([cause, count]) => (
@@ -587,7 +665,6 @@ export default function ReviewAndErrorsView() {
                           ))}
                         </div>
                       )}
-
                       {summary.notasRecentes.length > 0 && (
                         <div className="mt-3 space-y-2">
                           {summary.notasRecentes.map((note) => (
@@ -598,7 +675,6 @@ export default function ReviewAndErrorsView() {
                         </div>
                       )}
                     </div>
-
                     <div className="flex w-full shrink-0 flex-col gap-2 lg:w-72">
                       <div className={`rounded-lg border px-3 py-2 text-[11px] ${recovery.className}`}>
                         <div className="font-semibold">{recovery.label}</div>
@@ -610,30 +686,38 @@ export default function ReviewAndErrorsView() {
                         className="flex items-center justify-center gap-2 rounded-lg border border-blue-500/30 bg-blue-500/10 px-3 py-2 text-xs text-blue-300 transition hover:bg-blue-500/20"
                       >
                         <RotateCcw className="h-4 w-4" />
-                        {schedule?.desabilitada ? "Reativar revisão" : schedule ? "Reforçar ciclo" : "Agendar revisão"}
+                        {schedule?.desabilitada
+                          ? "Reativar revisão"
+                          : schedule
+                            ? "Reforçar ciclo"
+                            : "Agendar revisão"}
                       </button>
                     </div>
                   </div>
                 </article>
               );
             })}
-
             {errorSummaries.length === 0 && (
               <div className="rounded-xl border border-dashed border-zinc-800 px-4 py-8 text-center text-xs text-zinc-500">
-                Nenhum erro foi registrado ainda. Isso significa ausência de dados, não ausência de dificuldades.
+                Nenhum erro foi registrado. Isso significa ausência de dados, não ausência de dificuldades.
               </div>
             )}
           </div>
-        </section>
+        </details>
 
-        <section className="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-5">
-          <div className="mb-4 flex items-center justify-between gap-3">
-            <div>
-              <h2 className="text-sm font-semibold text-zinc-200">Próximas revisões</h2>
-              <p className="mt-1 text-[11px] text-zinc-500">Até doze ciclos futuros, ordenados por data.</p>
+        <details className="rounded-2xl border border-zinc-800 bg-zinc-900/20 p-5">
+          <summary className="cursor-pointer list-none">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h2 className="flex items-center gap-2 text-sm font-semibold text-zinc-200">
+                  <CalendarClock className="h-4 w-4 text-zinc-500" /> Próximas revisões
+                </h2>
+                <p className="mt-1 text-[11px] text-zinc-500">Planejamento futuro e ciclos pausados.</p>
+              </div>
+              <span className="text-[10px] font-mono text-zinc-600">{futureSchedules.length} VISÍVEIS</span>
             </div>
-          </div>
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          </summary>
+          <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {futureSchedules.map((schedule) => {
               const subtopic = subtopicById.get(schedule.subassuntoId);
               return (
@@ -644,7 +728,9 @@ export default function ReviewAndErrorsView() {
                         {subtopic?.nome ?? schedule.subassuntoId}
                       </p>
                       <p className="mt-1 text-[10px] text-zinc-600">
-                        {schedule.desabilitada ? "Pausada" : formatDate(schedule.proximaRevisaoData)} · {reviewModeLabel(schedule.modoProximaRevisao)} · intervalo {schedule.ultimaDecisaoIntervaloDias ?? "não calibrado"} dia(s)
+                        {schedule.desabilitada
+                          ? "Pausada"
+                          : `${formatDate(schedule.proximaRevisaoData)} · ${reviewModeLabel(schedule.modoProximaRevisao)}`}
                       </p>
                     </div>
                     {schedule.desabilitada ? (
@@ -656,7 +742,16 @@ export default function ReviewAndErrorsView() {
                       >
                         <PlayCircle className="h-4 w-4" />
                       </button>
-                    ) : null}
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => definirRevisaoDesabilitada(schedule.id, true)}
+                        className="text-zinc-700 transition hover:text-zinc-400"
+                        aria-label="Pausar revisão"
+                      >
+                        <PauseCircle className="h-4 w-4" />
+                      </button>
+                    )}
                   </div>
                 </div>
               );
@@ -665,20 +760,24 @@ export default function ReviewAndErrorsView() {
               <div className="text-xs text-zinc-600">Nenhuma revisão futura ativa.</div>
             )}
           </div>
+        </details>
+
+        <section className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-900/10 p-4 text-xs leading-relaxed text-zinc-500">
+          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-400" />
+          <p>
+            A autoavaliação descreve apenas esta tentativa de recuperação. Ela não comprova domínio e não substitui resultados posteriores em questões.
+          </p>
         </section>
       </div>
     </div>
   );
 }
 
-function Metric(props: { label: string; value: string; detail: string; icon: ReactNode }) {
+function Metric(props: { label: string; value: string; detail: string }) {
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900/35 p-4">
-      <div className="flex items-center justify-between gap-3">
-        <span className="text-[10px] font-mono uppercase tracking-wide text-zinc-500">{props.label}</span>
-        {props.icon}
-      </div>
-      <div className="mt-3 text-2xl font-bold text-zinc-100">{props.value}</div>
+    <div className="rounded-xl border border-zinc-800 bg-zinc-950/50 p-4">
+      <span className="text-[10px] font-mono uppercase tracking-wide text-zinc-500">{props.label}</span>
+      <div className="mt-2 text-2xl font-bold text-zinc-100">{props.value}</div>
       <p className="mt-1 text-[10px] leading-relaxed text-zinc-600">{props.detail}</p>
     </div>
   );
