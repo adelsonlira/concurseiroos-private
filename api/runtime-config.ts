@@ -1,4 +1,4 @@
-import { buildPublicRuntimeConfiguration, resolveRuntimeEnvironment } from "../src/server/runtimeEnvironment";
+import { buildPublicRuntimeConfiguration, resolveRuntimeEnvironment } from "../src/server/runtimeEnvironment.js";
 
 export default {
   fetch() {

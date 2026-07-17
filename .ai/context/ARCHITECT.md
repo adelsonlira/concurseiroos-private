@@ -29,5 +29,5 @@ UI → Zustand/adaptadores → Core determinístico → persistência/backend �
 
 ## Diagnósticos serverless
 
-Endpoints públicos de configuração e probes operacionais devem falhar de forma controlada e permanecer independentes do boot completo da aplicação. SDKs externos e verificadores de autenticação são inicializados sob demanda. Configuração inválida não pode impedir o próprio endpoint de explicar o estado do runtime.
+Endpoints públicos de configuração e probes operacionais devem falhar de forma controlada e permanecer independentes do boot completo da aplicação. SDKs externos e verificadores de autenticação são inicializados sob demanda. Configuração inválida não pode impedir o próprio endpoint de explicar o estado do runtime. Todo import relativo alcançável pelas funções Vercel deve declarar a extensão de runtime e ser coberto por teste de carga ESM sem bundle.
 

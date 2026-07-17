@@ -1,12 +1,12 @@
-# Próximos Passos — após 3.31.1
+# Próximos Passos — após 3.31.2
 
 ## Validação operacional imediata
 
-1. Publicar a versão 3.31.1 pelo fluxo normal da Vercel.
+1. Publicar a versão 3.31.2 pelo fluxo normal da Vercel.
 2. Confirmar HTTP 200 e JSON em `/api/runtime-config`.
-3. Executar o teste autenticado do Gemini e registrar o código/detalhe apenas se ainda houver falha.
-4. Confirmar que a barra lateral e o gate de login não solicitam mais `/brand/*`.
-5. Criar e cancelar um simulado, verificando que ele sai do histórico recente sem ser apagado do backup.
+3. Executar o teste autenticado do Gemini.
+4. Se houver nova falha, registrar o código JSON e o log da função sem expor segredos.
+5. Não alterar a chave nem o modelo antes de observar o resultado do runtime corrigido.
 
 ## Trabalho autônomo seguinte
 
@@ -26,7 +26,7 @@
 
 - login obrigatório: confirmado;
 - sincronização notebook–celular: confirmada;
-- Gemini pela Vercel: confirmado antes da regressão; reconfirmação pendente após deploy 3.31.1.
+- Gemini pela Vercel: confirmado antes da regressão; em 3.31.1 o probe não alcançou o provedor por falha ESM; reconfirmação pendente após deploy 3.31.2.
 
 ## Portões fechados
 

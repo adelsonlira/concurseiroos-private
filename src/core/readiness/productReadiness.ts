@@ -1,4 +1,4 @@
-import type { ProductReadinessAssessment, ReadinessCheck } from "./types";
+import type { ProductReadinessAssessment, ReadinessCheck } from "./types.js";
 
 export function assessProductReadiness(checks: readonly ReadinessCheck[]): ProductReadinessAssessment {
   const blockingChecks = checks

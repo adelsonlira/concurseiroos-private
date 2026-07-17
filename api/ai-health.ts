@@ -1,4 +1,4 @@
-import { resolveRuntimeEnvironment } from "../src/server/runtimeEnvironment";
+import { resolveRuntimeEnvironment } from "../src/server/runtimeEnvironment.js";
 
 function json(payload: unknown, status = 200) {
   return Response.json(payload, {

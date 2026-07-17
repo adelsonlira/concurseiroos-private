@@ -281,3 +281,6 @@ Simulados parciais e completos com composição oficial e fonte identificada: o 
 
 Patch de recuperação operacional: logos deixam de depender de assets inexistentes; configuração de runtime e probe Gemini ganham funções serverless independentes, normalização de variáveis e falhas JSON controladas; o cliente Supabase deixa de ser construído no boot do módulo. Simulados podem ser cancelados sem exclusão destrutiva, saindo da fila recente e permanecendo nos backups. Nenhum parâmetro do SDE ou sinal histórico foi alterado.
 
+## 3.31.2 — 2026-07-17
+
+Patch de resolução ESM em produção: o log da Vercel comprovou que `/api/ai-health` falhava com `ERR_MODULE_NOT_FOUND` antes de qualquer chamada ao Gemini. Todos os imports relativos do grafo serverless passaram a usar extensão explícita `.js`, o JSON de prontidão recebeu atributo de importação e foi criada regressão que transpila sem bundle e carrega os entrypoints com a resolução nativa do Node. Nenhum segredo, parâmetro do SDE, prioridade ou sinal histórico foi alterado.

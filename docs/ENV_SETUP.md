@@ -1,8 +1,8 @@
-# Configuração de ambiente — ConcurseiroOS 3.31.1
+# Configuração de ambiente — ConcurseiroOS 3.31.2
 
 ## O ponto mais importante
 
-O `.env` local configura apenas a execução naquela máquina. Em Vercel ou outro host, cadastre as variáveis no painel e faça novo deploy. Cole somente o valor, sem envolver com aspas; a 3.31.1 normaliza aspas externas por compatibilidade, mas o painel deve manter o valor limpo.
+O `.env` local configura apenas a execução naquela máquina. Em Vercel ou outro host, cadastre as variáveis no painel e faça novo deploy. Cole somente o valor, sem envolver com aspas; a 3.31.2 normaliza aspas externas por compatibilidade, mas o painel deve manter o valor limpo.
 
 ## Desenvolvimento local
 

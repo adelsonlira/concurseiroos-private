@@ -46,6 +46,7 @@ describe("Vercel serverless entrypoints", () => {
   it("keeps the Gemini probe independent from the shared Express boot path", () => {
     const source = readFileSync(resolve(root, "api/ai-health.ts"), "utf8");
     expect(source).toContain("async fetch(request: Request)");
+    expect(source).toContain('from "../src/server/runtimeEnvironment.js"');
     expect(source).toContain('await import("@google/genai")');
     expect(source).toContain('await import("@supabase/supabase-js")');
     expect(source).not.toContain("httpApp");
@@ -55,7 +56,7 @@ describe("Vercel serverless entrypoints", () => {
   it("keeps runtime configuration independent from the Express and Supabase SDK boot path", () => {
     const runtimeSource = readFileSync(resolve(root, "api/runtime-config.ts"), "utf8");
     expect(runtimeSource).toContain("Response.json");
-    expect(runtimeSource).toContain("resolveRuntimeEnvironment");
+    expect(runtimeSource).toContain('from "../src/server/runtimeEnvironment.js"');
     expect(runtimeSource).not.toContain("httpApp");
     expect(runtimeSource).not.toContain("@supabase/supabase-js");
   });
@@ -65,7 +66,7 @@ describe("Vercel serverless entrypoints", () => {
       const entrypoint = resolve(root, "api", `${route}.ts`);
       expect(existsSync(entrypoint), `missing ${entrypoint}`).toBe(true);
       const source = readFileSync(entrypoint, "utf8");
-      expect(source).toContain('import app from "../src/server/httpApp"');
+      expect(source).toContain('import app from "../src/server/httpApp.js"');
       expect(source).toContain("return app(req, res)");
     }
   });

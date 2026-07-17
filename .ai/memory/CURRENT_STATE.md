@@ -1,7 +1,7 @@
 # Estado Atual
 
 Data: 2026-07-17
-Versão: 3.31.1
+Versão: 3.31.2
 
 ## Projeto
 
@@ -11,7 +11,7 @@ O produto é um sistema de apoio à decisão orientado à aprovação. Deve redu
 
 ## Fase atual
 
-Patch 3.31.1 preparado após regressões observadas pelo usuário no deploy 3.31.0: logos ausentes, diagnósticos serverless com HTTP 500 e falta de cancelamento de simulados. Login e sincronização continuam confirmados; a integração Gemini precisa ser reconfirmada após o novo deploy. Em seguida, a prioridade retorna à validação real dos simulados e aos 37 localizadores pedagógicos pendentes.
+Patch 3.31.2 preparado após evidência do runtime da Vercel: `/api/ai-health` encerrava com `ERR_MODULE_NOT_FOUND` ao importar `src/server/runtimeEnvironment` sem extensão no Node ESM. A chave Gemini não chegou a ser utilizada e nenhuma chamada externa foi iniciada. A correção torna explícitas as extensões do grafo serverless e adiciona regressão que carrega a saída ESM não empacotada com resolução nativa do Node. Inscrição e pagamento no DATAPREV, publicação 3.31.1 e cancelamento de simulados foram confirmados pelo usuário; Gemini requer reconfirmação após o deploy 3.31.2.
 
 ## Implementado
 
@@ -38,13 +38,14 @@ Patch 3.31.1 preparado após regressões observadas pelo usuário no deploy 3.31
 - Comparação descritiva somente entre simulados com mesma composição.
 - Marca do produto renderizada por SVG embutido, sem dependência de arquivos estáticos ausentes.
 - Diagnósticos `/api/runtime-config` e `/api/ai-health` isolados do boot Express e tolerantes a configuração Supabase inválida ou entre aspas.
+- Grafo serverless usa especificadores relativos ESM com extensão explícita; a saída JavaScript não empacotada é carregada em teste pela resolução nativa do Node.
 - Cliente Supabase do backend inicializado sob demanda, sem derrubar endpoints públicos durante a carga do módulo.
 - Simulados podem ser cancelados com confirmação; saem da fila recente e permanecem preservados como `CANCELADO` no backup.
 
 ## Validado
 
 - Login obrigatório e sincronização notebook–celular confirmados pelo usuário no domínio de produção.
-- Gemini havia sido confirmado antes da regressão 3.31.0; a 3.31.1 possui correção e testes locais, mas requer novo probe autenticado após redeploy.
+- Gemini havia sido confirmado antes da regressão 3.31.0. Em produção 3.31.1, o probe falhou antes do provedor com `ERR_MODULE_NOT_FOUND`; a 3.31.2 corrige a resolução ESM, mas requer novo probe autenticado após redeploy.
 - Auditoria de roteamento: 57 teorias exatas, 0 fallbacks amplos ativos sem aprovação, 37 localizadores manuais pendentes, 52 baterias diagnósticas locais e 42 fallbacks por plataforma externa.
 - Zero subassuntos sem fonte diagnóstica executável.
 - Zero fallbacks entre subassuntos irmãos.
@@ -52,7 +53,7 @@ Patch 3.31.1 preparado após regressões observadas pelo usuário no deploy 3.31
 - Pipeline de memória, corpus, taxonomia, curadoria, classificação, roteamento, SDE, prontidão, TypeScript e testes.
 - Auditoria do SDE com 117 ações e 50 parâmetros catalogados.
 - Contrato de recuperação com 7 causas, 2 verificações independentes e contribuição zero ao ranking.
-- Linha de base 3.31.0 confirmada com 407 testes em 69 arquivos antes do patch. A 3.31.1 foi validada com 417 testes em 71 arquivos, TypeScript, builds web/Express/serverless, auditorias, segurança e smoke HTTP local.
+- Linha de base 3.31.1 confirmada com 417 testes em 71 arquivos antes do patch. A 3.31.2 foi validada com 419 testes em 72 arquivos, TypeScript, builds web/Express/serverless, auditorias do produto e smoke HTTP local. O `npm audit` não pôde consultar o serviço remoto por erro 502/EAI_AGAIN do ambiente; as dependências não foram alteradas em relação à 3.31.1, cuja auditoria tinha zero vulnerabilidades conhecidas.
 - Incidência histórica e materiais privados continuam neutros no ranking.
 
 ## Problemas conhecidos
@@ -65,9 +66,9 @@ Patch 3.31.1 preparado após regressões observadas pelo usuário no deploy 3.31
 - Dados locais ainda não são namespaceados para múltiplos usuários no mesmo perfil de navegador.
 - O limiar diagnóstico de 85% é conservador e só poderá ser recalibrado com resultados reais suficientes.
 - O runtime-alvo é Node.js 24.x; este ambiente automatizado executa Node 22.x.
-- A correção dos endpoints e do Gemini ainda precisa ser validada no runtime real da Vercel após publicação da 3.31.1.
+- A correção ESM dos endpoints e do Gemini ainda precisa ser validada no runtime real da Vercel após publicação da 3.31.2.
 - Nenhum software ou plano garante aprovação; o produto reduz erro decisório e organiza esforço com rastreabilidade.
 
 ## Próxima tarefa
 
-Publicar a 3.31.1 e confirmar em produção as logos, `/api/runtime-config`, o probe autenticado do Gemini e o cancelamento de simulados. Depois, fechar os 37 localizadores teóricos pendentes e validar prospectivamente os simulados.
+Publicar a 3.31.2 e confirmar em produção `/api/runtime-config` e o probe autenticado do Gemini. As logos e o cancelamento de simulados já foram confirmados. Depois, auditar os materiais físicos suspeitos, fechar os 37 localizadores teóricos pendentes e validar prospectivamente os simulados.

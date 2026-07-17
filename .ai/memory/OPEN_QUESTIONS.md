@@ -20,8 +20,8 @@
 
 ## Operação real
 
-- O probe Gemini da 3.31.1 responde no runtime real da Vercel após isolar o boot serverless?
-- Alguma variável da Vercel foi colada com aspas ou com par Supabase principal inválido, exigindo o fallback VITE registrado pelo endpoint?
+- O probe Gemini da 3.31.2 responde no runtime real da Vercel após corrigir os especificadores ESM?
+- Depois que o runtime carregar corretamente, a chave e o modelo Gemini serão aceitos pelo provedor ou haverá erro controlado de autenticação, quota ou modelo?
 
 - O fechamento guiado reduz repetição inútil e aumenta recuperação sem consulta?
 - O usuário inicia a sessão com menos navegação e menos decisões?

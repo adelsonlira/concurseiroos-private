@@ -1,10 +1,10 @@
 import express from "express";
 import { createClient } from "@supabase/supabase-js";
 import dotenv from "dotenv";
-import readinessReport from "../../data/quality/product-readiness-report.json";
-import { assessProductReadiness } from "../core/readiness/productReadiness";
-import type { ReadinessCheck } from "../core/readiness/types";
-import { buildPublicRuntimeConfiguration, resolveRuntimeEnvironment } from "./runtimeEnvironment";
+import readinessReport from "../../data/quality/product-readiness-report.json" with { type: "json" };
+import { assessProductReadiness } from "../core/readiness/productReadiness.js";
+import type { ReadinessCheck } from "../core/readiness/types.js";
+import { buildPublicRuntimeConfiguration, resolveRuntimeEnvironment } from "./runtimeEnvironment.js";
 
 dotenv.config({ quiet: true });
 
