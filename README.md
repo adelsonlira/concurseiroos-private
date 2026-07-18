@@ -146,3 +146,10 @@ Durante a sessão, o Coach abre a cópia disponível diretamente na página pres
 A versão 3.32.0 adiciona um fluxo manual e isolado para questões FGV de Banco de Dados. O catálogo derivado contém 664 questões elegíveis dos 797 registros preservados e utiliza 301 assets validados. Conferência e finalização ocorrem no backend; o catálogo público não contém gabarito ou metadados privados. O recurso não altera SDE, mastery, prioridades, sessões, simulados oficiais ou o Diagnóstico Piloto.
 
 Consulte `.ai/sprints/SPRINT-3.32.0.md`, `.ai/decisions/ADR-032-isolated-essential-fgv-training.md` e os relatórios da versão em `docs/`.
+
+
+## Hotfix Treino FGV 3.32.1
+
+A versão 3.32.1 adiciona entry points serverless explícitos para conferência e finalização, mantém o catálogo privado fora do bundle web, corrige o ciclo de vida de erros, garante rolagem integral em viewports estreitos e define aderência direta como padrão. As 664 questões, os 301 assets e todos os guardrails estratégicos permanecem inalterados.
+
+Consulte `.ai/sprints/SPRINT-3.32.1.md`, `.ai/decisions/ADR-033-explicit-fgv-training-serverless-entrypoints.md` e os relatórios da versão em `docs/`.

@@ -1,7 +1,7 @@
 {
   "name": "concurseiroos",
   "private": true,
-  "version": "3.32.0",
+  "version": "3.32.1",
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
@@ -16,7 +16,7 @@
     "build:web": "vite build && npm run diagnostic:audit-built-assets && npm run training:audit-built-assets",
     "build:server": "esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "vercel-build": "npm run build:web",
-    "build:serverless": "esbuild src/server/httpApp.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/http-app.mjs",
+    "build:serverless": "esbuild src/server/httpApp.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/http-app.mjs && esbuild api/training-fgv/check.ts api/training-fgv/finalize.ts --bundle --platform=node --format=esm --packages=external --outbase=api --outdir=dist/serverless-api",
     "validate:memory": "node scripts/validateAiMemory.mjs",
     "knowledge:build": "node scripts/buildKnowledgeCatalog.mjs",
     "sde:audit": "tsx scripts/auditSdeReliability.ts",
@@ -33,7 +33,8 @@
     "diagnostic:audit-built-assets": "node scripts/validateBuiltDiagnosticAssets.mjs",
     "training:build": "node scripts/buildFgvTrainingCatalog.mjs",
     "training:audit": "node scripts/validateFgvTrainingCatalog.mjs",
-    "training:audit-built-assets": "node scripts/validateBuiltFgvTrainingAssets.mjs"
+    "training:audit-built-assets": "node scripts/validateBuiltFgvTrainingAssets.mjs",
+    "training:smoke-serverless": "node scripts/smokeFgvTrainingServerless.mjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

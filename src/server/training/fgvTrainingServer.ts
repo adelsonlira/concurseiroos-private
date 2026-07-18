@@ -35,6 +35,12 @@ function assertBase(request: { attemptId: string; catalogId: string; catalogVers
 
 export function checkFgvTrainingAnswer(request: CheckFgvTrainingAnswerRequest): FgvTrainingCheckedCorrection {
   assertBase(request);
+  if (!Array.isArray(request.questionOrder) || request.questionOrder.length < 1 || request.questionOrder.length > 20) {
+    throw new Error("Tentativa inexistente ou inválida.");
+  }
+  if (new Set(request.questionOrder).size !== request.questionOrder.length) throw new Error("A tentativa contém questão repetida.");
+  if (!request.questionOrder.every((questionId) => PRIVATE_BY_ID.has(questionId))) throw new Error("A tentativa contém questão desconhecida.");
+  if (!request.questionOrder.includes(request.questionId)) throw new Error("Questão fora da tentativa.");
   if (!LABELS.has(request.selectedAnswer)) throw new Error("Alternativa inválida.");
   const question = PRIVATE_BY_ID.get(request.questionId);
   if (!question) throw new Error("Questão desconhecida.");

@@ -74,6 +74,7 @@ export interface CheckFgvTrainingAnswerRequest {
   attemptId: string;
   catalogId: FgvTrainingPublicCatalog["catalogId"];
   catalogVersion: 1;
+  questionOrder: string[];
   questionId: string;
   selectedAnswer: FgvTrainingOptionLabel;
 }

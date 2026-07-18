@@ -28,6 +28,8 @@ const serverlessRuntimeFiles = [
   "api/ai-health.ts",
   "api/coach-chat.ts",
   "api/diagnostic-finalize.ts",
+  "api/training-fgv/check.ts",
+  "api/training-fgv/finalize.ts",
   "api/explain-question.ts",
   "api/organize-material.ts",
   "api/parse-edital.ts",
@@ -36,6 +38,8 @@ const serverlessRuntimeFiles = [
   "src/server/httpApp.ts",
   "src/server/runtimeEnvironment.ts",
   "src/server/diagnostics/pilotDiagnosticServer.ts",
+  "src/server/training/fgvTrainingServer.ts",
+  "src/features/fgvTraining/types.ts",
   "src/features/pilotDiagnostic/types.ts",
   "src/core/readiness/productReadiness.ts",
   "src/core/readiness/types.ts",
@@ -99,6 +103,8 @@ describe("Vercel Node ESM resolution", () => {
     const runtimeJsonFiles = [
       "data/quality/product-readiness-report.json",
       "data/diagnostics/diag-fgv-dataprev-bd-v1/diagnostic-v1.internal.json",
+      "src/features/fgvTraining/data/trainingPublicCatalog.json",
+      "src/server/training/data/trainingPrivateCatalog.json",
     ];
     for (const relativeFile of runtimeJsonFiles) {
       const source = resolve(root, relativeFile);
@@ -122,5 +128,10 @@ describe("Vercel Node ESM resolution", () => {
 
     const diagnosticModule = await import(`${pathToFileURL(resolve(outputDirectory, "api/diagnostic-finalize.js")).href}?${cacheBuster}`);
     expect(typeof diagnosticModule.default).toBe("function");
+
+    const trainingCheckModule = await import(`${pathToFileURL(resolve(outputDirectory, "api/training-fgv/check.js")).href}?${cacheBuster}`);
+    const trainingFinalizeModule = await import(`${pathToFileURL(resolve(outputDirectory, "api/training-fgv/finalize.js")).href}?${cacheBuster}`);
+    expect(typeof trainingCheckModule.default).toBe("function");
+    expect(typeof trainingFinalizeModule.default).toBe("function");
   }, 15_000);
 });

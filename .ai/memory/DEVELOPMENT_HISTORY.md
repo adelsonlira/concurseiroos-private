@@ -305,3 +305,7 @@ Hotfix de navegação do diagnóstico piloto: removida a seleção automática d
 - Implementados conferência por questão, bloqueio após conferência, finalização com brancos, agregações e histórico básico imutável.
 - Mantidos `affectsSde: false`, `countsAsOfficialSimulation: false` e `trainingType: thematic_fgv`.
 - SDE, mastery, prioridades, roadmap, sessões, simulados oficiais, diagnóstico, autenticação e sincronização permaneceram sem alteração funcional.
+
+## 3.32.1 — 2026-07-18
+
+Hotfix crítico do Treino FGV: a causa da falha de conferência em produção foi a ausência de entry points correspondentes no diretório `api/` da Vercel, embora as rotas existissem no Express local. Foram adicionados handlers explícitos para `check` e `finalize`, com inclusão estática e validação do catálogo privado no bundle serverless. A conferência passou a validar tentativa, ordem e pertencimento da questão. Mensagens transitórias foram separadas por tela e deixaram de vazar para landing ou resultado. O módulo recebeu rolagem vertical única e imagens responsivas, e o filtro de aderência passou a iniciar em `DIRECT`. Nenhuma questão, asset, resposta operacional, histórico, SDE, mastery, prioridade, sessão, simulado, diagnóstico ou store principal foi alterado.

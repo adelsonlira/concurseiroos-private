@@ -61,6 +61,18 @@ describe("Vercel serverless entrypoints", () => {
     expect(runtimeSource).not.toContain("@supabase/supabase-js");
   });
 
+  it("publishes explicit nested serverless entrypoints for Treino FGV", () => {
+    for (const route of ["check", "finalize"]) {
+      const entrypoint = resolve(root, "api", "training-fgv", `${route}.ts`);
+      expect(existsSync(entrypoint), `missing ${entrypoint}`).toBe(true);
+      const source = readFileSync(entrypoint, "utf8");
+      expect(source).toContain('import app from "../../src/server/httpApp.js"');
+      expect(source).toContain('from "../../src/server/training/fgvTrainingServer.js"');
+      expect(source).toContain("validateFgvTrainingServerCatalog()");
+      expect(source).toContain("return app(req, res)");
+    }
+  });
+
   it("routes AI functions through the serverless-safe shared app", () => {
     for (const route of aiRoutes) {
       const entrypoint = resolve(root, "api", `${route}.ts`);

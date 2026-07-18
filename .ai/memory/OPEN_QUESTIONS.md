@@ -1,16 +1,15 @@
 # Questões Abertas
 
-## Treino FGV 3.32.0
+## Treino FGV 3.32.1
 
-- Os 301 assets são servidos corretamente pelo CDN da Vercel após o deploy real?
-- A experiência com catálogos de 664 questões permanece fluida nos dispositivos-alvo?
-- O endpoint autenticado de conferência/finalização mantém latência aceitável em produção?
-- O armazenamento local isolado será suficiente até a eventual sincronização de treinos entre dispositivos?
-- Quais recursos da 3.32.1 serão autorizados primeiro: não vistas, erradas anteriormente ou estatísticas acumuladas?
+- O domínio real da Vercel confirma HTTP 200 autenticado nos novos entry points aninhados?
+- A latência de cold start do bundle de correção permanece aceitável após a inclusão estática do catálogo privado?
+- O armazenamento local isolado será suficiente até uma eventual sincronização de treinos entre dispositivos?
+- Em qual versão futura serão autorizados filtros de não vistas, erradas anteriormente e estatísticas acumuladas?
 
 ## Diagnóstico Piloto
 
-- A navegação corrigida da 3.31.4 permanece estável após a inclusão da rota independente do Treino FGV?
+- A navegação corrigida da 3.31.4 permanece estável após o hotfix do Treino FGV?
 - Tentativas diagnósticas deverão ser sincronizadas entre dispositivos em versão futura?
 
 ## Plataforma

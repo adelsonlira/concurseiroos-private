@@ -67,4 +67,4 @@ Transformar regras oficiais, estado cognitivo, disponibilidade, materiais e evid
 
 ## 3.32.x — Treino FGV
 
-A 3.32.0 entrega o fluxo essencial. Não vistas, erradas anteriormente, estatísticas acumuladas e recomendações permanecem reservadas para a 3.32.1 ou posterior, mediante ordem explícita.
+A 3.32.0 entrega o fluxo essencial e a 3.32.1 corrige produção, mensagens e rolagem. Não vistas, erradas anteriormente, estatísticas acumuladas e recomendações permanecem reservadas para uma versão funcional posterior, mediante ordem explícita.

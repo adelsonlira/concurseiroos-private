@@ -32,6 +32,6 @@ UI → Zustand/adaptadores → Core determinístico → persistência/backend �
 Endpoints públicos de configuração e probes operacionais devem falhar de forma controlada e permanecer independentes do boot completo da aplicação. SDKs externos e verificadores de autenticação são inicializados sob demanda. Configuração inválida não pode impedir o próprio endpoint de explicar o estado do runtime. Todo import relativo alcançável pelas funções Vercel deve declarar a extensão de runtime e ser coberto por teste de carga ESM sem bundle.
 
 
-## Treino FGV Essencial — 3.32.0
+## Treino FGV Essencial — 3.32.1
 
-O Treino FGV é um bounded context isolado em `src/features/fgvTraining`, com persistência local própria e correção server-side em `src/server/training`. Não importa nem modifica o store principal, SDE, mastery, sessões ou simulados. Catálogos público e privado são gerados de forma determinística a partir do banco operacional preservado.
+O Treino FGV é um bounded context isolado em `src/features/fgvTraining`, com persistência local própria e correção server-side em `src/server/training`. Não importa nem modifica o store principal, SDE, mastery, sessões ou simulados. Catálogos público e privado são gerados de forma determinística a partir do banco operacional preservado. A publicação serverless exige entry points explícitos em `api/training-fgv/`; eles encaminham ao app autenticado e incluem estaticamente apenas o catálogo privado necessário à correção.

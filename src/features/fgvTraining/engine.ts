@@ -107,6 +107,7 @@ export function buildCheckFgvTrainingRequest(
     attemptId: attempt.attemptId,
     catalogId: attempt.catalogId,
     catalogVersion: 1,
+    questionOrder: [...attempt.questionOrder],
     questionId,
     selectedAnswer,
   };
