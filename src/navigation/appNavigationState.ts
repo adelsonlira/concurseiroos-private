@@ -1,11 +1,13 @@
 import { PILOT_DIAGNOSTIC_LANDING_ROUTE, parsePilotDiagnosticHash, type PilotDiagnosticRoute } from "../features/pilotDiagnostic/navigation";
 import { FGV_TRAINING_LANDING_ROUTE, parseFgvTrainingHash, type FgvTrainingRoute } from "../features/fgvTraining/navigation";
 import { getNavigationItem } from "./navigationModel";
+import { isExternalEvidenceHash } from "../features/externalEvidence/navigation";
 
 export interface AppNavigationState { activeTab: string; diagnosticRoute: PilotDiagnosticRoute; trainingRoute: FgvTrainingRoute; }
 export interface AppHistoryNavigationState { activeTab?: string; }
 
 export function resolveAppNavigationFromLocation(hash: string, historyState?: AppHistoryNavigationState | null): AppNavigationState {
+  if (isExternalEvidenceHash(hash)) return { activeTab: "exercises", diagnosticRoute: PILOT_DIAGNOSTIC_LANDING_ROUTE, trainingRoute: FGV_TRAINING_LANDING_ROUTE };
   const trainingRoute = parseFgvTrainingHash(hash);
   if (trainingRoute) return { activeTab: "training-fgv", diagnosticRoute: PILOT_DIAGNOSTIC_LANDING_ROUTE, trainingRoute };
   const diagnosticRoute = parsePilotDiagnosticHash(hash);

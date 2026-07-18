@@ -23,7 +23,7 @@ function backup(): BackupExportSchema {
       questoes: [], tentativasQuestoes: [], flashcards: [], documentos: [], resumos: [], anotacoes: [],
       planosEstudo: [], simulados: [], estatisticas: null, agenda: [], historicos: [], cronogramasRevisao: [],
       configuracao: null, conversasIA: [], sessoesEstudo: [], evidenciasAprendizagemGuiada: [],
-      casosRecuperacaoErro: [], itensBiblioteca: []
+      casosRecuperacaoErro: [], externalEvidenceLedger: [], itensBiblioteca: []
     }
   } as unknown as BackupExportSchema;
   value.metadata.checksum = calculateBackupChecksum(value);
@@ -53,19 +53,21 @@ describe("backup integrity", () => {
 
   it("migrates a valid 1.0 snapshot that predates guided-learning evidence", () => {
     const value = backup() as BackupExportSchema & {
-      dados: BackupExportSchema["dados"] & { evidenciasAprendizagemGuiada?: unknown; casosRecuperacaoErro?: unknown };
+      dados: BackupExportSchema["dados"] & { evidenciasAprendizagemGuiada?: unknown; casosRecuperacaoErro?: unknown; externalEvidenceLedger?: unknown };
     };
     value.metadata.versaoBackup = "1.0.0";
     delete value.metadata.checksum;
     delete value.metadata.integrityAlgorithm;
     delete value.dados.evidenciasAprendizagemGuiada;
     delete value.dados.casosRecuperacaoErro;
+    delete value.dados.externalEvidenceLedger;
 
     const prepared = prepareBackupForImport(value);
     expect(prepared.errors).toEqual([]);
     expect(prepared.migrated).toBe(true);
     expect(prepared.backup?.dados.evidenciasAprendizagemGuiada).toEqual([]);
     expect(prepared.backup?.dados.casosRecuperacaoErro).toEqual([]);
+    expect(prepared.backup?.dados.externalEvidenceLedger).toEqual([]);
     expect(prepared.warnings.join(" ")).toMatch(/snapshot antigo|backup legado/i);
   });
 

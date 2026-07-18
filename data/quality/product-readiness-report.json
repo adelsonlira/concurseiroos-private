@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "projectVersion": "3.32.1",
-  "generatedAt": "2026-07-18T21:40:12.286Z",
+  "projectVersion": "3.33.0",
+  "generatedAt": "2026-07-18T23:21:04.016Z",
   "status": "READY_WITH_LIMITATIONS",
   "confidence": "MEDIUM",
   "blockingChecks": [],

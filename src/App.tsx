@@ -21,6 +21,7 @@ import {
   type FgvTrainingRoute,
 } from "./features/fgvTraining/navigation";
 import { WORKSPACE_CONTENT_CLASS_NAME } from "./layout/appShellLayout";
+import { EXTERNAL_EVIDENCE_ROUTE } from "./features/externalEvidence/navigation";
 import AccessGate from "./components/AccessGate";
 import { decideAppAccess } from "./integrations/cloud/appAccessPolicy";
 
@@ -140,6 +141,17 @@ export default function App() {
       return;
     }
 
+    if (destination.activeTab === "exercises") {
+      const alreadyAtLanding = window.location.hash === EXTERNAL_EVIDENCE_ROUTE;
+      const nextUrl = `${window.location.pathname}${window.location.search}${EXTERNAL_EVIDENCE_ROUTE}`;
+      window.history[alreadyAtLanding ? "replaceState" : "pushState"](
+        { activeTab: "exercises" },
+        "",
+        nextUrl,
+      );
+      return;
+    }
+
     window.history.replaceState(
       { activeTab: destination.activeTab },
       "",
@@ -186,7 +198,7 @@ export default function App() {
       case "library":
         return <LibraryView />;
       case "exercises":
-        return <ExerciseDeskView />;
+        return <ExerciseDeskView onReturnToCoach={() => navigateTo("dashboard")} />;
       case "diagnostic":
         return <PilotDiagnosticView route={diagnosticRoute} onNavigate={commitDiagnosticRoute} />;
       case "training-fgv":
@@ -198,7 +210,7 @@ export default function App() {
       case "reviews":
         return <ReviewAndErrorsView />;
       case "focus":
-        return <FocusModeDesk onOpenQuestions={() => navigateTo("exercises")} onAskCoach={() => navigateTo("coach")} />;
+        return <FocusModeDesk onOpenQuestions={() => navigateTo("exercises")} onAskCoach={() => navigateTo("coach")} onReturnToCoach={() => navigateTo("dashboard")} />;
       case "weekly":
         return <WeeklyCalibrationView />;
       case "roadmap":

@@ -12,6 +12,7 @@ import type {
   SimulationPlan,
   SimulationSource,
 } from "./core/simulations/types";
+import type { ExternalEvidenceRecord } from "./core/externalEvidence/types";
 import type {
   AnswerConfidence,
   ErrorCause,
@@ -820,6 +821,7 @@ export interface BackupExportSchema {
     sessoesEstudo: SessaoEstudo[];
     evidenciasAprendizagemGuiada: GuidedLearningEvidence[];
     casosRecuperacaoErro: ErrorRecoveryCase[];
+    externalEvidenceLedger: ExternalEvidenceRecord[];
     itensBiblioteca: ItemBiblioteca[];
   };
 }

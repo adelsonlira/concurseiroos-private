@@ -1,19 +1,19 @@
 # Questões Abertas
 
-## Treino FGV 3.32.1
+## Ledger de Evidências Externas 3.33.0
 
-- O domínio real da Vercel confirma HTTP 200 autenticado nos novos entry points aninhados?
-- A latência de cold start do bundle de correção permanece aceitável após a inclusão estática do catálogo privado?
-- O armazenamento local isolado será suficiente até uma eventual sincronização de treinos entre dispositivos?
-- Em qual versão futura serão autorizados filtros de não vistas, erradas anteriormente e estatísticas acumuladas?
+- Quais combinações de autoridade, força de medição e amostra efetiva poderão tornar uma evidência elegível para o SDE v2?
+- Como o SDE v2 combinará lotes agregados e tentativas individuais sem inventar distribuição por questão?
+- O futuro consumo decisório exigirá confirmação humana adicional para fontes `outra` ou NotebookLM?
+- Qual política de retenção e visualização será adotada quando o ledger crescer por vários concursos?
 
-## Diagnóstico Piloto
+## Sincronização e backup
 
-- A navegação corrigida da 3.31.4 permanece estável após o hotfix do Treino FGV?
-- Tentativas diagnósticas deverão ser sincronizadas entre dispositivos em versão futura?
+- O domínio real preserva ordem append-only e IDs em conflitos simultâneos entre dispositivos?
+- Será necessário um merge específico por `evidenceId` em vez da reconciliação integral atual para uso intensivo multi-dispositivo?
 
 ## Plataforma
 
 - O runtime real da Vercel confirma Node.js 24.x em todos os endpoints?
-- O probe Gemini alcança o provedor no runtime real sem regressão?
 - Quando os dados locais gerais serão namespaceados para múltiplos usuários no mesmo navegador?
+- O smoke autenticado do Treino FGV permanece estável após a publicação da 3.33.0?

@@ -1,4 +1,5 @@
 import type { BackupExportSchema } from "../../types";
+import { containsSensitiveExternalData } from "../externalEvidence/ledger";
 
 export interface BackupValidationResult {
   valid: boolean;
@@ -71,7 +72,7 @@ function requireArray(value: unknown, label: string, errors: string[]): value is
  * feature did not exist when the snapshot was produced, therefore an empty
  * list is the only safe default.
  */
-const SAFE_ADDITIVE_COLLECTIONS = ["evidenciasAprendizagemGuiada", "casosRecuperacaoErro"] as const;
+const SAFE_ADDITIVE_COLLECTIONS = ["evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "externalEvidenceLedger"] as const;
 
 function verifyOriginalChecksum(
   backup: BackupExportSchema,
@@ -136,7 +137,7 @@ export function prepareBackupForImport(value: unknown): BackupImportPreparation 
   if (migrated) {
     normalized.metadata = {
       ...normalized.metadata,
-      versaoBackup: "2.1.0",
+      versaoBackup: "2.2.0",
       integrityAlgorithm: "FNV1A64_CANONICAL_JSON"
     };
     normalized.metadata.checksum = calculateBackupChecksum(normalized);
@@ -163,7 +164,7 @@ export function validateBackup(backup: BackupExportSchema): BackupValidationResu
     "concursos", "editais", "disciplinas", "assuntos", "subassuntos", "questoes",
     "tentativasQuestoes", "flashcards", "documentos", "resumos", "anotacoes",
     "planosEstudo", "simulados", "agenda", "historicos", "cronogramasRevisao",
-    "conversasIA", "sessoesEstudo", "evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "itensBiblioteca"
+    "conversasIA", "sessoesEstudo", "evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "externalEvidenceLedger", "itensBiblioteca"
   ];
   for (const key of requiredCollections) requireArray(backup.dados[key], String(key), errors);
   if (errors.length > 0) return { valid: false, errors, warnings };
@@ -179,6 +180,20 @@ export function validateBackup(backup: BackupExportSchema): BackupValidationResu
   for (const [label, items] of identityCollections) {
     const duplicates = duplicateIds(items);
     if (duplicates.length > 0) errors.push(`${label} contém IDs duplicados: ${duplicates.slice(0, 5).join(", ")}.`);
+  }
+
+  const evidenceIds = new Set<string>();
+  const duplicateEvidenceIds = new Set<string>();
+  for (const event of backup.dados.externalEvidenceLedger) {
+    if (!event.evidenceId || typeof event.evidenceId !== "string") {
+      errors.push("O ledger externo contém evento sem evidenceId válido.");
+      continue;
+    }
+    if (evidenceIds.has(event.evidenceId)) duplicateEvidenceIds.add(event.evidenceId);
+    evidenceIds.add(event.evidenceId);
+  }
+  if (duplicateEvidenceIds.size > 0) {
+    errors.push(`externalEvidenceLedger contém IDs duplicados: ${[...duplicateEvidenceIds].slice(0, 5).join(", ")}.`);
   }
 
   const concursoIds = new Set(backup.dados.concursos.map((item) => item.id));
@@ -206,6 +221,24 @@ export function validateBackup(backup: BackupExportSchema): BackupValidationResu
         if (!tentativaIds.has(attemptId)) errors.push(`Evento ${event.id} referencia tentativa inexistente ${attemptId}.`);
       }
     }
+  }
+
+  const priorEvidenceIds = new Set<string>();
+  for (const event of backup.dados.externalEvidenceLedger) {
+    if (!disciplinaIds.has(event.disciplineId)) errors.push(`Evidência ${event.evidenceId} referencia disciplina inexistente.`);
+    if (!assuntoIds.has(event.topicId)) errors.push(`Evidência ${event.evidenceId} referencia assunto inexistente.`);
+    if (event.subtopicId && !subassuntoIds.has(event.subtopicId)) errors.push(`Evidência ${event.evidenceId} referencia subassunto inexistente.`);
+    if (event.affectsSde !== false) errors.push(`Evidência ${event.evidenceId} não preserva affectsSde=false.`);
+    if (event.supersedesEvidenceId && !priorEvidenceIds.has(event.supersedesEvidenceId)) {
+      errors.push(`Evidência ${event.evidenceId} substitui evento inexistente ou posterior.`);
+    }
+    if (event.voidsEvidenceId && !priorEvidenceIds.has(event.voidsEvidenceId)) {
+      errors.push(`Evidência ${event.evidenceId} anula evento inexistente ou posterior.`);
+    }
+    if ([event.sourceReference, event.sourceLabel, event.notes, event.difficultPoints].some(containsSensitiveExternalData)) {
+      errors.push(`Evidência ${event.evidenceId} contém dado externo sensível ou HTML não permitido.`);
+    }
+    priorEvidenceIds.add(event.evidenceId);
   }
 
   const checksum = backup.metadata.checksum;

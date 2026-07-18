@@ -153,3 +153,11 @@ Consulte `.ai/sprints/SPRINT-3.32.0.md`, `.ai/decisions/ADR-032-isolated-essenti
 A versão 3.32.1 adiciona entry points serverless explícitos para conferência e finalização, mantém o catálogo privado fora do bundle web, corrige o ciclo de vida de erros, garante rolagem integral em viewports estreitos e define aderência direta como padrão. As 664 questões, os 301 assets e todos os guardrails estratégicos permanecem inalterados.
 
 Consulte `.ai/sprints/SPRINT-3.32.1.md`, `.ai/decisions/ADR-033-explicit-fgv-training-serverless-entrypoints.md` e os relatórios da versão em `docs/`.
+
+## Ledger de Evidências Externas 3.33.0
+
+A versão 3.33.0 transforma o registro manual em um ledger append-only para resultados externos. Uma bateria do QConcursos gera um único evento agregado; correções e anulações são novos eventos que preservam o original. O formulário reutiliza a taxonomia, integra-se a prescrição e sessão, participa do backup e da sincronização existentes e apresenta histórico e resumo descritivo.
+
+As novas evidências permanecem em `shadow` com `affectsSde: false`. Elas não alteram mastery, prioridades, roadmap, sessões ou a prescrição diária nesta versão.
+
+Consulte `.ai/sprints/SPRINT-3.33.0.md`, `.ai/decisions/ADR-034-append-only-external-evidence-ledger.md` e os relatórios da versão em `docs/`.

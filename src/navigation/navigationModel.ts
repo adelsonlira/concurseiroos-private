@@ -67,11 +67,11 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
   },
   {
     id: "exercises",
-    label: "Registrar questões",
+    label: "Registrar resultado",
     badge: "",
     group: "daily",
-    keywords: ["questoes", "tentativa", "acerto", "erro", "fgv", "diagnostico"],
-    subitems: ["Registrar resultados", "Tentativas", "Diagnóstico por questões"],
+    keywords: ["questoes", "registrar questoes", "registrar resultado", "tentativa", "acerto", "erro", "fgv", "qconcursos", "evidencia"],
+    subitems: ["Bateria agregada", "Evidências recentes", "Histórico append-only"],
     primary: true,
   },
   {

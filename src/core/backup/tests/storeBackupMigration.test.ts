@@ -34,6 +34,7 @@ function legacySnapshot(): BackupExportSchema {
       sessoesEstudo: [],
       evidenciasAprendizagemGuiada: [],
       casosRecuperacaoErro: [],
+      externalEvidenceLedger: [],
       itensBiblioteca: []
     }
   } as unknown as BackupExportSchema;
@@ -42,15 +43,17 @@ function legacySnapshot(): BackupExportSchema {
 describe("store backup migration", () => {
   it("imports a cloud snapshot created before guided-learning evidence existed", () => {
     const snapshot = legacySnapshot() as BackupExportSchema & {
-      dados: BackupExportSchema["dados"] & { evidenciasAprendizagemGuiada?: unknown; casosRecuperacaoErro?: unknown };
+      dados: BackupExportSchema["dados"] & { evidenciasAprendizagemGuiada?: unknown; casosRecuperacaoErro?: unknown; externalEvidenceLedger?: unknown };
     };
     delete snapshot.dados.evidenciasAprendizagemGuiada;
     delete snapshot.dados.casosRecuperacaoErro;
+    delete snapshot.dados.externalEvidenceLedger;
 
     const result = useConcurseiroStore.getState().importBackup(snapshot);
 
     expect(result).toMatchObject({ success: true, migrated: true });
     expect(useConcurseiroStore.getState().evidenciasAprendizagemGuiada).toEqual([]);
     expect(useConcurseiroStore.getState().casosRecuperacaoErro).toEqual([]);
+    expect(useConcurseiroStore.getState().externalEvidenceLedger).toEqual([]);
   });
 });

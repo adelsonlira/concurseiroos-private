@@ -1,5 +1,13 @@
 import { create } from "zustand";
 import { calculateBackupChecksum, prepareBackupForImport } from "./core/backup/backupIntegrity";
+import {
+  createExternalEvidenceRecord,
+  createExternalEvidenceVoidRecord,
+  deriveExternalEvidenceViews,
+  type ExternalEvidenceInput,
+  type ExternalEvidenceRecord,
+  type ExternalEvidenceTaxonomy
+} from "./core/externalEvidence";
 import { persistSnapshotAtomically, readRecoverableSnapshot } from "./integrations/localStorage/resilientSnapshot";
 import {
   DEFAULT_COMPETITION_ID,
@@ -68,6 +76,7 @@ interface ConcurseiroState {
   sessoesEstudo: SessaoEstudo[];
   evidenciasAprendizagemGuiada: GuidedLearningEvidence[];
   casosRecuperacaoErro: ErrorRecoveryCase[];
+  externalEvidenceLedger: ExternalEvidenceRecord[];
   biblioteca: ItemBiblioteca[];
   /** Ephemeral SDE output. It is recalculated from source data and is not persisted. */
   ultimaDecisaoSDE: SDEApplicationResult | null;
@@ -152,6 +161,9 @@ interface ConcurseiroState {
   resolveQuestao: (questaoId: string, selectedOptionId: string, isCorrect: boolean, timeSpentSeconds: number, origin?: "TREINO_ISOLADO" | "SIMULADO", contextId?: string) => void;
   registrarTentativaExterna: (input: ExternalQuestionAttemptInput) => { success: boolean; error?: string };
   registrarBateriaExterna: (input: ExternalQuestionBatchInput) => { success: boolean; error?: string };
+  registrarEvidenciaExterna: (input: ExternalEvidenceInput) => { success: boolean; evidenceId?: string; fieldErrors?: Record<string, string>; error?: string };
+  corrigirEvidenciaExterna: (evidenceId: string, input: ExternalEvidenceInput) => { success: boolean; evidenceId?: string; fieldErrors?: Record<string, string>; error?: string };
+  anularEvidenciaExterna: (evidenceId: string, reason?: string) => { success: boolean; evidenceId?: string; error?: string };
   registrarCorrecaoErro: (caseId: string, input: Omit<ErrorCorrectionInput, "recordedAt">) => { success: boolean; error?: string };
 
   // Review cycle and error recovery
@@ -346,6 +358,18 @@ function upsertReviewScheduleForSubtopic(args: {
     : [...args.schedules, schedule];
 }
 
+function buildExternalEvidenceTaxonomy(state: Pick<ConcurseiroState, "disciplinas" | "assuntos" | "subassuntos">): ExternalEvidenceTaxonomy {
+  return {
+    disciplineIds: new Set(state.disciplinas.filter((item) => !item.isDeleted).map((item) => item.id)),
+    topicToDiscipline: new Map(
+      state.assuntos.filter((item) => !item.isDeleted).map((item) => [item.id, item.disciplinaId])
+    ),
+    subtopicToTopic: new Map(
+      state.subassuntos.filter((item) => !item.isDeleted).map((item) => [item.id, item.assuntoId])
+    )
+  };
+}
+
 function isUntouchedLegacyDemo(parsed: any): boolean {
   return (
     Array.isArray(parsed?.concursos) &&
@@ -382,6 +406,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
   sessoesEstudo: [],
   evidenciasAprendizagemGuiada: [],
   casosRecuperacaoErro: [],
+  externalEvidenceLedger: [],
   biblioteca: [],
   ultimaDecisaoSDE: null,
 
@@ -428,6 +453,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             sessoesEstudo: [],
             evidenciasAprendizagemGuiada: [],
             casosRecuperacaoErro: [],
+            externalEvidenceLedger: [],
             biblioteca: seed.biblioteca,
             ultimaDecisaoSDE: null,
             activeConcursoId: seed.concurso.id,
@@ -454,6 +480,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             Array.isArray(parsed.casosRecuperacaoErro) && parsed.casosRecuperacaoErro.length > 0
               ? parsed.casosRecuperacaoErro
               : buildLegacyErrorRecoveryCases(parsed.tentativasQuestoes ?? []),
+          externalEvidenceLedger: Array.isArray(parsed.externalEvidenceLedger) ? parsed.externalEvidenceLedger : [],
           configuracao: normalizeConfig(parsed.configuracao),
           biblioteca: mergeLibrarySeedItems(parsed.biblioteca ?? [], seed.biblioteca),
           ultimaDecisaoSDE: null,
@@ -486,6 +513,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           sessoesEstudo: [],
           evidenciasAprendizagemGuiada: [],
           casosRecuperacaoErro: [],
+          externalEvidenceLedger: [],
           biblioteca: seed.biblioteca,
           ultimaDecisaoSDE: null,
           activeConcursoId: seed.concurso.id,
@@ -535,6 +563,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       sessoesEstudo: [],
       evidenciasAprendizagemGuiada: [],
       casosRecuperacaoErro: [],
+      externalEvidenceLedger: [],
       biblioteca: seed.biblioteca,
       ultimaDecisaoSDE: null,
       activeConcursoId: seed.concurso.id,
@@ -557,7 +586,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     } = get();
@@ -566,7 +595,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     };
@@ -611,6 +640,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           d.casosRecuperacaoErro?.length > 0
             ? d.casosRecuperacaoErro
             : buildLegacyErrorRecoveryCases(d.tentativasQuestoes || []),
+        externalEvidenceLedger: d.externalEvidenceLedger || [],
         biblioteca: mergeLibrarySeedItems(
           sanitizeLibraryForBackup(d.itensBiblioteca || []),
           buildSeedForCompetition(d.configuracao?.concursoAlvoId).biblioteca
@@ -638,7 +668,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     const s = get();
     const backup: BackupExportSchema = {
       metadata: {
-        versaoBackup: "2.1.0",
+        versaoBackup: "2.2.0",
         exportadoEm: new Date().toISOString(),
         estudanteNome: s.configuracao.estudanteNome,
         totalTamanhoBytes: 0,
@@ -668,6 +698,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         sessoesEstudo: s.sessoesEstudo,
         evidenciasAprendizagemGuiada: s.evidenciasAprendizagemGuiada,
         casosRecuperacaoErro: s.casosRecuperacaoErro,
+        externalEvidenceLedger: s.externalEvidenceLedger,
         itensBiblioteca: sanitizeLibraryForBackup(s.biblioteca)
       }
     };
@@ -1380,6 +1411,68 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     }));
 
     get().saveToLocalStorage();
+  },
+
+  registrarEvidenciaExterna: (input) => {
+    const state = get();
+    if (input.supersedesEvidenceId) {
+      return { success: false, error: "Use o fluxo de correção para substituir uma evidência existente." };
+    }
+    const created = createExternalEvidenceRecord({
+      input,
+      taxonomy: buildExternalEvidenceTaxonomy(state)
+    });
+    if (!created.record) {
+      return {
+        success: false,
+        error: "Revise os campos destacados antes de salvar.",
+        fieldErrors: created.validation.fieldErrors
+      };
+    }
+    if (state.externalEvidenceLedger.some((item) => item.evidenceId === created.record!.evidenceId)) {
+      return { success: false, error: "Identificador de evidência duplicado." };
+    }
+    set({ externalEvidenceLedger: [...state.externalEvidenceLedger, created.record] });
+    get().saveToLocalStorage();
+    return { success: true, evidenceId: created.record.evidenceId };
+  },
+
+  corrigirEvidenciaExterna: (evidenceId, input) => {
+    const state = get();
+    const targetView = deriveExternalEvidenceViews(state.externalEvidenceLedger)
+      .find((item) => item.record.evidenceId === evidenceId);
+    if (!targetView) return { success: false, error: "Evidência original não encontrada." };
+    if (targetView.status !== "active") {
+      return { success: false, error: "Somente uma evidência ativa pode receber correção." };
+    }
+    const created = createExternalEvidenceRecord({
+      input: { ...input, supersedesEvidenceId: evidenceId },
+      taxonomy: buildExternalEvidenceTaxonomy(state)
+    });
+    if (!created.record) {
+      return {
+        success: false,
+        error: "Revise os campos destacados antes de salvar a correção.",
+        fieldErrors: created.validation.fieldErrors
+      };
+    }
+    set({ externalEvidenceLedger: [...state.externalEvidenceLedger, created.record] });
+    get().saveToLocalStorage();
+    return { success: true, evidenceId: created.record.evidenceId };
+  },
+
+  anularEvidenciaExterna: (evidenceId, reason) => {
+    const state = get();
+    const targetView = deriveExternalEvidenceViews(state.externalEvidenceLedger)
+      .find((item) => item.record.evidenceId === evidenceId);
+    if (!targetView) return { success: false, error: "Evidência original não encontrada." };
+    if (targetView.status !== "active") {
+      return { success: false, error: "Somente uma evidência ativa pode ser anulada." };
+    }
+    const voidRecord = createExternalEvidenceVoidRecord({ target: targetView.record, reason });
+    set({ externalEvidenceLedger: [...state.externalEvidenceLedger, voidRecord] });
+    get().saveToLocalStorage();
+    return { success: true, evidenceId: voidRecord.evidenceId };
   },
 
   registrarTentativaExterna: (input) => {

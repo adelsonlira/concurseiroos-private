@@ -40,6 +40,7 @@ function backup(): BackupExportSchema {
       sessoesEstudo: [],
       evidenciasAprendizagemGuiada: [],
       casosRecuperacaoErro: [],
+      externalEvidenceLedger: [],
       itensBiblioteca: []
     }
   };

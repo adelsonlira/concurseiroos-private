@@ -11,10 +11,11 @@ import { Questao } from "../types";
 import ExternalAttemptRecorder from "./ExternalAttemptRecorder";
 import { resolveLatestQuestionBatchProgress } from "../core/prescription/questionBatchProgress";
 import { findCompetitionRuntimeDefinition } from "../config/concursos/registry";
+import { countExternalEvidenceQuestionsForContext } from "../core/externalEvidence";
 
-export default function ExerciseDeskView() {
+export default function ExerciseDeskView({ onReturnToCoach }: { onReturnToCoach?: () => void } = {}) {
   const { 
-    questoes, disciplinas, assuntos, subassuntos, sessoesEstudo, tentativasQuestoes,
+    questoes, disciplinas, assuntos, subassuntos, sessoesEstudo, tentativasQuestoes, externalEvidenceLedger,
     resolveQuestao, activeConcursoId, configuracao
   } = useConcurseiroStore();
 
@@ -29,8 +30,8 @@ export default function ExerciseDeskView() {
   const [aiExplanation, setAiExplanation] = useState<string>("");
   const [showAiDrawer, setShowAiDrawer] = useState<boolean>(false);
 
-  const questionBatch = useMemo(() =>
-    resolveLatestQuestionBatchProgress({
+  const questionBatch = useMemo(() => {
+    const base = resolveLatestQuestionBatchProgress({
       sessions: sessoesEstudo
         .filter((session) => session.atividadeEstudo === "questoes")
         .map((session) => ({
@@ -51,9 +52,22 @@ export default function ExerciseDeskView() {
         subtopicId: attempt.subassuntoId,
         contextId: attempt.contextoId
       }))
-    }),
-    [sessoesEstudo, tentativasQuestoes]
-  );
+    });
+    if (!base) return null;
+    const ledgerCount = countExternalEvidenceQuestionsForContext(externalEvidenceLedger, {
+      prescriptionId: base.prescriptionId,
+      sessionId: base.sessionId
+    });
+    if (ledgerCount === 0) return base;
+    const completedQuestionCount = base.completedQuestionCount + ledgerCount;
+    return {
+      ...base,
+      completedQuestionCount,
+      remainingQuestionCount: Math.max(0, base.targetQuestionCount - completedQuestionCount),
+      isTargetComplete: completedQuestionCount >= base.targetQuestionCount,
+      isStretchComplete: completedQuestionCount >= base.stretchQuestionCount
+    };
+  }, [sessoesEstudo, tentativasQuestoes, externalEvidenceLedger]);
 
   const batchSession = questionBatch
     ? sessoesEstudo.find((session) => session.id === questionBatch.sessionId) ?? null
@@ -81,6 +95,7 @@ export default function ExerciseDeskView() {
           : ""
       }`
     : undefined;
+  const batchQuestionSource = batchSession?.decisaoSDE?.questionSourceLabel ?? batchMaterialSource;
 
   useEffect(() => {
     if (questionBatch && activeDiscFilter !== questionBatch.disciplineId) {
@@ -237,7 +252,7 @@ export default function ExerciseDeskView() {
         <div className="flex items-center justify-between border-b border-zinc-900 pb-4">
           <div className="flex items-center gap-2">
             <FileQuestion className="h-5 w-5 text-blue-500" />
-            <h2 className="text-sm font-semibold text-zinc-300 font-mono tracking-wide uppercase">Questões e registro</h2>
+            <h2 className="text-sm font-semibold text-zinc-300 font-mono tracking-wide uppercase">Registrar resultado</h2>
           </div>
 
           <div className="flex items-center gap-3">
@@ -288,8 +303,8 @@ export default function ExerciseDeskView() {
                   {batchDiscipline?.nome ?? "Disciplina"}
                   {batchTopic?.nome ? ` · ${batchTopic.nome}` : ""}
                 </p>
-                {batchMaterialSource && (
-                  <p className="mt-2 text-xs text-indigo-300">Fonte sugerida: {batchMaterialSource}</p>
+                {batchQuestionSource && (
+                  <p className="mt-2 text-xs text-indigo-300">Fonte sugerida: {batchQuestionSource}</p>
                 )}
               </div>
 
@@ -311,7 +326,7 @@ export default function ExerciseDeskView() {
                 <p className="mt-2 text-[11px] leading-relaxed text-zinc-500">
                   {questionBatch.isTargetComplete
                     ? questionBatch.isStretchComplete
-                      ? "Meta e extensão concluídas. A próxima decisão usará estes resultados."
+                      ? "Meta e extensão registradas. A evidência permanece em shadow mode nesta versão."
                       : `Meta concluída. Extensão opcional até ${questionBatch.stretchQuestionCount} questões, somente se mantiver qualidade.`
                     : `Faltam ${questionBatch.remainingQuestionCount} questão(ões) para a meta mínima.`}
                 </p>
@@ -324,11 +339,16 @@ export default function ExerciseDeskView() {
           defaultDisciplineId={questionBatch?.isStretchComplete ? undefined : questionBatch?.disciplineId}
           defaultTopicId={questionBatch?.isStretchComplete ? undefined : questionBatch?.topicId}
           defaultSubtopicId={questionBatch?.isStretchComplete ? undefined : questionBatch?.subtopicId}
-          defaultSource={questionBatch?.isStretchComplete ? undefined : batchMaterialSource}
+          defaultSource={questionBatch?.isStretchComplete ? undefined : batchQuestionSource}
           defaultQuestionCount={questionBatch?.isStretchComplete ? undefined : questionBatch?.remainingQuestionCount}
           contextId={questionBatch?.isStretchComplete ? undefined : questionBatch?.prescriptionId}
+          prescriptionId={questionBatch?.isStretchComplete ? undefined : questionBatch?.prescriptionId}
+          sessionId={questionBatch?.isStretchComplete ? undefined : questionBatch?.sessionId}
+          plannedQuestionCount={questionBatch?.isStretchComplete ? undefined : questionBatch?.targetQuestionCount}
           diagnosticPurpose={questionBatch?.isStretchComplete ? false : questionBatch?.diagnosticPurpose}
           lockScope={Boolean(questionBatch && !questionBatch.isStretchComplete)}
+          showHistory
+          onReturnToCoach={onReturnToCoach}
         />
 
         {questionBatch && !questionBatch.isStretchComplete && filteredQuestoes.length === 0 && (

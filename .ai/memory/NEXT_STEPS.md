@@ -1,19 +1,15 @@
-# Próximos Passos — após 3.32.1
+# Próximos Passos — após 3.33.0
 
-1. Publicar a versão 3.32.1 pelo fluxo normal da Vercel.
-2. No domínio real e com sessão autenticada, registrar no DevTools:
-   - `POST /api/training-fgv/check`;
-   - HTTP 200;
-   - payload de correção somente após a ação explícita;
-   - ausência de resposta operacional no carregamento inicial.
-3. Repetir o fluxo mínimo de cinco questões: selecionar, conferir, F5, bloquear resposta, cancelar e finalizar.
-4. Validar texto longo, imagem de página, alternativas em imagem e código em 840×550, mobile e zoom 150%.
-5. Confirmar que menu, histórico e Diagnóstico Piloto mantêm as regressões de navegação.
+1. Publicar a versão 3.33.0 pelo fluxo normal da Vercel.
+2. Validar em dois dispositivos autenticados que um evento do ledger sincroniza com o mesmo `evidenceId` e mantém as relações de substituição/anulação.
+3. Registrar uma bateria QConcursos vinculada a uma prescrição e confirmar que somente o vínculo correto recebe progresso descritivo.
+4. Exportar, restaurar e reconciliar um backup com eventos ativos, substituídos e anulados.
+5. Especificar separadamente o contrato do SDE v2 para eventual consumo de evidências externas elegíveis.
 
 ## Guardrails
 
-- Não alimentar SDE, mastery, prioridade ou incidência histórica com o Treino FGV.
-- Não converter treino em simulado oficial ou sessão planejada.
-- Não expor respostas no catálogo público, HTML inicial ou bundle web.
-- Não alterar o banco operacional, as 664 questões ou os 301 assets.
-- Não implementar filtros históricos, recomendações ou explicações sem ordem explícita.
+- Não alterar o SDE atual, mastery, prioridades ou prescrição com a 3.33.0.
+- Não converter lotes em tentativas sintéticas.
+- Não editar ou excluir fisicamente eventos do ledger.
+- Não armazenar credenciais, cookies, tokens, HTML externo ou conteúdo integral de questões protegidas.
+- Não implementar scraping, integração automática ou recomendações sem ordem explícita.
