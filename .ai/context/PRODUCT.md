@@ -56,3 +56,7 @@ O produto permite executar provas completas e recortes parciais sem criar conte�
 - gamificação sem impacto pedagógico;
 - múltiplas recomendações concorrentes;
 - mensagens que tratem aprovação como inevitável.
+
+## Treino FGV Essencial
+
+Ferramenta manual para prática rápida de questões FGV de Banco de Dados. Seus resultados são informativos e não prescritivos: não alteram plano, prioridade, domínio, mastery, incidência ou prognóstico.

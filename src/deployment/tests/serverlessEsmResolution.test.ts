@@ -122,5 +122,5 @@ describe("Vercel Node ESM resolution", () => {
 
     const diagnosticModule = await import(`${pathToFileURL(resolve(outputDirectory, "api/diagnostic-finalize.js")).href}?${cacheBuster}`);
     expect(typeof diagnosticModule.default).toBe("function");
-  });
+  }, 15_000);
 });

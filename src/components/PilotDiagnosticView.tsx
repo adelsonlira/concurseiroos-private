@@ -23,6 +23,14 @@ import type {
   FinalizedPilotDiagnosticAttempt,
 } from "../features/pilotDiagnostic/types";
 
+import type { PilotDiagnosticNavigationOptions, PilotDiagnosticRoute } from "../features/pilotDiagnostic/navigation";
+import {
+  buildPilotDiagnosticResultRoute,
+  PILOT_DIAGNOSTIC_ACTIVE_ROUTE,
+  PILOT_DIAGNOSTIC_LANDING_ROUTE,
+  resolvePilotDiagnosticScreen,
+} from "../features/pilotDiagnostic/navigation";
+
 function formatDuration(totalSeconds: number): string {
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -164,12 +172,18 @@ function ResultView({ result, onNewAttempt }: {
   );
 }
 
-export default function PilotDiagnosticView() {
+
+
+interface PilotDiagnosticViewProps {
+  route: PilotDiagnosticRoute;
+  onNavigate: (route: PilotDiagnosticRoute, options?: PilotDiagnosticNavigationOptions) => void;
+}
+
+export default function PilotDiagnosticView({ route, onNavigate }: PilotDiagnosticViewProps) {
   const {
     hydrated,
-    activeAttempt,
+    activeAttempt: storedActiveAttempt,
     finalizedAttempts,
-    selectedFinalizedAttemptId,
     submitting,
     error,
     hydrate,
@@ -179,7 +193,6 @@ export default function PilotDiagnosticView() {
     navigate,
     cancel,
     finalize,
-    selectFinalizedAttempt,
     clearError,
   } = usePilotDiagnosticStore();
   const [reviewingFinish, setReviewingFinish] = useState(false);
@@ -188,21 +201,29 @@ export default function PilotDiagnosticView() {
 
   useEffect(() => hydrate(), [hydrate]);
   useEffect(() => {
-    if (!activeAttempt) return;
+    if (!storedActiveAttempt || route.view !== "active_attempt") return;
     const timer = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(timer);
-  }, [activeAttempt]);
+  }, [route.view, storedActiveAttempt]);
   useEffect(() => {
-    if (!activeAttempt) {
+    if (route.view !== "active_attempt") {
       setReviewingFinish(false);
       setConfirmedFinish(false);
     }
-  }, [activeAttempt]);
+  }, [route.view]);
 
-  const selectedResult = useMemo(
-    () => finalizedAttempts.find((attempt) => attempt.attemptId === selectedFinalizedAttemptId) ?? null,
-    [finalizedAttempts, selectedFinalizedAttemptId],
+  const screen = useMemo(
+    () => resolvePilotDiagnosticScreen(route, {
+      activeAttempt: storedActiveAttempt,
+      finalizedAttempts,
+    }),
+    [finalizedAttempts, route, storedActiveAttempt],
   );
+
+  useEffect(() => {
+    if (!hydrated || screen.view === route.view) return;
+    onNavigate(PILOT_DIAGNOSTIC_LANDING_ROUTE, { replace: true });
+  }, [hydrated, onNavigate, route.view, screen.view]);
 
   if (!hydrated) {
     return <div className="flex h-full items-center justify-center bg-zinc-950 text-sm text-zinc-500">Carregando diagnóstico…</div>;
@@ -210,21 +231,30 @@ export default function PilotDiagnosticView() {
 
   const startAttempt = () => {
     clearError();
+    if (storedActiveAttempt) {
+      onNavigate(PILOT_DIAGNOSTIC_ACTIVE_ROUTE);
+      return;
+    }
     const result = start();
-    if (!result.success && result.error) window.alert(result.error);
+    if (result.success) {
+      onNavigate(PILOT_DIAGNOSTIC_ACTIVE_ROUTE);
+    } else if (result.error) {
+      window.alert(result.error);
+    }
   };
 
-  if (!activeAttempt && selectedResult) {
+  if (screen.view === "finalized_result") {
     return (
       <div className="h-full overflow-y-auto bg-zinc-950 p-4 sm:p-6">
         <div className="mx-auto max-w-6xl pb-12">
-          <ResultView result={selectedResult} onNewAttempt={startAttempt} />
+          <ResultView result={screen.result} onNewAttempt={startAttempt} />
         </div>
       </div>
     );
   }
 
-  if (!activeAttempt) {
+  if (screen.view === "landing") {
+    const resume = screen.primaryAction === "resume";
     return (
       <div className="h-full overflow-y-auto bg-zinc-950 p-4 sm:p-6">
         <div className="mx-auto max-w-5xl space-y-6 pb-12">
@@ -244,19 +274,19 @@ export default function PilotDiagnosticView() {
               onClick={startAttempt}
               className="mt-7 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
             >
-              <Play className="h-4 w-4" /> Iniciar diagnóstico
+              <Play className="h-4 w-4" /> {resume ? "Retomar diagnóstico" : "Iniciar diagnóstico"}
             </button>
           </header>
 
-          {finalizedAttempts.length > 0 && (
+          {screen.finalizedAttempts.length > 0 && (
             <section className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-5">
               <h2 className="text-lg font-semibold text-zinc-100">Tentativas finalizadas</h2>
               <div className="mt-4 space-y-2">
-                {[...finalizedAttempts].reverse().map((attempt) => (
+                {[...screen.finalizedAttempts].reverse().map((attempt) => (
                   <button
                     key={attempt.attemptId}
                     type="button"
-                    onClick={() => selectFinalizedAttempt(attempt.attemptId)}
+                    onClick={() => onNavigate(buildPilotDiagnosticResultRoute(attempt.attemptId))}
                     className="flex w-full items-center justify-between rounded-xl border border-zinc-800 bg-zinc-950/60 px-4 py-3 text-left transition hover:border-zinc-700"
                   >
                     <span>
@@ -274,6 +304,7 @@ export default function PilotDiagnosticView() {
     );
   }
 
+  const activeAttempt = screen.attempt;
   const question = PILOT_DIAGNOSTIC_CATALOG.questions[activeAttempt.currentPosition - 1];
   const progress = countPilotDiagnosticProgress(activeAttempt);
   const selectedAnswer = activeAttempt.answers[question.questionId];
@@ -284,17 +315,18 @@ export default function PilotDiagnosticView() {
     const confirmed = window.confirm("Cancelar esta tentativa? Nenhum resultado será registrado.");
     if (!confirmed) return;
     cancel();
+    onNavigate(PILOT_DIAGNOSTIC_LANDING_ROUTE, { replace: true });
   };
 
   const handleFinalize = async () => {
     if (!confirmedFinish) return;
     const result = await finalize();
-    if (result.success) {
+    if (result.success && result.attemptId) {
       setReviewingFinish(false);
       setConfirmedFinish(false);
+      onNavigate(buildPilotDiagnosticResultRoute(result.attemptId), { replace: true });
     }
   };
-
   if (reviewingFinish) {
     const blankPositions = PILOT_DIAGNOSTIC_CATALOG.questions
       .filter((item) => activeAttempt.answers[item.questionId] === undefined)

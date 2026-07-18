@@ -55,3 +55,7 @@ Composição versionada derivada do edital, com disciplina, quantidade, pontuaç
 - LLM não cria prioridade, cronograma ou evidência;
 - material e plataforma de questões não alteram incidência;
 - troca de concurso preserva conhecimento quando houver equivalência validada, mas recalcula pesos, regras e banca.
+
+## Tentativa temática FGV
+
+Entidade isolada com `trainingType = thematic_fgv`, seed, ordem, filtros, respostas, conferências e revisão. Tentativas finalizadas são imutáveis e carregam `affectsSde = false` e `countsAsOfficialSimulation = false`.

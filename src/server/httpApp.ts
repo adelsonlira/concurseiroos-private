@@ -7,6 +7,7 @@ import type { ReadinessCheck } from "../core/readiness/types.js";
 import { buildPublicRuntimeConfiguration, resolveRuntimeEnvironment } from "./runtimeEnvironment.js";
 import { gradePilotDiagnosticAttempt } from "./diagnostics/pilotDiagnosticServer.js";
 import type { FinalizePilotDiagnosticRequest } from "../features/pilotDiagnostic/types.js";
+import type { CheckFgvTrainingAnswerRequest, FinalizeFgvTrainingRequest } from "../features/fgvTraining/types.js";
 
 dotenv.config({ quiet: true });
 
@@ -206,6 +207,33 @@ app.post("/api/diagnostic-finalize", (req, res) => {
   } catch (error) {
     const message = error instanceof Error ? error.message : "Não foi possível finalizar o diagnóstico.";
     res.status(400).json({ error: message });
+  }
+});
+
+app.get(["/api/training-fgv/check", "/api/training-fgv/finalize"], (_req, res) => {
+  res.setHeader("Cache-Control", "no-store");
+  res.status(405).json({ error: "A correção do Treino FGV exige ação explícita por POST." });
+});
+
+app.post("/api/training-fgv/check", async (req, res) => {
+  try {
+    const { checkFgvTrainingAnswer } = await import("./training/fgvTrainingServer.js");
+    const result = checkFgvTrainingAnswer(req.body as CheckFgvTrainingAnswerRequest);
+    res.setHeader("Cache-Control", "no-store");
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error instanceof Error ? error.message : "Não foi possível conferir a resposta." });
+  }
+});
+
+app.post("/api/training-fgv/finalize", async (req, res) => {
+  try {
+    const { finalizeFgvTrainingAttempt } = await import("./training/fgvTrainingServer.js");
+    const result = finalizeFgvTrainingAttempt(req.body as FinalizeFgvTrainingRequest);
+    res.setHeader("Cache-Control", "no-store");
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error instanceof Error ? error.message : "Não foi possível finalizar o treino." });
   }
 });
 

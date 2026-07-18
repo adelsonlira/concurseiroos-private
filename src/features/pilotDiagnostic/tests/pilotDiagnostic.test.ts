@@ -4,6 +4,10 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { buildDataprev2026Profile3AppSeed } from "../../../config/concursos/dataprev-2026-perfil-3";
 import { useConcurseiroStore } from "../../../store";
 import {
+  resolveAppNavigationFromLocation,
+  resolveSidebarNavigation,
+} from "../../../navigation/appNavigationState";
+import {
   gradePilotDiagnosticAttempt,
   validateInternalPilotDiagnosticCatalog,
 } from "../../../server/diagnostics/pilotDiagnosticServer";
@@ -14,7 +18,16 @@ import {
   buildPilotDiagnosticFinalizationRequest,
   createPilotDiagnosticAttempt,
   navigatePilotDiagnostic,
+  togglePilotDiagnosticReview,
 } from "../engine";
+import {
+  buildPilotDiagnosticHash,
+  buildPilotDiagnosticResultRoute,
+  parsePilotDiagnosticHash,
+  PILOT_DIAGNOSTIC_ACTIVE_ROUTE,
+  PILOT_DIAGNOSTIC_LANDING_ROUTE,
+  resolvePilotDiagnosticScreen,
+} from "../navigation";
 import {
   appendFinalizedPilotDiagnosticAttempt,
   cancelActivePilotDiagnosticAttempt,
@@ -23,7 +36,7 @@ import {
   startActivePilotDiagnosticAttempt,
   type DiagnosticStorage,
 } from "../storage";
-import type { DiagnosticOptionLabel, FinalizePilotDiagnosticRequest } from "../types";
+import type { DiagnosticOptionLabel, FinalizePilotDiagnosticRequest, FinalizedPilotDiagnosticAttempt } from "../types";
 
 class MemoryStorage implements DiagnosticStorage {
   private readonly values = new Map<string, string>();
@@ -35,6 +48,11 @@ class MemoryStorage implements DiagnosticStorage {
 function blankRequest(attemptId = "attempt-1"): FinalizePilotDiagnosticRequest {
   const attempt = createPilotDiagnosticAttempt(attemptId, "2026-07-18T15:00:00.000Z");
   return buildPilotDiagnosticFinalizationRequest(attempt);
+}
+
+function finalizeAttempt(attemptId: string, endedAt = "2026-07-18T16:00:00.000Z"): FinalizedPilotDiagnosticAttempt {
+  const active = createPilotDiagnosticAttempt(attemptId, "2026-07-18T15:00:00.000Z");
+  return gradePilotDiagnosticAttempt(buildPilotDiagnosticFinalizationRequest(active), endedAt);
 }
 
 function seedMainStore() {
@@ -207,5 +225,217 @@ describe("diagnóstico piloto FGV-DATAPREV — Banco de Dados", () => {
     expect(result.coverage.principal.total).toBe(20);
     expect(result.coverage.complementary.total).toBe(4);
     expect(result.affectsSde).toBe(false);
+  });
+});
+
+describe("hotfix 3.31.4 — navegação do diagnóstico piloto", () => {
+  it("clicar no menu abre a página raiz sem tentativa ativa", () => {
+    const destination = resolveSidebarNavigation("diagnostic");
+    const screen = resolvePilotDiagnosticScreen(destination.diagnosticRoute, {
+      activeAttempt: null,
+      finalizedAttempts: [],
+    });
+    expect(destination.activeTab).toBe("diagnostic");
+    expect(screen.view).toBe("landing");
+  });
+
+  it("clicar no menu abre a página raiz mesmo existindo resultados finalizados", () => {
+    const finalized = finalizeAttempt("older-result");
+    const destination = resolveSidebarNavigation("diagnostic");
+    const screen = resolvePilotDiagnosticScreen(destination.diagnosticRoute, {
+      activeAttempt: null,
+      finalizedAttempts: [finalized],
+    });
+    expect(screen.view).toBe("landing");
+    if (screen.view === "landing") expect(screen.finalizedAttempts).toEqual([finalized]);
+  });
+
+  it("não abre automaticamente a última tentativa finalizada", () => {
+    const first = finalizeAttempt("first", "2026-07-18T16:00:00.000Z");
+    const last = finalizeAttempt("last", "2026-07-18T17:00:00.000Z");
+    const route = resolveAppNavigationFromLocation("#/diagnostico").diagnosticRoute;
+    const screen = resolvePilotDiagnosticScreen(route, {
+      activeAttempt: null,
+      finalizedAttempts: [first, last],
+    });
+    expect(screen.view).toBe("landing");
+  });
+
+  it("clicar em um item do histórico abre exatamente aquele resultado", () => {
+    const first = finalizeAttempt("first", "2026-07-18T16:00:00.000Z");
+    const last = finalizeAttempt("last", "2026-07-18T17:00:00.000Z");
+    const screen = resolvePilotDiagnosticScreen(buildPilotDiagnosticResultRoute(first.attemptId), {
+      activeAttempt: null,
+      finalizedAttempts: [first, last],
+    });
+    expect(screen.view).toBe("finalized_result");
+    if (screen.view === "finalized_result") expect(screen.result.attemptId).toBe("first");
+  });
+
+  it("clicar novamente no menu fecha o resultado e retorna à raiz", () => {
+    const finalized = finalizeAttempt("selected");
+    const resultScreen = resolvePilotDiagnosticScreen(buildPilotDiagnosticResultRoute(finalized.attemptId), {
+      activeAttempt: null,
+      finalizedAttempts: [finalized],
+    });
+    expect(resultScreen.view).toBe("finalized_result");
+
+    const destination = resolveSidebarNavigation("diagnostic");
+    const landing = resolvePilotDiagnosticScreen(destination.diagnosticRoute, {
+      activeAttempt: null,
+      finalizedAttempts: [finalized],
+    });
+    expect(landing.view).toBe("landing");
+  });
+
+  it("iniciar cria uma nova tentativa e a rota ativa a abre", () => {
+    const storage = new MemoryStorage();
+    const attempt = createPilotDiagnosticAttempt("new-attempt", "2026-07-18T15:00:00.000Z");
+    startActivePilotDiagnosticAttempt(storage, attempt);
+    const screen = resolvePilotDiagnosticScreen(PILOT_DIAGNOSTIC_ACTIVE_ROUTE, readPilotDiagnosticSnapshot(storage));
+    expect(screen.view).toBe("active_attempt");
+    if (screen.view === "active_attempt") expect(screen.attempt.attemptId).toBe("new-attempt");
+  });
+
+  it("tentativa ativa aparece na raiz como Retomar diagnóstico", () => {
+    const attempt = createPilotDiagnosticAttempt("resume", "2026-07-18T15:00:00.000Z");
+    const screen = resolvePilotDiagnosticScreen(PILOT_DIAGNOSTIC_LANDING_ROUTE, {
+      activeAttempt: attempt,
+      finalizedAttempts: [],
+    });
+    expect(screen.view).toBe("landing");
+    if (screen.view === "landing") expect(screen.primaryAction).toBe("resume");
+  });
+
+  it("clicar em retomar abre a tentativa ativa", () => {
+    const attempt = createPilotDiagnosticAttempt("resume", "2026-07-18T15:00:00.000Z");
+    const screen = resolvePilotDiagnosticScreen(PILOT_DIAGNOSTIC_ACTIVE_ROUTE, {
+      activeAttempt: attempt,
+      finalizedAttempts: [],
+    });
+    expect(screen.view).toBe("active_attempt");
+  });
+
+  it("F5 dentro da tentativa preserva posição, respostas, revisão e rota", () => {
+    const storage = new MemoryStorage();
+    let attempt = createPilotDiagnosticAttempt("reload-active", "2026-07-18T15:00:00.000Z");
+    attempt = answerPilotDiagnosticQuestion(attempt, "fgv-bd-0147", "D", "2026-07-18T15:01:00.000Z");
+    attempt = togglePilotDiagnosticReview(attempt, "fgv-bd-0147", "2026-07-18T15:02:00.000Z");
+    attempt = navigatePilotDiagnostic(attempt, 8, "2026-07-18T15:03:00.000Z");
+    saveActivePilotDiagnosticAttempt(storage, attempt);
+
+    const parsedRoute = parsePilotDiagnosticHash(buildPilotDiagnosticHash(PILOT_DIAGNOSTIC_ACTIVE_ROUTE));
+    expect(parsedRoute).toEqual(PILOT_DIAGNOSTIC_ACTIVE_ROUTE);
+    const screen = resolvePilotDiagnosticScreen(parsedRoute!, readPilotDiagnosticSnapshot(storage));
+    expect(screen.view).toBe("active_attempt");
+    if (screen.view === "active_attempt") {
+      expect(screen.attempt.currentPosition).toBe(8);
+      expect(screen.attempt.answers["fgv-bd-0147"]).toBe("D");
+      expect(screen.attempt.reviewQuestionIds).toContain("fgv-bd-0147");
+      expect(screen.attempt.startedAt).toBe("2026-07-18T15:00:00.000Z");
+    }
+  });
+
+  it("cancelar retorna à raiz sem criar resultado e preserva o histórico", () => {
+    const storage = new MemoryStorage();
+    const previous = finalizeAttempt("previous");
+    appendFinalizedPilotDiagnosticAttempt(storage, previous);
+    startActivePilotDiagnosticAttempt(
+      storage,
+      createPilotDiagnosticAttempt("cancel", "2026-07-18T17:00:00.000Z"),
+    );
+    cancelActivePilotDiagnosticAttempt(storage);
+
+    const snapshot = readPilotDiagnosticSnapshot(storage);
+    const screen = resolvePilotDiagnosticScreen(PILOT_DIAGNOSTIC_LANDING_ROUTE, snapshot);
+    expect(screen.view).toBe("landing");
+    expect(snapshot.activeAttempt).toBeNull();
+    expect(snapshot.finalizedAttempts.map((attempt) => attempt.attemptId)).toEqual(["previous"]);
+  });
+
+  it("finalizar abre o resultado recém-finalizado pelo identificador imutável", () => {
+    const storage = new MemoryStorage();
+    const older = finalizeAttempt("older", "2026-07-18T16:00:00.000Z");
+    const newest = finalizeAttempt("newest", "2026-07-18T17:00:00.000Z");
+    appendFinalizedPilotDiagnosticAttempt(storage, older);
+    appendFinalizedPilotDiagnosticAttempt(storage, newest);
+
+    const screen = resolvePilotDiagnosticScreen(
+      buildPilotDiagnosticResultRoute(newest.attemptId),
+      readPilotDiagnosticSnapshot(storage),
+    );
+    expect(screen.view).toBe("finalized_result");
+    if (screen.view === "finalized_result") expect(screen.result.attemptId).toBe("newest");
+  });
+
+  it("F5 no resultado mantém o mesmo resultado, não o último", () => {
+    const first = finalizeAttempt("first", "2026-07-18T16:00:00.000Z");
+    const last = finalizeAttempt("last", "2026-07-18T17:00:00.000Z");
+    const hash = buildPilotDiagnosticHash(buildPilotDiagnosticResultRoute(first.attemptId));
+    const navigation = resolveAppNavigationFromLocation(hash);
+    const screen = resolvePilotDiagnosticScreen(navigation.diagnosticRoute, {
+      activeAttempt: null,
+      finalizedAttempts: [first, last],
+    });
+    expect(screen.view).toBe("finalized_result");
+    if (screen.view === "finalized_result") expect(screen.result.attemptId).toBe("first");
+  });
+
+  it("voltar ou navegar entre telas não altera tentativas", () => {
+    const storage = new MemoryStorage();
+    appendFinalizedPilotDiagnosticAttempt(storage, finalizeAttempt("stable"));
+    const before = JSON.stringify(readPilotDiagnosticSnapshot(storage));
+
+    resolveSidebarNavigation("dashboard");
+    resolveAppNavigationFromLocation("#/diagnostico/resultado/stable");
+    resolveSidebarNavigation("diagnostic");
+
+    expect(JSON.stringify(readPilotDiagnosticSnapshot(storage))).toBe(before);
+  });
+
+  it("histórico finalizado permanece append-only e imutável", () => {
+    const storage = new MemoryStorage();
+    const result = finalizeAttempt("immutable");
+    appendFinalizedPilotDiagnosticAttempt(storage, result);
+    expect(() => appendFinalizedPilotDiagnosticAttempt(storage, { ...result, percentage: 99 })).toThrow(/imutável/);
+    expect(readPilotDiagnosticSnapshot(storage).finalizedAttempts).toEqual([result]);
+  });
+
+  it("diagnóstico continua sem alterar o store principal, SDE, mastery ou prioridades", () => {
+    seedMainStore();
+    const before = JSON.stringify({
+      ultimaDecisaoSDE: useConcurseiroStore.getState().ultimaDecisaoSDE,
+      subassuntos: useConcurseiroStore.getState().subassuntos,
+      assuntos: useConcurseiroStore.getState().assuntos,
+      disciplinas: useConcurseiroStore.getState().disciplinas,
+      estatisticas: useConcurseiroStore.getState().estatisticas,
+      questoes: useConcurseiroStore.getState().questoes,
+      tentativasQuestoes: useConcurseiroStore.getState().tentativasQuestoes,
+      simulados: useConcurseiroStore.getState().simulados,
+    });
+
+    finalizeAttempt("neutral");
+    resolveSidebarNavigation("diagnostic");
+
+    const after = JSON.stringify({
+      ultimaDecisaoSDE: useConcurseiroStore.getState().ultimaDecisaoSDE,
+      subassuntos: useConcurseiroStore.getState().subassuntos,
+      assuntos: useConcurseiroStore.getState().assuntos,
+      disciplinas: useConcurseiroStore.getState().disciplinas,
+      estatisticas: useConcurseiroStore.getState().estatisticas,
+      questoes: useConcurseiroStore.getState().questoes,
+      tentativasQuestoes: useConcurseiroStore.getState().tentativasQuestoes,
+      simulados: useConcurseiroStore.getState().simulados,
+    });
+    expect(after).toBe(before);
+  });
+
+  it("rotas inválidas ou resultados ausentes retornam à página raiz", () => {
+    expect(parsePilotDiagnosticHash("#/diagnostico/resultado/")).toBeNull();
+    const screen = resolvePilotDiagnosticScreen(buildPilotDiagnosticResultRoute("missing"), {
+      activeAttempt: null,
+      finalizedAttempts: [],
+    });
+    expect(screen.view).toBe("landing");
   });
 });

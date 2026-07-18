@@ -54,11 +54,11 @@ Após uma sessão de questões, a tela de registro:
 
 Quando o catálogo privado não oferece uma bateria FGV suficiente, a prescrição pode indicar **Qconcursos** ou **Estratégia Questões**. O sistema mantém a decisão central — assunto, quantidade e tempo — e fornece os filtros de banca, disciplina, assunto, subassunto e exclusão de anuladas. Não há automação de login, cópia de questões ou coleta de respostas dessas plataformas.
 
-## Diagnóstico piloto 3.31.3
+## Diagnóstico piloto 3.31.4
 
-A versão 3.31.3 integra o **Diagnóstico Piloto FGV-DATAPREV — Banco de Dados** como fluxo experimental isolado. São 24 questões em ordem fixa, com seis assets, retomada local, cancelamento sem resultado e correção somente após confirmação explícita. O relatório usa a área de seleção operacional e não altera SDE, mastery, prioridades, sessões, simulados oficiais ou incidência histórica.
+A versão 3.31.4 corrige exclusivamente a navegação do **Diagnóstico Piloto FGV-DATAPREV — Banco de Dados**. O menu lateral sempre abre a landing page; tentativa ativa e resultado finalizado são acessados por rotas transitórias próprias, preservadas no F5. Conteúdo, gabarito, persistência, cálculo e isolamento estratégico permanecem idênticos à 3.31.3.
 
-Consulte `.ai/sprints/SPRINT-3.31.3.md`, `.ai/decisions/ADR-031-isolated-pilot-diagnostic.md`, `docs/IMPLEMENTATION_REPORT_3.31.3.md` e `docs/VALIDATION_RESULTS_3.31.3.md`.
+Consulte `.ai/sprints/SPRINT-3.31.4.md`, `.ai/decisions/ADR-031-isolated-pilot-diagnostic.md`, `docs/IMPLEMENTATION_REPORT_3.31.4.md` e `docs/VALIDATION_RESULTS_3.31.4.md`.
 
 ## Super Coach 3.31.0
 
@@ -140,3 +140,9 @@ A Biblioteca Inteligente indexa PDFs no navegador e salva somente metadados deri
 - **Somente local:** o PDF permanece no dispositivo e precisa ser vinculado naquele navegador.
 
 Durante a sessão, o Coach abre a cópia disponível diretamente na página prescrita. Consulte `docs/PRIVATE_MATERIAL_WORKFLOW.md`.
+
+## Treino FGV Essencial 3.32.0
+
+A versão 3.32.0 adiciona um fluxo manual e isolado para questões FGV de Banco de Dados. O catálogo derivado contém 664 questões elegíveis dos 797 registros preservados e utiliza 301 assets validados. Conferência e finalização ocorrem no backend; o catálogo público não contém gabarito ou metadados privados. O recurso não altera SDE, mastery, prioridades, sessões, simulados oficiais ou o Diagnóstico Piloto.
+
+Consulte `.ai/sprints/SPRINT-3.32.0.md`, `.ai/decisions/ADR-032-isolated-essential-fgv-training.md` e os relatórios da versão em `docs/`.

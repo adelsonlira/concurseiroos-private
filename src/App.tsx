@@ -4,6 +4,22 @@ import { useConcurseiroStore } from "./store";
 import Sidebar from "./components/Sidebar";
 import { useCloudAccountStore } from "./integrations/cloud/cloudStore";
 import { getNavigationItem } from "./navigation/navigationModel";
+import {
+  resolveAppNavigationFromLocation,
+  resolveSidebarNavigation,
+} from "./navigation/appNavigationState";
+import {
+  buildPilotDiagnosticHash,
+  PILOT_DIAGNOSTIC_LANDING_ROUTE,
+  type PilotDiagnosticNavigationOptions,
+  type PilotDiagnosticRoute,
+} from "./features/pilotDiagnostic/navigation";
+import {
+  buildFgvTrainingHash,
+  FGV_TRAINING_LANDING_ROUTE,
+  type FgvTrainingNavigationOptions,
+  type FgvTrainingRoute,
+} from "./features/fgvTraining/navigation";
 import { WORKSPACE_CONTENT_CLASS_NAME } from "./layout/appShellLayout";
 import AccessGate from "./components/AccessGate";
 import { decideAppAccess } from "./integrations/cloud/appAccessPolicy";
@@ -13,6 +29,7 @@ const LibraryView = lazy(() => import("./components/LibraryView"));
 const ExerciseDeskView = lazy(() => import("./components/ExerciseDeskView"));
 const SimulationsView = lazy(() => import("./components/SimulationsView"));
 const PilotDiagnosticView = lazy(() => import("./components/PilotDiagnosticView"));
+const FgvTrainingView = lazy(() => import("./components/FgvTrainingView"));
 const FlashcardView = lazy(() => import("./components/FlashcardView"));
 const FocusModeDesk = lazy(() => import("./components/FocusModeDesk"));
 const CoachIAView = lazy(() => import("./components/CoachIAView"));
@@ -29,7 +46,13 @@ export default function App() {
   const { hydrateStore, estatisticas } = useConcurseiroStore();
   const cloud = useCloudAccountStore();
   const initializeCloud = cloud.initialize;
-  const [activeTab, setActiveTab] = useState<string>("dashboard");
+  const [initialNavigation] = useState(() => {
+    if (typeof window === "undefined") return resolveAppNavigationFromLocation("");
+    return resolveAppNavigationFromLocation(window.location.hash, window.history.state);
+  });
+  const [activeTab, setActiveTab] = useState<string>(initialNavigation.activeTab);
+  const [diagnosticRoute, setDiagnosticRoute] = useState<PilotDiagnosticRoute>(initialNavigation.diagnosticRoute);
+  const [trainingRoute, setTrainingRoute] = useState<FgvTrainingRoute>(initialNavigation.trainingRoute);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [searchFocusToken, setSearchFocusToken] = useState(0);
   const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(() => {
@@ -46,9 +69,82 @@ export default function App() {
     window.localStorage.setItem(SIDEBAR_COLLAPSED_STORAGE_KEY, String(desktopSidebarCollapsed));
   }, [desktopSidebarCollapsed]);
 
-  const navigateTo = useCallback((tab: string) => {
-    setActiveTab(tab);
+  useEffect(() => {
+    const synchronizeNavigation = () => {
+      const navigation = resolveAppNavigationFromLocation(window.location.hash, window.history.state);
+      setActiveTab(navigation.activeTab);
+      setDiagnosticRoute(navigation.diagnosticRoute);
+      setTrainingRoute(navigation.trainingRoute);
+      setMobileSidebarOpen(false);
+    };
+    window.addEventListener("popstate", synchronizeNavigation);
+    window.addEventListener("hashchange", synchronizeNavigation);
+    return () => {
+      window.removeEventListener("popstate", synchronizeNavigation);
+      window.removeEventListener("hashchange", synchronizeNavigation);
+    };
+  }, []);
+
+  const commitDiagnosticRoute = useCallback((
+    route: PilotDiagnosticRoute,
+    options: PilotDiagnosticNavigationOptions = {},
+  ) => {
+    setActiveTab("diagnostic");
+    setDiagnosticRoute(route);
     setMobileSidebarOpen(false);
+    if (typeof window === "undefined") return;
+    const nextUrl = `${window.location.pathname}${window.location.search}${buildPilotDiagnosticHash(route)}`;
+    const method = options.replace ? "replaceState" : "pushState";
+    window.history[method]({ activeTab: "diagnostic" }, "", nextUrl);
+  }, []);
+
+  const commitTrainingRoute = useCallback((
+    route: FgvTrainingRoute,
+    options: FgvTrainingNavigationOptions = {},
+  ) => {
+    setActiveTab("training-fgv");
+    setTrainingRoute(route);
+    setMobileSidebarOpen(false);
+    if (typeof window === "undefined") return;
+    const nextUrl = `${window.location.pathname}${window.location.search}${buildFgvTrainingHash(route)}`;
+    const method = options.replace ? "replaceState" : "pushState";
+    window.history[method]({ activeTab: "training-fgv" }, "", nextUrl);
+  }, []);
+
+  const navigateTo = useCallback((tab: string) => {
+    const destination = resolveSidebarNavigation(tab);
+    setActiveTab(destination.activeTab);
+    setDiagnosticRoute(destination.diagnosticRoute);
+    setTrainingRoute(destination.trainingRoute);
+    setMobileSidebarOpen(false);
+
+    if (typeof window === "undefined") return;
+    if (destination.activeTab === "diagnostic") {
+      const alreadyAtLanding = window.location.hash === buildPilotDiagnosticHash(PILOT_DIAGNOSTIC_LANDING_ROUTE);
+      const nextUrl = `${window.location.pathname}${window.location.search}${buildPilotDiagnosticHash(PILOT_DIAGNOSTIC_LANDING_ROUTE)}`;
+      window.history[alreadyAtLanding ? "replaceState" : "pushState"](
+        { activeTab: "diagnostic" },
+        "",
+        nextUrl,
+      );
+      return;
+    }
+    if (destination.activeTab === "training-fgv") {
+      const alreadyAtLanding = window.location.hash === buildFgvTrainingHash(FGV_TRAINING_LANDING_ROUTE);
+      const nextUrl = `${window.location.pathname}${window.location.search}${buildFgvTrainingHash(FGV_TRAINING_LANDING_ROUTE)}`;
+      window.history[alreadyAtLanding ? "replaceState" : "pushState"](
+        { activeTab: "training-fgv" },
+        "",
+        nextUrl,
+      );
+      return;
+    }
+
+    window.history.replaceState(
+      { activeTab: destination.activeTab },
+      "",
+      `${window.location.pathname}${window.location.search}`,
+    );
   }, []);
 
   const openNavigationSearch = useCallback(() => {
@@ -92,7 +188,9 @@ export default function App() {
       case "exercises":
         return <ExerciseDeskView />;
       case "diagnostic":
-        return <PilotDiagnosticView />;
+        return <PilotDiagnosticView route={diagnosticRoute} onNavigate={commitDiagnosticRoute} />;
+      case "training-fgv":
+        return <FgvTrainingView route={trainingRoute} onNavigate={commitTrainingRoute} />;
       case "simulations":
         return <SimulationsView />;
       case "flashcards":

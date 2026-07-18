@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-18T01:30:56.971890+00:00",
+  "source": "CUR-BD-BANCO-OPERACIONAL-FGV-DATAPREV-v2",
+  "sourceRecordCount": 797,
+  "eligibleQuestionCount": 664,
+  "excludedRecordCount": 133,
+  "exclusionCounts": {
+    "NOT_FIT_FOR_STUDY": 132,
+    "OPERATIONALLY_UNFIT": 32,
+    "MISSING_OPTION": 14,
+    "DUPLICATE_REFERENCE": 1
+  },
+  "duplicateReferenceOrdinals": [
+    648
+  ],
+  "irrecoverableOrdinals": [
+    198,
+    236,
+    394,
+    423,
+    509,
+    660,
+    669,
+    690,
+    695,
+    752,
+    753
+  ],
+  "assetCount": 301,
+  "questionAssetCount": 87,
+  "optionAssetCount": 214,
+  "selectionAreas": [
+    "Correspondências parciais interdisciplinares adicionais",
+    "Dados estruturados, não estruturados ou Big Data",
+    "Integração de dados, ETL ou ingestão",
+    "Metadados ou qualidade de dados",
+    "Modelagem de dados",
+    "Modelagem dimensional, Data Warehouse ou OLAP",
+    "NoSQL",
+    "Normalização",
+    "SGBD e administração",
+    "SQL",
+    "Transações e concorrência"
+  ],
+  "primaryItems": [
+    {
+      "id": "dp26-p3-esp-bd-relacional-multidimensional",
+      "name": "Abordagem relacional e multidimensional"
+    },
+    {
+      "id": "dp26-p3-ia-machine-learning",
+      "name": "Aprendizado de máquina"
+    },
+    {
+      "id": "dp26-p3-esp-bd-nosql",
+      "name": "Banco de dados NoSQL"
+    },
+    {
+      "id": "dp26-p3-esp-codificacao",
+      "name": "Codificação de software transacional, analítico, mobile e API"
+    },
+    {
+      "id": "dp26-p3-esp-bd-estruturados",
+      "name": "Dados estruturados e não estruturados"
+    },
+    {
+      "id": "dp26-p3-esp-bd-datalake-bigdata",
+      "name": "Data lakes e soluções para big data"
+    },
+    {
+      "id": "dp26-p3-esp-bd-ddl",
+      "name": "DDL"
+    },
+    {
+      "id": "dp26-p3-esp-bd-dml",
+      "name": "DML"
+    },
+    {
+      "id": "dp26-p3-esp-bd-integracao-ingestao",
+      "name": "ETL/ELT, transferência de arquivos e integração via base de dados"
+    },
+    {
+      "id": "dp26-p3-esp-bd-integridade",
+      "name": "Integridade referencial"
+    },
+    {
+      "id": "dp26-p3-esp-linguagens-frameworks",
+      "name": "Java 6+, JavaEE 6+, JakartaEE, JPA 2+, JavaScript, JUnit, Hibernate, JSF, PrimeFaces, Spring, Spring Cloud e Spring Boot"
+    },
+    {
+      "id": "dp26-p3-esp-bi-fontes",
+      "name": "Mapeamento de fontes e técnicas de coleta de dados"
+    },
+    {
+      "id": "dp26-p3-esp-bd-metadados",
+      "name": "Metadados"
+    },
+    {
+      "id": "dp26-p3-esp-bd-modelagem",
+      "name": "Modelagem conceitual, lógica e física"
+    },
+    {
+      "id": "dp26-p3-esp-bd-dimensional",
+      "name": "Modelagem dimensional"
+    },
+    {
+      "id": "dp26-p3-esp-bd-normalizacao",
+      "name": "Normalização"
+    },
+    {
+      "id": "dp26-p3-esp-bd-propriedades",
+      "name": "Propriedades de banco de dados"
+    },
+    {
+      "id": "dp26-p3-esp-bd-sgbd",
+      "name": "SGBD"
+    },
+    {
+      "id": "dp26-p3-esp-bd-sql",
+      "name": "SQL"
+    },
+    {
+      "id": "dp26-p3-esp-ux-cms",
+      "name": "UX, CMS, arquitetura da informação, portais, workflow, acessibilidade, usabilidade e interação web"
+    }
+  ],
+  "constraints": {
+    "sourceModified": false,
+    "historicalFrequencyUsed": false,
+    "subjectUsedAsPrimaryDimension": false,
+    "newCurationPerformed": false
+  }
+}

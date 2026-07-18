@@ -76,3 +76,7 @@ A interface não deve aceitar “recuperei” como encerramento de um erro sem c
 
 Elementos essenciais de marca usados no gate de acesso e navegação devem estar no bundle da aplicação ou possuir teste de existência; a interface não pode depender de assets estáticos ausentes no deploy.
 
+
+## Navegação do Treino FGV
+
+O item lateral sempre abre a landing. Tentativa ativa e resultado finalizado são acessados somente por ação explícita ou pela rota atual no F5. O padrão replica a separação de estados validada no hotfix 3.31.4 sem compartilhar estado com o diagnóstico.

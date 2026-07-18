@@ -1,7 +1,7 @@
 # Estado Atual
 
 Data: 2026-07-18
-Versão: 3.31.3
+Versão: 3.32.0
 
 ## Projeto
 
@@ -11,61 +11,50 @@ O produto é um sistema de apoio à decisão orientado à aprovação. Deve redu
 
 ## Fase atual
 
-A versão 3.31.3 integra o `DIAGNÓSTICO PILOTO FGV–DATAPREV — BANCO DE DADOS — v1` como fluxo experimental isolado. A baseline funcional continua sendo a arquitetura validada da 3.31.2; banco operacional, SDE, prioridades, mastery, sessões e simulados oficiais não foram alterados. O diagnóstico possui catálogo público sanitizado, correção no backend, persistência local própria e marcador `affectsSde: false`.
+A versão 3.32.0 entrega o **Treino FGV Essencial** como fluxo manual, experimental e isolado para questões FGV de Banco de Dados. A fonte exclusiva é `CUR-BD-BANCO-OPERACIONAL-FGV-DATAPREV-v2`; o catálogo público derivado contém 664 questões elegíveis calculadas a partir dos 797 registros e usa 301 assets íntegros.
 
-A correção ESM da 3.31.2 permanece incorporada. O probe real do Gemini ainda precisa ser reconfirmado após publicação no runtime da Vercel.
+A correção de navegação do diagnóstico piloto da 3.31.4 permanece preservada. Diagnóstico e Treino FGV usam domínios, rotas e persistências independentes.
 
 ## Implementado
 
-- SDE puro, determinístico, explicável e independente da interface.
-- Prescrição diária com atividade, duração, material, páginas, questões, protocolo, evidências, fallback e próxima ação.
-- Proteção contra zerar disciplina e projeção conservadora de capacidade até 11/10/2026.
-- Ciclo teoria/recuperação/questões/correção/revisão com evidência antes e depois.
-- Login privado, sincronização em três vias, backup transacional, persistência local atômica e cofre deduplicado por SHA-256.
-- Taxonomia oficial com 123 nós e 94 subassuntos.
-- Corpus FGV com 6.462 questões, 5.324 canônicas e 2.840 vínculos definitivos, integralmente em shadow mode.
-- Curadoria append-only e 656 propostas automáticas sem qualquer incidência ativa.
-- Roteamento pedagógico exato, recuperação de erros baseada em evidência e simulados oficiais com fonte identificada.
-- Diagnósticos `/api/runtime-config` e `/api/ai-health` isolados do boot Express, com especificadores ESM explícitos.
-- Diagnóstico piloto `diag-fgv-dataprev-bd-v1`, versão 1:
-  - 24 questões em ordem fixa;
-  - duração sugerida de 50 minutos;
-  - seis assets relativos validados;
-  - estados respondida, não respondida e revisão;
-  - início, resposta, navegação, retomada, cancelamento e finalização explícita;
-  - bloqueio de segunda tentativa enquanto outra estiver ativa;
-  - catálogo público sem gabarito ou metadados internos;
-  - correção operacional somente após finalização;
-  - resultado total e por `selection_area`;
-  - cobertura principal de 20 questões e complementar de 4, sem ajuste de nota;
-  - tentativa finalizada append-only com rastreabilidade dos 24 registros por fingerprint;
-  - armazenamento próprio, fora do store principal, mastery, SDE, roadmap, prescrição e simulados.
+- SDE puro, determinístico, explicável e independente da interface, sem alteração nesta versão.
+- Treino FGV com estados explícitos:
+  - `landing` em `#/treino-fgv`;
+  - `active_training` em `#/treino-fgv/tentativa`;
+  - `finalized_training` em `#/treino-fgv/resultado/:attemptId`.
+- Menu `Treino FGV` sempre abre a landing, sem abrir automaticamente tentativa ou resultado.
+- Filtros por `selection_area`, item primário do edital, aderência e quantidade 5/10/15/20.
+- Seleção aleatória sem repetição, com seed, ordem imutável e filtros persistidos.
+- Conferência segura por POST, sem gabarito no catálogo público ou payload inicial.
+- Questões conferidas ficam bloqueadas; não conferidas continuam editáveis.
+- Retomada após F5 com posição, respostas, conferências, revisão, cronômetro, seed e ordem.
+- Cancelamento remove somente o treino ativo e não cria histórico.
+- Finalização aceita brancos e gera resultado por área, item primário e aderência.
+- Histórico local essencial, append-only e imutável.
+- Marcadores obrigatórios em tentativas: `trainingType: thematic_fgv`, `affectsSde: false` e `countsAsOfficialSimulation: false`.
+- Fonte operacional preservada sem modificação, catálogo derivado reproduzível e manifestado.
 
 ## Validado
 
-- Pacote fonte do diagnóstico: 24 questões únicas, 20 aderentes diretas, 4 parciais, 6 assets e controles 14 e 53.
-- Checksum do banco operacional recebido coincide com o manifesto do diagnóstico; o banco não foi alterado.
-- Catálogo público não contém `answer_key`, ordinal, ID de plataforma, origem do gabarito, assunto, subassunto ou item do edital.
-- Cancelamento não cria resultado; recarregamento preserva tentativa ativa; tentativa finalizada rejeita sobrescrita.
-- Agregação principal usa exclusivamente `selection_area`.
-- Resultado do piloto não altera SDE, mastery, prioridades ou simulados.
-- 436 testes aprovados em 74 arquivos, incluindo 17 testes novos do diagnóstico.
-- TypeScript aprovado.
-- Auditoria estática do diagnóstico aprovada.
-- Incidência histórica e materiais privados continuam neutros no ranking.
+- 797 registros de origem preservados.
+- 664 questões elegíveis calculadas pelos critérios operacionais; referência duplicada 648 e 11 irrecuperáveis excluídas.
+- 301 assets validados por hash e tamanho contra o manifesto.
+- Catálogo público sem resposta operacional, origem do gabarito, ordinal do corpus, ID da plataforma ou fingerprints privados.
+- Diagnóstico piloto continua com 24 questões, seis assets, navegação corrigida e persistência própria.
+- Store principal, SDE, mastery, prioridades, sessões e simulados oficiais permanecem inalterados.
+- Testes focados do Treino FGV e endpoints aprovados antes da regressão integral.
 
 ## Problemas conhecidos
 
-- A correção do diagnóstico depende do endpoint autenticado; indisponibilidade de rede impede a finalização até nova tentativa, preservando o estado ativo local.
-- Tentativas diagnósticas são locais e não sincronizam entre dispositivos nesta versão.
+- Treinos são armazenados localmente e não sincronizam entre dispositivos nesta versão.
+- A conferência e a finalização dependem do endpoint autenticado; indisponibilidade de rede preserva a tentativa ativa para nova tentativa.
+- Não há filtro de questões não vistas, erradas anteriormente, estatísticas acumuladas complexas ou recomendações; esses recursos estão reservados para versão futura.
+- A origem operacional preserva classificações históricas; `selection_area` é agrupamento derivado e reproduzível para navegação e relatório, sem alterar a curadoria fonte.
 - Dados locais gerais ainda não são namespaceados para múltiplos usuários no mesmo perfil de navegador.
-- 37 subassuntos ainda não possuem localizador teórico exato.
-- 42 subassuntos dependem de Qconcursos ou Estratégia Questões para diagnóstico seguro.
-- As 656 classificações históricas continuam automáticas; há zero classificações humanas aprovadas e zero incidência elegível.
-- O runtime-alvo é Node.js 24.x; o ambiente automatizado executa Node 22.x.
+- O runtime-alvo é Node.js 24.x; o ambiente automatizado disponível executa Node 22.x.
 - O probe Gemini precisa ser reconfirmado no runtime real da Vercel.
 - Nenhum software ou plano garante aprovação.
 
 ## Próxima tarefa
 
-Publicar a 3.31.3 e validar em produção: abertura dos seis assets, início, resposta, recarregamento, cancelamento, retomada, confirmação de encerramento, correção e imutabilidade do resultado. Em paralelo, confirmar `/api/runtime-config` e o probe autenticado do Gemini, sem alterar chave ou modelo antes de observar o runtime.
+Publicar a 3.32.0 e validar em produção: landing pelo menu, filtros, início, conferência, bloqueio, F5, cancelamento, finalização, histórico, resultado específico e disponibilidade dos 301 assets. Não iniciar a 3.32.1 sem ordem da Control Tower.

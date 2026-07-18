@@ -64,3 +64,7 @@ Transformar regras oficiais, estado cognitivo, disponibilidade, materiais e evid
 - equivalência versionada entre taxonomias;
 - transferência segura do estado cognitivo;
 - isolamento integral de regras e evidências.
+
+## 3.32.x — Treino FGV
+
+A 3.32.0 entrega o fluxo essencial. Não vistas, erradas anteriormente, estatísticas acumuladas e recomendações permanecem reservadas para a 3.32.1 ou posterior, mediante ordem explícita.

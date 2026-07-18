@@ -25,7 +25,6 @@ interface PilotDiagnosticState {
   hydrated: boolean;
   activeAttempt: ActivePilotDiagnosticAttempt | null;
   finalizedAttempts: FinalizedPilotDiagnosticAttempt[];
-  selectedFinalizedAttemptId: string | null;
   submitting: boolean;
   error: string | null;
   hydrate: () => void;
@@ -34,8 +33,7 @@ interface PilotDiagnosticState {
   toggleReview: (questionId: string) => void;
   navigate: (position: number) => void;
   cancel: () => void;
-  finalize: () => Promise<{ success: boolean; error?: string }>;
-  selectFinalizedAttempt: (attemptId: string | null) => void;
+  finalize: () => Promise<{ success: boolean; attemptId?: string; error?: string }>;
   clearError: () => void;
 }
 
@@ -58,7 +56,6 @@ export const usePilotDiagnosticStore = create<PilotDiagnosticState>((set, get) =
   hydrated: false,
   activeAttempt: null,
   finalizedAttempts: [],
-  selectedFinalizedAttemptId: null,
   submitting: false,
   error: null,
 
@@ -73,9 +70,6 @@ export const usePilotDiagnosticStore = create<PilotDiagnosticState>((set, get) =
       hydrated: true,
       activeAttempt: snapshot.activeAttempt,
       finalizedAttempts: snapshot.finalizedAttempts,
-      selectedFinalizedAttemptId: snapshot.activeAttempt
-        ? null
-        : snapshot.finalizedAttempts.at(-1)?.attemptId ?? null,
       error: null,
     });
   },
@@ -85,13 +79,13 @@ export const usePilotDiagnosticStore = create<PilotDiagnosticState>((set, get) =
     if (!storage) return { success: false, error: "Armazenamento local indisponível." };
     const existing = readPilotDiagnosticSnapshot(storage).activeAttempt;
     if (existing) {
-      set({ activeAttempt: existing, selectedFinalizedAttemptId: null });
+      set({ activeAttempt: existing });
       return { success: false, error: "Já existe uma tentativa ativa. Retome ou cancele antes de iniciar outra." };
     }
 
     const attempt = createPilotDiagnosticAttempt(createAttemptId(), nowIso());
     startActivePilotDiagnosticAttempt(storage, attempt);
-    set({ activeAttempt: attempt, selectedFinalizedAttemptId: null, error: null });
+    set({ activeAttempt: attempt, error: null });
     return { success: true };
   },
 
@@ -140,10 +134,9 @@ export const usePilotDiagnosticStore = create<PilotDiagnosticState>((set, get) =
         submitting: false,
         activeAttempt: null,
         finalizedAttempts,
-        selectedFinalizedAttemptId: result.attemptId,
         error: null,
       });
-      return { success: true };
+      return { success: true, attemptId: result.attemptId };
     } catch (error) {
       const message = error instanceof Error ? error.message : "Falha ao finalizar o diagnóstico.";
       set({ submitting: false, error: message });
@@ -151,6 +144,5 @@ export const usePilotDiagnosticStore = create<PilotDiagnosticState>((set, get) =
     }
   },
 
-  selectFinalizedAttempt: (attemptId) => set({ selectedFinalizedAttemptId: attemptId, error: null }),
   clearError: () => set({ error: null }),
 }));

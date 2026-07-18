@@ -84,6 +84,15 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
     primary: true,
   },
   {
+    id: "training-fgv",
+    label: "Treino FGV",
+    badge: "",
+    group: "daily",
+    keywords: ["treino", "fgv", "banco de dados", "questoes", "tematico"],
+    subitems: ["Filtros por área", "Conferir resposta", "Histórico básico"],
+    primary: true,
+  },
+  {
     id: "simulations",
     label: "Simulados",
     badge: "",

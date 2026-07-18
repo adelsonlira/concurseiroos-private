@@ -288,3 +288,20 @@ Patch de resolução ESM em produção: o log da Vercel comprovou que `/api/ai-h
 ## 3.31.3 — 2026-07-18
 
 Diagnóstico piloto FGV-DATAPREV de Banco de Dados integrado como fluxo experimental isolado: 24 questões fixas, seis assets, retomada local, cancelamento sem resultado, finalização explícita e tentativa append-only. O cliente recebe apenas catálogo sanitizado; gabarito e rastreabilidade fonte permanecem no backend até a correção. O relatório usa exclusivamente `selection_area`, separa cobertura principal e complementar sem alterar nota e registra `affectsSde: false`. Nenhuma estrutura do store principal, SDE, mastery, prioridade, sessão, simulado oficial ou incidência histórica foi alterada.
+
+## 3.31.4 — 2026-07-18
+
+Hotfix de navegação do diagnóstico piloto: removida a seleção automática da última tentativa finalizada durante a hidratação. O módulo passou a separar explicitamente `landing`, `active_attempt` e `finalized_result`, usando fragmentos de rota compatíveis com o shell atual e F5. O menu lateral sempre retorna à landing, cada resultado abre pelo `attemptId` exato, cancelamento não cria resultado e o histórico permanece append-only. Nenhum conteúdo, gabarito, asset, cálculo, storage, SDE, mastery, prioridade, sessão ou simulado oficial foi alterado.
+
+## 3.32.0 — 2026-07-18
+
+- Entregue o Treino FGV Essencial, separado do Diagnóstico Piloto, Simulados, Sessão Guiada e atividade prescrita pelo SDE.
+- Importados e preservados 797 registros do banco operacional v2, com catálogo derivado reproduzível de 664 questões elegíveis.
+- Validados 301 assets por hash e tamanho; nenhuma recuperação, OCR, reclassificação ou busca externa foi executada.
+- Criados catálogo público sanitizado e catálogo privado server-side para correção após ação explícita.
+- Implementados filtros por área, item, aderência e quantidades 5/10/15/20.
+- Implementada seleção aleatória com seed, ordem imutável, ausência de repetição e persistência local isolada.
+- Implementados estados `landing`, `active_training` e `finalized_training`, preservando a regressão de navegação corrigida na 3.31.4.
+- Implementados conferência por questão, bloqueio após conferência, finalização com brancos, agregações e histórico básico imutável.
+- Mantidos `affectsSde: false`, `countsAsOfficialSimulation: false` e `trainingType: thematic_fgv`.
+- SDE, mastery, prioridades, roadmap, sessões, simulados oficiais, diagnóstico, autenticação e sincronização permaneceram sem alteração funcional.

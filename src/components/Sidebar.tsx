@@ -49,6 +49,7 @@ const ICONS_BY_ID: Readonly<Record<string, LucideIcon>> = {
   reviews: RotateCcw,
   exercises: FileQuestion,
   diagnostic: FlaskConical,
+  "training-fgv": Target,
   simulations: ClipboardList,
   flashcards: Layers,
   weekly: CalendarRange,
