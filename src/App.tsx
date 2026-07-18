@@ -12,6 +12,7 @@ const DashboardView = lazy(() => import("./components/DashboardView"));
 const LibraryView = lazy(() => import("./components/LibraryView"));
 const ExerciseDeskView = lazy(() => import("./components/ExerciseDeskView"));
 const SimulationsView = lazy(() => import("./components/SimulationsView"));
+const PilotDiagnosticView = lazy(() => import("./components/PilotDiagnosticView"));
 const FlashcardView = lazy(() => import("./components/FlashcardView"));
 const FocusModeDesk = lazy(() => import("./components/FocusModeDesk"));
 const CoachIAView = lazy(() => import("./components/CoachIAView"));
@@ -90,6 +91,8 @@ export default function App() {
         return <LibraryView />;
       case "exercises":
         return <ExerciseDeskView />;
+      case "diagnostic":
+        return <PilotDiagnosticView />;
       case "simulations":
         return <SimulationsView />;
       case "flashcards":

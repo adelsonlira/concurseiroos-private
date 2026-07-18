@@ -54,6 +54,12 @@ Após uma sessão de questões, a tela de registro:
 
 Quando o catálogo privado não oferece uma bateria FGV suficiente, a prescrição pode indicar **Qconcursos** ou **Estratégia Questões**. O sistema mantém a decisão central — assunto, quantidade e tempo — e fornece os filtros de banca, disciplina, assunto, subassunto e exclusão de anuladas. Não há automação de login, cópia de questões ou coleta de respostas dessas plataformas.
 
+## Diagnóstico piloto 3.31.3
+
+A versão 3.31.3 integra o **Diagnóstico Piloto FGV-DATAPREV — Banco de Dados** como fluxo experimental isolado. São 24 questões em ordem fixa, com seis assets, retomada local, cancelamento sem resultado e correção somente após confirmação explícita. O relatório usa a área de seleção operacional e não altera SDE, mastery, prioridades, sessões, simulados oficiais ou incidência histórica.
+
+Consulte `.ai/sprints/SPRINT-3.31.3.md`, `.ai/decisions/ADR-031-isolated-pilot-diagnostic.md`, `docs/IMPLEMENTATION_REPORT_3.31.3.md` e `docs/VALIDATION_RESULTS_3.31.3.md`.
+
 ## Super Coach 3.31.0
 
 A versão 3.31.0 adiciona simulados parciais e completos derivados da composição oficial da DATAPREV 2026: 70 questões, 240 minutos e 115 pontos no completo; no parcial, cotas oficiais das disciplinas escolhidas e duração proporcional declarada. O fluxo exige fonte identificada, registra acertos, erros, brancos e tempo por disciplina, sinaliza risco de zero e organiza a correção sem gerar questões, alternativas ou gabaritos.

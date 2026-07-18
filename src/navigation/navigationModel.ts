@@ -75,6 +75,15 @@ export const NAVIGATION_ITEMS: readonly NavigationItemDefinition[] = [
     primary: true,
   },
   {
+    id: "diagnostic",
+    label: "Diagnóstico piloto",
+    badge: "PILOTO",
+    group: "daily",
+    keywords: ["diagnostico", "piloto", "fgv", "dataprev", "banco de dados"],
+    subitems: ["24 questões", "Tentativa isolada", "Resultado por área"],
+    primary: true,
+  },
+  {
     id: "simulations",
     label: "Simulados",
     badge: "",

@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diagnóstico Piloto FGV-DATAPREV - Banco de Dados</title>
+<style>
+@page { size:A4; margin:18mm 16mm; @bottom-center { content:counter(page); font-size:9pt; color:#667; } }
+*{box-sizing:border-box} body{margin:0;color:#202124;font-family:"DejaVu Sans",Arial,sans-serif;font-size:10.3pt;line-height:1.42}
+header{border-bottom:2px solid #243b53;padding-bottom:10px;margin-bottom:18px}
+h1{margin:0 0 6px;font-size:19pt;color:#243b53} .instructions{margin:0;color:#445}
+.question{page-break-inside:avoid;break-inside:avoid;margin:0 0 20px;padding:0 0 14px;border-bottom:1px solid #d9dee5}
+h2{margin:0 0 4px;font-size:12pt;color:#243b53} .stem,.alt-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.stem{margin:0 0 10px 28px} .alternatives{margin-left:28px}
+.alternative{display:grid;grid-template-columns:28px 1fr;gap:4px;align-items:start;margin:6px 0;page-break-inside:avoid}
+.label{font-weight:700} .statement-image{margin:10px 0 12px 28px}
+.statement-image img{max-width:480px;max-height:230px;border:1px solid #d7dde5;padding:4px;background:#fff}
+.alt-image img{max-width:455px;max-height:105px;object-fit:contain;border:1px solid #d7dde5;background:#fff}
+footer{margin-top:18px;font-size:9pt;color:#667} @media screen{body{max-width:900px;margin:24px auto;padding:0 20px}}
+</style></head><body>
+<header><h1>Diagnóstico Piloto FGV-DATAPREV - Banco de Dados</h1>
+<p class="instructions"><strong>24 questões</strong> | Tempo sugerido: <strong>50 minutos</strong> | Não há penalização por erro.</p></header>
+<section class="question" id="q1"><h2>1.</h2>
+<div class="stem">Trabalhar com dados não estruturados representa um grande desafio para as empresas, pois esses dados:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">são planejados desde a elaboração da estrutura para um propósito estrito.</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">possuem estrutura rígida e previamente definida.</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">correspondem a estruturas que não limitam a quantidade de informações coletadas e hierarquizam seus documentos por meio de elementos semânticos, como
+o código HTML.</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">não requerem estruturas bem definidas ou padronizadas e podem ser compostos por elementos diversos, comuns ao cotidiano das pessoas.</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">representam cerca de 80% deste universo, podendo ser fotos, áudios, vídeos, textos, formulários online e tabelas de bancos de dados relacionais.</div>
+</div>
+</div></section><section class="question" id="q2"><h2>2.</h2>
+<div class="stem">BDFree é um banco de dados distribuído que utiliza uma estrutura de armazenamento NoSQL. No BDFree quaisquer solicitações retornam respostas válidas em um intervalo
+de tempo razoável, independentemente da aplicação que o utiliza, devido ao cumprimento da propriedade que:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">viabiliza que cada cliente tenha a mesma visão dos dados;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">mantém cópias de itens de dados visíveis para várias transações;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">assegura que cada requisição receba a informação mais recente ou um erro;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">garante que partes da estrutura do banco de dados que estejam desativadas sejam ignoradas;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">replica dados entre as estruturas do banco de dados antes que a gravação seja considerada bem-sucedida.</div>
+</div>
+</div></section><section class="question" id="q3"><h2>3.</h2>
+<div class="stem">O MongoDB é um banco de dados NoSQL amplamente utilizado devido à sua flexibilidade e escalabilidade. Ele é popular em diversas aplicações modernas por suportar
+grandes volumes de dados e operações de leitura e escrita rápidas.
+Em um servidor MongoDB, o comando &quot;mongotop --host &lt;hostname&gt; --port &lt;port&gt; 1&quot;</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">exibe o número total de documentos em cada coleção a cada segundo.</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">monitora o espaço em disco usado por cada coleção a cada segundo.</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">monitora o tempo gasto em operações de leitura e escrita para cada coleção a cada segundo.</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">exibe o número de chamadas para cada coleção a cada segundo.</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">calcula o tempo de cada busca solicitada por usuários a cada segundo.</div>
+</div>
+</div></section><section class="question" id="q4"><h2>4.</h2>
+<div class="stem">A ingestão de dados consiste na coleta, importação ou transferência de dados para um sistema de armazenamento e processamento. Em geral, a ingestão de dados representa o primeiro passo em um pipeline de processamento. Os dois principais métodos de ingestão de dados são a ingestão em lote (batch) e a ingestão em tempo real (streaming). A respeito desses métodos, avalie as afirmativas a seguir. I. A ingestão em lotes se dá continuamente ao longo do tempo e é utilizada quando há necessidade de se processar os dados imediatamente após sua coleta. II. A ingestão em tempo real incorpora novos dados em massa, em intervalos ou blocos periodicamente transmitidos da fonte para o dispositivo em que ocorre o processamento. III. Em ambos os métodos, é comum que os dados sejam transformados e validados, garantindo-se assim a precisão e a consistência das informações ingeridas. Está correto o que se afirma em</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">I, apenas.</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">II, apenas.</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">III, apenas.</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">I e II, apenas.</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">I, II e III.</div>
+</div>
+</div></section><section class="question" id="q5"><h2>5.</h2>
+<div class="stem">Em um Sistema de Gerenciamento de Banco de Dados (SGBD), recursos como Stored Procedures e Triggers são utilizados para dar maior flexibilidade para as aplicações a
+serem desenvolvidas, com o objetivo de regras e controles serem implementados na camada do banco.
+No contexto apresentado, assinale a opção que mostra a principal diferença entre Stored Procedures e Triggers.</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">Stored Procedures são usadas para automatizar a execução de tarefas rotineiras, enquanto Triggers são usadas para armazenar procedimentos complexos.</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">Stored Procedures são acionadas automaticamente em resposta a eventos específicos, enquanto Triggers são procedimentos armazenados que podem ser
+chamados explicitamente por comandos SQL.</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">Stored Procedures são sempre escritas em linguagens de programação de alto nível, enquanto Triggers são escritas em SQL puro.</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">Stored Procedures são armazenadas no disco junto com os dados do banco, enquanto Triggers são armazenadas apenas na memória principal do servidor.</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">Stored Procedures são executadas apenas uma vez por evento, enquanto Triggers são executadas repetidamente até que o evento seja concluído.</div>
+</div>
+</div></section><section class="question" id="q6"><h2>6.</h2>
+<div class="stem">Maria gerencia um banco de dados SQL Server, e precisa criar um mecanismo que monitore todas as alterações ocorridas na estrutura das tabelas, especialmente os efeitos
+dos comandos CREATE, ALTER e DROP.</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">Funções escalares;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">Sequences;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">Statistics;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">Stored Procedures;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">Triggers.</div>
+</div>
+</div></section><section class="question" id="q7"><h2>7.</h2>
+<div class="stem">Num banco de dados relacional, considere as tabelas T1 e T2, criadas como descrito a seguir. 
+▪ T1 tem duas colunas, intituladas A e B, do tipo inteiro; a coluna A é declarada como primary key, e não aceita valores nulos. 
+▪ T2 tem duas colunas, intituladas C e A, do tipo inteiro; a coluna C é declarada como primary key, e não aceita valores nulos; a coluna A foi declarada como UNIQUE, não
+aceita valores nulos e ainda foi declarada como uma foreign key que referencia a coluna A da tabela T1. 
+À luz dessa estrutura, é correto afirmar que o relacionamento entre T1 e T2:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">é do tipo 1:1;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">é do tipo 1:N;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">é do tipo N:1;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">é do tipo M:N;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">não pode ser categorizado, pois isso depende das instâncias de cada tabela.</div>
+</div>
+</div></section><section class="question" id="q8"><h2>8.</h2>
+<div class="stem">Em projetos de banco de dados, os modelos conceituais são elaborados para descrever, necessariamente,</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">os aspectos de software e de hardware que serão utilizados para armazenamento de dados.</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">as chaves de acesso, os controles de chaves duplicadas e a integridade referencial.</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">a visão geral dos principais dados e suas relações, independentemente das restrições de implementação.</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">as entidades, os relacionamentos, os índices e o sistema gerenciador de banco de dados escolhido.</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">as necessidades e as preocupações para normalização das estruturas de dados.</div>
+</div>
+</div></section><section class="question" id="q9"><h2>9.</h2>
+<div class="stem">O processo de tomada de decisão conta com ferramentas computacionais que otimizam e auxiliam gestores em diferentes níveis de atuação organizacional. No que se refere
+ao suporte de dados, os armazéns de dados (ou data warehouses) representam uma importante alternativa para o armazenamento de dados por conta de suas características
+estruturais.
+Assinale a opção apresenta uma característica que diferencia um data warehouse de uma base de dados com suporte ao processamento OLTP.</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">Dimensões e níveis de agregação ilimitados.</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">Operações restritas em dimensões.</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">Tratamento estático da matriz esparsa.</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">Visão conceitual unidimensional.</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">Volatilidade dos dados armazenados.</div>
+</div>
+</div></section><section class="question" id="q10"><h2>10.</h2>
+<div class="stem">Em banco de dados, uma transação é composta por diversas operações sobre os dados, como leitura, alteração, inserção e remoção. Contudo, a transação é percebida como
+uma operação lógica única sobre os dados.
+Com isso, para garantir a consistência de um banco de dados, as transações devem satisfazer algumas propriedades, como: 
+(i) todas as operações da transação são executadas em caso de sucesso; ou
+(ii) em caso de falhas, todas as operações são desfeitas e o banco de dados deve voltar ao mesmo estado em que estava antes do início da transação.</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">atomicidade;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">consistência;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">isolamento;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">durabilidade;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">redundância.</div>
+</div>
+</div></section><section class="question" id="q11"><h2>11.</h2>
+<div class="stem">Com relação às propriedades ACID, fundamentais na implementação de bancos de dados relacionais, a durabilidade das transações é obtida por meio:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">da utilização de triggers;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">de algoritmos baseados em timestamp ordering;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">de algoritmos two-phase locking;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">de mecanismos e recursos externos ao SGBD;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">de replicação e redundância em memória estável.</div>
+</div>
+</div></section><section class="question" id="q12"><h2>12.</h2>
+<div class="stem">A normalização de dados é o processo de analisar os esquemas de relações com base nas dependências funcionais de seus atributos e chaves primárias, envolvendo uma série de Formas Normais (FN). Observe o esquema da tabela “Pedido”, a seguir. A tabela &quot;Pedido&quot; possui chave primária composta (ID_PEDIDO, ID_CLIENTE), atributos com valores atômicos e dependência parcial de coluna não chave (NOME_CLIENTE) com parte da chave primária (ID_CLIENTE). Com base nisso, “Pedido” está normalizada na FN:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">1FN;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">2FN;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">3FN;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">4FN;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">5FN</div>
+</div>
+</div></section><section class="question" id="q13"><h2>13.</h2>
+<div class="stem">A normalização de esquemas de bancos de dados é feita a partir das dependências funcionais existentes entre as colunas de uma tabela. Além disso, é possível combinar dependências e derivar novas dependências a partir de axiomas preestabelecidos. Considerando uma tabela hipotética, com colunas X, Y e Z, o axioma da transitividade é definido como segue:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">Se X → Y e X → Z então Z → XY;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">Se X → Y e Y → Z então X → Z;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">Se X → Y então XZ → YZ;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">Se X → Y então X → XY;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">Se XY → Z então X → Z.</div>
+</div>
+</div></section><section class="question" id="q14"><h2>14.</h2>
+<div class="stem">Os principais Sistemas Gerenciadores de Bancos de Dados oferecem total suporte à linguagem SQL. Um aspecto importante da implementação do SQL é o tratamento para
+valores nulos quando esses são considerados como unknown values.
+Nesse contexto, considere uma tabela T com colunas A e B, que podem conter valores nulos. T possui 100 registros e, em 50% das linhas, há pelo menos uma coluna
+preenchida com o valor NULL.
+Considere a consulta a seguir:
+SELECT * FROM T t1 
+WHERE t1.A = NULL or t1.B = NULL
+O número máximo de linhas de resultados que seriam retornadas pela consulta é igual a</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">0.</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">25.</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">50.</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">75.</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">100.</div>
+</div>
+</div></section><section class="question" id="q15"><h2>15.</h2>
+<div class="stem">Caio preparou o comando SQL exibido a seguir para deletar um conjunto de linhas de uma tabela.
+delete from T1
+where exists(select * from T2
+ where T1.A1 = T2.A2)
+Para testar seu comando e descobrir exatamente quais seriam as linhas deletadas, Caio pretende executar um comando sem alteração de dados que permita a identificação
+dessas linhas.
+Para isso, basta que Caio substitua no comando original o termo:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">“=” por “&lt;&gt;”;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">“delete from” por “show deleted rows from”;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">“delete” por “delete limit 0”;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">“delete” por “select *”;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">“exists” por “not exists”.</div>
+</div>
+</div></section><section class="question" id="q16"><h2>16.</h2>
+<div class="stem">No SQL Server 19, o comando de criação de restrições de chaves estrangeiras (em inglês, foreign key constraints) oferece as cláusulas ON DELETE e ON UPDATE, cujo
+conjunto de opções permitidas é:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">CASCADE, NO ACTION, RAISE ERROR e SET NULL;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">CASCADE, NO ACTION, RESTRICT e SET NULL;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">CASCADE, NO ACTION, SET DEFAULT e SET NULL;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">NO ACTION, RAISE ERROR, SET DEFAULT e SET NULL;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">RESTRICT, SET DEFAULT e SET NULL.</div>
+</div>
+</div></section><section class="question" id="q17"><h2>17.</h2>
+<div class="stem">Observe a seguinte consulta SQL, feita no SQLite:
+SELECT imagem, avg(imagem) OVER (PARTITION BY grau) AS media_grau FROM historico_bijecao;
+O SQLite dispõe de vários tipos de função. Na consulta acima, a função avg foi usada como uma função do tipo:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">core;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">math;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">window;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">ordinary scalar;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">ordinary aggregate.</div>
+</div>
+</div></section><section class="question" id="q18"><h2>18.</h2>
+<div class="stem">Maria executou as seguintes instruções em SQL para criação de tabelas:
+CREATE TABLE T1 (
+id_A INT,
+a1 CHAR(10),
+a2 CHAR(10));
+CREATE TABLE T2 (
+id_B INT,
+b1 CHAR(10),
+
+b2 CHAR(10));
+CREATE TABLE T3 (
+id_A INT,
+id_B INT,
+c1 CHAR(10),
+c2 CHAR(10));
+Maria deseja listar a quantidade e os respectivos dados de T1 que possuem pelo menos 1 e no máximo 5 relacionamentos com T2.
+Para isso, ela deve utilizar a instrução:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">SELECT COUNT(c.id_A), a.a1, a.a2
+FROM T1 a
+INNER JOIN T3 c ON c.id_A = a.id_A
+WHERE COUNT(c.id_A) &lt; = 5;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">SELECT a.id_A, a.a1, a.a2
+FROM T1 a, T2 b
+LEFT OUTER JOIN T3 c ON c.id_A = a.id_A
+LEFT OUTER JOIN T3 c ON c.id_B = b.id_B
+GROUP BY a.a1, a.a2
+HAVING COUNT(a.id_A) &lt; = 5;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">SELECT COUNT(a.id_A), a.a1, a.a2
+FROM T1 a
+INNER JOIN T3 c ON c.id_A = a.id_A
+WHERE a.id_A &lt; = 5;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">SELECT COUNT(a.id_A), a.*
+FROM T1 a
+INNER JOIN T3 c ON c.id_A = a.id_A
+GROUP BY a.a1, a.a2
+HAVING COUNT(a.id_A) &lt; = 5;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">SELECT a.id_A, a.a1, a.a2
+FROM T1 a
+RIGHT OUTER JOIN T3 c ON c.id_A = a.id_A
+GROUP BY a.id_A, a.a1, a.a2
+HAVING COUNT(a.id_A) &lt; = 5;</div>
+</div>
+</div></section><section class="question" id="q19"><h2>19.</h2>
+<div class="stem">Observe a seguinte modelagem dimensional.</div>
+<div class="statement-image"><img src="assets/q14-modelagem-dimensional.png" alt="Elemento visual da questão 19"></div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">Factless table;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">Fact Constellation;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">Role playing dimension;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">Degenerated dimension;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">Slowly changing dimension.</div>
+</div>
+</div></section><section class="question" id="q20"><h2>20.</h2>
+<div class="stem">Joana está elaborando um Diagrama Entidade Relacionamento para representar que a entidade Processo Judicial possui nenhum ou vários Réus. Na Notação Crow&#x27;s foot (Pé de Galinha), para representar esse relacionamento, Joana deve utilizar a notação:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-image"><img src="assets/q185-alternativa-a.png" alt="Alternativa A"></div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-image"><img src="assets/q185-alternativa-b.png" alt="Alternativa B"></div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-image"><img src="assets/q185-alternativa-c.png" alt="Alternativa C"></div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-image"><img src="assets/q185-alternativa-d.png" alt="Alternativa D"></div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-image"><img src="assets/q185-alternativa-e.png" alt="Alternativa E"></div>
+</div>
+</div></section><section class="question" id="q21"><h2>21.</h2>
+<div class="stem">O sistema de gerenciamento de banco de dados Oracle possui uma arquitetura complexa. Uma das estruturas mais importantes que podemos destacar é a de memória. 
+Duas das principais áreas de memória no Oracle são SGA (System Global Area) e PGA (Program Global Area). 
+Relacione as áreas de memória com a sua respectiva utilização e definição.
+1. PGA
+2. SGA
+( ) Ao executar uma instrução SQL é armazenado: tabelas temporárias, Linhas de classificação, bitmaps de mesclagem, variáveis e pilha de chamadas 
+( ) Contém estruturas que podem ser dimensionadas de forma independente 
+( ) Está associada a cada sessão e irá variar seu tamanho de acordo com as necessidades de memória da sessão em dado momento.
+( ) Aloca e desaloca a memória do servidor ao iniciar ou desligar a instância. 
+( ) Está presente em sua composição além de outras estruturas o stream pool, java pool. Também fazem parte. 
+Assinale a opção que indica a relação correta, na ordem apresentada.</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">2, 2, 1, 2 e 1.</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">1, 1, 2, 2 e 2.</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">1, 2, 1, 1 e 1.</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">2, 1, 1, 2 e 1.</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">1, 2, 1, 2 e 2.</div>
+</div>
+</div></section><section class="question" id="q22"><h2>22.</h2>
+<div class="stem">No contexto de Qualidade de Dados, o auditor de contas públicas João deverá analisar a consistência dos dados da base de dados AUD_CONTAS identificando variações
+sobre os valores dos atributos, como:
+30% das entradas de dados na coluna CD_FUNCIONARIO estão marcadas com o caractere “espaço”
+existem 200 linhas na tabela TBL_PROCESSO contendo dados sobre processos sem nenhuma linha contendo os seus detalhes 
+Para isso, a técnica de diagnóstico sobre a qualidade de dados que João deverá utilizar é:</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">profiling;</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">matching;</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">deduplicação;</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">data cleansing;</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">enriquecimento.</div>
+</div>
+</div></section><section class="question" id="q23"><h2>23.</h2>
+<div class="stem">Temos uma aplicação Spring Boot, utilizando Gradle e o H2. Assinale a opção que descreve, corretamente, os passos para migrar esta aplicação para usar o Maven com
+MySQL.</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">1 - Remover todas as configurações do Gradle
+2 - Adicionar dependência do MySQL no build.gradle
+3 - Alterar as configurações do MySQL</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">1 - Manter o arquivo build.gradle e renomeá-lo para pom.xml
+2 - Atualizar as configurações do MySQL
+3 - Criar o esquema do banco de dados manualmente</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">1 - Converter o build.gradle para pom.xml
+2 - Adicionar a dependência do MySQL no pom.xml
+3 - Atualizar o application.properties para o MySQL</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">1 - Criar um novo projeto usando o npm (Node Package Manager) com configurações para Maven e MySQL.
+2 - Copiar o código fonte do projeto antigo para o novo
+3 - Reconfigurar o application.properties para o MySQL.</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">1 - Adicionar a dependência do MySQL no pom.xml
+2 - Remover a dependência do H2 do pom.xml
+3 - Adicionar as configurações do MySQL no pom.xml</div>
+</div>
+</div></section><section class="question" id="q24"><h2>24.</h2>
+<div class="stem">A biblioteca Python de tensores que pode ser utilizada em problemas de aprendizado profundo, podendo utilizar tanto processadores do tipo GPU quanto CPU, é denominada</div>
+<div class="alternatives">
+<div class="alternative">
+<div class="label">A)</div>
+<div class="alt-text">PyFlow.</div>
+</div>
+<div class="alternative">
+<div class="label">B)</div>
+<div class="alt-text">PyTens</div>
+</div>
+<div class="alternative">
+<div class="label">C)</div>
+<div class="alt-text">PyNLP.</div>
+</div>
+<div class="alternative">
+<div class="label">D)</div>
+<div class="alt-text">Pandas.</div>
+</div>
+<div class="alternative">
+<div class="label">E)</div>
+<div class="alt-text">PyTorch.</div>
+</div>
+</div></section>
+<footer>Fim do diagnóstico.</footer></body></html>

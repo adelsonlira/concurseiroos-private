@@ -1,0 +1,1160 @@
+{
+  "diagnostic_id": "diag-fgv-dataprev-bd-v1",
+  "title": "Diagnóstico Piloto FGV-DATAPREV - Banco de Dados",
+  "version": "1",
+  "internal_label": "PILOTO DIAGNÓSTICO — NÃO REPRESENTA INCIDÊNCIA HISTÓRICA",
+  "suggested_duration_minutes": 50,
+  "question_count": 24,
+  "fixed_order": true,
+  "penalty_for_wrong_answer": false,
+  "questions": [
+    {
+      "position": 1,
+      "question_id": "fgv-bd-0147",
+      "stem": "Trabalhar com dados não estruturados representa um grande desafio para as empresas, pois esses dados:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "são planejados desde a elaboração da estrutura para um propósito estrito."
+        },
+        {
+          "label": "B",
+          "text": "possuem estrutura rígida e previamente definida."
+        },
+        {
+          "label": "C",
+          "text": "correspondem a estruturas que não limitam a quantidade de informações coletadas e hierarquizam seus documentos por meio de elementos semânticos, como\no código HTML."
+        },
+        {
+          "label": "D",
+          "text": "não requerem estruturas bem definidas ou padronizadas e podem ser compostos por elementos diversos, comuns ao cotidiano das pessoas."
+        },
+        {
+          "label": "E",
+          "text": "representam cerca de 80% deste universo, podendo ser fotos, áudios, vídeos, textos, formulários online e tabelas de bancos de dados relacionais."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "D",
+      "traceability": {
+        "corpus_ordinal": 147,
+        "platform_id": "4002272933",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "Programação",
+        "subsubject": "Linguagens, frameworks e código de aplicação",
+        "primary_edital_item": "Dados estruturados e não estruturados",
+        "secondary_edital_items": "",
+        "original_pages": [
+          56
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 147,
+        "secondary_contest_metadata": "TCE-PE 2025",
+        "selection_area": "Dados estruturados, não estruturados ou Big Data"
+      }
+    },
+    {
+      "position": 2,
+      "question_id": "fgv-bd-0517",
+      "stem": "BDFree é um banco de dados distribuído que utiliza uma estrutura de armazenamento NoSQL. No BDFree quaisquer solicitações retornam respostas válidas em um intervalo\nde tempo razoável, independentemente da aplicação que o utiliza, devido ao cumprimento da propriedade que:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "viabiliza que cada cliente tenha a mesma visão dos dados;"
+        },
+        {
+          "label": "B",
+          "text": "mantém cópias de itens de dados visíveis para várias transações;"
+        },
+        {
+          "label": "C",
+          "text": "assegura que cada requisição receba a informação mais recente ou um erro;"
+        },
+        {
+          "label": "D",
+          "text": "garante que partes da estrutura do banco de dados que estejam desativadas sejam ignoradas;"
+        },
+        {
+          "label": "E",
+          "text": "replica dados entre as estruturas do banco de dados antes que a gravação seja considerada bem-sucedida."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "D",
+      "traceability": {
+        "corpus_ordinal": 517,
+        "platform_id": "4001680603",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "NoSQL",
+        "subsubject": "Modelos NoSQL",
+        "primary_edital_item": "Banco de dados NoSQL",
+        "secondary_edital_items": "",
+        "original_pages": [
+          211
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 517,
+        "secondary_contest_metadata": "CVM 2024",
+        "selection_area": "NoSQL"
+      }
+    },
+    {
+      "position": 3,
+      "question_id": "fgv-bd-0708",
+      "stem": "O MongoDB é um banco de dados NoSQL amplamente utilizado devido à sua flexibilidade e escalabilidade. Ele é popular em diversas aplicações modernas por suportar\ngrandes volumes de dados e operações de leitura e escrita rápidas.\nEm um servidor MongoDB, o comando \"mongotop --host <hostname> --port <port> 1\"",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "exibe o número total de documentos em cada coleção a cada segundo."
+        },
+        {
+          "label": "B",
+          "text": "monitora o espaço em disco usado por cada coleção a cada segundo."
+        },
+        {
+          "label": "C",
+          "text": "monitora o tempo gasto em operações de leitura e escrita para cada coleção a cada segundo."
+        },
+        {
+          "label": "D",
+          "text": "exibe o número de chamadas para cada coleção a cada segundo."
+        },
+        {
+          "label": "E",
+          "text": "calcula o tempo de cada busca solicitada por usuários a cada segundo."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "C",
+      "traceability": {
+        "corpus_ordinal": 708,
+        "platform_id": "4001730180",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "NoSQL",
+        "subsubject": "Modelos NoSQL",
+        "primary_edital_item": "Banco de dados NoSQL",
+        "secondary_edital_items": "",
+        "original_pages": [
+          278
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 708,
+        "secondary_contest_metadata": "TCE-PA 2024",
+        "selection_area": "NoSQL"
+      }
+    },
+    {
+      "position": 4,
+      "question_id": "fgv-bd-0134",
+      "stem": "A ingestão de dados consiste na coleta, importação ou transferência de dados para um sistema de armazenamento e processamento. Em geral, a ingestão de dados representa o primeiro passo em um pipeline de processamento. Os dois principais métodos de ingestão de dados são a ingestão em lote (batch) e a ingestão em tempo real (streaming). A respeito desses métodos, avalie as afirmativas a seguir. I. A ingestão em lotes se dá continuamente ao longo do tempo e é utilizada quando há necessidade de se processar os dados imediatamente após sua coleta. II. A ingestão em tempo real incorpora novos dados em massa, em intervalos ou blocos periodicamente transmitidos da fonte para o dispositivo em que ocorre o processamento. III. Em ambos os métodos, é comum que os dados sejam transformados e validados, garantindo-se assim a precisão e a consistência das informações ingeridas. Está correto o que se afirma em",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "I, apenas."
+        },
+        {
+          "label": "B",
+          "text": "II, apenas."
+        },
+        {
+          "label": "C",
+          "text": "III, apenas."
+        },
+        {
+          "label": "D",
+          "text": "I e II, apenas."
+        },
+        {
+          "label": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "C",
+      "traceability": {
+        "corpus_ordinal": 134,
+        "platform_id": "4001857633",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "Integração de dados",
+        "subsubject": "ETL, preparação e ingestão de dados",
+        "primary_edital_item": "ETL/ELT, transferência de arquivos e integração via base de dados",
+        "secondary_edital_items": "",
+        "original_pages": [
+          52
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 134,
+        "secondary_contest_metadata": "TJ-RR 2024",
+        "selection_area": "Integração de dados, ETL ou ingestão"
+      }
+    },
+    {
+      "position": 5,
+      "question_id": "fgv-bd-0560",
+      "stem": "Em um Sistema de Gerenciamento de Banco de Dados (SGBD), recursos como Stored Procedures e Triggers são utilizados para dar maior flexibilidade para as aplicações a\nserem desenvolvidas, com o objetivo de regras e controles serem implementados na camada do banco.\nNo contexto apresentado, assinale a opção que mostra a principal diferença entre Stored Procedures e Triggers.",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "Stored Procedures são usadas para automatizar a execução de tarefas rotineiras, enquanto Triggers são usadas para armazenar procedimentos complexos."
+        },
+        {
+          "label": "B",
+          "text": "Stored Procedures são acionadas automaticamente em resposta a eventos específicos, enquanto Triggers são procedimentos armazenados que podem ser\nchamados explicitamente por comandos SQL."
+        },
+        {
+          "label": "C",
+          "text": "Stored Procedures são sempre escritas em linguagens de programação de alto nível, enquanto Triggers são escritas em SQL puro."
+        },
+        {
+          "label": "D",
+          "text": "Stored Procedures são armazenadas no disco junto com os dados do banco, enquanto Triggers são armazenadas apenas na memória principal do servidor."
+        },
+        {
+          "label": "E",
+          "text": "Stored Procedures são executadas apenas uma vez por evento, enquanto Triggers são executadas repetidamente até que o evento seja concluído."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "B",
+      "traceability": {
+        "corpus_ordinal": 560,
+        "platform_id": "4001725075",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "SGBD",
+        "subsubject": "Triggers, eventos e granularidade de disparo",
+        "primary_edital_item": "SGBD",
+        "secondary_edital_items": "",
+        "original_pages": [
+          226
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 560,
+        "secondary_contest_metadata": "TCE-PA 2024",
+        "selection_area": "SGBD e administração"
+      }
+    },
+    {
+      "position": 6,
+      "question_id": "fgv-bd-0377",
+      "stem": "Maria gerencia um banco de dados SQL Server, e precisa criar um mecanismo que monitore todas as alterações ocorridas na estrutura das tabelas, especialmente os efeitos\ndos comandos CREATE, ALTER e DROP.",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "Funções escalares;"
+        },
+        {
+          "label": "B",
+          "text": "Sequences;"
+        },
+        {
+          "label": "C",
+          "text": "Statistics;"
+        },
+        {
+          "label": "D",
+          "text": "Stored Procedures;"
+        },
+        {
+          "label": "E",
+          "text": "Triggers."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "E",
+      "traceability": {
+        "corpus_ordinal": 377,
+        "platform_id": "4000838639",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "SGBD",
+        "subsubject": "Triggers, eventos e granularidade de disparo",
+        "primary_edital_item": "SGBD",
+        "secondary_edital_items": "DDL",
+        "original_pages": [
+          158
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 377,
+        "secondary_contest_metadata": "TCE-AM",
+        "selection_area": "SGBD e administração"
+      }
+    },
+    {
+      "position": 7,
+      "question_id": "fgv-bd-0010",
+      "stem": "Num banco de dados relacional, considere as tabelas T1 e T2, criadas como descrito a seguir. \n▪ T1 tem duas colunas, intituladas A e B, do tipo inteiro; a coluna A é declarada como primary key, e não aceita valores nulos. \n▪ T2 tem duas colunas, intituladas C e A, do tipo inteiro; a coluna C é declarada como primary key, e não aceita valores nulos; a coluna A foi declarada como UNIQUE, não\naceita valores nulos e ainda foi declarada como uma foreign key que referencia a coluna A da tabela T1. \nÀ luz dessa estrutura, é correto afirmar que o relacionamento entre T1 e T2:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "é do tipo 1:1;"
+        },
+        {
+          "label": "B",
+          "text": "é do tipo 1:N;"
+        },
+        {
+          "label": "C",
+          "text": "é do tipo N:1;"
+        },
+        {
+          "label": "D",
+          "text": "é do tipo M:N;"
+        },
+        {
+          "label": "E",
+          "text": "não pode ser categorizado, pois isso depende das instâncias de cada tabela."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "A",
+      "traceability": {
+        "corpus_ordinal": 10,
+        "platform_id": "4001080719",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "Modelagem de dados",
+        "subsubject": "Modelo conceitual, lógico, ER e cardinalidade",
+        "primary_edital_item": "Integridade referencial",
+        "secondary_edital_items": "Modelagem conceitual, lógica e física",
+        "original_pages": [
+          4
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 10,
+        "secondary_contest_metadata": "MP-SC 2022",
+        "selection_area": "Modelagem de dados"
+      }
+    },
+    {
+      "position": 8,
+      "question_id": "fgv-bd-0035",
+      "stem": "Em projetos de banco de dados, os modelos conceituais são elaborados para descrever, necessariamente,",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "os aspectos de software e de hardware que serão utilizados para armazenamento de dados."
+        },
+        {
+          "label": "B",
+          "text": "as chaves de acesso, os controles de chaves duplicadas e a integridade referencial."
+        },
+        {
+          "label": "C",
+          "text": "a visão geral dos principais dados e suas relações, independentemente das restrições de implementação."
+        },
+        {
+          "label": "D",
+          "text": "as entidades, os relacionamentos, os índices e o sistema gerenciador de banco de dados escolhido."
+        },
+        {
+          "label": "E",
+          "text": "as necessidades e as preocupações para normalização das estruturas de dados."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "C",
+      "traceability": {
+        "corpus_ordinal": 35,
+        "platform_id": "4001379990",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "Normalização",
+        "subsubject": "Dependências funcionais e formas normais",
+        "primary_edital_item": "Modelagem conceitual, lógica e física",
+        "secondary_edital_items": "",
+        "original_pages": [
+          13
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 35,
+        "secondary_contest_metadata": "BB 2023",
+        "selection_area": "Modelagem de dados"
+      }
+    },
+    {
+      "position": 9,
+      "question_id": "fgv-bd-0066",
+      "stem": "O processo de tomada de decisão conta com ferramentas computacionais que otimizam e auxiliam gestores em diferentes níveis de atuação organizacional. No que se refere\nao suporte de dados, os armazéns de dados (ou data warehouses) representam uma importante alternativa para o armazenamento de dados por conta de suas características\nestruturais.\nAssinale a opção apresenta uma característica que diferencia um data warehouse de uma base de dados com suporte ao processamento OLTP.",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "Dimensões e níveis de agregação ilimitados."
+        },
+        {
+          "label": "B",
+          "text": "Operações restritas em dimensões."
+        },
+        {
+          "label": "C",
+          "text": "Tratamento estático da matriz esparsa."
+        },
+        {
+          "label": "D",
+          "text": "Visão conceitual unidimensional."
+        },
+        {
+          "label": "E",
+          "text": "Volatilidade dos dados armazenados."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "A",
+      "traceability": {
+        "corpus_ordinal": 66,
+        "platform_id": "4001580949",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "Modelagem dimensional",
+        "subsubject": "Data Warehouse, OLAP e estruturas dimensionais",
+        "primary_edital_item": "Modelagem dimensional",
+        "secondary_edital_items": "Data warehouse com ETL e OLAP",
+        "original_pages": [
+          25
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 66,
+        "secondary_contest_metadata": "ALEP 2024",
+        "selection_area": "Modelagem dimensional, Data Warehouse ou OLAP"
+      }
+    },
+    {
+      "position": 10,
+      "question_id": "fgv-bd-0032",
+      "stem": "Em banco de dados, uma transação é composta por diversas operações sobre os dados, como leitura, alteração, inserção e remoção. Contudo, a transação é percebida como\numa operação lógica única sobre os dados.\nCom isso, para garantir a consistência de um banco de dados, as transações devem satisfazer algumas propriedades, como: \n(i) todas as operações da transação são executadas em caso de sucesso; ou\n(ii) em caso de falhas, todas as operações são desfeitas e o banco de dados deve voltar ao mesmo estado em que estava antes do início da transação.",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "atomicidade;"
+        },
+        {
+          "label": "B",
+          "text": "consistência;"
+        },
+        {
+          "label": "C",
+          "text": "isolamento;"
+        },
+        {
+          "label": "D",
+          "text": "durabilidade;"
+        },
+        {
+          "label": "E",
+          "text": "redundância."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "A",
+      "traceability": {
+        "corpus_ordinal": 32,
+        "platform_id": "4001379425",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "Transações",
+        "subsubject": "ACID, concorrência e transações distribuídas",
+        "primary_edital_item": "Propriedades de banco de dados",
+        "secondary_edital_items": "SGBD",
+        "original_pages": [
+          12
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 32,
+        "secondary_contest_metadata": "TJ-RN 2023",
+        "selection_area": "Transações e concorrência"
+      }
+    },
+    {
+      "position": 11,
+      "question_id": "fgv-bd-0150",
+      "stem": "Com relação às propriedades ACID, fundamentais na implementação de bancos de dados relacionais, a durabilidade das transações é obtida por meio:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "da utilização de triggers;"
+        },
+        {
+          "label": "B",
+          "text": "de algoritmos baseados em timestamp ordering;"
+        },
+        {
+          "label": "C",
+          "text": "de algoritmos two-phase locking;"
+        },
+        {
+          "label": "D",
+          "text": "de mecanismos e recursos externos ao SGBD;"
+        },
+        {
+          "label": "E",
+          "text": "de replicação e redundância em memória estável."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "E",
+      "traceability": {
+        "corpus_ordinal": 150,
+        "platform_id": "4001469323",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "SGBD",
+        "subsubject": "Triggers, eventos e granularidade de disparo",
+        "primary_edital_item": "Propriedades de banco de dados",
+        "secondary_edital_items": "SGBD",
+        "original_pages": [
+          57
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 150,
+        "secondary_contest_metadata": "TCE-SP 2023",
+        "selection_area": "Transações e concorrência"
+      }
+    },
+    {
+      "position": 12,
+      "question_id": "fgv-bd-0086",
+      "stem": "A normalização de dados é o processo de analisar os esquemas de relações com base nas dependências funcionais de seus atributos e chaves primárias, envolvendo uma série de Formas Normais (FN). Observe o esquema da tabela “Pedido”, a seguir. A tabela \"Pedido\" possui chave primária composta (ID_PEDIDO, ID_CLIENTE), atributos com valores atômicos e dependência parcial de coluna não chave (NOME_CLIENTE) com parte da chave primária (ID_CLIENTE). Com base nisso, “Pedido” está normalizada na FN:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "1FN;"
+        },
+        {
+          "label": "B",
+          "text": "2FN;"
+        },
+        {
+          "label": "C",
+          "text": "3FN;"
+        },
+        {
+          "label": "D",
+          "text": "4FN;"
+        },
+        {
+          "label": "E",
+          "text": "5FN"
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "A",
+      "traceability": {
+        "corpus_ordinal": 86,
+        "platform_id": "4001628349",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "Normalização",
+        "subsubject": "Dependências funcionais e formas normais",
+        "primary_edital_item": "Normalização",
+        "secondary_edital_items": "",
+        "original_pages": [
+          34
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 86,
+        "secondary_contest_metadata": "TJ-MS 2024",
+        "selection_area": "Normalização"
+      }
+    },
+    {
+      "position": 13,
+      "question_id": "fgv-bd-0215",
+      "stem": "A normalização de esquemas de bancos de dados é feita a partir das dependências funcionais existentes entre as colunas de uma tabela. Além disso, é possível combinar dependências e derivar novas dependências a partir de axiomas preestabelecidos. Considerando uma tabela hipotética, com colunas X, Y e Z, o axioma da transitividade é definido como segue:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "Se X → Y e X → Z então Z → XY;"
+        },
+        {
+          "label": "B",
+          "text": "Se X → Y e Y → Z então X → Z;"
+        },
+        {
+          "label": "C",
+          "text": "Se X → Y então XZ → YZ;"
+        },
+        {
+          "label": "D",
+          "text": "Se X → Y então X → XY;"
+        },
+        {
+          "label": "E",
+          "text": "Se XY → Z então X → Z."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "B",
+      "traceability": {
+        "corpus_ordinal": 215,
+        "platform_id": "4001424643",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "Normalização",
+        "subsubject": "Dependências funcionais e formas normais",
+        "primary_edital_item": "Normalização",
+        "secondary_edital_items": "",
+        "original_pages": [
+          79
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 215,
+        "secondary_contest_metadata": "TJ-SE 2023",
+        "selection_area": "Normalização"
+      }
+    },
+    {
+      "position": 14,
+      "question_id": "fgv-bd-0277",
+      "stem": "Os principais Sistemas Gerenciadores de Bancos de Dados oferecem total suporte à linguagem SQL. Um aspecto importante da implementação do SQL é o tratamento para\nvalores nulos quando esses são considerados como unknown values.\nNesse contexto, considere uma tabela T com colunas A e B, que podem conter valores nulos. T possui 100 registros e, em 50% das linhas, há pelo menos uma coluna\npreenchida com o valor NULL.\nConsidere a consulta a seguir:\nSELECT * FROM T t1 \nWHERE t1.A = NULL or t1.B = NULL\nO número máximo de linhas de resultados que seriam retornadas pela consulta é igual a",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "0."
+        },
+        {
+          "label": "B",
+          "text": "25."
+        },
+        {
+          "label": "C",
+          "text": "50."
+        },
+        {
+          "label": "D",
+          "text": "75."
+        },
+        {
+          "label": "E",
+          "text": "100."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "A",
+      "traceability": {
+        "corpus_ordinal": 277,
+        "platform_id": "4001335515",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "SQL",
+        "subsubject": "Consultas, comandos, junções e subconsultas",
+        "primary_edital_item": "SQL",
+        "secondary_edital_items": "",
+        "original_pages": [
+          106
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 277,
+        "secondary_contest_metadata": "RFB",
+        "selection_area": "SQL"
+      }
+    },
+    {
+      "position": 15,
+      "question_id": "fgv-bd-0268",
+      "stem": "Caio preparou o comando SQL exibido a seguir para deletar um conjunto de linhas de uma tabela.\ndelete from T1\nwhere exists(select * from T2\n where T1.A1 = T2.A2)\nPara testar seu comando e descobrir exatamente quais seriam as linhas deletadas, Caio pretende executar um comando sem alteração de dados que permita a identificação\ndessas linhas.\nPara isso, basta que Caio substitua no comando original o termo:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "“=” por “<>”;"
+        },
+        {
+          "label": "B",
+          "text": "“delete from” por “show deleted rows from”;"
+        },
+        {
+          "label": "C",
+          "text": "“delete” por “delete limit 0”;"
+        },
+        {
+          "label": "D",
+          "text": "“delete” por “select *”;"
+        },
+        {
+          "label": "E",
+          "text": "“exists” por “not exists”."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "D",
+      "traceability": {
+        "corpus_ordinal": 268,
+        "platform_id": "4001224861",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "SQL",
+        "subsubject": "Consultas, comandos, junções e subconsultas",
+        "primary_edital_item": "DML",
+        "secondary_edital_items": "SQL",
+        "original_pages": [
+          102,
+          103
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 268,
+        "secondary_contest_metadata": "TCE-TO 2022",
+        "selection_area": "SQL"
+      }
+    },
+    {
+      "position": 16,
+      "question_id": "fgv-bd-0257",
+      "stem": "No SQL Server 19, o comando de criação de restrições de chaves estrangeiras (em inglês, foreign key constraints) oferece as cláusulas ON DELETE e ON UPDATE, cujo\nconjunto de opções permitidas é:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "CASCADE, NO ACTION, RAISE ERROR e SET NULL;"
+        },
+        {
+          "label": "B",
+          "text": "CASCADE, NO ACTION, RESTRICT e SET NULL;"
+        },
+        {
+          "label": "C",
+          "text": "CASCADE, NO ACTION, SET DEFAULT e SET NULL;"
+        },
+        {
+          "label": "D",
+          "text": "NO ACTION, RAISE ERROR, SET DEFAULT e SET NULL;"
+        },
+        {
+          "label": "E",
+          "text": "RESTRICT, SET DEFAULT e SET NULL."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "C",
+      "traceability": {
+        "corpus_ordinal": 257,
+        "platform_id": "4001068938",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "SQL",
+        "subsubject": "Consultas, comandos, junções e subconsultas",
+        "primary_edital_item": "SQL",
+        "secondary_edital_items": "Integridade referencial",
+        "original_pages": [
+          96
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 257,
+        "secondary_contest_metadata": "TJDFT 2022",
+        "selection_area": "SQL"
+      }
+    },
+    {
+      "position": 17,
+      "question_id": "fgv-bd-0298",
+      "stem": "Observe a seguinte consulta SQL, feita no SQLite:\nSELECT imagem, avg(imagem) OVER (PARTITION BY grau) AS media_grau FROM historico_bijecao;\nO SQLite dispõe de vários tipos de função. Na consulta acima, a função avg foi usada como uma função do tipo:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "core;"
+        },
+        {
+          "label": "B",
+          "text": "math;"
+        },
+        {
+          "label": "C",
+          "text": "window;"
+        },
+        {
+          "label": "D",
+          "text": "ordinary scalar;"
+        },
+        {
+          "label": "E",
+          "text": "ordinary aggregate."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "C",
+      "traceability": {
+        "corpus_ordinal": 298,
+        "platform_id": "4001469803",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "SQL",
+        "subsubject": "Consultas, comandos, junções e subconsultas",
+        "primary_edital_item": "SQL",
+        "secondary_edital_items": "",
+        "original_pages": [
+          115
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 298,
+        "secondary_contest_metadata": "TCE-SP 2023",
+        "selection_area": "SQL"
+      }
+    },
+    {
+      "position": 18,
+      "question_id": "fgv-bd-0320",
+      "stem": "Maria executou as seguintes instruções em SQL para criação de tabelas:\nCREATE TABLE T1 (\nid_A INT,\na1 CHAR(10),\na2 CHAR(10));\nCREATE TABLE T2 (\nid_B INT,\nb1 CHAR(10),\n\nb2 CHAR(10));\nCREATE TABLE T3 (\nid_A INT,\nid_B INT,\nc1 CHAR(10),\nc2 CHAR(10));\nMaria deseja listar a quantidade e os respectivos dados de T1 que possuem pelo menos 1 e no máximo 5 relacionamentos com T2.\nPara isso, ela deve utilizar a instrução:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "SELECT COUNT(c.id_A), a.a1, a.a2\nFROM T1 a\nINNER JOIN T3 c ON c.id_A = a.id_A\nWHERE COUNT(c.id_A) < = 5;"
+        },
+        {
+          "label": "B",
+          "text": "SELECT a.id_A, a.a1, a.a2\nFROM T1 a, T2 b\nLEFT OUTER JOIN T3 c ON c.id_A = a.id_A\nLEFT OUTER JOIN T3 c ON c.id_B = b.id_B\nGROUP BY a.a1, a.a2\nHAVING COUNT(a.id_A) < = 5;"
+        },
+        {
+          "label": "C",
+          "text": "SELECT COUNT(a.id_A), a.a1, a.a2\nFROM T1 a\nINNER JOIN T3 c ON c.id_A = a.id_A\nWHERE a.id_A < = 5;"
+        },
+        {
+          "label": "D",
+          "text": "SELECT COUNT(a.id_A), a.*\nFROM T1 a\nINNER JOIN T3 c ON c.id_A = a.id_A\nGROUP BY a.a1, a.a2\nHAVING COUNT(a.id_A) < = 5;"
+        },
+        {
+          "label": "E",
+          "text": "SELECT a.id_A, a.a1, a.a2\nFROM T1 a\nRIGHT OUTER JOIN T3 c ON c.id_A = a.id_A\nGROUP BY a.id_A, a.a1, a.a2\nHAVING COUNT(a.id_A) < = 5;"
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "D",
+      "traceability": {
+        "corpus_ordinal": 320,
+        "platform_id": "4001785528",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "SQL",
+        "subsubject": "Consultas, comandos, junções e subconsultas",
+        "primary_edital_item": "SQL",
+        "secondary_edital_items": "",
+        "original_pages": [
+          124,
+          125
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 320,
+        "secondary_contest_metadata": "TRF1 2024",
+        "selection_area": "SQL"
+      }
+    },
+    {
+      "position": 19,
+      "question_id": "fgv-bd-0014",
+      "stem": "Observe a seguinte modelagem dimensional.",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "Factless table;"
+        },
+        {
+          "label": "B",
+          "text": "Fact Constellation;"
+        },
+        {
+          "label": "C",
+          "text": "Role playing dimension;"
+        },
+        {
+          "label": "D",
+          "text": "Degenerated dimension;"
+        },
+        {
+          "label": "E",
+          "text": "Slowly changing dimension."
+        }
+      ],
+      "statement_assets": [
+        "assets/q14-modelagem-dimensional.png"
+      ],
+      "answer_key": "C",
+      "traceability": {
+        "corpus_ordinal": 14,
+        "platform_id": "4001221783",
+        "answer_origin": "oficial definitivo",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "Modelagem dimensional",
+        "subsubject": "Role-playing dimension",
+        "primary_edital_item": "Modelagem dimensional",
+        "secondary_edital_items": "",
+        "original_pages": [
+          5,
+          6
+        ],
+        "asset_files": [
+          "assets/q14-modelagem-dimensional.png"
+        ],
+        "duplicate_group": "",
+        "principal_record": 14,
+        "secondary_contest_metadata": "TCE-TO 2022",
+        "selection_area": "Modelagem dimensional, Data Warehouse ou OLAP"
+      }
+    },
+    {
+      "position": 20,
+      "question_id": "fgv-bd-0185",
+      "stem": "Joana está elaborando um Diagrama Entidade Relacionamento para representar que a entidade Processo Judicial possui nenhum ou vários Réus. Na Notação Crow's foot (Pé de Galinha), para representar esse relacionamento, Joana deve utilizar a notação:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "",
+          "asset": "assets/q185-alternativa-a.png"
+        },
+        {
+          "label": "B",
+          "text": "",
+          "asset": "assets/q185-alternativa-b.png"
+        },
+        {
+          "label": "C",
+          "text": "",
+          "asset": "assets/q185-alternativa-c.png"
+        },
+        {
+          "label": "D",
+          "text": "",
+          "asset": "assets/q185-alternativa-d.png"
+        },
+        {
+          "label": "E",
+          "text": "",
+          "asset": "assets/q185-alternativa-e.png"
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "D",
+      "traceability": {
+        "corpus_ordinal": 185,
+        "platform_id": "4001784157",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_DIRETA",
+        "subject": "Modelagem de dados",
+        "subsubject": "Modelo conceitual, lógico, ER e cardinalidade",
+        "primary_edital_item": "Modelagem conceitual, lógica e física",
+        "secondary_edital_items": "",
+        "original_pages": [
+          69
+        ],
+        "asset_files": [
+          "assets/q185-alternativa-a.png",
+          "assets/q185-alternativa-b.png",
+          "assets/q185-alternativa-c.png",
+          "assets/q185-alternativa-d.png",
+          "assets/q185-alternativa-e.png"
+        ],
+        "duplicate_group": "",
+        "principal_record": 185,
+        "secondary_contest_metadata": "TRF1 2024",
+        "selection_area": "Modelagem de dados"
+      }
+    },
+    {
+      "position": 21,
+      "question_id": "fgv-bd-0024",
+      "stem": "O sistema de gerenciamento de banco de dados Oracle possui uma arquitetura complexa. Uma das estruturas mais importantes que podemos destacar é a de memória. \nDuas das principais áreas de memória no Oracle são SGA (System Global Area) e PGA (Program Global Area). \nRelacione as áreas de memória com a sua respectiva utilização e definição.\n1. PGA\n2. SGA\n( ) Ao executar uma instrução SQL é armazenado: tabelas temporárias, Linhas de classificação, bitmaps de mesclagem, variáveis e pilha de chamadas \n( ) Contém estruturas que podem ser dimensionadas de forma independente \n( ) Está associada a cada sessão e irá variar seu tamanho de acordo com as necessidades de memória da sessão em dado momento.\n( ) Aloca e desaloca a memória do servidor ao iniciar ou desligar a instância. \n( ) Está presente em sua composição além de outras estruturas o stream pool, java pool. Também fazem parte. \nAssinale a opção que indica a relação correta, na ordem apresentada.",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "2, 2, 1, 2 e 1."
+        },
+        {
+          "label": "B",
+          "text": "1, 1, 2, 2 e 2."
+        },
+        {
+          "label": "C",
+          "text": "1, 2, 1, 1 e 1."
+        },
+        {
+          "label": "D",
+          "text": "2, 1, 1, 2 e 1."
+        },
+        {
+          "label": "E",
+          "text": "1, 2, 1, 2 e 2."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "E",
+      "traceability": {
+        "corpus_ordinal": 24,
+        "platform_id": "4001301621",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_PARCIAL",
+        "subject": "Estruturas de dados",
+        "subsubject": "Pilhas, árvores, hash e estruturas clássicas",
+        "primary_edital_item": "SGBD",
+        "secondary_edital_items": "",
+        "original_pages": [
+          9
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 24,
+        "secondary_contest_metadata": "SEFAZ-MG 2023",
+        "selection_area": "SGBD e administração"
+      }
+    },
+    {
+      "position": 22,
+      "question_id": "fgv-bd-0053",
+      "stem": "No contexto de Qualidade de Dados, o auditor de contas públicas João deverá analisar a consistência dos dados da base de dados AUD_CONTAS identificando variações\nsobre os valores dos atributos, como:\n30% das entradas de dados na coluna CD_FUNCIONARIO estão marcadas com o caractere “espaço”\nexistem 200 linhas na tabela TBL_PROCESSO contendo dados sobre processos sem nenhuma linha contendo os seus detalhes \nPara isso, a técnica de diagnóstico sobre a qualidade de dados que João deverá utilizar é:",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "profiling;"
+        },
+        {
+          "label": "B",
+          "text": "matching;"
+        },
+        {
+          "label": "C",
+          "text": "deduplicação;"
+        },
+        {
+          "label": "D",
+          "text": "data cleansing;"
+        },
+        {
+          "label": "E",
+          "text": "enriquecimento."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "A",
+      "traceability": {
+        "corpus_ordinal": 53,
+        "platform_id": "4001545892",
+        "answer_origin": "oficial definitivo",
+        "adherence": "ADERENTE_PARCIAL",
+        "subject": "Qualidade de dados",
+        "subsubject": "Data profiling",
+        "primary_edital_item": "Mapeamento de fontes e técnicas de coleta de dados",
+        "secondary_edital_items": "Inteligência Artificial, Análise de Dados e Big Data",
+        "original_pages": [
+          19,
+          20
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 53,
+        "secondary_contest_metadata": "CGE-PB 2024",
+        "selection_area": "Metadados ou qualidade de dados"
+      }
+    },
+    {
+      "position": 23,
+      "question_id": "fgv-bd-0601",
+      "stem": "Temos uma aplicação Spring Boot, utilizando Gradle e o H2. Assinale a opção que descreve, corretamente, os passos para migrar esta aplicação para usar o Maven com\nMySQL.",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "1 - Remover todas as configurações do Gradle\n2 - Adicionar dependência do MySQL no build.gradle\n3 - Alterar as configurações do MySQL"
+        },
+        {
+          "label": "B",
+          "text": "1 - Manter o arquivo build.gradle e renomeá-lo para pom.xml\n2 - Atualizar as configurações do MySQL\n3 - Criar o esquema do banco de dados manualmente"
+        },
+        {
+          "label": "C",
+          "text": "1 - Converter o build.gradle para pom.xml\n2 - Adicionar a dependência do MySQL no pom.xml\n3 - Atualizar o application.properties para o MySQL"
+        },
+        {
+          "label": "D",
+          "text": "1 - Criar um novo projeto usando o npm (Node Package Manager) com configurações para Maven e MySQL.\n2 - Copiar o código fonte do projeto antigo para o novo\n3 - Reconfigurar o application.properties para o MySQL."
+        },
+        {
+          "label": "E",
+          "text": "1 - Adicionar a dependência do MySQL no pom.xml\n2 - Remover a dependência do H2 do pom.xml\n3 - Adicionar as configurações do MySQL no pom.xml"
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "C",
+      "traceability": {
+        "corpus_ordinal": 601,
+        "platform_id": "4001593276",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_PARCIAL",
+        "subject": "Programação",
+        "subsubject": "Linguagens, frameworks e código de aplicação",
+        "primary_edital_item": "Java 6+, JavaEE 6+, JakartaEE, JPA 2+, JavaScript, JUnit, Hibernate, JSF, PrimeFaces, Spring, Spring Cloud e Spring Boot",
+        "secondary_edital_items": "",
+        "original_pages": [
+          240,
+          241
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 601,
+        "secondary_contest_metadata": "AL-TO 2024",
+        "selection_area": "Correspondências parciais interdisciplinares adicionais"
+      }
+    },
+    {
+      "position": 24,
+      "question_id": "fgv-bd-0029",
+      "stem": "A biblioteca Python de tensores que pode ser utilizada em problemas de aprendizado profundo, podendo utilizar tanto processadores do tipo GPU quanto CPU, é denominada",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "PyFlow."
+        },
+        {
+          "label": "B",
+          "text": "PyTens"
+        },
+        {
+          "label": "C",
+          "text": "PyNLP."
+        },
+        {
+          "label": "D",
+          "text": "Pandas."
+        },
+        {
+          "label": "E",
+          "text": "PyTorch."
+        }
+      ],
+      "statement_assets": [],
+      "answer_key": "E",
+      "traceability": {
+        "corpus_ordinal": 29,
+        "platform_id": "4001379310",
+        "answer_origin": "plataforma secundária",
+        "adherence": "ADERENTE_PARCIAL",
+        "subject": "Programação",
+        "subsubject": "Linguagens, frameworks e código de aplicação",
+        "primary_edital_item": "Aprendizado de máquina",
+        "secondary_edital_items": "Inteligência Artificial, Análise de Dados e Big Data",
+        "original_pages": [
+          11
+        ],
+        "asset_files": [],
+        "duplicate_group": "",
+        "principal_record": 29,
+        "secondary_contest_metadata": "BB 2023",
+        "selection_area": "Correspondências parciais interdisciplinares adicionais"
+      }
+    }
+  ]
+}

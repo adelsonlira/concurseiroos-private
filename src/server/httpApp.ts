@@ -5,6 +5,8 @@ import readinessReport from "../../data/quality/product-readiness-report.json" w
 import { assessProductReadiness } from "../core/readiness/productReadiness.js";
 import type { ReadinessCheck } from "../core/readiness/types.js";
 import { buildPublicRuntimeConfiguration, resolveRuntimeEnvironment } from "./runtimeEnvironment.js";
+import { gradePilotDiagnosticAttempt } from "./diagnostics/pilotDiagnosticServer.js";
+import type { FinalizePilotDiagnosticRequest } from "../features/pilotDiagnostic/types.js";
 
 dotenv.config({ quiet: true });
 
@@ -188,6 +190,22 @@ app.use("/api", async (req: any, res: any, next: any) => {
   } catch (error) {
     console.error("[API Auth Error]", error);
     return res.status(401).json({ error: "Não foi possível validar a sessão." });
+  }
+});
+
+app.get("/api/diagnostic-finalize", (_req, res) => {
+  res.setHeader("Cache-Control", "no-store");
+  res.status(405).json({ error: "A correção só está disponível após finalização explícita por POST." });
+});
+
+app.post("/api/diagnostic-finalize", (req, res) => {
+  try {
+    const result = gradePilotDiagnosticAttempt(req.body as FinalizePilotDiagnosticRequest);
+    res.setHeader("Cache-Control", "no-store");
+    res.status(200).json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Não foi possível finalizar o diagnóstico.";
+    res.status(400).json({ error: message });
   }
 });
 

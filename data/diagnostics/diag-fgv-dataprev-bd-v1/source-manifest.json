@@ -1,0 +1,146 @@
+{
+  "label": "PILOTO DIAGNÓSTICO — NÃO REPRESENTA INCIDÊNCIA HISTÓRICA",
+  "diagnostic_id": "diag-fgv-dataprev-bd-v1",
+  "generated_at_utc": "2026-07-18T02:51:26.581206+00:00",
+  "baseline": {
+    "file": "CUR-BD-BANCO-OPERACIONAL-FGV-DATAPREV-v2.zip",
+    "size_bytes": 22422187,
+    "sha256": "f0a031ebd7331a1634ab8c2844bf0a18f0fe4391c46322caf5ba39c60f9973b7"
+  },
+  "asset_note": "O visual da questão 14 foi reexportado da página já referenciada pelo baseline, sem nova auditoria ou alteração do banco.",
+  "counts": {
+    "questions": 24,
+    "unique_principal_records": 24,
+    "direct": 20,
+    "partial": 4,
+    "image_dependent_questions": 2,
+    "asset_files": 6,
+    "sql_code_questions": 5,
+    "table_questions": 9,
+    "diagram_questions": 2,
+    "annulments_identified_available_sources": 0,
+    "conflicts_detected_available_sources": 0
+  },
+  "theme_distribution": {
+    "SQL": 5,
+    "Modelagem de dados": 3,
+    "SGBD e administração": 3,
+    "Normalização": 2,
+    "Transações e concorrência": 2,
+    "NoSQL": 2,
+    "Modelagem dimensional, Data Warehouse ou OLAP": 2,
+    "Integração de dados, ETL ou ingestão": 1,
+    "Metadados ou qualidade de dados": 1,
+    "Dados estruturados, não estruturados ou Big Data": 1,
+    "Correspondências parciais interdisciplinares adicionais": 2
+  },
+  "selected_ordinals": [
+    147,
+    517,
+    708,
+    134,
+    560,
+    377,
+    10,
+    35,
+    66,
+    32,
+    150,
+    86,
+    215,
+    277,
+    268,
+    257,
+    298,
+    320,
+    14,
+    185,
+    24,
+    53,
+    601,
+    29
+  ],
+  "controls": [
+    14,
+    53
+  ],
+  "deliverables": [
+    {
+      "file": "CUR-BD-DIAGNOSTICO-PILOTO-v1-CANDIDATO.pdf",
+      "size_bytes": 102856,
+      "sha256": "ad988d677c036c681a30dfcf67dfef3884f7a34622d192ee6ab838f81524e6c8"
+    },
+    {
+      "file": "CUR-BD-DIAGNOSTICO-PILOTO-v1-CANDIDATO.html",
+      "size_bytes": 30375,
+      "sha256": "ef19c36e2c9e25ace4c41b8b2f7d8ca723ffcdd3b3b4083fa5a86c2f63433b8e"
+    },
+    {
+      "file": "CUR-BD-DIAGNOSTICO-PILOTO-v1-IMPORT.json",
+      "size_bytes": 43316,
+      "sha256": "0ef9edd1933a66c2cdc7a741eab499ec48bcf508502668e0e1e1331605a04ff3"
+    },
+    {
+      "file": "CUR-BD-DIAGNOSTICO-PILOTO-v1-GABARITO-INTERNO.csv",
+      "size_bytes": 8679,
+      "sha256": "7c1ab313fccd5220f93469155027e21bf03d311c0bf46552d4f4b333753c1d8c"
+    },
+    {
+      "file": "CUR-BD-DIAGNOSTICO-PILOTO-v1-SELECAO.csv",
+      "size_bytes": 7152,
+      "sha256": "66a86740fe0207fbd09fbd3996e5ccb00758a26c3adcd51991b432de09e127e1"
+    },
+    {
+      "file": "CUR-BD-DIAGNOSTICO-PILOTO-v1-VALIDACAO.md",
+      "size_bytes": 1554,
+      "sha256": "5f4ecd217483fa0637c23bde08b413e70a794299ad4864222ca1c90a49e44c99"
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/q14-modelagem-dimensional.png",
+      "size_bytes": 38511,
+      "sha256": "600f5c3a54d09f6df075e32c0b42c1c0b1f871f3046767e48fe49d8f9e32eecd"
+    },
+    {
+      "file": "assets/q185-alternativa-a.png",
+      "size_bytes": 3619,
+      "sha256": "bbe38f0a1a2a4af70624d9d7d988923530843d35abd7baa881346e4f4e90e494"
+    },
+    {
+      "file": "assets/q185-alternativa-b.png",
+      "size_bytes": 3345,
+      "sha256": "198423fe06749768a3f16b04d02b5d4c4ff3035ef586f1d42b1b79efd7f5f4da"
+    },
+    {
+      "file": "assets/q185-alternativa-c.png",
+      "size_bytes": 3430,
+      "sha256": "b5d9fbdd115b8a2ad89e7c5313a653ec1455cec57bff4dfd89ffdadc38051dc9"
+    },
+    {
+      "file": "assets/q185-alternativa-d.png",
+      "size_bytes": 6406,
+      "sha256": "f6cd8bf85d4ef0fb86520ac753906727f5622a741c86ebf25c837f88eda0b1c7"
+    },
+    {
+      "file": "assets/q185-alternativa-e.png",
+      "size_bytes": 5131,
+      "sha256": "371aecb5dccfa70b0cf51914ab64bdb68a1b72cf3aec647221e8dae16b378af0"
+    }
+  ],
+  "validations": {
+    "all_passed": true,
+    "candidate_has_no_answer_key": true,
+    "import_json_has_no_absolute_local_paths": true,
+    "all_assets_exist_and_open": true,
+    "no_duplicate_references": true,
+    "no_similar_pair": true,
+    "maximum_same_secondary_contest": 2
+  },
+  "constraints_observed": [
+    "Nenhuma busca externa.",
+    "Nenhuma reclassificação temática.",
+    "Nenhuma alteração do banco ou do SDE.",
+    "Nenhuma seleção de simulado final."
+  ]
+}

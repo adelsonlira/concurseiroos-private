@@ -284,3 +284,7 @@ Patch de recuperação operacional: logos deixam de depender de assets inexisten
 ## 3.31.2 — 2026-07-17
 
 Patch de resolução ESM em produção: o log da Vercel comprovou que `/api/ai-health` falhava com `ERR_MODULE_NOT_FOUND` antes de qualquer chamada ao Gemini. Todos os imports relativos do grafo serverless passaram a usar extensão explícita `.js`, o JSON de prontidão recebeu atributo de importação e foi criada regressão que transpila sem bundle e carrega os entrypoints com a resolução nativa do Node. Nenhum segredo, parâmetro do SDE, prioridade ou sinal histórico foi alterado.
+
+## 3.31.3 — 2026-07-18
+
+Diagnóstico piloto FGV-DATAPREV de Banco de Dados integrado como fluxo experimental isolado: 24 questões fixas, seis assets, retomada local, cancelamento sem resultado, finalização explícita e tentativa append-only. O cliente recebe apenas catálogo sanitizado; gabarito e rastreabilidade fonte permanecem no backend até a correção. O relatório usa exclusivamente `selection_area`, separa cobertura principal e complementar sem alterar nota e registra `affectsSde: false`. Nenhuma estrutura do store principal, SDE, mastery, prioridade, sessão, simulado oficial ou incidência histórica foi alterada.

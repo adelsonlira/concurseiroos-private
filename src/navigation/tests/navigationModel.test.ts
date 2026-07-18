@@ -13,6 +13,7 @@ describe("navigationModel", () => {
       "focus",
       "reviews",
       "exercises",
+      "diagnostic",
       "simulations",
       "coach",
     ]);
@@ -34,7 +35,7 @@ describe("navigationModel", () => {
   });
 
   it("retorna todos os itens quando a consulta está vazia", () => {
-    expect(filterNavigationItems("   ")).toHaveLength(11);
+    expect(filterNavigationItems("   ")).toHaveLength(12);
     expect(filterNavigationItems("coach").map((result) => result.item.id)).toContain("coach");
   });
 

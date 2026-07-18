@@ -1,7 +1,7 @@
 # Estado Atual
 
-Data: 2026-07-17
-Versão: 3.31.2
+Data: 2026-07-18
+Versão: 3.31.3
 
 ## Projeto
 
@@ -11,64 +11,61 @@ O produto é um sistema de apoio à decisão orientado à aprovação. Deve redu
 
 ## Fase atual
 
-Patch 3.31.2 preparado após evidência do runtime da Vercel: `/api/ai-health` encerrava com `ERR_MODULE_NOT_FOUND` ao importar `src/server/runtimeEnvironment` sem extensão no Node ESM. A chave Gemini não chegou a ser utilizada e nenhuma chamada externa foi iniciada. A correção torna explícitas as extensões do grafo serverless e adiciona regressão que carrega a saída ESM não empacotada com resolução nativa do Node. Inscrição e pagamento no DATAPREV, publicação 3.31.1 e cancelamento de simulados foram confirmados pelo usuário; Gemini requer reconfirmação após o deploy 3.31.2.
+A versão 3.31.3 integra o `DIAGNÓSTICO PILOTO FGV–DATAPREV — BANCO DE DADOS — v1` como fluxo experimental isolado. A baseline funcional continua sendo a arquitetura validada da 3.31.2; banco operacional, SDE, prioridades, mastery, sessões e simulados oficiais não foram alterados. O diagnóstico possui catálogo público sanitizado, correção no backend, persistência local própria e marcador `affectsSde: false`.
+
+A correção ESM da 3.31.2 permanece incorporada. O probe real do Gemini ainda precisa ser reconfirmado após publicação no runtime da Vercel.
 
 ## Implementado
 
 - SDE puro, determinístico, explicável e independente da interface.
 - Prescrição diária com atividade, duração, material, páginas, questões, protocolo, evidências, fallback e próxima ação.
-- Diagnóstico inicial por questões com amostra mínima, acerto, ausência de consulta/branco e confiança dos acertos.
 - Proteção contra zerar disciplina e projeção conservadora de capacidade até 11/10/2026.
 - Ciclo teoria/recuperação/questões/correção/revisão com evidência antes e depois.
 - Login privado, sincronização em três vias, backup transacional, persistência local atômica e cofre deduplicado por SHA-256.
 - Taxonomia oficial com 123 nós e 94 subassuntos.
 - Corpus FGV com 6.462 questões, 5.324 canônicas e 2.840 vínculos definitivos, integralmente em shadow mode.
 - Curadoria append-only e 656 propostas automáticas sem qualquer incidência ativa.
-- Roteamento pedagógico exato: seção de subassunto irmão nunca é fallback.
-- Casos append-only de recuperação de erros, com causa confirmada, correção, prevenção, verificação independente e reabertura automática.
-- `TOPIC_ONLY` exige o marcador revisado `AUDITED_TOPIC_WIDE` antes de autorizar páginas amplas.
-- Diagnóstico local aceita somente lista de questões ou simulado; teoria e comentários não servem como primeira tentativa.
-- Relatório reproduzível de roteamento para os 94 subassuntos.
-- Correção auditada do PDF da Lei nº 12.527/2011 para o tópico e subassunto oficiais de LAI.
-- Plano e Progresso distingue teoria exata, fallback amplo aprovado e necessidade de localização manual.
-- Confirmações de login, sincronização e Gemini registradas com proveniência operacional do usuário.
-- Simulados parciais e completos com composição oficial, fonte identificada, tempo, brancos, pontuação e risco de zero.
-- Seleção local determinística limitada a questões com documento de origem e gabarito oficial; fontes externas não incorporam conteúdo.
-- Análise pós-simulado e plano de correção sem cronograma paralelo ou alteração direta do ranking.
-- Comparação descritiva somente entre simulados com mesma composição.
-- Marca do produto renderizada por SVG embutido, sem dependência de arquivos estáticos ausentes.
-- Diagnósticos `/api/runtime-config` e `/api/ai-health` isolados do boot Express e tolerantes a configuração Supabase inválida ou entre aspas.
-- Grafo serverless usa especificadores relativos ESM com extensão explícita; a saída JavaScript não empacotada é carregada em teste pela resolução nativa do Node.
-- Cliente Supabase do backend inicializado sob demanda, sem derrubar endpoints públicos durante a carga do módulo.
-- Simulados podem ser cancelados com confirmação; saem da fila recente e permanecem preservados como `CANCELADO` no backup.
+- Roteamento pedagógico exato, recuperação de erros baseada em evidência e simulados oficiais com fonte identificada.
+- Diagnósticos `/api/runtime-config` e `/api/ai-health` isolados do boot Express, com especificadores ESM explícitos.
+- Diagnóstico piloto `diag-fgv-dataprev-bd-v1`, versão 1:
+  - 24 questões em ordem fixa;
+  - duração sugerida de 50 minutos;
+  - seis assets relativos validados;
+  - estados respondida, não respondida e revisão;
+  - início, resposta, navegação, retomada, cancelamento e finalização explícita;
+  - bloqueio de segunda tentativa enquanto outra estiver ativa;
+  - catálogo público sem gabarito ou metadados internos;
+  - correção operacional somente após finalização;
+  - resultado total e por `selection_area`;
+  - cobertura principal de 20 questões e complementar de 4, sem ajuste de nota;
+  - tentativa finalizada append-only com rastreabilidade dos 24 registros por fingerprint;
+  - armazenamento próprio, fora do store principal, mastery, SDE, roadmap, prescrição e simulados.
 
 ## Validado
 
-- Login obrigatório e sincronização notebook–celular confirmados pelo usuário no domínio de produção.
-- Gemini havia sido confirmado antes da regressão 3.31.0. Em produção 3.31.1, o probe falhou antes do provedor com `ERR_MODULE_NOT_FOUND`; a 3.31.2 corrige a resolução ESM, mas requer novo probe autenticado após redeploy.
-- Auditoria de roteamento: 57 teorias exatas, 0 fallbacks amplos ativos sem aprovação, 37 localizadores manuais pendentes, 52 baterias diagnósticas locais e 42 fallbacks por plataforma externa.
-- Zero subassuntos sem fonte diagnóstica executável.
-- Zero fallbacks entre subassuntos irmãos.
-- LAI abre o PDF auditado correto nas páginas 1–31.
-- Pipeline de memória, corpus, taxonomia, curadoria, classificação, roteamento, SDE, prontidão, TypeScript e testes.
-- Auditoria do SDE com 117 ações e 50 parâmetros catalogados.
-- Contrato de recuperação com 7 causas, 2 verificações independentes e contribuição zero ao ranking.
-- Linha de base 3.31.1 confirmada com 417 testes em 71 arquivos antes do patch. A 3.31.2 foi validada com 419 testes em 72 arquivos, TypeScript, builds web/Express/serverless, auditorias do produto e smoke HTTP local. O `npm audit` não pôde consultar o serviço remoto por erro 502/EAI_AGAIN do ambiente; as dependências não foram alteradas em relação à 3.31.1, cuja auditoria tinha zero vulnerabilidades conhecidas.
+- Pacote fonte do diagnóstico: 24 questões únicas, 20 aderentes diretas, 4 parciais, 6 assets e controles 14 e 53.
+- Checksum do banco operacional recebido coincide com o manifesto do diagnóstico; o banco não foi alterado.
+- Catálogo público não contém `answer_key`, ordinal, ID de plataforma, origem do gabarito, assunto, subassunto ou item do edital.
+- Cancelamento não cria resultado; recarregamento preserva tentativa ativa; tentativa finalizada rejeita sobrescrita.
+- Agregação principal usa exclusivamente `selection_area`.
+- Resultado do piloto não altera SDE, mastery, prioridades ou simulados.
+- 436 testes aprovados em 74 arquivos, incluindo 17 testes novos do diagnóstico.
+- TypeScript aprovado.
+- Auditoria estática do diagnóstico aprovada.
 - Incidência histórica e materiais privados continuam neutros no ranking.
 
 ## Problemas conhecidos
 
-- 37 subassuntos ainda não possuem localizador teórico exato para a atividade; o Coach deve declarar a lacuna e orientar busca manual, sem inventar páginas.
+- A correção do diagnóstico depende do endpoint autenticado; indisponibilidade de rede impede a finalização até nova tentativa, preservando o estado ativo local.
+- Tentativas diagnósticas são locais e não sincronizam entre dispositivos nesta versão.
+- Dados locais gerais ainda não são namespaceados para múltiplos usuários no mesmo perfil de navegador.
+- 37 subassuntos ainda não possuem localizador teórico exato.
 - 42 subassuntos dependem de Qconcursos ou Estratégia Questões para diagnóstico seguro.
-- Nenhum fallback amplo está ativo até existir revisão explícita com o marcador `AUDITED_TOPIC_WIDE`.
 - As 656 classificações históricas continuam automáticas; há zero classificações humanas aprovadas e zero incidência elegível.
-- Duplicatas antigas no bucket não são removidas automaticamente.
-- Dados locais ainda não são namespaceados para múltiplos usuários no mesmo perfil de navegador.
-- O limiar diagnóstico de 85% é conservador e só poderá ser recalibrado com resultados reais suficientes.
-- O runtime-alvo é Node.js 24.x; este ambiente automatizado executa Node 22.x.
-- A correção ESM dos endpoints e do Gemini ainda precisa ser validada no runtime real da Vercel após publicação da 3.31.2.
-- Nenhum software ou plano garante aprovação; o produto reduz erro decisório e organiza esforço com rastreabilidade.
+- O runtime-alvo é Node.js 24.x; o ambiente automatizado executa Node 22.x.
+- O probe Gemini precisa ser reconfirmado no runtime real da Vercel.
+- Nenhum software ou plano garante aprovação.
 
 ## Próxima tarefa
 
-Publicar a 3.31.2 e confirmar em produção `/api/runtime-config` e o probe autenticado do Gemini. As logos e o cancelamento de simulados já foram confirmados. Depois, auditar os materiais físicos suspeitos, fechar os 37 localizadores teóricos pendentes e validar prospectivamente os simulados.
+Publicar a 3.31.3 e validar em produção: abertura dos seis assets, início, resposta, recarregamento, cancelamento, retomada, confirmação de encerramento, correção e imutabilidade do resultado. Em paralelo, confirmar `/api/runtime-config` e o probe autenticado do Gemini, sem alterar chave ou modelo antes de observar o runtime.

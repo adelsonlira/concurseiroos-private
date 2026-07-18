@@ -27,6 +27,7 @@ const originalEnvironment = Object.fromEntries(ENV_KEYS.map((key) => [key, proce
 const serverlessRuntimeFiles = [
   "api/ai-health.ts",
   "api/coach-chat.ts",
+  "api/diagnostic-finalize.ts",
   "api/explain-question.ts",
   "api/organize-material.ts",
   "api/parse-edital.ts",
@@ -34,6 +35,8 @@ const serverlessRuntimeFiles = [
   "api/semantic-search.ts",
   "src/server/httpApp.ts",
   "src/server/runtimeEnvironment.ts",
+  "src/server/diagnostics/pilotDiagnosticServer.ts",
+  "src/features/pilotDiagnostic/types.ts",
   "src/core/readiness/productReadiness.ts",
   "src/core/readiness/types.ts",
 ] as const;
@@ -93,10 +96,16 @@ describe("Vercel Node ESM resolution", () => {
       logLevel: "silent",
     });
 
-    const readinessSource = resolve(root, "data/quality/product-readiness-report.json");
-    const readinessTarget = resolve(outputDirectory, "data/quality/product-readiness-report.json");
-    mkdirSync(dirname(readinessTarget), { recursive: true });
-    copyFileSync(readinessSource, readinessTarget);
+    const runtimeJsonFiles = [
+      "data/quality/product-readiness-report.json",
+      "data/diagnostics/diag-fgv-dataprev-bd-v1/diagnostic-v1.internal.json",
+    ];
+    for (const relativeFile of runtimeJsonFiles) {
+      const source = resolve(root, relativeFile);
+      const target = resolve(outputDirectory, relativeFile);
+      mkdirSync(dirname(target), { recursive: true });
+      copyFileSync(source, target);
+    }
 
     const cacheBuster = `${Date.now()}-${Math.random()}`;
     const runtimeModule = await import(`${pathToFileURL(resolve(outputDirectory, "api/runtime-config.js")).href}?${cacheBuster}`);
@@ -110,5 +119,8 @@ describe("Vercel Node ESM resolution", () => {
 
     const coachModule = await import(`${pathToFileURL(resolve(outputDirectory, "api/coach-chat.js")).href}?${cacheBuster}`);
     expect(typeof coachModule.default).toBe("function");
+
+    const diagnosticModule = await import(`${pathToFileURL(resolve(outputDirectory, "api/diagnostic-finalize.js")).href}?${cacheBuster}`);
+    expect(typeof diagnosticModule.default).toBe("function");
   });
 });
