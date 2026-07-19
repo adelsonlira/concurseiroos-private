@@ -40,6 +40,10 @@ npm audit --omit=dev
 
 `npm run build` continua sendo o comando local completo. No GitHub Actions, `npm run validate` é executado uma única vez e os builds web, Express e serverless são chamados separadamente para evitar repetir toda a regressão; o CI também verifica os blobs canônicos do corpus. `npm run vercel-build` executa apenas o build web para evitar repetição do pipeline dentro da Vercel.
 
+## Calibração do SDE v2 — 3.34.1
+
+A prescrição exibida e executada continua sendo produzida pelo SDE v1. O SDE v2 usa a mesma fotografia de dados apenas em paralelo, com `executionMode = shadow` e `affectsPrescription = false`, e registra comparações append-only para calibração prospectiva. Não há segunda prescrição nem promoção automática. Consulte `docs/SDE_V2_SHADOW_CALIBRATION_3.34.1.md`.
+
 ## Integridade do corpus operacional 3.33.1
 
 Os CSVs aprovados do Treino FGV são artefatos binários do ponto de vista do Git: seus bytes CRLF participam do tamanho e do SHA-256 declarados no manifesto. A raiz contém regras específicas em `.gitattributes`, e o comando abaixo confere arquivo de trabalho e blob de `HEAD` quando executado dentro de um repositório Git:

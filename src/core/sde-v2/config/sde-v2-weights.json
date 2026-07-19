@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "activeSdeVersion": "v2",
+  "activeSdeVersion": "v1",
   "evidence": {
     "recencyHalfLifeDays": 45,
     "minimumEffectiveSample": 5,

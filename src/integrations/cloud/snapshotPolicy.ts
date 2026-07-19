@@ -55,7 +55,8 @@ export function hasMeaningfulLocalProgress(snapshot: BackupExportSchema): boolea
     data.sessoesEstudo,
     data.evidenciasAprendizagemGuiada,
     data.externalEvidenceLedger,
-    data.sdeDecisionLedger
+    data.sdeDecisionLedger,
+    data.sdeCalibrationLedger
   ].some((collection) => Array.isArray(collection) && collection.length > 0);
 }
 

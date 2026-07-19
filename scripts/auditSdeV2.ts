@@ -49,7 +49,7 @@ const graphValidation = validateKnowledgeGraph(
   DATAPREV_KNOWLEDGE_GRAPH_V2,
   new Set(seed.subassuntos.map((item) => item.id)),
 );
-seed.configuracao.activeSdeVersion = "v2";
+seed.configuracao.activeSdeVersion = "v1";
 const snapshot = {
   configuracao: seed.configuracao,
   subassuntos: seed.subassuntos,
@@ -69,14 +69,16 @@ const eligibleEvidence = v2.v2 ? countDecisionEligibleEvidence(v2.v2.output.norm
 const selected = v2.v2?.output.selected ?? null;
 const failures: string[] = [];
 if (!graphValidation.valid) failures.push(...graphValidation.errors);
-if (v2.status !== "SUCCESS" || v2.sdeVersionUsed !== "2.0" || !selected) failures.push("SDE v2 não produziu decisão executável na amostra.");
+if (v2.status !== "SUCCESS" || v2.sdeVersionUsed !== "1.0" || v2.executionMode !== "shadow" || v2.affectsPrescription !== false || !selected) failures.push("SDE v2 shadow não executou em paralelo com o SDE v1 efetivo.");
 if (eligibleEvidence !== 1) failures.push(`Esperada 1 evidência elegível; obtidas ${eligibleEvidence}.`);
 if (selected?.historicalIncidenceShadow.decisionWeight !== 0) failures.push("Incidência histórica recebeu peso decisório diferente de zero.");
-if (fallback.fallbackUsed !== true || fallback.sdeVersionUsed !== "1.0") failures.push("Fallback seguro para SDE v1 não foi observado.");
+if (fallback.calibrationRecord?.fallbackUsed !== true || fallback.sdeVersionUsed !== "1.0") failures.push("Fallback do comparador shadow não foi observado.");
 if (!v2.v2?.decisionRecord) failures.push("Ledger de decisão SDE v2 não foi produzido.");
+if (!v2.calibrationRecord) failures.push("Ledger de calibração v1 × v2 não foi produzido.");
+if (v2.prescription?.current?.id !== v1.prescription?.current?.id) failures.push("A prescrição efetiva divergiu do SDE v1.");
 
 const report = {
-  schemaVersion: "1.0.0",
+  schemaVersion: "1.1.0",
   projectVersion: packageMetadata.version,
   generatedAt: new Date().toISOString(),
   status: failures.length === 0 ? "PASS" : "FAIL",
@@ -93,6 +95,12 @@ const report = {
     eligibleRecords: eligibleEvidence,
     aggregateExpandedIntoSyntheticAttempts: false,
   },
+  activation: {
+    activeSdeVersion: v2.activeSdeVersion ?? null,
+    effectiveSdeVersion: v2.sdeVersionUsed ?? null,
+    executionMode: v2.executionMode ?? null,
+    affectsPrescription: v2.affectsPrescription ?? null,
+  },
   comparison: {
     v1Status: v1.status,
     v1SelectedNode: v1.actions[0]?.subassuntoId ?? null,
@@ -103,9 +111,11 @@ const report = {
     sameNode: v2.v2?.comparisonWithV1.sameNode ?? null,
     sameActivity: v2.v2?.comparisonWithV1.sameActivity ?? null,
     divergenceReasons: v2.v2?.comparisonWithV1.divergenceReasons ?? [],
+    divergences: v2.calibrationRecord?.divergences ?? [],
+    isEqual: v2.calibrationRecord?.isEqual ?? null,
   },
   decision: {
-    sdeVersion: v2.sdeVersionUsed ?? null,
+    sdeVersion: v2.v2?.decisionRecord?.sdeVersion ?? null,
     score: selected?.score ?? null,
     hardRules: selected?.hardRules.length ?? 0,
     scoreComponents: selected?.scoreComponents.length ?? 0,
@@ -113,9 +123,21 @@ const report = {
     decisionRecordId: v2.v2?.decisionRecord?.decisionId ?? null,
   },
   fallback: {
-    scenariosObserved: fallback.fallbackUsed ? 1 : 0,
-    reason: fallback.fallbackReason ?? null,
+    scenariosObserved: fallback.calibrationRecord?.fallbackUsed ? 1 : 0,
+    reason: fallback.calibrationRecord?.fallbackReason ?? null,
     selectedVersion: fallback.sdeVersionUsed ?? null,
+  },
+  futurePromotionCriteria: {
+    decisionsCompared: v2.calibrationRecord ? 1 : 0,
+    decisionsWithDivergence: v2.calibrationRecord && !v2.calibrationRecord.isEqual ? 1 : 0,
+    topicDivergences: v2.calibrationRecord?.divergences.filter((item) => item.field === "topic").length ?? 0,
+    methodDivergences: v2.calibrationRecord?.divergences.filter((item) => item.field === "method").length ?? 0,
+    fallbacks: fallback.calibrationRecord?.fallbackUsed ? 1 : 0,
+    invalidDecisions: v2.v2?.output.status === "INVALID_INPUT" ? 1 : 0,
+    prerequisiteCases: selected && (selected.prerequisiteState.requiredBlocked || selected.prerequisiteState.recommendedNodeIds.length > 0) ? 1 : 0,
+    materialAvailable: selected?.materialAvailable ?? false,
+    sessionOutcomeEvaluable: false,
+    automaticPromotionEnabled: false,
   },
   failures,
 };
@@ -126,4 +148,4 @@ if (failures.length > 0) {
   console.error(JSON.stringify(report, null, 2));
   process.exit(1);
 }
-console.log(`SDE v2 audit PASS: ${report.graph.relations} relation(s), ${eligibleEvidence} eligible evidence(s), ${report.fallback.scenariosObserved} fallback(s).`);
+console.log(`SDE v2 shadow audit PASS: ${report.graph.relations} relation(s), ${eligibleEvidence} eligible evidence(s), ${report.fallback.scenariosObserved} fallback(s).`);

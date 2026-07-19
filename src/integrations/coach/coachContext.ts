@@ -325,8 +325,11 @@ export function buildCoachGroundingContext(params: {
       auditoriaSdeV2: decision.v2
         ? {
             version: "2.0",
-            fallbackUsed: decision.fallbackUsed === true,
-            fallbackReason: decision.fallbackReason ?? null,
+            executionMode: decision.executionMode ?? "active",
+            affectsPrescription: decision.affectsPrescription === true,
+            calibrationMessage: decision.executionMode === "shadow" ? "SDE v2 em calibração — não altera a orientação atual" : null,
+            fallbackUsed: decision.calibrationRecord?.fallbackUsed ?? decision.fallbackUsed === true,
+            fallbackReason: decision.calibrationRecord?.fallbackReason ?? decision.fallbackReason ?? null,
             selectedNodeId: decision.v2.output.selected?.nodeId ?? null,
             selectedMethod: decision.v2.output.selected?.method.method ?? null,
             methodRule: decision.v2.output.selected?.method.rule ?? null,

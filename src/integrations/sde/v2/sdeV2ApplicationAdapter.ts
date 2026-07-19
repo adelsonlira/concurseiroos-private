@@ -14,6 +14,7 @@ import type { DecisionRecord, SdeV2CandidateDecision } from "../../../core/sde-v
 import { getCompetitionRuntimeDefinition } from "../../../config/concursos/registry";
 import type { CompetitionDecisionSnapshot } from "../competitionDecisionAdapter";
 import type { SDEApplicationResult } from "../types";
+import { buildSdeV1V2Comparison } from "./calibrationLedger";
 
 
 function hashText(value: string): string {
@@ -269,25 +270,6 @@ function buildDurationMap(snapshot: CompetitionDecisionSnapshot, actions: readon
   return map;
 }
 
-function comparison(v1: SDEApplicationResult, v2Candidate: SdeV2CandidateDecision) {
-  const v1Top = v1.actions[0] ?? null;
-  const sameNode = v1Top?.subassuntoId === v2Candidate.subtopicId;
-  const sameActivity = v1Top?.tipo === activityFor(v2Candidate);
-  const divergenceReasons: string[] = [];
-  if (!sameNode) divergenceReasons.push("O SDE v2 distribuiu pesos hierarquicamente e aplicou grafo, qualidade e ledger agregado.");
-  if (!sameActivity) divergenceReasons.push(`O método do SDE v2 foi escolhido pela regra ${v2Candidate.method.rule}.`);
-  if (v2Candidate.historicalIncidenceShadow.finalShadowValue > 0) {
-    divergenceReasons.push("A incidência histórica foi registrada em shadow mode e não causou a divergência.");
-  }
-  return {
-    sameNode,
-    sameActivity,
-    v1NodeId: v1Top?.subassuntoId ?? null,
-    v1Activity: v1Top?.tipo ?? null,
-    divergenceReasons,
-  };
-}
-
 export function buildSdeV2ApplicationResult(params: {
   snapshot: CompetitionDecisionSnapshot;
   referenceDate: string;
@@ -333,7 +315,7 @@ export function buildSdeV2ApplicationResult(params: {
     materials: materialCatalog,
     historicalSignals: historicalSignalsFromCatalog(snapshot.isolatedEvidence?.fgvTrainingCatalog ?? { questions: [] } as never),
     recentDecisionNodeIds: (snapshot.decisionLedger ?? [])
-      .filter((record) => record.referenceDate >= new Date(new Date(`${referenceDate}T00:00:00Z`).getTime() - 7 * 86_400_000).toISOString().slice(0, 10))
+      .filter((record) => record.referenceDate < referenceDate && record.referenceDate >= new Date(new Date(`${referenceDate}T00:00:00Z`).getTime() - 7 * 86_400_000).toISOString().slice(0, 10))
       .map((record) => record.selectedNodeId),
   });
   if (
@@ -346,7 +328,7 @@ export function buildSdeV2ApplicationResult(params: {
   ) {
     const fallbackReason = v2Output.errors.join(" ") || (!v2Output.selected?.materialAvailable ? "SDE v2 não encontrou material utilizável para a ação selecionada." : "SDE v2 não produziu ação executável dentro do tempo disponível.");
     const fallbackRecord = buildFallbackDecisionRecord({ referenceDate, v1Result, reason: fallbackReason, v2Output });
-    return {
+    const provisional: SDEApplicationResult = {
       ...v1Result,
       sdeVersionUsed: "1.0",
       activeSdeVersion: "v2",
@@ -356,15 +338,13 @@ export function buildSdeV2ApplicationResult(params: {
       v2: {
         output: v2Output,
         decisionRecord: fallbackRecord,
-        comparisonWithV1: {
-          sameNode: false,
-          sameActivity: false,
-          v1NodeId: v1Result.actions[0]?.subassuntoId ?? null,
-          v1Activity: v1Result.actions[0]?.tipo ?? null,
-          divergenceReasons: ["Fallback seguro para o SDE v1."],
-        },
+        comparisonWithV1: undefined as never,
       },
     };
+    const compared = buildSdeV1V2Comparison(v1Result, provisional);
+    if (fallbackRecord) fallbackRecord.comparisonWithV1 = compared;
+    provisional.v2!.comparisonWithV1 = compared;
+    return provisional;
   }
 
   const candidateActions = v2Output.candidates
@@ -416,7 +396,17 @@ export function buildSdeV2ApplicationResult(params: {
     questionPolicy: QUESTION_PRESCRIPTION_POLICY,
     maxUpcomingSessions: 2,
   });
-  const compared = comparison(v1Result, v2Output.selected);
+  const compared = buildSdeV1V2Comparison(v1Result, {
+    ...v1Result,
+    sdeVersionUsed: "2.0",
+    activeSdeVersion: "v2",
+    fallbackUsed: false,
+    v2: {
+      output: v2Output,
+      decisionRecord: v2Output.decisionRecord,
+      comparisonWithV1: undefined as never,
+    },
+  });
   v2Output.decisionRecord.comparisonWithV1 = compared;
 
   return {

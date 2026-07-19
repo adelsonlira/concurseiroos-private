@@ -139,6 +139,9 @@ export interface CoachEvidenceCoverage {
 
 export interface CoachSdeV2AuditContext {
   version: "2.0";
+  executionMode: "active" | "shadow";
+  affectsPrescription: boolean;
+  calibrationMessage: string | null;
   fallbackUsed: boolean;
   fallbackReason: string | null;
   selectedNodeId: string | null;
@@ -164,6 +167,8 @@ export interface CoachSdeV2AuditContext {
     v1NodeId: string | null;
     v1Activity: string | null;
     divergenceReasons: string[];
+    isEqual: boolean;
+    divergences: Array<{ field: string; v1Value: string | number | null; v2Value: string | number | null }>;
   } | null;
 }
 

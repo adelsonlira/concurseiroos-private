@@ -51,3 +51,8 @@ O contrato de correção de erros é pedagógico e operacional. Ele não adicion
 O SDE v2 adiciona adaptador unificado de evidências, estados de conhecimento, pesos hierárquicos, grafo versionado, regras duras, score configurado, seleção explícita do método e ledger append-only de decisões. `activeSdeVersion = v2` só é respeitado quando configuração, grafo, score, tempo, material e prescrição passam nos portões; caso contrário, o SDE v1 é usado e o motivo é registrado.
 
 Novos eventos objetivos validados do `externalEvidenceLedger` podem ser consumidos sem expansão sintética. Observações livres, eventos anulados/substituídos, Treino FGV e Diagnóstico Piloto não alteram o score. Incidência histórica permanece com `decisionWeight = 0`.
+
+## Calibração prospectiva — versão 3.34.1
+
+O SDE v1 é a única fonte da prescrição efetiva (`activeSdeVersion = v1`). O SDE v2 executa em paralelo com a mesma fotografia objetiva, `executionMode = shadow` e `affectsPrescription = false`. A comparação é registrada em `sdeCalibrationLedger` append-only, com fingerprint que evita duplicação por reload sem mudança dos inputs. Adaptador, pesos, grafo, regras duras, score e incidência histórica de peso zero permanecem inalterados. Não existe promoção automática.
+

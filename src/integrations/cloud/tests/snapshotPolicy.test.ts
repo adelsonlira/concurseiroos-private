@@ -4,6 +4,7 @@ import {
   decideSyncReconciliation,
   detectSyncConflict,
   fingerprintSnapshot,
+  hasMeaningfulLocalProgress,
   validateBackupSnapshot
 } from "../snapshotPolicy";
 import type { CloudSnapshotRow, LocalSyncMetadata } from "../types";
@@ -107,6 +108,14 @@ describe("cloud snapshot policy", () => {
     second.metadata.exportadoEm = "2026-07-14T15:00:00.000Z";
     second.metadata.totalTamanhoBytes = 9999;
     expect(fingerprintSnapshot(first)).toBe(fingerprintSnapshot(second));
+  });
+
+
+  it("treats the SDE calibration ledger as synchronized progress", () => {
+    const local = backup();
+    local.dados.sdeCalibrationLedger = [{ calibrationId: "calibration-1" }] as never;
+    expect(hasMeaningfulLocalProgress(local)).toBe(true);
+    expect(decideSyncReconciliation(remote(3), metadata(null), local)).toBe("CONFLICT");
   });
 
   it("restores the cloud automatically on a clean new device", () => {

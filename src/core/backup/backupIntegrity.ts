@@ -72,7 +72,7 @@ function requireArray(value: unknown, label: string, errors: string[]): value is
  * feature did not exist when the snapshot was produced, therefore an empty
  * list is the only safe default.
  */
-const SAFE_ADDITIVE_COLLECTIONS = ["evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "externalEvidenceLedger", "sdeDecisionLedger"] as const;
+const SAFE_ADDITIVE_COLLECTIONS = ["evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "externalEvidenceLedger", "sdeDecisionLedger", "sdeCalibrationLedger"] as const;
 
 function verifyOriginalChecksum(
   backup: BackupExportSchema,
@@ -137,7 +137,7 @@ export function prepareBackupForImport(value: unknown): BackupImportPreparation 
   if (migrated) {
     normalized.metadata = {
       ...normalized.metadata,
-      versaoBackup: "2.3.0",
+      versaoBackup: "2.4.0",
       integrityAlgorithm: "FNV1A64_CANONICAL_JSON"
     };
     normalized.metadata.checksum = calculateBackupChecksum(normalized);
@@ -260,6 +260,26 @@ export function validateBackup(backup: BackupExportSchema): BackupValidationResu
     if (decisionIds.has(decision.decisionId)) errors.push(`sdeDecisionLedger contém ID duplicado: ${decision.decisionId}.`);
     decisionIds.add(decision.decisionId);
     if (decision.sdeVersion !== "2.0") errors.push(`Decisão ${decision.decisionId} possui versão não suportada.`);
+  }
+
+
+  const calibrationIds = new Set<string>();
+  for (const calibration of backup.dados.sdeCalibrationLedger ?? []) {
+    if (!calibration?.calibrationId || typeof calibration.calibrationId !== "string") {
+      errors.push("O ledger de calibração contém registro sem calibrationId válido.");
+      continue;
+    }
+    if (calibrationIds.has(calibration.calibrationId)) errors.push(`sdeCalibrationLedger contém ID duplicado: ${calibration.calibrationId}.`);
+    calibrationIds.add(calibration.calibrationId);
+    if (calibration.executionMode !== "shadow" || calibration.affectsPrescription !== false) {
+      errors.push(`Calibração ${calibration.calibrationId} viola o isolamento shadow.`);
+    }
+    if (calibration.activeSdeVersion !== "v1") {
+      errors.push(`Calibração ${calibration.calibrationId} não preserva o SDE v1 como versão ativa.`);
+    }
+    if (calibration.historicalIncidenceShadow?.decisionWeight !== 0) {
+      errors.push(`Calibração ${calibration.calibrationId} atribui peso decisório à incidência histórica.`);
+    }
   }
 
   const checksum = backup.metadata.checksum;

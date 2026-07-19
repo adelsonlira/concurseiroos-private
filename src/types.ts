@@ -13,7 +13,7 @@ import type {
   SimulationSource,
 } from "./core/simulations/types";
 import type { ExternalEvidenceRecord } from "./core/externalEvidence/types";
-import type { DecisionRecord } from "./core/sde-v2/types";
+import type { DecisionRecord, SdeCalibrationRecord } from "./core/sde-v2/types";
 import type {
   AnswerConfidence,
   ErrorCause,
@@ -825,6 +825,7 @@ export interface BackupExportSchema {
     casosRecuperacaoErro: ErrorRecoveryCase[];
     externalEvidenceLedger: ExternalEvidenceRecord[];
     sdeDecisionLedger?: DecisionRecord[];
+    sdeCalibrationLedger?: SdeCalibrationRecord[];
     itensBiblioteca: ItemBiblioteca[];
   };
 }

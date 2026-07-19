@@ -48,3 +48,10 @@ A memória institucional e o protocolo de retomada ficam em [`../.ai/README.md`]
 - `VALIDATION_RESULTS_3.31.0.md`: pipeline, builds, segurança e smoke HTTP.
 - `RELEASE_NOTES_3.31.0.md`: mudanças e compatibilidade.
 - `../.ai/decisions/ADR-028-evidence-gated-simulations.md`: decisão arquitetural.
+
+## SDE v2 em calibração — 3.34.1
+
+- `SDE_V2_SHADOW_CALIBRATION_3.34.1.md`: contrato do modo shadow, ledger e critérios futuros.
+- `SDE_V1_V2_SHADOW_COMPARISON_EXAMPLE_3.34.1.md`: fotografia controlada da comparação.
+- `../.ai/decisions/ADR-037-sde-v2-prospective-shadow-calibration.md`: decisão arquitetural.
+

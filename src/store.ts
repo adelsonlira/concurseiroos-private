@@ -32,7 +32,7 @@ import type { FlashcardRetrievalPerformance } from "./core/flashcards/types";
 import { AvailabilityOverride, DailyAvailabilityResult, WeeklyAvailabilityDay } from "./core/availability/types";
 import { runCompetitionDecisionForDate } from "./integrations/sde/competitionDecisionAdapter";
 import { SDEApplicationResult } from "./integrations/sde/types";
-import type { DecisionRecord } from "./core/sde-v2/types";
+import type { DecisionRecord, SdeCalibrationRecord } from "./core/sde-v2/types";
 import { readIsolatedEvidenceSnapshot } from "./integrations/sde/v2/isolatedEvidenceSnapshot";
 import { mergeLibrarySeedItems, sanitizeLibraryForBackup } from "./core/materials/libraryPrivacy";
 import { completeReviewSchedule, createOrRefreshReviewSchedule } from "./core/review/reviewEngine";
@@ -80,6 +80,7 @@ interface ConcurseiroState {
   casosRecuperacaoErro: ErrorRecoveryCase[];
   externalEvidenceLedger: ExternalEvidenceRecord[];
   sdeDecisionLedger: DecisionRecord[];
+  sdeCalibrationLedger: SdeCalibrationRecord[];
   biblioteca: ItemBiblioteca[];
   /** Ephemeral SDE output. It is recalculated from source data and is not persisted. */
   ultimaDecisaoSDE: SDEApplicationResult | null;
@@ -262,7 +263,7 @@ function normalizeConfig(input?: Partial<ConfigUsuario> | null): ConfigUsuario {
     metaHorariaDiariaMinutos:
       input?.metaHorariaDiariaMinutos ?? base.metaHorariaDiariaMinutos,
     concursoAlvoId: runtime.id ?? DEFAULT_COMPETITION_ID,
-    activeSdeVersion: input?.activeSdeVersion === "v1" ? "v1" : "v2",
+    activeSdeVersion: "v1",
     localProva: input?.localProva ?? base.localProva,
     localLotacao: input?.localLotacao ?? base.localLotacao,
     disponibilidadeEstudo: availability,
@@ -412,6 +413,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
   casosRecuperacaoErro: [],
   externalEvidenceLedger: [],
   sdeDecisionLedger: [],
+  sdeCalibrationLedger: [],
   biblioteca: [],
   ultimaDecisaoSDE: null,
 
@@ -460,6 +462,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             casosRecuperacaoErro: [],
             externalEvidenceLedger: [],
             sdeDecisionLedger: [],
+  sdeCalibrationLedger: [],
             biblioteca: seed.biblioteca,
             ultimaDecisaoSDE: null,
             activeConcursoId: seed.concurso.id,
@@ -488,6 +491,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
               : buildLegacyErrorRecoveryCases(parsed.tentativasQuestoes ?? []),
           externalEvidenceLedger: Array.isArray(parsed.externalEvidenceLedger) ? parsed.externalEvidenceLedger : [],
           sdeDecisionLedger: Array.isArray(parsed.sdeDecisionLedger) ? parsed.sdeDecisionLedger : [],
+          sdeCalibrationLedger: Array.isArray(parsed.sdeCalibrationLedger) ? parsed.sdeCalibrationLedger : [],
           configuracao: normalizeConfig(parsed.configuracao),
           biblioteca: mergeLibrarySeedItems(parsed.biblioteca ?? [], seed.biblioteca),
           ultimaDecisaoSDE: null,
@@ -522,6 +526,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           casosRecuperacaoErro: [],
           externalEvidenceLedger: [],
           sdeDecisionLedger: [],
+  sdeCalibrationLedger: [],
           biblioteca: seed.biblioteca,
           ultimaDecisaoSDE: null,
           activeConcursoId: seed.concurso.id,
@@ -573,6 +578,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       casosRecuperacaoErro: [],
       externalEvidenceLedger: [],
       sdeDecisionLedger: [],
+  sdeCalibrationLedger: [],
       biblioteca: seed.biblioteca,
       ultimaDecisaoSDE: null,
       activeConcursoId: seed.concurso.id,
@@ -595,7 +601,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, sdeDecisionLedger, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, sdeDecisionLedger, sdeCalibrationLedger, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     } = get();
@@ -604,7 +610,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, sdeDecisionLedger, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, sdeDecisionLedger, sdeCalibrationLedger, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     };
@@ -651,6 +657,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             : buildLegacyErrorRecoveryCases(d.tentativasQuestoes || []),
         externalEvidenceLedger: d.externalEvidenceLedger || [],
         sdeDecisionLedger: d.sdeDecisionLedger || [],
+        sdeCalibrationLedger: d.sdeCalibrationLedger || [],
         biblioteca: mergeLibrarySeedItems(
           sanitizeLibraryForBackup(d.itensBiblioteca || []),
           buildSeedForCompetition(d.configuracao?.concursoAlvoId).biblioteca
@@ -678,7 +685,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     const s = get();
     const backup: BackupExportSchema = {
       metadata: {
-        versaoBackup: "2.3.0",
+        versaoBackup: "2.4.0",
         exportadoEm: new Date().toISOString(),
         estudanteNome: s.configuracao.estudanteNome,
         totalTamanhoBytes: 0,
@@ -710,6 +717,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         casosRecuperacaoErro: s.casosRecuperacaoErro,
         externalEvidenceLedger: s.externalEvidenceLedger,
         sdeDecisionLedger: s.sdeDecisionLedger,
+        sdeCalibrationLedger: s.sdeCalibrationLedger,
         itensBiblioteca: sanitizeLibraryForBackup(s.biblioteca)
       }
     };
@@ -814,12 +822,15 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       date
     );
     const record = result.v2?.decisionRecord ?? null;
-    const shouldAppend = record !== null && !state.sdeDecisionLedger.some((item) => item.decisionId === record.decisionId);
+    const calibrationRecord = result.calibrationRecord ?? null;
+    const shouldAppendDecision = record !== null && !state.sdeDecisionLedger.some((item) => item.decisionId === record.decisionId);
+    const shouldAppendCalibration = calibrationRecord !== null && !state.sdeCalibrationLedger.some((item) => item.calibrationId === calibrationRecord.calibrationId);
     set({
       ultimaDecisaoSDE: result,
-      sdeDecisionLedger: shouldAppend ? [...state.sdeDecisionLedger, record!] : state.sdeDecisionLedger
+      sdeDecisionLedger: shouldAppendDecision ? [...state.sdeDecisionLedger, record!] : state.sdeDecisionLedger,
+      sdeCalibrationLedger: shouldAppendCalibration ? [...state.sdeCalibrationLedger, calibrationRecord!] : state.sdeCalibrationLedger
     });
-    if (shouldAppend) get().saveToLocalStorage();
+    if (shouldAppendDecision || shouldAppendCalibration) get().saveToLocalStorage();
     return result;
   },
 

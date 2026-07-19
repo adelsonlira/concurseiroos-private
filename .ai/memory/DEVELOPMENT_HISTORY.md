@@ -321,3 +321,7 @@ Hotfix de integridade do corpus no Git e CI: os quatro CSVs operacionais aprovad
 ## 3.34.0 — 2026-07-19
 
 SDE v2 e Coach Decisório Explicável: evidências individuais, agregadas e operacionais passam por adaptador puro sem tentativas sintéticas; o motor calcula estado de conhecimento, peso hierárquico, grafo, regras duras, score configurado e método executável. Novos eventos objetivos do ledger podem ser elegíveis, enquanto registros antigos, anulações, observações livres, Treino FGV e Diagnóstico Piloto permanecem fora do score. Cada decisão v2 é registrada em ledger append-only e comparada ao SDE v1, que continua disponível como fallback. Incidência histórica é calculada apenas em shadow mode com peso zero.
+
+## 3.34.1 — 2026-07-19
+
+Calibração prospectiva do SDE v2: o SDE v1 volta a ser a única decisão efetiva e o v2 executa em paralelo com a mesma fotografia, `executionMode: shadow` e `affectsPrescription: false`. Foi criado `sdeCalibrationLedger` append-only com fingerprint objetivo, snapshots v1/v2, divergências tipadas, fallback, evidências e incidência histórica de peso zero. Reload sem mudança de inputs não duplica comparação. A tela mostra apenas a prescrição v1 e uma auditoria secundária recolhida. Adaptador, pesos, grafo, score, SDE v1, evidências, Treino FGV, Diagnóstico Piloto, simulados, backup e sincronização foram preservados.

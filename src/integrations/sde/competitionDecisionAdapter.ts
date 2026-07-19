@@ -34,6 +34,7 @@ import type { ExternalEvidenceRecord } from "../../core/externalEvidence/types";
 import type { DecisionRecord } from "../../core/sde-v2/types";
 import type { IsolatedEvidenceSnapshot } from "./v2/isolatedEvidenceSnapshot";
 import { buildSdeV2ApplicationResult } from "./v2/sdeV2ApplicationAdapter";
+import { buildSdeCalibrationRecord, buildSdeV1V2Comparison } from "./v2/calibrationLedger";
 
 export interface CompetitionDecisionSnapshot {
   configuracao: ConfigUsuario;
@@ -328,13 +329,38 @@ export function runCompetitionDecisionForDate(
 ): SDEApplicationResult {
   const v1Result = runCompetitionDecisionForDateV1(snapshot, referenceDate);
   const activeVersion = snapshot.configuracao.activeSdeVersion ?? "v1";
-  if (activeVersion === "v1") {
+  const v2Result = buildSdeV2ApplicationResult({ snapshot, referenceDate, v1Result });
+
+  if (activeVersion === "v2") {
     return {
-      ...v1Result,
-      sdeVersionUsed: "1.0",
-      activeSdeVersion: "v1",
-      fallbackUsed: false
+      ...v2Result,
+      executionMode: "active",
+      affectsPrescription: v2Result.sdeVersionUsed === "2.0",
+      calibrationRecord: null,
     };
   }
-  return buildSdeV2ApplicationResult({ snapshot, referenceDate, v1Result });
+
+  const comparison = v2Result.v2?.comparisonWithV1 ?? buildSdeV1V2Comparison(v1Result, v2Result);
+  const calibrationRecord = buildSdeCalibrationRecord({
+    referenceDate,
+    v1Result,
+    v2Result,
+    comparison,
+  });
+
+  return {
+    ...v1Result,
+    sdeVersionUsed: "1.0",
+    activeSdeVersion: "v1",
+    fallbackUsed: false,
+    executionMode: "shadow",
+    affectsPrescription: false,
+    calibrationRecord,
+    v2: v2Result.v2
+      ? {
+          ...v2Result.v2,
+          comparisonWithV1: comparison,
+        }
+      : undefined,
+  };
 }

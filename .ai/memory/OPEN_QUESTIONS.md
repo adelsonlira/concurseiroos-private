@@ -1,20 +1,21 @@
 # Questões Abertas
 
-## SDE v2
+## Calibração SDE v2
 
-- Quais coeficientes serão ajustados após observação prospectiva suficiente?
+- Quantas decisões prospectivas são necessárias antes de uma avaliação de promoção?
+- Quais divergências de assunto ou método melhor predizem resultado real da sessão?
+- Como associar resultado de sessão ao registro de calibração sem confundir abertura, conclusão e evidência válida?
+- Qual taxa de fallback e indisponibilidade de material ocorre no runtime real?
+- Como tratar comparações concorrentes entre dispositivos mantendo append-only e deduplicação determinística?
+
+## Modelo preservado
+
+- Quais coeficientes poderão ser ajustados após série prospectiva suficiente?
 - Quais participações internas podem substituir a distribuição neutra sem inventar incidência?
-- Quais novas relações do grafo possuem evidência documental e aprovação humana?
-- Qual taxa real de fallback ocorrerá no runtime e quais dados faltantes a explicam?
-- Como medir retorno por minuto sem confundir correlação com causalidade?
-
-## Evidências
-
-- Registros de fontes `outra` exigirão confirmação adicional para elegibilidade futura?
-- Como reconciliar eventos append-only concorrentes por ID entre dispositivos sem migrar para nuvem paralela?
-- Em que contrato futuro o Diagnóstico Piloto poderia ser explicitamente elegível?
+- Quais novas relações do grafo possuem documentação e aprovação humana?
 
 ## Shadow mode
 
-- Quando a incidência histórica terá classificação, deduplicação e validação suficientes para nova decisão arquitetural?
-- Como apresentar comparação shadow sem induzir o usuário a tratá-la como frequência oficial?
+- Quando a incidência histórica terá validação suficiente para nova decisão arquitetural?
+- Como expor auditoria técnica sem induzir o usuário a seguir a decisão shadow?
+- Quais critérios humanos mínimos seriam necessários para promover o v2, sem automação?

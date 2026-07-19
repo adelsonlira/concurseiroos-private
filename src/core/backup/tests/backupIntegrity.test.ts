@@ -53,7 +53,7 @@ describe("backup integrity", () => {
 
   it("migrates a valid 1.0 snapshot that predates guided-learning evidence", () => {
     const value = backup() as BackupExportSchema & {
-      dados: BackupExportSchema["dados"] & { evidenciasAprendizagemGuiada?: unknown; casosRecuperacaoErro?: unknown; externalEvidenceLedger?: unknown };
+      dados: BackupExportSchema["dados"] & { evidenciasAprendizagemGuiada?: unknown; casosRecuperacaoErro?: unknown; externalEvidenceLedger?: unknown; sdeCalibrationLedger?: unknown };
     };
     value.metadata.versaoBackup = "1.0.0";
     delete value.metadata.checksum;
@@ -61,6 +61,7 @@ describe("backup integrity", () => {
     delete value.dados.evidenciasAprendizagemGuiada;
     delete value.dados.casosRecuperacaoErro;
     delete value.dados.externalEvidenceLedger;
+    delete value.dados.sdeCalibrationLedger;
 
     const prepared = prepareBackupForImport(value);
     expect(prepared.errors).toEqual([]);
@@ -68,7 +69,31 @@ describe("backup integrity", () => {
     expect(prepared.backup?.dados.evidenciasAprendizagemGuiada).toEqual([]);
     expect(prepared.backup?.dados.casosRecuperacaoErro).toEqual([]);
     expect(prepared.backup?.dados.externalEvidenceLedger).toEqual([]);
+    expect(prepared.backup?.dados.sdeCalibrationLedger).toEqual([]);
     expect(prepared.warnings.join(" ")).toMatch(/snapshot antigo|backup legado/i);
+  });
+
+
+  it("rejects a calibration record that can affect the real prescription", () => {
+    const value = backup();
+    value.dados.sdeCalibrationLedger = [{
+      calibrationId: "calibration-invalid",
+      schemaVersion: 1,
+      createdAt: "2026-07-16T12:00:00.000Z",
+      referenceDate: "2026-07-16",
+      inputFingerprint: "fnv1a-deadbeef",
+      activeSdeVersion: "v1",
+      executionMode: "shadow",
+      affectsPrescription: true,
+      v1Decision: {},
+      v2Decision: null,
+      divergences: [],
+      isEqual: false,
+      fallbackUsed: true,
+      evidenceIds: [],
+    }] as never;
+    value.metadata.checksum = calculateBackupChecksum(value);
+    expect(validateBackup(value).errors).toContain("Calibração calibration-invalid viola o isolamento shadow.");
   });
 
   it("never uses migration to hide a corrupted checksummed snapshot", () => {

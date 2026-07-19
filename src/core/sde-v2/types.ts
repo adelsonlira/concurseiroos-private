@@ -183,6 +183,73 @@ export interface SdeV2CandidateDecision {
   evidenceIds: string[];
 }
 
+
+export type SdeCalibrationField =
+  | "discipline"
+  | "topic"
+  | "subtopic"
+  | "method"
+  | "duration"
+  | "advance_criterion"
+  | "prerequisite"
+  | "score";
+
+export interface SdeDecisionComparisonSnapshot {
+  version: "1.0" | "2.0";
+  status: string;
+  disciplineId: string | null;
+  topicId: string | null;
+  subtopicId: string | null;
+  method: string | null;
+  durationMinutes: number | null;
+  advanceCriterion: string | null;
+  prerequisiteSummary: string | null;
+  score: number | null;
+  topFactors: string[];
+}
+
+export interface SdeCalibrationDivergence {
+  field: SdeCalibrationField;
+  v1Value: string | number | null;
+  v2Value: string | number | null;
+}
+
+export interface SdeV1V2Comparison {
+  sameNode: boolean;
+  sameActivity: boolean;
+  v1NodeId: string | null;
+  v1Activity: string | null;
+  divergenceReasons: string[];
+  v1: SdeDecisionComparisonSnapshot;
+  v2: SdeDecisionComparisonSnapshot | null;
+  divergences: SdeCalibrationDivergence[];
+  isEqual: boolean;
+}
+
+export interface SdeCalibrationRecord {
+  calibrationId: string;
+  schemaVersion: 1;
+  createdAt: string;
+  referenceDate: string;
+  inputFingerprint: string;
+  activeSdeVersion: "v1";
+  executionMode: "shadow";
+  affectsPrescription: false;
+  v1Decision: SdeDecisionComparisonSnapshot;
+  v2Decision: SdeDecisionComparisonSnapshot | null;
+  divergences: SdeCalibrationDivergence[];
+  isEqual: boolean;
+  fallbackUsed: boolean;
+  fallbackReason?: string;
+  evidenceIds: string[];
+  historicalIncidenceShadow?: HistoricalIncidenceSignal;
+  sessionOutcome?: {
+    sessionId: string;
+    completedAt: string;
+    completed: boolean;
+  } | null;
+}
+
 export interface DecisionRecord {
   decisionId: string;
   sdeVersion: "2.0";
@@ -205,13 +272,7 @@ export interface DecisionRecord {
   }>;
   fallbackUsed: boolean;
   fallbackReason?: string;
-  comparisonWithV1?: {
-    sameNode: boolean;
-    sameActivity: boolean;
-    v1NodeId: string | null;
-    v1Activity: string | null;
-    divergenceReasons: string[];
-  };
+  comparisonWithV1?: SdeV1V2Comparison;
 }
 
 export interface SdeV2DecisionOutput {
@@ -228,7 +289,7 @@ export interface SdeV2DecisionOutput {
 
 export interface SdeV2RuntimeConfig {
   version: "2.0";
-  activeSdeVersion: "v2";
+  activeSdeVersion: "v1" | "v2";
   evidence: {
     recencyHalfLifeDays: number;
     minimumEffectiveSample: number;

@@ -145,10 +145,10 @@ describe("Coach grounding context", () => {
     expect(JSON.stringify(located)).not.toMatch(/textoExtraido|conteudoMarkdown|rawText/i);
   });
 
-  it("expõe a auditoria determinística do SDE v2 sem substituir a decisão", () => {
+  it("expõe o SDE v2 em calibração sem substituir a decisão do SDE v1", () => {
     const { seed, snapshot } = base();
-    seed.configuracao.activeSdeVersion = "v2";
-    snapshot.configuracao.activeSdeVersion = "v2";
+    seed.configuracao.activeSdeVersion = "v1";
+    snapshot.configuracao.activeSdeVersion = "v1";
     const decision = runDataprevDecisionForDate(snapshot, "2026-07-13");
     const context = buildCoachGroundingContext({
       referenceDate: "2026-07-13",
@@ -162,9 +162,12 @@ describe("Coach grounding context", () => {
       decision
     });
 
-    expect(decision.sdeVersionUsed).toBe("2.0");
+    expect(decision.sdeVersionUsed).toBe("1.0");
     expect(context.decisaoSDE.auditoriaSdeV2).toMatchObject({
       version: "2.0",
+      executionMode: "shadow",
+      affectsPrescription: false,
+      calibrationMessage: "SDE v2 em calibração — não altera a orientação atual",
       fallbackUsed: false
     });
     expect(context.decisaoSDE.auditoriaSdeV2?.historicalIncidenceShadow?.decisionWeight).toBe(0);

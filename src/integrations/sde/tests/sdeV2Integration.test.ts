@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { buildDataprev2026Profile3AppSeed } from "../../../config/concursos/dataprev-2026-perfil-3";
 import { DATAPREV_KNOWLEDGE_GRAPH_V2 } from "../../../core/sde-v2/config";
-import { runCompetitionDecisionForDate } from "../competitionDecisionAdapter";
+import { runCompetitionDecisionForDate, runCompetitionDecisionForDateV1 } from "../competitionDecisionAdapter";
 import { useConcurseiroStore } from "../../../store";
 import type { ExternalEvidenceInput } from "../../../core/externalEvidence/types";
 
@@ -26,13 +26,13 @@ function snapshot(active: "v1" | "v2" = "v2") {
 }
 
 function resetStore() {
-  const { seed } = snapshot("v2");
+  const { seed } = snapshot("v1");
   useConcurseiroStore.setState({
     concursos: [seed.concurso], editais: [seed.edital], disciplinas: seed.disciplinas,
     assuntos: seed.assuntos, subassuntos: seed.subassuntos, configuracao: seed.configuracao,
     estatisticas: seed.estatisticas, historicoAtividades: [], tentativasQuestoes: [], sessoesEstudo: [],
     flashcards: [], cronogramasRevisao: [], casosRecuperacaoErro: [], externalEvidenceLedger: [],
-    sdeDecisionLedger: [], simulados: [], questoes: [], biblioteca: [], ultimaDecisaoSDE: null,
+    sdeDecisionLedger: [], sdeCalibrationLedger: [], simulados: [], questoes: [], biblioteca: [], ultimaDecisaoSDE: null,
     activeConcursoId: seed.concurso.id,
   });
   return seed;
@@ -44,21 +44,29 @@ describe("SDE v2 application integration", () => {
     vi.setSystemTime(new Date("2026-07-13T12:00:00.000Z"));
   });
 
-  it("uses SDE v2 by default when the configured gates are valid", () => {
-    const { value } = snapshot("v2");
-    const result = runCompetitionDecisionForDate(value, "2026-07-13");
-    expect(result.status).toBe("SUCCESS");
-    expect(result.sdeVersionUsed).toBe("2.0");
-    expect(result.fallbackUsed).toBe(false);
-    expect(result.v2?.decisionRecord?.sdeVersion).toBe("2.0");
+  it("keeps SDE v1 as the effective prescription while SDE v2 runs in shadow", () => {
+    const { value } = snapshot("v1");
+    const effective = runCompetitionDecisionForDate(value, "2026-07-13");
+    const pureV1 = runCompetitionDecisionForDateV1(value, "2026-07-13");
+    expect(effective.status).toBe("SUCCESS");
+    expect(effective.sdeVersionUsed).toBe("1.0");
+    expect(effective.activeSdeVersion).toBe("v1");
+    expect(effective.executionMode).toBe("shadow");
+    expect(effective.affectsPrescription).toBe(false);
+    expect(effective.prescription).toEqual(pureV1.prescription);
+    expect(effective.actions).toEqual(pureV1.actions);
+    expect(effective.v2?.decisionRecord?.sdeVersion).toBe("2.0");
+    expect(effective.calibrationRecord).toMatchObject({ executionMode: "shadow", affectsPrescription: false });
   });
 
-  it("keeps SDE v1 available through the activation configuration", () => {
-    const { value } = snapshot("v1");
+  it("keeps the SDE v2 engine available behind explicit technical activation", () => {
+    const { value } = snapshot("v2");
     const result = runCompetitionDecisionForDate(value, "2026-07-13");
-    expect(result.sdeVersionUsed).toBe("1.0");
-    expect(result.activeSdeVersion).toBe("v1");
-    expect(result.v2).toBeUndefined();
+    expect(result.sdeVersionUsed).toBe("2.0");
+    expect(result.activeSdeVersion).toBe("v2");
+    expect(result.executionMode).toBe("active");
+    expect(result.affectsPrescription).toBe(true);
+    expect(result.calibrationRecord).toBeNull();
   });
 
   it("records an explainable append-only decision with alternatives", () => {
@@ -143,7 +151,11 @@ describe("SDE v2 application integration", () => {
     expect(second.v2?.output.normalizedEvidence.some((item) => item.evidenceId === saved.evidenceId && item.decisionEligible)).toBe(true);
     expect(useConcurseiroStore.getState().sdeDecisionLedger.length).toBeGreaterThanOrEqual(1);
     expect(second.v2?.decisionRecord?.decisionId).toBeTruthy();
-    if (firstId && second.v2?.decisionRecord?.decisionId) expect(second.v2.decisionRecord.decisionId).not.toBe(firstId);
+    expect(second.calibrationRecord?.evidenceIds).toContain(saved.evidenceId);
+    expect(useConcurseiroStore.getState().sdeCalibrationLedger.length).toBeGreaterThanOrEqual(2);
+    if (firstId && second.v2?.decisionRecord?.decisionId && second.v2.decisionRecord.decisionId === firstId) {
+      expect(second.calibrationRecord?.inputFingerprint).not.toBe(useConcurseiroStore.getState().sdeCalibrationLedger[0]?.inputFingerprint);
+    }
   });
 
   it("does not use free observations as score input", () => {

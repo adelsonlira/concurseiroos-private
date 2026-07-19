@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "1.0.0",
-  "projectVersion": "3.34.0",
-  "generatedAt": "2026-07-19T00:52:28.797Z",
+  "schemaVersion": "1.1.0",
+  "projectVersion": "3.34.1",
+  "generatedAt": "2026-07-19T04:06:30.812Z",
   "status": "PASS",
   "graph": {
     "version": "dataprev-2026-profile-3-kg-v1",
@@ -16,6 +16,12 @@
     "eligibleRecords": 1,
     "aggregateExpandedIntoSyntheticAttempts": false
   },
+  "activation": {
+    "activeSdeVersion": "v1",
+    "effectiveSdeVersion": "1.0",
+    "executionMode": "shadow",
+    "affectsPrescription": false
+  },
   "comparison": {
     "v1Status": "SUCCESS",
     "v1SelectedNode": "dp26-p3-esp-bd-avaliacao-modelos",
@@ -24,10 +30,54 @@
     "v2SelectedNode": "dp26-p3-esp-arquitetura-software",
     "v2SelectedMethod": "short_diagnostic",
     "sameNode": false,
-    "sameActivity": true,
+    "sameActivity": false,
     "divergenceReasons": [
-      "O SDE v2 distribuiu pesos hierarquicamente e aplicou grafo, qualidade e ledger agregado."
-    ]
+      "Assunto selecionado divergente.",
+      "Subassunto selecionado divergente.",
+      "Método de estudo divergente.",
+      "Duração prescrita divergente.",
+      "Critério de avanço divergente.",
+      "Tratamento de pré-requisito divergente.",
+      "Score estratégico divergente."
+    ],
+    "divergences": [
+      {
+        "field": "topic",
+        "v1Value": "dp26-p3-esp-banco-dados",
+        "v2Value": "dp26-p3-esp-desenvolvimento-sistemas"
+      },
+      {
+        "field": "subtopic",
+        "v1Value": "dp26-p3-esp-bd-avaliacao-modelos",
+        "v2Value": "dp26-p3-esp-arquitetura-software"
+      },
+      {
+        "field": "method",
+        "v1Value": "questoes",
+        "v2Value": "short_diagnostic"
+      },
+      {
+        "field": "duration",
+        "v1Value": 45,
+        "v2Value": 25
+      },
+      {
+        "field": "advance_criterion",
+        "v1Value": "Registrar quantidade, acertos, erros, tempo e confiança. | Classificar a causa de cada erro e refazer o raciocínio sem olhar a solução.",
+        "v2Value": "Alcançar pelo menos 80% sem consulta, com erros explicados e nenhum branco não justificado."
+      },
+      {
+        "field": "prerequisite",
+        "v1Value": null,
+        "v2Value": "Recomendados: dp26-p3-esp-padroes-dados-web"
+      },
+      {
+        "field": "score",
+        "v1Value": 100,
+        "v2Value": 48.44
+      }
+    ],
+    "isEqual": false
   },
   "decision": {
     "sdeVersion": "2.0",
@@ -41,6 +91,18 @@
     "scenariosObserved": 1,
     "reason": "SDE v2 não foi executado porque o SDE v1 retornou NO_TIME_AVAILABLE.",
     "selectedVersion": "1.0"
+  },
+  "futurePromotionCriteria": {
+    "decisionsCompared": 1,
+    "decisionsWithDivergence": 1,
+    "topicDivergences": 1,
+    "methodDivergences": 1,
+    "fallbacks": 1,
+    "invalidDecisions": 0,
+    "prerequisiteCases": 1,
+    "materialAvailable": true,
+    "sessionOutcomeEvaluable": false,
+    "automaticPromotionEnabled": false
   },
   "failures": []
 }
