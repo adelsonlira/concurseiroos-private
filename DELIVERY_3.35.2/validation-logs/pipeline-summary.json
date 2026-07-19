@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "node": "v24.18.0",
+  "npm": "10.9.2",
+  "commit": "230765c65619f4c521b09714ba551191c6240290",
+  "steps": [
+    {
+      "label": "03_npm_ci",
+      "startedAt": "2026-07-19T22:33:10.060Z",
+      "endedAt": "2026-07-19T22:33:17.030Z",
+      "durationMs": 6970,
+      "exitCode": 0,
+      "signal": null,
+      "childProcessesRemaining": 0,
+      "result": "PASS"
+    },
+    {
+      "label": "04_training_audit_git",
+      "startedAt": "2026-07-19T22:33:17.039Z",
+      "endedAt": "2026-07-19T22:33:17.746Z",
+      "durationMs": 707,
+      "exitCode": 0,
+      "signal": null,
+      "childProcessesRemaining": 0,
+      "result": "PASS"
+    },
+    {
+      "label": "05_validate",
+      "startedAt": "2026-07-19T22:33:17.748Z",
+      "endedAt": "2026-07-19T22:34:03.662Z",
+      "durationMs": 45913,
+      "exitCode": 0,
+      "signal": null,
+      "childProcessesRemaining": 0,
+      "result": "PASS"
+    },
+    {
+      "label": "06a_build_web",
+      "startedAt": "2026-07-19T22:34:03.665Z",
+      "endedAt": "2026-07-19T22:34:12.293Z",
+      "durationMs": 8628,
+      "exitCode": 0,
+      "signal": null,
+      "childProcessesRemaining": 0,
+      "result": "PASS"
+    },
+    {
+      "label": "06b_build_server",
+      "startedAt": "2026-07-19T22:34:12.295Z",
+      "endedAt": "2026-07-19T22:34:12.753Z",
+      "durationMs": 459,
+      "exitCode": 0,
+      "signal": null,
+      "childProcessesRemaining": 0,
+      "result": "PASS"
+    },
+    {
+      "label": "06c_build_serverless",
+      "startedAt": "2026-07-19T22:34:12.756Z",
+      "endedAt": "2026-07-19T22:34:13.455Z",
+      "durationMs": 699,
+      "exitCode": 0,
+      "signal": null,
+      "childProcessesRemaining": 0,
+      "result": "PASS"
+    },
+    {
+      "label": "07_smoke_serverless",
+      "startedAt": "2026-07-19T22:34:13.457Z",
+      "endedAt": "2026-07-19T22:34:14.335Z",
+      "durationMs": 878,
+      "exitCode": 0,
+      "signal": null,
+      "childProcessesRemaining": 0,
+      "result": "PASS"
+    },
+    {
+      "label": "08a_npm_audit",
+      "startedAt": "2026-07-19T22:34:14.337Z",
+      "endedAt": "2026-07-19T22:34:15.367Z",
+      "durationMs": 1030,
+      "exitCode": 0,
+      "signal": null,
+      "childProcessesRemaining": 0,
+      "result": "PASS"
+    },
+    {
+      "label": "08b_npm_audit_prod",
+      "startedAt": "2026-07-19T22:34:15.369Z",
+      "endedAt": "2026-07-19T22:34:19.566Z",
+      "durationMs": 4197,
+      "exitCode": 0,
+      "signal": null,
+      "childProcessesRemaining": 0,
+      "result": "PASS"
+    },
+    {
+      "label": "09_termination_audit",
+      "startedAt": "2026-07-19T22:34:19.568Z",
+      "endedAt": "2026-07-19T22:34:49.688Z",
+      "durationMs": 30119,
+      "exitCode": 0,
+      "signal": null,
+      "childProcessesRemaining": 0,
+      "result": "PASS"
+    },
+    {
+      "label": "10_build",
+      "startedAt": "2026-07-19T22:34:49.690Z",
+      "endedAt": "2026-07-19T22:35:48.261Z",
+      "durationMs": 58571,
+      "exitCode": 0,
+      "signal": null,
+      "childProcessesRemaining": 0,
+      "result": "PASS"
+    }
+  ]
+}

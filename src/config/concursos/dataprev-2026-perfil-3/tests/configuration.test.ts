@@ -220,7 +220,7 @@ describe("DATAPREV 2026 — Perfil 3 official configuration", () => {
   it("gera seed do aplicativo sem desempenho ou prioridade inventada", () => {
     const seed = buildDataprev2026Profile3AppSeed();
     expect(seed.concurso.id).toBe(DATAPREV_2026_PROFILE_3_ID);
-    expect(seed.configuracao.metaHorariaDiariaMinutos).toBe(180);
+    expect(seed.configuracao.metaHorariaDiariaMinutos).toBe(120);
     expect(seed.configuracao.localProva).toBe("Natal/RN");
     expect(seed.assuntos.every((item) => item.prioridadeEdital === "NAO_INFORMADA")).toBe(true);
     expect(seed.disciplinas.every((item) => item.percentualAcertosAlvo === null)).toBe(true);

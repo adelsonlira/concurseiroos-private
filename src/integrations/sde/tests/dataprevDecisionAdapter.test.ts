@@ -83,10 +83,10 @@ describe("Store evidence adapter", () => {
 });
 
 describe("DATAPREV decision integration", () => {
-  it("gera ações e plano para uma segunda-feira com 180 minutos", () => {
+  it("gera ações e plano para uma segunda-feira com 120 minutos", () => {
     const result = runDataprevDecisionForDate(snapshot(), "2026-07-13");
     expect(result.status).toBe("SUCCESS");
-    expect(result.availability?.remainingMinutes).toBe(180);
+    expect(result.availability?.remainingMinutes).toBe(120);
     expect(result.actions.length).toBeGreaterThan(0);
     expect(result.planner?.status).toBe("SUCCESS");
     expect(result.prescription?.status).toBe("READY");
@@ -136,9 +136,9 @@ describe("DATAPREV decision integration", () => {
     const result = runDataprevDecisionForDate(input, "2026-07-13");
     expect(result.status).toBe("SUCCESS");
     expect(result.availability?.completedMinutes).toBe(60);
-    expect(result.availability?.remainingMinutes).toBe(120);
+    expect(result.availability?.remainingMinutes).toBe(60);
     if (result.planner?.status === "SUCCESS") {
-      expect(result.planner.plan.tempoDisponivelMinutos).toBe(120);
+      expect(result.planner.plan.tempoDisponivelMinutos).toBe(60);
     }
   });
 

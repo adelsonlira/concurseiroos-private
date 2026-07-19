@@ -156,13 +156,13 @@ export function buildDataprev2026Profile3AppSeed(): CompetitionAppSeed {
   const configuracao: CompetitionAppSeed["configuracao"] = {
     id: "global_config",
     estudanteNome: "Concurseiro",
-    metaHorariaDiariaMinutos: 180,
+    metaHorariaDiariaMinutos: 120,
     concursoAlvoId: DATAPREV_2026_PROFILE_3_ID,
     activeSdeVersion: "v1",
     localProva: "Natal/RN",
     localLotacao: "Natal/RN",
     disponibilidadeEstudo: createSixDayAvailability({
-      minutesPerActiveDay: 180,
+      minutesPerActiveDay: 120,
       restDay: 0,
       timeZone: "America/Fortaleza",
       includesBreaks: true

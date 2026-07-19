@@ -42,6 +42,8 @@ const ACTIVITY_LABELS: Record<StudyActivityKind, string> = {
   revisao: "Revisão ativa",
   flashcards: "Flashcards",
   simulado: "Simulado",
+  pratica: "Prática técnica",
+  operacional: "Atividade operacional",
 };
 
 function currentDateKey(timeZone: string): string {

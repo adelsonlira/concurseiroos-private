@@ -1,0 +1,183 @@
+
+> concurseiroos@3.35.2 termination:audit
+> node scripts/auditNaturalTermination.mjs
+
+
+> concurseiroos@3.35.2 test:run
+> vitest run --maxWorkers=2
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.10 [39m[90m/mnt/data/concurseiroos_3352_clean[39m
+
+ [32m✓[39m src/deployment/tests/serverlessEsmResolution.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 506[2mms[22m[39m
+     [33m[2m✓[22m[39m loads the emitted diagnostic and shared Express entrypoints with native Node ESM resolution [33m 501[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/dataprevRoadmapAdapter.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 246[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/repositoryHygiene.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 141[2mms[22m[39m
+ [32m✓[39m src/server/tests/runtimeConfiguration.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 279[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/sdeShadowCalibration.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 238[2mms[22m[39m
+ [32m✓[39m src/server/tests/pilotDiagnosticEndpoint.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 193[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/dataprevDecisionAdapter.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 211[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/sdeV2Integration.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 231[2mms[22m[39m
+ [32m✓[39m src/integrations/coach/tests/coachContext.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 187[2mms[22m[39m
+ [32m✓[39m src/server/tests/fgvTrainingEndpoint.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 260[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyStoreIntegrity351.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 165[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyStoreIntegration.test.ts [2m([22m[2m33 tests[22m[2m)[22m[33m 347[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/storeSdeIntegration.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 162[2mms[22m[39m
+ [32m✓[39m src/features/fgvTraining/tests/fgvTraining.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 212[2mms[22m[39m
+ [32m✓[39m src/config/concursos/tests/competitionIsolation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 73[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/trainingCorpusGitIntegrity.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 152[2mms[22m[39m
+ [32m✓[39m src/core/sde-v2/tests/knowledgeAndGraph.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 57[2mms[22m[39m
+ [32m✓[39m src/config/concursos/dataprev-2026-perfil-3/tests/configuration.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 78[2mms[22m[39m
+ [32m✓[39m src/config/concursos/tests/registry.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 64[2mms[22m[39m
+ [32m✓[39m src/core/backup/tests/backupIntegrity.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 85[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/serverlessDiagnostics.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 62[2mms[22m[39m
+ [32m✓[39m src/core/availability/tests/availabilityMigration.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 80[2mms[22m[39m
+ [32m✓[39m src/core/roadmap/tests/examHorizon.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 76[2mms[22m[39m
+ [32m✓[39m src/core/externalEvidence/tests/storeIntegration.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 77[2mms[22m[39m
+ [32m✓[39m src/features/fgvTraining/tests/fgvTrainingApiHotfix.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 67[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyIntegrity351.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 63[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/environment.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 65[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/sde.test.ts [2m([22m[2m59 tests[22m[2m)[22m[32m 58[2mms[22m[39m
+ [32m✓[39m src/core/availability/tests/availability.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 64[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyEngine.test.ts [2m([22m[2m25 tests[22m[2m)[22m[32m 40[2mms[22m[39m
+ [32m✓[39m src/features/pilotDiagnostic/tests/pilotDiagnostic.test.ts [2m([22m[2m32 tests[22m[2m)[22m[32m 45[2mms[22m[39m
+ [32m✓[39m src/core/review/tests/reviewEngine.test.ts [2m([22m[2m18 tests[22m[2m)[22m[32m 43[2mms[22m[39m
+ [32m✓[39m src/server/tests/httpTestHarness.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 58[2mms[22m[39m
+ [32m✓[39m src/core/prescription/tests/prescriptionEngine.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/sde.b11.test.ts [2m([22m[2m29 tests[22m[2m)[22m[32m 28[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/mathematicalSafety.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 26[2mms[22m[39m
+ [32m✓[39m src/core/classification/tests/ruleBasedClassifier.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m src/core/curation/tests/curation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/snapshotPolicy.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m src/core/diagnostic/tests/diagnosticEngine.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+ [32m✓[39m src/core/simulations/tests/simulationEngine.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 33[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/privateDocumentPolicy.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m src/core/externalEvidence/tests/ledger.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m src/core/questions/tests/externalQuestionBanks.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m src/core/simulations/tests/simulationStoreIntegration.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/core/prescription/tests/questionBatchProgress.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/planner.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m src/features/fgvTraining/tests/fgvTrainingHotfix.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m src/core/backup/tests/storeBackupMigration.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/studySessionTraceability.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m src/core/sde-v2/tests/evidenceAdapter.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m src/core/weekly/tests/weeklyCalibration.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m src/core/flashcards/tests/flashcardScheduler.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m src/navigation/tests/navigationModel.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/core/roadmap/tests/weeklyOutlook.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m src/core/sde-v2/tests/methodAndScore.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/vercelExpressEntrypoint.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/materialPolicy.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/integrations/localFiles/tests/privatePdfAccess.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/config/concursos/dataprev-2026-perfil-3/tests/pedagogicalRoutingSafety.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/core/evidence/tests/evidencePolicy.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/core/review/tests/errorRecovery.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/libraryPrivacy.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/integrations/localStorage/tests/resilientSnapshot.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/core/knowledge/tests/knowledgeEngine.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/dynamicLibraryCatalog.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/guidedLearningStoreIntegration.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/integrations/localFiles/tests/privatePdfIndexer.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/core/prescription/tests/studyFocusGuide.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/learningProtocols.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/core/learning/tests/guidedResponsePolicy.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/knowledge/tests/officialCorpus.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/core/questions/tests/questionEligibility.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/core/taxonomy/tests/taxonomy.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/authPolicy.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/externalEvidence/tests/uiGovernance.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/readiness/tests/productReadiness.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/onboarding/tests/onboarding.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/rlsMigration.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/features/externalEvidence/tests/navigation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/brandRendering.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/core/diagnostic/tests/diagnosticPlacement.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/deterministicTerminationContract.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/pedagogicalRoutingAudit.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/layout/tests/appShellLayout.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/shadow/tests/historicalMatrix.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/core/presentation/tests/decisionWarnings.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/appAccessPolicy.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/classification/tests/classificationPolicy.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/sdeShadowUiContract.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/core/learning/tests/learningCycle.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/coach/tests/operationalCoach.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/rankingStability.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/config/tests/appMetadata.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/onlineAccountViewGovernance.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/libraryViewGovernance.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m96 passed[39m[22m[90m (96)[39m
+[2m      Tests [22m [1m[32m716 passed[39m[22m[90m (716)[39m
+[2m   Start at [22m 22:34:21
+[2m   Duration [22m 26.91s[2m (transform 3.13s, setup 0ms, import 8.99s, tests 5.29s, environment 8ms)[22m
+
+
+> concurseiroos@3.35.2 training:smoke-serverless
+> node scripts/smokeFgvTrainingServerless.mjs
+
+{
+  "status": "PASS",
+  "runtime": "compiled-serverless-entrypoints",
+  "publicCatalog": {
+    "urlEquivalent": "/assets/JavaScript public catalog bundle",
+    "questionCount": 664,
+    "operationalAnswerPresentBeforeCheck": false
+  },
+  "attempt": {
+    "attemptId": "serverless-smoke-attempt",
+    "totalQuestions": 5,
+    "questionOrder": [
+      "fgv-bd-72620920f0bb5b7d",
+      "fgv-bd-23263c7fc5cc6a5f",
+      "fgv-bd-bfdca2cebc1e72c5",
+      "fgv-bd-3c65ee7a411bde75",
+      "fgv-bd-f5ceae93f53a20d4"
+    ]
+  },
+  "check": {
+    "url": "/api/training-fgv/check",
+    "method": "POST",
+    "httpStatus": 200,
+    "questionId": "fgv-bd-72620920f0bb5b7d",
+    "selectedAnswer": "A",
+    "operationalAnswerFormatValid": true,
+    "resultStatus": "INCORRECT"
+  },
+  "finalize": {
+    "url": "/api/training-fgv/finalize",
+    "method": "POST",
+    "httpStatus": 200,
+    "totalQuestions": 5,
+    "affectsSde": false,
+    "countsAsOfficialSimulation": false
+  },
+  "teardown": {
+    "serverListeningAfterClose": false,
+    "activeSocketsBeforeClose": 0,
+    "activeSocketsAfterClose": 0,
+    "closeIdleConnectionsCalled": true,
+    "closeAllConnectionsCalled": true
+  }
+}
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-19T22:34:49.659Z",
+  "status": "PASS",
+  "testRun": {
+    "durationMs": 28665,
+    "exitCode": 0,
+    "signal": null,
+    "naturalExit": true,
+    "childProcessesRemaining": 0,
+    "outputAfterSummary": []
+  },
+  "serverlessSmoke": {
+    "durationMs": 910,
+    "exitCode": 0,
+    "signal": null,
+    "naturalExit": true,
+    "childProcessesRemaining": 0
+  },
+  "timeoutAsSuccess": false
+}

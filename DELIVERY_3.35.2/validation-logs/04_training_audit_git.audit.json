@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "label": "04_training_audit_git",
+  "command": [
+    "npm",
+    "run",
+    "training:audit-git"
+  ],
+  "cwd": "/mnt/data/concurseiroos_3352_clean",
+  "startedAt": "2026-07-19T22:33:17.039Z",
+  "endedAt": "2026-07-19T22:33:17.746Z",
+  "durationMs": 707,
+  "timeoutMs": 60000,
+  "timedOut": false,
+  "exitCode": 0,
+  "signal": null,
+  "descendantProcessGroupRemaining": false,
+  "quiescenceWaitMs": 0,
+  "missingPatterns": [],
+  "matchedForbiddenPatterns": [],
+  "naturalExit": true
+}

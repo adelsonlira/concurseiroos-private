@@ -16,7 +16,9 @@ const ACTIVITY_PREFERENCE: Record<MaterialRoutingInput["activity"], readonly Mat
   questoes: ["QUESTION_LIST", "SIMULATION", "COMMENTED_QUESTIONS"],
   revisao: ["SUMMARY", "MIND_MAP", "THEORY", "COMMENTED_QUESTIONS"],
   flashcards: ["SUMMARY", "MIND_MAP", "THEORY"],
-  simulado: ["SIMULATION", "QUESTION_LIST"]
+  simulado: ["SIMULATION", "QUESTION_LIST"],
+  pratica: ["THEORY", "REFERENCE", "SUMMARY"],
+  operacional: ["REFERENCE", "SUMMARY"]
 };
 
 const DIAGNOSTIC_QUESTION_PREFERENCE: readonly MaterialContentKind[] = [

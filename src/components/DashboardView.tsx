@@ -22,13 +22,16 @@ import PrivatePdfOpenButton from "./PrivatePdfOpenButton";
 import { buildCoachOperationalCommand } from "../core/coach/operationalCoach";
 import { buildOnboardingPlan } from "../core/onboarding/onboarding";
 import { presentDecisionWarning } from "../core/presentation/decisionWarnings";
+import OptionalStudyCard from "./OptionalStudyCard";
 
 const ACTIVITY_LABELS: Record<StudyActivityKind, string> = {
   teoria: "Teoria ativa",
   questoes: "Questões",
   revisao: "Revisão ativa",
   flashcards: "Flashcards",
-  simulado: "Simulado"
+  simulado: "Simulado",
+  pratica: "Prática técnica",
+  operacional: "Atividade operacional"
 };
 
 function currentDateKey(timeZone: string): string {
@@ -104,6 +107,11 @@ export default function DashboardView({ onStartSession, onAskCoach }: { onStartS
   const prescription = ultimaDecisaoSDE?.prescription?.current ?? null;
   const upcoming = ultimaDecisaoSDE?.prescription?.upcoming ?? [];
   const availability = ultimaDecisaoSDE?.availability;
+  const optionalStudyContext = ultimaDecisaoSDE?.status === "NO_TIME_AVAILABLE"
+    ? availability?.scheduledMinutes === 0
+      ? "rest_day_optional" as const
+      : "extra_after_required_plan" as const
+    : null;
   const operationalCommand = buildCoachOperationalCommand({ prescription, timerRunning: isTimerRunning });
   const onboardingPlan = buildOnboardingPlan({
     competitionSelected: Boolean(configuracao.concursoAlvoId),
@@ -206,6 +214,10 @@ export default function DashboardView({ onStartSession, onAskCoach }: { onStartS
           >
             O dia está configurado como descanso ou todo o tempo disponível já foi registrado. O sistema não cria tarefas apenas para preencher espaço.
           </StatusCard>
+        )}
+
+        {optionalStudyContext && (
+          <OptionalStudyCard localDate={referenceDate} context={optionalStudyContext} />
         )}
 
         {prescription && ultimaDecisaoSDE?.status === "SUCCESS" && (

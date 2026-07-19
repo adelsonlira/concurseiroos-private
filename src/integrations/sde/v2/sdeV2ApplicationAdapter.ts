@@ -11,6 +11,7 @@ import {
 import { normalizeUnifiedEvidence } from "../../../core/sde-v2/evidenceAdapter";
 import { runSdeV2Decision } from "../../../core/sde-v2/decisionEngine";
 import type { DecisionRecord, SdeV2CandidateDecision } from "../../../core/sde-v2/types";
+import type { SdeV2DecisionInput } from "../../../core/sde-v2/decisionEngine";
 import { getCompetitionRuntimeDefinition } from "../../../config/concursos/registry";
 import type { CompetitionDecisionSnapshot } from "../competitionDecisionAdapter";
 import type { SDEApplicationResult } from "../types";
@@ -257,6 +258,47 @@ function applyDeterministicTieTransparency(actions: StrategicAction[]): Strategi
   });
 }
 
+export function buildSdeV2DecisionInputFromSnapshot(params: {
+  snapshot: CompetitionDecisionSnapshot;
+  referenceDate: string;
+  availableMinutes: number;
+}): SdeV2DecisionInput {
+  const { snapshot, referenceDate, availableMinutes } = params;
+  const runtime = getCompetitionRuntimeDefinition(snapshot.configuracao.concursoAlvoId);
+  const materialCatalog = mergePrivateMaterialCatalogs(
+    runtime.privateStudyMaterials,
+    buildDynamicPrivateMaterialCatalog(snapshot.biblioteca ?? [], runtime.package.id),
+  );
+  const normalizedEvidence = normalizeUnifiedEvidence({
+    referenceDate,
+    legacyAttempts: snapshot.tentativasQuestoes,
+    externalEvidenceLedger: snapshot.externalEvidenceLedger ?? [],
+    sessions: snapshot.sessoesEstudo,
+    reviewSchedules: snapshot.cronogramasRevisao,
+    subtopics: snapshot.subassuntos,
+    simulations: snapshot.simulados ?? [],
+    questions: snapshot.questoes ?? [],
+    fgvTrainingAttempts: snapshot.isolatedEvidence?.fgvTrainingAttempts ?? [],
+    fgvTrainingCatalog: snapshot.isolatedEvidence?.fgvTrainingCatalog ?? null,
+    pilotDiagnosticAttempts: snapshot.isolatedEvidence?.pilotDiagnosticAttempts ?? [],
+  });
+  return {
+    referenceDate,
+    examDate: runtime.package.officialRules.examDate,
+    availableMinutes,
+    edital: runtime.package.sde.edital,
+    disciplinas: runtime.package.sde.disciplinas,
+    assuntos: runtime.package.sde.assuntos,
+    subassuntos: runtime.package.sde.subassuntos,
+    evidence: normalizedEvidence,
+    materials: materialCatalog,
+    historicalSignals: historicalSignalsFromCatalog(snapshot.isolatedEvidence?.fgvTrainingCatalog ?? { questions: [] } as never),
+    recentDecisionNodeIds: (snapshot.decisionLedger ?? [])
+      .filter((record) => record.referenceDate < referenceDate && record.referenceDate >= new Date(new Date(`${referenceDate}T00:00:00Z`).getTime() - 7 * 86_400_000).toISOString().slice(0, 10))
+      .map((record) => record.selectedNodeId),
+  };
+}
+
 function buildDurationMap(snapshot: CompetitionDecisionSnapshot, actions: readonly StrategicAction[]): Record<string, number> {
   const map: Record<string, number> = {};
   for (const action of actions) {
@@ -290,34 +332,11 @@ export function buildSdeV2ApplicationResult(params: {
     runtime.privateStudyMaterials,
     buildDynamicPrivateMaterialCatalog(snapshot.biblioteca ?? [], runtime.package.id),
   );
-  const normalizedEvidence = normalizeUnifiedEvidence({
+  const v2Output = runSdeV2Decision(buildSdeV2DecisionInputFromSnapshot({
+    snapshot,
     referenceDate,
-    legacyAttempts: snapshot.tentativasQuestoes,
-    externalEvidenceLedger: snapshot.externalEvidenceLedger ?? [],
-    sessions: snapshot.sessoesEstudo,
-    reviewSchedules: snapshot.cronogramasRevisao,
-    subtopics: snapshot.subassuntos,
-    simulations: snapshot.simulados ?? [],
-    questions: snapshot.questoes ?? [],
-    fgvTrainingAttempts: snapshot.isolatedEvidence?.fgvTrainingAttempts ?? [],
-    fgvTrainingCatalog: snapshot.isolatedEvidence?.fgvTrainingCatalog ?? null,
-    pilotDiagnosticAttempts: snapshot.isolatedEvidence?.pilotDiagnosticAttempts ?? [],
-  });
-  const v2Output = runSdeV2Decision({
-    referenceDate,
-    examDate: runtime.package.officialRules.examDate,
     availableMinutes: v1Result.availability.remainingMinutes,
-    edital: runtime.package.sde.edital,
-    disciplinas: runtime.package.sde.disciplinas,
-    assuntos: runtime.package.sde.assuntos,
-    subassuntos: runtime.package.sde.subassuntos,
-    evidence: normalizedEvidence,
-    materials: materialCatalog,
-    historicalSignals: historicalSignalsFromCatalog(snapshot.isolatedEvidence?.fgvTrainingCatalog ?? { questions: [] } as never),
-    recentDecisionNodeIds: (snapshot.decisionLedger ?? [])
-      .filter((record) => record.referenceDate < referenceDate && record.referenceDate >= new Date(new Date(`${referenceDate}T00:00:00Z`).getTime() - 7 * 86_400_000).toISOString().slice(0, 10))
-      .map((record) => record.selectedNodeId),
-  });
+  }));
   if (
     v2Output.status !== "SUCCESS" ||
     !v2Output.selected ||

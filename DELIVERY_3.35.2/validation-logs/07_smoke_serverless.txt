@@ -1,0 +1,48 @@
+
+> concurseiroos@3.35.2 training:smoke-serverless
+> node scripts/smokeFgvTrainingServerless.mjs
+
+{
+  "status": "PASS",
+  "runtime": "compiled-serverless-entrypoints",
+  "publicCatalog": {
+    "urlEquivalent": "/assets/JavaScript public catalog bundle",
+    "questionCount": 664,
+    "operationalAnswerPresentBeforeCheck": false
+  },
+  "attempt": {
+    "attemptId": "serverless-smoke-attempt",
+    "totalQuestions": 5,
+    "questionOrder": [
+      "fgv-bd-72620920f0bb5b7d",
+      "fgv-bd-23263c7fc5cc6a5f",
+      "fgv-bd-bfdca2cebc1e72c5",
+      "fgv-bd-3c65ee7a411bde75",
+      "fgv-bd-f5ceae93f53a20d4"
+    ]
+  },
+  "check": {
+    "url": "/api/training-fgv/check",
+    "method": "POST",
+    "httpStatus": 200,
+    "questionId": "fgv-bd-72620920f0bb5b7d",
+    "selectedAnswer": "A",
+    "operationalAnswerFormatValid": true,
+    "resultStatus": "INCORRECT"
+  },
+  "finalize": {
+    "url": "/api/training-fgv/finalize",
+    "method": "POST",
+    "httpStatus": 200,
+    "totalQuestions": 5,
+    "affectsSde": false,
+    "countsAsOfficialSimulation": false
+  },
+  "teardown": {
+    "serverListeningAfterClose": false,
+    "activeSocketsBeforeClose": 0,
+    "activeSocketsAfterClose": 0,
+    "closeIdleConnectionsCalled": true,
+    "closeAllConnectionsCalled": true
+  }
+}

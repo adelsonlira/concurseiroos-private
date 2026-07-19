@@ -1,0 +1,5 @@
+
+> concurseiroos@3.35.2 test:hanging-process
+> vitest run --maxWorkers=2 --reporter=hanging-process
+
+

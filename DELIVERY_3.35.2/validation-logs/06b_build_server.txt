@@ -1,0 +1,9 @@
+
+> concurseiroos@3.35.2 build:server
+> esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs
+
+
+  dist/server.cjs      1.4mb ⚠️
+  dist/server.cjs.map  1.9mb
+
+⚡ Done in 90ms

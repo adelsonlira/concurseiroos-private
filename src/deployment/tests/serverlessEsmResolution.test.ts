@@ -1,4 +1,4 @@
-import { build } from "esbuild";
+import { build, stop } from "esbuild";
 import {
   copyFileSync,
   mkdirSync,
@@ -57,11 +57,12 @@ function restoreEnvironment() {
   }
 }
 
-afterEach(() => {
+afterEach(async () => {
   restoreEnvironment();
   for (const directory of temporaryDirectories.splice(0)) {
     rmSync(directory, { recursive: true, force: true });
   }
+  await stop();
 });
 
 describe("Vercel Node ESM resolution", () => {

@@ -1,0 +1,379 @@
+
+> concurseiroos@3.35.2 build
+> npm run validate && npm run build:web && npm run build:server && npm run build:serverless
+
+
+> concurseiroos@3.35.2 validate
+> bash scripts/runValidationPipeline.sh
+
+
+[validate] validate:memory
+Memória institucional sincronizada com a versão 3.35.2.
+
+[validate] diagnostic:audit
+[pilot-diagnostic] PASS — 24 questões, 6 assets, controles 14/53, catálogo público sanitizado.
+
+[validate] training:build
+Treino FGV: 797 registros preservados; 664 questões elegíveis; 301 assets validados.
+
+[validate] training:audit
+Treino FGV validado: 797 registros de origem, 664 questões elegíveis, 301 assets íntegros.
+
+[validate] knowledge:validate-official
+{
+  "status": "PASS",
+  "exams": 95,
+  "questions": 6462,
+  "answerKeySections": 1344,
+  "reviewQueueItems": 646,
+  "corpusSha256": "138d03d3632d0db6c839b4c07a2c36558898c0929485baf2bc396b44c0479210",
+  "errors": []
+}
+
+[validate] knowledge:build
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-19T22:34:52.347Z",
+  "shadowMode": true,
+  "counts": {
+    "documents": 181,
+    "contests": 54,
+    "declaredLogicalDuplicates": 20,
+    "links": 95,
+    "incidenceEligibleLinks": 77,
+    "confirmedLinks": 77,
+    "inferredLinks": 9,
+    "insufficientLinks": 9
+  },
+  "integrity": {
+    "valid": true,
+    "errors": []
+  },
+  "questionCorpus": {
+    "extractedQuestions": 6462,
+    "canonicalQuestions": 5324,
+    "definitiveAnswerLinks": 2840,
+    "reviewQueueItems": 646,
+    "status": "EXTRACTED_SHADOW_REVIEW_REQUIRED",
+    "eligibleForSDEHistoricalIncidence": false
+  },
+  "policy": "Historical incidence is not connected to the SDE. Document links are package-level evidence only.",
+  "catalogSha256": "27d98d3344d7f61d53f474a91886c45b5c0ee08d6bb41e4fa14f9794b6a08f16"
+}
+
+[validate] knowledge:build-taxonomy
+{
+  "status": "PASS",
+  "nodes": 123,
+  "subtopics": 94,
+  "materialOnly": 63,
+  "gaps": 31,
+  "shadowMode": true
+}
+
+[validate] knowledge:build-curation
+{
+  "status": "PASS",
+  "total": 646,
+  "p0Target": 43,
+  "p1High": 58,
+  "p2Medium": 257,
+  "p3Backlog": 288
+}
+
+[validate] knowledge:build-classification
+{
+  "status": "PASS",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-16T10:27:00-03:00",
+  "shadowMode": true,
+  "processedQuestions": 6462,
+  "skippedNonCanonicalDuplicates": 1138,
+  "proposedClassifications": 656,
+  "humanApprovedClassifications": 0,
+  "incidenceEligibleClassifications": 0,
+  "policy": "Rule-based proposals support the curation queue only. They do not define source taxonomy, target equivalence or SDE incidence.",
+  "byTarget": {
+    "dp26-p3-esp-bd-sql": 123,
+    "dp26-p3-esp-bd-integracao-ingestao": 16,
+    "dp26-p3-esp-ia-dados-bigdata": 74,
+    "dp26-p3-esp-si-acesso": 57,
+    "dp26-p3-esp-metodologias-ageis": 50,
+    "dp26-p3-esp-design-arquitetura": 36,
+    "dp26-p3-esp-testes": 15,
+    "dp26-p3-esp-si-sdl-owasp": 11,
+    "dp26-p3-esp-metricas": 18,
+    "dp26-p3-esp-requisitos": 18,
+    "dp26-p3-esp-padroes-dados-web": 36,
+    "dp26-p3-esp-arquitetura-software": 25,
+    "dp26-p3-esp-linguagens-frameworks": 65,
+    "dp26-p3-esp-devops-git": 32,
+    "dp26-p3-esp-si-politicas": 12,
+    "dp26-p3-leg-lgpd-capitulos": 39,
+    "dp26-p3-leg-lai-capitulos": 11,
+    "dp26-p3-esp-bd-nosql": 18
+  }
+}
+
+[validate] knowledge:build-routing
+{
+  "status": "PASS",
+  "subtopics": 94,
+  "exactTheory": 57,
+  "topicTheoryFallback": 0,
+  "manualTheoryLocatorRequired": 37,
+  "exactDiagnosticQuestionSet": 52,
+  "topicDiagnosticQuestionSet": 0,
+  "externalDiagnosticFallback": 42,
+  "noExecutableDiagnosticSource": 0,
+  "unsafeSiblingRoutes": 0
+}
+
+[validate] learning:audit-error-recovery
+{
+  "status": "PASS",
+  "causes": 7,
+  "confirmationsRequired": 2
+}
+
+[validate] simulation:audit
+{
+  "schemaVersion": "1.0.0",
+  "policyVersion": "OFFICIAL_BLUEPRINT_IDENTIFIED_SOURCES_V1",
+  "generatedAt": "2026-07-19T22:34:56.134Z",
+  "status": "PASS",
+  "blueprint": {
+    "competitionId": "dataprev-2026-perfil-3",
+    "officialDocument": "Edital DATAPREV 001/2026",
+    "disciplines": 6,
+    "totalQuestions": 70,
+    "maximumPoints": 115,
+    "durationMinutes": 240,
+    "minimumTotalPoints": 57.5,
+    "eliminatesOnZeroDiscipline": true
+  },
+  "safeguards": {
+    "identifiedSourceRequired": true,
+    "generatedQuestionsAllowed": false,
+    "generatedAnswerKeysAllowed": false,
+    "historicalIncidenceChanged": false,
+    "sdeRankingChangedByAggregateResult": false,
+    "blanksRecordedSeparately": true,
+    "partialGlobalEligibilityEvaluated": false
+  },
+  "sample": {
+    "zeroScoreDisciplineIds": [
+      "dp26-p3-portugues"
+    ],
+    "correctionPriority": "ZERO_SCORE_RISK"
+  },
+  "errors": []
+}
+
+[validate] sde:v2-audit
+SDE v2 shadow audit PASS: 20 relation(s), 1 eligible evidence(s), 1 fallback(s).
+
+[validate] sde:audit
+SDE reliability audit PASS: 117 action(s), 50 parameter(s).
+
+[validate] readiness:audit
+{
+  "status": "READY_FOR_LOCAL_DAILY_USE",
+  "confidence": "HIGH",
+  "warnings": 0
+}
+
+[validate] typecheck
+
+[validate] test:run
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.10 [39m[90m/mnt/data/concurseiroos_3352_clean[39m
+
+ [32m✓[39m src/deployment/tests/serverlessEsmResolution.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 551[2mms[22m[39m
+     [33m[2m✓[22m[39m loads the emitted diagnostic and shared Express entrypoints with native Node ESM resolution [33m 546[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyStoreIntegration.test.ts [2m([22m[2m33 tests[22m[2m)[22m[32m 178[2mms[22m[39m
+ [32m✓[39m src/server/tests/runtimeConfiguration.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 255[2mms[22m[39m
+ [32m✓[39m src/server/tests/fgvTrainingEndpoint.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 240[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/dataprevRoadmapAdapter.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 244[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/sdeShadowCalibration.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 238[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/sdeV2Integration.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 218[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/dataprevDecisionAdapter.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 210[2mms[22m[39m
+ [32m✓[39m src/features/fgvTraining/tests/fgvTraining.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 195[2mms[22m[39m
+ [32m✓[39m src/server/tests/pilotDiagnosticEndpoint.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 200[2mms[22m[39m
+ [32m✓[39m src/integrations/coach/tests/coachContext.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 188[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyStoreIntegrity351.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 162[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/storeSdeIntegration.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 142[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/trainingCorpusGitIntegrity.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 134[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/repositoryHygiene.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 150[2mms[22m[39m
+ [32m✓[39m src/core/backup/tests/backupIntegrity.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 72[2mms[22m[39m
+ [32m✓[39m src/core/availability/tests/availabilityMigration.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 67[2mms[22m[39m
+ [32m✓[39m src/config/concursos/dataprev-2026-perfil-3/tests/configuration.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 86[2mms[22m[39m
+ [32m✓[39m src/core/externalEvidence/tests/storeIntegration.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 66[2mms[22m[39m
+ [32m✓[39m src/core/roadmap/tests/examHorizon.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 61[2mms[22m[39m
+ [32m✓[39m src/config/concursos/tests/competitionIsolation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 48[2mms[22m[39m
+ [32m✓[39m src/features/fgvTraining/tests/fgvTrainingApiHotfix.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 58[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/environment.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 56[2mms[22m[39m
+ [32m✓[39m src/config/concursos/tests/registry.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 52[2mms[22m[39m
+ [32m✓[39m src/core/availability/tests/availability.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 59[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyIntegrity351.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 61[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/serverlessDiagnostics.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 56[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/sde.test.ts [2m([22m[2m59 tests[22m[2m)[22m[32m 48[2mms[22m[39m
+ [32m✓[39m src/server/tests/httpTestHarness.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 38[2mms[22m[39m
+ [32m✓[39m src/core/sde-v2/tests/knowledgeAndGraph.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 72[2mms[22m[39m
+ [32m✓[39m src/features/pilotDiagnostic/tests/pilotDiagnostic.test.ts [2m([22m[2m32 tests[22m[2m)[22m[32m 41[2mms[22m[39m
+ [32m✓[39m src/core/review/tests/reviewEngine.test.ts [2m([22m[2m18 tests[22m[2m)[22m[32m 39[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyEngine.test.ts [2m([22m[2m25 tests[22m[2m)[22m[32m 34[2mms[22m[39m
+ [32m✓[39m src/core/simulations/tests/simulationEngine.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/core/diagnostic/tests/diagnosticEngine.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/sde.b11.test.ts [2m([22m[2m29 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/mathematicalSafety.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 28[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/privateDocumentPolicy.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+ [32m✓[39m src/core/curation/tests/curation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m src/core/simulations/tests/simulationStoreIntegration.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/core/prescription/tests/questionBatchProgress.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/snapshotPolicy.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/core/classification/tests/ruleBasedClassifier.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m src/core/questions/tests/externalQuestionBanks.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/planner.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m src/core/externalEvidence/tests/ledger.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m src/core/backup/tests/storeBackupMigration.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m src/features/fgvTraining/tests/fgvTrainingHotfix.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m src/core/sde-v2/tests/evidenceAdapter.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/studySessionTraceability.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m src/core/flashcards/tests/flashcardScheduler.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/core/roadmap/tests/weeklyOutlook.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/core/weekly/tests/weeklyCalibration.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/navigation/tests/navigationModel.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/core/sde-v2/tests/methodAndScore.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/core/prescription/tests/prescriptionEngine.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/core/evidence/tests/evidencePolicy.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/core/review/tests/errorRecovery.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/materialPolicy.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/vercelExpressEntrypoint.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/libraryPrivacy.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/config/concursos/dataprev-2026-perfil-3/tests/pedagogicalRoutingSafety.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/dynamicLibraryCatalog.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/core/knowledge/tests/knowledgeEngine.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/learningProtocols.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/core/questions/tests/questionEligibility.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/core/knowledge/tests/officialCorpus.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/guidedLearningStoreIntegration.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/integrations/localFiles/tests/privatePdfAccess.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/core/taxonomy/tests/taxonomy.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/core/prescription/tests/studyFocusGuide.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/integrations/localFiles/tests/privatePdfIndexer.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/deterministicTerminationContract.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/integrations/localStorage/tests/resilientSnapshot.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/core/diagnostic/tests/diagnosticPlacement.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/externalEvidence/tests/uiGovernance.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/rlsMigration.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/pedagogicalRoutingAudit.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/learning/tests/learningCycle.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/readiness/tests/productReadiness.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/learning/tests/guidedResponsePolicy.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/features/externalEvidence/tests/navigation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/appAccessPolicy.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/classification/tests/classificationPolicy.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/layout/tests/appShellLayout.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/authPolicy.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/presentation/tests/decisionWarnings.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/onboarding/tests/onboarding.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/brandRendering.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/shadow/tests/historicalMatrix.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/rankingStability.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/libraryViewGovernance.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/onlineAccountViewGovernance.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/config/tests/appMetadata.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/core/coach/tests/operationalCoach.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/sdeShadowUiContract.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m96 passed[39m[22m[90m (96)[39m
+[2m      Tests [22m [1m[32m716 passed[39m[22m[90m (716)[39m
+[2m   Start at [22m 22:35:12
+[2m   Duration [22m 24.95s[2m (transform 2.89s, setup 0ms, import 8.15s, tests 4.91s, environment 8ms)[22m
+
+
+> concurseiroos@3.35.2 build:web
+> vite build && npm run diagnostic:audit-built-assets && npm run training:audit-built-assets
+
+[36mvite v6.4.3 [32mbuilding for production...[36m[39m
+transforming...
+[32m✓[39m 2282 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mpublic/[22m[32mindex.html                                         [39m[1m[2m    1.08 kB[22m[1m[22m[2m │ gzip:   0.47 kB[22m
+[2mpublic/[22m[2massets/[22m[32mq185-alternativa-b-CbImi4FU.png             [39m[1m[2m    3.35 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mq185-alternativa-c-CYQvXYGS.png             [39m[1m[2m    3.43 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mq185-alternativa-a-Vc8Pyi-U.png             [39m[1m[2m    3.62 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mq185-alternativa-e-DINnOqgG.png             [39m[1m[2m    5.13 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mq185-alternativa-d-rpOa5IaA.png             [39m[1m[2m    6.41 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mq14-modelagem-dimensional-3ZGsEBq0.png      [39m[1m[2m   38.51 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mpdf.worker.min-DEtVeC4l.mjs                 [39m[1m[2m1,255.07 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[35mindex-BRKR0EDS.css                          [39m[1m[2m   85.29 kB[22m[1m[22m[2m │ gzip:  13.60 kB[22m
+[2mpublic/[22m[2massets/[22m[36mauthenticatedFetch-NF7dcORZ.js              [39m[1m[2m    0.29 kB[22m[1m[22m[2m │ gzip:   0.24 kB[22m
+[2mpublic/[22m[2massets/[22m[36mOperationalScreenGuide-wNbBCuzE.js          [39m[1m[2m    0.95 kB[22m[1m[22m[2m │ gzip:   0.43 kB[22m
+[2mpublic/[22m[2massets/[22m[36mExternalQuestionSourcePlanCard-B7YWikYU.js  [39m[1m[2m    2.45 kB[22m[1m[22m[2m │ gzip:   1.05 kB[22m
+[2mpublic/[22m[2massets/[22m[36mprivatePdfAccess-YzKv-o5D.js                [39m[1m[2m    4.60 kB[22m[1m[22m[2m │ gzip:   2.03 kB[22m
+[2mpublic/[22m[2massets/[22m[36mPrivatePdfOpenButton-BPcCzAWk.js            [39m[1m[2m    7.98 kB[22m[1m[22m[2m │ gzip:   3.11 kB[22m
+[2mpublic/[22m[2massets/[22m[36mWeeklyCalibrationView-DruZq43R.js           [39m[1m[2m   10.48 kB[22m[1m[22m[2m │ gzip:   3.28 kB[22m
+[2mpublic/[22m[2massets/[22m[36mFlashcardView-DvrdFOry.js                   [39m[1m[2m   11.78 kB[22m[1m[22m[2m │ gzip:   3.85 kB[22m
+[2mpublic/[22m[2massets/[22m[36mBackupSettingsView-cGwz05-t.js              [39m[1m[2m   12.25 kB[22m[1m[22m[2m │ gzip:   4.16 kB[22m
+[2mpublic/[22m[2massets/[22m[36mStrategicRoadmapView-DfDcGnk6.js            [39m[1m[2m   15.05 kB[22m[1m[22m[2m │ gzip:   4.31 kB[22m
+[2mpublic/[22m[2massets/[22m[36mExerciseDeskView-CMdZxLdH.js                [39m[1m[2m   15.09 kB[22m[1m[22m[2m │ gzip:   5.05 kB[22m
+[2mpublic/[22m[2massets/[22m[36mSimulationsView-BUYQwS45.js                 [39m[1m[2m   19.06 kB[22m[1m[22m[2m │ gzip:   5.23 kB[22m
+[2mpublic/[22m[2massets/[22m[36mFgvTrainingView-DC9o6CU8.js                 [39m[1m[2m   22.70 kB[22m[1m[22m[2m │ gzip:   6.26 kB[22m
+[2mpublic/[22m[2massets/[22m[36mPilotDiagnosticView-C7q1ZqYF.js             [39m[1m[2m   22.79 kB[22m[1m[22m[2m │ gzip:   5.74 kB[22m
+[2mpublic/[22m[2massets/[22m[36mquestionBatchProgress-wQtwGz0e.js           [39m[1m[2m   24.38 kB[22m[1m[22m[2m │ gzip:   6.98 kB[22m
+[2mpublic/[22m[2massets/[22m[36mReviewAndErrorsView-CHd1iemS.js             [39m[1m[2m   27.33 kB[22m[1m[22m[2m │ gzip:   7.71 kB[22m
+[2mpublic/[22m[2massets/[22m[36mCoachIAView-CKRiHxRh.js                     [39m[1m[2m   27.35 kB[22m[1m[22m[2m │ gzip:   8.98 kB[22m
+[2mpublic/[22m[2massets/[22m[36mOnlineAccountView-BIJPkNiD.js               [39m[1m[2m   28.50 kB[22m[1m[22m[2m │ gzip:   7.49 kB[22m
+[2mpublic/[22m[2massets/[22m[36mFocusModeDesk-BqONoMNj.js                   [39m[1m[2m   33.45 kB[22m[1m[22m[2m │ gzip:   9.37 kB[22m
+[2mpublic/[22m[2massets/[22m[36mvendor-icons-BE5vdkTc.js                    [39m[1m[2m   39.12 kB[22m[1m[22m[2m │ gzip:   7.89 kB[22m
+[2mpublic/[22m[2massets/[22m[36mDashboardView-8aRyFfYA.js                   [39m[1m[2m   49.70 kB[22m[1m[22m[2m │ gzip:  12.90 kB[22m
+[2mpublic/[22m[2massets/[22m[36mLibraryView-DeOOj3fx.js                     [39m[1m[2m   50.31 kB[22m[1m[22m[2m │ gzip:  13.76 kB[22m
+[2mpublic/[22m[2massets/[22m[36mvendor-motion-CriRwHdM.js                   [39m[1m[2m  128.79 kB[22m[1m[22m[2m │ gzip:  42.35 kB[22m
+[2mpublic/[22m[2massets/[22m[36mVerticalizedSyllabusView-BYJx4qVH.js        [39m[1m[2m  149.26 kB[22m[1m[22m[2m │ gzip:  12.57 kB[22m
+[2mpublic/[22m[2massets/[22m[36mindex-xKMpHsjZ.js                           [39m[1m[2m  166.97 kB[22m[1m[22m[2m │ gzip:  47.42 kB[22m
+[2mpublic/[22m[2massets/[22m[36mvendor-react-BIDnxaey.js                    [39m[1m[2m  194.17 kB[22m[1m[22m[2m │ gzip:  60.74 kB[22m
+[2mpublic/[22m[2massets/[22m[36mvendor-supabase-CLLjj4df.js                 [39m[1m[2m  207.97 kB[22m[1m[22m[2m │ gzip:  53.80 kB[22m
+[2mpublic/[22m[2massets/[22m[36mcompetition-packages-CM4G3db6.js            [39m[1m[2m  421.22 kB[22m[1m[22m[2m │ gzip:  43.69 kB[22m
+[2mpublic/[22m[2massets/[22m[36mvendor-misc-CzU8uSlK.js                     [39m[1m[2m  483.32 kB[22m[1m[22m[2m │ gzip: 143.60 kB[22m
+[2mpublic/[22m[2massets/[22m[36mstudy-engine-8MDrCzvb.js                    [39m[1m[33m1,088.10 kB[39m[22m[2m │ gzip: 254.88 kB[22m
+[32m✓ built in 6.44s[39m
+
+> concurseiroos@3.35.2 diagnostic:audit-built-assets
+> node scripts/validateBuiltDiagnosticAssets.mjs
+
+[pilot-diagnostic-build] PASS — seis assets emitidos como URLs de produção.
+
+> concurseiroos@3.35.2 training:audit-built-assets
+> node scripts/validateBuiltFgvTrainingAssets.mjs
+
+Treino FGV: 301 assets emitidos e bundle web sem metadados privados amostrados.
+
+> concurseiroos@3.35.2 build:server
+> esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs
+
+
+> concurseiroos@3.35.2 build:serverless
+> esbuild src/server/httpApp.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/http-app.mjs && esbuild api/training-fgv/check.ts api/training-fgv/finalize.ts --bundle --platform=node --format=esm --packages=external --outbase=api --outdir=dist/serverless-api
+
+[33m
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+
+  dist/server.cjs      1.4mb ⚠️
+  dist/server.cjs.map  1.9mb
+
+⚡ Done in 92ms
+
+  dist/http-app.mjs  1.4mb ⚠️
+
+⚡ Done in 59ms
+
+  dist/serverless-api/training-fgv/finalize.js  1.4mb ⚠️
+  dist/serverless-api/training-fgv/check.js     1.4mb ⚠️
+
+⚡ Done in 72ms

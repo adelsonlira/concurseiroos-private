@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "fromVersion": "3.35.1",
+  "toVersion": "3.35.2",
+  "baselineZip": "ConcurseiroOS_v3.35.1_Integridade_Estudo_Opcional_Shadow_Real.zip",
+  "commit": "230765c65619f4c521b09714ba551191c6240290",
+  "scope": "deterministic_validation_termination_only",
+  "counts": {
+    "added": 8,
+    "modified": 20,
+    "removed": 0,
+    "unchanged": 983
+  },
+  "added": [
+    ".ai/decisions/ADR-040-deterministic-validation-teardown.md",
+    ".ai/sprints/SPRINT-3.35.2.md",
+    "docs/DETERMINISTIC_VALIDATION_TERMINATION_3.35.2.md",
+    "scripts/auditNaturalTermination.mjs",
+    "scripts/lib/processExitAudit.mjs",
+    "src/deployment/tests/deterministicTerminationContract.test.ts",
+    "src/server/testing/httpTestHarness.ts",
+    "src/server/tests/httpTestHarness.test.ts"
+  ],
+  "modified": [
+    ".ai/memory/CURRENT_STATE.md",
+    ".ai/memory/DEVELOPMENT_HISTORY.md",
+    ".ai/memory/NEXT_STEPS.md",
+    ".gitignore",
+    "README.md",
+    "data/knowledge/quality-report.json",
+    "data/quality/error-recovery-contract.json",
+    "data/quality/pedagogical-routing-report.json",
+    "data/quality/product-readiness-report.json",
+    "data/quality/sde-reliability-report.json",
+    "data/quality/sde-v2-audit-report.json",
+    "data/quality/simulation-contract.json",
+    "docs/README.md",
+    "package-lock.json",
+    "package.json",
+    "scripts/smokeFgvTrainingServerless.mjs",
+    "src/deployment/tests/serverlessEsmResolution.test.ts",
+    "src/server/tests/fgvTrainingEndpoint.test.ts",
+    "src/server/tests/pilotDiagnosticEndpoint.test.ts",
+    "src/server/tests/runtimeConfiguration.test.ts"
+  ],
+  "removed": [],
+  "protectedIntegrity": {
+    "protectedFiles": 311,
+    "unchanged": 311,
+    "mismatches": []
+  },
+  "functionalProductChanges": false
+}

@@ -1,0 +1,11 @@
+03_npm_ci: PASS 6970ms
+04_training_audit_git: PASS 707ms
+05_validate: PASS 45913ms
+06a_build_web: PASS 8628ms
+06b_build_server: PASS 459ms
+06c_build_serverless: PASS 699ms
+07_smoke_serverless: PASS 878ms
+08a_npm_audit: PASS 1030ms
+08b_npm_audit_prod: PASS 4197ms
+09_termination_audit: PASS 30119ms
+10_build: PASS 58571ms

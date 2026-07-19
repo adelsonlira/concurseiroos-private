@@ -1,0 +1,13 @@
+
+> concurseiroos@3.35.1 build:serverless
+> esbuild src/server/httpApp.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/http-app.mjs && esbuild api/training-fgv/check.ts api/training-fgv/finalize.ts --bundle --platform=node --format=esm --packages=external --outbase=api --outdir=dist/serverless-api
+
+
+  dist/http-app.mjs  1.4mb ⚠️
+
+⚡ Done in 55ms
+
+  dist/serverless-api/training-fgv/finalize.js  1.4mb ⚠️
+  dist/serverless-api/training-fgv/check.js     1.4mb ⚠️
+
+⚡ Done in 78ms

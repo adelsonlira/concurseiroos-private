@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "label": "06b_build_server",
+  "command": [
+    "npm",
+    "run",
+    "build:server"
+  ],
+  "cwd": "/mnt/data/concurseiroos_3352_clean",
+  "startedAt": "2026-07-19T22:34:12.295Z",
+  "endedAt": "2026-07-19T22:34:12.753Z",
+  "durationMs": 459,
+  "timeoutMs": 60000,
+  "timedOut": false,
+  "exitCode": 0,
+  "signal": null,
+  "descendantProcessGroupRemaining": false,
+  "quiescenceWaitMs": 0,
+  "missingPatterns": [],
+  "matchedForbiddenPatterns": [],
+  "naturalExit": true
+}

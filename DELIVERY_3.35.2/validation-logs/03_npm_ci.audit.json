@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "label": "03_npm_ci",
+  "command": [
+    "npm",
+    "ci"
+  ],
+  "cwd": "/mnt/data/concurseiroos_3352_clean",
+  "startedAt": "2026-07-19T22:33:10.060Z",
+  "endedAt": "2026-07-19T22:33:17.030Z",
+  "durationMs": 6970,
+  "timeoutMs": 180000,
+  "timedOut": false,
+  "exitCode": 0,
+  "signal": null,
+  "descendantProcessGroupRemaining": false,
+  "quiescenceWaitMs": 2,
+  "missingPatterns": [],
+  "matchedForbiddenPatterns": [],
+  "naturalExit": true
+}

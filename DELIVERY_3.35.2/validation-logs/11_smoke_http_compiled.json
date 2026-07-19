@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "PASS",
+  "startedAt": "2026-07-19T22:39:27.993Z",
+  "endedAt": "2026-07-19T22:39:28.453Z",
+  "durationMs": 460,
+  "node": "v24.18.0",
+  "requests": {
+    "runtimeConfig": {
+      "status": 200,
+      "connection": "close"
+    },
+    "readiness": {
+      "status": 200,
+      "connection": "close"
+    },
+    "trainingCheckGet": {
+      "status": 405,
+      "connection": "close"
+    }
+  },
+  "serverTermination": {
+    "requestedSignal": "SIGTERM",
+    "exitCode": null,
+    "signal": "SIGTERM",
+    "childRemaining": false
+  },
+  "stdout": "[ConcurseiroOS] Backend server listening on http://localhost:43152",
+  "stderr": ""
+}

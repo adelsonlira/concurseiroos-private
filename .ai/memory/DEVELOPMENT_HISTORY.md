@@ -325,3 +325,16 @@ SDE v2 e Coach Decisório Explicável: evidências individuais, agregadas e oper
 ## 3.34.1 — 2026-07-19
 
 Calibração prospectiva do SDE v2: o SDE v1 volta a ser a única decisão efetiva e o v2 executa em paralelo com a mesma fotografia, `executionMode: shadow` e `affectsPrescription: false`. Foi criado `sdeCalibrationLedger` append-only com fingerprint objetivo, snapshots v1/v2, divergências tipadas, fallback, evidências e incidência histórica de peso zero. Reload sem mudança de inputs não duplica comparação. A tela mostra apenas a prescrição v1 e uma auditoria secundária recolhida. Adaptador, pesos, grafo, score, SDE v1, evidências, Treino FGV, Diagnóstico Piloto, simulados, backup e sincronização foram preservados.
+
+## 3.35.0 — 2026-07-19
+
+Disponibilidade real e estudo opcional inteligente: o seed DATAPREV passa de 180 para 120 minutos de segunda a sábado, com domingo livre e migração automática apenas do perfil legado exato. O novo `optionalStudyLedger` registra recomendações, escolhas e sessões voluntárias de forma append-only, sem penalidade quando ignoradas. Sessões aceitas contam como estudo real e podem gerar evidência objetiva, mas não criam tentativas sintéticas nem domínio por mero tempo. Backup 2.5.0, restauração e sincronização incluem o ledger. O SDE v1 permanece efetivo e o SDE v2 permanece em shadow mode sem alterar a orientação exibida.
+
+## 3.35.1 — 2026-07-19
+
+Integridade do Estudo Opcional e Shadow Real: removida a comparação fictícia que rotulava alternativa v1 como SDE v2; criado adaptador explícito para execução real do SDE v2 ou fallback declarado. Recomendações passaram a exigir sinais reais de erro, revisão, material e pré-requisito. Fonte e banca foram separadas, resultados tornaram-se estruturados por método, teoria deixou de concluir subassunto automaticamente, o histórico passou a usar tipos canônicos e sessões interrompidas passaram a contabilizar somente tempo efetivo, uma única vez e sem penalidade. Disponibilidade de 120 minutos, backup 2.5.0, SDE v1 efetivo e v2 shadow foram preservados.
+
+
+## 3.35.2 — 2026-07-19
+
+Encerramento determinístico da validação: testes HTTP passaram a usar cliente sem pooling e harness com rastreamento explícito de sockets; o smoke serverless fecha servidor, conexões e listeners antes de declarar sucesso. Um auditor de subprocessos bloqueia timeout, sinal ou descendentes residuais. Nenhuma funcionalidade do produto, dado canônico, decisão do SDE ou persistência foi alterada.

@@ -43,7 +43,7 @@ export default function BackupSettingsView() {
     structuredClone(configuracao.duracaoSessaoPreferidaMinutos)
   );
   const [overrideDate, setOverrideDate] = useState("");
-  const [overrideMinutes, setOverrideMinutes] = useState(180);
+  const [overrideMinutes, setOverrideMinutes] = useState(120);
   const [overrideReason, setOverrideReason] = useState("");
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
@@ -99,7 +99,7 @@ export default function BackupSettingsView() {
       reason: overrideReason.trim() || undefined
     });
     setOverrideDate("");
-    setOverrideMinutes(180);
+    setOverrideMinutes(120);
     setOverrideReason("");
   };
 
@@ -129,9 +129,11 @@ export default function BackupSettingsView() {
         if (result.success) {
           setImportStatus({
             success: true,
-            message: result.migrated
-              ? "Backup antigo importado e migrado com segurança para o formato atual."
-              : "Backup importado."
+            message: result.warnings?.includes("LEGACY_DEFAULT_AVAILABILITY_MIGRATED_180_TO_120")
+              ? "Backup importado. LEGACY_DEFAULT_AVAILABILITY_MIGRATED_180_TO_120"
+              : result.migrated
+                ? "Backup antigo importado e migrado com segurança para o formato atual."
+                : "Backup importado."
           });
           setTimeout(() => setImportStatus({}), 4000);
         } else {
@@ -337,7 +339,7 @@ export default function BackupSettingsView() {
             </h3>
           </div>
           <p className="mt-2 text-xs text-zinc-500">
-            A configuração inicial é de 180 minutos, de segunda a sábado, com domingo livre. O saldo diário desconta automaticamente as sessões já concluídas.
+            A configuração inicial é de 120 minutos, de segunda a sábado, com domingo livre. O saldo diário desconta automaticamente as sessões já concluídas.
           </p>
           <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-7">
             {configuracao.disponibilidadeEstudo.weekly.map((day) => (
@@ -354,7 +356,7 @@ export default function BackupSettingsView() {
                         ...day,
                         enabled: event.target.checked,
                         totalMinutes: event.target.checked
-                          ? Math.max(day.totalMinutes, 180)
+                          ? Math.max(day.totalMinutes, 120)
                           : 0
                       })
                     }

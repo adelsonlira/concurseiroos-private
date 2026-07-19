@@ -1,5 +1,6 @@
 import type { BackupExportSchema } from "../../types";
 import { containsSensitiveExternalData } from "../externalEvidence/ledger";
+import { migrateExactLegacyDefaultAvailability, LEGACY_AVAILABILITY_MIGRATION_WARNING } from "../availability/availabilityMigration";
 
 export interface BackupValidationResult {
   valid: boolean;
@@ -72,7 +73,7 @@ function requireArray(value: unknown, label: string, errors: string[]): value is
  * feature did not exist when the snapshot was produced, therefore an empty
  * list is the only safe default.
  */
-const SAFE_ADDITIVE_COLLECTIONS = ["evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "externalEvidenceLedger", "sdeDecisionLedger", "sdeCalibrationLedger"] as const;
+const SAFE_ADDITIVE_COLLECTIONS = ["evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "externalEvidenceLedger", "sdeDecisionLedger", "sdeCalibrationLedger", "optionalStudyLedger"] as const;
 
 function verifyOriginalChecksum(
   backup: BackupExportSchema,
@@ -134,10 +135,19 @@ export function prepareBackupForImport(value: unknown): BackupImportPreparation 
     }
   }
 
+  if (data.configuracao) {
+    const availabilityMigration = migrateExactLegacyDefaultAvailability(data.configuracao as BackupExportSchema["dados"]["configuracao"] & {});
+    if (availabilityMigration.migrated) {
+      data.configuracao = availabilityMigration.config;
+      migrated = true;
+      warnings.push(LEGACY_AVAILABILITY_MIGRATION_WARNING);
+    }
+  }
+
   if (migrated) {
     normalized.metadata = {
       ...normalized.metadata,
-      versaoBackup: "2.4.0",
+      versaoBackup: "2.5.0",
       integrityAlgorithm: "FNV1A64_CANONICAL_JSON"
     };
     normalized.metadata.checksum = calculateBackupChecksum(normalized);
@@ -164,7 +174,7 @@ export function validateBackup(backup: BackupExportSchema): BackupValidationResu
     "concursos", "editais", "disciplinas", "assuntos", "subassuntos", "questoes",
     "tentativasQuestoes", "flashcards", "documentos", "resumos", "anotacoes",
     "planosEstudo", "simulados", "agenda", "historicos", "cronogramasRevisao",
-    "conversasIA", "sessoesEstudo", "evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "externalEvidenceLedger", "itensBiblioteca"
+    "conversasIA", "sessoesEstudo", "evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "externalEvidenceLedger", "optionalStudyLedger", "itensBiblioteca"
   ];
   for (const key of requiredCollections) requireArray(backup.dados[key], String(key), errors);
   if (errors.length > 0) return { valid: false, errors, warnings };
@@ -250,6 +260,20 @@ export function validateBackup(backup: BackupExportSchema): BackupValidationResu
     priorEvidenceIds.add(event.evidenceId);
   }
 
+
+
+  const optionalEventIds = new Set<string>();
+  for (const event of backup.dados.optionalStudyLedger ?? []) {
+    if (!event?.eventId || typeof event.eventId !== "string") {
+      errors.push("optionalStudyLedger contém evento sem eventId válido.");
+      continue;
+    }
+    if (optionalEventIds.has(event.eventId)) errors.push(`optionalStudyLedger contém ID duplicado: ${event.eventId}.`);
+    optionalEventIds.add(event.eventId);
+    if (event.isOptional !== true || event.mandatory !== false || event.affectsPlanCompliance !== false) {
+      errors.push(`Evento opcional ${event.eventId} viola o contrato de não obrigatoriedade.`);
+    }
+  }
 
   const decisionIds = new Set<string>();
   for (const decision of backup.dados.sdeDecisionLedger ?? []) {

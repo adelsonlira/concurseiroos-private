@@ -20,7 +20,7 @@ export function buildOnboardingPlan(context: OnboardingContext): OnboardingPlan 
       id: "availability",
       label: "Disponibilidade",
       status: context.availabilityConfigured ? "DONE" : "AUTO_DEFAULTED",
-      action: context.availabilityConfigured ? "Agenda semanal configurada." : "Aplicar disponibilidade segura padrão de 180 minutos em seis dias.",
+      action: context.availabilityConfigured ? "Agenda semanal configurada." : "Aplicar disponibilidade segura padrão de 120 minutos em seis dias.",
       studentDecisionRequired: !context.availabilityConfigured,
     },
     {

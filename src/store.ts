@@ -15,6 +15,7 @@ import {
   getDefaultCompetitionRuntimeDefinition
 } from "./config/concursos/registry";
 import { calculateDailyAvailability } from "./core/availability/availabilityEngine";
+import { isExactLegacyDefaultAvailability, migrateExactLegacyDefaultAvailability } from "./core/availability/availabilityMigration";
 import { scheduleFlashcardReview } from "./core/flashcards/flashcardScheduler";
 import { assessGuidedLearningCycle } from "./core/learning/learningCycle";
 import { assessDiagnosticPlacement } from "./core/diagnostic/diagnosticPlacement";
@@ -31,8 +32,27 @@ import type { GuidedLearningEvidence, GuidedLearningEvidenceInput, LearningCycle
 import type { FlashcardRetrievalPerformance } from "./core/flashcards/types";
 import { AvailabilityOverride, DailyAvailabilityResult, WeeklyAvailabilityDay } from "./core/availability/types";
 import { runCompetitionDecisionForDate } from "./integrations/sde/competitionDecisionAdapter";
+import { buildSdeV2DecisionInputFromSnapshot } from "./integrations/sde/v2/sdeV2ApplicationAdapter";
 import { SDEApplicationResult } from "./integrations/sde/types";
 import type { DecisionRecord, SdeCalibrationRecord } from "./core/sde-v2/types";
+import {
+  appendOptionalStudyEvent,
+  buildOptionalStudyCalibrationRecord,
+  buildOptionalStudyRecommendation,
+  deriveOptionalStudyState,
+  deriveOptionalQuestionSourceAndBoard,
+  durationWarning,
+  optionalMethodHistoryType,
+  optionalResultHistoryType,
+  optionalResultSummary,
+  validateOptionalStudyResult,
+  OPTIONAL_STUDY_ENGINE_VERSION,
+  type OptionalStudyContext,
+  type OptionalStudyLedgerEvent,
+  type OptionalStudyRecommendation,
+  type OptionalStudyRecommendationOption,
+  type OptionalStudyResultInput
+} from "./core/optionalStudy";
 import { readIsolatedEvidenceSnapshot } from "./integrations/sde/v2/isolatedEvidenceSnapshot";
 import { mergeLibrarySeedItems, sanitizeLibraryForBackup } from "./core/materials/libraryPrivacy";
 import { completeReviewSchedule, createOrRefreshReviewSchedule } from "./core/review/reviewEngine";
@@ -81,6 +101,7 @@ interface ConcurseiroState {
   externalEvidenceLedger: ExternalEvidenceRecord[];
   sdeDecisionLedger: DecisionRecord[];
   sdeCalibrationLedger: SdeCalibrationRecord[];
+  optionalStudyLedger: OptionalStudyLedgerEvent[];
   biblioteca: ItemBiblioteca[];
   /** Ephemeral SDE output. It is recalculated from source data and is not persisted. */
   ultimaDecisaoSDE: SDEApplicationResult | null;
@@ -117,6 +138,14 @@ interface ConcurseiroState {
   getDailyAvailability: (date: string) => DailyAvailabilityResult;
   executarSDEParaData: (date: string) => SDEApplicationResult;
   limparDecisaoSDE: () => void;
+  gerarRecomendacaoEstudoOpcional: (date: string, context: OptionalStudyContext, forceNew?: boolean) => { recommendation: OptionalStudyRecommendation | null; generated: boolean };
+  manterDescansoOpcional: (date: string, context?: OptionalStudyContext) => void;
+  ocultarEstudoOpcionalHoje: (date: string, context?: OptionalStudyContext) => void;
+  aceitarEstudoOpcional: (params: { recommendationId: string; optionId?: string; durationMinutes?: number; manualOption?: OptionalStudyRecommendationOption }) => { success: boolean; sessionId?: string; warning?: string; error?: string };
+  pausarEstudoOpcional: (sessionId: string) => { success: boolean; error?: string };
+  retomarEstudoOpcional: (sessionId: string) => { success: boolean; error?: string };
+  concluirEstudoOpcional: (sessionId: string, result: OptionalStudyResultInput) => { success: boolean; evidenceId?: string; error?: string };
+  interromperEstudoOpcional: (sessionId: string, actualMinutes?: number) => { success: boolean; error?: string };
 
   // Concurso Actions
   addConcurso: (concurso: Concurso) => void;
@@ -257,7 +286,7 @@ function normalizeConfig(input?: Partial<ConfigUsuario> | null): ConfigUsuario {
       }
     : defaultAvailability;
 
-  return {
+  const normalized: ConfigUsuario = {
     ...base,
     ...input,
     metaHorariaDiariaMinutos:
@@ -276,6 +305,7 @@ function normalizeConfig(input?: Partial<ConfigUsuario> | null): ConfigUsuario {
       ...(input?.configuracoesPomodoro ?? {})
     }
   };
+  return migrateExactLegacyDefaultAvailability(normalized).config;
 }
 
 function toLocalDateKey(timestamp: string, timeZone: string): string {
@@ -414,6 +444,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
   externalEvidenceLedger: [],
   sdeDecisionLedger: [],
   sdeCalibrationLedger: [],
+  optionalStudyLedger: [],
   biblioteca: [],
   ultimaDecisaoSDE: null,
 
@@ -463,6 +494,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             externalEvidenceLedger: [],
             sdeDecisionLedger: [],
   sdeCalibrationLedger: [],
+            optionalStudyLedger: [],
             biblioteca: seed.biblioteca,
             ultimaDecisaoSDE: null,
             activeConcursoId: seed.concurso.id,
@@ -481,6 +513,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         }
 
         const seed = buildSeedForCompetition(parsed.configuracao?.concursoAlvoId);
+        const legacyAvailabilityMigrated = isExactLegacyDefaultAvailability(parsed.configuracao);
         set({
           ...parsed,
           tentativasQuestoes: parsed.tentativasQuestoes ?? [],
@@ -492,6 +525,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           externalEvidenceLedger: Array.isArray(parsed.externalEvidenceLedger) ? parsed.externalEvidenceLedger : [],
           sdeDecisionLedger: Array.isArray(parsed.sdeDecisionLedger) ? parsed.sdeDecisionLedger : [],
           sdeCalibrationLedger: Array.isArray(parsed.sdeCalibrationLedger) ? parsed.sdeCalibrationLedger : [],
+          optionalStudyLedger: Array.isArray(parsed.optionalStudyLedger) ? parsed.optionalStudyLedger : [],
           configuracao: normalizeConfig(parsed.configuracao),
           biblioteca: mergeLibrarySeedItems(parsed.biblioteca ?? [], seed.biblioteca),
           ultimaDecisaoSDE: null,
@@ -499,6 +533,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           timerSecondsElapsed: 0,
           timerIntervalId: null
         });
+        if (legacyAvailabilityMigrated) get().saveToLocalStorage();
       } else {
         const seed = buildSeedForCompetition();
         set({
@@ -579,6 +614,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       externalEvidenceLedger: [],
       sdeDecisionLedger: [],
   sdeCalibrationLedger: [],
+      optionalStudyLedger: [],
       biblioteca: seed.biblioteca,
       ultimaDecisaoSDE: null,
       activeConcursoId: seed.concurso.id,
@@ -601,7 +637,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, sdeDecisionLedger, sdeCalibrationLedger, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, sdeDecisionLedger, sdeCalibrationLedger, optionalStudyLedger, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     } = get();
@@ -610,7 +646,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, sdeDecisionLedger, sdeCalibrationLedger, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, sdeDecisionLedger, sdeCalibrationLedger, optionalStudyLedger, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     };
@@ -658,6 +694,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         externalEvidenceLedger: d.externalEvidenceLedger || [],
         sdeDecisionLedger: d.sdeDecisionLedger || [],
         sdeCalibrationLedger: d.sdeCalibrationLedger || [],
+        optionalStudyLedger: d.optionalStudyLedger || [],
         biblioteca: mergeLibrarySeedItems(
           sanitizeLibraryForBackup(d.itensBiblioteca || []),
           buildSeedForCompetition(d.configuracao?.concursoAlvoId).biblioteca
@@ -685,7 +722,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     const s = get();
     const backup: BackupExportSchema = {
       metadata: {
-        versaoBackup: "2.4.0",
+        versaoBackup: "2.5.0",
         exportadoEm: new Date().toISOString(),
         estudanteNome: s.configuracao.estudanteNome,
         totalTamanhoBytes: 0,
@@ -718,6 +755,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         externalEvidenceLedger: s.externalEvidenceLedger,
         sdeDecisionLedger: s.sdeDecisionLedger,
         sdeCalibrationLedger: s.sdeCalibrationLedger,
+        optionalStudyLedger: s.optionalStudyLedger,
         itensBiblioteca: sanitizeLibraryForBackup(s.biblioteca)
       }
     };
@@ -835,6 +873,420 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
   },
 
   limparDecisaoSDE: () => set({ ultimaDecisaoSDE: null }),
+
+  gerarRecomendacaoEstudoOpcional: (date, context, forceNew = false) => {
+    const state = get();
+    const availability = state.getDailyAvailability(date);
+    const lowerBound = new Date(`${date}T12:00:00.000Z`);
+    lowerBound.setUTCDate(lowerBound.getUTCDate() - 6);
+    const lowerDate = lowerBound.toISOString().slice(0, 10);
+    const weeklyStudiedMinutes = state.sessoesEstudo
+      .filter((session) => {
+        const localDate = session.dataLocal ?? toLocalDateKey(session.dataFim, state.configuracao.disponibilidadeEstudo.timeZone);
+        return localDate >= lowerDate && localDate <= date;
+      })
+      .reduce((sum, session) => sum + Math.ceil(session.tempoGastoSegundos / 60), 0);
+    const requestOrdinal = forceNew
+      ? state.optionalStudyLedger.filter((item) => item.localDate === date && item.context === context && item.eventType === "recommendation_generated").length
+      : 0;
+    let sdeV2DecisionInput;
+    try {
+      sdeV2DecisionInput = buildSdeV2DecisionInputFromSnapshot({
+        snapshot: {
+          configuracao: state.configuracao,
+          subassuntos: state.subassuntos,
+          tentativasQuestoes: state.tentativasQuestoes,
+          sessoesEstudo: state.sessoesEstudo,
+          flashcards: state.flashcards,
+          cronogramasRevisao: state.cronogramasRevisao,
+          biblioteca: state.biblioteca,
+          externalEvidenceLedger: state.externalEvidenceLedger,
+          simulados: state.simulados,
+          questoes: state.questoes,
+          decisionLedger: state.sdeDecisionLedger,
+          isolatedEvidence: readIsolatedEvidenceSnapshot(),
+        },
+        referenceDate: date,
+        availableMinutes: weeklyStudiedMinutes >= 600 ? 15 : 30,
+      });
+    } catch {
+      // Unsupported or invalid optional context is recorded as an explicit v2 fallback.
+      sdeV2DecisionInput = undefined;
+    }
+    const recommendation = buildOptionalStudyRecommendation({
+      now: new Date().toISOString(),
+      localDate: date,
+      context,
+      requestOrdinal,
+      scheduledMinutes: availability.scheduledMinutes,
+      completedMinutes: availability.completedMinutes,
+      remainingMinutes: availability.remainingMinutes,
+      weeklyStudiedMinutes,
+      examDate: state.concursos.find((item) => item.id === state.configuracao.concursoAlvoId)?.dataProva,
+      effectiveDecision: state.ultimaDecisaoSDE,
+      disciplines: state.disciplinas,
+      topics: state.assuntos,
+      subtopics: state.subassuntos,
+      sessions: state.sessoesEstudo,
+      reviews: state.cronogramasRevisao,
+      errorCases: state.casosRecuperacaoErro,
+      materials: state.biblioteca,
+      evidence: state.externalEvidenceLedger,
+      sdeV2DecisionInput,
+    });
+    if (!recommendation) return { recommendation: null, generated: false };
+    if (!forceNew) {
+      const existing = state.optionalStudyLedger.find((item) =>
+        item.localDate === date &&
+        item.context === context &&
+        item.eventType === "recommendation_generated" &&
+        item.inputFingerprint === recommendation.inputFingerprint
+      );
+      const existingRecommendation = existing?.payload.recommendation as OptionalStudyRecommendation | undefined;
+      if (existingRecommendation?.engineVersion === OPTIONAL_STUDY_ENGINE_VERSION) return { recommendation: existingRecommendation, generated: false };
+    }
+    const event: OptionalStudyLedgerEvent = {
+      eventId: `optional-event-recommendation-${recommendation.recommendationId}`,
+      schemaVersion: 1,
+      occurredAt: recommendation.generatedAt,
+      localDate: date,
+      eventType: "recommendation_generated",
+      context,
+      recommendationId: recommendation.recommendationId,
+      inputFingerprint: recommendation.inputFingerprint,
+      engineVersion: OPTIONAL_STUDY_ENGINE_VERSION,
+      isOptional: true,
+      mandatory: false,
+      affectsPlanCompliance: false,
+      payload: { recommendation },
+    };
+    const calibration = buildOptionalStudyCalibrationRecord(recommendation);
+    const nextCalibration = state.sdeCalibrationLedger.some((item) => item.calibrationId === calibration.calibrationId)
+      ? state.sdeCalibrationLedger
+      : [...state.sdeCalibrationLedger, calibration];
+    set({
+      optionalStudyLedger: appendOptionalStudyEvent(state.optionalStudyLedger, event),
+      sdeCalibrationLedger: nextCalibration,
+    });
+    get().saveToLocalStorage();
+    return { recommendation, generated: true };
+  },
+
+  manterDescansoOpcional: (date, context = "rest_day_optional") => {
+    const now = new Date().toISOString();
+    const event: OptionalStudyLedgerEvent = {
+      eventId: `optional-event-rest-${date}-${Date.now()}`,
+      schemaVersion: 1,
+      occurredAt: now,
+      localDate: date,
+      eventType: "rest_kept",
+      context,
+      engineVersion: OPTIONAL_STUDY_ENGINE_VERSION,
+      isOptional: true,
+      mandatory: false,
+      affectsPlanCompliance: false,
+      payload: { noPenalty: true, noEvidence: true, noSession: true },
+    };
+    set((state) => ({ optionalStudyLedger: appendOptionalStudyEvent(state.optionalStudyLedger, event) }));
+    get().saveToLocalStorage();
+  },
+
+  ocultarEstudoOpcionalHoje: (date, context = "manual_optional") => {
+    const event: OptionalStudyLedgerEvent = {
+      eventId: `optional-event-hidden-${date}-${Date.now()}`,
+      schemaVersion: 1,
+      occurredAt: new Date().toISOString(),
+      localDate: date,
+      eventType: "hidden_for_today",
+      context,
+      engineVersion: OPTIONAL_STUDY_ENGINE_VERSION,
+      isOptional: true,
+      mandatory: false,
+      affectsPlanCompliance: false,
+      payload: { noPenalty: true, presentationOnly: true },
+    };
+    set((state) => ({ optionalStudyLedger: appendOptionalStudyEvent(state.optionalStudyLedger, event) }));
+    get().saveToLocalStorage();
+  },
+
+  aceitarEstudoOpcional: ({ recommendationId, optionId, durationMinutes, manualOption }) => {
+    const state = get();
+    const recommendationEvent = state.optionalStudyLedger.find((item) => item.eventType === "recommendation_generated" && item.recommendationId === recommendationId);
+    const recommendation = recommendationEvent?.payload.recommendation as OptionalStudyRecommendation | undefined;
+    if (!recommendation) return { success: false, error: "Recomendação opcional não encontrada." };
+    const option = manualOption ?? [recommendation.primary, ...recommendation.alternatives].find((item) => item.optionId === (optionId ?? recommendation.primary.optionId));
+    if (!option) return { success: false, error: "Opção de estudo não encontrada." };
+    const selected: OptionalStudyRecommendationOption = { ...option, durationMinutes: durationMinutes ?? option.durationMinutes };
+    if (!Number.isFinite(selected.durationMinutes) || selected.durationMinutes <= 0) return { success: false, error: "Informe uma duração positiva." };
+    const now = new Date().toISOString();
+    const sessionId = `optional-session-${recommendation.localDate}-${Date.now()}`;
+    const common = {
+      schemaVersion: 1 as const,
+      occurredAt: now,
+      localDate: recommendation.localDate,
+      context: recommendation.context,
+      recommendationId,
+      sessionId,
+      inputFingerprint: recommendation.inputFingerprint,
+      engineVersion: OPTIONAL_STUDY_ENGINE_VERSION,
+      isOptional: true as const,
+      mandatory: false as const,
+      affectsPlanCompliance: false as const,
+    };
+    const accepted: OptionalStudyLedgerEvent = { ...common, eventId: `optional-event-accepted-${sessionId}`, eventType: "accepted", payload: { option: selected, warning: durationWarning(selected.durationMinutes) } };
+    const started: OptionalStudyLedgerEvent = { ...common, eventId: `optional-event-started-${sessionId}`, eventType: "session_started", payload: { option: selected, startedAt: now } };
+    set({ optionalStudyLedger: appendOptionalStudyEvent(appendOptionalStudyEvent(state.optionalStudyLedger, accepted), started) });
+    get().saveToLocalStorage();
+    return { success: true, sessionId, warning: durationWarning(selected.durationMinutes) ?? undefined };
+  },
+
+  pausarEstudoOpcional: (sessionId) => {
+    const state = get();
+    const start = state.optionalStudyLedger.find((item) => item.eventType === "session_started" && item.sessionId === sessionId);
+    if (!start) return { success: false, error: "Sessão opcional não encontrada." };
+    const derived = deriveOptionalStudyState(state.optionalStudyLedger, start.localDate);
+    if (derived.activeSessionId !== sessionId || derived.sessionStatus !== "active") return { success: false, error: "A sessão não está ativa para pausa." };
+    const event: OptionalStudyLedgerEvent = { ...start, eventId: `optional-event-paused-${sessionId}-${Date.now()}`, occurredAt: new Date().toISOString(), eventType: "session_paused", payload: { pausedAt: new Date().toISOString() } };
+    set({ optionalStudyLedger: appendOptionalStudyEvent(state.optionalStudyLedger, event) });
+    get().saveToLocalStorage();
+    return { success: true };
+  },
+
+  retomarEstudoOpcional: (sessionId) => {
+    const state = get();
+    const start = state.optionalStudyLedger.find((item) => item.eventType === "session_started" && item.sessionId === sessionId);
+    if (!start) return { success: false, error: "Sessão opcional não encontrada." };
+    const derived = deriveOptionalStudyState(state.optionalStudyLedger, start.localDate);
+    if (derived.activeSessionId !== sessionId || derived.sessionStatus !== "paused") return { success: false, error: "A sessão não está pausada." };
+    const event: OptionalStudyLedgerEvent = { ...start, eventId: `optional-event-resumed-${sessionId}-${Date.now()}`, occurredAt: new Date().toISOString(), eventType: "session_resumed", payload: { resumedAt: new Date().toISOString() } };
+    set({ optionalStudyLedger: appendOptionalStudyEvent(state.optionalStudyLedger, event) });
+    get().saveToLocalStorage();
+    return { success: true };
+  },
+
+  concluirEstudoOpcional: (sessionId, result) => {
+    const state = get();
+    const start = state.optionalStudyLedger.find((item) => item.eventType === "session_started" && item.sessionId === sessionId);
+    const accepted = state.optionalStudyLedger.find((item) => item.eventType === "accepted" && item.sessionId === sessionId);
+    const option = accepted?.payload.option as OptionalStudyRecommendationOption | undefined;
+    if (!start || !option) return { success: false, error: "Sessão opcional não encontrada." };
+    if (state.optionalStudyLedger.some((item) => item.sessionId === sessionId && ["session_completed", "session_interrupted"].includes(item.eventType))) return { success: false, error: "A sessão opcional já foi encerrada." };
+    const validationError = validateOptionalStudyResult(result);
+    if (validationError) return { success: false, error: validationError };
+
+    const now = new Date().toISOString();
+    const activityKind = result.kind === "questions"
+      ? "questoes"
+      : result.kind === "simulation"
+        ? "simulado"
+        : result.kind === "review"
+          ? "revisao"
+          : result.kind === "technical_practice"
+            ? "pratica"
+            : result.kind === "organization"
+              ? "operacional"
+              : "teoria";
+    const optionalSession: SessaoEstudo = {
+      id: `sess-${sessionId}`,
+      disciplinaId: option.disciplineId,
+      assuntoId: option.topicId,
+      subassuntoId: option.subtopicId,
+      tipo: StudySessionType.MANUAL,
+      atividadeEstudo: activityKind,
+      tempoGastoSegundos: Math.round(result.actualMinutes * 60),
+      concluidaComSucesso: result.kind === "technical_practice" ? result.taskCompleted === true : true,
+      dataInicio: start.occurredAt,
+      dataFim: now,
+      dataLocal: start.localDate,
+      contabilizaNaDisponibilidade: true,
+      anotacoesSession: result.notes,
+      isOptional: true,
+      mandatory: false,
+      affectsPlanCompliance: false,
+      optionalContext: start.context,
+      optionalRecommendationId: start.recommendationId,
+      optionalSessionId: sessionId,
+      createdAt: now,
+    };
+
+    const stats = structuredClone(state.estatisticas);
+    stats.tempoTotalGeralMinutos += result.actualMinutes;
+    const discipline = state.disciplinas.find((item) => item.id === option.disciplineId);
+    const ds = stats.desempenhoGeralPorDisciplina[option.disciplineId] ?? { nomeDisciplina: discipline?.nome ?? "Indefinida", questoesRespondidas: 0, questoesAcertadas: 0, tempoMinutosEstudo: 0 };
+    stats.desempenhoGeralPorDisciplina[option.disciplineId] = { ...ds, tempoMinutosEstudo: ds.tempoMinutosEstudo + result.actualMinutes };
+    stats.updatedAt = now;
+    const updatedDisciplines = state.disciplinas.map((item) => item.id === option.disciplineId ? { ...item, tempoTotalEstudoMinutos: item.tempoTotalEstudoMinutos + result.actualMinutes, updatedAt: now } : item);
+    const updatedTopics = state.assuntos.map((item) => item.id === option.topicId ? { ...item, tempoEstudadoMinutos: item.tempoEstudadoMinutos + result.actualMinutes, updatedAt: now } : item);
+    // Theory declarations are stored in the structured result, but never mark the
+    // subtopic completed or grant mastery by themselves.
+    const updatedSubtopics = state.subassuntos;
+
+    let evidenceLedger = state.externalEvidenceLedger;
+    let evidenceId: string | undefined;
+    if (result.kind === "questions" || result.kind === "simulation") {
+      const sourceAndBoard = deriveOptionalQuestionSourceAndBoard(option, result);
+      const structuredNotes = [result.resolutionConditions, result.notes].filter(Boolean).join(" | ") || undefined;
+      const created = createExternalEvidenceRecord({
+        input: {
+          evidenceType: result.kind === "simulation" ? "external_simulation" : "aggregate_question_batch",
+          source: sourceAndBoard.source,
+          sourceLabel: `Atividade opcional — ${option.method}`,
+          sourceReference: result.sourceReference,
+          prescriptionId: start.recommendationId,
+          sessionId: optionalSession.id,
+          disciplineId: option.disciplineId,
+          topicId: option.topicId,
+          subtopicId: option.subtopicId,
+          syllabusItemId: option.subtopicId ?? option.topicId,
+          examiningBoard: sourceAndBoard.examiningBoard,
+          totalQuestions: result.totalQuestions,
+          correctAnswers: result.correctAnswers,
+          wrongAnswers: result.wrongAnswers,
+          blankAnswers: result.blankAnswers,
+          durationMinutes: result.actualMinutes,
+          actualQuestions: result.totalQuestions,
+          consultedMaterial: result.consultedMaterial ?? "not_applicable",
+          perceivedConfidence: "not_informed",
+          primaryErrorCause: result.primaryErrorCause,
+          difficultPoints: result.batchType,
+          notes: structuredNotes,
+          granularity: "aggregate",
+          recordedAt: now,
+        },
+        taxonomy: buildExternalEvidenceTaxonomy(state),
+      });
+      if (!created.record) return { success: false, error: Object.values(created.validation.fieldErrors).join(" ") };
+      evidenceId = created.record.evidenceId;
+      evidenceLedger = [...evidenceLedger, created.record];
+      stats.questoesRespondidas += result.totalQuestions ?? 0;
+      stats.questoesAcertadas += result.correctAnswers ?? 0;
+      stats.desempenhoGeralPorDisciplina[option.disciplineId] = {
+        ...stats.desempenhoGeralPorDisciplina[option.disciplineId],
+        questoesRespondidas: stats.desempenhoGeralPorDisciplina[option.disciplineId].questoesRespondidas + (result.totalQuestions ?? 0),
+        questoesAcertadas: stats.desempenhoGeralPorDisciplina[option.disciplineId].questoesAcertadas + (result.correctAnswers ?? 0),
+      };
+    }
+
+    let updatedReviewSchedules = state.cronogramasRevisao;
+    if (result.kind === "review" && result.reviewPerformance && option.subtopicId) {
+      const schedule = state.cronogramasRevisao.find((item) => item.subassuntoId === option.subtopicId && !item.isDeleted && !item.desabilitada);
+      if (schedule) {
+        const performance: ReviewPerformance = result.reviewPerformance === "difficult" ? "HARD" : result.reviewPerformance === "fluent" ? "EASY" : "MEDIUM";
+        const completedSchedule = completeReviewSchedule({
+          schedule,
+          performance,
+          reviewedAt: now,
+          examDate: state.concursos.find((item) => item.id === state.configuracao.concursoAlvoId)?.dataProva,
+          peerSchedules: state.cronogramasRevisao,
+          tempoGastoSegundos: Math.round(result.actualMinutes * 60),
+          duracaoFonte: "MANUAL",
+        }) as CronogramaRevisao;
+        updatedReviewSchedules = state.cronogramasRevisao.map((item) => item.id === schedule.id ? completedSchedule : item);
+      }
+    }
+
+    const common = { ...start, occurredAt: now };
+    const completed: OptionalStudyLedgerEvent = { ...common, engineVersion: OPTIONAL_STUDY_ENGINE_VERSION, eventId: `optional-event-completed-${sessionId}`, eventType: "session_completed", payload: { actualMinutes: result.actualMinutes, noMandatoryEffect: true } };
+    const resultEvent: OptionalStudyLedgerEvent = { ...common, engineVersion: OPTIONAL_STUDY_ENGINE_VERSION, eventId: `optional-event-result-${sessionId}`, eventType: "result_recorded", payload: { result, evidenceId, sessionRecordId: optionalSession.id, structured: true } };
+    const activity: LogHistoricoAtividade = {
+      id: `act-${sessionId}`,
+      tipoAtividade: optionalResultHistoryType(result.kind),
+      dataHora: now,
+      descricao: `Atividade opcional — ${option.method}: ${option.topicName}; ${result.actualMinutes} min; ${optionalResultSummary(result)}.`,
+      disciplinaId: option.disciplineId,
+      assuntoId: option.topicId,
+      subassuntoId: option.subtopicId,
+      tempoGastoSegundos: Math.round(result.actualMinutes * 60),
+      metadata: { isOptional: true, mandatory: false, affectsPlanCompliance: false, resultKind: result.kind, method: option.method, structuredResult: result, evidenceId: evidenceId ?? null },
+    };
+    set({
+      optionalStudyLedger: appendOptionalStudyEvent(appendOptionalStudyEvent(state.optionalStudyLedger, completed), resultEvent),
+      sessoesEstudo: [...state.sessoesEstudo, optionalSession],
+      externalEvidenceLedger: evidenceLedger,
+      estatisticas: stats,
+      disciplinas: updatedDisciplines,
+      assuntos: updatedTopics,
+      subassuntos: updatedSubtopics,
+      cronogramasRevisao: updatedReviewSchedules,
+      historicoAtividades: [activity, ...state.historicoAtividades],
+      ultimaDecisaoSDE: null,
+    });
+    get().saveToLocalStorage();
+    return { success: true, evidenceId };
+  },
+
+  interromperEstudoOpcional: (sessionId, actualMinutes = 0) => {
+    const state = get();
+    const start = state.optionalStudyLedger.find((item) => item.eventType === "session_started" && item.sessionId === sessionId);
+    const accepted = state.optionalStudyLedger.find((item) => item.eventType === "accepted" && item.sessionId === sessionId);
+    const option = accepted?.payload.option as OptionalStudyRecommendationOption | undefined;
+    if (!start || !option) return { success: false, error: "Sessão opcional não encontrada." };
+    if (state.optionalStudyLedger.some((item) => item.sessionId === sessionId && ["session_completed", "session_interrupted"].includes(item.eventType))) return { success: false, error: "A sessão opcional já foi encerrada." };
+    if (!Number.isFinite(actualMinutes) || actualMinutes < 0) return { success: false, error: "O tempo real não pode ser negativo." };
+    const now = new Date().toISOString();
+    const interrupted: OptionalStudyLedgerEvent = { ...start, engineVersion: OPTIONAL_STUDY_ENGINE_VERSION, eventId: `optional-event-interrupted-${sessionId}`, occurredAt: now, eventType: "session_interrupted", payload: { actualMinutes, noPenalty: true, noNegativeEvidence: true, terminal: true } };
+    const updates: Partial<ConcurseiroState> = { optionalStudyLedger: appendOptionalStudyEvent(state.optionalStudyLedger, interrupted) };
+    if (actualMinutes > 0) {
+      const activityKind = option.method.includes("question") || option.method === "fgv_questions"
+        ? "questoes"
+        : option.method.includes("review") || option.method === "active_recall" || option.method === "flashcards"
+          ? "revisao"
+          : option.method === "mini_simulation"
+            ? "simulado"
+            : option.method === "technical_practice"
+              ? "pratica"
+              : option.method === "light_organization"
+                ? "operacional"
+                : "teoria";
+      const session: SessaoEstudo = {
+        id: `sess-${sessionId}`,
+        disciplinaId: option.disciplineId,
+        assuntoId: option.topicId,
+        subassuntoId: option.subtopicId,
+        tipo: StudySessionType.MANUAL,
+        atividadeEstudo: activityKind,
+        tempoGastoSegundos: Math.round(actualMinutes * 60),
+        concluidaComSucesso: false,
+        dataInicio: start.occurredAt,
+        dataFim: now,
+        dataLocal: start.localDate,
+        contabilizaNaDisponibilidade: true,
+        isOptional: true,
+        mandatory: false,
+        affectsPlanCompliance: false,
+        optionalContext: start.context,
+        optionalRecommendationId: start.recommendationId,
+        optionalSessionId: sessionId,
+        createdAt: now,
+      };
+      const stats = structuredClone(state.estatisticas);
+      stats.tempoTotalGeralMinutos += actualMinutes;
+      const discipline = state.disciplinas.find((item) => item.id === option.disciplineId);
+      const ds = stats.desempenhoGeralPorDisciplina[option.disciplineId] ?? { nomeDisciplina: discipline?.nome ?? "Indefinida", questoesRespondidas: 0, questoesAcertadas: 0, tempoMinutosEstudo: 0 };
+      stats.desempenhoGeralPorDisciplina[option.disciplineId] = { ...ds, tempoMinutosEstudo: ds.tempoMinutosEstudo + actualMinutes };
+      stats.updatedAt = now;
+      updates.sessoesEstudo = [...state.sessoesEstudo, session];
+      updates.estatisticas = stats;
+      updates.disciplinas = state.disciplinas.map((item) => item.id === option.disciplineId ? { ...item, tempoTotalEstudoMinutos: item.tempoTotalEstudoMinutos + actualMinutes, updatedAt: now } : item);
+      updates.assuntos = state.assuntos.map((item) => item.id === option.topicId ? { ...item, tempoEstudadoMinutos: item.tempoEstudadoMinutos + actualMinutes, updatedAt: now } : item);
+      const activity: LogHistoricoAtividade = {
+        id: `act-interrupted-${sessionId}`,
+        tipoAtividade: optionalMethodHistoryType(option),
+        dataHora: now,
+        descricao: `Atividade opcional interrompida: ${option.method}; ${option.topicName}; ${actualMinutes} min efetivos; sem penalidade e sem resultado inferido.`,
+        disciplinaId: option.disciplineId,
+        assuntoId: option.topicId,
+        subassuntoId: option.subtopicId,
+        tempoGastoSegundos: Math.round(actualMinutes * 60),
+        metadata: { isOptional: true, interrupted: true, noPenalty: true, noNegativeEvidence: true, method: option.method },
+      };
+      updates.historicoAtividades = [activity, ...state.historicoAtividades];
+      updates.ultimaDecisaoSDE = null;
+    }
+    set(updates as Partial<ConcurseiroState>);
+    get().saveToLocalStorage();
+    return { success: true };
+  },
 
   // -------------------------------------------------------------
   // Concurso Actions

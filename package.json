@@ -1,15 +1,15 @@
 {
   "name": "concurseiroos",
   "private": true,
-  "version": "3.34.1",
+  "version": "3.35.2",
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
     "typecheck": "tsc --noEmit",
     "lint": "npm run typecheck",
     "test": "vitest",
-    "test:run": "vitest run",
-    "validate": "npm run validate:memory && npm run diagnostic:audit && npm run training:build && npm run training:audit && npm run knowledge:validate-official && npm run knowledge:build && npm run knowledge:build-taxonomy && npm run knowledge:build-curation && npm run knowledge:build-classification && npm run knowledge:build-routing && npm run learning:audit-error-recovery && npm run simulation:audit && npm run sde:v2-audit && npm run sde:audit && npm run readiness:audit && npm run typecheck && npm run test:run",
+    "test:run": "vitest run --maxWorkers=2",
+    "validate": "bash scripts/runValidationPipeline.sh",
     "build": "npm run validate && npm run build:web && npm run build:server && npm run build:serverless",
     "start": "node dist/server.cjs",
     "clean": "rm -rf dist",
@@ -36,7 +36,9 @@
     "training:audit-git": "node scripts/verifyTrainingSourceGitIntegrity.mjs",
     "training:audit-built-assets": "node scripts/validateBuiltFgvTrainingAssets.mjs",
     "training:smoke-serverless": "node scripts/smokeFgvTrainingServerless.mjs",
-    "sde:v2-audit": "tsx scripts/auditSdeV2.ts"
+    "sde:v2-audit": "tsx scripts/auditSdeV2.ts",
+    "test:hanging-process": "vitest run --maxWorkers=2 --reporter=hanging-process",
+    "termination:audit": "node scripts/auditNaturalTermination.mjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

@@ -1,7 +1,7 @@
 # Estado Atual
 
 Data: 2026-07-19
-Versão: 3.34.1
+Versão: 3.35.2
 
 ## Projeto
 
@@ -9,43 +9,36 @@ ConcurseiroOS — alvo ativo: DATAPREV 2026, Analista de Tecnologia da Informaç
 
 ## Fase atual
 
-A versão 3.34.1 mantém o SDE v1 como única decisão efetiva e executa o SDE v2 em paralelo para calibração prospectiva. O produto continua usando Hoje — Seu Coach, Sessão guiada e Registrar resultado; nenhuma tela, prescrição ou plano paralelo foi criado.
+A versão 3.35.2 corrige exclusivamente o encerramento do pipeline. O comportamento funcional da 3.35.1 permanece integralmente preservado.
 
 ## Implementado
 
-- `activeSdeVersion = v1` como configuração segura e fallback para snapshots antigos;
-- SDE v2 executado sobre a mesma fotografia de dados com `executionMode = shadow`;
-- `affectsPrescription = false` em toda comparação shadow;
-- comparação de disciplina, assunto, subassunto, método, duração, critério de avanço, pré-requisito e score;
-- `sdeCalibrationLedger` append-only com fingerprints objetivos;
-- deduplicação de reload sem mudança de inputs;
-- registro de igualdade, divergência, fallback, evidências e incidência histórica shadow;
-- backup, restauração e sincronização aditivamente compatíveis;
-- interface com uma única prescrição e auditoria secundária recolhida.
+- encerramento explícito do serviço do esbuild usado no teste ESM;
+- harness HTTP de teste com cliente sem keep-alive, consumo integral de respostas e rastreamento de sockets;
+- teardown explícito de servidores, conexões ociosas, conexões ativas e listeners temporários;
+- smoke serverless sem `fetch` global e com `PASS` somente depois do fechamento confirmado;
+- auditoria de subprocessos para saída natural, código zero, ausência de sinal e ausência de descendentes;
+- comando `test:hanging-process` para diagnóstico reproduzível;
+- watchdog tratado exclusivamente como gate de falha.
 
 ## Validado
 
-- regressão completa, TypeScript e auditorias institucionais;
-- builds web, Express e serverless;
-- smoke HTTP compilado e smoke serverless funcional;
-- SDE v1 confirmado como prescrição efetiva;
-- SDE v2 confirmado em paralelo sem efeito prescritivo;
-- incidência histórica mantida com peso zero;
-- `npm audit` sem vulnerabilidades.
-
-## Preservado
-
-Adaptador de evidências, pesos, grafo, score do SDE v2, SDE v1, dados do usuário, ledger externo, corpus FGV, Treino FGV, Diagnóstico Piloto, simulados, autenticação, backup e sincronização. Nenhuma evidência foi duplicada ou convertida em tentativa sintética.
+- teardown direcionado dos testes HTTP e do smoke serverless;
+- cliente sem keep-alive e consumo integral das respostas;
+- fechamento de conexões ociosas e ativas;
+- auditoria de timeout, sinal e processos descendentes;
+- preservação dos contratos funcionais existentes.
 
 ## Problemas conhecidos
 
-- a calibração ainda não possui série prospectiva suficiente com resultados reais de sessão;
-- não há promoção automática do SDE v2;
-- participações internas neutras e 20 relações aprovadas permanecem como na 3.34.0;
-- incidência histórica permanece sem peso decisório;
-- merge multi-dispositivo dos ledgers ainda usa reconciliação integral;
+- o aviso não bloqueante de tamanho do chunk web permanece;
+- a confirmação final em runners remotos depende da publicação do commit;
 - nenhum sistema garante aprovação.
+
+## Preservado
+
+Disponibilidade de 120 minutos, migração 180 → 120, domingo livre, estudo opcional, resultados estruturados, `optionalStudyLedger`, backup 2.5.0, SDE v1 efetivo, SDE v2 shadow real, Treino FGV, Diagnóstico Piloto, simulados, corpus, taxonomia e dados canônicos.
 
 ## Próxima tarefa
 
-Publicar a v3.34.1 e observar comparações v1 × v2, fallbacks e resultados reais de sessão sem alterar pesos, grafo ou prescrição efetiva.
+Publicar a v3.35.2 e confirmar no GitHub Actions/Vercel que `validate`, `build` e o smoke devolvem o controle ao shell sem intervenção externa.

@@ -1,0 +1,289 @@
+
+> concurseiroos@3.35.1 validate
+> bash scripts/runValidationPipeline.sh
+
+
+[validate] validate:memory
+Memória institucional sincronizada com a versão 3.35.1.
+
+[validate] diagnostic:audit
+[pilot-diagnostic] PASS — 24 questões, 6 assets, controles 14/53, catálogo público sanitizado.
+
+[validate] training:build
+Treino FGV: 797 registros preservados; 664 questões elegíveis; 301 assets validados.
+
+[validate] training:audit
+Treino FGV validado: 797 registros de origem, 664 questões elegíveis, 301 assets íntegros.
+
+[validate] knowledge:validate-official
+{
+  "status": "PASS",
+  "exams": 95,
+  "questions": 6462,
+  "answerKeySections": 1344,
+  "reviewQueueItems": 646,
+  "corpusSha256": "138d03d3632d0db6c839b4c07a2c36558898c0929485baf2bc396b44c0479210",
+  "errors": []
+}
+
+[validate] knowledge:build
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-19T21:17:10.497Z",
+  "shadowMode": true,
+  "counts": {
+    "documents": 181,
+    "contests": 54,
+    "declaredLogicalDuplicates": 20,
+    "links": 95,
+    "incidenceEligibleLinks": 77,
+    "confirmedLinks": 77,
+    "inferredLinks": 9,
+    "insufficientLinks": 9
+  },
+  "integrity": {
+    "valid": true,
+    "errors": []
+  },
+  "questionCorpus": {
+    "extractedQuestions": 6462,
+    "canonicalQuestions": 5324,
+    "definitiveAnswerLinks": 2840,
+    "reviewQueueItems": 646,
+    "status": "EXTRACTED_SHADOW_REVIEW_REQUIRED",
+    "eligibleForSDEHistoricalIncidence": false
+  },
+  "policy": "Historical incidence is not connected to the SDE. Document links are package-level evidence only.",
+  "catalogSha256": "27d98d3344d7f61d53f474a91886c45b5c0ee08d6bb41e4fa14f9794b6a08f16"
+}
+
+[validate] knowledge:build-taxonomy
+{
+  "status": "PASS",
+  "nodes": 123,
+  "subtopics": 94,
+  "materialOnly": 63,
+  "gaps": 31,
+  "shadowMode": true
+}
+
+[validate] knowledge:build-curation
+{
+  "status": "PASS",
+  "total": 646,
+  "p0Target": 43,
+  "p1High": 58,
+  "p2Medium": 257,
+  "p3Backlog": 288
+}
+
+[validate] knowledge:build-classification
+{
+  "status": "PASS",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-16T10:27:00-03:00",
+  "shadowMode": true,
+  "processedQuestions": 6462,
+  "skippedNonCanonicalDuplicates": 1138,
+  "proposedClassifications": 656,
+  "humanApprovedClassifications": 0,
+  "incidenceEligibleClassifications": 0,
+  "policy": "Rule-based proposals support the curation queue only. They do not define source taxonomy, target equivalence or SDE incidence.",
+  "byTarget": {
+    "dp26-p3-esp-bd-sql": 123,
+    "dp26-p3-esp-bd-integracao-ingestao": 16,
+    "dp26-p3-esp-ia-dados-bigdata": 74,
+    "dp26-p3-esp-si-acesso": 57,
+    "dp26-p3-esp-metodologias-ageis": 50,
+    "dp26-p3-esp-design-arquitetura": 36,
+    "dp26-p3-esp-testes": 15,
+    "dp26-p3-esp-si-sdl-owasp": 11,
+    "dp26-p3-esp-metricas": 18,
+    "dp26-p3-esp-requisitos": 18,
+    "dp26-p3-esp-padroes-dados-web": 36,
+    "dp26-p3-esp-arquitetura-software": 25,
+    "dp26-p3-esp-linguagens-frameworks": 65,
+    "dp26-p3-esp-devops-git": 32,
+    "dp26-p3-esp-si-politicas": 12,
+    "dp26-p3-leg-lgpd-capitulos": 39,
+    "dp26-p3-leg-lai-capitulos": 11,
+    "dp26-p3-esp-bd-nosql": 18
+  }
+}
+
+[validate] knowledge:build-routing
+{
+  "status": "PASS",
+  "subtopics": 94,
+  "exactTheory": 57,
+  "topicTheoryFallback": 0,
+  "manualTheoryLocatorRequired": 37,
+  "exactDiagnosticQuestionSet": 52,
+  "topicDiagnosticQuestionSet": 0,
+  "externalDiagnosticFallback": 42,
+  "noExecutableDiagnosticSource": 0,
+  "unsafeSiblingRoutes": 0
+}
+
+[validate] learning:audit-error-recovery
+{
+  "status": "PASS",
+  "causes": 7,
+  "confirmationsRequired": 2
+}
+
+[validate] simulation:audit
+{
+  "schemaVersion": "1.0.0",
+  "policyVersion": "OFFICIAL_BLUEPRINT_IDENTIFIED_SOURCES_V1",
+  "generatedAt": "2026-07-19T21:17:16.082Z",
+  "status": "PASS",
+  "blueprint": {
+    "competitionId": "dataprev-2026-perfil-3",
+    "officialDocument": "Edital DATAPREV 001/2026",
+    "disciplines": 6,
+    "totalQuestions": 70,
+    "maximumPoints": 115,
+    "durationMinutes": 240,
+    "minimumTotalPoints": 57.5,
+    "eliminatesOnZeroDiscipline": true
+  },
+  "safeguards": {
+    "identifiedSourceRequired": true,
+    "generatedQuestionsAllowed": false,
+    "generatedAnswerKeysAllowed": false,
+    "historicalIncidenceChanged": false,
+    "sdeRankingChangedByAggregateResult": false,
+    "blanksRecordedSeparately": true,
+    "partialGlobalEligibilityEvaluated": false
+  },
+  "sample": {
+    "zeroScoreDisciplineIds": [
+      "dp26-p3-portugues"
+    ],
+    "correctionPriority": "ZERO_SCORE_RISK"
+  },
+  "errors": []
+}
+
+[validate] sde:v2-audit
+SDE v2 shadow audit PASS: 20 relation(s), 1 eligible evidence(s), 1 fallback(s).
+
+[validate] sde:audit
+SDE reliability audit PASS: 117 action(s), 50 parameter(s).
+
+[validate] readiness:audit
+{
+  "status": "READY_FOR_LOCAL_DAILY_USE",
+  "confidence": "HIGH",
+  "warnings": 0
+}
+
+[validate] typecheck
+
+[validate] test:run
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.10 [39m[90m/mnt/data/concurseiroos_3351_release_validation[39m
+
+ [32m✓[39m src/core/sde/tests/sde.test.ts [2m([22m[2m59 tests[22m[2m)[22m[32m 47[2mms[22m[39m
+ [32m✓[39m src/features/pilotDiagnostic/tests/pilotDiagnostic.test.ts [2m([22m[2m32 tests[22m[2m)[22m[32m 41[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/storeSdeIntegration.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 145[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/planner.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/sde.b11.test.ts [2m([22m[2m29 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+ [32m✓[39m src/core/review/tests/reviewEngine.test.ts [2m([22m[2m18 tests[22m[2m)[22m[32m 40[2mms[22m[39m
+ [32m✓[39m src/features/fgvTraining/tests/fgvTraining.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 189[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyStoreIntegration.test.ts [2m([22m[2m33 tests[22m[2m)[22m[32m 179[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyIntegrity351.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 65[2mms[22m[39m
+ [32m✓[39m src/config/concursos/dataprev-2026-perfil-3/tests/configuration.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 72[2mms[22m[39m
+ [32m✓[39m src/core/prescription/tests/prescriptionEngine.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyStoreIntegrity351.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 160[2mms[22m[39m
+ [32m✓[39m src/core/externalEvidence/tests/ledger.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/mathematicalSafety.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/sdeV2Integration.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 218[2mms[22m[39m
+ [32m✓[39m src/integrations/coach/tests/coachContext.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 189[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/sdeShadowCalibration.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 247[2mms[22m[39m
+ [32m✓[39m src/core/sde-v2/tests/knowledgeAndGraph.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 65[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/materialPolicy.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/features/fgvTraining/tests/fgvTrainingHotfix.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/dataprevDecisionAdapter.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 208[2mms[22m[39m
+ [32m✓[39m src/core/sde-v2/tests/methodAndScore.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/server/tests/runtimeConfiguration.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 373[2mms[22m[39m
+ [32m✓[39m src/core/backup/tests/backupIntegrity.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 71[2mms[22m[39m
+ [32m✓[39m src/core/externalEvidence/tests/storeIntegration.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 63[2mms[22m[39m
+ [32m✓[39m src/core/optionalStudy/tests/optionalStudyEngine.test.ts [2m([22m[2m25 tests[22m[2m)[22m[32m 36[2mms[22m[39m
+ [32m✓[39m src/core/simulations/tests/simulationStoreIntegration.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/core/sde-v2/tests/evidenceAdapter.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m src/core/evidence/tests/evidencePolicy.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/studySessionTraceability.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m src/core/availability/tests/availabilityMigration.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 71[2mms[22m[39m
+ [32m✓[39m src/core/diagnostic/tests/diagnosticEngine.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/serverlessEsmResolution.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 497[2mms[22m[39m
+     [33m[2m✓[22m[39m loads the emitted diagnostic and shared Express entrypoints with native Node ESM resolution [33m 492[2mms[22m[39m
+ [32m✓[39m src/core/review/tests/errorRecovery.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/core/simulations/tests/simulationEngine.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/snapshotPolicy.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/trainingCorpusGitIntegrity.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 124[2mms[22m[39m
+ [32m✓[39m src/core/knowledge/tests/officialCorpus.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/vercelExpressEntrypoint.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/server/tests/fgvTrainingEndpoint.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 297[2mms[22m[39m
+ [32m✓[39m src/core/roadmap/tests/weeklyOutlook.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/core/flashcards/tests/flashcardScheduler.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/core/weekly/tests/weeklyCalibration.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m src/core/questions/tests/externalQuestionBanks.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/pedagogicalRoutingAudit.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/availability/tests/availability.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 59[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/libraryPrivacy.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/guidedLearningStoreIntegration.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/core/prescription/tests/questionBatchProgress.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/appAccessPolicy.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/privateDocumentPolicy.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m src/core/knowledge/tests/knowledgeEngine.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/features/fgvTraining/tests/fgvTrainingApiHotfix.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 58[2mms[22m[39m
+ [32m✓[39m src/core/roadmap/tests/examHorizon.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 63[2mms[22m[39m
+ [32m✓[39m src/core/taxonomy/tests/taxonomy.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/core/prescription/tests/studyFocusGuide.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/learningProtocols.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/environment.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 56[2mms[22m[39m
+ [32m✓[39m src/core/diagnostic/tests/diagnosticPlacement.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/questions/tests/questionEligibility.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/core/curation/tests/curation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+ [32m✓[39m src/core/externalEvidence/tests/uiGovernance.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/serverlessDiagnostics.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 71[2mms[22m[39m
+ [32m✓[39m src/core/backup/tests/storeBackupMigration.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m src/config/concursos/tests/competitionIsolation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 55[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/dynamicLibraryCatalog.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/navigation/tests/navigationModel.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m src/server/tests/pilotDiagnosticEndpoint.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 333[2mms[22m[39m
+     [33m[2m✓[22m[39m não fornece gabarito por GET e corrige somente após POST de finalização [33m 331[2mms[22m[39m
+ [32m✓[39m src/config/concursos/dataprev-2026-perfil-3/tests/pedagogicalRoutingSafety.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/repositoryHygiene.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 143[2mms[22m[39m
+ [32m✓[39m src/config/concursos/tests/registry.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 68[2mms[22m[39m
+ [32m✓[39m src/integrations/localFiles/tests/privatePdfIndexer.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/dataprevRoadmapAdapter.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 250[2mms[22m[39m
+ [32m✓[39m src/core/coach/tests/operationalCoach.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/core/learning/tests/guidedResponsePolicy.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/shadow/tests/historicalMatrix.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/integrations/localFiles/tests/privatePdfAccess.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/integrations/localStorage/tests/resilientSnapshot.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/core/classification/tests/ruleBasedClassifier.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/rlsMigration.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/classification/tests/classificationPolicy.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/learning/tests/learningCycle.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/core/sde/tests/rankingStability.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/deployment/tests/brandRendering.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/readiness/tests/productReadiness.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/presentation/tests/decisionWarnings.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/features/externalEvidence/tests/navigation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/integrations/sde/tests/sdeShadowUiContract.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/core/onboarding/tests/onboarding.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/authPolicy.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/core/materials/tests/libraryViewGovernance.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/integrations/cloud/tests/onlineAccountViewGovernance.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/layout/tests/appShellLayout.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/config/tests/appMetadata.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m94 passed[39m[22m[90m (94)[39m
+[2m      Tests [22m [1m[32m710 passed[39m[22m[90m (710)[39m
+[2m   Start at [22m 21:17:25
+[2m   Duration [22m 24.22s[2m (transform 2.78s, setup 0ms, import 7.91s, tests 5.15s, environment 8ms)[22m
+

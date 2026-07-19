@@ -163,7 +163,7 @@ export function createSixDayAvailability(params?: {
   timeZone?: string;
   includesBreaks?: boolean;
 }): StudyAvailabilityConfig {
-  const minutes = params?.minutesPerActiveDay ?? 180;
+  const minutes = params?.minutesPerActiveDay ?? 120;
   const restDay = params?.restDay ?? 0;
   assertIntegerMinutes(minutes, "minutesPerActiveDay");
   if (minutes === 0) throw new Error("minutesPerActiveDay deve ser positivo.");

@@ -1,0 +1,14 @@
+
+> concurseiroos@3.35.1 training:audit-git
+> node scripts/verifyTrainingSourceGitIntegrity.mjs --require-git
+
+Integridade canônica dos CSVs do Treino FGV:
+┌─────────┬─────────────────────────────────────────────────────────────────┬──────────────┬────────────────────────────────────────────────────────────────────┬──────┬──────────┬─────────┐
+│ (index) │ file                                                            │ expectedSize │ expectedSha256                                                     │ crlf │ worktree │ gitBlob │
+├─────────┼─────────────────────────────────────────────────────────────────┼──────────────┼────────────────────────────────────────────────────────────────────┼──────┼──────────┼─────────┤
+│ 0       │ 'CUR-BD-BANCO-OPERACIONAL-v2-APTAS-ESTUDO.csv'                  │ 148440       │ 'ed528ba4a7b0a21c3eb839dae150d04e856b96f7c35561f233b4a216f7195f25' │ 666  │ 'PASS'   │ 'PASS'  │
+│ 1       │ 'CUR-BD-BANCO-OPERACIONAL-v2-POTENCIALMENTE-APTAS-SIMULADO.csv' │ 148189       │ '05501d6c16c0e8e90dc4f6239a1d5f0815e0750925bd0cc9ce606b4ae98eecb0' │ 665  │ 'PASS'   │ 'PASS'  │
+│ 2       │ 'CUR-BD-BANCO-OPERACIONAL-v2-EXCLUIDAS-PENDENTES.csv'           │ 29812        │ 'a3b9460286ce6c37cdec8f3d61f05aea28864b6a7bf69e3ef0b025c40e50c841' │ 133  │ 'PASS'   │ 'PASS'  │
+│ 3       │ 'CUR-BD-BANCO-OPERACIONAL-v2-RECUPERACAO-87.csv'                │ 15058        │ 'ea00d70894b7d99d19037f33fbb2b06f1be8f9ba37832096a2be81e20fe068a1' │ 88   │ 'PASS'   │ 'PASS'  │
+└─────────┴─────────────────────────────────────────────────────────────────┴──────────────┴────────────────────────────────────────────────────────────────────┴──────┴──────────┴─────────┘
+Verificação de blobs Git: PASS.

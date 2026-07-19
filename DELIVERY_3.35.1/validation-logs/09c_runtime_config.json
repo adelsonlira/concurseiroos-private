@@ -1,0 +1,1 @@
+{"supabase":{"configured":false,"url":null,"anonKey":null,"source":"NONE","configurationIssue":null,"snapshotTable":"user_snapshots","privateBucket":"private-study-materials"},"auth":{"mode":"optional","allowSelfSignup":false},"ai":{"configured":false,"model":"gemini-3.5-flash"}}

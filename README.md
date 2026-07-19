@@ -175,3 +175,18 @@ A versão 3.33.0 transforma o registro manual em um ledger append-only para resu
 As novas evidências permanecem em `shadow` com `affectsSde: false`. Elas não alteram mastery, prioridades, roadmap, sessões ou a prescrição diária nesta versão.
 
 Consulte `.ai/sprints/SPRINT-3.33.0.md`, `.ai/decisions/ADR-034-append-only-external-evidence-ledger.md` e os relatórios da versão em `docs/`.
+
+## Disponibilidade real e estudo opcional — 3.35.0
+
+O perfil DATAPREV usa 120 minutos de segunda a sábado e domingo como descanso. Somente o padrão legado exato de 180 minutos é migrado. Em descanso ou após concluir o plano obrigatório, o Coach pode sugerir uma atividade opcional sem atraso, aderência negativa ou compensação. Sessões aceitas registram apenas tempo e resultados reais. O SDE v1 continua efetivo e o SDE v2 permanece em shadow mode. Consulte `docs/AVAILABILITY_AND_MIGRATION_3.35.0.md` e `docs/OPTIONAL_STUDY_3.35.0.md`.
+
+## Integridade do Estudo Opcional e Shadow Real — 3.35.1
+
+A versão 3.35.1 substitui a comparação opcional fictícia por execução real do SDE v2 através de um adaptador dedicado. Somente uma saída originada em `runSdeV2Decision` pode ser identificada como versão 2.0; ausência de suporte produz fallback explícito. O SDE v1 continua sendo a única fonte da recomendação mostrada.
+
+Recomendações opcionais agora exigem sinais reais de erro, revisão, material e pré-requisito. Fonte e banca são registradas separadamente, resultados são estruturados por método, teoria não conclui subassunto automaticamente e sessões interrompidas contabilizam apenas o tempo efetivo, sem penalidade ou dupla contagem. Consulte `docs/OPTIONAL_STUDY_REAL_SHADOW_3.35.1.md`, `docs/OPTIONAL_STUDY_STRUCTURED_RESULTS_3.35.1.md` e `docs/OPTIONAL_STUDY_SOURCE_BOARD_MATRIX_3.35.1.md`.
+
+
+## Encerramento Determinístico da Validação — 3.35.2
+
+A versão 3.35.2 corrige exclusivamente recursos HTTP e subprocessos residuais da suíte e do smoke serverless. O pipeline agora consome respostas integralmente, fecha sockets e servidores antes de reportar sucesso e audita saída natural sem aceitar timeout como aprovação. Consulte `docs/DETERMINISTIC_VALIDATION_TERMINATION_3.35.2.md`.

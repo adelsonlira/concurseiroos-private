@@ -14,6 +14,7 @@ import type {
 } from "./core/simulations/types";
 import type { ExternalEvidenceRecord } from "./core/externalEvidence/types";
 import type { DecisionRecord, SdeCalibrationRecord } from "./core/sde-v2/types";
+import type { OptionalStudyLedgerEvent } from "./core/optionalStudy/types";
 import type {
   AnswerConfidence,
   ErrorCause,
@@ -64,7 +65,9 @@ export type StudyActivityKind =
   | "questoes"
   | "revisao"
   | "flashcards"
-  | "simulado";
+  | "simulado"
+  | "pratica"
+  | "operacional";
 
 export interface StudySessionDecisionContext {
   atividadeEstudo: StudyActivityKind;
@@ -84,6 +87,10 @@ export interface StudySessionDecisionContext {
   questionSourceKind?: "PRIVATE_MATERIAL" | "EXTERNAL_BANK";
   /** Explicit user confirmation after a theory session; never inferred automatically. */
   markTheoryCompleted?: boolean;
+  isOptional?: boolean;
+  optionalContext?: "rest_day_optional" | "extra_after_required_plan" | "manual_optional";
+  affectsPlanCompliance?: false;
+  optionalRecommendationId?: string;
 }
 
 export enum StudySessionType {
@@ -542,7 +549,7 @@ export interface AgendaEvento {
 // ------------------------------------------
 export interface LogHistoricoAtividade {
   id: string;
-  tipoAtividade: "ESTUDO_TEORIA" | "RESOLUCAO_QUESTAO" | "REVISAO_FLASHCARD" | "REVISAO_PROGRAMADA" | "SIMULADO" | "AI_COACH_CHAT" | "PARSER_DOCUMENTO";
+  tipoAtividade: "ESTUDO_TEORIA" | "RESOLUCAO_QUESTAO" | "REVISAO_FLASHCARD" | "REVISAO_PROGRAMADA" | "SIMULADO" | "PRATICA_TECNICA" | "ATIVIDADE_OPERACIONAL" | "AI_COACH_CHAT" | "PARSER_DOCUMENTO";
   dataHora: string;
   descricao: string; // e.g., "Estudou Direito de Propriedade por 45 minutos"
   tempoGastoSegundos?: number;
@@ -784,6 +791,12 @@ export interface SessaoEstudo {
   dataLocal?: string;
   contabilizaNaDisponibilidade?: boolean;
   anotacoesSession?: string; // notes generated on focus mode
+  isOptional?: boolean;
+  mandatory?: boolean;
+  affectsPlanCompliance?: boolean;
+  optionalContext?: "rest_day_optional" | "extra_after_required_plan" | "manual_optional";
+  optionalRecommendationId?: string;
+  optionalSessionId?: string;
   createdAt: string;
 }
 
@@ -826,6 +839,7 @@ export interface BackupExportSchema {
     externalEvidenceLedger: ExternalEvidenceRecord[];
     sdeDecisionLedger?: DecisionRecord[];
     sdeCalibrationLedger?: SdeCalibrationRecord[];
+    optionalStudyLedger?: OptionalStudyLedgerEvent[];
     itensBiblioteca: ItemBiblioteca[];
   };
 }

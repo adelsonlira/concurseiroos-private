@@ -1,0 +1,7 @@
+pid 53061 2026-07-19T22:28:51.235Z
+closed { code: 0, signal: null } 2026-07-19T22:29:33.861Z
+after 0 exists true processes 53335     1 53061 Z         28 [esbuild] <defunct> 2026-07-19T22:29:33.887Z
+after 250 exists true processes 53335     1 53061 Z         28 [esbuild] <defunct> 2026-07-19T22:29:34.160Z
+after 1000 exists false processes <none> 2026-07-19T22:29:35.186Z
+after 3000 exists false processes <none> 2026-07-19T22:29:38.210Z
+after 10000 exists false processes <none> 2026-07-19T22:29:48.237Z

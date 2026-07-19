@@ -235,6 +235,7 @@ export interface SdeCalibrationRecord {
   activeSdeVersion: "v1";
   executionMode: "shadow";
   affectsPrescription: false;
+  decisionContext?: "daily_prescription" | "optional_study";
   v1Decision: SdeDecisionComparisonSnapshot;
   v2Decision: SdeDecisionComparisonSnapshot | null;
   divergences: SdeCalibrationDivergence[];

@@ -1,0 +1,63 @@
+
+> concurseiroos@3.35.1 build:web
+> vite build && npm run diagnostic:audit-built-assets && npm run training:audit-built-assets
+
+[36mvite v6.4.3 [32mbuilding for production...[36m[39m
+transforming...
+[32m✓[39m 2282 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mpublic/[22m[32mindex.html                                         [39m[1m[2m    1.08 kB[22m[1m[22m[2m │ gzip:   0.47 kB[22m
+[2mpublic/[22m[2massets/[22m[32mq185-alternativa-b-CbImi4FU.png             [39m[1m[2m    3.35 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mq185-alternativa-c-CYQvXYGS.png             [39m[1m[2m    3.43 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mq185-alternativa-a-Vc8Pyi-U.png             [39m[1m[2m    3.62 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mq185-alternativa-e-DINnOqgG.png             [39m[1m[2m    5.13 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mq185-alternativa-d-rpOa5IaA.png             [39m[1m[2m    6.41 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mq14-modelagem-dimensional-3ZGsEBq0.png      [39m[1m[2m   38.51 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[32mpdf.worker.min-DEtVeC4l.mjs                 [39m[1m[2m1,255.07 kB[22m[1m[22m
+[2mpublic/[22m[2massets/[22m[35mindex-BRKR0EDS.css                          [39m[1m[2m   85.29 kB[22m[1m[22m[2m │ gzip:  13.60 kB[22m
+[2mpublic/[22m[2massets/[22m[36mauthenticatedFetch-Cxk0f-rh.js              [39m[1m[2m    0.29 kB[22m[1m[22m[2m │ gzip:   0.25 kB[22m
+[2mpublic/[22m[2massets/[22m[36mOperationalScreenGuide-wNbBCuzE.js          [39m[1m[2m    0.95 kB[22m[1m[22m[2m │ gzip:   0.43 kB[22m
+[2mpublic/[22m[2massets/[22m[36mExternalQuestionSourcePlanCard-B7YWikYU.js  [39m[1m[2m    2.45 kB[22m[1m[22m[2m │ gzip:   1.05 kB[22m
+[2mpublic/[22m[2massets/[22m[36mprivatePdfAccess-YzKv-o5D.js                [39m[1m[2m    4.60 kB[22m[1m[22m[2m │ gzip:   2.03 kB[22m
+[2mpublic/[22m[2massets/[22m[36mPrivatePdfOpenButton-C0scrUrk.js            [39m[1m[2m    7.98 kB[22m[1m[22m[2m │ gzip:   3.11 kB[22m
+[2mpublic/[22m[2massets/[22m[36mWeeklyCalibrationView-ByTjIKC_.js           [39m[1m[2m   10.48 kB[22m[1m[22m[2m │ gzip:   3.27 kB[22m
+[2mpublic/[22m[2massets/[22m[36mFlashcardView-ilc1RnEU.js                   [39m[1m[2m   11.78 kB[22m[1m[22m[2m │ gzip:   3.85 kB[22m
+[2mpublic/[22m[2massets/[22m[36mBackupSettingsView-gKhM-jHo.js              [39m[1m[2m   12.25 kB[22m[1m[22m[2m │ gzip:   4.15 kB[22m
+[2mpublic/[22m[2massets/[22m[36mStrategicRoadmapView-C4c2aV3R.js            [39m[1m[2m   15.05 kB[22m[1m[22m[2m │ gzip:   4.31 kB[22m
+[2mpublic/[22m[2massets/[22m[36mExerciseDeskView-BaIIJFQf.js                [39m[1m[2m   15.09 kB[22m[1m[22m[2m │ gzip:   5.05 kB[22m
+[2mpublic/[22m[2massets/[22m[36mSimulationsView-Cm5VWQS7.js                 [39m[1m[2m   19.06 kB[22m[1m[22m[2m │ gzip:   5.23 kB[22m
+[2mpublic/[22m[2massets/[22m[36mFgvTrainingView-emEtGYQj.js                 [39m[1m[2m   22.70 kB[22m[1m[22m[2m │ gzip:   6.26 kB[22m
+[2mpublic/[22m[2massets/[22m[36mPilotDiagnosticView-C9ObDmoo.js             [39m[1m[2m   22.79 kB[22m[1m[22m[2m │ gzip:   5.74 kB[22m
+[2mpublic/[22m[2massets/[22m[36mquestionBatchProgress-4jXkFA54.js           [39m[1m[2m   24.38 kB[22m[1m[22m[2m │ gzip:   6.98 kB[22m
+[2mpublic/[22m[2massets/[22m[36mReviewAndErrorsView-CK9iQHkx.js             [39m[1m[2m   27.33 kB[22m[1m[22m[2m │ gzip:   7.71 kB[22m
+[2mpublic/[22m[2massets/[22m[36mCoachIAView-m2cG5Sva.js                     [39m[1m[2m   27.35 kB[22m[1m[22m[2m │ gzip:   8.98 kB[22m
+[2mpublic/[22m[2massets/[22m[36mOnlineAccountView-BUGKPMDI.js               [39m[1m[2m   28.50 kB[22m[1m[22m[2m │ gzip:   7.49 kB[22m
+[2mpublic/[22m[2massets/[22m[36mFocusModeDesk-lPmJ1SFw.js                   [39m[1m[2m   33.45 kB[22m[1m[22m[2m │ gzip:   9.37 kB[22m
+[2mpublic/[22m[2massets/[22m[36mvendor-icons-BE5vdkTc.js                    [39m[1m[2m   39.12 kB[22m[1m[22m[2m │ gzip:   7.89 kB[22m
+[2mpublic/[22m[2massets/[22m[36mDashboardView-B9kdU0wP.js                   [39m[1m[2m   49.70 kB[22m[1m[22m[2m │ gzip:  12.89 kB[22m
+[2mpublic/[22m[2massets/[22m[36mLibraryView-DIOovndH.js                     [39m[1m[2m   50.31 kB[22m[1m[22m[2m │ gzip:  13.76 kB[22m
+[2mpublic/[22m[2massets/[22m[36mvendor-motion-CriRwHdM.js                   [39m[1m[2m  128.79 kB[22m[1m[22m[2m │ gzip:  42.35 kB[22m
+[2mpublic/[22m[2massets/[22m[36mVerticalizedSyllabusView-NDvOdQHy.js        [39m[1m[2m  149.26 kB[22m[1m[22m[2m │ gzip:  12.57 kB[22m
+[2mpublic/[22m[2massets/[22m[36mindex-1m52O8Tp.js                           [39m[1m[2m  166.97 kB[22m[1m[22m[2m │ gzip:  47.42 kB[22m
+[2mpublic/[22m[2massets/[22m[36mvendor-react-BIDnxaey.js                    [39m[1m[2m  194.17 kB[22m[1m[22m[2m │ gzip:  60.74 kB[22m
+[2mpublic/[22m[2massets/[22m[36mvendor-supabase-CLLjj4df.js                 [39m[1m[2m  207.97 kB[22m[1m[22m[2m │ gzip:  53.80 kB[22m
+[2mpublic/[22m[2massets/[22m[36mcompetition-packages-CM4G3db6.js            [39m[1m[2m  421.22 kB[22m[1m[22m[2m │ gzip:  43.69 kB[22m
+[2mpublic/[22m[2massets/[22m[36mvendor-misc-CzU8uSlK.js                     [39m[1m[2m  483.32 kB[22m[1m[22m[2m │ gzip: 143.60 kB[22m
+[2mpublic/[22m[2massets/[22m[36mstudy-engine-8MDrCzvb.js                    [39m[1m[33m1,088.10 kB[39m[22m[2m │ gzip: 254.88 kB[22m
+[33m
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[32m✓ built in 6.15s[39m
+
+> concurseiroos@3.35.1 diagnostic:audit-built-assets
+> node scripts/validateBuiltDiagnosticAssets.mjs
+
+[pilot-diagnostic-build] PASS — seis assets emitidos como URLs de produção.
+
+> concurseiroos@3.35.1 training:audit-built-assets
+> node scripts/validateBuiltFgvTrainingAssets.mjs
+
+Treino FGV: 301 assets emitidos e bundle web sem metadados privados amostrados.

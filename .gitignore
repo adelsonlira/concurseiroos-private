@@ -7,3 +7,6 @@ coverage/
 .env*
 !.env.example
 public/
+
+# Local process-exit audit evidence
+reports/process-termination/

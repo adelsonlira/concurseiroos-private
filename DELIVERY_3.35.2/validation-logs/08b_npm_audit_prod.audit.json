@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "label": "08b_npm_audit_prod",
+  "command": [
+    "npm",
+    "audit",
+    "--omit=dev"
+  ],
+  "cwd": "/mnt/data/concurseiroos_3352_clean",
+  "startedAt": "2026-07-19T22:34:15.369Z",
+  "endedAt": "2026-07-19T22:34:19.566Z",
+  "durationMs": 4197,
+  "timeoutMs": 60000,
+  "timedOut": false,
+  "exitCode": 0,
+  "signal": null,
+  "descendantProcessGroupRemaining": false,
+  "quiescenceWaitMs": 0,
+  "missingPatterns": [],
+  "matchedForbiddenPatterns": [],
+  "naturalExit": true
+}

@@ -5,6 +5,8 @@ import {
   validateBackup
 } from "../backupIntegrity";
 import type { BackupExportSchema } from "../../../types";
+import { buildDataprev2026Profile3AppSeed } from "../../../config/concursos/dataprev-2026-perfil-3/appSeed";
+import { createSixDayAvailability } from "../../availability/availabilityEngine";
 
 function backup(): BackupExportSchema {
   const value = {
@@ -23,7 +25,7 @@ function backup(): BackupExportSchema {
       questoes: [], tentativasQuestoes: [], flashcards: [], documentos: [], resumos: [], anotacoes: [],
       planosEstudo: [], simulados: [], estatisticas: null, agenda: [], historicos: [], cronogramasRevisao: [],
       configuracao: null, conversasIA: [], sessoesEstudo: [], evidenciasAprendizagemGuiada: [],
-      casosRecuperacaoErro: [], externalEvidenceLedger: [], itensBiblioteca: []
+      casosRecuperacaoErro: [], externalEvidenceLedger: [], sdeDecisionLedger: [], sdeCalibrationLedger: [], optionalStudyLedger: [], itensBiblioteca: []
     }
   } as unknown as BackupExportSchema;
   value.metadata.checksum = calculateBackupChecksum(value);
@@ -94,6 +96,34 @@ describe("backup integrity", () => {
     }] as never;
     value.metadata.checksum = calculateBackupChecksum(value);
     expect(validateBackup(value).errors).toContain("Calibração calibration-invalid viola o isolamento shadow.");
+  });
+
+
+  it("migrates the exact legacy 180-minute backup and emits the required warning", () => {
+    const value = backup();
+    const config = structuredClone(buildDataprev2026Profile3AppSeed().configuracao);
+    config.metaHorariaDiariaMinutos = 180;
+    config.disponibilidadeEstudo = createSixDayAvailability({ minutesPerActiveDay: 180, restDay: 0, timeZone: "America/Fortaleza", includesBreaks: true });
+    value.dados.configuracao = config;
+    value.metadata.checksum = calculateBackupChecksum(value);
+    const prepared = prepareBackupForImport(value);
+    expect(prepared.migrated).toBe(true);
+    expect(prepared.warnings).toContain("LEGACY_DEFAULT_AVAILABILITY_MIGRATED_180_TO_120");
+    expect(prepared.backup?.dados.configuracao?.metaHorariaDiariaMinutos).toBe(120);
+    expect(prepared.backup?.metadata.versaoBackup).toBe("2.5.0");
+  });
+
+  it("does not warn or migrate a customized 180-minute backup", () => {
+    const value = backup();
+    const config = structuredClone(buildDataprev2026Profile3AppSeed().configuracao);
+    config.metaHorariaDiariaMinutos = 180;
+    config.disponibilidadeEstudo = createSixDayAvailability({ minutesPerActiveDay: 180, restDay: 0, timeZone: "America/Fortaleza", includesBreaks: true });
+    config.disponibilidadeEstudo.overrides = [{ date: "2026-07-20", totalMinutes: 60 }];
+    value.dados.configuracao = config;
+    value.metadata.checksum = calculateBackupChecksum(value);
+    const prepared = prepareBackupForImport(value);
+    expect(prepared.warnings).not.toContain("LEGACY_DEFAULT_AVAILABILITY_MIGRATED_180_TO_120");
+    expect(prepared.backup?.dados.configuracao?.metaHorariaDiariaMinutos).toBe(180);
   });
 
   it("never uses migration to hide a corrupted checksummed snapshot", () => {

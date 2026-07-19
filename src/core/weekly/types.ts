@@ -6,7 +6,7 @@ export interface WeeklySessionRecord {
   disciplinaId: string;
   assuntoId?: string;
   subassuntoId?: string;
-  atividadeEstudo?: "teoria" | "questoes" | "revisao" | "flashcards" | "simulado";
+  atividadeEstudo?: "teoria" | "questoes" | "revisao" | "flashcards" | "simulado" | "pratica" | "operacional";
   tempoGastoSegundos: number;
   dataInicio: string;
   dataFim: string;

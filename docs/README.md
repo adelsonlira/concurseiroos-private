@@ -55,3 +55,27 @@ A memória institucional e o protocolo de retomada ficam em [`../.ai/README.md`]
 - `SDE_V1_V2_SHADOW_COMPARISON_EXAMPLE_3.34.1.md`: fotografia controlada da comparação.
 - `../.ai/decisions/ADR-037-sde-v2-prospective-shadow-calibration.md`: decisão arquitetural.
 
+
+## Disponibilidade e estudo opcional — 3.35.0
+
+- `AVAILABILITY_AND_MIGRATION_3.35.0.md`: configuração canônica e migração conservadora.
+- `OPTIONAL_STUDY_3.35.0.md`: contrato funcional do estudo voluntário.
+- `OPTIONAL_STUDY_LEDGER_3.35.0.md`: eventos append-only e sincronização.
+- `OPTIONAL_STUDY_UI_STATE_MATRIX_3.35.0.md`: estados da interface.
+- `OPTIONAL_STUDY_EFFECT_MATRIX_3.35.0.md`: efeitos obrigatórios e opcionais.
+- `OPTIONAL_STUDY_EXAMPLES_3.35.0.md`: exemplos auditáveis.
+
+## Integridade do Estudo Opcional — 3.35.1
+
+- `RELEASE_STATUS_3.35.0.md`: bloqueio de produção identificado na versão anterior.
+- `OPTIONAL_STUDY_REAL_SHADOW_3.35.1.md`: proveniência real do SDE v2 e fallback.
+- `OPTIONAL_STUDY_STRUCTURED_RESULTS_3.35.1.md`: contratos por método e contabilização de interrupções.
+- `OPTIONAL_STUDY_SOURCE_BOARD_MATRIX_3.35.1.md`: derivação segura de origem e banca.
+- `OPTIONAL_STUDY_EFFECT_MATRIX_3.35.1.md`: efeitos sobre tempo, progresso, mastery e evidências.
+- `OPTIONAL_STUDY_EXAMPLES_3.35.1.md`: exemplos auditáveis.
+- `../.ai/decisions/ADR-039-optional-study-real-shadow-and-result-integrity.md`: decisão arquitetural.
+
+
+## Pipeline — 3.35.2
+
+- `DETERMINISTIC_VALIDATION_TERMINATION_3.35.2.md`: causa-raiz, teardown HTTP e auditoria de encerramento natural.

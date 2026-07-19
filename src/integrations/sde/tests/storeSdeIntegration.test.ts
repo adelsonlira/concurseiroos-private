@@ -437,7 +437,7 @@ describe("Zustand → SDE integration", () => {
     const result = useConcurseiroStore.getState().executarSDEParaData("2026-07-13");
     expect(result.status).toBe("SUCCESS");
     expect(result.availability?.completedMinutes).toBe(60);
-    expect(result.availability?.remainingMinutes).toBe(120);
+    expect(result.availability?.remainingMinutes).toBe(60);
   });
   it("exige correção explícita e duas verificações independentes para estabilizar um erro", () => {
     const seed = seedStore();
