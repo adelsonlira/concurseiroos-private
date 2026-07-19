@@ -1,19 +1,20 @@
 # Questões Abertas
 
-## Ledger de Evidências Externas 3.33.0
+## SDE v2
 
-- Quais combinações de autoridade, força de medição e amostra efetiva poderão tornar uma evidência elegível para o SDE v2?
-- Como o SDE v2 combinará lotes agregados e tentativas individuais sem inventar distribuição por questão?
-- O futuro consumo decisório exigirá confirmação humana adicional para fontes `outra` ou NotebookLM?
-- Qual política de retenção e visualização será adotada quando o ledger crescer por vários concursos?
+- Quais coeficientes serão ajustados após observação prospectiva suficiente?
+- Quais participações internas podem substituir a distribuição neutra sem inventar incidência?
+- Quais novas relações do grafo possuem evidência documental e aprovação humana?
+- Qual taxa real de fallback ocorrerá no runtime e quais dados faltantes a explicam?
+- Como medir retorno por minuto sem confundir correlação com causalidade?
 
-## Sincronização e backup
+## Evidências
 
-- O domínio real preserva ordem append-only e IDs em conflitos simultâneos entre dispositivos?
-- Será necessário um merge específico por `evidenceId` em vez da reconciliação integral atual para uso intensivo multi-dispositivo?
+- Registros de fontes `outra` exigirão confirmação adicional para elegibilidade futura?
+- Como reconciliar eventos append-only concorrentes por ID entre dispositivos sem migrar para nuvem paralela?
+- Em que contrato futuro o Diagnóstico Piloto poderia ser explicitamente elegível?
 
-## Plataforma
+## Shadow mode
 
-- O runtime real da Vercel confirma Node.js 24.x em todos os endpoints?
-- Quando os dados locais gerais serão namespaceados para múltiplos usuários no mesmo navegador?
-- O smoke autenticado do Treino FGV permanece estável após a publicação da 3.33.0?
+- Quando a incidência histórica terá classificação, deduplicação e validação suficientes para nova decisão arquitetural?
+- Como apresentar comparação shadow sem induzir o usuário a tratá-la como frequência oficial?

@@ -1,57 +1,55 @@
 # Estado Atual
 
-Data: 2026-07-18
-Versão: 3.33.0
+Data: 2026-07-19
+Versão: 3.34.0
 
 ## Projeto
 
 ConcurseiroOS — alvo ativo: DATAPREV 2026, Analista de Tecnologia da Informação, Perfil 3 — Desenvolvimento de Software.
 
-O produto é um sistema de apoio à decisão orientado à aprovação. Deve reduzir fadiga decisória, entregar uma sessão executável e recalcular a próxima ação apenas quando houver contrato decisório autorizado. Nenhum módulo promete aprovação, inventa incidência ou converte ausência de dados em certeza.
-
 ## Fase atual
 
-A versão 3.33.0 introduz o **Ledger de Evidências Externas** reutilizando o recurso anteriormente chamado `Registrar questões`, agora apresentado como `Registrar resultado`.
-
-O ledger coleta resultados agregados ou individuais obtidos fora do ConcurseiroOS, sobretudo no QConcursos, e os mantém em shadow mode para futura integração ao SDE v2. A versão não altera o algoritmo decisório atual, mastery, prioridades, roadmap ou prescrição diária.
+A versão 3.34.0 ativa o SDE v2 como padrão quando seus portões são válidos e mantém o SDE v1 como fallback técnico. O produto continua usando Hoje — Seu Coach, Sessão guiada e Registrar resultado; nenhuma tela ou plano paralelo foi criado.
 
 ## Implementado
 
-- `externalEvidenceLedger` append-only, versionado e inicializado de forma aditiva.
-- Um lote agregado gera exatamente um evento, sem tentativas sintéticas.
-- Correções criam evento com `supersedesEvidenceId`; anulações criam evento com `voidsEvidenceId`.
-- Estados derivados distinguem evidências ativas, substituídas e anuladas.
-- Formulário rápido com QConcursos, FGV, sem consulta e confiança não informada como padrões.
-- Validação de taxonomia, total, acertos, erros, brancos, duração e quantidades planejada/realizada.
-- Cálculo automático revisável de brancos quando total, acertos e erros determinam um único valor.
-- Campos adicionais recolhidos em `Mais detalhes`.
-- Vínculo opcional com `prescriptionId` e `sessionId`, incluindo quantidade planejada e realizada.
-- Qualidade de evidência derivada de forma determinística e explicável.
-- Histórico filtrável, detalhes, correção, anulação e resumo descritivo recente.
-- Rota canônica `#/registrar-resultado` e aliases compatíveis com links antigos.
-- Backup, restauração, persistência local e sincronização existentes incluem o ledger.
+- adaptador unificado sem tentativas sintéticas;
+- estados de conhecimento por subassunto;
+- pesos hierárquicos com participação interna explícita;
+- grafo versionado com 20 relações aprovadas;
+- regras duras anteriores ao score;
+- score 0–100 com coeficientes em arquivo;
+- incidência histórica calculada em shadow mode com peso zero;
+- escolha determinística do método e sequência executável;
+- critério de avanço e plano reduzido;
+- `sdeDecisionLedger` append-only;
+- comparação automática v1 × v2 e fallback registrado;
+- auditoria recolhida na tela do Coach;
+- evidências objetivas novas do ledger elegíveis após validação determinística.
 
 ## Validado
 
-- Evidências novas têm `decisionStatus = shadow` e `affectsSde = false`.
-- SDE, mastery, prioridades, estatísticas legadas e tentativas anteriores não são modificados ao salvar no ledger.
-- Correção e anulação preservam o evento original e mantêm IDs estáveis em backup/restauração.
-- O resumo ignora eventos anulados e usa a versão substituta sem duplicar contagens.
-- Filtros por período, fonte, disciplina, assunto e situação são não decisórios.
-- Dados sensíveis externos, tokens, cookies, credenciais e HTML completo são rejeitados.
-- Prescrição e sessão só recebem progresso quando uma evidência válida vinculada é salva.
-- Treino FGV e Diagnóstico Piloto permanecem sob seus contratos isolados.
+- 584/584 testes em 87 arquivos;
+- TypeScript e auditorias institucionais;
+- builds web, Express e serverless;
+- smoke HTTP compilado e smoke serverless funcional;
+- grafo com 20 relações e zero ciclos obrigatórios;
+- auditoria v2 com incidência histórica de peso zero e fallback seguro;
+- `npm audit` com zero vulnerabilidades.
+
+## Preservado
+
+Dados do usuário, evidências antigas, corpus FGV, 301 assets, Treino FGV, Diagnóstico Piloto, simulados, autenticação, backup e sincronização. Registros antigos do ledger continuam shadow. Observações livres não são fatos decisórios.
 
 ## Problemas conhecidos
 
-- O ledger ainda não é consumido pelo SDE; isso é intencional nesta versão.
-- O histórico não possui dashboards estatísticos avançados nem recomendações.
-- Não há integração automática com QConcursos ou NotebookLM.
-- O formulário depende da taxonomia ativa existente no dispositivo.
-- Dados locais gerais ainda não são namespaceados para múltiplos usuários no mesmo perfil de navegador.
-- O runtime-alvo é Node.js 24.x; a validação automatizada disponível executa Node 22.x.
-- Nenhum software ou plano garante aprovação.
+- apenas 20 relações de conhecimento estão aprovadas;
+- participações internas ainda usam distribuição neutra quando não há estimativa validada;
+- incidência histórica permanece sem peso decisório;
+- merge multi-dispositivo do ledger ainda usa reconciliação integral;
+- o SDE v2 ainda precisa de calibração prospectiva de coeficientes;
+- nenhum sistema garante aprovação.
 
 ## Próxima tarefa
 
-Projetar, sob nova ordem da Control Tower, o contrato do SDE v2 para consumir somente evidências elegíveis do ledger, sem criar tentativas sintéticas, sem reescrever o histórico e com portões explícitos de autoridade, força de medição e amostra efetiva.
+Publicar a v3.34.0, observar divergências v1 × v2 e fallbacks reais, sem alterar coeficientes até acumular evidência prospectiva suficiente.

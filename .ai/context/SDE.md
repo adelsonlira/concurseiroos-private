@@ -45,3 +45,9 @@ O SDE é um priorizador constitucional heurístico, conservador, puro, determin�
 ## Limite da recuperação de erros
 
 O contrato de correção de erros é pedagógico e operacional. Ele não adiciona peso, bônus, incidência ou probabilidade ao ranking do SDE. Duas verificações independentes indicam estabilização provisória, não domínio permanente.
+
+## SDE v2 — versão 3.34.0
+
+O SDE v2 adiciona adaptador unificado de evidências, estados de conhecimento, pesos hierárquicos, grafo versionado, regras duras, score configurado, seleção explícita do método e ledger append-only de decisões. `activeSdeVersion = v2` só é respeitado quando configuração, grafo, score, tempo, material e prescrição passam nos portões; caso contrário, o SDE v1 é usado e o motivo é registrado.
+
+Novos eventos objetivos validados do `externalEvidenceLedger` podem ser consumidos sem expansão sintética. Observações livres, eventos anulados/substituídos, Treino FGV e Diagnóstico Piloto não alteram o score. Incidência histórica permanece com `decisionWeight = 0`.

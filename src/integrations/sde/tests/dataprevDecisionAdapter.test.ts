@@ -6,6 +6,7 @@ import { buildCanonicalEvidenceFromStore } from "../storeEvidenceAdapter";
 
 function snapshot() {
   const seed = buildDataprev2026Profile3AppSeed();
+  seed.configuracao.activeSdeVersion = "v1";
   return {
     configuracao: seed.configuracao,
     subassuntos: seed.subassuntos,

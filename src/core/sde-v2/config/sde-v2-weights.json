@@ -1,0 +1,71 @@
+{
+  "version": "2.0",
+  "activeSdeVersion": "v2",
+  "evidence": {
+    "recencyHalfLifeDays": 45,
+    "minimumEffectiveSample": 5,
+    "stableEffectiveSample": 20,
+    "mediumConfidenceSample": 10,
+    "highConfidenceSample": 30,
+    "stableAccuracy": 0.8,
+    "criticalAccuracy": 0.5,
+    "decayDays": 30,
+    "consultationFactors": {
+      "no": 1,
+      "occasionally": 0.7,
+      "yes": 0.4,
+      "not_applicable": 1
+    },
+    "sourceAuthority": {
+      "official_simulation": 1,
+      "qconcursos_fgv": 0.9,
+      "tracked_individual": 0.85,
+      "aggregate_no_consultation": 0.78,
+      "training_fgv": 0.68,
+      "guided_retrieval": 0.58,
+      "aggregate_with_consultation": 0.42,
+      "theory_or_self_assessment": 0.2,
+      "diagnostic_explicitly_eligible": 0.72,
+      "diagnostic_shadow": 0
+    }
+  },
+  "score": {
+    "components": {
+      "officialWeight": 0.13,
+      "personalDeficiency": 0.15,
+      "coverageGap": 0.08,
+      "forgettingRisk": 0.08,
+      "worseningTrend": 0.07,
+      "eliminationRisk": 0.12,
+      "reviewUrgency": 0.09,
+      "prerequisiteValue": 0.08,
+      "transferValue": 0.05,
+      "evidenceQuality": 0.05,
+      "examProximity": 0.04,
+      "returnPerMinute": 0.03,
+      "materialAvailability": 0.02,
+      "recentDiversity": 0.01
+    },
+    "componentCap": 0.16
+  },
+  "methods": {
+    "defaultMinutes": {
+      "short_diagnostic": 25,
+      "theory_notebooklm": 45,
+      "concept_recovery": 55,
+      "fgv_question_batch": 40,
+      "active_review": 30,
+      "timed_question_batch": 35,
+      "structured_error_recovery": 45,
+      "spaced_maintenance": 25,
+      "prerequisite_recovery": 40
+    },
+    "minimumQuestionTarget": 10,
+    "maintenanceQuestionTarget": 5
+  },
+  "safeguards": {
+    "maxRecentSameNodeSelections": 2,
+    "recentWindowDays": 7,
+    "requiredPrerequisiteMinimumState": ["PRACTICING", "STABLE"]
+  }
+}

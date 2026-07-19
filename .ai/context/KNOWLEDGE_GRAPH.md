@@ -48,3 +48,7 @@ Concurso
 - equivalência registra origem, força, confiança, racional e versão;
 - estatística sem amostra suficiente mostra insuficiência, não zero;
 - conexão ao SDE exige decisão arquitetural explícita e reversível.
+
+## Grafo decisório inicial — versão 3.34.0
+
+Foi adicionado arquivo versionado com 26 nós conceituais e 20 relações aprovadas de pré-requisito obrigatório, recomendado e transferência. O carregador rejeita referências inválidas, forças fora do intervalo, justificativas vazias e ciclos em pré-requisitos obrigatórios. Nenhuma relação é gerada por IA. Conceitos que compartilham o mesmo nó da taxonomia são registrados para explicabilidade, mas não causam autobloqueio.

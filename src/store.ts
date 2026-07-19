@@ -32,6 +32,8 @@ import type { FlashcardRetrievalPerformance } from "./core/flashcards/types";
 import { AvailabilityOverride, DailyAvailabilityResult, WeeklyAvailabilityDay } from "./core/availability/types";
 import { runCompetitionDecisionForDate } from "./integrations/sde/competitionDecisionAdapter";
 import { SDEApplicationResult } from "./integrations/sde/types";
+import type { DecisionRecord } from "./core/sde-v2/types";
+import { readIsolatedEvidenceSnapshot } from "./integrations/sde/v2/isolatedEvidenceSnapshot";
 import { mergeLibrarySeedItems, sanitizeLibraryForBackup } from "./core/materials/libraryPrivacy";
 import { completeReviewSchedule, createOrRefreshReviewSchedule } from "./core/review/reviewEngine";
 import { applyErrorRecoveryEpisode, buildLegacyErrorRecoveryCases, deriveErrorRecoveryCaseState, recordErrorCorrection } from "./core/review/errorRecovery";
@@ -77,6 +79,7 @@ interface ConcurseiroState {
   evidenciasAprendizagemGuiada: GuidedLearningEvidence[];
   casosRecuperacaoErro: ErrorRecoveryCase[];
   externalEvidenceLedger: ExternalEvidenceRecord[];
+  sdeDecisionLedger: DecisionRecord[];
   biblioteca: ItemBiblioteca[];
   /** Ephemeral SDE output. It is recalculated from source data and is not persisted. */
   ultimaDecisaoSDE: SDEApplicationResult | null;
@@ -259,6 +262,7 @@ function normalizeConfig(input?: Partial<ConfigUsuario> | null): ConfigUsuario {
     metaHorariaDiariaMinutos:
       input?.metaHorariaDiariaMinutos ?? base.metaHorariaDiariaMinutos,
     concursoAlvoId: runtime.id ?? DEFAULT_COMPETITION_ID,
+    activeSdeVersion: input?.activeSdeVersion === "v1" ? "v1" : "v2",
     localProva: input?.localProva ?? base.localProva,
     localLotacao: input?.localLotacao ?? base.localLotacao,
     disponibilidadeEstudo: availability,
@@ -407,6 +411,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
   evidenciasAprendizagemGuiada: [],
   casosRecuperacaoErro: [],
   externalEvidenceLedger: [],
+  sdeDecisionLedger: [],
   biblioteca: [],
   ultimaDecisaoSDE: null,
 
@@ -454,6 +459,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             evidenciasAprendizagemGuiada: [],
             casosRecuperacaoErro: [],
             externalEvidenceLedger: [],
+            sdeDecisionLedger: [],
             biblioteca: seed.biblioteca,
             ultimaDecisaoSDE: null,
             activeConcursoId: seed.concurso.id,
@@ -481,6 +487,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
               ? parsed.casosRecuperacaoErro
               : buildLegacyErrorRecoveryCases(parsed.tentativasQuestoes ?? []),
           externalEvidenceLedger: Array.isArray(parsed.externalEvidenceLedger) ? parsed.externalEvidenceLedger : [],
+          sdeDecisionLedger: Array.isArray(parsed.sdeDecisionLedger) ? parsed.sdeDecisionLedger : [],
           configuracao: normalizeConfig(parsed.configuracao),
           biblioteca: mergeLibrarySeedItems(parsed.biblioteca ?? [], seed.biblioteca),
           ultimaDecisaoSDE: null,
@@ -514,6 +521,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
           evidenciasAprendizagemGuiada: [],
           casosRecuperacaoErro: [],
           externalEvidenceLedger: [],
+          sdeDecisionLedger: [],
           biblioteca: seed.biblioteca,
           ultimaDecisaoSDE: null,
           activeConcursoId: seed.concurso.id,
@@ -564,6 +572,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       evidenciasAprendizagemGuiada: [],
       casosRecuperacaoErro: [],
       externalEvidenceLedger: [],
+      sdeDecisionLedger: [],
       biblioteca: seed.biblioteca,
       ultimaDecisaoSDE: null,
       activeConcursoId: seed.concurso.id,
@@ -586,7 +595,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, sdeDecisionLedger, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     } = get();
@@ -595,7 +604,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       concursos, editais, disciplinas, assuntos, subassuntos, questoes, tentativasQuestoes, 
       flashcards, documentos, resumos, anotacoes, planosEstudo, simulados, 
       estatisticas, agenda, historicoAtividades, cronogramasRevisao, 
-      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, biblioteca, activeConcursoId,
+      configuracao, conversasIA, sessoesEstudo, evidenciasAprendizagemGuiada, casosRecuperacaoErro, externalEvidenceLedger, sdeDecisionLedger, biblioteca, activeConcursoId,
       activeDisciplinaId, activeAssuntoId, activeChatId, activeSimuladoId,
       activeDocumentoId
     };
@@ -641,6 +650,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
             ? d.casosRecuperacaoErro
             : buildLegacyErrorRecoveryCases(d.tentativasQuestoes || []),
         externalEvidenceLedger: d.externalEvidenceLedger || [],
+        sdeDecisionLedger: d.sdeDecisionLedger || [],
         biblioteca: mergeLibrarySeedItems(
           sanitizeLibraryForBackup(d.itensBiblioteca || []),
           buildSeedForCompetition(d.configuracao?.concursoAlvoId).biblioteca
@@ -668,7 +678,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     const s = get();
     const backup: BackupExportSchema = {
       metadata: {
-        versaoBackup: "2.2.0",
+        versaoBackup: "2.3.0",
         exportadoEm: new Date().toISOString(),
         estudanteNome: s.configuracao.estudanteNome,
         totalTamanhoBytes: 0,
@@ -699,6 +709,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         evidenciasAprendizagemGuiada: s.evidenciasAprendizagemGuiada,
         casosRecuperacaoErro: s.casosRecuperacaoErro,
         externalEvidenceLedger: s.externalEvidenceLedger,
+        sdeDecisionLedger: s.sdeDecisionLedger,
         itensBiblioteca: sanitizeLibraryForBackup(s.biblioteca)
       }
     };
@@ -793,11 +804,22 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         sessoesEstudo: state.sessoesEstudo,
         flashcards: state.flashcards,
         cronogramasRevisao: state.cronogramasRevisao,
-        biblioteca: state.biblioteca
+        biblioteca: state.biblioteca,
+        externalEvidenceLedger: state.externalEvidenceLedger,
+        simulados: state.simulados,
+        questoes: state.questoes,
+        decisionLedger: state.sdeDecisionLedger,
+        isolatedEvidence: readIsolatedEvidenceSnapshot()
       },
       date
     );
-    set({ ultimaDecisaoSDE: result });
+    const record = result.v2?.decisionRecord ?? null;
+    const shouldAppend = record !== null && !state.sdeDecisionLedger.some((item) => item.decisionId === record.decisionId);
+    set({
+      ultimaDecisaoSDE: result,
+      sdeDecisionLedger: shouldAppend ? [...state.sdeDecisionLedger, record!] : state.sdeDecisionLedger
+    });
+    if (shouldAppend) get().saveToLocalStorage();
     return result;
   },
 
@@ -1432,7 +1454,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     if (state.externalEvidenceLedger.some((item) => item.evidenceId === created.record!.evidenceId)) {
       return { success: false, error: "Identificador de evidência duplicado." };
     }
-    set({ externalEvidenceLedger: [...state.externalEvidenceLedger, created.record] });
+    set({ externalEvidenceLedger: [...state.externalEvidenceLedger, created.record], ultimaDecisaoSDE: null });
     get().saveToLocalStorage();
     return { success: true, evidenceId: created.record.evidenceId };
   },
@@ -1456,7 +1478,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
         fieldErrors: created.validation.fieldErrors
       };
     }
-    set({ externalEvidenceLedger: [...state.externalEvidenceLedger, created.record] });
+    set({ externalEvidenceLedger: [...state.externalEvidenceLedger, created.record], ultimaDecisaoSDE: null });
     get().saveToLocalStorage();
     return { success: true, evidenceId: created.record.evidenceId };
   },
@@ -1470,7 +1492,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       return { success: false, error: "Somente uma evidência ativa pode ser anulada." };
     }
     const voidRecord = createExternalEvidenceVoidRecord({ target: targetView.record, reason });
-    set({ externalEvidenceLedger: [...state.externalEvidenceLedger, voidRecord] });
+    set({ externalEvidenceLedger: [...state.externalEvidenceLedger, voidRecord], ultimaDecisaoSDE: null });
     get().saveToLocalStorage();
     return { success: true, evidenceId: voidRecord.evidenceId };
   },

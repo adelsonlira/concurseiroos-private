@@ -9,6 +9,7 @@ import packageMetadata from "../package.json";
 
 const referenceDate = "2026-07-13";
 const seed = buildDataprev2026Profile3AppSeed();
+seed.configuracao.activeSdeVersion = "v1";
 const snapshot = {
   configuracao: seed.configuracao,
   subassuntos: seed.subassuntos,

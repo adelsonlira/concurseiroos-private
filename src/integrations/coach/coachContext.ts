@@ -322,6 +322,48 @@ export function buildCoachGroundingContext(params: {
               )
               .map((item) => item.reason)
           : [],
+      auditoriaSdeV2: decision.v2
+        ? {
+            version: "2.0",
+            fallbackUsed: decision.fallbackUsed === true,
+            fallbackReason: decision.fallbackReason ?? null,
+            selectedNodeId: decision.v2.output.selected?.nodeId ?? null,
+            selectedMethod: decision.v2.output.selected?.method.method ?? null,
+            methodRule: decision.v2.output.selected?.method.rule ?? null,
+            advanceCriterion: decision.v2.output.selected?.method.advanceCriterion ?? null,
+            reducedPlan: decision.v2.output.selected?.method.reducedPlan.map((step) => ({ ...step })) ?? [],
+            topFactors: decision.v2.output.selected?.scoreComponents
+              .slice()
+              .sort((left, right) => right.contribution - left.contribution)
+              .slice(0, 5)
+              .map((factor) => ({
+                label: factor.label,
+                contribution: factor.contribution,
+                explanation: factor.explanation
+              })) ?? [],
+            unavailableFactors: decision.v2.output.selected?.scoreComponents
+              .filter((factor) => factor.fallbackUsed)
+              .map((factor) => factor.label) ?? [],
+            evidenceIds: [...(decision.v2.output.selected?.evidenceIds ?? [])],
+            knowledgeState: decision.v2.output.selected?.knowledgeState.state ?? null,
+            effectiveSampleSize: decision.v2.output.selected?.knowledgeState.effectiveSampleSize ?? null,
+            prerequisiteRationale: [...(decision.v2.output.selected?.prerequisiteState.rationale ?? [])],
+            alternatives: decision.v2.decisionRecord?.alternativesConsidered.map((item) => ({ ...item })) ?? [],
+            historicalIncidenceShadow: decision.v2.output.selected
+              ? {
+                  label: decision.v2.output.selected.historicalIncidenceShadow.label,
+                  finalShadowValue: decision.v2.output.selected.historicalIncidenceShadow.finalShadowValue,
+                  decisionWeight: 0
+                }
+              : null,
+            comparisonWithV1: decision.v2.comparisonWithV1
+              ? {
+                  ...decision.v2.comparisonWithV1,
+                  divergenceReasons: [...decision.v2.comparisonWithV1.divergenceReasons]
+                }
+              : null
+          }
+        : null,
       avisos: [...decision.warnings],
       erros: [...decision.errors]
     }

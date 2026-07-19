@@ -63,6 +63,16 @@ const COACH_MODES: CoachMode[] = [
           "Explique a prescrição atual do SDE: prioridade, camada constitucional, duração, material, confiança, dados usados e dados ausentes. Não proponha outra atividade."
       },
       {
+        title: "Por que não outro assunto?",
+        prompt:
+          "Compare a ação escolhida com as alternativas registradas no ledger de decisões. Explique por que elas ficaram abaixo ou foram bloqueadas, sem criar nova prioridade."
+      },
+      {
+        title: "O que faria a decisão mudar?",
+        prompt:
+          "Use os fatores, portões, evidências e critérios registrados pelo SDE v2 para dizer quais novos dados objetivos poderiam mudar a decisão. Não reescreva a decisão atual."
+      },
+      {
         title: "O que ainda falta medir?",
         prompt:
           "Liste somente os dados ausentes que realmente limitam a decisão atual. Separe o que eu posso registrar estudando do que depende de documentos externos."

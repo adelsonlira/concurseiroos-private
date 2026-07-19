@@ -416,6 +416,52 @@ export default function DashboardView({ onStartSession, onAskCoach }: { onStartS
                   </p>
                 ))}
               </details>
+              {ultimaDecisaoSDE.v2?.output.selected && (
+                <details className="max-w-4xl rounded-xl border border-cyan-500/20 bg-cyan-500/[0.03] p-3 text-xs text-zinc-400 sm:basis-full">
+                  <summary className="cursor-pointer font-semibold text-cyan-200">Como esta decisão foi tomada</summary>
+                  <div className="mt-3 grid gap-4 md:grid-cols-2">
+                    <div>
+                      <p className="text-[10px] font-mono uppercase text-zinc-500">Fatores ativos</p>
+                      <ul className="mt-2 space-y-1.5">
+                        {ultimaDecisaoSDE.v2.output.selected.scoreComponents
+                          .slice()
+                          .sort((left, right) => right.contribution - left.contribution)
+                          .slice(0, 5)
+                          .map((factor) => (
+                            <li key={factor.key}>• {factor.label}: {factor.explanation}</li>
+                          ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono uppercase text-zinc-500">Qualidade e portões</p>
+                      <p className="mt-2">Estado: {ultimaDecisaoSDE.v2.output.selected.knowledgeState.state} · amostra efetiva {ultimaDecisaoSDE.v2.output.selected.knowledgeState.effectiveSampleSize.toFixed(2)} · confiança {ultimaDecisaoSDE.v2.output.selected.knowledgeState.confidence}</p>
+                      <p className="mt-2">Pré-requisitos: {ultimaDecisaoSDE.v2.output.selected.prerequisiteState.rationale.join(" ") || "Nenhum bloqueio ativo."}</p>
+                      <p className="mt-2">Peso hierárquico: {ultimaDecisaoSDE.v2.output.nodeWeights[ultimaDecisaoSDE.v2.output.selected.subtopicId]?.effectiveNodeWeight.toFixed(4) ?? "indisponível"}.</p>
+                      <p className="mt-2 text-amber-300/80">{ultimaDecisaoSDE.v2.output.selected.historicalIncidenceShadow.label}: valor {ultimaDecisaoSDE.v2.output.selected.historicalIncidenceShadow.finalShadowValue.toFixed(3)}, peso decisório 0.</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono uppercase text-zinc-500">Como executar</p>
+                      <ol className="mt-2 space-y-1.5">
+                        {ultimaDecisaoSDE.v2.output.selected.method.executionSequence.map((step) => (
+                          <li key={`${step.order}-${step.tool}`}>{step.order}. {step.tool} — {step.minutes} min · {step.instruction}</li>
+                        ))}
+                      </ol>
+                      <p className="mt-3 font-semibold text-emerald-200">Critério para avançar: {ultimaDecisaoSDE.v2.output.selected.method.advanceCriterion}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-mono uppercase text-zinc-500">Plano reduzido</p>
+                      <ol className="mt-2 space-y-1.5">
+                        {ultimaDecisaoSDE.v2.output.selected.method.reducedPlan.map((step) => (
+                          <li key={`${step.order}-${step.tool}`}>{step.order}. {step.tool} — {step.minutes} min · {step.instruction}</li>
+                        ))}
+                      </ol>
+                      {ultimaDecisaoSDE.v2.output.selected.scoreComponents.some((factor) => factor.fallbackUsed) && (
+                        <p className="mt-3 text-zinc-500">Fatores indisponíveis: {ultimaDecisaoSDE.v2.output.selected.scoreComponents.filter((factor) => factor.fallbackUsed).map((factor) => factor.label).join(", ")}.</p>
+                      )}
+                    </div>
+                  </div>
+                </details>
+              )}
               <div className="flex shrink-0 flex-wrap gap-2">
                 <button
                   type="button"

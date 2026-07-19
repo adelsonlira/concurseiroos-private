@@ -6,6 +6,7 @@ import { DATAPREV_2026_PRIVATE_STUDY_MATERIALS } from "../../../config/concursos
 
 function base() {
   const seed = buildDataprev2026Profile3AppSeed();
+  seed.configuracao.activeSdeVersion = "v1";
   const snapshot = {
     configuracao: seed.configuracao,
     subassuntos: seed.subassuntos,
@@ -142,6 +143,32 @@ describe("Coach grounding context", () => {
     expect(located?.strategicUse).toBe("PEDAGOGICAL_ROUTING_ONLY");
     expect(located?.accessMode).toBe("USER_PRIVATE_LOCAL_COPY");
     expect(JSON.stringify(located)).not.toMatch(/textoExtraido|conteudoMarkdown|rawText/i);
+  });
+
+  it("expõe a auditoria determinística do SDE v2 sem substituir a decisão", () => {
+    const { seed, snapshot } = base();
+    seed.configuracao.activeSdeVersion = "v2";
+    snapshot.configuracao.activeSdeVersion = "v2";
+    const decision = runDataprevDecisionForDate(snapshot, "2026-07-13");
+    const context = buildCoachGroundingContext({
+      referenceDate: "2026-07-13",
+      configuracao: seed.configuracao,
+      disciplinas: seed.disciplinas,
+      assuntos: seed.assuntos,
+      subassuntos: seed.subassuntos,
+      tentativasQuestoes: [],
+      sessoesEstudo: [],
+      cronogramasRevisao: [],
+      decision
+    });
+
+    expect(decision.sdeVersionUsed).toBe("2.0");
+    expect(context.decisaoSDE.auditoriaSdeV2).toMatchObject({
+      version: "2.0",
+      fallbackUsed: false
+    });
+    expect(context.decisaoSDE.auditoriaSdeV2?.historicalIncidenceShadow?.decisionWeight).toBe(0);
+    expect(context.decisaoSDE.auditoriaSdeV2?.topFactors.length).toBeGreaterThan(0);
   });
 
   it("expõe erros e revisões como evidência descritiva, sem declarar domínio", () => {

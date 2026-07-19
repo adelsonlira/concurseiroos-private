@@ -24,10 +24,16 @@ import {
   SessaoEstudo,
   Subassunto,
   TentativaQuestaoUsuario,
-  ItemBiblioteca
+  ItemBiblioteca,
+  Questao,
+  Simulado
 } from "../../types";
 import { buildCanonicalEvidenceFromStore } from "./storeEvidenceAdapter";
 import { SDEApplicationResult } from "./types";
+import type { ExternalEvidenceRecord } from "../../core/externalEvidence/types";
+import type { DecisionRecord } from "../../core/sde-v2/types";
+import type { IsolatedEvidenceSnapshot } from "./v2/isolatedEvidenceSnapshot";
+import { buildSdeV2ApplicationResult } from "./v2/sdeV2ApplicationAdapter";
 
 export interface CompetitionDecisionSnapshot {
   configuracao: ConfigUsuario;
@@ -37,6 +43,11 @@ export interface CompetitionDecisionSnapshot {
   flashcards: Flashcard[];
   cronogramasRevisao: CronogramaRevisao[];
   biblioteca?: ItemBiblioteca[];
+  externalEvidenceLedger?: ExternalEvidenceRecord[];
+  simulados?: Simulado[];
+  questoes?: Questao[];
+  decisionLedger?: DecisionRecord[];
+  isolatedEvidence?: IsolatedEvidenceSnapshot;
 }
 
 const DATE_ONLY = /^(\d{4})-(\d{2})-(\d{2})$/;
@@ -163,7 +174,7 @@ function defaultWarnings(runtime: CompetitionRuntimeDefinition): string[] {
   ];
 }
 
-export function runCompetitionDecisionForDate(
+export function runCompetitionDecisionForDateV1(
   snapshot: CompetitionDecisionSnapshot,
   referenceDate: string
 ): SDEApplicationResult {
@@ -309,3 +320,21 @@ export function runCompetitionDecisionForDate(
   }
 }
 
+
+
+export function runCompetitionDecisionForDate(
+  snapshot: CompetitionDecisionSnapshot,
+  referenceDate: string
+): SDEApplicationResult {
+  const v1Result = runCompetitionDecisionForDateV1(snapshot, referenceDate);
+  const activeVersion = snapshot.configuracao.activeSdeVersion ?? "v1";
+  if (activeVersion === "v1") {
+    return {
+      ...v1Result,
+      sdeVersionUsed: "1.0",
+      activeSdeVersion: "v1",
+      fallbackUsed: false
+    };
+  }
+  return buildSdeV2ApplicationResult({ snapshot, referenceDate, v1Result });
+}

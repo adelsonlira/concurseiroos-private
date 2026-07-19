@@ -177,6 +177,14 @@ export function createExternalEvidenceRecord(params: {
   const now = params.now ?? new Date().toISOString();
   const input = params.input;
   const action = input.supersedesEvidenceId ? "correction" : "record";
+  const objectiveTotal = input.totalQuestions ?? input.actualQuestions ?? 0;
+  const objectiveCountsMatch =
+    objectiveTotal > 0 &&
+    (input.correctAnswers ?? 0) + (input.wrongAnswers ?? 0) + (input.blankAnswers ?? 0) === objectiveTotal;
+  const eligibleForSdeV2 =
+    objectiveCountsMatch &&
+    input.source !== "notebooklm" &&
+    input.evidenceType !== "guided_retrieval";
   const record: ExternalEvidenceRecord = {
     evidenceId: params.evidenceId ?? defaultEvidenceId(now),
     schemaVersion: SCHEMA_VERSION,
@@ -209,8 +217,8 @@ export function createExternalEvidenceRecord(params: {
     difficultPoints: sanitizeExternalEvidenceText(input.difficultPoints, 2000),
     notes: sanitizeExternalEvidenceText(input.notes, 3000),
     granularity: input.granularity,
-    decisionStatus: "shadow",
-    affectsSde: false,
+    decisionStatus: eligibleForSdeV2 ? "eligible_for_future_sde" : "shadow",
+    affectsSde: eligibleForSdeV2,
     evidenceQuality: calculateExternalEvidenceQuality(input),
     ledgerAction: action,
     supersedesEvidenceId: input.supersedesEvidenceId,

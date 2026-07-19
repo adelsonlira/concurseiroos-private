@@ -83,7 +83,7 @@ export interface ExternalEvidenceRecord {
 
   granularity: ExternalEvidenceGranularity;
   decisionStatus: ExternalEvidenceDecisionStatus;
-  affectsSde: false;
+  affectsSde: boolean;
   evidenceQuality: ExternalEvidenceQuality;
   ledgerAction: ExternalEvidenceLedgerAction;
 

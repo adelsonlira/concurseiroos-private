@@ -136,6 +136,37 @@ export interface CoachEvidenceCoverage {
   caveats: string[];
 }
 
+
+export interface CoachSdeV2AuditContext {
+  version: "2.0";
+  fallbackUsed: boolean;
+  fallbackReason: string | null;
+  selectedNodeId: string | null;
+  selectedMethod: string | null;
+  methodRule: string | null;
+  advanceCriterion: string | null;
+  reducedPlan: Array<{ order: number; tool: string; minutes: number; instruction: string }>;
+  topFactors: Array<{ label: string; contribution: number; explanation: string }>;
+  unavailableFactors: string[];
+  evidenceIds: string[];
+  knowledgeState: string | null;
+  effectiveSampleSize: number | null;
+  prerequisiteRationale: string[];
+  alternatives: Array<{ nodeId: string; score: number; method: string; excludedBy?: string }>;
+  historicalIncidenceShadow: {
+    label: string;
+    finalShadowValue: number;
+    decisionWeight: 0;
+  } | null;
+  comparisonWithV1: {
+    sameNode: boolean;
+    sameActivity: boolean;
+    v1NodeId: string | null;
+    v1Activity: string | null;
+    divergenceReasons: string[];
+  } | null;
+}
+
 export interface CoachGroundingContext {
   fonte: "REGISTROS_GRANULARES_DO_APLICATIVO";
   referenceDate: string;
@@ -178,6 +209,7 @@ export interface CoachGroundingContext {
     prescricaoAtual: CoachCurrentPrescription | null;
     plano: CoachPlannedSession[] | null;
     protecoesPlanner: string[];
+    auditoriaSdeV2: CoachSdeV2AuditContext | null;
     avisos: string[];
     erros: string[];
   };

@@ -13,6 +13,7 @@ import type {
   SimulationSource,
 } from "./core/simulations/types";
 import type { ExternalEvidenceRecord } from "./core/externalEvidence/types";
+import type { DecisionRecord } from "./core/sde-v2/types";
 import type {
   AnswerConfidence,
   ErrorCause,
@@ -713,6 +714,7 @@ export interface ConfigUsuario {
   estudanteEmail?: string;
   metaHorariaDiariaMinutos: number; // compatibility summary; daily truth comes from disponibilidadeEstudo
   concursoAlvoId?: string;
+  activeSdeVersion?: "v1" | "v2";
   localProva?: string;
   localLotacao?: string;
   disponibilidadeEstudo: StudyAvailabilityConfig;
@@ -822,6 +824,7 @@ export interface BackupExportSchema {
     evidenciasAprendizagemGuiada: GuidedLearningEvidence[];
     casosRecuperacaoErro: ErrorRecoveryCase[];
     externalEvidenceLedger: ExternalEvidenceRecord[];
+    sdeDecisionLedger?: DecisionRecord[];
     itensBiblioteca: ItemBiblioteca[];
   };
 }

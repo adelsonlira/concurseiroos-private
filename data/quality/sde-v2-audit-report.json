@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectVersion": "3.34.0",
+  "generatedAt": "2026-07-19T00:52:28.797Z",
+  "status": "PASS",
+  "graph": {
+    "version": "dataprev-2026-profile-3-kg-v1",
+    "nodes": 26,
+    "relations": 20,
+    "valid": true,
+    "requiredCycles": 0
+  },
+  "evidence": {
+    "sourceRecords": 1,
+    "normalizedRecords": 1,
+    "eligibleRecords": 1,
+    "aggregateExpandedIntoSyntheticAttempts": false
+  },
+  "comparison": {
+    "v1Status": "SUCCESS",
+    "v1SelectedNode": "dp26-p3-esp-bd-avaliacao-modelos",
+    "v1SelectedActivity": "questoes",
+    "v2Status": "SUCCESS",
+    "v2SelectedNode": "dp26-p3-esp-arquitetura-software",
+    "v2SelectedMethod": "short_diagnostic",
+    "sameNode": false,
+    "sameActivity": true,
+    "divergenceReasons": [
+      "O SDE v2 distribuiu pesos hierarquicamente e aplicou grafo, qualidade e ledger agregado."
+    ]
+  },
+  "decision": {
+    "sdeVersion": "2.0",
+    "score": 48.44,
+    "hardRules": 8,
+    "scoreComponents": 14,
+    "historicalIncidenceDecisionWeight": 0,
+    "decisionRecordId": "decision-v2-2026-07-13-f83da965"
+  },
+  "fallback": {
+    "scenariosObserved": 1,
+    "reason": "SDE v2 não foi executado porque o SDE v1 retornou NO_TIME_AVAILABLE.",
+    "selectedVersion": "1.0"
+  },
+  "failures": []
+}

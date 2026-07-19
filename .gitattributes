@@ -1,0 +1,6 @@
+data/training-fgv/source/*.csv -text
+data/training-fgv/source/*.jsonl -text
+data/training-fgv/source/*.json -text
+data/training-fgv/source/*.md -text
+data/training-fgv/source/*.xlsx binary
+static/fgv-training/assets/** binary

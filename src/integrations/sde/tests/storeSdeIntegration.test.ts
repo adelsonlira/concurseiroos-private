@@ -8,6 +8,7 @@ import { evaluateActivityEligibility } from "../../../core/sde/prioritization/co
 
 function seedStore() {
   const seed = buildDataprev2026Profile3AppSeed();
+  seed.configuracao.activeSdeVersion = "v1";
   useConcurseiroStore.setState({
     concursos: [seed.concurso],
     editais: [seed.edital],

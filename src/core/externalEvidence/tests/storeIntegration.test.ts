@@ -60,7 +60,7 @@ describe("external evidence store integration", () => {
     expect(after.tentativasQuestoes).toHaveLength(0);
   });
 
-  it("keeps SDE, mastery statistics, priorities and legacy records unchanged", () => {
+  it("invalidates only the current decision while preserving mastery statistics, priorities and legacy records", () => {
     const before = useConcurseiroStore.getState();
     const decision = before.ultimaDecisaoSDE;
     const stats = before.estatisticas;
@@ -69,7 +69,8 @@ describe("external evidence store integration", () => {
     const attempts = before.tentativasQuestoes;
     before.registrarEvidenciaExterna(aggregate());
     const after = useConcurseiroStore.getState();
-    expect(after.ultimaDecisaoSDE).toBe(decision);
+    expect(decision).not.toBeNull();
+    expect(after.ultimaDecisaoSDE).toBeNull();
     expect(after.estatisticas).toBe(stats);
     expect(after.disciplinas).toBe(disciplines);
     expect(after.assuntos).toBe(topics);

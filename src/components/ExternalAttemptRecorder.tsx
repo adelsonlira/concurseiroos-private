@@ -525,8 +525,8 @@ export default function ExternalAttemptRecorder({
             </h3>
             <p className="mt-1 text-xs leading-relaxed text-zinc-500">
               Registre o que realmente ocorreu fora do ConcurseiroOS. O ledger é
-              append-only, sincronizado e permanece em shadow mode: ainda não
-              altera mastery, prioridades ou decisões do SDE.
+              append-only e sincronizado. Resultados objetivos validados podem
+              alimentar o SDE v2; observações livres nunca viram fatos decisórios.
             </p>
           </div>
         </div>
@@ -873,8 +873,8 @@ export default function ExternalAttemptRecorder({
           )}
           {diagnosticPurpose && (
             <p className="text-[11px] text-amber-300">
-              Vínculo de diagnóstico legado preservado apenas como contexto;
-              esta nova evidência permanece em shadow mode.
+              Vínculo de diagnóstico legado preservado apenas como contexto. A elegibilidade
+              decisória depende exclusivamente dos campos objetivos validados.
             </p>
           )}
 
@@ -1125,7 +1125,7 @@ export default function ExternalAttemptRecorder({
               Evidências recentes
             </h3>
             <p className="mt-1 text-xs text-amber-300">
-              Resumo descritivo — ainda não altera as decisões do SDE
+              Resumo descritivo — eventos objetivos elegíveis alimentam o SDE v2; observações livres não alteram o score
             </p>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full min-w-[760px] text-left text-xs">

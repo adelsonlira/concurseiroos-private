@@ -1,15 +1,17 @@
-# Próximos Passos — após 3.33.0
+# Próximos Passos — após 3.34.0
 
-1. Publicar a versão 3.33.0 pelo fluxo normal da Vercel.
-2. Validar em dois dispositivos autenticados que um evento do ledger sincroniza com o mesmo `evidenceId` e mantém as relações de substituição/anulação.
-3. Registrar uma bateria QConcursos vinculada a uma prescrição e confirmar que somente o vínculo correto recebe progresso descritivo.
-4. Exportar, restaurar e reconciliar um backup com eventos ativos, substituídos e anulados.
-5. Especificar separadamente o contrato do SDE v2 para eventual consumo de evidências externas elegíveis.
+1. Publicar a versão e confirmar SDE v2, fallback e ledger de decisões no runtime real.
+2. Observar divergências v1 × v2 sem ajustar coeficientes durante a janela inicial.
+3. Validar sincronização do `sdeDecisionLedger` em dois dispositivos.
+4. Ampliar o grafo somente por relações documentadas e revisadas.
+5. Calibrar participações internas e coeficientes apenas com série prospectiva suficiente.
+6. Manter incidência histórica com peso zero até validação específica.
 
 ## Guardrails
 
-- Não alterar o SDE atual, mastery, prioridades ou prescrição com a 3.33.0.
-- Não converter lotes em tentativas sintéticas.
-- Não editar ou excluir fisicamente eventos do ledger.
-- Não armazenar credenciais, cookies, tokens, HTML externo ou conteúdo integral de questões protegidas.
-- Não implementar scraping, integração automática ou recomendações sem ordem explícita.
+- não remover o SDE v1;
+- não promover registros antigos do ledger automaticamente;
+- não usar observações livres como fato;
+- não converter lotes em tentativas sintéticas;
+- não permitir que IA altere a decisão determinística;
+- não ativar incidência histórica no score sem nova ordem arquitetural.

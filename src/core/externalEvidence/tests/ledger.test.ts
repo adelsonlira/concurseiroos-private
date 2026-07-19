@@ -79,8 +79,8 @@ describe("external evidence ledger", () => {
       correctAnswers: 14,
       wrongAnswers: 5,
       blankAnswers: 1,
-      decisionStatus: "shadow",
-      affectsSde: false,
+      decisionStatus: "eligible_for_future_sde",
+      affectsSde: true,
       ledgerAction: "record",
     });
   });
@@ -232,8 +232,16 @@ describe("external evidence ledger", () => {
     ).toEqual(["e-filter-second"]);
   });
 
-  it("keeps every new evidence in shadow with affectsSde false", () => {
-    expect(record("e-shadow")).toMatchObject({
+  it("marks objective validated evidence eligible while keeping non-objective evidence in shadow", () => {
+    expect(record("e-objective")).toMatchObject({
+      decisionStatus: "eligible_for_future_sde",
+      affectsSde: true,
+    });
+    expect(record("e-shadow", {
+      source: "notebooklm",
+      evidenceType: "guided_retrieval",
+      consultedMaterial: "not_applicable",
+    })).toMatchObject({
       decisionStatus: "shadow",
       affectsSde: false,
     });

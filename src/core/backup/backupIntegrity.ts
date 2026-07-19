@@ -72,7 +72,7 @@ function requireArray(value: unknown, label: string, errors: string[]): value is
  * feature did not exist when the snapshot was produced, therefore an empty
  * list is the only safe default.
  */
-const SAFE_ADDITIVE_COLLECTIONS = ["evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "externalEvidenceLedger"] as const;
+const SAFE_ADDITIVE_COLLECTIONS = ["evidenciasAprendizagemGuiada", "casosRecuperacaoErro", "externalEvidenceLedger", "sdeDecisionLedger"] as const;
 
 function verifyOriginalChecksum(
   backup: BackupExportSchema,
@@ -137,7 +137,7 @@ export function prepareBackupForImport(value: unknown): BackupImportPreparation 
   if (migrated) {
     normalized.metadata = {
       ...normalized.metadata,
-      versaoBackup: "2.2.0",
+      versaoBackup: "2.3.0",
       integrityAlgorithm: "FNV1A64_CANONICAL_JSON"
     };
     normalized.metadata.checksum = calculateBackupChecksum(normalized);
@@ -228,7 +228,16 @@ export function validateBackup(backup: BackupExportSchema): BackupValidationResu
     if (!disciplinaIds.has(event.disciplineId)) errors.push(`Evidência ${event.evidenceId} referencia disciplina inexistente.`);
     if (!assuntoIds.has(event.topicId)) errors.push(`Evidência ${event.evidenceId} referencia assunto inexistente.`);
     if (event.subtopicId && !subassuntoIds.has(event.subtopicId)) errors.push(`Evidência ${event.evidenceId} referencia subassunto inexistente.`);
-    if (event.affectsSde !== false) errors.push(`Evidência ${event.evidenceId} não preserva affectsSde=false.`);
+    if (event.affectsSde === true && event.decisionStatus !== "eligible_for_future_sde") {
+      errors.push(`Evidência ${event.evidenceId} afeta o SDE sem elegibilidade determinística.`);
+    }
+    if (event.affectsSde === true) {
+      const total = event.totalQuestions ?? event.actualQuestions ?? 0;
+      const sum = (event.correctAnswers ?? 0) + (event.wrongAnswers ?? 0) + (event.blankAnswers ?? 0);
+      if (total <= 0 || sum !== total || event.source === "notebooklm" || event.evidenceType === "guided_retrieval") {
+        errors.push(`Evidência ${event.evidenceId} marcada para o SDE sem resultado objetivo válido.`);
+      }
+    }
     if (event.supersedesEvidenceId && !priorEvidenceIds.has(event.supersedesEvidenceId)) {
       errors.push(`Evidência ${event.evidenceId} substitui evento inexistente ou posterior.`);
     }
@@ -239,6 +248,18 @@ export function validateBackup(backup: BackupExportSchema): BackupValidationResu
       errors.push(`Evidência ${event.evidenceId} contém dado externo sensível ou HTML não permitido.`);
     }
     priorEvidenceIds.add(event.evidenceId);
+  }
+
+
+  const decisionIds = new Set<string>();
+  for (const decision of backup.dados.sdeDecisionLedger ?? []) {
+    if (!decision?.decisionId || typeof decision.decisionId !== "string") {
+      errors.push("O ledger de decisões contém registro sem decisionId válido.");
+      continue;
+    }
+    if (decisionIds.has(decision.decisionId)) errors.push(`sdeDecisionLedger contém ID duplicado: ${decision.decisionId}.`);
+    decisionIds.add(decision.decisionId);
+    if (decision.sdeVersion !== "2.0") errors.push(`Decisão ${decision.decisionId} possui versão não suportada.`);
   }
 
   const checksum = backup.metadata.checksum;

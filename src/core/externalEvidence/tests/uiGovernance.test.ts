@@ -39,7 +39,7 @@ describe("external evidence UI governance", () => {
       "Principal causa dos erros",
       "Mais detalhes",
       "Evidências recentes",
-      "Resumo descritivo — ainda não altera as decisões do SDE",
+      "Resumo descritivo — eventos objetivos elegíveis alimentam o SDE v2; observações livres não alteram o score",
     ])
       expect(recorder).toContain(label);
   });

@@ -38,7 +38,17 @@ npm run build
 npm audit --omit=dev
 ```
 
-`npm run build` executa toda a validação local. O workflow versionado em `.github/workflows/ci.yml` bloqueia a integração quando TypeScript, testes, auditorias ou builds falham; `npm run vercel-build` executa apenas o build web para evitar repetição do pipeline dentro da Vercel.
+`npm run build` continua sendo o comando local completo. No GitHub Actions, `npm run validate` é executado uma única vez e os builds web, Express e serverless são chamados separadamente para evitar repetir toda a regressão; o CI também verifica os blobs canônicos do corpus. `npm run vercel-build` executa apenas o build web para evitar repetição do pipeline dentro da Vercel.
+
+## Integridade do corpus operacional 3.33.1
+
+Os CSVs aprovados do Treino FGV são artefatos binários do ponto de vista do Git: seus bytes CRLF participam do tamanho e do SHA-256 declarados no manifesto. A raiz contém regras específicas em `.gitattributes`, e o comando abaixo confere arquivo de trabalho e blob de `HEAD` quando executado dentro de um repositório Git:
+
+```bash
+npm run training:audit-git -- --require-git
+```
+
+Não normalize esses CSVs nem substitua a validação bruta por comparação textual.
 
 ## Prescrição de questões
 

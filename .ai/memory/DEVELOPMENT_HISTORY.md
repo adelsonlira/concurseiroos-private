@@ -313,3 +313,11 @@ Hotfix crítico do Treino FGV: a causa da falha de conferência em produção fo
 ## 3.33.0 — 2026-07-18
 
 Ledger de Evidências Externas: a tela legada `Registrar questões` foi reutilizada e renomeada para `Registrar resultado`, com rota canônica e aliases compatíveis. Resultados agregados passam a gerar um único evento append-only em `externalEvidenceLedger`; correções e anulações preservam o original por referências explícitas. O formulário usa taxonomia ativa, padrões QConcursos/FGV, vínculos opcionais com prescrição e sessão, metadados determinísticos de qualidade, histórico filtrável e resumo descritivo. Backup, restauração, persistência local e sincronização incluem o ledger por migração aditiva. Todas as novas evidências permanecem `decisionStatus: shadow` e `affectsSde: false`; SDE, mastery, prioridades, tentativas legadas, Treino FGV e Diagnóstico Piloto não foram alterados.
+
+## 3.33.1 — 2026-07-18
+
+Hotfix de integridade do corpus no Git e CI: os quatro CSVs operacionais aprovados foram protegidos por regra `-text`, restaurados do pacote canônico e verificados tanto no arquivo de trabalho quanto no blob do commit e em checkout limpo. O manifesto e o construtor do catálogo continuam validando tamanho e SHA-256 brutos. O GitHub Actions deixou de chamar `npm run build` depois de `npm run validate`; a regressão é executada uma única vez e os builds web, Express e serverless são chamados separadamente. Nenhum comportamento do Ledger, Treino FGV, Diagnóstico Piloto, SDE, mastery, prioridades, sincronização ou backup foi alterado.
+
+## 3.34.0 — 2026-07-19
+
+SDE v2 e Coach Decisório Explicável: evidências individuais, agregadas e operacionais passam por adaptador puro sem tentativas sintéticas; o motor calcula estado de conhecimento, peso hierárquico, grafo, regras duras, score configurado e método executável. Novos eventos objetivos do ledger podem ser elegíveis, enquanto registros antigos, anulações, observações livres, Treino FGV e Diagnóstico Piloto permanecem fora do score. Cada decisão v2 é registrada em ledger append-only e comparada ao SDE v1, que continua disponível como fallback. Incidência histórica é calculada apenas em shadow mode com peso zero.
