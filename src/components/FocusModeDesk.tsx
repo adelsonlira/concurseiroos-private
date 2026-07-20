@@ -26,6 +26,7 @@ import StudyFocusGuideCard from "./StudyFocusGuideCard";
 import PrivatePdfOpenButton from "./PrivatePdfOpenButton";
 import GuidedLearningCloseout from "./GuidedLearningCloseout";
 import GuidedLearningActivation from "./GuidedLearningActivation";
+import StudyExecutionPacketView from "./StudyExecutionPacketView";
 import type {
   GuidedQuestionDraft,
   GuidedQuestionResponse,
@@ -541,6 +542,12 @@ export default function FocusModeDesk({
             {prescription.focusGuide && (
               <div className="mt-4">
                 <StudyFocusGuideCard guide={prescription.focusGuide} />
+              </div>
+            )}
+
+            {prescription.executionPacket && (
+              <div className="mt-4">
+                <StudyExecutionPacketView packet={prescription.executionPacket} compact />
               </div>
             )}
 

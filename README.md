@@ -190,3 +190,7 @@ Recomendações opcionais agora exigem sinais reais de erro, revisão, material 
 ## Encerramento Determinístico da Validação — 3.35.2
 
 A versão 3.35.2 corrige exclusivamente recursos HTTP e subprocessos residuais da suíte e do smoke serverless. O pipeline agora consome respostas integralmente, fecha sockets e servidores antes de reportar sucesso e audita saída natural sem aceitar timeout como aprovação. Consulte `docs/DETERMINISTIC_VALIDATION_TERMINATION_3.35.2.md`.
+
+## Prescrição Executável e Gate de Ambientes — 3.35.3
+
+A versão 3.35.3 mantém o ranking do SDE intacto e aplica um gate pós-ranking antes de mostrar ou iniciar a atividade. NotebookLM só é indicado quando o notebook e as fontes estão cadastrados; materiais precisam corresponder ao assunto/subassunto; ausência de caminho bloqueia o candidato e permite usar o próximo candidato executável sem reescrever prioridades. Toda recomendação pronta contém um `studyExecutionPacket` com conteúdo, ambiente, material, páginas, instruções, critério e retorno. Consulte `docs/STUDY_EXECUTION_REGISTRY_3.35.3.md`, `docs/EXECUTION_READINESS_GATE_3.35.3.md` e `docs/STUDY_EXECUTION_PACKET_3.35.3.md`.

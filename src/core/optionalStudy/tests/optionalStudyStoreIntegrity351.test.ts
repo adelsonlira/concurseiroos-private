@@ -1,9 +1,37 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { buildDataprev2026Profile3AppSeed } from "../../../config/concursos/dataprev-2026-perfil-3/appSeed";
+import { DATAPREV_2026_PRIVATE_STUDY_MATERIALS } from "../../../config/concursos/dataprev-2026-perfil-3/privateStudyMaterials";
 import { useConcurseiroStore } from "../../../store";
 import type { OptionalStudyMethod, OptionalStudyRecommendationOption, OptionalStudyResultInput } from "../types";
 
 const seed = buildDataprev2026Profile3AppSeed();
+
+const specificDiscipline = seed.disciplinas.find((item) => item.id === "dp26-p3-conhecimentos-especificos")!;
+const databaseTopic = seed.assuntos.find((item) => item.id === "dp26-p3-esp-banco-dados")!;
+const databaseMaterial = DATAPREV_2026_PRIVATE_STUDY_MATERIALS.find((material) =>
+  material.sections.some((section) => section.topicId === databaseTopic.id && section.subtopicIds.length > 0),
+)!;
+const databaseSection = databaseMaterial.sections.find((section) => section.topicId === databaseTopic.id && section.subtopicIds.length > 0)!;
+const databaseSubtopic = seed.subassuntos.find((item) => item.id === databaseSection.subtopicIds[0])!;
+
+function executableOverrides(method: OptionalStudyMethod, environment: OptionalStudyRecommendationOption["environment"]): Partial<OptionalStudyRecommendationOption> {
+  if (method === "theory_notebooklm") {
+    return {
+      disciplineId: specificDiscipline.id, disciplineName: specificDiscipline.nome,
+      topicId: databaseTopic.id, topicName: databaseTopic.nome,
+      subtopicId: databaseSubtopic.id, subtopicName: databaseSubtopic.nome,
+      environment: "notebooklm", materialId: databaseMaterial.id, materialLabel: databaseMaterial.displayTitle,
+      objective: `Estudar ${databaseSubtopic.nome}.`, completionCriterion: "Registrar recuperação ativa e dúvidas restantes.",
+    };
+  }
+  if (environment === "manual") {
+    return { environment: "qconcursos", suggestedSource: "qconcursos" };
+  }
+  if (["active_recall", "technical_practice", "light_organization"].includes(method)) {
+    return { environment: "concurseiroos", materialId: undefined, materialLabel: undefined };
+  }
+  return {};
+}
 
 function resetStore() {
   useConcurseiroStore.setState({
@@ -31,6 +59,7 @@ function startManual(method: OptionalStudyMethod, environment: OptionalStudyReco
     environment,
     origin: "manual",
     sdeVersion: "1.0",
+    ...executableOverrides(method, environment),
     ...extra,
   };
   const accepted = useConcurseiroStore.getState().aceitarEstudoOpcional({ recommendationId: rec.recommendationId, manualOption: manual });

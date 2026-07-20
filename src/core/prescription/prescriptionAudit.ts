@@ -27,6 +27,15 @@ function auditExecutable(prescription: ExecutableStudyPrescription): Prescriptio
   if (prescription.executionReadiness.status === "READY" && prescription.executionReadiness.requiredResource !== "NONE") {
     add("READINESS_CONTRADICTION", "Uma sessão READY não pode declarar recurso obrigatório ausente.");
   }
+  if (prescription.executionGate.executionStatus !== "READY" || !prescription.executionPacket) {
+    add("MISSING_EXECUTION_PACKET", "Uma prescrição apresentada como executável precisa de pacote operacional completo.");
+  } else {
+    const packet = prescription.executionPacket;
+    if (!packet.contentScope.trim()) add("MISSING_CONTENT_SCOPE", "O pacote precisa informar o conteúdo exato.");
+    if (!packet.completionCriterion.trim()) add("MISSING_PACKET_CRITERION", "O pacote precisa informar o critério de conclusão.");
+    if (!packet.prompt.trim()) add("MISSING_OPERATIONAL_PROMPT", "O pacote precisa informar a instrução operacional.");
+    if (packet.resultCapture.fields.length === 0) add("MISSING_RESULT_CAPTURE", "O pacote precisa informar o que registrar.");
+  }
   if (prescription.activity === "questoes") {
     if (!prescription.questionPractice) add("MISSING_QUESTION_TARGET", "Sessão de questões sem alvo calculado.");
     if ((prescription.questionPractice?.targetQuestions ?? 0) <= 0) add("INVALID_QUESTION_TARGET", "O alvo de questões deve ser positivo.");

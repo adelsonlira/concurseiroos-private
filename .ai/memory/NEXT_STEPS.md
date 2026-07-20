@@ -1,14 +1,16 @@
-# Próximos Passos — após 3.35.2
+# Próximos Passos — após 3.35.3
 
 1. Publicar o commit validado em checkout limpo.
-2. Confirmar no GitHub Actions que `npm run validate` encerra naturalmente.
-3. Confirmar que `npm run training:smoke-serverless` encerra naturalmente no runner remoto.
-4. Manter o watchdog como gate de falha e investigar qualquer novo handle antes de promover a versão.
+2. Executar o smoke de domingo e confirmar descanso sem obrigação e pacote opcional completo.
+3. Executar o smoke de segunda-feira e confirmar prescrição obrigatória executável dentro de 120 minutos.
+4. Validar no uso real o pacote de Banco de Dados no NotebookLM.
+5. Manter o ensino de estilo FGV de Português desativado enquanto `fgvEvidenceStatus = PENDING`; demais notebooks permanecem `NOT_CONFIGURED` até cadastro explícito.
 
 ## Guardrails
 
-- não usar `process.exit(0)` ou timeout como sucesso;
-- não reduzir testes ou cobertura;
-- não alterar funcionalidades do produto;
-- manter Node.js 24.x no CI;
-- preservar os bytes canônicos do corpus.
+- não alterar ranking ou prioridade no gate;
+- não inventar notebook, URL, fonte, páginas, filtro ou prompt;
+- não aceitar material incompatível nem material amplo não validado;
+- não usar alegações gerais sobre a FGV;
+- manter SDE v1 efetivo e SDE v2 somente em shadow;
+- preservar corpus e dados canônicos.

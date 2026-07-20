@@ -338,3 +338,14 @@ Integridade do Estudo Opcional e Shadow Real: removida a comparação fictícia 
 ## 3.35.2 — 2026-07-19
 
 Encerramento determinístico da validação: testes HTTP passaram a usar cliente sem pooling e harness com rastreamento explícito de sockets; o smoke serverless fecha servidor, conexões e listeners antes de declarar sucesso. Um auditor de subprocessos bloqueia timeout, sinal ou descendentes residuais. Nenhuma funcionalidade do produto, dado canônico, decisão do SDE ou persistência foi alterada.
+
+## 3.35.3 — Prescrição Executável e Gate de Ambientes — 2026-07-19
+
+- Registrou capacidades reais de execução por disciplina e assunto.
+- Manteve Banco de Dados como único NotebookLM inicialmente pronto e deixou Português e demais disciplinas sem notebook presumido.
+- Adicionou validação assunto × material e bloqueou o caso interpretação × ortografia.
+- Introduziu gate pós-ranking sem alterar pesos, score ou ordem do SDE.
+- Permitiu fallback de método/ambiente e avanço para o próximo candidato executável.
+- Gerou pacote completo com conteúdo, páginas, ambiente, prompt, critério e retorno.
+- Aplicou o mesmo contrato à prescrição obrigatória, domingo opcional, extra após o plano e escolha manual.
+- Preservou SDE v1 efetivo, SDE v2 em shadow, disponibilidade de 120 minutos, backup 2.5.0 e todos os dados canônicos.

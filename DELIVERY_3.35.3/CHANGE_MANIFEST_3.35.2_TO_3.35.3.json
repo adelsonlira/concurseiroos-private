@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "from": "3.35.2",
+  "to": "3.35.3",
+  "packagedCommit": "b9b20c93f49f3572ddc8c30b29183defc754faef",
+  "functionalValidation": {
+    "testFiles": 99,
+    "tests": 769,
+    "status": "PASS"
+  },
+  "physicalDelivery": {
+    "generatedAt": "2026-07-20T11:53:22.153904+00:00"
+  },
+  "notableCorrections": [
+    "nome exato do notebook de Português",
+    "13 fontes reais",
+    "Aula 12 SECONDARY_PEDAGOGICAL",
+    "seleção temática de interpretação",
+    "limitação parcial de reescrita"
+  ],
+  "auditStatus": "AUDIT_EXPLICIT_INCONCLUSIVE_EXTERNAL_502"
+}

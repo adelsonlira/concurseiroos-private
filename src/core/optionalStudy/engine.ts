@@ -8,6 +8,9 @@ import { prerequisiteStateForTaxonomyNode } from "../sde-v2/knowledgeGraph";
 import type { KnowledgeStateAssessment, SdeCalibrationRecord, SdeDecisionComparisonSnapshot } from "../sde-v2/types";
 import type { SdeV2DecisionInput } from "../sde-v2/decisionEngine";
 import type { SDEApplicationResult } from "../../integrations/sde/types";
+import type { PrivateStudyMaterial } from "../materials/types";
+import { executionReadinessGate } from "../studyExecution/executionReadinessGate";
+import type { StudyExecutionEnvironment, StudyExecutionMaterialCandidate } from "../studyExecution/types";
 import { optionalStudySdeV2ShadowAdapter } from "./optionalStudySdeV2ShadowAdapter";
 import type {
   OptionalStudyContext,
@@ -20,7 +23,7 @@ import type {
   OptionalStudyRecommendationOption,
 } from "./types";
 
-export const OPTIONAL_STUDY_ENGINE_VERSION = "1.1" as const;
+export const OPTIONAL_STUDY_ENGINE_VERSION = "1.2" as const;
 export const OPTIONAL_STUDY_QUICK_DURATIONS = [15, 30, 45, 60, 90, 120] as const;
 export const OPTIONAL_STUDY_NORMAL_DAILY_LIMIT = 120;
 export const OPTIONAL_STUDY_REVIEW_WINDOW_DAYS = 3;
@@ -72,7 +75,62 @@ const METHOD_CONTENT: Record<OptionalStudyMethod, { objective: string; criterion
 
 export interface OptionalMaterialMatch {
   material?: ItemBiblioteca;
+  candidate?: StudyExecutionMaterialCandidate;
   confidence: OptionalStudyMaterialMatchConfidence;
+}
+
+export function findOptionalStudyMaterialById(
+  materials: readonly ItemBiblioteca[],
+  selectedMaterialId: string,
+  disciplineId: string,
+  topicId: string,
+  subtopicId?: string,
+  materialCatalog: readonly PrivateStudyMaterial[] = [],
+): OptionalMaterialMatch {
+  const material = materials.find((item) => item.id === selectedMaterialId && !item.isDeleted);
+  if (!material) return { confidence: "none" };
+  const catalogId = material.privateMaterial?.catalogMaterialId ?? (material.id.startsWith("lib-") ? material.id.slice(4) : material.id);
+  const catalogMaterial = materialCatalog.find((item) => item.id === catalogId);
+  if (catalogMaterial) {
+    const exact = subtopicId ? catalogMaterial.sections.find((section) => section.subtopicIds.includes(subtopicId)) : undefined;
+    const topicWide = catalogMaterial.sections.find((section) =>
+      section.topicId === topicId &&
+      (section.subtopicIds.length === 0 || section.matchedTerms.includes("AUDITED_TOPIC_WIDE")),
+    );
+    const topicSection = exact ?? topicWide ?? catalogMaterial.sections.find((section) => section.topicId === topicId) ?? catalogMaterial.sections[0];
+    return {
+      material,
+      confidence: exact ? "exact_subtopic" : topicWide ? "topic" : catalogMaterial.disciplineId === disciplineId ? "discipline_broad" : "none",
+      candidate: {
+        materialId: catalogMaterial.id,
+        materialTitle: catalogMaterial.displayTitle,
+        sectionTitle: topicSection?.title,
+        startPage: topicSection?.startPage,
+        endPage: topicSection?.endPage,
+        sourceFileName: catalogMaterial.sourceFileName,
+        matchScope: exact ? "EXACT_SUBTOPIC" : "TOPIC_FALLBACK",
+        contentKind: topicSection?.contentKind,
+        questionBank: topicSection?.questionBank,
+      },
+    };
+  }
+  const exactIndex = subtopicId
+    ? material.dadosPDF?.indice?.find((section) => section.subassuntoIds?.includes(subtopicId))
+    : undefined;
+  const topicIndex = material.dadosPDF?.indice?.find((section) => section.assuntoId === topicId);
+  const section = exactIndex ?? topicIndex;
+  return {
+    material,
+    confidence: exactIndex ? "exact_subtopic" : topicIndex ? "topic" : material.disciplinaId === disciplineId ? "discipline_broad" : "none",
+    candidate: {
+      materialId: material.id,
+      materialTitle: material.titulo,
+      sectionTitle: section?.titulo,
+      startPage: section?.paginaInicial,
+      endPage: section?.paginaFinal,
+      matchScope: exactIndex ? "EXACT_SUBTOPIC" : "TOPIC_FALLBACK",
+    },
+  };
 }
 
 export function findOptionalStudyMaterial(
@@ -80,17 +138,164 @@ export function findOptionalStudyMaterial(
   disciplineId: string,
   topicId: string,
   subtopicId?: string,
+  materialCatalog: readonly PrivateStudyMaterial[] = [],
 ): OptionalMaterialMatch {
   const live = materials.filter((item) => !item.isDeleted);
+  const libraryById = new Map(live.map((item) => [item.id, item] as const));
+  const libraryItemForCatalog = (catalogId: string): ItemBiblioteca | undefined =>
+    libraryById.get(catalogId) ?? libraryById.get(`lib-${catalogId}`);
+  const catalogById = new Map(materialCatalog.map((material) => [material.id, material] as const));
+  const catalogForLibraryItem = (item: ItemBiblioteca): PrivateStudyMaterial | undefined => {
+    const catalogId = item.privateMaterial?.catalogMaterialId ?? (item.id.startsWith("lib-") ? item.id.slice(4) : item.id);
+    return catalogById.get(catalogId);
+  };
+  const catalogSectionSupportsTarget = (material: PrivateStudyMaterial): boolean => {
+    const topicSections = material.sections.filter((section) => section.topicId === topicId);
+    if (topicSections.length === 0) return false;
+    if (!subtopicId) {
+      return topicSections.some((section) => section.subtopicIds.length === 0 || section.matchedTerms.includes("AUDITED_TOPIC_WIDE"));
+    }
+    return topicSections.some((section) =>
+      section.subtopicIds.includes(subtopicId) ||
+      section.subtopicIds.length === 0 ||
+      section.matchedTerms.includes("AUDITED_TOPIC_WIDE"),
+    );
+  };
   if (subtopicId) {
+    for (const catalogMaterial of materialCatalog) {
+      const section = catalogMaterial.sections.find((item) => item.subtopicIds.includes(subtopicId));
+      if (!section) continue;
+      return {
+        material: libraryItemForCatalog(catalogMaterial.id),
+        confidence: "exact_subtopic",
+        candidate: {
+          materialId: catalogMaterial.id,
+          materialTitle: catalogMaterial.displayTitle,
+          sectionTitle: section.title,
+          startPage: section.startPage,
+          endPage: section.endPage,
+          sourceFileName: catalogMaterial.sourceFileName,
+          matchScope: "EXACT_SUBTOPIC",
+          contentKind: section.contentKind,
+          questionBank: section.questionBank,
+        },
+      };
+    }
     const exact = live.find((item) => item.dadosPDF?.indice?.some((section) => section.subassuntoIds?.includes(subtopicId)));
-    if (exact) return { material: exact, confidence: "exact_subtopic" };
+    if (exact) return { material: exact, confidence: "exact_subtopic", candidate: { materialId: exact.id, materialTitle: exact.titulo, matchScope: "EXACT_SUBTOPIC" } };
   }
-  const topic = live.find((item) => item.assuntoId === topicId || item.dadosPDF?.indice?.some((section) => section.assuntoId === topicId));
-  if (topic) return { material: topic, confidence: "topic" };
+  for (const catalogMaterial of materialCatalog) {
+    const sections = catalogMaterial.sections.filter((section) => section.topicId === topicId);
+    const section = sections.find((item) => item.subtopicIds.length === 0 || item.matchedTerms.includes("AUDITED_TOPIC_WIDE"));
+    if (!section) continue;
+    return {
+      material: libraryItemForCatalog(catalogMaterial.id),
+      confidence: "topic",
+      candidate: {
+        materialId: catalogMaterial.id,
+        materialTitle: catalogMaterial.displayTitle,
+        sectionTitle: section.title,
+        startPage: section.startPage,
+        endPage: section.endPage,
+        sourceFileName: catalogMaterial.sourceFileName,
+        matchScope: "TOPIC_FALLBACK",
+        contentKind: section.contentKind,
+        questionBank: section.questionBank,
+      },
+    };
+  }
+  const topic = live.find((item) => {
+    const catalogMaterial = catalogForLibraryItem(item);
+    if (catalogMaterial) return catalogSectionSupportsTarget(catalogMaterial);
+    return item.dadosPDF?.indice?.some((section) =>
+      section.assuntoId === topicId &&
+      (!subtopicId || !section.subassuntoIds?.length || section.subassuntoIds.includes(subtopicId)),
+    ) ?? false;
+  });
+  if (topic) {
+    const catalogMaterial = catalogForLibraryItem(topic);
+    const materialId = catalogMaterial?.id ?? topic.id;
+    const section = catalogMaterial?.sections.find((item) =>
+      item.topicId === topicId &&
+      (!subtopicId || item.subtopicIds.includes(subtopicId) || item.subtopicIds.length === 0 || item.matchedTerms.includes("AUDITED_TOPIC_WIDE")),
+    );
+    return {
+      material: topic,
+      confidence: "topic",
+      candidate: {
+        materialId,
+        materialTitle: catalogMaterial?.displayTitle ?? topic.titulo,
+        sectionTitle: section?.title,
+        startPage: section?.startPage,
+        endPage: section?.endPage,
+        sourceFileName: catalogMaterial?.sourceFileName,
+        matchScope: "TOPIC_FALLBACK",
+        contentKind: section?.contentKind,
+        questionBank: section?.questionBank,
+      },
+    };
+  }
   const discipline = live.find((item) => item.disciplinaId === disciplineId || item.dadosPDF?.indice?.some((section) => section.disciplinaId === disciplineId));
   if (discipline) return { material: discipline, confidence: "discipline_broad" };
   return { confidence: "none" };
+}
+
+function optionalEnvironment(environment: OptionalStudyRecommendationOption["environment"]): StudyExecutionEnvironment {
+  switch (environment) {
+    case "notebooklm": return "notebooklm";
+    case "qconcursos": return "qconcursos";
+    case "treino_fgv": return "treino_fgv";
+    case "material": return "internal_material";
+    case "manual": return "manual_external";
+    default: return "guided_session";
+  }
+}
+
+export function validateOptionalStudyExecutionOption(
+  option: OptionalStudyRecommendationOption,
+  context: OptionalStudyContext,
+  materialMatch: OptionalMaterialMatch,
+  materialCatalog: readonly PrivateStudyMaterial[],
+): OptionalStudyRecommendationOption {
+  const gate = executionReadinessGate({
+    competitionId: "dataprev-2026-perfil-3",
+    context,
+    disciplineId: option.disciplineId,
+    disciplineName: option.disciplineName,
+    topicId: option.topicId,
+    topicName: option.topicName,
+    subtopicId: option.subtopicId,
+    subtopicName: option.subtopicName,
+    requestedMethod: option.method,
+    requestedEnvironment: optionalEnvironment(option.environment),
+    durationMinutes: option.durationMinutes,
+    objective: option.objective,
+    completionCriterion: option.completionCriterion,
+    material: materialMatch.candidate ?? null,
+    materialCatalog,
+    targetQuestions: ["fgv_questions", "short_question_batch", "timed_question_batch"].includes(option.method) ? (option.method === "short_question_batch" ? 5 : 10) : null,
+    examiningBoard: option.suggestedExaminingBoard ?? null,
+    sourceLabel: option.suggestedSource ?? null,
+    sourceDecisionId: option.sourceDecisionId ?? option.optionId,
+    allowMethodFallback: true,
+    forceFgvEvidenceUse: false,
+  });
+  return {
+    ...option,
+    method: (gate.effectiveMethod ?? option.method) as OptionalStudyMethod,
+    environment: gate.effectiveEnvironment === "notebooklm" ? "notebooklm"
+      : gate.effectiveEnvironment === "qconcursos" ? "qconcursos"
+      : gate.effectiveEnvironment === "treino_fgv" ? "treino_fgv"
+      : gate.effectiveEnvironment === "internal_material" ? "material"
+      : gate.effectiveEnvironment === "manual_external" ? "manual"
+      : "concurseiroos",
+    materialId: gate.packet?.materialId ?? option.materialId,
+    materialLabel: gate.packet?.materialTitle ?? option.materialLabel,
+    executionStatus: gate.executionStatus,
+    executionPacket: gate.packet,
+    executionBlockReasons: gate.blockedReasons,
+    warnings: [...option.warnings, ...(gate.methodChanged && gate.methodChangeReason ? [gate.methodChangeReason] : []), ...(gate.blockedCandidate ? [gate.blockedCandidate.explanation] : [])],
+  };
 }
 
 function makeOption(params: {
@@ -207,6 +412,7 @@ export interface BuildOptionalStudyRecommendationInput {
   reviews: readonly CronogramaRevisao[];
   errorCases: readonly ErrorRecoveryCase[];
   materials: readonly ItemBiblioteca[];
+  materialCatalog?: readonly PrivateStudyMaterial[];
   evidence: readonly ExternalEvidenceRecord[];
   sdeV2DecisionInput?: SdeV2DecisionInput;
 }
@@ -258,7 +464,7 @@ export function buildOptionalStudyRecommendation(input: BuildOptionalStudyRecomm
   const discipline = input.disciplines.find((item) => item.id === disciplineId);
   if (!discipline || !topic) return null;
 
-  const match = findOptionalStudyMaterial(input.materials, discipline.id, topic.id, subtopic?.id);
+  const match = findOptionalStudyMaterial(input.materials, discipline.id, topic.id, subtopic?.id, input.materialCatalog ?? []);
   const prereq = prerequisiteState(prerequisiteKnowledgeStates, subtopic?.id);
   const prereqAdequate = prereq ? !prereq.requiredBlocked : null;
   const highWeeklyLoad = input.weeklyStudiedMinutes >= 600;
@@ -286,7 +492,7 @@ export function buildOptionalStudyRecommendation(input: BuildOptionalStudyRecomm
     const blockerTopic = blockerSubtopic ? input.topics.find((item) => item.id === blockerSubtopic.assuntoId) : undefined;
     const blockerDiscipline = blockerTopic ? input.disciplines.find((item) => item.id === blockerTopic.disciplinaId) : undefined;
     if (blockerSubtopic && blockerTopic && blockerDiscipline) {
-      const blockerMaterial = findOptionalStudyMaterial(input.materials, blockerDiscipline.id, blockerTopic.id, blockerSubtopic.id);
+      const blockerMaterial = findOptionalStudyMaterial(input.materials, blockerDiscipline.id, blockerTopic.id, blockerSubtopic.id, input.materialCatalog ?? []);
       candidates.unshift({
         method: "prerequisite_recovery",
         discipline: blockerDiscipline,
@@ -336,19 +542,52 @@ export function buildOptionalStudyRecommendation(input: BuildOptionalStudyRecomm
     }];
   }
 
-  const [primarySpec, ...alternativeSpecs] = grounded;
-  const primary = makeOption({
-    ordinal: 0, method: primarySpec.method, discipline: primarySpec.discipline, topic: primarySpec.topic,
-    subtopic: primarySpec.subtopic, durationMinutes: primarySpec.duration, materialMatch: primarySpec.materialMatch,
-    rationale: primarySpec.rationale, warnings: primarySpec.warnings, supportSignals: primarySpec.signals,
-    prerequisiteAdequate: primarySpec.prerequisiteAdequate,
-  });
-  const alternatives = alternativeSpecs.slice(0, 4).map((candidate, index) => makeOption({
-    ordinal: index + 1, method: candidate.method, discipline: candidate.discipline, topic: candidate.topic,
-    subtopic: candidate.subtopic, durationMinutes: candidate.duration, materialMatch: candidate.materialMatch,
-    rationale: candidate.rationale, warnings: candidate.warnings, supportSignals: candidate.signals,
+  const gatedOptions = grounded.map((candidate, index) => validateOptionalStudyExecutionOption(makeOption({
+    ordinal: index,
+    method: candidate.method,
+    discipline: candidate.discipline,
+    topic: candidate.topic,
+    subtopic: candidate.subtopic,
+    durationMinutes: candidate.duration,
+    materialMatch: candidate.materialMatch,
+    rationale: candidate.rationale,
+    warnings: candidate.warnings,
+    supportSignals: candidate.signals,
     prerequisiteAdequate: candidate.prerequisiteAdequate,
-  }));
+  }), input.context, candidate.materialMatch, input.materialCatalog ?? []));
+  let executableOptions = gatedOptions.filter((option) => option.executionStatus === "READY" && option.executionPacket);
+  const blockedOptions = gatedOptions.filter((option) => option.executionStatus !== "READY" || !option.executionPacket);
+  if (executableOptions.length === 0) {
+    const safeFallbackSpec: CandidateSpec = {
+      method: "light_organization",
+      discipline,
+      topic,
+      subtopic,
+      rationale: "Os caminhos pedagógicos avaliados não possuem ambiente ou material executável; foi mantida somente uma opção operacional leve, sem substituir estudo real.",
+      signals: ["ausência de caminho pedagógico executável"],
+      materialMatch: { confidence: "none" },
+      prerequisiteAdequate: prereqAdequate,
+      warnings: [...commonWarnings, "Nenhum ambiente pedagógico foi apresentado como pronto sem os recursos necessários."],
+      duration: 15,
+    };
+    const fallback = validateOptionalStudyExecutionOption(makeOption({
+      ordinal: gatedOptions.length,
+      method: safeFallbackSpec.method,
+      discipline: safeFallbackSpec.discipline,
+      topic: safeFallbackSpec.topic,
+      subtopic: safeFallbackSpec.subtopic,
+      durationMinutes: safeFallbackSpec.duration,
+      materialMatch: safeFallbackSpec.materialMatch,
+      rationale: safeFallbackSpec.rationale,
+      warnings: safeFallbackSpec.warnings,
+      supportSignals: safeFallbackSpec.signals,
+      prerequisiteAdequate: safeFallbackSpec.prerequisiteAdequate,
+    }), input.context, safeFallbackSpec.materialMatch, input.materialCatalog ?? []);
+    if (fallback.executionStatus === "READY" && fallback.executionPacket) executableOptions = [fallback];
+  }
+  if (executableOptions.length === 0) return null;
+  const [primary, ...restExecutable] = executableOptions;
+  const alternatives = restExecutable.slice(0, 4);
 
   const blockedIds = input.subtopics.filter((item) => prerequisiteState(prerequisiteKnowledgeStates, item.id)?.requiredBlocked).map((item) => item.id);
   const snapshot: OptionalStudyInputSnapshot = {
@@ -387,6 +626,7 @@ export function buildOptionalStudyRecommendation(input: BuildOptionalStudyRecomm
     requestOrdinal,
     primary,
     alternatives,
+    blockedOptions,
     shadowAlternative: shadow.option ?? undefined,
     shadowExecution: shadow.execution,
     snapshot,

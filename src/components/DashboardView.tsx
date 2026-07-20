@@ -23,6 +23,7 @@ import { buildCoachOperationalCommand } from "../core/coach/operationalCoach";
 import { buildOnboardingPlan } from "../core/onboarding/onboarding";
 import { presentDecisionWarning } from "../core/presentation/decisionWarnings";
 import OptionalStudyCard from "./OptionalStudyCard";
+import StudyExecutionPacketView from "./StudyExecutionPacketView";
 
 const ACTIVITY_LABELS: Record<StudyActivityKind, string> = {
   teoria: "Teoria ativa",
@@ -249,6 +250,12 @@ export default function DashboardView({ onStartSession, onAskCoach }: { onStartS
                 )}
               </div>
             </div>
+
+            {prescription.executionPacket && (
+              <div className="mt-5">
+                <StudyExecutionPacketView packet={prescription.executionPacket} />
+              </div>
+            )}
 
             <div className="mt-5 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
               <div className="space-y-4">

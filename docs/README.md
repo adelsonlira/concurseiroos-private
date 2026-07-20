@@ -79,3 +79,12 @@ A memória institucional e o protocolo de retomada ficam em [`../.ai/README.md`]
 ## Pipeline — 3.35.2
 
 - `DETERMINISTIC_VALIDATION_TERMINATION_3.35.2.md`: causa-raiz, teardown HTTP e auditoria de encerramento natural.
+
+## Prescrição executável — 3.35.3
+
+- `RELEASE_STATUS_3.35.2.md`: limitação operacional da versão anterior.
+- `STUDY_EXECUTION_REGISTRY_3.35.3.md`: capacidades de notebook, fontes, ambientes e captura.
+- `EXECUTION_READINESS_GATE_3.35.3.md`: gate pós-ranking e fallback operacional.
+- `STUDY_EXECUTION_PACKET_3.35.3.md`: contrato apresentado ao usuário.
+- `STUDY_EXECUTION_PRODUCTION_SMOKE_3.35.3.md`: roteiro de domingo, segunda-feira e ambientes.
+- `../.ai/decisions/ADR-041-execution-readiness-gate.md`: decisão arquitetural.

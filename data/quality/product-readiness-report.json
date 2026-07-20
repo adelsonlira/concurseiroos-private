@@ -1,11 +1,13 @@
 {
   "schemaVersion": "1.0.0",
-  "projectVersion": "3.35.2",
-  "generatedAt": "2026-07-19T22:21:02.312Z",
-  "status": "READY_FOR_LOCAL_DAILY_USE",
-  "confidence": "HIGH",
+  "projectVersion": "3.35.3",
+  "generatedAt": "2026-07-20T02:17:52.356Z",
+  "status": "READY_WITH_LIMITATIONS",
+  "confidence": "MEDIUM",
   "blockingChecks": [],
-  "warnings": [],
+  "warnings": [
+    "Paridade Node.js 24: Executado em Node.js 22.16.0; alvo declarado 24.x."
+  ],
   "checks": [
     {
       "id": "sde-audit",
@@ -66,9 +68,9 @@
     {
       "id": "node-runtime",
       "label": "Paridade Node.js 24",
-      "status": "PASS",
+      "status": "WARN",
       "requiredForDailyUse": false,
-      "detail": "Runtime-alvo confirmado."
+      "detail": "Executado em Node.js 22.16.0; alvo declarado 24.x."
     },
     {
       "id": "supabase-authenticated",

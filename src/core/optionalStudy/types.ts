@@ -1,5 +1,6 @@
 import type { ExternalEvidenceConsultation, ExternalEvidenceErrorCause, ExternalEvidenceSource } from "../externalEvidence/types";
 import type { HistoricalIncidenceSignal } from "../sde-v2/types";
+import type { StudyExecutionBlockReason, StudyExecutionPacket, StudyExecutionStatus } from "../studyExecution/types";
 
 export type OptionalStudyContext = "rest_day_optional" | "extra_after_required_plan" | "manual_optional";
 export type OptionalStudyMethod =
@@ -49,6 +50,9 @@ export interface OptionalStudyRecommendationOption {
   score?: number | null;
   suggestedSource?: ExternalEvidenceSource;
   suggestedExaminingBoard?: string;
+  executionStatus?: StudyExecutionStatus;
+  executionPacket?: StudyExecutionPacket | null;
+  executionBlockReasons?: StudyExecutionBlockReason[];
 }
 
 export interface OptionalStudyInputSnapshot {
@@ -87,7 +91,7 @@ export interface OptionalStudyShadowExecution {
 export interface OptionalStudyRecommendation {
   recommendationId: string;
   schemaVersion: 1;
-  engineVersion: "1.0" | "1.1";
+  engineVersion: "1.0" | "1.1" | "1.2";
   generatedAt: string;
   localDate: string;
   context: OptionalStudyContext;
@@ -95,6 +99,7 @@ export interface OptionalStudyRecommendation {
   requestOrdinal: number;
   primary: OptionalStudyRecommendationOption;
   alternatives: OptionalStudyRecommendationOption[];
+  blockedOptions?: OptionalStudyRecommendationOption[];
   /** Present only when produced by a real SDE v2 execution. */
   shadowAlternative?: OptionalStudyRecommendationOption;
   shadowExecution?: OptionalStudyShadowExecution;
@@ -129,7 +134,7 @@ export interface OptionalStudyLedgerEvent {
   recommendationId?: string;
   sessionId?: string;
   inputFingerprint?: string;
-  engineVersion: "1.0" | "1.1";
+  engineVersion: "1.0" | "1.1" | "1.2";
   isOptional: true;
   mandatory: false;
   affectsPlanCompliance: false;

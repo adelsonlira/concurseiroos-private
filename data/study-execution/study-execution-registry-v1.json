@@ -1,0 +1,864 @@
+{
+  "schemaVersion": "1.0.0",
+  "registryId": "dataprev-2026-study-execution-v1",
+  "competitionId": "dataprev-2026-perfil-3",
+  "generatedAt": "2026-07-19T12:00:00.000Z",
+  "defaultNotebookStatus": "NOT_CONFIGURED",
+  "materialCatalog": {
+    "registryId": "dataprev-2026-private-study-materials",
+    "version": "1.0.0",
+    "sourceModule": "src/config/concursos/dataprev-2026-perfil-3/privateStudyMaterials.ts",
+    "readyMatches": [
+      "EXACT_SUBTOPIC",
+      "EXACT_TOPIC"
+    ],
+    "disciplineLevelRequiresValidation": true,
+    "unverifiedAllowedAsReady": false
+  },
+  "resultCaptureRoutes": {
+    "theory": "Sessão guiada",
+    "questions": "Registrar resultado",
+    "review": "Revisões e erros",
+    "technical_practice": "Sessão guiada",
+    "simulation": "Simulados ou Registrar resultado",
+    "operational": "Sessão guiada"
+  },
+  "globalEnvironments": [
+    {
+      "environment": "qconcursos",
+      "status": "AVAILABLE",
+      "notes": "Origem externa manual. Exige filtros estruturados e registro posterior do resultado."
+    },
+    {
+      "environment": "guided_session",
+      "status": "AVAILABLE",
+      "notes": "Sessão guiada interna para recuperação, revisão e prática sem conteúdo inventado."
+    },
+    {
+      "environment": "manual_external",
+      "status": "AVAILABLE_WITH_USER_INPUT",
+      "notes": "Exige que o usuário informe a fonte ou material realmente utilizado."
+    }
+  ],
+  "disciplines": [
+    {
+      "disciplineId": "dp26-p3-portugues",
+      "disciplineName": "Língua Portuguesa",
+      "notebookStatus": "READY_THEORY_ONLY",
+      "notebookName": "DATAPREV 2026 — Língua Portuguesa — Tutor FGV",
+      "notebookUrl": null,
+      "approvedSources": [
+        {
+          "sourceId": "por-edital",
+          "fileName": "edital-dataprev_supe-versaofinal.pdf",
+          "title": "Edital DATAPREV 2026 — Língua Portuguesa",
+          "kind": "INSTITUTIONAL",
+          "coverage": "Conteúdo programático oficial de Língua Portuguesa",
+          "topicKeywords": [
+            "edital",
+            "conteúdo programático"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": true
+        },
+        {
+          "sourceId": "por-aula-01",
+          "fileName": "curso-392405-aula-01-ce54-grifado.pdf",
+          "title": "Aula 01 — Noções iniciais de ortografia",
+          "kind": "THEORY",
+          "coverage": "Ortografia e convenções da escrita",
+          "topicKeywords": [
+            "ortografia",
+            "acentuação",
+            "grafia"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        },
+        {
+          "sourceId": "por-aula-02",
+          "fileName": "curso-392405-aula-02-5d07-grifado.pdf",
+          "title": "Aula 02 — Classes e emprego de palavras",
+          "kind": "THEORY",
+          "coverage": "Morfologia e emprego de classes gramaticais",
+          "topicKeywords": [
+            "classes de palavras",
+            "morfologia",
+            "substantivo",
+            "adjetivo"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        },
+        {
+          "sourceId": "por-aula-03",
+          "fileName": "curso-392405-aula-03-43fb-grifado.pdf",
+          "title": "Aula 03 — Verbos e flexões",
+          "kind": "THEORY",
+          "coverage": "Verbos, tempos e modos verbais",
+          "topicKeywords": [
+            "verbo",
+            "tempos verbais",
+            "modos verbais"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        },
+        {
+          "sourceId": "por-aula-04",
+          "fileName": "curso-392405-aula-04-1019-grifado.pdf",
+          "title": "Aula 04 — Sintaxe da oração",
+          "kind": "THEORY",
+          "coverage": "Termos da oração e relações sintáticas",
+          "topicKeywords": [
+            "sintaxe",
+            "oração",
+            "termos da oração"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        },
+        {
+          "sourceId": "por-aula-05",
+          "fileName": "curso-392405-aula-05-c93b-grifado.pdf",
+          "title": "Aula 05 — Período composto",
+          "kind": "THEORY",
+          "coverage": "Coordenação e subordinação",
+          "topicKeywords": [
+            "período composto",
+            "coordenação",
+            "subordinação"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        },
+        {
+          "sourceId": "por-aula-06",
+          "fileName": "curso-392405-aula-06-ebad-grifado.pdf",
+          "title": "Aula 06 — Concordância",
+          "kind": "THEORY",
+          "coverage": "Concordância verbal e nominal",
+          "topicKeywords": [
+            "concordância",
+            "concordância verbal",
+            "concordância nominal"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        },
+        {
+          "sourceId": "por-aula-07",
+          "fileName": "curso-392405-aula-07-0dd6-grifado.pdf",
+          "title": "Aula 07 — Regência e crase",
+          "kind": "THEORY",
+          "coverage": "Regência verbal, nominal e crase",
+          "topicKeywords": [
+            "regência",
+            "crase"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        },
+        {
+          "sourceId": "por-aula-08",
+          "fileName": "curso-392405-aula-08-21e4-grifado.pdf",
+          "title": "Aula 08 — Pontuação",
+          "kind": "THEORY",
+          "coverage": "Pontuação e efeitos sintáticos",
+          "topicKeywords": [
+            "pontuação",
+            "vírgula",
+            "sinais de pontuação"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        },
+        {
+          "sourceId": "por-aula-09",
+          "fileName": "curso-392405-aula-09-e3cf-grifado.pdf",
+          "title": "Aula 09 — Coesão, coerência e reescrita",
+          "kind": "THEORY",
+          "coverage": "Coesão, coerência e reescrita textual",
+          "topicKeywords": [
+            "coesão",
+            "coerência",
+            "reescrita",
+            "formalidade",
+            "conectivos"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        },
+        {
+          "sourceId": "por-aula-10",
+          "fileName": "curso-392405-aula-10-2915-grifado.pdf",
+          "title": "Aula 10 — Semântica e relações de sentido",
+          "kind": "THEORY",
+          "coverage": "Semântica, inferência e relações de sentido",
+          "topicKeywords": [
+            "semântica",
+            "sentido",
+            "inferência",
+            "ambiguidade",
+            "interpretação contextual"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        },
+        {
+          "sourceId": "por-aula-11",
+          "fileName": "curso-392405-aula-11-0181-grifado.pdf",
+          "title": "Aula 11 — Compreensão e interpretação de textos",
+          "kind": "THEORY",
+          "coverage": "Compreensão e interpretação de gêneros variados",
+          "topicKeywords": [
+            "compreensão",
+            "interpretação",
+            "texto",
+            "gênero",
+            "tipologia",
+            "reescrita"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        },
+        {
+          "sourceId": "por-aula-12",
+          "fileName": "curso-392405-aula-12-21bb-completo.pdf",
+          "title": "Aula 12 — Fonte secundária pedagógica",
+          "kind": "SECONDARY_PEDAGOGICAL",
+          "coverage": "Material pedagógico complementar, sem autoridade documental FGV",
+          "topicKeywords": [
+            "complemento pedagógico"
+          ],
+          "fgvEvidence": false,
+          "defaultSelected": false
+        }
+      ],
+      "topicOverrides": [
+        {
+          "topicId": "dp26-p3-por-interpretacao",
+          "topicName": "Compreensão e interpretação de textos",
+          "notebookStatus": "READY_THEORY_ONLY",
+          "notebookName": "DATAPREV 2026 — Língua Portuguesa — Tutor FGV",
+          "notebookUrl": null,
+          "fgvEvidenceStatus": "PENDING",
+          "fgvStyleTeaching": "DISABLED",
+          "approvedSources": [
+            {
+              "sourceId": "por-edital",
+              "fileName": "edital-dataprev_supe-versaofinal.pdf",
+              "title": "Edital DATAPREV 2026 — Língua Portuguesa",
+              "kind": "INSTITUTIONAL",
+              "coverage": "Conteúdo programático oficial de Língua Portuguesa",
+              "topicKeywords": [
+                "edital",
+                "conteúdo programático"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": true
+            },
+            {
+              "sourceId": "por-aula-01",
+              "fileName": "curso-392405-aula-01-ce54-grifado.pdf",
+              "title": "Aula 01 — Noções iniciais de ortografia",
+              "kind": "THEORY",
+              "coverage": "Ortografia e convenções da escrita",
+              "topicKeywords": [
+                "ortografia",
+                "acentuação",
+                "grafia"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-02",
+              "fileName": "curso-392405-aula-02-5d07-grifado.pdf",
+              "title": "Aula 02 — Classes e emprego de palavras",
+              "kind": "THEORY",
+              "coverage": "Morfologia e emprego de classes gramaticais",
+              "topicKeywords": [
+                "classes de palavras",
+                "morfologia",
+                "substantivo",
+                "adjetivo"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-03",
+              "fileName": "curso-392405-aula-03-43fb-grifado.pdf",
+              "title": "Aula 03 — Verbos e flexões",
+              "kind": "THEORY",
+              "coverage": "Verbos, tempos e modos verbais",
+              "topicKeywords": [
+                "verbo",
+                "tempos verbais",
+                "modos verbais"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-04",
+              "fileName": "curso-392405-aula-04-1019-grifado.pdf",
+              "title": "Aula 04 — Sintaxe da oração",
+              "kind": "THEORY",
+              "coverage": "Termos da oração e relações sintáticas",
+              "topicKeywords": [
+                "sintaxe",
+                "oração",
+                "termos da oração"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-05",
+              "fileName": "curso-392405-aula-05-c93b-grifado.pdf",
+              "title": "Aula 05 — Período composto",
+              "kind": "THEORY",
+              "coverage": "Coordenação e subordinação",
+              "topicKeywords": [
+                "período composto",
+                "coordenação",
+                "subordinação"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-06",
+              "fileName": "curso-392405-aula-06-ebad-grifado.pdf",
+              "title": "Aula 06 — Concordância",
+              "kind": "THEORY",
+              "coverage": "Concordância verbal e nominal",
+              "topicKeywords": [
+                "concordância",
+                "concordância verbal",
+                "concordância nominal"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-07",
+              "fileName": "curso-392405-aula-07-0dd6-grifado.pdf",
+              "title": "Aula 07 — Regência e crase",
+              "kind": "THEORY",
+              "coverage": "Regência verbal, nominal e crase",
+              "topicKeywords": [
+                "regência",
+                "crase"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-08",
+              "fileName": "curso-392405-aula-08-21e4-grifado.pdf",
+              "title": "Aula 08 — Pontuação",
+              "kind": "THEORY",
+              "coverage": "Pontuação e efeitos sintáticos",
+              "topicKeywords": [
+                "pontuação",
+                "vírgula",
+                "sinais de pontuação"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-09",
+              "fileName": "curso-392405-aula-09-e3cf-grifado.pdf",
+              "title": "Aula 09 — Coesão, coerência e reescrita",
+              "kind": "THEORY",
+              "coverage": "Coesão, coerência e reescrita textual",
+              "topicKeywords": [
+                "coesão",
+                "coerência",
+                "reescrita",
+                "formalidade",
+                "conectivos"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-10",
+              "fileName": "curso-392405-aula-10-2915-grifado.pdf",
+              "title": "Aula 10 — Semântica e relações de sentido",
+              "kind": "THEORY",
+              "coverage": "Semântica, inferência e relações de sentido",
+              "topicKeywords": [
+                "semântica",
+                "sentido",
+                "inferência",
+                "ambiguidade",
+                "interpretação contextual"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-11",
+              "fileName": "curso-392405-aula-11-0181-grifado.pdf",
+              "title": "Aula 11 — Compreensão e interpretação de textos",
+              "kind": "THEORY",
+              "coverage": "Compreensão e interpretação de gêneros variados",
+              "topicKeywords": [
+                "compreensão",
+                "interpretação",
+                "texto",
+                "gênero",
+                "tipologia",
+                "reescrita"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-12",
+              "fileName": "curso-392405-aula-12-21bb-completo.pdf",
+              "title": "Aula 12 — Fonte secundária pedagógica",
+              "kind": "SECONDARY_PEDAGOGICAL",
+              "coverage": "Material pedagógico complementar, sem autoridade documental FGV",
+              "topicKeywords": [
+                "complemento pedagógico"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            }
+          ],
+          "sourcesToDisableByDefault": [
+            "Conversas do Gemini (1)",
+            "curso-392405-aula-01-ce54-grifado.pdf",
+            "curso-392405-aula-12-21bb-completo.pdf"
+          ],
+          "notebookConfiguration": {
+            "conversationMode": "Personalizado",
+            "responseLength": "Mais longa",
+            "webSearchAllowed": false,
+            "dataAnalysisAllowed": false
+          },
+          "environments": [
+            "notebooklm",
+            "qconcursos",
+            "internal_material",
+            "guided_session",
+            "manual_external"
+          ],
+          "coverageStatus": "FULL",
+          "limitations": []
+        },
+        {
+          "topicId": "dp26-p3-por-reescrita",
+          "topicName": "Reescrita de frases e parágrafos",
+          "notebookStatus": "READY_THEORY_ONLY",
+          "notebookName": "DATAPREV 2026 — Língua Portuguesa — Tutor FGV",
+          "notebookUrl": null,
+          "fgvEvidenceStatus": "PENDING",
+          "fgvStyleTeaching": "DISABLED",
+          "approvedSources": [
+            {
+              "sourceId": "por-edital",
+              "fileName": "edital-dataprev_supe-versaofinal.pdf",
+              "title": "Edital DATAPREV 2026 — Língua Portuguesa",
+              "kind": "INSTITUTIONAL",
+              "coverage": "Conteúdo programático oficial de Língua Portuguesa",
+              "topicKeywords": [
+                "edital",
+                "conteúdo programático"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": true
+            },
+            {
+              "sourceId": "por-aula-01",
+              "fileName": "curso-392405-aula-01-ce54-grifado.pdf",
+              "title": "Aula 01 — Noções iniciais de ortografia",
+              "kind": "THEORY",
+              "coverage": "Ortografia e convenções da escrita",
+              "topicKeywords": [
+                "ortografia",
+                "acentuação",
+                "grafia"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-02",
+              "fileName": "curso-392405-aula-02-5d07-grifado.pdf",
+              "title": "Aula 02 — Classes e emprego de palavras",
+              "kind": "THEORY",
+              "coverage": "Morfologia e emprego de classes gramaticais",
+              "topicKeywords": [
+                "classes de palavras",
+                "morfologia",
+                "substantivo",
+                "adjetivo"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-03",
+              "fileName": "curso-392405-aula-03-43fb-grifado.pdf",
+              "title": "Aula 03 — Verbos e flexões",
+              "kind": "THEORY",
+              "coverage": "Verbos, tempos e modos verbais",
+              "topicKeywords": [
+                "verbo",
+                "tempos verbais",
+                "modos verbais"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-04",
+              "fileName": "curso-392405-aula-04-1019-grifado.pdf",
+              "title": "Aula 04 — Sintaxe da oração",
+              "kind": "THEORY",
+              "coverage": "Termos da oração e relações sintáticas",
+              "topicKeywords": [
+                "sintaxe",
+                "oração",
+                "termos da oração"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-05",
+              "fileName": "curso-392405-aula-05-c93b-grifado.pdf",
+              "title": "Aula 05 — Período composto",
+              "kind": "THEORY",
+              "coverage": "Coordenação e subordinação",
+              "topicKeywords": [
+                "período composto",
+                "coordenação",
+                "subordinação"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-06",
+              "fileName": "curso-392405-aula-06-ebad-grifado.pdf",
+              "title": "Aula 06 — Concordância",
+              "kind": "THEORY",
+              "coverage": "Concordância verbal e nominal",
+              "topicKeywords": [
+                "concordância",
+                "concordância verbal",
+                "concordância nominal"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-07",
+              "fileName": "curso-392405-aula-07-0dd6-grifado.pdf",
+              "title": "Aula 07 — Regência e crase",
+              "kind": "THEORY",
+              "coverage": "Regência verbal, nominal e crase",
+              "topicKeywords": [
+                "regência",
+                "crase"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-08",
+              "fileName": "curso-392405-aula-08-21e4-grifado.pdf",
+              "title": "Aula 08 — Pontuação",
+              "kind": "THEORY",
+              "coverage": "Pontuação e efeitos sintáticos",
+              "topicKeywords": [
+                "pontuação",
+                "vírgula",
+                "sinais de pontuação"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-09",
+              "fileName": "curso-392405-aula-09-e3cf-grifado.pdf",
+              "title": "Aula 09 — Coesão, coerência e reescrita",
+              "kind": "THEORY",
+              "coverage": "Coesão, coerência e reescrita textual",
+              "topicKeywords": [
+                "coesão",
+                "coerência",
+                "reescrita",
+                "formalidade",
+                "conectivos"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-10",
+              "fileName": "curso-392405-aula-10-2915-grifado.pdf",
+              "title": "Aula 10 — Semântica e relações de sentido",
+              "kind": "THEORY",
+              "coverage": "Semântica, inferência e relações de sentido",
+              "topicKeywords": [
+                "semântica",
+                "sentido",
+                "inferência",
+                "ambiguidade",
+                "interpretação contextual"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-11",
+              "fileName": "curso-392405-aula-11-0181-grifado.pdf",
+              "title": "Aula 11 — Compreensão e interpretação de textos",
+              "kind": "THEORY",
+              "coverage": "Compreensão e interpretação de gêneros variados",
+              "topicKeywords": [
+                "compreensão",
+                "interpretação",
+                "texto",
+                "gênero",
+                "tipologia",
+                "reescrita"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "por-aula-12",
+              "fileName": "curso-392405-aula-12-21bb-completo.pdf",
+              "title": "Aula 12 — Fonte secundária pedagógica",
+              "kind": "SECONDARY_PEDAGOGICAL",
+              "coverage": "Material pedagógico complementar, sem autoridade documental FGV",
+              "topicKeywords": [
+                "complemento pedagógico"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            }
+          ],
+          "sourcesToDisableByDefault": [
+            "Conversas do Gemini (1)",
+            "curso-392405-aula-01-ce54-grifado.pdf",
+            "curso-392405-aula-12-21bb-completo.pdf"
+          ],
+          "notebookConfiguration": {
+            "conversationMode": "Personalizado",
+            "responseLength": "Mais longa",
+            "webSearchAllowed": false,
+            "dataAnalysisAllowed": false
+          },
+          "environments": [
+            "notebooklm",
+            "qconcursos",
+            "internal_material",
+            "guided_session",
+            "manual_external"
+          ],
+          "coverageStatus": "PARTIAL",
+          "limitations": [
+            "A cobertura disponível para reescrita entre diferentes gêneros e níveis de formalidade é parcial."
+          ]
+        }
+      ],
+      "fgvEvidenceStatus": "PENDING",
+      "fgvStyleTeaching": "DISABLED"
+    },
+    {
+      "disciplineId": "dp26-p3-ingles",
+      "disciplineName": "Língua Inglesa",
+      "notebookStatus": "NOT_CONFIGURED",
+      "notebookName": null,
+      "notebookUrl": null,
+      "approvedSources": [],
+      "topicOverrides": [],
+      "fgvEvidenceStatus": "NOT_AVAILABLE",
+      "fgvStyleTeaching": "DISABLED"
+    },
+    {
+      "disciplineId": "dp26-p3-raciocinio-logico",
+      "disciplineName": "Raciocínio Lógico Matemático",
+      "notebookStatus": "NOT_CONFIGURED",
+      "notebookName": null,
+      "notebookUrl": null,
+      "approvedSources": [],
+      "topicOverrides": [],
+      "fgvEvidenceStatus": "NOT_AVAILABLE",
+      "fgvStyleTeaching": "DISABLED"
+    },
+    {
+      "disciplineId": "dp26-p3-atualidades-ia",
+      "disciplineName": "Atualidades e Inteligência Artificial",
+      "notebookStatus": "NOT_CONFIGURED",
+      "notebookName": null,
+      "notebookUrl": null,
+      "approvedSources": [],
+      "topicOverrides": [],
+      "fgvEvidenceStatus": "NOT_AVAILABLE",
+      "fgvStyleTeaching": "DISABLED"
+    },
+    {
+      "disciplineId": "dp26-p3-legislacao-si-dados",
+      "disciplineName": "Legislação de Segurança da Informação e Proteção de Dados",
+      "notebookStatus": "NOT_CONFIGURED",
+      "notebookName": null,
+      "notebookUrl": null,
+      "approvedSources": [],
+      "topicOverrides": [],
+      "fgvEvidenceStatus": "NOT_AVAILABLE",
+      "fgvStyleTeaching": "DISABLED"
+    },
+    {
+      "disciplineId": "dp26-p3-conhecimentos-especificos",
+      "disciplineName": "Conhecimentos Específicos",
+      "notebookStatus": "NOT_CONFIGURED",
+      "notebookName": null,
+      "notebookUrl": null,
+      "approvedSources": [],
+      "topicOverrides": [
+        {
+          "topicId": "dp26-p3-esp-banco-dados",
+          "topicName": "Banco de Dados",
+          "notebookStatus": "READY_WITH_FGV_EVIDENCE",
+          "notebookName": "DATAPREV 2026 — Banco de Dados — Tutor FGV",
+          "notebookUrl": null,
+          "approvedSources": [
+            {
+              "sourceId": "bd-edital",
+              "title": "Edital DATAPREV 2026",
+              "kind": "INSTITUTIONAL",
+              "coverage": "Banco de Dados no conteúdo programático",
+              "fgvEvidence": false,
+              "defaultSelected": true
+            },
+            {
+              "sourceId": "bd-ficha-direcao",
+              "title": "Ficha de Direção — Banco de Dados",
+              "kind": "INSTITUTIONAL",
+              "coverage": "Objetivos, limites e orientação do estudo",
+              "fgvEvidence": false,
+              "defaultSelected": true
+            },
+            {
+              "sourceId": "bd-taxonomia",
+              "title": "Recorte da taxonomia DATAPREV — Banco de Dados",
+              "kind": "INSTITUTIONAL",
+              "coverage": "Assuntos e subassuntos aprovados",
+              "fgvEvidence": false,
+              "defaultSelected": true
+            },
+            {
+              "sourceId": "bd-materiais-teoricos",
+              "title": "Materiais teóricos aprovados — Banco de Dados",
+              "kind": "THEORY",
+              "coverage": "Teoria do assunto atual",
+              "fgvEvidence": false,
+              "defaultSelected": true
+            },
+            {
+              "sourceId": "bd-complemento-mer-der",
+              "title": "Complemento MER/DER",
+              "kind": "THEORY",
+              "coverage": "Modelagem conceitual, MER e DER",
+              "topicKeywords": [
+                "modelo",
+                "modelagem",
+                "mer",
+                "der",
+                "entidade",
+                "relacionamento"
+              ],
+              "fgvEvidence": false,
+              "defaultSelected": false
+            },
+            {
+              "sourceId": "bd-pacote-fgv-v1.2.1",
+              "title": "Pacote FGV — Banco de Dados — v1.2.1",
+              "kind": "FGV_EVIDENCE",
+              "coverage": "Padrões observados, distratores e questões oficiais do conjunto documental selecionado",
+              "fgvEvidence": true,
+              "defaultSelected": false
+            }
+          ],
+          "sourcesToDisableByDefault": [
+            "Conversas do Gemini (1)",
+            "Aula 08 — Data Mining",
+            "Aula 11 — Inteligência Artificial"
+          ],
+          "notebookConfiguration": {
+            "conversationMode": "Personalizado",
+            "responseLength": "Mais longa",
+            "webSearchAllowed": false,
+            "dataAnalysisAllowed": false
+          },
+          "environments": [
+            "notebooklm",
+            "qconcursos",
+            "treino_fgv",
+            "internal_material",
+            "guided_session",
+            "simulation",
+            "manual_external"
+          ],
+          "fgvEvidenceStatus": "APPROVED",
+          "fgvStyleTeaching": "ENABLED_LIMITED"
+        }
+      ],
+      "fgvEvidenceStatus": "NOT_AVAILABLE",
+      "fgvStyleTeaching": "DISABLED"
+    }
+  ],
+  "materialSemanticRules": [
+    {
+      "topicId": "dp26-p3-por-interpretacao",
+      "requiredAny": [
+        "interpretação",
+        "interpretacao",
+        "compreensão",
+        "compreensao",
+        "texto",
+        "gênero",
+        "genero",
+        "leitura"
+      ],
+      "incompatibleAny": [
+        "ortografia",
+        "acentuação",
+        "acentuacao",
+        "pontuação",
+        "pontuacao",
+        "concordância",
+        "concordancia",
+        "regência",
+        "regencia"
+      ]
+    },
+    {
+      "topicId": "dp26-p3-por-ortografia",
+      "requiredAny": [
+        "ortografia",
+        "acentuação",
+        "acentuacao",
+        "grafia"
+      ],
+      "incompatibleAny": [
+        "interpretação",
+        "interpretacao",
+        "compreensão",
+        "compreensao de textos"
+      ]
+    }
+  ]
+}

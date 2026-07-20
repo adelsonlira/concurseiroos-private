@@ -1,7 +1,7 @@
 # Estado Atual
 
 Data: 2026-07-19
-Versão: 3.35.2
+Versão: 3.35.3
 
 ## Projeto
 
@@ -9,36 +9,44 @@ ConcurseiroOS — alvo ativo: DATAPREV 2026, Analista de Tecnologia da Informaç
 
 ## Fase atual
 
-A versão 3.35.2 corrige exclusivamente o encerramento do pipeline. O comportamento funcional da 3.35.1 permanece integralmente preservado.
+A versão 3.35.3 fecha a última milha da prescrição. O SDE v1 continua determinando o ranking e a prioridade; um gate pós-ranking impede que ambiente inexistente, material incompatível ou instrução incompleta sejam apresentados como atividade pronta.
 
 ## Implementado
 
-- encerramento explícito do serviço do esbuild usado no teste ESM;
-- harness HTTP de teste com cliente sem keep-alive, consumo integral de respostas e rastreamento de sockets;
-- teardown explícito de servidores, conexões ociosas, conexões ativas e listeners temporários;
-- smoke serverless sem `fetch` global e com `PASS` somente depois do fechamento confirmado;
-- auditoria de subprocessos para saída natural, código zero, ausência de sinal e ausência de descendentes;
-- comando `test:hanging-process` para diagnóstico reproduzível;
-- watchdog tratado exclusivamente como gate de falha.
+- `studyExecutionRegistry` versionado com notebooks, fontes, ambientes, política de material e rotas de captura;
+- Banco de Dados como `READY_WITH_FGV_EVIDENCE` no notebook cadastrado;
+- Português como `READY_THEORY_ONLY`, com `fgvEvidenceStatus = PENDING` e `fgvStyleTeaching = DISABLED`; demais disciplinas permanecem `NOT_CONFIGURED`, salvo cadastro explícito;
+- correspondência semântica e taxonômica entre assunto, subassunto e material;
+- `executionReadinessGate` aplicado à prescrição obrigatória, estudo opcional, extra após plano e escolha manual;
+- fallback de método/ambiente sem alterar o ranking;
+- bloqueio auditável e avanço ao próximo candidato executável quando não existe caminho;
+- `studyExecutionPacket` com conteúdo, ambiente, material, páginas, instruções, prompt, critério e retorno;
+- prompt NotebookLM específico, fontes ativas/desativadas e limites de afirmações sobre a FGV;
+- filtros estruturados do QConcursos sem confundir origem com banca;
+- interface com linguagem compreensível, cópia de prompt e atalho para registrar resultado.
 
 ## Validado
 
-- teardown direcionado dos testes HTTP e do smoke serverless;
-- cliente sem keep-alive e consumo integral das respostas;
-- fechamento de conexões ociosas e ativas;
-- auditoria de timeout, sinal e processos descendentes;
-- preservação dos contratos funcionais existentes.
+- bloqueio de Noções Iniciais de Ortografia para interpretação de textos;
+- ausência de NotebookLM em Português;
+- uso válido do NotebookLM em Banco de Dados;
+- preferência por material exato e rejeição de material amplo não validado;
+- fallback para material interno e próximo candidato executável;
+- pacote completo e retorno por método;
+- preservação do SDE v1, shadow do SDE v2, disponibilidade de 120 minutos e domingo de descanso.
 
 ## Problemas conhecidos
 
+- somente Banco de Dados possui NotebookLM aprovado no registro inicial;
+- URLs de notebooks não são inventadas e permanecem ausentes até cadastro explícito;
+- materiais amplos de disciplina continuam bloqueados até validação humana de utilidade temática;
 - o aviso não bloqueante de tamanho do chunk web permanece;
-- a confirmação final em runners remotos depende da publicação do commit;
 - nenhum sistema garante aprovação.
 
 ## Preservado
 
-Disponibilidade de 120 minutos, migração 180 → 120, domingo livre, estudo opcional, resultados estruturados, `optionalStudyLedger`, backup 2.5.0, SDE v1 efetivo, SDE v2 shadow real, Treino FGV, Diagnóstico Piloto, simulados, corpus, taxonomia e dados canônicos.
+Pesos, ranking, grafo, regras duras, estado de conhecimento, mastery, incidência histórica, SDE v1 efetivo, SDE v2 shadow real, disponibilidade de 120 minutos, estudo opcional, `optionalStudyLedger`, backup 2.5.0, corpus, taxonomia, Treino FGV, Diagnóstico Piloto, simulados e dados canônicos.
 
 ## Próxima tarefa
 
-Publicar a v3.35.2 e confirmar no GitHub Actions/Vercel que `validate`, `build` e o smoke devolvem o controle ao shell sem intervenção externa.
+Publicar a v3.35.3 e executar o roteiro de smoke funcional de domingo e segunda-feira no domínio real, cadastrando novos notebooks somente após confirmação explícita de nome, fontes e cobertura.

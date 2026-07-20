@@ -46,6 +46,9 @@ import {
   optionalResultHistoryType,
   optionalResultSummary,
   validateOptionalStudyResult,
+  validateOptionalStudyExecutionOption,
+  findOptionalStudyMaterial,
+  findOptionalStudyMaterialById,
   OPTIONAL_STUDY_ENGINE_VERSION,
   type OptionalStudyContext,
   type OptionalStudyLedgerEvent,
@@ -931,6 +934,7 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
       reviews: state.cronogramasRevisao,
       errorCases: state.casosRecuperacaoErro,
       materials: state.biblioteca,
+      materialCatalog: (getCompetitionRuntimeDefinition(state.configuracao.concursoAlvoId) ?? getDefaultCompetitionRuntimeDefinition()).privateStudyMaterials,
       evidence: state.externalEvidenceLedger,
       sdeV2DecisionInput,
     });
@@ -1016,8 +1020,18 @@ export const useConcurseiroStore = create<ConcurseiroState>((set, get) => ({
     if (!recommendation) return { success: false, error: "Recomendação opcional não encontrada." };
     const option = manualOption ?? [recommendation.primary, ...recommendation.alternatives].find((item) => item.optionId === (optionId ?? recommendation.primary.optionId));
     if (!option) return { success: false, error: "Opção de estudo não encontrada." };
-    const selected: OptionalStudyRecommendationOption = { ...option, durationMinutes: durationMinutes ?? option.durationMinutes };
+    let selected: OptionalStudyRecommendationOption = { ...option, durationMinutes: durationMinutes ?? option.durationMinutes };
     if (!Number.isFinite(selected.durationMinutes) || selected.durationMinutes <= 0) return { success: false, error: "Informe uma duração positiva." };
+    const runtime = getCompetitionRuntimeDefinition(state.configuracao.concursoAlvoId) ?? getDefaultCompetitionRuntimeDefinition();
+    if (manualOption || !selected.executionPacket) {
+      const match = selected.materialId
+        ? findOptionalStudyMaterialById(state.biblioteca, selected.materialId, selected.disciplineId, selected.topicId, selected.subtopicId, runtime.privateStudyMaterials)
+        : findOptionalStudyMaterial(state.biblioteca, selected.disciplineId, selected.topicId, selected.subtopicId, runtime.privateStudyMaterials);
+      selected = validateOptionalStudyExecutionOption(selected, recommendation.context, match, runtime.privateStudyMaterials);
+    }
+    if (selected.executionStatus !== "READY" || !selected.executionPacket) {
+      return { success: false, error: selected.executionBlockReasons?.length ? `Atividade sem caminho executável: ${selected.executionBlockReasons.join(", ")}.` : "Atividade sem caminho executável validado." };
+    }
     const now = new Date().toISOString();
     const sessionId = `optional-session-${recommendation.localDate}-${Date.now()}`;
     const common = {

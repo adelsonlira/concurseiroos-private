@@ -19,3 +19,10 @@
 - Quando a incidência histórica terá validação suficiente para nova decisão arquitetural?
 - Como expor auditoria técnica sem induzir o usuário a seguir a decisão shadow?
 - Quais critérios humanos mínimos seriam necessários para promover o v2, sem automação?
+
+## Capacidades de execução
+
+- Quais notebooks adicionais serão aprovados, com nome, URL, fontes e cobertura verificáveis?
+- Quais materiais hoje classificados no nível da disciplina podem receber validação explícita para assuntos específicos?
+- Quais URLs de notebooks podem ser cadastradas sem comprometer portabilidade e privacidade?
+- Quais filtros de anos em bancos externos podem ser prescritos somente após confirmação de disponibilidade real?

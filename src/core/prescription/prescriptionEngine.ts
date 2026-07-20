@@ -6,6 +6,7 @@ import type { StudyActivityType, StudySession } from "../sde/planner/plannerType
 import { getPlannerActionId } from "../sde/planner/blockBuilder";
 import type { StrategicAction } from "../sde/prioritization/types";
 import { buildStudyFocusGuide } from "./studyFocusGuide";
+import { executionReadinessGate } from "../studyExecution/executionReadinessGate";
 import type {
   DailyStudyPrescription,
   DailyStudyPrescriptionInput,
@@ -193,46 +194,35 @@ function buildDecisionReliability(action: StrategicAction): PrescriptionDecision
   };
 }
 
-function buildExecutionReadiness(params: {
-  activity: StudyActivityType;
-  material: MaterialLocatorRecommendation | null;
-  questionPractice: QuestionPracticePrescription | null;
-}): PrescriptionExecutionReadiness {
-  if (params.activity === "questoes") {
-    if (params.material?.matchScope === "TOPIC_FALLBACK") {
-      return {
-        status: "READY_WITH_FALLBACK",
-        reason: "A bateria local cobre o assunto de forma ampla, não o subassunto de modo exato. Use somente itens claramente aderentes ao recorte prescrito ou aplique os filtros do banco externo.",
-        requiredResource: "QUESTION_SOURCE"
-      };
-    }
-    if (params.questionPractice?.externalSourcePlan || params.material) {
-      return { status: "READY", reason: "Fonte de questões identificada para execução.", requiredResource: "NONE" };
-    }
+function buildExecutionReadinessFromGate(gate: ReturnType<typeof executionReadinessGate>): PrescriptionExecutionReadiness {
+  if (gate.executionStatus === "BLOCKED_NO_EXECUTABLE_PATH") {
     return {
-      status: "READY_WITH_FALLBACK",
-      reason: "O alvo de questões está definido, mas nenhuma fonte executável foi localizada; use Qconcursos ou Estratégia Questões com os filtros prescritos.",
-      requiredResource: "QUESTION_SOURCE"
+      status: "BLOCKED_NO_EXECUTABLE_PATH",
+      reason: gate.blockedCandidate?.explanation ?? "Não existe caminho executável seguro para esta prescrição.",
+      requiredResource: gate.blockedReasons.some((reason) => reason === "NO_MATCHING_MATERIAL" || reason === "MATERIAL_INCOMPATIBLE" || reason === "NO_APPROVED_SOURCE" || reason === "NO_CONFIGURED_NOTEBOOK")
+        ? "MATERIAL"
+        : "NONE",
     };
   }
-  if ((params.activity === "teoria" || params.activity === "revisao") && !params.material) {
+  if (gate.methodChanged) {
     return {
       status: "READY_WITH_FALLBACK",
-      reason: "A decisão pedagógica está válida, mas falta um localizador exato. Use a busca da biblioteca pelo nome oficial do subassunto e registre o material e as páginas realmente utilizados.",
-      requiredResource: "MATERIAL"
+      reason: gate.methodChangeReason ?? "O assunto foi mantido e o método foi substituído por um caminho executável validado.",
+      requiredResource: "NONE",
     };
   }
-  if (
-    (params.activity === "teoria" || params.activity === "revisao") &&
-    params.material?.matchScope === "TOPIC_FALLBACK"
-  ) {
+  if (gate.packet?.environment === "qconcursos" && gate.packet.confidence !== "HIGH") {
     return {
       status: "READY_WITH_FALLBACK",
-      reason: params.material.fallbackNotice ?? "O material cobre o assunto de forma ampla; confirme o trecho relevante antes de registrar a conclusão.",
-      requiredResource: "MATERIAL"
+      reason: "O QConcursos está disponível como origem externa, mas os filtros e a banca devem ser confirmados antes do início.",
+      requiredResource: "QUESTION_SOURCE",
     };
   }
-  return { status: "READY", reason: "Todos os recursos obrigatórios para esta sessão estão disponíveis.", requiredResource: "NONE" };
+  return {
+    status: "READY",
+    reason: "Atividade, ambiente, conteúdo, critério de conclusão e registro de resultado estão definidos.",
+    requiredResource: "NONE",
+  };
 }
 
 function buildPrescriptionForSession(
@@ -265,6 +255,28 @@ function buildPrescriptionForSession(
     material,
     action.diagnosticPurpose === true
   );
+  const completionEvidence = completionEvidenceFor(session.tipo as StudyActivityType);
+  const executionGate = executionReadinessGate({
+    competitionId: input.concursoId,
+    context: "mandatory",
+    disciplineId: session.disciplinaId,
+    disciplineName: session.disciplinaNome,
+    topicId: session.assuntoId,
+    topicName: session.assuntoNome,
+    subtopicId: session.subassuntoId,
+    subtopicName: session.subassuntoNome,
+    requestedMethod: session.tipo as StudyActivityType,
+    durationMinutes: session.tempoMinutos,
+    objective: session.objetivos.map((objective) => objective.descricao).join(" ") || `Executar ${session.tipo} no recorte prescrito.`,
+    completionCriterion: completionEvidence.join(" "),
+    material,
+    materialCatalog: input.materialCatalog,
+    questionSourcePlan: questionPractice?.externalSourcePlan ?? null,
+    targetQuestions: questionPractice?.targetQuestions ?? null,
+    examiningBoard: input.banca,
+    sourceDecisionId: session.actionId ?? session.id,
+    allowMethodFallback: true,
+  });
 
   return {
     id: `prescription-${session.id}`,
@@ -316,13 +328,11 @@ function buildPrescriptionForSession(
     }),
     material,
     questionPractice,
-    completionEvidence: completionEvidenceFor(session.tipo as StudyActivityType),
+    completionEvidence,
     decisionReliability: buildDecisionReliability(action),
-    executionReadiness: buildExecutionReadiness({
-      activity: session.tipo as StudyActivityType,
-      material,
-      questionPractice
-    }),
+    executionReadiness: buildExecutionReadinessFromGate(executionGate),
+    executionGate,
+    executionPacket: executionGate.packet,
     nextAction: {
       afterCompletion: "Registre as evidências de conclusão. O SDE invalidará a prescrição atual e recalculará a próxima ação com os novos dados.",
       preview: null
@@ -351,6 +361,7 @@ export function buildDailyStudyPrescription(
       referenceDate: input.referenceDate,
       current: null,
       upcoming: [],
+      blockedCandidates: [],
       warnings: ["O planner não produziu uma sessão executável para esta data."]
     };
   }
@@ -377,40 +388,56 @@ export function buildDailyStudyPrescription(
       referenceDate: input.referenceDate,
       current: null,
       upcoming: [],
+      blockedCandidates: [],
       warnings: ["As sessões do planner não puderam ser ligadas às ações estratégicas de origem."]
     };
   }
 
-  const prescriptionsWithNextAction = prescriptions.map((prescription, index) => {
-    const next = prescriptions[index + 1];
+  const executable = prescriptions.filter((prescription) => prescription.executionGate.executionStatus === "READY");
+  const blockedCandidates = prescriptions.flatMap((prescription) => prescription.executionGate.blockedCandidate ? [prescription.executionGate.blockedCandidate] : []);
+
+  if (executable.length === 0) {
+    return {
+      status: "NO_EXECUTABLE_SESSION",
+      referenceDate: input.referenceDate,
+      current: null,
+      upcoming: [],
+      blockedCandidates,
+      warnings: [
+        "O ranking estratégico foi preservado, mas nenhum candidato possui ambiente, material, conteúdo, critério e captura de resultado executáveis.",
+        ...blockedCandidates.map((candidate) => `${candidate.topicId}: ${candidate.explanation}`),
+      ],
+    };
+  }
+
+  const prescriptionsWithNextAction = executable.map((prescription, index) => {
+    const next = executable[index + 1];
     return {
       ...prescription,
       nextAction: {
         ...prescription.nextAction,
         preview: next
-          ? `${next.activity}: ${next.topicName}${next.subtopicName ? ` · ${next.subtopicName}` : ""} (${next.durationMinutes} min)`
+          ? `${next.executionPacket?.method ?? next.activity}: ${next.topicName}${next.subtopicName ? ` · ${next.subtopicName}` : ""} (${next.durationMinutes} min)`
           : null
       }
     };
   });
 
   const maxUpcoming = Math.max(0, input.maxUpcomingSessions ?? 2);
-  const warnings = prescriptionsWithNextAction.flatMap((prescription) => {
-    const target = `${prescription.topicName}${prescription.subtopicName ? ` · ${prescription.subtopicName}` : ""}`;
-    if (!prescription.material) {
-      return [`Não há localizador exato ou fallback amplo auditado para ${target}; use a busca da biblioteca e registre o trecho utilizado.`];
-    }
-    if (prescription.material.matchScope === "TOPIC_FALLBACK") {
-      return [`O material indicado para ${target} cobre o assunto de forma ampla e não comprova cobertura exata do subassunto.`];
-    }
-    return [];
-  });
+  const warnings = [
+    ...blockedCandidates.map((candidate) => `Candidato bloqueado sem alterar o ranking: ${candidate.topicId}. ${candidate.explanation}`),
+    ...prescriptionsWithNextAction.flatMap((prescription) => prescription.executionReadiness.status === "READY_WITH_FALLBACK"
+      ? [prescription.executionReadiness.reason]
+      : []),
+  ];
 
   return {
     status: "READY",
     referenceDate: input.referenceDate,
     current: prescriptionsWithNextAction[0],
     upcoming: prescriptionsWithNextAction.slice(1, maxUpcoming + 1),
+    blockedCandidates,
     warnings: [...new Set(warnings)]
   };
+
 }

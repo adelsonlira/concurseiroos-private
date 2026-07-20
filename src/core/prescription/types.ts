@@ -6,6 +6,7 @@ import type {
 } from "../questions/externalQuestionBanks";
 import type { PlannerResponse, StudyActivityType, StudySession } from "../sde/planner/plannerTypes";
 import type { StrategicAction } from "../sde/prioritization/types";
+import type { StudyExecutionBlockedCandidate, StudyExecutionGateResult, StudyExecutionPacket } from "../studyExecution/types";
 
 export type QuestionPaceSource =
   | "CANDIDATE_SUBTOPIC_MEDIAN"
@@ -30,7 +31,7 @@ export interface PrescriptionDecisionReliability {
 }
 
 export interface PrescriptionExecutionReadiness {
-  status: "READY" | "READY_WITH_FALLBACK";
+  status: "READY" | "READY_WITH_FALLBACK" | "BLOCKED_NO_EXECUTABLE_PATH";
   reason: string;
   requiredResource: "NONE" | "MATERIAL" | "QUESTION_SOURCE";
 }
@@ -104,6 +105,8 @@ export interface ExecutableStudyPrescription {
   completionEvidence: string[];
   decisionReliability: PrescriptionDecisionReliability;
   executionReadiness: PrescriptionExecutionReadiness;
+  executionGate: StudyExecutionGateResult;
+  executionPacket: StudyExecutionPacket | null;
   nextAction: PrescriptionNextAction;
 }
 
@@ -112,6 +115,7 @@ export interface DailyStudyPrescription {
   referenceDate: string;
   current: ExecutableStudyPrescription | null;
   upcoming: ExecutableStudyPrescription[];
+  blockedCandidates: StudyExecutionBlockedCandidate[];
   warnings: string[];
 }
 
