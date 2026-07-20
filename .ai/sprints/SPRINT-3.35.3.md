@@ -8,7 +8,7 @@ Fechar a última milha entre a prioridade determinada pelo Coach e uma atividade
 
 - `studyExecutionRegistry` versionado;
 - Banco de Dados registrado como `READY_WITH_FGV_EVIDENCE` no notebook `DATAPREV 2026 — Banco de Dados — Tutor FGV`;
-- Português em `READY_THEORY_ONLY`, com evidência FGV pendente e ensino de estilo FGV desativado; demais disciplinas em `NOT_CONFIGURED`, salvo ambiente explicitamente disponível;
+- Português e demais disciplinas em `NOT_CONFIGURED`, salvo ambiente explicitamente disponível;
 - correspondência assunto × material com bloqueio de incompatibilidade;
 - `executionReadinessGate` pós-ranking;
 - fallback de método/ambiente sem reescrever o ranking;

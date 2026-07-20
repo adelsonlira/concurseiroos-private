@@ -15,7 +15,7 @@ A versão 3.35.3 fecha a última milha da prescrição. O SDE v1 continua determ
 
 - `studyExecutionRegistry` versionado com notebooks, fontes, ambientes, política de material e rotas de captura;
 - Banco de Dados como `READY_WITH_FGV_EVIDENCE` no notebook cadastrado;
-- Português como `READY_THEORY_ONLY`, com `fgvEvidenceStatus = PENDING` e `fgvStyleTeaching = DISABLED`; demais disciplinas permanecem `NOT_CONFIGURED`, salvo cadastro explícito;
+- Português e demais disciplinas como `NOT_CONFIGURED` para NotebookLM, salvo cadastro explícito futuro;
 - correspondência semântica e taxonômica entre assunto, subassunto e material;
 - `executionReadinessGate` aplicado à prescrição obrigatória, estudo opcional, extra após plano e escolha manual;
 - fallback de método/ambiente sem alterar o ranking;

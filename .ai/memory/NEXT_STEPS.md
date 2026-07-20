@@ -4,7 +4,7 @@
 2. Executar o smoke de domingo e confirmar descanso sem obrigação e pacote opcional completo.
 3. Executar o smoke de segunda-feira e confirmar prescrição obrigatória executável dentro de 120 minutos.
 4. Validar no uso real o pacote de Banco de Dados no NotebookLM.
-5. Manter o ensino de estilo FGV de Português desativado enquanto `fgvEvidenceStatus = PENDING`; demais notebooks permanecem `NOT_CONFIGURED` até cadastro explícito.
+5. Manter Português e demais notebooks em `NOT_CONFIGURED` até cadastro explícito de nome, fontes, cobertura e instruções.
 
 ## Guardrails
 
