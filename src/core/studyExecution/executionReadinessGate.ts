@@ -122,6 +122,10 @@ function sourcePlanRecommendation(input: StudyExecutionGateInput): ExternalQuest
   return items.find((item) => item.provider === "QCONCURSOS") ?? items[0] ?? null;
 }
 
+function notebookSourceDisplayName(source: { fileName?: string; title: string }): string {
+  return source.fileName?.trim() || source.title;
+}
+
 function selectedNotebookSources(input: StudyExecutionGateInput, forceFgv: boolean): string[] {
   const capability = resolveStudyExecutionCapability(input.disciplineId, input.topicId);
   const targetText = `${input.topicName} ${input.subtopicName ?? ""}`.toLocaleLowerCase("pt-BR");
@@ -131,7 +135,7 @@ function selectedNotebookSources(input: StudyExecutionGateInput, forceFgv: boole
       if (source.defaultSelected) return true;
       return source.topicKeywords?.some((keyword) => targetText.includes(keyword.toLocaleLowerCase("pt-BR"))) ?? false;
     })
-    .map((source) => source.fileName);
+    .map(notebookSourceDisplayName);
 }
 
 function fgvBoundary(params: {
@@ -274,7 +278,9 @@ function notebookPacket(params: {
   const forceFgv = input.forceFgvEvidenceUse === true;
   const sources = selectedNotebookSources(input, forceFgv);
   if (sources.length === 0) return null;
-  const hasFgv = capability.approvedSources.some((source) => source.fgvEvidence && sources.includes(source.fileName));
+  const hasFgv = capability.approvedSources.some(
+    (source) => source.fgvEvidence && sources.includes(notebookSourceDisplayName(source)),
+  );
   const boundary = fgvBoundary({
     notebookStatus: capability.notebookStatus,
     fgvEvidenceStatus: capability.fgvEvidenceStatus,
